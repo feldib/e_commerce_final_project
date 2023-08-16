@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import HomePage from './pages/user/HomePage.js'
+import SignInPage from './pages/user/SignInPage.js'
+import RegistrationPage from "./pages/user/RegistrationPage.js"
+import ShoppingCartPage from './pages/user/ShoppingCartPage.js'
+import CheckoutPage from "./pages/user/CheckoutPage.js"
+import ArtworkPage from './pages/user/ArtworkPage.js'
+import ReceiptPage from './pages/user/ReceiptPage.js'
+import ContactUsPage from './pages/user/ContactUsPage.js'
+import AboutUsPage from './pages/user/AboutUsPage.js'
+import UserData from './subpages/user/UserData.js'
+import OrderHistory from './subpages/user/OrderHistory.js'
+import WishList from './subpages/user/WishList.js'
+import ProfilePage from './pages/user/ProfilePage.js'
+import AdminPage from './pages/admin/AdminPage.js'
+
+import Header from "./components/Header"
+import Footer from "./components/Footer"
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Header />
+
+      <div className='mb-5'>
+        <AdminPage />
+      </div>
+
+      <Footer />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
