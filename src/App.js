@@ -27,6 +27,7 @@ import Footer from "./components/Footer"
 import React from 'react'
 import server_url from './server.js'
 
+
 function App() {
   const [user, setUser] = React.useState()
   const [loggedIn, setLoggedIn] = React.useState()
@@ -197,6 +198,7 @@ function App() {
 
       <Footer />
     </BrowserRouter>
+
   )
 }
 

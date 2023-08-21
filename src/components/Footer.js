@@ -1,6 +1,7 @@
 import React from 'react'
 import { Navbar, Nav, Container } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShareAlt } from '@fortawesome/free-solid-svg-icons'
 
@@ -18,6 +19,7 @@ function Footer() {
                             <Link style={{ color: 'inherit', textDecoration: 'inherit'}} to="/contact">
                                 Contact us
                             </Link>
+
                         </Nav.Link>
                         <Nav.Link>
                             <FontAwesomeIcon icon={faShareAlt} />

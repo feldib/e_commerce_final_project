@@ -1,5 +1,6 @@
 import React from 'react'
 import server_url from '../../server'
+
 import { Col, Row, Button, Form, InputGroup } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAsterisk, faUser, faKey } from '@fortawesome/free-solid-svg-icons'
@@ -34,6 +35,7 @@ function SignInPage(props) {
                 <Form
                     onSubmit={handleSubmit}
                 >
+
                     <Form.Group className="mb-3">
                         <Form.Label>Email address</Form.Label>
                         <FontAwesomeIcon icon={faAsterisk} style={{color: "red"}} className='mx-3'/>
@@ -47,6 +49,7 @@ function SignInPage(props) {
                                     setEmail(e.target.value)
                                 }}
                             />
+
                         </InputGroup>
                     </Form.Group>
 
@@ -63,6 +66,7 @@ function SignInPage(props) {
                                     setPassword(e.target.value)
                                 }}
                             />
+
                         </InputGroup>
                     </Form.Group>
 

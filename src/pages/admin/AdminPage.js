@@ -2,7 +2,6 @@ import React from 'react'
 import { Navbar, Nav, Container, Row, Col } from 'react-bootstrap'
 import { Outlet } from 'react-router-dom';
 
-
 function AdminPage() {
     return (
         <Container className='mb-5 pb-5'>
@@ -34,6 +33,7 @@ function AdminPage() {
 
             <Row className='mb-5'>
                 <Outlet />
+
             </Row>
         </Container>
     )

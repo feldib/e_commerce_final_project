@@ -1,5 +1,6 @@
 import React from 'react'
 import server_url from '../../server'
+
 import { Col, Row, Button, Form, InputGroup } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAsterisk, faUser, faKey, faQuestion, faHouse, faPhone } from '@fortawesome/free-solid-svg-icons'
@@ -44,6 +45,7 @@ function RegistrationPage(props) {
         <Row>
             <Col className='mx-5'>
                 <Form onSubmit={handleSubmit}>
+
                     <Form.Group className="mb-3">
                         <Form.Label>Email address</Form.Label>
                         <FontAwesomeIcon icon={faAsterisk} style={{color: "red"}} className='mx-3'/>
@@ -57,6 +59,7 @@ function RegistrationPage(props) {
                                     setFirstEmail(e.target.value)
                                 }}
                             />
+
                         </InputGroup>
                     </Form.Group>
 
@@ -75,6 +78,7 @@ function RegistrationPage(props) {
                                     }
                                 }}
                             />
+
                         </InputGroup>
                     </Form.Group>
 
@@ -91,6 +95,7 @@ function RegistrationPage(props) {
                                     setFirstPassword(e.target.value)
                                 }}
                             />
+
                         </InputGroup>
                     </Form.Group>
 
@@ -109,6 +114,7 @@ function RegistrationPage(props) {
                                     }
                                 }}
                             />
+
                         </InputGroup>
                     </Form.Group>
 
@@ -125,6 +131,7 @@ function RegistrationPage(props) {
                                     setFirstName(e.target.value)
                                 }}
                             />
+
                         </InputGroup>
                     </Form.Group>
 
@@ -141,6 +148,7 @@ function RegistrationPage(props) {
                                     setLastName(e.target.value)
                                 }}
                             />
+
                         </InputGroup>
                     </Form.Group>
 
@@ -157,11 +165,14 @@ function RegistrationPage(props) {
                                     setAddress(e.target.value)
                                 }}
                             />
+
                         </InputGroup>
                     </Form.Group>
 
                     <Form.Group className="mb-3">
+
                         <Form.Label>Phone Number</Form.Label>
+
                         <FontAwesomeIcon icon={faAsterisk} style={{color: "red"}} className='mx-3'/>
 
                         <InputGroup>
@@ -173,6 +184,7 @@ function RegistrationPage(props) {
                                     setPhone(e.target.value)
                                 }}
                             />
+
                         </InputGroup>
                     </Form.Group>
 

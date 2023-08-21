@@ -22,6 +22,7 @@ function Header(props) {
           .catch((err)=>{console.log(err)})
         }
     
+
     return (
             <Navbar expand="lg">
                 <Container>
@@ -29,6 +30,7 @@ function Header(props) {
                         <Link style={{ color: 'inherit', textDecoration: 'inherit'}} to="/">
                             Artwork Market
                         </Link>
+
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="menu-items" />
                     <Navbar.Collapse id="menu-idems">
@@ -94,6 +96,7 @@ function Header(props) {
                                 </>
                             }
                            
+
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

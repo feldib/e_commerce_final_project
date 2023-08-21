@@ -184,6 +184,7 @@ function HomePage() {
                             </Dropdown.Menu>
                         </Dropdown>
                     </Col>
+
                 </Row>
 
                 <Row className='mx-auto mb-3 text-end'>
@@ -191,6 +192,7 @@ function HomePage() {
                         <Button
                             onClick = {search}
                         >
+
                             Search
                         </Button>
                     </Col>
@@ -315,6 +317,7 @@ function HomePage() {
 
                 <Row className="mb-3 d-flex justify-content-evenly">
                         <Col sx={12} md={5} lg={3} className="mb-2 mx-3">
+
                             <Row>
                                 <Col>
                                     <h4 className='text-center'>Featured</h4>
@@ -332,6 +335,7 @@ function HomePage() {
                             />
                         </Col>
                     
+
 
                 </Row>
 
