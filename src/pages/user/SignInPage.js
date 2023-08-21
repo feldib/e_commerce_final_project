@@ -1,5 +1,6 @@
 import React from 'react'
 import server_url from '../../server'
+import axios from "axios"
 
 import { Col, Row, Button, Form, InputGroup } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -12,21 +13,19 @@ function SignInPage(props) {
     async function handleSubmit(e){
         
         e.preventDefault()
-        
-        await fetch(
-            `${server_url}/login`,
-            {
-                method: "POST",
-                headers: {"Content-Type": "application/json"},
-                body: JSON.stringify({
-                    email, password
-                })
-            }
-        ).then((response)=>response.json())
-        .then((userData)=>{
-            props.settleSuccessfulLogIn(userData)
-        })
-        .catch((err)=>{console.log(err)})
+        await axios.post(`${server_url}/login`, {email, password})
+            .then(function (response) {
+                if(response.data){
+                    console.log(response.data)
+                    const userData = response.data
+                    props.settleSuccessfulLogIn(userData)
+                }else{
+                    throw Error("Wrong email or password")
+                }
+            })
+            .catch(function (error) {
+                console.log(error)
+            })
     }
 
     return (

@@ -26,36 +26,25 @@ import Header from "./components/Header"
 import Footer from "./components/Footer"
 import React from 'react'
 import server_url from './server.js'
+import axios from 'axios'
 
 
 function App() {
-  const [user, setUser] = React.useState()
-  const [loggedIn, setLoggedIn] = React.useState()
+  axios.defaults.withCredentials = true
 
-  React.useEffect(()=>{
-    (async()=>{
-      if(user){
-        await fetch(
-          `${server_url}/logged_in`,
-            {
-                method: "POST",
-                headers: {"Content-Type": "application/json"},
-                body: JSON.stringify({
-                    id: user.id
-                })
-            }
-        ).then((response)=>response.json())
-        .then((isLoggedIn)=>{
-            setLoggedIn(isLoggedIn)
-        })
-        .catch((err)=>{console.log(err)})
-      }
-    })()
-  }, [user])
+  const [user, setUser] = React.useState()
+  const [loggedIn, setLoggedIn] = React.useState(false)
 
   React.useEffect(()=>{
     if(user){
-      localStorage.setItem('user', JSON.stringify(user))
+      axios.get(`${server_url}/logged_in`, {id: user.id})
+      .then(res =>{
+        if(res.data.Status === "Success"){
+          setLoggedIn(true)
+        }else{
+          setLoggedIn(false)
+        }
+      })
     }
   }, [user])
 
