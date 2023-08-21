@@ -4,21 +4,15 @@ import { faMagnifyingGlass, faFilter } from '@fortawesome/free-solid-svg-icons'
 import { Col, Row, Button, Form, InputGroup, Dropdown} from 'react-bootstrap'
 import UsersSearchResults from '../../components/UsersSearchResults'
 import UserPurchaseHistory from '../../components/UserPurchaseHistory'
+import SearchField from '../../components/SearchField'
 
 function Users() {
     return (
             <Col>
-                <Row lg={6} sx={8} className='mx-auto mb-3 mt-5'>
-                    <InputGroup>
-                            <Form.Control
-                                type="text"
-                                placeholder="Enter user's name"
-                            />
-                            <Button >
-                                <FontAwesomeIcon icon={faMagnifyingGlass} />
-                            </Button>
-                        </InputGroup>
-                </Row>
+                <SearchField 
+                    placeholder="Enter user's name"
+                />
+
 
                 <Row className='mx-auto mb-3 text-end'>
                     <Col>
