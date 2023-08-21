@@ -2,25 +2,20 @@ import React from 'react'
 import { Navbar, Nav, Container } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import server_url from '../server'
+import axios from 'axios'
 
 function Header(props) {
+    axios.defaults.withCredentials = true
     
-    const logOut = async(id)=>{
-        await fetch(
-            `${server_url}/log_out`,
-              {
-                  method: "POST",
-                  headers: {"Content-Type": "application/json"},
-                  body: JSON.stringify({
-                      id
-                  })
-              }
-          ).then((response)=>{
-              console.log(response)
-              window.location.replace("/")
-          })
-          .catch((err)=>{console.log(err)})
-        }
+    const logOut = async()=>{
+        await axios.get(`${server_url}/log_out`)
+        .then(function (response) {
+            window.location.replace("/")
+        })
+        .catch(function (error) {
+            console.log(error)
+        })
+    }
     
 
     return (
@@ -52,7 +47,7 @@ function Header(props) {
                             </Nav.Link>
                             {props.loggedIn ?
                                 <>
-                                {!props.user.is_admin ?
+                                {props.user && !props.user.is_admin ?
                                 <>
                                     <Nav.Link>
                                         <Link style={{ color: 'inherit', textDecoration: 'inherit'}} to="/shopping_cart">
@@ -75,7 +70,7 @@ function Header(props) {
                                 
                                 <Nav.Link
                                     onClick={async()=>{
-                                        await logOut(props.user.id)
+                                        await logOut()
                                     }}
                                 >
                                     Log out

@@ -8,9 +8,10 @@ function CategoriesDropdown(props) {
                 <Dropdown.Toggle>Categories</Dropdown.Toggle>
                 <Dropdown.Menu className='px-3'>
                     {props.categories.map(
-                        (category)=>{
+                        (category, index)=>{
                             return (
                                 <p
+                                    key={index}
                                     id={category.id}
                                     onClick={()=>{
                                         props.switchCategoryTo(category)

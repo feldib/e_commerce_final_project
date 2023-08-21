@@ -1,5 +1,7 @@
 import React from 'react'
 import server_url from '../../server'
+import axios from 'axios'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBasketShopping, faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons'
 import { Col, Row, Container, Button, Dropdown, InputGroup, Form } from 'react-bootstrap'
@@ -20,23 +22,25 @@ function HomePage() {
     
     React.useEffect(()=>{
         (async()=>{
-            await fetch(`${server_url}/categories`)
-            .then((response)=>response.json())
-            .then((cats)=>{
-                setCategories(cats)
+            await axios.get(`${server_url}/categories`)
+            .then(function (cats) {
+                setCategories(cats.data)
             })
-            .catch((err)=>{console.log(err)})
+            .catch(function (error) {
+                console.log(error)
+            })
         })()
     }, [])
 
     React.useEffect(()=>{
         (async()=>{
-            await fetch(`${server_url}/users/recommendation/featured`)
-            .then((response)=>response.json())
-            .then((feat)=>{
-                setFeatured(feat)
+            await axios.get(`${server_url}/users/recommendation/featured`)
+            .then(function (feat) {
+                setFeatured(feat.data)
             })
-            .catch((err)=>{console.log(err)})
+            .catch(function (error) {
+                console.log(error)
+            })
         })()
     }, [])
 
@@ -49,13 +53,13 @@ function HomePage() {
                 )
             }
         }
-        await fetch(`
-            ${server_url}/search_artworks${`?${qs.join("&")}`}`)
-        .then((response)=>response.json())
-        .then((artw)=>{
-            setSearchResults(artw)
+        await axios.get(`${server_url}/search_artworks${`?${qs.join("&")}`}`)
+        .then(function (artw) {
+            setSearchResults(artw.data)
         })
-        .catch((err)=>{console.log(err)})
+        .catch(function (error) {
+            console.log(error)
+        })
     }
 
     return (

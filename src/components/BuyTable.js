@@ -23,9 +23,9 @@ function BuyTable(props) {
                 }
                 
                 <tbody>
-                {props.dataLines.map((line)=>{
+                {props.dataLines.map((line, index)=>{
                     return (
-                        <tr>
+                        <tr key={index}>
                             <td>
                                 <img 
                                         src = {line.thumbnail}
