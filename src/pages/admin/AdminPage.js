@@ -1,10 +1,7 @@
 import React from 'react'
 import { Navbar, Nav, Container, Row, Col } from 'react-bootstrap'
-import Orders from '../../subpages/admin/Orders'
-import Reviews from '../../subpages/admin/Reviews'
-import Messages from '../../subpages/admin/Messages'
-import Users from '../../subpages/admin/Users'
-import Artworks from '../../subpages/admin/Artworks'
+import { Outlet } from 'react-router-dom';
+
 
 function AdminPage() {
     return (
@@ -36,7 +33,7 @@ function AdminPage() {
             </Row>
 
             <Row className='mb-5'>
-                <Artworks />
+                <Outlet />
             </Row>
         </Container>
     )

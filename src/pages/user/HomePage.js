@@ -1,244 +1,320 @@
 import React from 'react'
+import server_url from '../../server'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHeart, faBasketShopping, faMagnifyingGlass, faCaretDown, faCaretUp, faFilter } from '@fortawesome/free-solid-svg-icons'
-import { Col, Row, Container, Button, Form, InputGroup, Dropdown, Table } from 'react-bootstrap'
+import { faBasketShopping, faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons'
+import { Col, Row, Container, Button, Dropdown, InputGroup, Form } from 'react-bootstrap'
+import SearchField from '../../components/SearchField'
+import Query from '../../components/Query'
+import CategoriesDropdown from '../../components/CategoriesDropdown'
+import BuyTable from '../../components/BuyTable'
 
 function HomePage() {
+    const [categories, setCategories] = React.useState([])
+
+    const [queries, setQueries] = React.useState(
+        {min: "", max: "", title: "", artist_name: "", category_id: "", order: "asc", n: 10}
+    )
+    
+    const [featured, setFeatured] = React.useState([])
+    const [searchResults, setSearchResults] = React.useState([])
+    
+    React.useEffect(()=>{
+        (async()=>{
+            await fetch(`${server_url}/categories`)
+            .then((response)=>response.json())
+            .then((cats)=>{
+                setCategories(cats)
+            })
+            .catch((err)=>{console.log(err)})
+        })()
+    }, [])
+
+    React.useEffect(()=>{
+        (async()=>{
+            await fetch(`${server_url}/users/recommendation/featured`)
+            .then((response)=>response.json())
+            .then((feat)=>{
+                setFeatured(feat)
+            })
+            .catch((err)=>{console.log(err)})
+        })()
+    }, [])
+
+    async function search(){
+        const qs = []
+        for (const [key, value] of Object.entries(queries)) {
+            if(value){
+                qs.push(
+                    `${key}=${value}`
+                )
+            }
+        }
+        await fetch(`
+            ${server_url}/search_artworks${`?${qs.join("&")}`}`)
+        .then((response)=>response.json())
+        .then((artw)=>{
+            setSearchResults(artw)
+        })
+        .catch((err)=>{console.log(err)})
+    }
+
     return (
         <div>
             <Container>
-                <Row lg={6} sx={8} className='mx-auto mb-3 mt-5'>
+                <SearchField
+                    what="Title"
+                    saveQuery={(title)=>{
+                        setQueries({
+                            ...queries,
+                            title
+                        })
+                    }}
+                />
+
+                <SearchField
+                    what="Artist"
+                    saveQuery={(name)=>{
+                        setQueries({
+                            ...queries,
+                            artist_name: name
+                        })
+                    }}
+                />
+
+                <Row lg={6} sx={8} className='mx-auto mb-5 mt-5'>
                     <InputGroup>
+                            <InputGroup.Text>
+                                Price range (min, max)
+                            </InputGroup.Text>
+
                             <Form.Control
-                                type="text"
-                                placeholder="Enter the title of an artwork or the name of an artist"
+                                type="number"
+                                placeholder="Minimum"
+                                onBlur={(e)=>{
+                                    setQueries({
+                                        ...queries,
+                                        min: e.target.value
+                                    })
+                                }}
                             />
-                            <Button >
-                                <FontAwesomeIcon icon={faMagnifyingGlass} />
-                            </Button>
+
+                            <Form.Control
+                                type="number"
+                                placeholder="Maximum"
+                                onBlur={(e)=>{
+                                    setQueries({
+                                        ...queries,
+                                        max: e.target.value
+                                    })
+                                }}
+                            />
                         </InputGroup>
                 </Row>
+                
+                <Row>
+                    <CategoriesDropdown 
+                        categories = {categories}
+                        switchCategoryTo = {(newCategory)=>{
+                            setQueries({
+                                ...queries,
+                                category_id: newCategory.id
+                            })
+                        }}
+                    />
 
-                <Row className='mx-auto mb-3'>
-                    <Dropdown>
-                        <Dropdown.Toggle>Categories</Dropdown.Toggle>
-                        <Dropdown.Menu className='px-3'>
-                            <Form.Check
-                                type="switch"
-                                id="cat1"
-                                onChange={()=>{}}
-                                label="Category 1"
-                            />
+                    <Col>
+                        <Dropdown
+                            onSelect={(eventKey)=>{
+                                setQueries({
+                                    ...queries,
+                                    n: eventKey
+                                })
+                            }}
+                        >
+                            <Dropdown.Toggle>Number of artworks shown</Dropdown.Toggle>
+                            <Dropdown.Menu>
+                                <Dropdown.Item
+                                    href=""
+                                    eventKey="10"
+                                >
+                                    10
+                                </Dropdown.Item>
 
-                            <Form.Check
-                                type="switch"
-                                id="cat1"
-                                onChange={()=>{}}
-                                label="Category 1"
-                            />
-                            
-                            <Form.Check
-                                type="switch"
-                                id="cat1"
-                                onChange={()=>{}}
-                                label="Category 1"
-                            />
-                        </Dropdown.Menu>
-                    </Dropdown>
+                                <Dropdown.Item
+                                    href=""
+                                    eventKey="20"
+                                >
+                                    20
+                                </Dropdown.Item>
+                                
+                                <Dropdown.Item
+                                    href=""
+                                    eventKey="30"
+                                >
+                                    30
+                                </Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    </Col>
+                    
+                    <Col>
+                        <Dropdown
+                            onSelect={(eventKey)=>{
+                                setQueries({
+                                    ...queries,
+                                    order: eventKey
+                                })
+                            }}
+                        >
+                            <Dropdown.Toggle>Order by</Dropdown.Toggle>
+                            <Dropdown.Menu>
+                                <Dropdown.Item
+                                    href=""
+                                    eventKey="asc"
+                                >
+                                    Newest to oldest
+                                </Dropdown.Item>
+
+                                <Dropdown.Item
+                                    href=""
+                                    eventKey="desc"
+                                >
+                                    Oldest to newest
+                                </Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    </Col>
                 </Row>
 
                 <Row className='mx-auto mb-3 text-end'>
                     <Col>
-                        <Button>
+                        <Button
+                            onClick = {search}
+                        >
                             Search
                         </Button>
                     </Col>
                 </Row>
 
                 <Row>
-                    <Col>
-                        <p>
-                            <FontAwesomeIcon icon={faFilter} style={{
-                                color: "red",
-                                border: "2px solid red",
-                                borderRadius: "10px",
-                                padding: "2px"
-                            }} />
-                            <span style={{
-                                margin: "10px",
-                                fontSize: "1.5rem"
-                            }}>25 - 300 EUR</span>
-                            <span
-                                className='mx-1'
-                                style={{ cursor: "pointer" }}
-                                onClick={() => {}}
-                            >❌</span>
-                        </p>
-                    </Col>
+                    {(queries.min && queries.max) ?
+                            <Query 
+                                text = {`Between ${queries.min} and ${queries.max}`}
+                                remove = {()=>{
+                                    setQueries(
+                                        {
+                                            ...queries,
+                                            min: "",
+                                            max: ""
+                                        }
+                                    )
+                                }}
+                            />
+                        :
+                            queries.min ?
+                            <Query 
+                                text = {`Minimum: ${queries.min}`}
+                                remove = {()=>{
+                                    setQueries(
+                                        {
+                                            ...queries,
+                                            min: "",
+                                        }
+                                    )
+                                }}
+                            />:
 
-                    <Col>
-                        <Row>
-                            <Col lg={4} className='mx-auto mt-3'>
-                                <Dropdown
-                                onSelect={(eventKey)=>{return}}
-                                >
-                                    <Dropdown.Toggle>Number of artworks shown</Dropdown.Toggle>
-                                    <Dropdown.Menu>
-                                        <Dropdown.Item
-                                            href=""
-                                            eventKey="10"
-                                        >
-                                            10
-                                        </Dropdown.Item>
+                            queries.max &&
+                            <Query 
+                                text = {`Maxim: ${queries.max}`}
+                                remove = {()=>{
+                                    setQueries(
+                                        {
+                                            ...queries,
+                                            max: "",
+                                        }
+                                    )
+                                }}
+                            />
+                    }
 
-                                        <Dropdown.Item
-                                            href=""
-                                            eventKey="20"
-                                        >
-                                            20
-                                        </Dropdown.Item>
-                                        
-                                        <Dropdown.Item
-                                            href=""
-                                            eventKey="30"
-                                        >
-                                            30
-                                        </Dropdown.Item>
-                                    </Dropdown.Menu>
-                                </Dropdown>
-                            </Col>
-                            <Col lg={4} className='mx-auto mt-3'>
-                                <Dropdown
-                                onSelect={(eventKey)=>{return}}
-                                >
-                                    <Dropdown.Toggle>Order by</Dropdown.Toggle>
-                                    <Dropdown.Menu>
-                                        <Dropdown.Item
-                                            href=""
-                                            eventKey="Newest to oldest"
-                                        >
-                                            Newest to oldest
-                                        </Dropdown.Item>
+                    {queries.title &&
+                        <Query 
+                        text = {`Title: ${queries.title}`}
+                        remove = {()=>{
+                            setQueries(
+                                {
+                                    ...queries,
+                                    title: ""
+                                }
+                            )
+                        }}
+                    />
+                    }
 
-                                        <Dropdown.Item
-                                            href=""
-                                            eventKey="Oldest to newest"
-                                        >
-                                            Oldest to newest
-                                        </Dropdown.Item>
-                                    </Dropdown.Menu>
-                                </Dropdown>
-                            </Col>
+                    {queries.artist_name &&
+                        <Query 
+                            text = {`Artist: ${queries.artist_name}`}
+                            remove = {()=>{
+                                setQueries(
+                                    {
+                                        ...queries,
+                                        artist_name: ""
+                                    }
+                                )
+                            }}
+                        />
+                    }
+
+                    {queries.category_id &&
+                        <Query 
+                            text = {`${
+                                categories.find((cat)=>{
+                                    return cat.id === queries.category_id
+                                }).cname
+                            }`}
+                            remove = {()=>{
+                                setQueries(
+                                    {
+                                        ...queries,
+                                        category_id: ""
+                                    }
+                                )
+                            }}
+                        />
+                    }
+                    {/*
+                            //{min, max, title, artist_name, category_id, order, n}ű
+                    <Query 
+                        text = {query}
+                        remove = {()=>{
+                                setQueries(
+                                queries.filter((q)=>{
+                                    return q !== query
+                                })
+                            )
+                        }}
+                    /> */}
+
+                </Row>
+
+                {searchResults.length !==0 &&
+                    <Row>
+                        <Row className='mb-3 mt-5'>
+                            <h3 className='text-center'>Search results</h3>
                         </Row>
                         
-                    </Col>
-                </Row>
-
-                <Row>
-                    <Row className='mb-3 mt-5'>
-                        <h3 className='text-center'>Search results</h3>
+                        <BuyTable 
+                            reccomendation = {false}
+                            theadNeeded = {true}
+                            dataLines = {searchResults}
+                            categories = {categories}
+                        />
                     </Row>
+                }
 
-                    <Row>
-                        <Table className='table-hover'>
-                            <thead>
-                                <tr>
-                                    <th></th>
-                                    <th>Title</th>
-                                    <th>Artist</th>
-                                    <th>Price (€)</th>
-                                    <th>Tags</th>
-                                    <th>Categories</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <img 
-                                                src="https://d7hftxdivxxvm.cloudfront.net/?height=600&quality=80&resize_to=fit&src=https%3A%2F%2Fd32dm0rphc51dk.cloudfront.net%2Fpj1Kk4Od1CBV8tWBLk3zeA%2Fnormalized.jpg&width=800" 
-                                                height="100"
-                                                weight="100"
-                                                style={{objectFit: "contain"}}
-                                            />
-                                    </td>
-                                    <td>
-                                        Birth of Venus
-                                    </td>
-                                    <td>
-                                        Boticelli
-                                    </td>
-                                    <td>
-                                        45
-                                    </td>
-                                    <td>
-                                        Renessaince, Classic, Replica
-                                    </td>
-                                    <td>
-                                        Painting, Oil Painting
-                                    </td>
-                                    <td>
-                                        <div className='container'>
-                                            <Row>
-                                                <p style={{cursor: "pointer"}}>
-                                                    <FontAwesomeIcon icon={faBasketShopping} />
-                                                </p>
-                                            </Row>
-                                            <Row>
-                                                <p style={{cursor: "pointer"}}>
-                                                    <FontAwesomeIcon icon={faHeart} />
-                                                </p>
-                                            </Row>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <img 
-                                                src="https://d7hftxdivxxvm.cloudfront.net/?height=600&quality=80&resize_to=fit&src=https%3A%2F%2Fd32dm0rphc51dk.cloudfront.net%2Fpj1Kk4Od1CBV8tWBLk3zeA%2Fnormalized.jpg&width=800" 
-                                                height="100"
-                                                weight="100"
-                                                style={{objectFit: "contain"}}
-                                            />
-                                    </td>
-                                    <td>
-                                        Birth of Venus
-                                    </td>
-                                    <td>
-                                        Boticelli
-                                    </td>
-                                    <td>
-                                        45
-                                    </td>
-                                    <td>
-                                        Renessaince, Classic, Replica
-                                    </td>
-                                    <td>
-                                        Painting, Oil Painting
-                                    </td>
-                                    <td>
-                                        <div className='container'>
-                                            <Row>
-                                                <p style={{cursor: "pointer"}}>
-                                                    <FontAwesomeIcon icon={faBasketShopping} />
-                                                </p>
-                                            </Row>
-                                            <Row>
-                                                <p style={{cursor: "pointer"}}>
-                                                    <FontAwesomeIcon icon={faHeart} />
-                                                </p>
-                                            </Row>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </Table>
-                    </Row>
-                </Row>
-
-                <Row className="d-flex flex-wrap mb-3 mx-auto">
-                    <Row col={12} className="my-4">
-                        <Col sx={12} md={5} lg={3} className="mb-2 mx-3 d-flex align-content-between flex-wrap">
+                <Row className="mb-3 d-flex justify-content-evenly">
+                        <Col sx={12} md={5} lg={3} className="mb-2 mx-3">
                             <Row>
                                 <Col>
                                     <h4 className='text-center'>Featured</h4>
@@ -247,457 +323,16 @@ function HomePage() {
                                     <FontAwesomeIcon icon={faCaretDown} />
                                 </Col>                                
                             </Row>
-                            <Row>
-                                <Row className='border'>
-                                    <Col>
-                                        <Row>
-                                            <img 
-                                                src="https://d7hftxdivxxvm.cloudfront.net/?height=600&quality=80&resize_to=fit&src=https%3A%2F%2Fd32dm0rphc51dk.cloudfront.net%2Fpj1Kk4Od1CBV8tWBLk3zeA%2Fnormalized.jpg&width=800" 
-                                                height="100"
-                                                weight="100"
-                                                style={{objectFit: "contain"}}
-                                            />
-                                        </Row>
-                                        <Row className='text-center'>
-                                            Birth of Venus
-                                        </Row>
-                                    </Col>
-                                    <Col>
-                                        <p>
-                                            €45
-                                        </p>
-                                    </Col>
-                                    <Col>
-                                        <Row>
-                                            <p style={{cursor: "pointer"}}>
-                                                <FontAwesomeIcon icon={faBasketShopping} />
-                                            </p>
-                                        </Row>
-                                        <Row>
-                                            <p style={{cursor: "pointer"}}>
-                                                <FontAwesomeIcon icon={faHeart} />
-                                            </p>
-                                        </Row>
-                                    </Col>
-                                </Row>
-                                <Row className='border'>
-                                    <Col>
-                                        <Row>
-                                            <img 
-                                                src="https://d7hftxdivxxvm.cloudfront.net/?height=600&quality=80&resize_to=fit&src=https%3A%2F%2Fd32dm0rphc51dk.cloudfront.net%2Fpj1Kk4Od1CBV8tWBLk3zeA%2Fnormalized.jpg&width=800" 
-                                                height="100"
-                                                weight="100"
-                                                style={{objectFit: "contain"}}
-                                            />
-                                        </Row>
-                                        <Row className='text-center'>
-                                            Birth of Venus
-                                        </Row>
-                                    </Col>
-                                    <Col>
-                                        <p>
-                                            €45
-                                        </p>
-                                    </Col>
-                                    <Col>
-                                        <Row>
-                                            <p style={{cursor: "pointer"}}>
-                                                <FontAwesomeIcon icon={faBasketShopping} />
-                                            </p>
-                                        </Row>
-                                        <Row>
-                                            <p style={{cursor: "pointer"}}>
-                                                <FontAwesomeIcon icon={faHeart} />
-                                            </p>
-                                        </Row>
-                                    </Col>
-                                </Row>
-                            </Row>
+
+                            <BuyTable 
+                                reccomendation = {true}
+                                theadNeeded = {false}
+                                dataLines = {featured}
+                                categories = {categories}
+                            />
                         </Col>
-                        <Col sx={12} md={5} lg={3} className="mb-2 mx-3 d-flex align-content-between flex-wrap">
-                            <Row>
-                                <Col>
-                                    <h4 className='text-center'>Wishlisted the most</h4>
-                                </Col>
-                                <Col>
-                                    <FontAwesomeIcon icon={faCaretDown} />
-                                </Col>    
-                            </Row>
-                            <Row>
-                                <Row className='border'>
-                                    <Col>
-                                        <Row>
-                                            <img 
-                                                src="https://d7hftxdivxxvm.cloudfront.net/?height=600&quality=80&resize_to=fit&src=https%3A%2F%2Fd32dm0rphc51dk.cloudfront.net%2Fpj1Kk4Od1CBV8tWBLk3zeA%2Fnormalized.jpg&width=800" 
-                                                height="100"
-                                                weight="100"
-                                                style={{objectFit: "contain"}}
-                                            />
-                                        </Row>
-                                        <Row className='text-center'>
-                                            Birth of Venus
-                                        </Row>
-                                    </Col>
-                                    <Col>
-                                        <p>
-                                            €45
-                                        </p>
-                                    </Col>
-                                    <Col>
-                                        <Row>
-                                            <p style={{cursor: "pointer"}}>
-                                                <FontAwesomeIcon icon={faBasketShopping} />
-                                            </p>
-                                        </Row>
-                                        <Row>
-                                            <p style={{cursor: "pointer"}}>
-                                                <FontAwesomeIcon icon={faHeart} />
-                                            </p>
-                                        </Row>
-                                    </Col>
-                                </Row>
-                                <Row className='border'>
-                                    <Col>
-                                        <Row>
-                                            <img 
-                                                src="https://d7hftxdivxxvm.cloudfront.net/?height=600&quality=80&resize_to=fit&src=https%3A%2F%2Fd32dm0rphc51dk.cloudfront.net%2Fpj1Kk4Od1CBV8tWBLk3zeA%2Fnormalized.jpg&width=800" 
-                                                height="100"
-                                                weight="100"
-                                                style={{objectFit: "contain"}}
-                                            />
-                                        </Row>
-                                        <Row className='text-center'>
-                                            Birth of Venus
-                                        </Row>
-                                    </Col>
-                                    <Col>
-                                        <p>
-                                            €45
-                                        </p>
-                                    </Col>
-                                    <Col>
-                                        <Row>
-                                            <p style={{cursor: "pointer"}}>
-                                                <FontAwesomeIcon icon={faBasketShopping} />
-                                            </p>
-                                        </Row>
-                                        <Row>
-                                            <p style={{cursor: "pointer"}}>
-                                                <FontAwesomeIcon icon={faHeart} />
-                                            </p>
-                                        </Row>
-                                    </Col>
-                                </Row>
-                            </Row>
-                        </Col>
-                        <Col sx={12} md={5} lg={3} className="mb-2 mx-3 d-flex align-content-between flex-wrap">
-                            <Row>
-                                <Col>
-                                    <h4 className='text-center'>Newest</h4>
-                                </Col>
-                                <Col>
-                                    <FontAwesomeIcon icon={faCaretDown} />
-                                </Col>                                </Row>
-                            <Row>
-                                <Row className='border'>
-                                    <Col>
-                                        <Row>
-                                            <img 
-                                                src="https://d7hftxdivxxvm.cloudfront.net/?height=600&quality=80&resize_to=fit&src=https%3A%2F%2Fd32dm0rphc51dk.cloudfront.net%2Fpj1Kk4Od1CBV8tWBLk3zeA%2Fnormalized.jpg&width=800" 
-                                                height="100"
-                                                weight="100"
-                                                style={{objectFit: "contain"}}
-                                            />
-                                        </Row>
-                                        <Row className='text-center'>
-                                            Birth of Venus
-                                        </Row>
-                                    </Col>
-                                    <Col>
-                                        <p>
-                                            €45
-                                        </p>
-                                    </Col>
-                                    <Col>
-                                        <Row>
-                                            <p style={{cursor: "pointer"}}>
-                                                <FontAwesomeIcon icon={faBasketShopping} />
-                                            </p>
-                                        </Row>
-                                        <Row>
-                                            <p style={{cursor: "pointer"}}>
-                                                <FontAwesomeIcon icon={faHeart} />
-                                            </p>
-                                        </Row>
-                                    </Col>
-                                </Row>
-                                <Row className='border'>
-                                    <Col>
-                                        <Row>
-                                            <img 
-                                                src="https://d7hftxdivxxvm.cloudfront.net/?height=600&quality=80&resize_to=fit&src=https%3A%2F%2Fd32dm0rphc51dk.cloudfront.net%2Fpj1Kk4Od1CBV8tWBLk3zeA%2Fnormalized.jpg&width=800" 
-                                                height="100"
-                                                weight="100"
-                                                style={{objectFit: "contain"}}
-                                            />
-                                        </Row>
-                                        <Row className='text-center'>
-                                            Birth of Venus
-                                        </Row>
-                                    </Col>
-                                    <Col>
-                                        <p>
-                                            €45
-                                        </p>
-                                    </Col>
-                                    <Col>
-                                        <Row>
-                                            <p style={{cursor: "pointer"}}>
-                                                <FontAwesomeIcon icon={faBasketShopping} />
-                                            </p>
-                                        </Row>
-                                        <Row>
-                                            <p style={{cursor: "pointer"}}>
-                                                <FontAwesomeIcon icon={faHeart} />
-                                            </p>
-                                        </Row>
-                                    </Col>
-                                </Row>
-                            </Row>
-                        </Col>
-                        <Col sx={12} md={5} lg={3} className="mb-2 mx-3 d-flex align-content-between flex-wrap">
-                            <Row>
-                                <Col>
-                                    <h4 className='text-center'>Already purchased with tag or category</h4>
-                                </Col>
-                                <Col>
-                                    <FontAwesomeIcon icon={faCaretDown} />
-                                </Col>    
-                            </Row>
-                            <Row>
-                                <Row className='border'>
-                                    <Col>
-                                        <Row>
-                                            <img 
-                                                src="https://d7hftxdivxxvm.cloudfront.net/?height=600&quality=80&resize_to=fit&src=https%3A%2F%2Fd32dm0rphc51dk.cloudfront.net%2Fpj1Kk4Od1CBV8tWBLk3zeA%2Fnormalized.jpg&width=800" 
-                                                height="100"
-                                                weight="100"
-                                                style={{objectFit: "contain"}}
-                                            />
-                                        </Row>
-                                        <Row className='text-center'>
-                                            Birth of Venus
-                                        </Row>
-                                    </Col>
-                                    <Col>
-                                        <p>
-                                            €45
-                                        </p>
-                                    </Col>
-                                    <Col>
-                                        <Row>
-                                            <p style={{cursor: "pointer"}}>
-                                                <FontAwesomeIcon icon={faBasketShopping} />
-                                            </p>
-                                        </Row>
-                                        <Row>
-                                            <p style={{cursor: "pointer"}}>
-                                                <FontAwesomeIcon icon={faHeart} />
-                                            </p>
-                                        </Row>
-                                    </Col>
-                                </Row>
-                                <Row className='border'>
-                                    <Col>
-                                        <Row>
-                                            <img 
-                                                src="https://d7hftxdivxxvm.cloudfront.net/?height=600&quality=80&resize_to=fit&src=https%3A%2F%2Fd32dm0rphc51dk.cloudfront.net%2Fpj1Kk4Od1CBV8tWBLk3zeA%2Fnormalized.jpg&width=800" 
-                                                height="100"
-                                                weight="100"
-                                                style={{objectFit: "contain"}}
-                                            />
-                                        </Row>
-                                        <Row className='text-center'>
-                                            Birth of Venus
-                                        </Row>
-                                    </Col>
-                                    <Col>
-                                        <p>
-                                            €45
-                                        </p>
-                                    </Col>
-                                    <Col>
-                                        <Row>
-                                            <p style={{cursor: "pointer"}}>
-                                                <FontAwesomeIcon icon={faBasketShopping} />
-                                            </p>
-                                        </Row>
-                                        <Row>
-                                            <p style={{cursor: "pointer"}}>
-                                                <FontAwesomeIcon icon={faHeart} />
-                                            </p>
-                                        </Row>
-                                    </Col>
-                                </Row>
-                            </Row>
-                        </Col>
-                        <Col sx={12} md={5} lg={3} className="mb-2 mx-3 d-flex align-content-between flex-wrap">
-                            <Row>
-                                <Row>
-                                    <Col>
-                                        <h4 className='text-center'>Wishlisted by you</h4>
-                                    </Col>
-                                    <Col>
-                                        <FontAwesomeIcon icon={faCaretDown} />
-                                    </Col>    
-                                </Row>
-                            </Row>
-                            <Row>
-                                <Row className='border'>
-                                    <Col>
-                                        <Row>
-                                            <img 
-                                                src="https://d7hftxdivxxvm.cloudfront.net/?height=600&quality=80&resize_to=fit&src=https%3A%2F%2Fd32dm0rphc51dk.cloudfront.net%2Fpj1Kk4Od1CBV8tWBLk3zeA%2Fnormalized.jpg&width=800" 
-                                                height="100"
-                                                weight="100"
-                                                style={{objectFit: "contain"}}
-                                            />
-                                        </Row>
-                                        <Row className='text-center'>
-                                            Birth of Venus
-                                        </Row>
-                                    </Col>
-                                    <Col>
-                                        <p>
-                                            €45
-                                        </p>
-                                    </Col>
-                                    <Col>
-                                        <Row>
-                                            <p style={{cursor: "pointer"}}>
-                                                <FontAwesomeIcon icon={faBasketShopping} />
-                                            </p>
-                                        </Row>
-                                        <Row>
-                                            <p style={{cursor: "pointer"}}>
-                                                <FontAwesomeIcon icon={faHeart} />
-                                            </p>
-                                        </Row>
-                                    </Col>
-                                </Row>
-                                <Row className='border'>
-                                    <Col>
-                                        <Row>
-                                            <img 
-                                                src="https://d7hftxdivxxvm.cloudfront.net/?height=600&quality=80&resize_to=fit&src=https%3A%2F%2Fd32dm0rphc51dk.cloudfront.net%2Fpj1Kk4Od1CBV8tWBLk3zeA%2Fnormalized.jpg&width=800" 
-                                                height="100"
-                                                weight="100"
-                                                style={{objectFit: "contain"}}
-                                            />
-                                        </Row>
-                                        <Row className='text-center'>
-                                            Birth of Venus
-                                        </Row>
-                                    </Col>
-                                    <Col>
-                                        <p>
-                                            €45
-                                        </p>
-                                    </Col>
-                                    <Col>
-                                        <Row>
-                                            <p style={{cursor: "pointer"}}>
-                                                <FontAwesomeIcon icon={faBasketShopping} />
-                                            </p>
-                                        </Row>
-                                        <Row>
-                                            <p style={{cursor: "pointer"}}>
-                                                <FontAwesomeIcon icon={faHeart} />
-                                            </p>
-                                        </Row>
-                                    </Col>
-                                </Row>
-                            </Row>
-                        </Col>
-                        <Col sx={12} md={5} lg={3} className="mb-2 mx-3 d-flex align-content-between flex-wrap">
-                            <Row>
-                                <Row>
-                                    <Col>
-                                        <h4 className='text-center'>Recently viewed</h4>
-                                    </Col>
-                                    <Col>
-                                        <FontAwesomeIcon icon={faCaretDown} />
-                                    </Col>    
-                                </Row>                            
-                            </Row>
-                            <Row>
-                                <Row className='border'>
-                                    <Col>
-                                        <Row>
-                                            <img 
-                                                src="https://d7hftxdivxxvm.cloudfront.net/?height=600&quality=80&resize_to=fit&src=https%3A%2F%2Fd32dm0rphc51dk.cloudfront.net%2Fpj1Kk4Od1CBV8tWBLk3zeA%2Fnormalized.jpg&width=800" 
-                                                height="100"
-                                                weight="100"
-                                                style={{objectFit: "contain"}}
-                                            />
-                                        </Row>
-                                        <Row className='text-center'>
-                                            Birth of Venus
-                                        </Row>
-                                    </Col>
-                                    <Col>
-                                        <p>
-                                            €45
-                                        </p>
-                                    </Col>
-                                    <Col>
-                                        <Row>
-                                            <p style={{cursor: "pointer"}}>
-                                                <FontAwesomeIcon icon={faBasketShopping} />
-                                            </p>
-                                        </Row>
-                                        <Row>
-                                            <p style={{cursor: "pointer"}}>
-                                                <FontAwesomeIcon icon={faHeart} />
-                                            </p>
-                                        </Row>
-                                    </Col>
-                                </Row>
-                                <Row className='border'>
-                                    <Col>
-                                        <Row>
-                                            <img 
-                                                src="https://d7hftxdivxxvm.cloudfront.net/?height=600&quality=80&resize_to=fit&src=https%3A%2F%2Fd32dm0rphc51dk.cloudfront.net%2Fpj1Kk4Od1CBV8tWBLk3zeA%2Fnormalized.jpg&width=800" 
-                                                height="100"
-                                                weight="100"
-                                                style={{objectFit: "contain"}}
-                                            />
-                                        </Row>
-                                        <Row className='text-center'>
-                                            Birth of Venus
-                                        </Row>
-                                    </Col>
-                                    <Col>
-                                        <p>
-                                            €45
-                                        </p>
-                                    </Col>
-                                    <Col>
-                                        <Row>
-                                            <p style={{cursor: "pointer"}}>
-                                                <FontAwesomeIcon icon={faBasketShopping} />
-                                            </p>
-                                        </Row>
-                                        <Row>
-                                            <p style={{cursor: "pointer"}}>
-                                                <FontAwesomeIcon icon={faHeart} />
-                                            </p>
-                                        </Row>
-                                    </Col>
-                                </Row>
-                            </Row>
-                        </Col>
-                    </Row>
+                    
+
                 </Row>
 
             </Container>
