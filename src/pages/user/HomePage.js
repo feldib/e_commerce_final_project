@@ -3,36 +3,13 @@ import server_url from '../../server'
 import axios from 'axios'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBasketShopping, faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons'
-import { Col, Row, Container, Button, Dropdown, InputGroup, Form } from 'react-bootstrap'
-import SearchField from '../../components/SearchField'
-import Query from '../../components/Query'
-import CategoriesDropdown from '../../components/CategoriesDropdown'
+import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons'
+import { Col, Row, Container, Display } from 'react-bootstrap'
 import BuyTable from '../../components/BuyTable'
 
-function HomePage() {
-    const [categories, setCategories] = React.useState([])
-
-    const [queries, setQueries] = React.useState(
-        {min: "", max: "", title: "", artist_name: "", category_id: "", order: "asc", n: 10}
-    )
-    
+function HomePage(props) {
     const [featured, setFeatured] = React.useState([])
-    const [searchResults, setSearchResults] = React.useState([])
-
     const [featuredBuyTableHidden, setFeaturedBuyTableHidden] = React.useState(false)
-    
-    React.useEffect(()=>{
-        (async()=>{
-            await axios.get(`${server_url}/categories`)
-            .then(function (cats) {
-                setCategories(cats.data)
-            })
-            .catch(function (error) {
-                console.log(error)
-            })
-        })()
-    }, [])
 
     React.useEffect(()=>{
         (async()=>{
@@ -46,309 +23,107 @@ function HomePage() {
         })()
     }, [])
 
-    async function search(){
-        const qs = []
-        for (const [key, value] of Object.entries(queries)) {
-            if(value){
-                qs.push(
-                    `${key}=${value}`
-                )
-            }
-        }
-        await axios.get(`${server_url}/search_artworks${`?${qs.join("&")}`}`)
-        .then(function (artw) {
-            setSearchResults(artw.data)
-        })
-        .catch(function (error) {
-            console.log(error)
-        })
-    }
-
     return (
-        <div>
-            <Container>
-                <SearchField
-                    what="Title"
-                    saveQuery={(title)=>{
-                        setQueries({
-                            ...queries,
-                            title
-                        })
-                    }}
-                />
+        <Container>
+            <Row className='mt-5 mb-5 jumbotron'>
+                <p className='display-2 text-center'>
+                    Welcome to Artworks Market{`${
+                        props.loggedIn ?
+                            ` ${props.user.first_name}`:
+                            ""
+                    }!`}
+                </p>
+            </Row>
 
-                <SearchField
-                    what="Artist"
-                    saveQuery={(name)=>{
-                        setQueries({
-                            ...queries,
-                            artist_name: name
-                        })
-                    }}
-                />
+            <Row className="mb-3 d-flex justify-content-evenly">
+                    <Col sx={12} md={5} lg={3} className="mb-2 mx-3">
 
-                <Row lg={6} sx={8} className='mx-auto mb-5 mt-5'>
-                    <InputGroup>
-                            <InputGroup.Text>
-                                Price range (min, max)
-                            </InputGroup.Text>
-
-                            <Form.Control
-                                type="number"
-                                placeholder="Minimum"
-                                onBlur={(e)=>{
-                                    setQueries({
-                                        ...queries,
-                                        min: e.target.value
-                                    })
-                                }}
-                            />
-
-                            <Form.Control
-                                type="number"
-                                placeholder="Maximum"
-                                onBlur={(e)=>{
-                                    setQueries({
-                                        ...queries,
-                                        max: e.target.value
-                                    })
-                                }}
-                            />
-                        </InputGroup>
-                </Row>
-                
-                <Row>
-                    <CategoriesDropdown 
-                        categories = {categories}
-                        switchCategoryTo = {(newCategory)=>{
-                            setQueries({
-                                ...queries,
-                                category_id: newCategory.id
-                            })
-                        }}
-                    />
-
-                    <Col>
-                        <Dropdown
-                            onSelect={(eventKey)=>{
-                                setQueries({
-                                    ...queries,
-                                    n: eventKey
-                                })
-                            }}
-                        >
-                            <Dropdown.Toggle>Number of artworks shown</Dropdown.Toggle>
-                            <Dropdown.Menu>
-                                <Dropdown.Item
-                                    href=""
-                                    eventKey="10"
-                                >
-                                    10
-                                </Dropdown.Item>
-
-                                <Dropdown.Item
-                                    href=""
-                                    eventKey="20"
-                                >
-                                    20
-                                </Dropdown.Item>
-                                
-                                <Dropdown.Item
-                                    href=""
-                                    eventKey="30"
-                                >
-                                    30
-                                </Dropdown.Item>
-                            </Dropdown.Menu>
-                        </Dropdown>
-                    </Col>
-                    
-                    <Col>
-                        <Dropdown
-                            onSelect={(eventKey)=>{
-                                setQueries({
-                                    ...queries,
-                                    order: eventKey
-                                })
-                            }}
-                        >
-                            <Dropdown.Toggle>Order by</Dropdown.Toggle>
-                            <Dropdown.Menu>
-                                <Dropdown.Item
-                                    href=""
-                                    eventKey="asc"
-                                >
-                                    Newest to oldest
-                                </Dropdown.Item>
-
-                                <Dropdown.Item
-                                    href=""
-                                    eventKey="desc"
-                                >
-                                    Oldest to newest
-                                </Dropdown.Item>
-                            </Dropdown.Menu>
-                        </Dropdown>
-                    </Col>
-
-                </Row>
-
-                <Row className='mx-auto mb-3 text-end'>
-                    <Col>
-                        <Button
-                            onClick = {search}
-                        >
-
-                            Search
-                        </Button>
-                    </Col>
-                </Row>
-
-                <Row>
-                    {(queries.min && queries.max) ?
-                            <Query 
-                                text = {`Between ${queries.min} and ${queries.max}`}
-                                remove = {()=>{
-                                    setQueries(
-                                        {
-                                            ...queries,
-                                            min: "",
-                                            max: ""
-                                        }
-                                    )
-                                }}
-                            />
-                        :
-                            queries.min ?
-                            <Query 
-                                text = {`Minimum: ${queries.min}`}
-                                remove = {()=>{
-                                    setQueries(
-                                        {
-                                            ...queries,
-                                            min: "",
-                                        }
-                                    )
-                                }}
-                            />:
-
-                            queries.max &&
-                            <Query 
-                                text = {`Maxim: ${queries.max}`}
-                                remove = {()=>{
-                                    setQueries(
-                                        {
-                                            ...queries,
-                                            max: "",
-                                        }
-                                    )
-                                }}
-                            />
-                    }
-
-                    {queries.title &&
-                        <Query 
-                        text = {`Title: ${queries.title}`}
-                        remove = {()=>{
-                            setQueries(
-                                {
-                                    ...queries,
-                                    title: ""
-                                }
-                            )
-                        }}
-                    />
-                    }
-
-                    {queries.artist_name &&
-                        <Query 
-                            text = {`Artist: ${queries.artist_name}`}
-                            remove = {()=>{
-                                setQueries(
-                                    {
-                                        ...queries,
-                                        artist_name: ""
-                                    }
-                                )
-                            }}
-                        />
-                    }
-
-                    {queries.category_id &&
-                        <Query 
-                            text = {`${
-                                categories.find((cat)=>{
-                                    return cat.id === queries.category_id
-                                }).cname
-                            }`}
-                            remove = {()=>{
-                                setQueries(
-                                    {
-                                        ...queries,
-                                        category_id: ""
-                                    }
-                                )
-                            }}
-                        />
-                    }
-
-                </Row>
-
-                {searchResults.length !==0 &&
-                    <Row>
-                        <Row className='mb-3 mt-5'>
-                            <h3 className='text-center'>Search results</h3>
-                        </Row>
-                        
-                        <BuyTable 
-                            reccomendation = {false}
-                            theadNeeded = {true}
-                            dataLines = {searchResults}
-                            categories = {categories}
-                        />
-                    </Row>
-                }
-
-                <Row className="mb-3 d-flex justify-content-evenly">
-                        <Col sx={12} md={5} lg={3} className="mb-2 mx-3">
-
-                            <Row>
-                                <Col>
-                                    <h4 className='text-center'>Featured</h4>
-                                </Col>
-                                <Col>
-                                    <FontAwesomeIcon 
-                                        icon={
-                                            !featuredBuyTableHidden ?
-                                                faCaretDown :
-                                                faCaretUp
-                                        } 
-                                        onClick={(e)=>{
-                                            setFeaturedBuyTableHidden(!featuredBuyTableHidden)
-                                        }}
-                                    />
-                                </Col>                                
-                            </Row>
-
-                            {!featuredBuyTableHidden &&
-                                <BuyTable 
-                                    reccomendation = {true}
-                                    theadNeeded = {false}
-                                    dataLines = {featured}
-                                    categories = {categories} 
+                        <Row>
+                            <Col>
+                                <h4 className='text-center'>Featured</h4>
+                            </Col>
+                            <Col>
+                                <FontAwesomeIcon 
+                                    icon={
+                                        !featuredBuyTableHidden ?
+                                            faCaretDown :
+                                            faCaretUp
+                                    } 
+                                    onClick={(e)=>{
+                                        setFeaturedBuyTableHidden(!featuredBuyTableHidden)
+                                    }}
                                 />
-                            }
-                        </Col>
-                    
+                            </Col>                                
+                        </Row>
 
+                        {!featuredBuyTableHidden &&
+                            <BuyTable 
+                                reccomendation = {true}
+                                theadNeeded = {false}
+                                dataLines = {featured}
+                            />
+                        }
+                    </Col>
 
-                </Row>
+                    <Col sx={12} md={5} lg={3} className="mb-2 mx-3">
 
-            </Container>
-            
+                        <Row>
+                            <Col>
+                                <h4 className='text-center'>Featured</h4>
+                            </Col>
+                            <Col>
+                                <FontAwesomeIcon 
+                                    icon={
+                                        !featuredBuyTableHidden ?
+                                            faCaretDown :
+                                            faCaretUp
+                                    } 
+                                    onClick={(e)=>{
+                                        setFeaturedBuyTableHidden(!featuredBuyTableHidden)
+                                    }}
+                                />
+                            </Col>                                
+                        </Row>
 
-            {/*<FontAwesomeIcon icon={faCoffee} /> */}
-        </div>
+                        {!featuredBuyTableHidden &&
+                            <BuyTable 
+                                reccomendation = {true}
+                                theadNeeded = {false}
+                                dataLines = {featured}
+                            />
+                        }
+                    </Col>
+
+                    <Col sx={12} md={5} lg={3} className="mb-2 mx-3">
+
+                        <Row>
+                            <Col>
+                                <h4 className='text-center'>Featured</h4>
+                            </Col>
+                            <Col>
+                                <FontAwesomeIcon 
+                                    icon={
+                                        !featuredBuyTableHidden ?
+                                            faCaretDown :
+                                            faCaretUp
+                                    } 
+                                    onClick={(e)=>{
+                                        setFeaturedBuyTableHidden(!featuredBuyTableHidden)
+                                    }}
+                                />
+                            </Col>                                
+                        </Row>
+
+                        {!featuredBuyTableHidden &&
+                            <BuyTable 
+                                reccomendation = {true}
+                                theadNeeded = {false}
+                                dataLines = {featured}
+                            />
+                        }
+                    </Col>
+            </Row>
+        </Container>
     )
 }
 
