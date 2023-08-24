@@ -1,5 +1,7 @@
 import React from 'react'
 import server_url from '../../server'
+import axios from "axios"
+
 
 import { Col, Row, Button, Form, InputGroup } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -19,25 +21,36 @@ function RegistrationPage(props) {
     async function handleSubmit(e){
         e.preventDefault()
         if(email && password && firstName && lastName && address){
-            await fetch(
-                `${server_url}/users/new_user`,
-                {
-                    method: "POST",
-                    headers: {"Content-Type": "application/json"},
-                    body: JSON.stringify({
-                        email, 
-                        password, 
-                        first_name: firstName, 
-                        last_name: lastName, 
-                        address, 
-                        phone_number: phone
-                    })
-                }
-            ).then((response)=>response.json())
-            .then((userData)=>{
-                props.settleSuccessfulRegistration(userData)
+            await axios.post(`${server_url}/users/new_user`, {
+                last_name: lastName,
+                first_name: firstName, 
+                email, 
+                password, 
+                address, 
+                phone_number: phone
             })
-            .catch((err)=>{console.log(err)})
+            .then(async function (response) {
+                if(response.data.Status === "Success"){
+                    await axios.post(`${server_url}/login`, {email, password})
+                    .then(function (response) {
+                        if(response.data){
+                            console.log(response.data)
+                            const userData = response.data
+                            props.settleSuccessfulRegistration(userData)
+                        }else{
+                            throw Error("Wrong email or password")
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(error)
+                    })
+                }else{
+                    throw Error("Wrong email or password")
+                }
+            })
+            .catch(function (error) {
+                console.log(error)
+            })
         }
     }
 
@@ -189,7 +202,7 @@ function RegistrationPage(props) {
                     </Form.Group>
 
                     <Button variant="primary" type="submit">
-                        Sign In
+                        Register
                     </Button>
                 </Form>
             </Col>
