@@ -6,13 +6,17 @@ h1, h2, h3, h4, h5{
 }
 
 #root{
-    background: #a1873d;
+    background-color: #a1873d;
 }
 
 #header, #header>div>div>div>a, #footer, #footer>div>div>div>a, .share-icon,  #header-toggler {
     font-family: 'Limelight';
     font-size: 1.5rem;
     background-color: rgba(7,27,25,255);
+    color: #a1873d;
+}
+
+td{
     color: #a1873d;
 }
 

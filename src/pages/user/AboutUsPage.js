@@ -7,7 +7,7 @@ function AboutUsPage() {
     return (
         <Container>
             <Row>
-                <Col className='mt-5'>
+                <Col className='pt-5 pb-5'>
                     <Row>
                         <h2>Our story</h2>
                     </Row>

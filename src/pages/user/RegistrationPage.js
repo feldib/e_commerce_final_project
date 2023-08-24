@@ -3,7 +3,7 @@ import server_url from '../../server'
 import axios from "axios"
 
 
-import { Col, Row, Button, Form, InputGroup } from 'react-bootstrap'
+import { Container, Col, Row, Button, Form, InputGroup } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAsterisk, faUser, faKey, faQuestion, faHouse, faPhone } from '@fortawesome/free-solid-svg-icons'
 
@@ -55,8 +55,9 @@ function RegistrationPage(props) {
     }
 
     return (
+        <Container>
         <Row>
-            <Col className='mx-5'>
+            <Col className='mx-5 pt-5 pb-5'>
                 <Form onSubmit={handleSubmit}>
 
                     <Form.Group className="mb-3">
@@ -207,6 +208,7 @@ function RegistrationPage(props) {
                 </Form>
             </Col>
         </Row>
+        </Container>
     )
 }
 

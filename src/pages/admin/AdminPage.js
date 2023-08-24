@@ -4,10 +4,10 @@ import { Outlet } from 'react-router-dom';
 
 function AdminPage() {
     return (
-        <Container className='mb-5 pb-5'>
+        <Container className='pb-5'>
             <Row>
                 <Col>
-                    <Navbar >
+                    <Navbar>
                         <Container>
                             <Nav className='mx-3 text-center justify-content-between w-100'>
                                 <Nav.Link>
@@ -31,7 +31,7 @@ function AdminPage() {
                 </Col>
             </Row>
 
-            <Row className='mb-5'>
+            <Row className='pb-5'>
                 <Outlet />
 
             </Row>

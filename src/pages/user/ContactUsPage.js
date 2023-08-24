@@ -7,7 +7,7 @@ function ContactUsPage() {
     return (
         <Container>
             <Row>
-                <Col sm={12} md={5} className='mt-5 mb-5'>
+                <Col sm={12} md={5} className='pt-5 pb-5'>
                     <Row>
                         <h2>Company details</h2>
                     </Row>
@@ -19,7 +19,7 @@ function ContactUsPage() {
                     </Row>
                 </Col>
 
-                <Col sm={12} md={5}>
+                <Col sm={12} md={5} className='pt-5 pb-5'>
                     <Row>
                         <h2>Message administrator</h2>
                     </Row>

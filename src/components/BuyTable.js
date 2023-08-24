@@ -6,7 +6,7 @@ import { Row, Table } from 'react-bootstrap'
 function BuyTable(props) {
     return (
         <Row>
-            <Table className='table-hover'>
+            <Table className='table-hover' variant='dark'>
                 {props.theadNeeded &&
                 <thead>
                     <tr>
