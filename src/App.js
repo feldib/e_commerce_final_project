@@ -68,7 +68,7 @@ function App() {
     <BrowserRouter>
       <Header loggedIn={loggedIn} user={user} />
 
-      <div id="main" className='pb-5'>
+      <div id="main" className='pb-5 vh-100'>
         <Routes>
           <Route
             path='/'
