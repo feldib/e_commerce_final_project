@@ -1,4 +1,6 @@
 import React from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { Navbar, Nav, Container } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import server_url from '../server'
@@ -19,15 +21,22 @@ function Header(props) {
     
 
     return (
-            <Navbar expand="lg">
+            <Navbar id='header' expand="lg">
                 <Container>
                     <Navbar.Brand>
                         <Link style={{ color: 'inherit', textDecoration: 'inherit'}} to="/">
-                            Artwork Market
+                            <img
+                                src='/logo.jpg'
+                                width="100"
+                                className="d-inline-block align-top"
+                                alt="React Bootstrap logo"
+                            />
                         </Link>
 
                     </Navbar.Brand>
-                    <Navbar.Toggle aria-controls="menu-items" />
+                    <Navbar.Toggle aria-controls="menu-items">
+                        <FontAwesomeIcon id="header-toggler" icon={faBars} />
+                    </Navbar.Toggle>
                     <Navbar.Collapse id="menu-idems">
                         <Nav className='mx-auto'>
                             <Nav.Link>
