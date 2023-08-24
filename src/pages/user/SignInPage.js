@@ -3,7 +3,7 @@ import server_url from '../../server'
 import axios from "axios"
 import { Link } from 'react-router-dom'
 
-import { Col, Row, Button, Form, InputGroup } from 'react-bootstrap'
+import { Col, Container, Row, Button, Form, InputGroup } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAsterisk, faUser, faKey } from '@fortawesome/free-solid-svg-icons'
 
@@ -27,14 +27,14 @@ function SignInPage(props) {
     }
 
     return (
-        <Row>
+        <Container className='pb-5'>
             <Row>
-                <Col className='mx-5'>
+                <Col className='mx-3 pt-5 pb-5'>
                     <Form
                         onSubmit={handleSubmit}
                     >
 
-                        <Form.Group className="mb-3">
+                        <Form.Group className="pb-3">
                             <Form.Label>Email address</Form.Label>
                             <FontAwesomeIcon icon={faAsterisk} style={{color: "red"}} className='mx-3'/>
 
@@ -51,7 +51,7 @@ function SignInPage(props) {
                             </InputGroup>
                         </Form.Group>
 
-                        <Form.Group className="mb-3">
+                        <Form.Group className="pb-3">
                             <Form.Label>Password</Form.Label>
                             <FontAwesomeIcon icon={faAsterisk} style={{color: "red"}} className='mx-3'/>
 
@@ -75,7 +75,7 @@ function SignInPage(props) {
                 </Col>
             </Row>
 
-            <Row className='mx-5 mt-3'>
+            <Row className='mx-5 pt-3'>
                 <Col>
                     <Link
                         to="/forgot_password"
@@ -84,7 +84,7 @@ function SignInPage(props) {
                     </Link>
                 </Col>
             </Row>
-        </Row>
+        </Container>
     )
 }
 
