@@ -31,8 +31,8 @@ function Header(props) {
                     <Navbar.Collapse id="menu-idems">
                         <Nav className='mx-auto'>
                             <Nav.Link>
-                                <Link style={{ color: 'inherit', textDecoration: 'inherit'}} to="/">
-                                    Browse
+                                <Link style={{ color: 'inherit', textDecoration: 'inherit'}} to="/search">
+                                    Search
                                 </Link>
                             </Nav.Link>
                             <Nav.Link>

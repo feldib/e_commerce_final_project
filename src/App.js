@@ -1,4 +1,5 @@
 import HomePage from './pages/user/HomePage.js'
+import Search from './pages/user/Search.js'
 import SignInPage from './pages/user/SignInPage.js'
 import RegistrationPage from "./pages/user/RegistrationPage.js"
 import ShoppingCartPage from './pages/user/ShoppingCartPage.js'
@@ -71,7 +72,12 @@ function App() {
         <Routes>
           <Route
             path='/'
-            element={<HomePage />}
+            element={<HomePage loggedIn={loggedIn} user={user} />}
+          />
+
+          <Route
+            path='/search'
+            element={<Search />}
           />
 
           <Route
