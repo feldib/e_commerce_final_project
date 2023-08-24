@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Limelight&display=swap');
+
+h1, h2, h3, h4, h5{
+    font-family: 'Limelight';
+
+}
+
+#root{
+    background: #a1873d;
+}
+
+#header, #header>div>div>div>a, #footer, #footer>div>div>div>a, .share-icon,  #header-toggler {
+    font-family: 'Limelight';
+    font-size: 1.5rem;
+    background-color: rgba(7,27,25,255);
+    color: #a1873d;
+}
+
+#footer, #footer>div>div>div>a, .share-icon{
+    font-size: 1rem;
+}

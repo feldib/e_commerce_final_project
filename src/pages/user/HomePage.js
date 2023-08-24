@@ -25,14 +25,14 @@ function HomePage(props) {
 
     return (
         <Container>
-            <Row className='mt-5 mb-5 jumbotron'>
-                <p className='display-2 text-center'>
+            <Row className='pt-5 pb-5 jumbotron'>
+                <h1 className='display-2 text-center'>
                     Welcome to Artworks Market{`${
                         props.loggedIn ?
                             ` ${props.user.first_name}`:
                             ""
                     }!`}
-                </p>
+                </h1>
             </Row>
 
             <Row className="mb-3 d-flex justify-content-evenly">

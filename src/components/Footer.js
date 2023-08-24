@@ -7,22 +7,19 @@ import { faShareAlt } from '@fortawesome/free-solid-svg-icons'
 
 function Footer() {
     return (
-            <Navbar fixed="bottom bg-white">
+            <Navbar id='footer' fixed="bottom">
                 <Container>
                     <Nav className='mx-auto' col="12">
-                        <Nav.Link>
-                            <Link style={{ color: 'inherit', textDecoration: 'inherit'}} to="/about">
-                                About us
-                            </Link>
-                        </Nav.Link>
-                        <Nav.Link>
-                            <Link style={{ color: 'inherit', textDecoration: 'inherit'}} to="/contact">
-                                Contact us
-                            </Link>
+                        <Link className='nav-link' style={{ color: 'inherit', textDecoration: 'inherit'}} to="/about">
+                            About us
+                        </Link>
+                        
+                        <Link className='nav-link' style={{ color: 'inherit', textDecoration: 'inherit'}} to="/contact">
+                            Contact us
+                        </Link>
 
-                        </Nav.Link>
                         <Nav.Link>
-                            <FontAwesomeIcon icon={faShareAlt} />
+                            <FontAwesomeIcon icon={faShareAlt} className='share-icon'/>
                         </Nav.Link>
                     </Nav>
                 </Container>
