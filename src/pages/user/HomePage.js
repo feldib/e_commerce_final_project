@@ -19,6 +19,8 @@ function HomePage() {
     
     const [featured, setFeatured] = React.useState([])
     const [searchResults, setSearchResults] = React.useState([])
+
+    const [featuredBuyTableHidden, setFeaturedBuyTableHidden] = React.useState(false)
     
     React.useEffect(()=>{
         (async()=>{
@@ -289,18 +291,6 @@ function HomePage() {
                             }}
                         />
                     }
-                    {/*
-                            //{min, max, title, artist_name, category_id, order, n}ű
-                    <Query 
-                        text = {query}
-                        remove = {()=>{
-                                setQueries(
-                                queries.filter((q)=>{
-                                    return q !== query
-                                })
-                            )
-                        }}
-                    /> */}
 
                 </Row>
 
@@ -327,16 +317,27 @@ function HomePage() {
                                     <h4 className='text-center'>Featured</h4>
                                 </Col>
                                 <Col>
-                                    <FontAwesomeIcon icon={faCaretDown} />
+                                    <FontAwesomeIcon 
+                                        icon={
+                                            !featuredBuyTableHidden ?
+                                                faCaretDown :
+                                                faCaretUp
+                                        } 
+                                        onClick={(e)=>{
+                                            setFeaturedBuyTableHidden(!featuredBuyTableHidden)
+                                        }}
+                                    />
                                 </Col>                                
                             </Row>
 
-                            <BuyTable 
-                                reccomendation = {true}
-                                theadNeeded = {false}
-                                dataLines = {featured}
-                                categories = {categories}
-                            />
+                            {!featuredBuyTableHidden &&
+                                <BuyTable 
+                                    reccomendation = {true}
+                                    theadNeeded = {false}
+                                    dataLines = {featured}
+                                    categories = {categories} 
+                                />
+                            }
                         </Col>
                     
 

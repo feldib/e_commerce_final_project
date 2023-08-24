@@ -21,13 +21,13 @@ function BuyTable(props) {
                     </tr>
                 </thead>
                 }
-                
+
                 <tbody>
                 {props.dataLines.map((line, index)=>{
                     return (
                         <tr key={index}>
                             <td>
-                                <img 
+                                <img
                                         src = {line.thumbnail}
                                         width="100"
                                         style={{objectFit: "contain"}}
@@ -47,10 +47,14 @@ function BuyTable(props) {
                                 {line.quantity}
                             </td>
                             <td className={`${props.reccomendation ? "d-none" : "d-none d-md-table-cell"}`}>
-                                //place of categories
+                                {line.tags &&
+                                    line.tags
+                                    .map(tag => tag.tname)
+                                    .join(", ")
+                                }
                             </td>
                             <td className={`${props.reccomendation ? "d-none" : "d-none d-md-table-cell"}`}>
-                                //place of categories
+                                {line.cname}
                             </td>
                             <td>
                                 <div className='container'>

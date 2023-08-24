@@ -56,7 +56,7 @@ function Header(props) {
                                     </Nav.Link>
                                     <Nav.Link>
                                         <Link style={{ color: 'inherit', textDecoration: 'inherit'}} to="/user">
-                                            Profile Page
+                                            {props.user.first_name}'s Page
                                         </Link>
                                     </Nav.Link>
                                 </>:

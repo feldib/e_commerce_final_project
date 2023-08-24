@@ -17,6 +17,8 @@ import Reviews from './subpages/admin/Reviews'
 import Messages from './subpages/admin/Messages'
 import Users from './subpages/admin/Users'
 import Artworks from './subpages/admin/Artworks'
+import ForgotPasword from './pages/user/ForgotPasword.js'
+import ResetPassword from './pages/user/ResetPassword.js'
 
 import ProfilePage from './pages/user/ProfilePage.js'
 import AdminPage from './pages/admin/AdminPage.js'
@@ -32,30 +34,20 @@ import axios from 'axios'
 function App() {
   axios.defaults.withCredentials = true
 
-  const [user, setUser] = React.useState()
+  const [user, setUser] = React.useState({id: 0})
   const [loggedIn, setLoggedIn] = React.useState(false)
 
   React.useEffect(()=>{
-    if(user){
-      axios.get(`${server_url}/logged_in`, {id: user.id})
+      axios.get(`${server_url}/logged_in`)
       .then(res =>{
         if(res.data.Status === "Success"){
+          setUser(res.data.user)
           setLoggedIn(true)
         }else{
           setLoggedIn(false)
         }
       })
-    }
-  }, [user])
-
-  React.useEffect(()=>{
-    const prev_user = localStorage.getItem('user')
-    if(prev_user){
-      setUser(
-        JSON.parse(prev_user)
-      )
-    }
-  } ,[])
+  }, [])
 
   const settleSuccessfulLogIn = (userData)=>{
     setUser(userData)
@@ -179,6 +171,16 @@ function App() {
               element={<Artworks />}
             />
           </Route>
+
+          <Route
+            path='forgot_password'
+            element={<ForgotPasword />}
+          />
+
+          <Route
+            path='reset_password'
+            element={<ResetPassword />}
+          />
 
         </Routes>
 
