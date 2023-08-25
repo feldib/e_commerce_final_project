@@ -3,23 +3,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { Navbar, Nav, Container } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import server_url from '../server'
-import axios from 'axios'
+import { logOut } from '../fetching'
 
-function Header(props) {
-    axios.defaults.withCredentials = true
-    
-    const logOut = async()=>{
-        await axios.get(`${server_url}/log_out`)
-        .then(function (response) {
-            window.location.replace("/")
-        })
-        .catch(function (error) {
-            console.log(error)
-        })
-    }
-    
-
+function Header(props) { 
     return (
             <Navbar id='header' expand="lg">
                 <Container>
