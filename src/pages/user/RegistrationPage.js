@@ -1,8 +1,6 @@
 import React from 'react'
-import server_url from '../../server'
-import axios from "axios"
-
-
+import { registerNewUser } from '../../fetching'
+import { logIn } from '../../fetching'
 import { Container, Col, Row, Button, Form, InputGroup } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAsterisk, faUser, faKey, faQuestion, faHouse, faPhone } from '@fortawesome/free-solid-svg-icons'
@@ -21,29 +19,11 @@ function RegistrationPage(props) {
     async function handleSubmit(e){
         e.preventDefault()
         if(email && password && firstName && lastName && address){
-            await axios.post(`${server_url}/users/new_user`, {
-                last_name: lastName,
-                first_name: firstName, 
-                email, 
-                password, 
-                address, 
-                phone_number: phone
-            })
-            .then(async function (response) {
-                if(response.data.Status === "Success"){
-                    await axios.post(`${server_url}/login`, {email, password})
-                    .then(function (response) {
-                        if(response.data){
-                            console.log(response.data)
-                            const userData = response.data
-                            props.settleSuccessfulRegistration(userData)
-                        }else{
-                            throw Error("Wrong email or password")
-                        }
-                    })
-                    .catch(function (error) {
-                        console.log(error)
-                    })
+            await registerNewUser(email, password, firstName, lastName, address, phone)
+            .then(function (response) {
+                console.log("reponse: ", JSON.stringify(response))
+                if(response.data === true){
+                    logIn(email, password, props.settleSuccessfulRegistration)
                 }else{
                     throw Error("Wrong email or password")
                 }

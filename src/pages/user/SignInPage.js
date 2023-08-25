@@ -2,6 +2,7 @@ import React from 'react'
 import server_url from '../../server'
 import axios from "axios"
 import { Link } from 'react-router-dom'
+import { logIn } from '../../fetching'
 
 import { Col, Container, Row, Button, Form, InputGroup } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -12,18 +13,7 @@ function SignInPage(props) {
     const [password, setPassword] = React.useState("")
     async function handleSubmit(e){
         e.preventDefault()
-        await axios.post(`${server_url}/login`, {email, password})
-            .then(function (response) {
-                if(response.data !== false){
-                    const userData = response.data
-                    props.settleSuccessfulLogIn(userData)
-                }else{
-                    throw Error("Wrong email or password")
-                }
-            })
-            .catch(function (error) {
-                console.log(error)
-            })
+        await logIn(email, password, props.settleSuccessfulLogIn)
     }
 
     return (
@@ -33,7 +23,6 @@ function SignInPage(props) {
                     <Form
                         onSubmit={handleSubmit}
                     >
-
                         <Form.Group className="pb-3">
                             <Form.Label>Email address</Form.Label>
                             <FontAwesomeIcon icon={faAsterisk} style={{color: "red"}} className='mx-3'/>

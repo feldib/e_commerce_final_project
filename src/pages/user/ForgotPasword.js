@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAsterisk, faUser } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
 import server_url from '../../server'
+import { sendForgotPasswordEmail } from '../../fetching'
 
 function ForgotPasword() {
     const [email, setEmail] = React.useState("")
@@ -11,10 +12,7 @@ function ForgotPasword() {
     const handleSubmit = async (e) => {
         e.preventDefault()
         if(email){
-            await axios.post(`${server_url}/forgot_password`, {email})
-                .catch(function (error) {
-                    console.log(error)
-                })
+            await sendForgotPasswordEmail(email)
             setMessageHidden(false)
         }else{
             setMessageHidden(true)
