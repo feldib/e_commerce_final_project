@@ -1,6 +1,7 @@
 import React from 'react'
 import server_url from '../../server'
 import axios from 'axios'
+import { useAxios, getArtworkSearchResults } from '../../fetching'
 
 import { Col, Row, Container, Button, Dropdown, InputGroup, Form } from 'react-bootstrap'
 import SearchField from '../../components/SearchField'
@@ -9,26 +10,12 @@ import CategoriesDropdown from '../../components/CategoriesDropdown'
 import BuyTable from '../../components/BuyTable'
 
 function Search() {
-    const [categories, setCategories] = React.useState([])
-
     const [queries, setQueries] = React.useState(
         {min: "", max: "", title: "", artist_name: "", category_id: "", order: "asc", n: 10}
     )
-    
-    const [searchResults, setSearchResults] = React.useState([])
-    
-    React.useEffect(()=>{
-        (async()=>{
-            await axios.get(`${server_url}/categories`)
-            .then(function (cats) {
-                setCategories(cats.data)
-            })
-            .catch(function (error) {
-                console.log(error)
-            })
-        })()
-    }, [])
+    const categories = useAxios("/categories")
 
+    const [searchResults, setSearchResults] = React.useState()
     async function search(){
         const qs = []
         for (const [key, value] of Object.entries(queries)) {
@@ -38,13 +25,7 @@ function Search() {
                 )
             }
         }
-        await axios.get(`${server_url}/search_artworks${`?${qs.join("&")}`}`)
-        .then(function (artw) {
-            setSearchResults(artw.data)
-        })
-        .catch(function (error) {
-            console.log(error)
-        })
+        await getArtworkSearchResults(qs, setSearchResults)
     }
 
     return (
@@ -199,6 +180,7 @@ function Search() {
                                             max: ""
                                         }
                                     )
+                                    search()
                                 }}
                             />
                         :
@@ -212,6 +194,7 @@ function Search() {
                                             min: "",
                                         }
                                     )
+                                    search()
                                 }}
                             />:
 
@@ -225,6 +208,7 @@ function Search() {
                                             max: "",
                                         }
                                     )
+                                    search()
                                 }}
                             />
                     }
@@ -239,6 +223,7 @@ function Search() {
                                     title: ""
                                 }
                             )
+                            search()
                         }}
                     />
                     }
@@ -253,6 +238,7 @@ function Search() {
                                         artist_name: ""
                                     }
                                 )
+                                search()
                             }}
                         />
                     }
@@ -271,13 +257,14 @@ function Search() {
                                         category_id: ""
                                     }
                                 )
+                                search()
                             }}
                         />
                     }
 
                 </Row>
 
-                {searchResults.length !==0 &&
+                {searchResults &&
                     <Row>
                         <Row className='mb-3 mt-5'>
                             <h3 className='text-center'>Search results</h3>

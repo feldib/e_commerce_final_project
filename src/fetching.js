@@ -2,15 +2,21 @@ import React from 'react'
 import server_url from './server'
 import axios from 'axios'
 
-const useFetching = async()=>{
-    return
-    // await axios.get(`${server_url}/categories`)
-    // .then(function (cats) {
-    //     setCategories(cats.data)
-    // })
-    // .catch(function (error) {
-    //     console.log(error)
-    // })
+const useAxios = (url)=>{
+    const [data, setData] = React.useState()
+    React.useEffect(()=>{
+        (async()=>{
+            await axios.get(`${server_url}${url}`)
+            .then(function (results) {
+                setData(results.data)
+            })
+            .catch(function (error) {
+                console.log(error)
+            })
+        })()
+    }, [data])
+
+    return data
 }
 
 const logOut = async()=>{
@@ -65,11 +71,22 @@ const changePassword = async(token, email, newPassword)=>{
     })
 }
 
+const getArtworkSearchResults = async(queries, setter)=>{
+    axios.get(`${server_url}/search_artworks${`?${queries.join("&")}`}`)
+    .then(function (artw) {
+        setter(artw.data)
+    })
+    .catch(function (error) {
+        console.log(error)
+    })
+}
+
 export {
-    useFetching,
+    useAxios,
     logOut,
     sendForgotPasswordEmail,
     registerNewUser,
     logIn,
     changePassword,
+    getArtworkSearchResults,
 }
