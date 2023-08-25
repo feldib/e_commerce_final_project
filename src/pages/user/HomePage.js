@@ -1,28 +1,15 @@
 import React from 'react'
 import server_url from '../../server'
 import axios from 'axios'
-
+import { useAxios } from '../../fetching'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons'
 import { Col, Row, Container, Display } from 'react-bootstrap'
 import BuyTable from '../../components/BuyTable'
 
 function HomePage(props) {
-    const [featured, setFeatured] = React.useState([])
     const [featuredBuyTableHidden, setFeaturedBuyTableHidden] = React.useState(false)
-
-    React.useEffect(()=>{
-        (async()=>{
-            await axios.get(`${server_url}/users/recommendation/featured`)
-            .then(function (feat) {
-                setFeatured(feat.data)
-            })
-            .catch(function (error) {
-                console.log(error)
-            })
-        })()
-    }, [])
-
+    const featured = useAxios("/users/recommendation/featured")
     return (
         <Container>
             <Row className='pt-5 pb-5 jumbotron'>

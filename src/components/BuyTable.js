@@ -1,6 +1,6 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHeart, faBasketShopping, faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons'
+import { faHeart, faBasketShopping} from '@fortawesome/free-solid-svg-icons'
 import { Row, Table } from 'react-bootstrap'
 
 function BuyTable(props) {
@@ -23,56 +23,65 @@ function BuyTable(props) {
                 }
 
                 <tbody>
-                {props.dataLines.map((line, index)=>{
-                    return (
-                        <tr key={index}>
-                            <td>
-                                <img
-                                        src = {line.thumbnail}
-                                        width="100"
-                                        style={{objectFit: "contain"}}
-                                        alt="place of thumbnail"
-                                    />
-                            </td>
-                            <td>
-                                {line.title}
-                            </td>
-                            <td>
-                                {line.artist_name}
-                            </td>
-                            <td>
-                                €{line.price}
-                            </td>
-                            <td>
-                                {line.quantity}
-                            </td>
-                            <td className={`${props.reccomendation ? "d-none" : "d-none d-md-table-cell"}`}>
-                                {line.tags &&
-                                    line.tags
-                                    .map(tag => tag.tname)
-                                    .join(", ")
-                                }
-                            </td>
-                            <td className={`${props.reccomendation ? "d-none" : "d-none d-md-table-cell"}`}>
-                                {line.cname}
-                            </td>
-                            <td>
-                                <div className='container'>
-                                    <Row>
-                                        <p style={{cursor: "pointer"}}>
-                                            <FontAwesomeIcon icon={faBasketShopping} />
-                                        </p>
-                                    </Row>
-                                    <Row>
-                                        <p style={{cursor: "pointer"}}>
-                                            <FontAwesomeIcon icon={faHeart} />
-                                        </p>
-                                    </Row>
-                                </div>
-                            </td>
-                        </tr>
-                    )
-                })}
+                { props.dataLines ?
+                    props.dataLines.length > 0 ?
+                        props.dataLines.map((line, index)=>{
+                            return (
+                                <tr key={index}>
+                                    <td>
+                                        <img
+                                                src = {line.thumbnail}
+                                                width="100"
+                                                style={{objectFit: "contain"}}
+                                                alt="place of thumbnail"
+                                            />
+                                    </td>
+                                    <td>
+                                        {line.title}
+                                    </td>
+                                    <td>
+                                        {line.artist_name}
+                                    </td>
+                                    <td>
+                                        €{line.price}
+                                    </td>
+                                    <td>
+                                        {line.quantity}
+                                    </td>
+                                    <td className={`${props.reccomendation ? "d-none" : "d-none d-md-table-cell"}`}>
+                                        {line.tags &&
+                                            line.tags
+                                            .map(tag => tag.tname)
+                                            .join(", ")
+                                        }
+                                    </td>
+                                    <td className={`${props.reccomendation ? "d-none" : "d-none d-md-table-cell"}`}>
+                                        {line.cname}
+                                    </td>
+                                    <td>
+                                        <div className='container'>
+                                            <Row>
+                                                <p style={{cursor: "pointer"}}>
+                                                    <FontAwesomeIcon icon={faBasketShopping} />
+                                                </p>
+                                            </Row>
+                                            <Row>
+                                                <p style={{cursor: "pointer"}}>
+                                                    <FontAwesomeIcon icon={faHeart} />
+                                                </p>
+                                            </Row>
+                                        </div>
+                                    </td>
+                                </tr>
+                            )
+                        })
+                    :
+                        <p>No results :'(</p>
+                :
+                    <div class="d-flex justify-content-center">
+                        <div class="spinner-border" role="status" />
+                    </div>
+                }
                 </tbody>
             </Table>
         </Row>
