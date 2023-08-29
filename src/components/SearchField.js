@@ -10,6 +10,7 @@ function SearchField(props) {
                         </InputGroup.Text>
                     <Form.Control
                         type="text"
+                        ref={props.inputRef}
                         onBlur={
                             (e)=>{
                                 props.saveQuery(e.target.value)

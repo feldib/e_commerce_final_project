@@ -76,7 +76,11 @@ function BuyTable(props) {
                             )
                         })
                     :
-                        <p>No results :'(</p>
+                        <tr>
+                            <td colspan="8">
+                                <h6 className='text-center'>No results</h6>
+                            </td>
+                        </tr>
                 :
                     <div class="d-flex justify-content-center">
                         <div class="spinner-border" role="status" />
