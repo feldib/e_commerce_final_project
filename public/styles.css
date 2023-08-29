@@ -10,12 +10,13 @@ h1, h2, h3, h4, h5{
 
 #root{
     background-color: #a1873d;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 #header, #header>div>div>div>a, #footer, #footer>div>div>div>a, .share-icon,  #header-toggler {
     font-family: 'Limelight';
     font-size: 1.5rem;
-    background-color: rgba(7,27,25,255);
+    background-color: #071b19;
     color: #a1873d;
 }
 
@@ -25,4 +26,21 @@ td{
 
 #footer, #footer>div>div>div>a, .share-icon{
     font-size: 1rem;
+}
+
+.dropdown-menu{
+    background-color: #bea04f !important;
+}
+
+.dropdown-toggle{
+    font-family: Verdana, Geneva, Tahoma, sans-serif !important;
+    font-weight: 700 !important;
+}
+
+button[type = "submit"], input[type = "submit"], .submit{
+    background-color: #2e778b  !important;
+    font-weight: 700 !important;
+    color: #071b19  !important;
+    border: 2px solid #071b19a2 !important;
+    text-transform: capitalize !important;
 }

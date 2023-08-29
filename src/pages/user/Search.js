@@ -101,7 +101,7 @@ function Search() {
                                 })
                             }}
                         >
-                            <Dropdown.Toggle>Number of artworks shown</Dropdown.Toggle>
+                            <Dropdown.Toggle variant='outilne-dark'>Number of artworks shown</Dropdown.Toggle>
                             <Dropdown.Menu>
                                 <Dropdown.Item
                                     href=""
@@ -128,7 +128,7 @@ function Search() {
                     </Col>
                     
                     <Col>
-                        <Dropdown
+                        <Dropdown 
                             onSelect={(eventKey)=>{
                                 setQueries({
                                     ...queries,
@@ -136,7 +136,7 @@ function Search() {
                                 })
                             }}
                         >
-                            <Dropdown.Toggle>Order by</Dropdown.Toggle>
+                            <Dropdown.Toggle variant='outilne-dark'>Order by</Dropdown.Toggle>
                             <Dropdown.Menu>
                                 <Dropdown.Item
                                     href=""
@@ -160,6 +160,7 @@ function Search() {
                 <Row className='mx-auto mb-3 text-end'>
                     <Col>
                         <Button
+                            className='submit'
                             onClick = {search}
                         >
 
