@@ -32,6 +32,14 @@ function Search() {
         await getArtworkSearchResults(qs, setSearchResults)
     }
 
+    const [isConditionBeignRemoved, setIsConditionBeignRemoved] = React.useState(false)
+    React.useEffect(()=>{
+        if(isConditionBeignRemoved){
+            search()
+            setIsConditionBeignRemoved(false)
+        }
+    }, [isConditionBeignRemoved])
+
     return (
         <div>
             <Container className='pb-5 mb-5'>
@@ -191,7 +199,7 @@ function Search() {
                                             max: ""
                                         }
                                     )
-                                    search()
+                                    setIsConditionBeignRemoved(true)
                                 }}
                             />
                         :
@@ -206,7 +214,7 @@ function Search() {
                                             min: "",
                                         }
                                     )
-                                    search()
+                                    setIsConditionBeignRemoved(true)
                                 }}
                             />:
 
@@ -221,7 +229,7 @@ function Search() {
                                             max: "",
                                         }
                                     )
-                                    search()
+                                    setIsConditionBeignRemoved(true)
                                 }}
                             />
                     }
@@ -237,7 +245,7 @@ function Search() {
                                     title: ""
                                 }
                             )
-                            search()
+                            setIsConditionBeignRemoved(true)
                         }}
                     />
                     }
@@ -253,7 +261,7 @@ function Search() {
                                         artist_name: ""
                                     }
                                 )
-                                search()
+                                setIsConditionBeignRemoved(true)
                             }}
                         />
                     }
@@ -272,7 +280,7 @@ function Search() {
                                         category_id: ""
                                     }
                                 )
-                                search()
+                                setIsConditionBeignRemoved(true)
                             }}
                         />
                     }
