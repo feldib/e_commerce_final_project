@@ -109,7 +109,7 @@ function App() {
           />
 
           <Route
-            path='/artwork_page'
+            path='/artwork_page/:artwork_id'
             element={<ArtworkPage />}
           />
 
