@@ -2,9 +2,12 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleLeft, faAngleRight, faBasketShopping, faHeart } from '@fortawesome/free-solid-svg-icons'
 import { Col, Row, Container, Carousel, Form, Button } from 'react-bootstrap'
-
+import { useParams } from 'react-router-dom'
+import { useAxios } from '../../fetching'
 
 function ArtworkPage() {
+    const {artwork_id} = useParams()
+    const artwork = useAxios(`/artwork?id=${artwork_id}`)
     return (
         <Container>
             <Row className='mb-2 mt-5 mb-3'>
@@ -15,23 +18,42 @@ function ArtworkPage() {
                     <Row>
                         <Col>
                             <Row>
-                                <h3>Mona Lisa</h3>
+                                <h3>
+                                    {artwork ?
+                                        artwork.title :
+                                        <div class="d-flex justify-content-center">
+                                            <div class="spinner-border" role="status" />
+                                        </div>
+                                    }
+                                </h3>
                             </Row>
                             
                             <Row>
-                                <h6>by Michelangelo</h6>
+                                <h6>
+                                    {artwork ?
+                                        `by ${artwork.artist_name}` :
+                                        <div class="d-flex justify-content-center">
+                                            <div class="spinner-border" role="status" />
+                                        </div>
+                                    }
+                                </h6>
                             </Row>
                         </Col>
                     </Row>
 
                     <Row>
                         <Col >
-                        <img 
-                            src="https://d7hftxdivxxvm.cloudfront.net/?height=600&quality=80&resize_to=fit&src=https%3A%2F%2Fd32dm0rphc51dk.cloudfront.net%2Fpj1Kk4Od1CBV8tWBLk3zeA%2Fnormalized.jpg&width=800" 
-                            height="200"
-                            weight="200"
-                            style={{objectFit: "contain"}}
-                        />
+                        {artwork ?
+                            <img 
+                                src={artwork.thumbnail} 
+                                height="200"
+                                weight="200"
+                                style={{objectFit: "contain"}}
+                            /> :
+                            <div class="d-flex justify-content-center">
+                                <div class="spinner-border" role="status" />
+                            </div>
+                        }
                         </Col>
                     </Row>
                     
@@ -42,11 +64,18 @@ function ArtworkPage() {
                     <Row>
                         <Col>
                             <Row>
-                                <h5>Categories:</h5>
+                                <h5>
+                                    Category:
+                                </h5>
                             </Row>
 
                             <Row>
-                                <p>Italian, Renessaince</p>
+                                {artwork ?
+                                    <p>{artwork.cname}</p> :
+                                    <div class="d-flex justify-content-center">
+                                        <div class="spinner-border" role="status" />
+                                    </div>
+                                }
                             </Row>
                         </Col>
 
@@ -56,7 +85,14 @@ function ArtworkPage() {
                             </Row>
 
                             <Row>
-                                <p>Painting, Oil Painting</p>
+                                {artwork ?
+                                    <p>{artwork.tags.map((tag)=>{
+                                        return tag.tname
+                                    }).join(", ")}</p> :
+                                    <div class="d-flex justify-content-center">
+                                        <div class="spinner-border" role="status" />
+                                    </div>
+                                }
                             </Row>
                         </Col>
 
@@ -67,7 +103,12 @@ function ArtworkPage() {
                     </Row>
 
                     <Row>
-                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur</p>
+                        {artwork ?
+                            <p>{artwork.descript}</p> :
+                            <div class="d-flex justify-content-center">
+                                <div class="spinner-border" role="status" />
+                            </div>
+                        }
                     </Row>
                 </Col>
             </Row>
@@ -107,11 +148,25 @@ function ArtworkPage() {
 
                 <Col>
                     <Row>
-                        <p>Available quantity: 5</p>
+                        <p>{"Available quantity: "}
+                            {artwork ?
+                                artwork.quantity :
+                                <div class="d-flex justify-content-center">
+                                    <div class="spinner-border" role="status" />
+                                </div>
+                            }
+                        </p>
                     </Row>
 
                     <Row>
-                        <p>Price: €500</p>
+                        <p>{"Price: €"}
+                            {artwork ?
+                                artwork.price :
+                                <div class="d-flex justify-content-center">
+                                    <div class="spinner-border" role="status" />
+                                </div>
+                            }
+                        </p>
                     </Row>
                 </Col>
 
