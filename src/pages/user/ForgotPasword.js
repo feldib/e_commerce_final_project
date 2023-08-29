@@ -1,9 +1,7 @@
 import React from 'react'
 import { Row, Col, Button, Form, InputGroup } from 'react-bootstrap'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAsterisk, faUser } from '@fortawesome/free-solid-svg-icons'
-import axios from 'axios'
-import server_url from '../../server'
+import { faUser } from '@fortawesome/free-solid-svg-icons'
+import InputComponent from '../../components/InputComponent'
 import { sendForgotPasswordEmail } from '../../fetching'
 
 function ForgotPasword() {
@@ -25,22 +23,14 @@ function ForgotPasword() {
                 <Form 
                     onSubmit={handleSubmit}
                 >
-                    <Form.Group className="mb-3">
-                        <Form.Label>Email address</Form.Label>
-                        <FontAwesomeIcon icon={faAsterisk} style={{color: "red"}} className='mx-3'/>
-
-                        <InputGroup>
-                            <InputGroup.Text>
-                                <FontAwesomeIcon icon={faUser} className='mx-3'/>
-                            </InputGroup.Text>
-
-                            <Form.Control name="email" type="email" placeholder="Enter email" 
-                                onBlur={(e)=>{
-                                    setEmail(e.target.value)
-                                }}
-                            />
-                        </InputGroup>
-                    </Form.Group>
+                    <InputComponent 
+                            label="Email address"
+                            name="email"
+                            type="email"
+                            placeholder="Enter email"
+                            icon={faUser}
+                            changeValue={(value)=>{setEmail(value)}}
+                        />
 
                     {!messageHidden && 
                         <Form.Group className='mt-2 mb-4'>

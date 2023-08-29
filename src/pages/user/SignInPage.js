@@ -1,12 +1,9 @@
 import React from 'react'
-import server_url from '../../server'
-import axios from "axios"
 import { Link } from 'react-router-dom'
 import { logIn } from '../../fetching'
-
+import InputComponent from '../../components/InputComponent'
 import { Col, Container, Row, Button, Form, InputGroup } from 'react-bootstrap'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAsterisk, faUser, faKey } from '@fortawesome/free-solid-svg-icons'
+import { faUser, faKey } from '@fortawesome/free-solid-svg-icons'
 
 function SignInPage(props) {
     const [email, setEmail] = React.useState("")
@@ -16,6 +13,9 @@ function SignInPage(props) {
         await logIn(email, password, props.settleSuccessfulLogIn)
     }
 
+    const emailWarningAsterisk = React.useRef()
+    const passwordWarningAsterisk = React.useRef()
+
     return (
         <Container className='pb-5'>
             <Row>
@@ -23,39 +23,23 @@ function SignInPage(props) {
                     <Form
                         onSubmit={handleSubmit}
                     >
-                        <Form.Group className="pb-3">
-                            <Form.Label>Email address</Form.Label>
-                            <FontAwesomeIcon icon={faAsterisk} style={{color: "red"}} className='mx-3'/>
+                        <InputComponent 
+                            label="Email address"
+                            name="email"
+                            type="email"
+                            placeholder="Enter email"
+                            icon={faUser}
+                            changeValue={(value)=>{setEmail(value)}}
+                        />
 
-                            <InputGroup>
-                                <InputGroup.Text>
-                                    <FontAwesomeIcon icon={faUser} className='mx-3'/>
-                                </InputGroup.Text>
-                                <Form.Control name="email" type="email" placeholder="Enter email" 
-                                    onBlur={(e)=>{
-                                        setEmail(e.target.value)
-                                    }}
-                                />
-
-                            </InputGroup>
-                        </Form.Group>
-
-                        <Form.Group className="pb-3">
-                            <Form.Label>Password</Form.Label>
-                            <FontAwesomeIcon icon={faAsterisk} style={{color: "red"}} className='mx-3'/>
-
-                            <InputGroup>
-                                <InputGroup.Text>
-                                    <FontAwesomeIcon icon={faKey} className='mx-3'/>
-                                </InputGroup.Text>
-                                <Form.Control name="password" type="password" placeholder="Enter password" 
-                                    onBlur={(e)=>{
-                                        setPassword(e.target.value)
-                                    }}
-                                />
-
-                            </InputGroup>
-                        </Form.Group>
+                        <InputComponent 
+                            label="Password"
+                            name="password"
+                            type="password"
+                            placeholder="Enter password"
+                            icon={faKey}
+                            changeValue={(value)=>{setPassword(value)}}
+                        />
 
                         <Button variant="primary" type="submit">
                             Sign In
