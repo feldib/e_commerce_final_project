@@ -32,6 +32,16 @@ function Search() {
         await getArtworkSearchResults(qs, setSearchResults)
     }
 
+    function makeRemoveFunction(newQueriesObj, ...inputFieldsToReset){
+        return ()=>{
+            inputFieldsToReset.forEach((ref) => {
+                ref.current.value=""
+            })
+            setQueries(newQueriesObj)
+            setIsConditionBeignRemoved(true)
+        }
+    }
+
     const [isConditionBeignRemoved, setIsConditionBeignRemoved] = React.useState(false)
     React.useEffect(()=>{
         if(isConditionBeignRemoved){
@@ -189,80 +199,75 @@ function Search() {
                     {(queries.min && queries.max) ?
                             <Query 
                                 text = {`Between ${queries.min} and ${queries.max}`}
-                                remove = {()=>{
-                                    minInputField.current.value=""
-                                    maxInputField.current.value=""
-                                    setQueries(
+                                remove = {
+                                    makeRemoveFunction(
                                         {
                                             ...queries,
                                             min: "",
                                             max: ""
-                                        }
+                                        },
+                                        minInputField,
+                                        maxInputField
                                     )
-                                    setIsConditionBeignRemoved(true)
-                                }}
+                                }
                             />
                         :
                             queries.min ?
                             <Query 
                                 text = {`Minimum: ${queries.min}`}
-                                remove = {()=>{
-                                    minInputField.current.value=""
-                                    setQueries(
+                                remove = {
+                                    makeRemoveFunction(
                                         {
                                             ...queries,
                                             min: "",
-                                        }
+                                        },
+                                        minInputField
                                     )
-                                    setIsConditionBeignRemoved(true)
-                                }}
+                                }
                             />:
 
                             queries.max &&
                             <Query 
                                 text = {`Maximum: ${queries.max}`}
-                                remove = {()=>{
-                                    maxInputField.current.value=""
-                                    setQueries(
+                                remove = {
+                                    makeRemoveFunction(
                                         {
                                             ...queries,
                                             max: "",
-                                        }
+                                        },
+                                        maxInputField
                                     )
-                                    setIsConditionBeignRemoved(true)
-                                }}
+                                }
                             />
                     }
 
                     {queries.title &&
                         <Query 
                         text = {`Title: ${queries.title}`}
-                        remove = {()=>{
-                            titleInputField.current.value=""
-                            setQueries(
+                        remove = {
+                            makeRemoveFunction(
                                 {
                                     ...queries,
-                                    title: ""
-                                }
+                                    title: "",
+                                },
+                                titleInputField
                             )
-                            setIsConditionBeignRemoved(true)
-                        }}
+                        }
                     />
                     }
 
                     {queries.artist_name &&
                         <Query 
                             text = {`Artist: ${queries.artist_name}`}
-                            remove = {()=>{
-                                artistInputField.current.value=""
-                                setQueries(
+                            remove = {
+                                makeRemoveFunction(
                                     {
                                         ...queries,
-                                        artist_name: ""
-                                    }
+                                        artist_name: "",
+                                    },
+                                    artistInputField
                                 )
-                                setIsConditionBeignRemoved(true)
-                            }}
+                            }
                         />
                     }
 
