@@ -37,8 +37,11 @@ function RegistrationPage(props) {
 
     return (
         <Container>
+            <Row className='mb-2 mt-5 mb-3'>
+                <h1 className='text-center'>Register</h1>
+            </Row>
             <Row className='pb-5'> 
-                <Col className='mx-5 pt-5 pb-5'>
+                <Col className='mx-5 pb-5'>
                     <Form onSubmit={handleSubmit}>
                         
                         <InputComponent 

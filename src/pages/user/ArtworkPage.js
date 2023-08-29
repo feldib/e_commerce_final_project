@@ -7,7 +7,10 @@ import { Col, Row, Container, Carousel, Form, Button } from 'react-bootstrap'
 function ArtworkPage() {
     return (
         <Container>
-            <Row className='mt-5'>
+            <Row className='mb-2 mt-5 mb-3'>
+                <h1 className='text-center'>Artwork details</h1>
+            </Row>
+            <Row>
                 <Col sm={12} lg={4}>
                     <Row>
                         <Col>

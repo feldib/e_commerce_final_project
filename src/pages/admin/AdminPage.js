@@ -5,6 +5,9 @@ import { Outlet } from 'react-router-dom';
 function AdminPage() {
     return (
         <Container className='pb-5'>
+            <Row className='mb-2 mt-5 mb-3'>
+                <h1 className='text-center'>Admin page</h1>
+            </Row>
             <Row>
                 <Col>
                     <Navbar>

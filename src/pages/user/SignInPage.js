@@ -18,8 +18,11 @@ function SignInPage(props) {
 
     return (
         <Container className='pb-5'>
+            <Row className='mb-2 mt-5 mb-3'>
+                <h1 className='text-center'>Log In</h1>
+            </Row>
             <Row>
-                <Col className='mx-3 pt-5 pb-5'>
+                <Col className='mx-3 pb-5'>
                     <Form
                         onSubmit={handleSubmit}
                     >

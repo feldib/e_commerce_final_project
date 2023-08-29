@@ -130,7 +130,7 @@ function App() {
 
           <Route
             path='/user'
-            element={<ProfilePage />}
+            element={<ProfilePage user={user} />}
           >
             <Route
               path='data'
