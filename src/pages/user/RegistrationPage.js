@@ -1,6 +1,7 @@
 import React from 'react'
 import { registerNewUser } from '../../fetching'
 import { logIn } from '../../fetching'
+import InputComponent from '../../components/InputComponent'
 import { Container, Col, Row, Button, Form, InputGroup } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAsterisk, faUser, faKey, faQuestion, faHouse, faPhone } from '@fortawesome/free-solid-svg-icons'
@@ -39,148 +40,88 @@ function RegistrationPage(props) {
         <Row>
             <Col className='mx-5 pt-5 pb-5'>
                 <Form onSubmit={handleSubmit}>
+                    
+                    <InputComponent 
+                        label="Email address"
+                        name="email"
+                        type="email"
+                        placeholder="Enter email"
+                        icon={faUser}
+                        changeValue={(value)=>{setFirstEmail(value)}}
+                    />
 
-                    <Form.Group className="mb-3">
-                        <Form.Label>Email address</Form.Label>
-                        <FontAwesomeIcon icon={faAsterisk} style={{color: "red"}} className='mx-3'/>
+                    <InputComponent 
+                        label="Email address again"
+                        name="email"
+                        type="email"
+                        placeholder="Enter email again"
+                        icon={faUser}
+                        extraCondition={firstEmail !== email}
+                        changeValue={(value)=>{
+                            if(value === firstEmail){
+                                setEmail(value)
+                            }
+                        }}
+                    />
 
-                        <InputGroup>
-                            <InputGroup.Text>
-                                <FontAwesomeIcon icon={faUser} className='mx-3'/>
-                            </InputGroup.Text>
-                            <Form.Control type="email" placeholder="Enter email" 
-                                onBlur={(e)=>{
-                                    setFirstEmail(e.target.value)
-                                }}
-                            />
+                    <InputComponent 
+                        label="Password"
+                        name="password"
+                        type="password"
+                        placeholder="Enter password"
+                        icon={faKey}
+                        changeValue={(value)=>{setFirstPassword(value)}}
+                    />
 
-                        </InputGroup>
-                    </Form.Group>
+                    <InputComponent 
+                        label="Password"
+                        name="password"
+                        type="password"
+                        placeholder="Enter password"
+                        icon={faKey}
+                        extraCondition={firstPassword !== password}
+                        changeValue={(value)=>{
+                            if(value === firstPassword){
+                                setPassword(value)
+                            }
+                        }}
+                    />
 
-                    <Form.Group className="mb-3">
-                        <Form.Label>Email address again</Form.Label>
-                        <FontAwesomeIcon icon={faAsterisk} style={{color: "red"}} className='mx-3'/>
+                    <InputComponent 
+                        label="First Name"
+                        name="firstName"
+                        type="text"
+                        placeholder="Enter First Name"
+                        icon={faQuestion}
+                        changeValue={(value)=>{setFirstName(value)}}
+                    />
 
-                        <InputGroup>
-                            <InputGroup.Text>
-                                <FontAwesomeIcon icon={faUser} className='mx-3'/>
-                            </InputGroup.Text>
-                            <Form.Control type="email" placeholder="Enter email again" 
-                                onBlur={(e)=>{
-                                    if(e.target.value === firstEmail){
-                                        setEmail(e.target.value)
-                                    }
-                                }}
-                            />
+                    <InputComponent 
+                        label="First Name"
+                        name="lastName"
+                        type="text"
+                        placeholder="Enter Last Name"
+                        icon={faQuestion}
+                        changeValue={(value)=>{setLastName(value)}}
+                    />
 
-                        </InputGroup>
-                    </Form.Group>
+                    <InputComponent 
+                        label="Address"
+                        name="address"
+                        type="text"
+                        placeholder="Enter Address"
+                        icon={faHouse}
+                        changeValue={(value)=>{setAddress(value)}}
+                    />
 
-                    <Form.Group className="mb-3">
-                        <Form.Label>Password</Form.Label>
-                        <FontAwesomeIcon icon={faAsterisk} style={{color: "red"}} className='mx-3'/>
-
-                        <InputGroup>
-                            <InputGroup.Text>
-                                <FontAwesomeIcon icon={faKey} className='mx-3'/>
-                            </InputGroup.Text>
-                            <Form.Control type="password" placeholder="Enter password"
-                                onBlur={(e)=>{
-                                    setFirstPassword(e.target.value)
-                                }}
-                            />
-
-                        </InputGroup>
-                    </Form.Group>
-
-                    <Form.Group className="mb-3">
-                        <Form.Label>Password again</Form.Label>
-                        <FontAwesomeIcon icon={faAsterisk} style={{color: "red"}} className='mx-3'/>
-
-                        <InputGroup>
-                            <InputGroup.Text>
-                                <FontAwesomeIcon icon={faKey} className='mx-3'/>
-                            </InputGroup.Text>
-                            <Form.Control type="password" placeholder="Enter password again" 
-                                onBlur={(e)=>{
-                                    if(e.target.value === firstPassword){
-                                        setPassword(e.target.value)
-                                    }
-                                }}
-                            />
-
-                        </InputGroup>
-                    </Form.Group>
-
-                    <Form.Group className="mb-3">
-                        <Form.Label>First Name</Form.Label>
-                        <FontAwesomeIcon icon={faAsterisk} style={{color: "red"}} className='mx-3'/>
-
-                        <InputGroup>
-                            <InputGroup.Text>
-                                <FontAwesomeIcon icon={faQuestion} className='mx-3'/>
-                            </InputGroup.Text>
-                            <Form.Control type="text" placeholder="Enter First Name" 
-                                onBlur={(e)=>{
-                                    setFirstName(e.target.value)
-                                }}
-                            />
-
-                        </InputGroup>
-                    </Form.Group>
-
-                    <Form.Group className="mb-3">
-                        <Form.Label>Last Name</Form.Label>
-                        <FontAwesomeIcon icon={faAsterisk} style={{color: "red"}} className='mx-3'/>
-
-                        <InputGroup>
-                            <InputGroup.Text>
-                                <FontAwesomeIcon icon={faQuestion} className='mx-3'/>
-                            </InputGroup.Text>
-                            <Form.Control type="text" placeholder="Enter Last Name" 
-                                onBlur={(e)=>{
-                                    setLastName(e.target.value)
-                                }}
-                            />
-
-                        </InputGroup>
-                    </Form.Group>
-
-                    <Form.Group className="mb-3">
-                        <Form.Label>Address</Form.Label>
-                        <FontAwesomeIcon icon={faAsterisk} style={{color: "red"}} className='mx-3'/>
-
-                        <InputGroup>
-                            <InputGroup.Text>
-                                <FontAwesomeIcon icon={faHouse} className='mx-3'/>
-                            </InputGroup.Text>
-                            <Form.Control type="text" placeholder="Enter Address" 
-                                onBlur={(e)=>{
-                                    setAddress(e.target.value)
-                                }}
-                            />
-
-                        </InputGroup>
-                    </Form.Group>
-
-                    <Form.Group className="mb-3">
-
-                        <Form.Label>Phone Number</Form.Label>
-
-                        <FontAwesomeIcon icon={faAsterisk} style={{color: "red"}} className='mx-3'/>
-
-                        <InputGroup>
-                            <InputGroup.Text>
-                                <FontAwesomeIcon icon={faPhone} className='mx-3'/>
-                            </InputGroup.Text>
-                            <Form.Control type="text" placeholder="Enter Phone Number" 
-                                onBlur={(e)=>{
-                                    setPhone(e.target.value)
-                                }}
-                            />
-
-                        </InputGroup>
-                    </Form.Group>
+                    <InputComponent 
+                        label="Phone Number"
+                        name="phone"
+                        type="text"
+                        placeholder="Enter Phone Number"
+                        icon={faPhone}
+                        changeValue={(value)=>{setPhone(value)}}
+                    />
 
                     <Button variant="primary" type="submit">
                         Register
