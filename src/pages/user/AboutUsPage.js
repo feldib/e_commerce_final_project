@@ -6,8 +6,11 @@ import { Col, Row, Container, Button, Form, InputGroup, FloatingLabel } from 're
 function AboutUsPage() {
     return (
         <Container>
+            <Row className='mb-2 mt-5 mb-3'>
+                <h1 className='text-center'>About us</h1>
+            </Row>
             <Row>
-                <Col className='pt-5 pb-5'>
+                <Col className='pb-5'>
                     <Row>
                         <h2>Our story</h2>
                     </Row>

@@ -6,6 +6,9 @@ import { faUser, faKey, faQuestion, faHouse, faPhone,faGear } from '@fortawesome
 function CheckoutPage() {
     return (
         <Container>
+            <Row className='mb-2 mt-5 mb-3'>
+                <h1 className='text-center'>Checkout</h1>
+            </Row>
             <Row className='pb-5'>
                 <Col className='mx-5'>
                     <Row>

@@ -6,8 +6,11 @@ import { Col, Row, Container, Button, Form, InputGroup, FloatingLabel } from 're
 function ContactUsPage() {
     return (
         <Container>
+            <Row className='mb-2 mt-5 mb-3'>
+                <h1 className='text-center'>Contact us</h1>
+            </Row>
             <Row>
-                <Col sm={12} md={5} className='pt-5 pb-5'>
+                <Col sm={12} md={5} className='pb-5'>
                     <Row>
                         <h2>Company details</h2>
                     </Row>
@@ -19,7 +22,7 @@ function ContactUsPage() {
                     </Row>
                 </Col>
 
-                <Col sm={12} md={5} className='pt-5 pb-5'>
+                <Col sm={12} md={5} className='pb-5'>
                     <Row>
                         <h2>Message administrator</h2>
                     </Row>

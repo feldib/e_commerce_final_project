@@ -4,9 +4,12 @@ import OrderHistory from '../../subpages/user/OrderHistory'
 import UserData from '../../subpages/user/UserData'
 import WishList from '../../subpages/user/WishList'
 
-function ProfilePage() {
+function ProfilePage(props) {
     return (
         <Container>
+            <Row className='mb-2 mt-5 mb-3'>
+                <h1 className='text-center'>{props.user.first_name}'s page</h1>
+            </Row>
             <Row>
                 <Col>
                     <Navbar >
