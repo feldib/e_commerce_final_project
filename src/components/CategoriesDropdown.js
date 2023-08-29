@@ -6,7 +6,7 @@ function CategoriesDropdown(props) {
         
             <Col className='mx-auto mb-3'>
             <Dropdown>
-                <Dropdown.Toggle>Categories</Dropdown.Toggle>
+                <Dropdown.Toggle variant='outilne-dark'>Categories</Dropdown.Toggle>
                 <Dropdown.Menu className='px-3'>
                     {props.categories ? 
                         props.categories.map(
