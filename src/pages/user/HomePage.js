@@ -9,7 +9,7 @@ function HomePage(props) {
     const [featuredBuyTableHidden, setFeaturedBuyTableHidden] = React.useState(false)
     const featured = useAxios("/users/recommendation/featured")
     return (
-        <Container>
+        <Container className='pb-5'>
             <Row className='pt-5 pb-5 jumbotron'>
                 <h1 className='display-2 text-center'>
                     Welcome to Artworks Market{`${
