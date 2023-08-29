@@ -40,3 +40,12 @@ button[type = "submit"], input[type = "submit"], .submit{
     border: 2px solid #071b19a2 !important;
     text-transform: capitalize !important;
 }
+
+input, textarea{
+    background-color: rgb(215, 199, 134) !important;
+}
+
+.input-group-text{
+    background-color: rgb(170, 152, 81) !important;
+    color: #071b19 !important;
+}
