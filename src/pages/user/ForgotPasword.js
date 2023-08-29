@@ -1,5 +1,5 @@
 import React from 'react'
-import { Row, Col, Button, Form, InputGroup } from 'react-bootstrap'
+import { Container, Row, Col, Button, Form, InputGroup } from 'react-bootstrap'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 import InputComponent from '../../components/InputComponent'
 import { sendForgotPasswordEmail } from '../../fetching'
@@ -18,35 +18,37 @@ function ForgotPasword() {
     }
 
     return (
-        <Row>
-            <Col className='mx-5'>
-                <Form 
-                    onSubmit={handleSubmit}
-                >
-                    <InputComponent 
-                            label="Email address"
-                            name="email"
-                            type="email"
-                            placeholder="Enter email"
-                            icon={faUser}
-                            changeValue={(value)=>{setEmail(value)}}
-                        />
+        <Container className='pb-5'>
+            <Row>
+                <Col className='mx-5 pt-5 pb-5'>
+                    <Form 
+                        onSubmit={handleSubmit}
+                    >
+                        <InputComponent 
+                                label="Email address"
+                                name="email"
+                                type="email"
+                                placeholder="Enter email"
+                                icon={faUser}
+                                changeValue={(value)=>{setEmail(value)}}
+                            />
 
-                    {!messageHidden && 
-                        <Form.Group className='mt-2 mb-4'>
-                            <Form.Text className="text-muted">
-                                If a user is registered with this email, a password recovery link was sent to them
-                            </Form.Text>
-                        </Form.Group>
-                    }
+                        {!messageHidden && 
+                            <Form.Group className='mt-2 mb-4'>
+                                <Form.Text className="text-muted">
+                                    If a user is registered with this email, a password recovery link was sent to them
+                                </Form.Text>
+                            </Form.Group>
+                        }
 
-                    <Button variant="primary" type="submit">
-                        Send link
-                    </Button>
+                        <Button variant="primary" type="submit">
+                            Send link
+                        </Button>
 
-                </Form>
-            </Col>
-        </Row>
+                    </Form>
+                </Col>
+            </Row>
+        </Container>
         )
 }
 
