@@ -37,98 +37,98 @@ function RegistrationPage(props) {
 
     return (
         <Container>
-        <Row>
-            <Col className='mx-5 pt-5 pb-5'>
-                <Form onSubmit={handleSubmit}>
-                    
-                    <InputComponent 
-                        label="Email address"
-                        name="email"
-                        type="email"
-                        placeholder="Enter email"
-                        icon={faUser}
-                        changeValue={(value)=>{setFirstEmail(value)}}
-                    />
+            <Row className='pb-5'> 
+                <Col className='mx-5 pt-5 pb-5'>
+                    <Form onSubmit={handleSubmit}>
+                        
+                        <InputComponent 
+                            label="Email address"
+                            name="email"
+                            type="email"
+                            placeholder="Enter email"
+                            icon={faUser}
+                            changeValue={(value)=>{setFirstEmail(value)}}
+                        />
 
-                    <InputComponent 
-                        label="Email address again"
-                        name="email"
-                        type="email"
-                        placeholder="Enter email again"
-                        icon={faUser}
-                        extraCondition={firstEmail !== email}
-                        changeValue={(value)=>{
-                            if(value === firstEmail){
-                                setEmail(value)
-                            }
-                        }}
-                    />
+                        <InputComponent 
+                            label="Email address again"
+                            name="email"
+                            type="email"
+                            placeholder="Enter email again"
+                            icon={faUser}
+                            extraCondition={firstEmail !== email}
+                            changeValue={(value)=>{
+                                if(value === firstEmail){
+                                    setEmail(value)
+                                }
+                            }}
+                        />
 
-                    <InputComponent 
-                        label="Password"
-                        name="password"
-                        type="password"
-                        placeholder="Enter password"
-                        icon={faKey}
-                        changeValue={(value)=>{setFirstPassword(value)}}
-                    />
+                        <InputComponent 
+                            label="Password"
+                            name="password"
+                            type="password"
+                            placeholder="Enter password"
+                            icon={faKey}
+                            changeValue={(value)=>{setFirstPassword(value)}}
+                        />
 
-                    <InputComponent 
-                        label="Password"
-                        name="password"
-                        type="password"
-                        placeholder="Enter password"
-                        icon={faKey}
-                        extraCondition={firstPassword !== password}
-                        changeValue={(value)=>{
-                            if(value === firstPassword){
-                                setPassword(value)
-                            }
-                        }}
-                    />
+                        <InputComponent 
+                            label="Password"
+                            name="password"
+                            type="password"
+                            placeholder="Enter password"
+                            icon={faKey}
+                            extraCondition={firstPassword !== password}
+                            changeValue={(value)=>{
+                                if(value === firstPassword){
+                                    setPassword(value)
+                                }
+                            }}
+                        />
 
-                    <InputComponent 
-                        label="First Name"
-                        name="firstName"
-                        type="text"
-                        placeholder="Enter First Name"
-                        icon={faQuestion}
-                        changeValue={(value)=>{setFirstName(value)}}
-                    />
+                        <InputComponent 
+                            label="First Name"
+                            name="firstName"
+                            type="text"
+                            placeholder="Enter First Name"
+                            icon={faQuestion}
+                            changeValue={(value)=>{setFirstName(value)}}
+                        />
 
-                    <InputComponent 
-                        label="First Name"
-                        name="lastName"
-                        type="text"
-                        placeholder="Enter Last Name"
-                        icon={faQuestion}
-                        changeValue={(value)=>{setLastName(value)}}
-                    />
+                        <InputComponent 
+                            label="First Name"
+                            name="lastName"
+                            type="text"
+                            placeholder="Enter Last Name"
+                            icon={faQuestion}
+                            changeValue={(value)=>{setLastName(value)}}
+                        />
 
-                    <InputComponent 
-                        label="Address"
-                        name="address"
-                        type="text"
-                        placeholder="Enter Address"
-                        icon={faHouse}
-                        changeValue={(value)=>{setAddress(value)}}
-                    />
+                        <InputComponent 
+                            label="Address"
+                            name="address"
+                            type="text"
+                            placeholder="Enter Address"
+                            icon={faHouse}
+                            changeValue={(value)=>{setAddress(value)}}
+                        />
 
-                    <InputComponent 
-                        label="Phone Number"
-                        name="phone"
-                        type="text"
-                        placeholder="Enter Phone Number"
-                        icon={faPhone}
-                        changeValue={(value)=>{setPhone(value)}}
-                    />
+                        <InputComponent 
+                            label="Phone Number"
+                            name="phone"
+                            type="text"
+                            placeholder="Enter Phone Number"
+                            icon={faPhone}
+                            changeValue={(value)=>{setPhone(value)}}
+                        />
 
-                    <Button variant="primary" type="submit">
-                        Register
-                    </Button>
-                </Form>
-            </Col>
-        </Row>
+                        <Button variant="primary" type="submit">
+                            Register
+                        </Button>
+                    </Form>
+                </Col>
+            </Row>
         </Container>
     )
 }
