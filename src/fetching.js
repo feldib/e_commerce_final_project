@@ -14,7 +14,7 @@ const useAxios = (url)=>{
                 console.log(error)
             })
         })()
-    }, [data])
+    }, [])
 
     return data
 }

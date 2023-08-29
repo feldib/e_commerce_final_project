@@ -13,6 +13,11 @@ function Search() {
     const [queries, setQueries] = React.useState(
         {min: "", max: "", title: "", artist_name: "", category_id: "", order: "asc", n: 10}
     )
+    const minInputField = React.useRef()
+    const maxInputField = React.useRef()
+    const titleInputField = React.useRef()
+    const artistInputField = React.useRef()
+
     const categories = useAxios("/categories")
 
     const [searchResults, setSearchResults] = React.useState()
@@ -33,6 +38,7 @@ function Search() {
             <Container>
                 <SearchField
                     what="Title"
+                    inputRef={titleInputField}
                     saveQuery={(title)=>{
                         setQueries({
                             ...queries,
@@ -43,6 +49,7 @@ function Search() {
 
                 <SearchField
                     what="Artist"
+                    inputRef={artistInputField}
                     saveQuery={(name)=>{
                         setQueries({
                             ...queries,
@@ -59,6 +66,7 @@ function Search() {
 
                             <Form.Control
                                 type="number"
+                                ref={minInputField}
                                 placeholder="Minimum"
                                 onBlur={(e)=>{
                                     setQueries({
@@ -70,6 +78,7 @@ function Search() {
 
                             <Form.Control
                                 type="number"
+                                ref={maxInputField}
                                 placeholder="Maximum"
                                 onBlur={(e)=>{
                                     setQueries({
@@ -173,6 +182,8 @@ function Search() {
                             <Query 
                                 text = {`Between ${queries.min} and ${queries.max}`}
                                 remove = {()=>{
+                                    minInputField.current.value=""
+                                    maxInputField.current.value=""
                                     setQueries(
                                         {
                                             ...queries,
@@ -188,6 +199,7 @@ function Search() {
                             <Query 
                                 text = {`Minimum: ${queries.min}`}
                                 remove = {()=>{
+                                    minInputField.current.value=""
                                     setQueries(
                                         {
                                             ...queries,
@@ -200,8 +212,9 @@ function Search() {
 
                             queries.max &&
                             <Query 
-                                text = {`Maxim: ${queries.max}`}
+                                text = {`Maximum: ${queries.max}`}
                                 remove = {()=>{
+                                    maxInputField.current.value=""
                                     setQueries(
                                         {
                                             ...queries,
@@ -217,6 +230,7 @@ function Search() {
                         <Query 
                         text = {`Title: ${queries.title}`}
                         remove = {()=>{
+                            titleInputField.current.value=""
                             setQueries(
                                 {
                                     ...queries,
@@ -232,6 +246,7 @@ function Search() {
                         <Query 
                             text = {`Artist: ${queries.artist_name}`}
                             remove = {()=>{
+                                artistInputField.current.value=""
                                 setQueries(
                                     {
                                         ...queries,

@@ -1,6 +1,4 @@
 import React from 'react'
-import server_url from '../../server'
-import axios from 'axios'
 import { useAxios } from '../../fetching'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons'
