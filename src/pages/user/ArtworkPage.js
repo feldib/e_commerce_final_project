@@ -8,6 +8,7 @@ import { useAxios } from '../../fetching'
 function ArtworkPage() {
     const {artwork_id} = useParams()
     const artwork = useAxios(`/artwork?id=${artwork_id}`)
+    const reviews = useAxios(`/reviews?id=${artwork_id}`)
     return (
         <Container>
             <Row className='mb-2 mt-5 mb-3'>
@@ -92,29 +93,43 @@ function ArtworkPage() {
                         </Row>
 
                         <Row>
-                            <Col>
-                                <Row>
-                                    <h6>So-so</h6>
-                                </Row>
+                            {reviews ?
+                                reviews.map((review)=>{
+                                    return (
+                                        <Col>
+                                            <Row>
+                                                <h6>
+                                                    {review.title}
+                                                </h6>
+                                            </Row>
 
-                                <Row>
-                                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. </p>
-                                </Row>
+                                            <Row>
+                                                <p>
+                                                    {review.review_text}
+                                                </p>
+                                            </Row>
 
-                                <Row className='text-center'>
-                                    <Col>
-                                        <FontAwesomeIcon icon={faAngleLeft} style={{
-                                            padding: "2px"
-                                        }} />
-                                    </Col>
-                                    
-                                    <Col>
-                                        <FontAwesomeIcon icon={faAngleRight} style={{
-                                            padding: "2px"
-                                        }} />
-                                    </Col>
-                                </Row>
-                            </Col>
+                                            <Row className='text-center'>
+                                                <Col>
+                                                    <FontAwesomeIcon icon={faAngleLeft} style={{
+                                                        padding: "2px"
+                                                    }} />
+                                                </Col>
+                                                
+                                                <Col>
+                                                    <FontAwesomeIcon icon={faAngleRight} style={{
+                                                        padding: "2px"
+                                                    }} />
+                                                </Col>
+                                            </Row>
+                                        </Col>
+                                    )
+                                }) :
+                                <div class="d-flex justify-content-center">
+                                    <div class="spinner-border" role="status" />
+                                </div>
+                            }
+                            
                         </Row>
                     </Col>
 

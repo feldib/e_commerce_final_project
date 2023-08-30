@@ -3,8 +3,7 @@ import { Col, Dropdown } from 'react-bootstrap'
 
 function CategoriesDropdown(props) {
     return (
-        
-            <Col className='mx-auto mb-3'>
+        <Col className='mx-auto mb-3'>
             <Dropdown>
                 <Dropdown.Toggle variant='outilne-dark'>Categories</Dropdown.Toggle>
                 <Dropdown.Menu className='px-3'>
@@ -26,12 +25,12 @@ function CategoriesDropdown(props) {
                             }
                         )
                         : 
-                          props.categories === undefined ?
+                            props.categories === undefined ?
                             <p>
                                 <span className="spinner-border spinner-border-sm text-center" role="status" aria-hidden="true"></span>
                             </p>
                             :
-                              <p>Error</p>
+                                <p>Error</p>
                     }
                 </Dropdown.Menu>
             </Dropdown>

@@ -1,6 +1,4 @@
 import React from 'react'
-import server_url from '../../server'
-import axios from 'axios'
 import { useAxios, getArtworkSearchResults } from '../../fetching'
 
 import { Col, Row, Container, Button, Dropdown, InputGroup, Form } from 'react-bootstrap'
