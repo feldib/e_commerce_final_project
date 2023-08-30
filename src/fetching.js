@@ -11,6 +11,7 @@ const useAxios = (url)=>{
                 setData(results.data)
             })
             .catch(function (error) {
+                setData(false)
                 console.log(error)
             })
         })()
