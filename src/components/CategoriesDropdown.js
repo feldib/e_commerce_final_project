@@ -25,9 +25,13 @@ function CategoriesDropdown(props) {
                                 )
                             }
                         )
-                        : <p>
-                            <span className="spinner-border spinner-border-sm text-center" role="status" aria-hidden="true"></span>
-                          </p>
+                        : 
+                          props.categories === undefined ?
+                            <p>
+                                <span className="spinner-border spinner-border-sm text-center" role="status" aria-hidden="true"></span>
+                            </p>
+                            :
+                              <p>Error</p>
                     }
                 </Dropdown.Menu>
             </Dropdown>

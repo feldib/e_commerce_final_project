@@ -82,9 +82,12 @@ function BuyTable(props) {
                             </td>
                         </tr>
                 :
-                    <div class="d-flex justify-content-center">
-                        <div class="spinner-border" role="status" />
-                    </div>
+                    props.dataLines === undefined ?
+                        <div class="d-flex justify-content-center">
+                            <div class="spinner-border" role="status" />
+                        </div>
+                        :
+                        <p>Error</p>
                 }
                 </tbody>
             </Table>
