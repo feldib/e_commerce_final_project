@@ -25,42 +25,31 @@ function Header(props) {
                     </Navbar.Toggle>
                     <Navbar.Collapse id="menu-idems">
                         <Nav className='mx-auto'>
-                            <Nav.Link>
-                                <Link style={{ color: 'inherit', textDecoration: 'inherit'}} to="/search">
-                                    Search
-                                </Link>
-                            </Nav.Link>
-                            <Nav.Link>
-                                <Link style={{ color: 'inherit', textDecoration: 'inherit'}} to="/about">
-                                    About us
-                                </Link>
-                            </Nav.Link>
-                            <Nav.Link>
-                                <Link style={{ color: 'inherit', textDecoration: 'inherit'}} to="/contact">
-                                    Contact us
-                                </Link>
-                            </Nav.Link>
+                            <Link className='nav-link' style={{ color: 'inherit', textDecoration: 'inherit'}} to="/search">
+                                Search
+                            </Link>
+                            <Link className='nav-link' style={{ color: 'inherit', textDecoration: 'inherit'}} to="/about">
+                                About us
+                            </Link>
+                            <Link className='nav-link' style={{ color: 'inherit', textDecoration: 'inherit'}} to="/contact">
+                                Contact us
+                            </Link>
                             {props.loggedIn ?
                                 <>
                                 {props.user && !props.user.is_admin ?
                                 <>
-                                    <Nav.Link>
-                                        <Link style={{ color: 'inherit', textDecoration: 'inherit'}} to="/shopping_cart">
-                                            Shopping cart
-                                        </Link>
-                                    </Nav.Link>
-                                    <Nav.Link>
-                                        <Link style={{ color: 'inherit', textDecoration: 'inherit'}} to="/user">
-                                            {props.user.first_name}'s Page
-                                        </Link>
-                                    </Nav.Link>
+                                    <Link className='nav-link' style={{ color: 'inherit', textDecoration: 'inherit'}} to="/shopping_cart">
+                                        Shopping cart
+                                    </Link>
+
+                                    <Link className='nav-link' style={{ color: 'inherit', textDecoration: 'inherit'}} to="/user">
+                                        {props.user.first_name}'s Page
+                                    </Link>
                                 </>:
 
-                                <Nav.Link>
-                                    <Link style={{ color: 'inherit', textDecoration: 'inherit'}} to="/admin">
-                                        Admin Page
-                                    </Link>
-                                </Nav.Link>
+                                <Link className='nav-link' style={{ color: 'inherit', textDecoration: 'inherit'}} to="/admin">
+                                    Admin Page
+                                </Link>
                                 }
                                 
                                 <Nav.Link
@@ -73,16 +62,13 @@ function Header(props) {
                                 </>
                             :
                                 <>
-                                 <Nav.Link>
-                                    <Link style={{ color: 'inherit', textDecoration: 'inherit'}} to="/login">
+                                    <Link className='nav-link' style={{ color: 'inherit', textDecoration: 'inherit'}} to="/login">
                                         Log in
                                     </Link>
-                                </Nav.Link>
-                                <Nav.Link>
-                                    <Link style={{ color: 'inherit', textDecoration: 'inherit'}} to="/register">
+  
+                                    <Link className='nav-link' style={{ color: 'inherit', textDecoration: 'inherit'}} to="/register">
                                         Register
                                     </Link>
-                                </Nav.Link>
                                 </>
                             }
                            
