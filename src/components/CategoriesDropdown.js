@@ -1,37 +1,35 @@
 import React from 'react'
 import { Col, Dropdown } from 'react-bootstrap'
+import { useLoading } from '../fetching'
 
 function CategoriesDropdown(props) {
+    function createCategoryButtons(categories){
+        return (
+            categories.map(
+                (category, index)=>{
+                    return (
+                        <p
+                            key={index}
+                            id={category.id}
+                            onClick={()=>{
+                                props.switchCategoryTo(category)
+                            }}
+                            style={{cursor: "pointer"}}
+                        >
+                            {category.cname}
+                        </p>
+                    )
+                }
+            )
+        )
+    }
+    const categories = useLoading(props.categories, createCategoryButtons)
     return (
         <Col className='mx-auto mb-3'>
             <Dropdown>
                 <Dropdown.Toggle variant='outilne-dark'>Categories</Dropdown.Toggle>
                 <Dropdown.Menu className='px-3'>
-                    {props.categories ? 
-                        props.categories.map(
-                            (category, index)=>{
-                                return (
-                                    <p
-                                        key={index}
-                                        id={category.id}
-                                        onClick={()=>{
-                                            props.switchCategoryTo(category)
-                                        }}
-                                        style={{cursor: "pointer"}}
-                                    >
-                                        {category.cname}
-                                    </p>
-                                )
-                            }
-                        )
-                        : 
-                            props.categories === undefined ?
-                            <p>
-                                <span className="spinner-border spinner-border-sm text-center" role="status" aria-hidden="true"></span>
-                            </p>
-                            :
-                                <p>Error</p>
-                    }
+                    {categories}
                 </Dropdown.Menu>
             </Dropdown>
         </Col>       
