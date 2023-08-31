@@ -20,6 +20,29 @@ const useAxios = (url)=>{
     return data
 }
 
+const useLoading = (data, makeJSX)=>{
+    const spinner = (
+        <div className="d-flex justify-content-center">
+            <div className="spinner-border" role="status" />
+        </div>
+    )
+
+    const [result, setResult] = React.useState(spinner)
+    React.useEffect(()=>{
+        if(data){
+            setResult(
+                makeJSX(data)
+            )
+        }else{
+            setResult(
+                spinner
+            )
+        }
+    },[data])
+    
+    return result
+}
+
 const logOut = async()=>{
     await axios.get(`${server_url}/log_out`)
     .then(function (response) {
@@ -84,6 +107,7 @@ const getArtworkSearchResults = async(queries, setter)=>{
 
 export {
     useAxios,
+    useLoading,
     logOut,
     sendForgotPasswordEmail,
     registerNewUser,
