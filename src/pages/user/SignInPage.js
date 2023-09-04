@@ -5,6 +5,7 @@ import InputComponent from '../../components/InputComponent'
 import { Col, Container, Row, Button, Form, InputGroup } from 'react-bootstrap'
 import { faUser, faKey } from '@fortawesome/free-solid-svg-icons'
 
+
 function SignInPage(props) {
     const [email, setEmail] = React.useState("")
     const [password, setPassword] = React.useState("")
