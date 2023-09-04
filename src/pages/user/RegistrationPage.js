@@ -2,29 +2,40 @@ import React from 'react'
 import { registerNewUser } from '../../fetching'
 import { logIn } from '../../fetching'
 import InputComponent from '../../components/InputComponent'
-import { Container, Col, Row, Button, Form, InputGroup } from 'react-bootstrap'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAsterisk, faUser, faKey, faQuestion, faHouse, faPhone } from '@fortawesome/free-solid-svg-icons'
+import { Container, Col, Row, Button } from 'react-bootstrap'
+import { faUser, faKey, faQuestion, faHouse, faPhone } from '@fortawesome/free-solid-svg-icons'
+import { Formik, Form } from 'formik'
+import * as Yup from 'yup'
 
 function RegistrationPage(props) {
-    const [email, setEmail] = React.useState("")
-    const [password, setPassword] = React.useState("")
-    const [firstName, setFirstName] = React.useState("")
-    const [lastName, setLastName] = React.useState("")
-    const [address, setAddress] = React.useState("")
-    const [phone, setPhone] = React.useState("")
 
-    const [firstEmail, setFirstEmail] = React.useState()
-    const [firstPassword, setFirstPassword] = React.useState()
+    const initialValues = {
+        email: '',
+        repeatEmail: '',
+        password: '',
+        repeatPassword: '',
+        firstName: '',
+        lastName: '',
+        address: '',
+        phone: ''
+    }
 
-    async function handleSubmit(e){
-        e.preventDefault()
-        if(email && password && firstName && lastName && address){
-            await registerNewUser(email, password, firstName, lastName, address, phone)
+    async function onSubmit(values){
+        if(
+            values.email && 
+            values.repeatEmail && 
+            values.email === values.repeatEmail && 
+            values.password && 
+            values.repeatPassword === values.password && 
+            values.firstName && 
+            values.lastName && 
+            values.address
+        ){
+            await registerNewUser(values.email, values.password, values.firstName, values.lastName, values.address, values.phone)
             .then(function (response) {
                 console.log("reponse: ", JSON.stringify(response))
                 if(response.data === true){
-                    logIn(email, password, props.settleSuccessfulRegistration)
+                    logIn(values.email, values.password, props.settleSuccessfulRegistration)
                 }else{
                     throw Error("Wrong email or password")
                 }
@@ -35,6 +46,26 @@ function RegistrationPage(props) {
         }
     }
 
+    const registrationSchema = Yup.object().shape({
+        email: Yup.string()
+            .required("Email required")
+            .email("Invalid email"),
+        repeatEmail: Yup.string()
+            .required("Repeat email required")
+            .oneOf([Yup.ref("email")], 'Must match email'),
+        password: Yup.string()
+            .required("Password required"),
+        repeatPassword: Yup.string()
+            .required("Repeat password required")
+            .oneOf([Yup.ref("password")], 'Must match password'),
+        firstName: Yup.string()
+            .required("First name required"),
+        lastName:  Yup.string()
+            .required("Last name required"),
+        address:  Yup.string()
+            .required("Address name required")
+    })
+
     return (
         <Container>
             <Row className='mb-2 mt-5 mb-3'>
@@ -42,94 +73,91 @@ function RegistrationPage(props) {
             </Row>
             <Row className='pb-5'> 
                 <Col className='mx-5 pb-5'>
-                    <Form onSubmit={handleSubmit}>
-                        
-                        <InputComponent 
-                            label="Email address"
-                            name="email"
-                            type="email"
-                            placeholder="Enter email"
-                            icon={faUser}
-                            changeValue={(value)=>{setFirstEmail(value)}}
-                        />
+                    <Formik
+                        initialValues={initialValues}
+                        onSubmit={onSubmit}
+                        validationSchema={registrationSchema}
+                    >     
+                        {({errors, touched})=>(       
+                            <Form>        
+                                <InputComponent 
+                                    label="Email address"
+                                    name="email"
+                                    type="email"
+                                    placeholder="Enter email"
+                                    icon={faUser}
+                                    showAsterisk={errors.email && touched.email}
+                                />
 
-                        <InputComponent 
-                            label="Email address again"
-                            name="email"
-                            type="email"
-                            placeholder="Enter email again"
-                            icon={faUser}
-                            extraCondition={firstEmail !== email}
-                            changeValue={(value)=>{
-                                if(value === firstEmail){
-                                    setEmail(value)
-                                }
-                            }}
-                        />
+                                <InputComponent 
+                                    label="Email address again"
+                                    name="repeatEmail"
+                                    type="email"
+                                    placeholder="Enter email again"
+                                    icon={faUser}
+                                    showAsterisk={errors.repeatEmail&& touched.repeatEmail}
+                                />
 
-                        <InputComponent 
-                            label="Password"
-                            name="password"
-                            type="password"
-                            placeholder="Enter password"
-                            icon={faKey}
-                            changeValue={(value)=>{setFirstPassword(value)}}
-                        />
+                                <InputComponent 
+                                    label="Password"
+                                    name="password"
+                                    type="password"
+                                    placeholder="Enter password"
+                                    icon={faKey}
+                                    showAsterisk={errors.password && touched.password}
+                                />
 
-                        <InputComponent 
-                            label="Password"
-                            name="password"
-                            type="password"
-                            placeholder="Enter password"
-                            icon={faKey}
-                            extraCondition={firstPassword !== password}
-                            changeValue={(value)=>{
-                                if(value === firstPassword){
-                                    setPassword(value)
-                                }
-                            }}
-                        />
+                                <InputComponent 
+                                    label="Password"
+                                    name="repeatPassword"
+                                    type="password"
+                                    placeholder="Enter password"
+                                    icon={faKey}
+                                    showAsterisk={errors.repeatPassword && touched.repeatPassword}
+                                />
 
-                        <InputComponent 
-                            label="First Name"
-                            name="firstName"
-                            type="text"
-                            placeholder="Enter First Name"
-                            icon={faQuestion}
-                            changeValue={(value)=>{setFirstName(value)}}
-                        />
+                                <InputComponent 
+                                    label="First Name"
+                                    name="firstName"
+                                    type="text"
+                                    placeholder="Enter First Name"
+                                    icon={faQuestion}
+                                    showAsterisk={errors.firstName && touched.firstName}
+                                />
 
-                        <InputComponent 
-                            label="First Name"
-                            name="lastName"
-                            type="text"
-                            placeholder="Enter Last Name"
-                            icon={faQuestion}
-                            changeValue={(value)=>{setLastName(value)}}
-                        />
+                                <InputComponent 
+                                    label="First Name"
+                                    name="lastName"
+                                    type="text"
+                                    placeholder="Enter Last Name"
+                                    icon={faQuestion}
+                                    showAsterisk={errors.lastName && touched.lastName}
+                                />
 
-                        <InputComponent 
-                            label="Address"
-                            name="address"
-                            type="text"
-                            placeholder="Enter Address"
-                            icon={faHouse}
-                            changeValue={(value)=>{setAddress(value)}}
-                        />
+                                <InputComponent 
+                                    label="Address"
+                                    name="address"
+                                    type="text"
+                                    placeholder="Enter Address"
+                                    icon={faHouse}
+                                    showAsterisk={errors.address && touched.address}
+                                />
 
-                        <InputComponent 
-                            label="Phone Number"
-                            name="phone"
-                            type="text"
-                            placeholder="Enter Phone Number"
-                            icon={faPhone}
-                            changeValue={(value)=>{setPhone(value)}}
-                        />
+                                <InputComponent 
+                                    label="Phone Number"
+                                    name="phone"
+                                    type="text"
+                                    placeholder="Enter Phone Number"
+                                    icon={faPhone}
+                                    showAsterisk={errors.phone && touched.phone}
+                                />
 
-                        <Button variant="primary" type="submit">
-                            Register
-                        </Button>
-                    </Form>
+                                <Button variant="primary" type="submit">
+                                    Register
+                                </Button>
+                            </Form>    
+                        )}
+                    </Formik>
                 </Col>
             </Row>
         </Container>
