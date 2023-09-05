@@ -1,5 +1,5 @@
 import React from 'react'
-import { Row, Form, InputGroup, } from 'react-bootstrap'
+import { Row, Form, InputGroup } from 'react-bootstrap'
 
 function SearchField(props) {
     return (
@@ -9,13 +9,12 @@ function SearchField(props) {
                             {props.what}
                         </InputGroup.Text>
                     <Form.Control
+                        className="form-control"
                         type="text"
-                        ref={props.inputRef}
-                        onBlur={
-                            (e)=>{
-                                props.saveQuery(e.target.value)
-                            }
-                        }
+                        name={props.name}
+                        value={props.value}
+                        onChange={props.onChange}
+                        onBlur={props.onBlur}
                     />
             </InputGroup>
         </Row>
