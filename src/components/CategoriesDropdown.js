@@ -8,16 +8,14 @@ function CategoriesDropdown(props) {
             categories.map(
                 (category, index)=>{
                     return (
-                        <p
+                        <Dropdown.Item
+                            eventKey={category.id}
                             key={index}
                             id={category.id}
-                            onClick={()=>{
-                                props.switchCategoryTo(category)
-                            }}
                             style={{cursor: "pointer"}}
                         >
                             {category.cname}
-                        </p>
+                        </Dropdown.Item>
                     )
                 }
             )
@@ -26,7 +24,11 @@ function CategoriesDropdown(props) {
     const categories = useLoading(props.categories, createCategoryButtons)
     return (
         <Col className='mx-auto mb-3'>
-            <Dropdown>
+            <Dropdown 
+                onSelect={(e)=>{
+                    props.setValue("category_id", e)
+                }}
+            >
                 <Dropdown.Toggle variant='outilne-dark'>Categories</Dropdown.Toggle>
                 <Dropdown.Menu className='px-3'>
                     {categories}

@@ -16,7 +16,12 @@ function InputComponent(props) {
                     <FontAwesomeIcon icon={props.icon} className='mx-3'/>
                 </InputGroup.Text>
 
-                <Field className="form-control" name={props.name} type={props.type} placeholder={props.placeholder}  />
+                <Field 
+                    className="form-control" 
+                    name={props.name} 
+                    type={props.type} 
+                    placeholder={props.placeholder}  
+                />
             </InputGroup>
             <ErrorMessage 
                 component="div"

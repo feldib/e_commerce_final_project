@@ -6,21 +6,14 @@ import SearchField from '../../components/SearchField'
 import Query from '../../components/Query'
 import CategoriesDropdown from '../../components/CategoriesDropdown'
 import BuyTable from '../../components/BuyTable'
+import { useFormik } from 'formik'
+import * as Yup from 'yup'
 
 function Search() {
-    const [queries, setQueries] = React.useState(
-        {min: "", max: "", title: "", artist_name: "", category_id: "", order: "asc", n: 10}
-    )
-    const minInputField = React.useRef()
-    const maxInputField = React.useRef()
-    const titleInputField = React.useRef()
-    const artistInputField = React.useRef()
-    const categories = useAxios("/categories")
 
-    const [searchResults, setSearchResults] = React.useState()
-    async function search(){
+    async function search(values){
         const qs = []
-        for (const [key, value] of Object.entries(queries)) {
+        for (const [key, value] of Object.entries(values)) {
             if(value){
                 qs.push(
                     `${key}=${value}`
@@ -30,262 +23,226 @@ function Search() {
         await getArtworkSearchResults(qs, setSearchResults)
     }
 
-    function makeRemoveFunction(newQueriesObj, ...inputFieldsToReset){
-        return ()=>{
-            inputFieldsToReset.forEach((ref) => {
-                ref.current.value=""
-            })
-            setQueries(newQueriesObj)
-            setIsConditionBeignRemoved(true)
-        }
-    }
 
-    const [isConditionBeignRemoved, setIsConditionBeignRemoved] = React.useState(false)
-    React.useEffect(()=>{
-        if(isConditionBeignRemoved){
-            search()
-            setIsConditionBeignRemoved(false)
-        }
-    }, [isConditionBeignRemoved])
+    const formik = useFormik({
+        initialValues: {
+            min: "", 
+            max: "", 
+            title: "", 
+            artist_name: "", 
+            category_id: "", 
+            order: "asc", 
+            n: 10
+        },
+
+        onSubmit: (values) => search(values)
+
+    })
+
+    const categories = useAxios("/categories")
+
+    const [searchResults, setSearchResults] = React.useState()
 
     return (
         <Container className='pb-5 mb-5'>
             <Row className='mb-2 mt-5 mb-3'>
                 <h1 className='text-center'>Search</h1>
             </Row>
-            <SearchField
-                what="Title"
-                inputRef={titleInputField}
-                saveQuery={(title)=>{
-                    setQueries({
-                        ...queries,
-                        title
-                    })
-                }}
-            />
 
-            <SearchField
-                what="Artist"
-                inputRef={artistInputField}
-                saveQuery={(name)=>{
-                    setQueries({
-                        ...queries,
-                        artist_name: name
-                    })
-                }}
-            />
-
-            <Row lg={6} sx={8} className='mx-auto mb-5 mt-5'>
-                <InputGroup>
-                        <InputGroup.Text>
-                            Price range (min, max)
-                        </InputGroup.Text>
-
-                        <Form.Control
-                            type="number"
-                            placeholder="Minimum"
-                            ref={minInputField}
-                            onBlur={(e)=>{
-                                setQueries({
-                                    ...queries,
-                                    min: e.target.value
-                                })
-                            }}
-                        />
-
-                        <Form.Control
-                            type="number"
-                            placeholder="Maximum"
-                            ref={maxInputField}
-                            onBlur={(e)=>{
-                                setQueries({
-                                    ...queries,
-                                    max: e.target.value
-                                })
-                            }}
-                        />
-                    </InputGroup>
-            </Row>
-            
-            <Row>
-                <CategoriesDropdown 
-                    categories = {categories}
-                    switchCategoryTo = {(newCategory)=>{
-                        setQueries({
-                            ...queries,
-                            category_id: newCategory.id
-                        })
-                    }}
+            <Form onSubmit={formik.handleSubmit}>
+                <SearchField
+                    what="Title"
+                    name="title"
+                    category_id="title"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.title}
                 />
 
-                <Col>
-                    <Dropdown
-                        onSelect={(eventKey)=>{
-                            setQueries({
-                                ...queries,
-                                n: eventKey
-                            })
-                        }}
-                    >
-                        <Dropdown.Toggle variant='outilne-dark'>Number of artworks shown</Dropdown.Toggle>
-                        <Dropdown.Menu>
-                            <Dropdown.Item
-                                href=""
-                                eventKey="10"
-                            >
-                                10
-                            </Dropdown.Item>
+                <SearchField
+                    what="Artist"
+                    name="artist_name"
+                    category_id="title"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur} 
+                    value={formik.values.artist_name}
+                />
 
-                            <Dropdown.Item
-                                href=""
-                                eventKey="20"
-                            >
-                                20
-                            </Dropdown.Item>
-                            
-                            <Dropdown.Item
-                                href=""
-                                eventKey="30"
-                            >
-                                30
-                            </Dropdown.Item>
-                        </Dropdown.Menu>
-                    </Dropdown>
-                </Col>
+                <Row lg={6} sx={8} className='mx-auto mb-5 mt-5'>
+                    <InputGroup>
+                            <InputGroup.Text>
+                                Price range (min, max)
+                            </InputGroup.Text>
+
+                            <Form.Control
+                                type="number"
+                                placeholder="Minimum"
+                                name="name"
+                                value={formik.values.username}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                            />
+
+                            <Form.Control
+                                type="number"
+                                placeholder="Maximum"
+                                name="max"
+                                value={formik.values.username}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                            />
+                        </InputGroup>
+                </Row>
                 
-                <Col>
-                    <Dropdown 
-                        onSelect={(eventKey)=>{
-                            setQueries({
-                                ...queries,
-                                order: eventKey
-                            })
-                        }}
-                    >
-                        <Dropdown.Toggle variant='outilne-dark'>Order by</Dropdown.Toggle>
-                        <Dropdown.Menu>
-                            <Dropdown.Item
-                                href=""
-                                eventKey="asc"
-                            >
-                                Newest to oldest
-                            </Dropdown.Item>
+                <Row>
+                    <CategoriesDropdown 
+                        categories = {categories}
+                        category_id="category_id"
+                        setValue={formik.setFieldValue}
+                    />
 
-                            <Dropdown.Item
-                                href=""
-                                eventKey="desc"
-                            >
-                                Oldest to newest
-                            </Dropdown.Item>
-                        </Dropdown.Menu>
-                    </Dropdown>
-                </Col>
+                    <Col>
+                        <Dropdown
+                            value={formik.values.n}
+                            onSelect={(e)=>{
+                                formik.setFieldValue("n", e)
+                            }}
+                        >
+                            <Dropdown.Toggle variant='outilne-dark'>Number of artworks shown</Dropdown.Toggle>
+                            <Dropdown.Menu>
+                                <Dropdown.Item
+                                    href=""
+                                    eventKey="10"
+                                >
+                                    10
+                                </Dropdown.Item>
 
-            </Row>
+                                <Dropdown.Item
+                                    href=""
+                                    eventKey="20"
+                                >
+                                    20
+                                </Dropdown.Item>
+                                
+                                <Dropdown.Item
+                                    href=""
+                                    eventKey="30"
+                                >
+                                    30
+                                </Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    </Col>
+                    
+                    <Col>
+                        <Dropdown 
+                            value={formik.values.order}
+                            onSelect={(e)=>{
+                                formik.setFieldValue("order", e)
+                            }}
+                        >
+                            <Dropdown.Toggle variant='outilne-dark'>Order by</Dropdown.Toggle>
+                            <Dropdown.Menu>
+                                <Dropdown.Item
+                                    href=""
+                                    eventKey="asc"
+                                >
+                                    Newest to oldest
+                                </Dropdown.Item>
 
-            <Row className='mx-auto mb-3 text-end'>
-                <Col>
-                    <Button
-                        className='submit'
-                        onClick = {search}
-                    >
+                                <Dropdown.Item
+                                    href=""
+                                    eventKey="desc"
+                                >
+                                    Oldest to newest
+                                </Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    </Col>
 
-                        Search
-                    </Button>
-                </Col>
-            </Row>
+                </Row>
 
-            <Row>
-                {(queries.min && queries.max) ?
+                <Row className='mx-auto mb-3 text-end'>
+                    <Col>
+                        <Button
+                            className='submit'
+                            type="submit"
+                        >
+                            Search
+                        </Button>
+                    </Col>
+                </Row>
+
+                <Row>
+                {(formik.values.min && formik.values.max) ?
                         <Query 
-                            text = {`Between ${queries.min} and ${queries.max}`}
+                            text = {`Between ${formik.values.min} and ${formik.values.max}`}
                             remove = {
-                                makeRemoveFunction(
-                                    {
-                                        ...queries,
-                                        min: "",
-                                        max: ""
-                                    },
-                                    minInputField,
-                                    maxInputField
-                                )
+                                ()=>{
+                                    formik.setFieldValue('max', '')
+                                    formik.setFieldValue('min', '')
+                                    formik.submitForm()
+                                }
                             }
                         />
                     :
-                        queries.min ?
+                        formik.values.min ?
                         <Query 
-                            text = {`Minimum: ${queries.min}`}
+                            text = {`Minimum: ${formik.values.min}`}
                             remove = {
-                                makeRemoveFunction(
-                                    {
-                                        ...queries,
-                                        min: "",
-                                    },
-                                    minInputField
-                                )
+                                ()=>{
+                                    formik.setFieldValue('min', '')
+                                    formik.submitForm()
+                                }
                             }
                         />:
 
-                        queries.max &&
+                        formik.values.max &&
                         <Query 
-                            text = {`Maximum: ${queries.max}`}
+                            text = {`Maximum: ${formik.values.max}`}
                             remove = {
-                                makeRemoveFunction(
-                                    {
-                                        ...queries,
-                                        max: "",
-                                    },
-                                    maxInputField
-                                )
+                                ()=>{
+                                    formik.setFieldValue('max', '')
+                                    formik.submitForm()
+                                }
                             }
                         />
                 }
 
-                {queries.title &&
+                {formik.values.title &&
                     <Query 
-                    text = {`Title: ${queries.title}`}
+                    text = {`Title: ${formik.values.title}`}
                     remove = {
-                        makeRemoveFunction(
-                            {
-                                ...queries,
-                                title: "",
-                            },
-                            titleInputField
-                        )
+                        ()=>{
+                            formik.setFieldValue('title', '')
+                            formik.submitForm()
+                        }
                     }
                 />
                 }
 
-                {queries.artist_name &&
+                {formik.values.artist_name &&
                     <Query 
-                        text = {`Artist: ${queries.artist_name}`}
+                        text = {`Artist: ${formik.values.artist_name}`}
                         remove = {
-                            makeRemoveFunction(
-                                {
-                                    ...queries,
-                                    artist_name: "",
-                                },
-                                artistInputField
-                            )
+                            ()=>{
+                                formik.setFieldValue('artist_name', '')
+                                formik.submitForm()
+                            }
                         }
                     />
                 }
 
-                {queries.category_id &&
+                {formik.values.category_id &&
                     <Query 
                         text = {`${
                             categories.find((cat)=>{
-                                return cat.id === queries.category_id
+                                return cat.id === parseInt(formik.values.category_id)
                             }).cname
                         }`}
                         remove = {()=>{
-                            setQueries(
-                                {
-                                    ...queries,
-                                    category_id: ""
-                                }
-                            )
-                            setIsConditionBeignRemoved(true)
+                            formik.setFieldValue('category_id', '')
+                            formik.submitForm()
                         }}
                     />
                 }
@@ -305,6 +262,9 @@ function Search() {
                     />
                 </Row>
             }
+            </Form>
+
+            
 
         </Container>            
     )
