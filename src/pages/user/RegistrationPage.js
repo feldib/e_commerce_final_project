@@ -6,6 +6,19 @@ import { Container, Col, Row, Button } from 'react-bootstrap'
 import { faUser, faKey, faQuestion, faHouse, faPhone } from '@fortawesome/free-solid-svg-icons'
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
+import { ToastContainer, toast } from 'react-toastify'
+
+const attemptRegistration = async (values, settleSuccessfulRegistration) => {
+    await registerNewUser(values.email, values.password, values.firstName, values.lastName, values.address, values.phone)
+        .then(function (response) {
+            console.log("reponse: ", JSON.stringify(response))
+            if(response.data === true){
+                logIn(values.email, values.password, settleSuccessfulRegistration)
+            }else{
+                throw Error("Wrong email or password")
+            }
+        })
+}
 
 function RegistrationPage(props) {
 
@@ -21,27 +34,14 @@ function RegistrationPage(props) {
     }
 
     async function onSubmit(values){
-        if(
-            values.email && 
-            values.repeatEmail && 
-            values.email === values.repeatEmail && 
-            values.password && 
-            values.repeatPassword === values.password && 
-            values.firstName && 
-            values.lastName && 
-            values.address
-        ){
-            await registerNewUser(values.email, values.password, values.firstName, values.lastName, values.address, values.phone)
-            .then(function (response) {
-                console.log("reponse: ", JSON.stringify(response))
-                if(response.data === true){
-                    logIn(values.email, values.password, props.settleSuccessfulRegistration)
-                }else{
-                    throw Error("Wrong email or password")
-                }
+        try{
+            await attemptRegistration(values, props.settleSuccessfulRegistration)
+            toast.success("Registration successful", {
+                className: "toast-success"
             })
-            .catch(function (error) {
-                console.log(error)
+        }catch(error){
+            toast.error("A user is registered with email already", {
+                className: "toast-error"
             })
         }
     }
@@ -152,9 +152,18 @@ function RegistrationPage(props) {
                                     showAsterisk={errors.phone && touched.phone}
                                 />
 
-                                <Button variant="primary" type="submit">
+                                <Button variant="primary" type="submit" onClick={
+                                    ()=>{
+                                        Object.keys(errors).length && (
+                                            toast.error("Incorrect data", {
+                                            className: "toast-error"
+                                        })
+                                        )
+                                    }
+                                }>
                                     Register
                                 </Button>
+                                <ToastContainer position='top-right' />
                             </Form>    
                         )}
                     </Formik>
