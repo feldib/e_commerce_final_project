@@ -1,6 +1,5 @@
 import React from 'react'
 import { useAxios, getArtworkSearchResults } from '../../fetching'
-
 import { Col, Row, Container, Button, Dropdown, InputGroup, Form } from 'react-bootstrap'
 import SearchField from '../../components/SearchField'
 import Query from '../../components/Query'
@@ -35,7 +34,14 @@ function Search() {
             n: 10
         },
 
-        onSubmit: (values) => search(values)
+        onSubmit: (values) => search(values),
+        
+        validationSchema: Yup.object({
+            min: Yup.string()
+                .max(Yup.ref("max")-1, 'Minimum number cannot be larger than maximum'),
+            max: Yup.string()
+                .min(Yup.ref("min")+1, 'Maximum number cannot be smaller than minimum')
+        })
 
     })
 
@@ -77,8 +83,8 @@ function Search() {
                             <Form.Control
                                 type="number"
                                 placeholder="Minimum"
-                                name="name"
-                                value={formik.values.username}
+                                name="min"
+                                value={formik.values.min}
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                             />
@@ -87,7 +93,7 @@ function Search() {
                                 type="number"
                                 placeholder="Maximum"
                                 name="max"
-                                value={formik.values.username}
+                                value={formik.values.max}
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                             />
@@ -174,7 +180,10 @@ function Search() {
                 </Row>
 
                 <Row>
-                {(formik.values.min && formik.values.max) ?
+                {(
+                    formik.values.min && formik.values.max && 
+                    formik.errors.min && formik.errors.max
+                ) ?
                         <Query 
                             text = {`Between ${formik.values.min} and ${formik.values.max}`}
                             remove = {

@@ -6,6 +6,7 @@ import { Col, Container, Row, Button, InputGroup } from 'react-bootstrap'
 import { faUser, faKey } from '@fortawesome/free-solid-svg-icons'
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
+import { ToastContainer, toast } from 'react-toastify'
 
 function SignInPage(props) {
     const initialValues = {
@@ -14,7 +15,16 @@ function SignInPage(props) {
     }
 
     async function onSubmit(values){
-        await logIn(values.email, values.password, props.settleSuccessfulLogIn)
+        try{
+            await logIn(values.email, values.password, props.settleSuccessfulLogIn)
+            toast.success("Logged in", {
+                className: "toast-success"
+            })
+        }catch(error){
+            toast.error("Incorrect email or password", {
+                className: "toast-error"
+            })
+        }
     }
 
     const signInSchema = Yup.object().shape({
@@ -61,6 +71,7 @@ function SignInPage(props) {
                                 <Button variant="primary" type="submit">
                                     Sign In
                                 </Button>
+                                <ToastContainer position='top-right'/>
                             </Form>
                         </Col>
                     </Row>

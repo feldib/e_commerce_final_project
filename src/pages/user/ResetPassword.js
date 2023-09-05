@@ -6,6 +6,7 @@ import { faKey } from '@fortawesome/free-solid-svg-icons'
 import { useLocation } from 'react-router-dom'
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
+import { ToastContainer, toast } from 'react-toastify'
 
 function ResetPassword() {
 
@@ -16,12 +17,18 @@ function ResetPassword() {
 
     const search = useLocation().search
 
-    const onSubmit = async (values) => {
-        if(values.password === values.repeatPassword){
-            const token = new URLSearchParams(search).get('token')
-            const email = new URLSearchParams(search).get('email')
-            await changePassword(token, email, values.password)
-        }
+    const onSubmit = (values) => {
+        const token = new URLSearchParams(search).get('token')
+        const email = new URLSearchParams(search).get('email')
+        changePassword(token, email, values.password).then(()=>{
+            toast.success("Password changed successfully", {
+                className: "toast-success"
+            })
+        }).catch(()=>{
+            toast.error("Error: couldn't change password", {
+                className: "toast-error"
+            })
+        })
     }
 
     const resetPasswordSchema = Yup.object().shape({
@@ -64,10 +71,22 @@ function ResetPassword() {
                                     howAsterisk={errors.repeatPassword && touched.repeatPassword}
                                 />
         
-                                <Button variant="primary" type="submit">
+                                <Button 
+                                    variant="primary" 
+                                    type="submit"
+                                    onClick={
+                                        ()=>{
+                                            Object.keys(errors).length && (
+                                                toast.error("Incorrect data", {
+                                                className: "toast-error"
+                                            })
+                                            )
+                                        }
+                                    }
+                                >
                                     Change password
                                 </Button>
-        
+                                <ToastContainer position='top-right' />
                             </Form>
                         )}
                     </Formik>

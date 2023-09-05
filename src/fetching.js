@@ -53,11 +53,8 @@ const logOut = async()=>{
     })
 }
 
-const sendForgotPasswordEmail = async(email)=>{
-    axios.post(`${server_url}/forgot_password`, {email})
-    .catch(function (error) {
-        console.log(error)
-    })
+const sendForgotPasswordEmail = (email)=>{
+    return axios.post(`${server_url}/forgot_password`, {email})
 }
 
 const registerNewUser = async(email, password, firstName, lastName, address, phone)=>{
@@ -75,20 +72,13 @@ const logIn = async(email, password, settleSuccess)=>{
     await axios.post(`${server_url}/login`, {email, password})
     .then(function (response) {
         console.log("login response.data: ", response.data)
-        if(response.data){
-            const userData = response.data
-            settleSuccess(userData)
-        }else{
-            throw Error("Wrong email or password")
-        }
-    })
-    .catch(function (error) {
-        console.log(error)
+        const userData = response.data
+        settleSuccess(userData)
     })
 }
 
 const changePassword = async(token, email, newPassword)=>{
-    axios.post(`${server_url}/reset_password`, {
+    return axios.post(`${server_url}/reset_password`, {
         token,
         email,
         new_password: newPassword

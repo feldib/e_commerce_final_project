@@ -5,6 +5,7 @@ import { sendForgotPasswordEmail } from '../../fetching'
 import InputComponent from '../../components/InputComponent'
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
+import { ToastContainer, toast } from 'react-toastify'
 
 function ForgotPasword() {
     const [displayMessage, setDisplayMessage] = React.useState(false)
@@ -13,11 +14,17 @@ function ForgotPasword() {
         email: ''
     }
 
-    const onSubmit = async (values) => {
-        if(values.email){
-            await sendForgotPasswordEmail(values.email)
+    const onSubmit = (values) => {
+        sendForgotPasswordEmail(values.email).then(()=>{
             setDisplayMessage(true)
-        }
+            toast.success("Email submitted", {
+                className: "toast-success"
+            })
+        }).catch(()=>{
+            toast.error("Error: couldn't submit", {
+                className: "toast-error"
+            })
+        })
     }
 
     const forgotPasswordSchema = Yup.object().shape({
@@ -56,6 +63,7 @@ function ForgotPasword() {
                                 <Button variant="primary" type="submit">
                                     Send link
                                 </Button>
+                                <ToastContainer position='top-right' />
                             </Form>
                         </Col>
                     </Row>
