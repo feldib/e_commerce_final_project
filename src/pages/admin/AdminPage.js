@@ -1,6 +1,7 @@
 import React from 'react'
-import { Navbar, Nav, Container, Row, Col } from 'react-bootstrap'
+import { Navbar, Nav, Container, Row } from 'react-bootstrap'
 import { Outlet } from 'react-router-dom';
+import SubNavbar from '../../components/SubNavbar';
 
 function AdminPage() {
     return (
@@ -8,31 +9,17 @@ function AdminPage() {
             <Row className='mb-2 mt-5 mb-3'>
                 <h1 className='text-center'>Admin page</h1>
             </Row>
-            <Row>
-                <Col>
-                    <Navbar>
-                        <Container>
-                            <Nav className='mx-3 text-center justify-content-between w-100'>
-                                <Nav.Link>
-                                    <h3>Artworks</h3>
-                                </Nav.Link>
-                                <Nav.Link>
-                                    <h3>Users</h3>
-                                </Nav.Link>
-                                <Nav.Link>
-                                    <h3>Orders</h3>
-                                </Nav.Link>
-                                <Nav.Link>
-                                    <h3>Reviews</h3>
-                                </Nav.Link>
-                                <Nav.Link>
-                                    <h3>Messages</h3>
-                                </Nav.Link>
-                            </Nav>
-                        </Container>
-                    </Navbar>
-                </Col>
-            </Row>
+
+            <SubNavbar 
+                navbarName="Admin pages"
+                linkObjects={[
+                    {linkText:"Artworks",  linkTo:""},
+                    {linkText:"Users",  linkTo:""},
+                    {linkText:"Orders",  linkTo:""},
+                    {linkText:"Reviews",  linkTo:""},
+                    {linkText:"Messages",  linkTo:""}
+                ]}
+            />
 
             <Row className='pb-5'>
                 <Outlet />
