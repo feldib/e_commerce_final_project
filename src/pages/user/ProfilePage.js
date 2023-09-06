@@ -4,6 +4,7 @@ import OrderHistory from '../../subpages/user/OrderHistory'
 import UserData from '../../subpages/user/UserData'
 import WishList from '../../subpages/user/WishList'
 import SubNavbar from '../../components/SubNavbar'
+import { faStar, faHeart, faInfoCircle, faArrowRotateBack } from '@fortawesome/free-solid-svg-icons'
 
 function ProfilePage(props) {
     return (
@@ -15,10 +16,10 @@ function ProfilePage(props) {
             <SubNavbar 
                 navbarName="User pages"
                 linkObjects={[
-                    {linkText:"User Data",  linkTo:""},
-                    {linkText:"Order History",  linkTo:""},
-                    {linkText:"Wishlist",  linkTo:""},
-                    {linkText:"Reviews",  linkTo:""}
+                    {linkText:"User Data",  linkTo:"", icon: faInfoCircle},
+                    {linkText:"Order History",  linkTo:"", icon: faArrowRotateBack},
+                    {linkText:"Wishlist",  linkTo:"", icon: faHeart},
+                    {linkText:"Reviews",  linkTo:"", icon: faStar}
                 ]}
             />
 
