@@ -57,14 +57,12 @@ const sendForgotPasswordEmail = (email)=>{
     return axios.post(`${server_url}/forgot_password`, {email})
 }
 
-const registerNewUser = async(email, password, firstName, lastName, address, phone)=>{
+const registerNewUser = async(email, password, firstName, lastName)=>{
     return await axios.post(`${server_url}/users/new_user`, {
         last_name: lastName,
         first_name: firstName, 
         email, 
-        password, 
-        address, 
-        phone_number: phone
+        password
     })
 }
 

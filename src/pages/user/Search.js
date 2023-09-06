@@ -24,9 +24,7 @@ function Search() {
 
 
     const formik = useFormik({
-        initialValues: {
-            min: "", 
-            max: "", 
+        initialValues: { 
             title: "", 
             artist_name: "", 
             category_id: "", 
@@ -35,13 +33,6 @@ function Search() {
         },
 
         onSubmit: (values) => search(values),
-        
-        validationSchema: Yup.object({
-            min: Yup.string()
-                .max(Yup.ref("max")-1, 'Minimum number cannot be larger than maximum'),
-            max: Yup.string()
-                .min(Yup.ref("min")+1, 'Maximum number cannot be smaller than minimum')
-        })
 
     })
 
@@ -181,8 +172,7 @@ function Search() {
 
                 <Row>
                 {(
-                    formik.values.min && formik.values.max && 
-                    formik.errors.min && formik.errors.max
+                    formik.values.min && formik.values.max
                 ) ?
                         <Query 
                             text = {`Between ${formik.values.min} and ${formik.values.max}`}

@@ -3,13 +3,13 @@ import { registerNewUser } from '../../fetching'
 import { logIn } from '../../fetching'
 import InputComponent from '../../components/InputComponent'
 import { Container, Col, Row, Button } from 'react-bootstrap'
-import { faUser, faKey, faQuestion, faHouse, faPhone } from '@fortawesome/free-solid-svg-icons'
+import { faUser, faKey, faQuestion } from '@fortawesome/free-solid-svg-icons'
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 import { ToastContainer, toast } from 'react-toastify'
 
 const attemptRegistration = async (values, settleSuccessfulRegistration) => {
-    await registerNewUser(values.email, values.password, values.firstName, values.lastName, values.address, values.phone)
+    await registerNewUser(values.email, values.password, values.firstName, values.lastName)
         .then(function (response) {
             console.log("reponse: ", JSON.stringify(response))
             if(response.data === true){
@@ -61,9 +61,7 @@ function RegistrationPage(props) {
         firstName: Yup.string()
             .required("First name required"),
         lastName:  Yup.string()
-            .required("Last name required"),
-        address:  Yup.string()
-            .required("Address name required")
+            .required("Last name required")
     })
 
     return (
@@ -132,24 +130,6 @@ function RegistrationPage(props) {
                                     placeholder="Enter Last Name"
                                     icon={faQuestion}
                                     showAsterisk={errors.lastName && touched.lastName}
-                                />
-
-                                <InputComponent 
-                                    label="Address"
-                                    name="address"
-                                    type="text"
-                                    placeholder="Enter Address"
-                                    icon={faHouse}
-                                    showAsterisk={errors.address && touched.address}
-                                />
-
-                                <InputComponent 
-                                    label="Phone Number"
-                                    name="phone"
-                                    type="text"
-                                    placeholder="Enter Phone Number"
-                                    icon={faPhone}
-                                    showAsterisk={errors.phone && touched.phone}
                                 />
 
                                 <Button variant="primary" type="submit" onClick={
