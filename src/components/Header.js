@@ -4,6 +4,7 @@ import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { Navbar, Nav, Container } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import LoggedInNavbarItems from './LoggedInNavbarItems'
+import NotLoggedInNavbarItems from './NotLoggedInNavbarItems'
 
 function Header(props) { 
     return (
@@ -41,15 +42,7 @@ function Header(props) {
                                     user={props.user}
                                 />
                             :
-                                <>
-                                    <Link className='nav-link' style={{ color: 'inherit', textDecoration: 'inherit'}} to="/login">
-                                        Log in
-                                    </Link>
-  
-                                    <Link className='nav-link' style={{ color: 'inherit', textDecoration: 'inherit'}} to="/register">
-                                        Register
-                                    </Link>
-                                </>
+                                <NotLoggedInNavbarItems />
                             }
                            
 
