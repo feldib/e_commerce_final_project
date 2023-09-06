@@ -2,6 +2,7 @@ import React from 'react'
 import { Navbar, Nav, Container, Row } from 'react-bootstrap'
 import { Outlet } from 'react-router-dom';
 import SubNavbar from '../../components/SubNavbar';
+import { faMessage, faStar, faPerson, faPalette, faArrowRotateBack } from '@fortawesome/free-solid-svg-icons'
 
 function AdminPage() {
     return (
@@ -13,11 +14,11 @@ function AdminPage() {
             <SubNavbar 
                 navbarName="Admin pages"
                 linkObjects={[
-                    {linkText:"Artworks",  linkTo:""},
-                    {linkText:"Users",  linkTo:""},
-                    {linkText:"Orders",  linkTo:""},
-                    {linkText:"Reviews",  linkTo:""},
-                    {linkText:"Messages",  linkTo:""}
+                    {linkText:"Artworks",  linkTo:"", icon: faPalette},
+                    {linkText:"Users",  linkTo:"", icon: faPerson},
+                    {linkText:"Orders",  linkTo:"", icon: faArrowRotateBack},
+                    {linkText:"Reviews",  linkTo:"", icon: faStar},
+                    {linkText:"Messages",  linkTo:"", icon: faMessage}
                 ]}
             />
 

@@ -1,27 +1,29 @@
 import React from 'react'
-import { Navbar, Nav, Container, Row } from 'react-bootstrap'
+import { Navbar, Nav, Container, Col, Row } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 function SubNavbar(props) {
     return (
         <Row>
-            <Navbar expand="lg">
+            <Navbar>
                 <Container>
-                    <Navbar.Toggle aria-controls="menu-items">
-                        <h4 className='text-center'>{props.navbarName}</h4>
-                    </Navbar.Toggle>
-
-                    <Navbar.Collapse id="menu-items">
-                        <Nav className='mx-3 justify-content-between w-100'>
+                        <Nav className='d-flex flex-wrap mx-3 justify-content-around w-100'>
                             {props.linkObjects.map((obj)=>{
                                 return (
                                     <Link className='nav-link' style={{ color: 'inherit', textDecoration: 'inherit'}} to={`${obj.linkTo}`}> 
-                                        <h3>{obj.linkText}</h3>
+                                        <Col>
+                                            <Row>
+                                                <FontAwesomeIcon size='2xl' icon={obj.icon} />
+                                            </Row>
+                                            <Row>
+                                                <p>{obj.linkText}</p>
+                                            </Row>
+                                        </Col>
                                     </Link>
                                 )
                             })}
                         </Nav>
-                    </Navbar.Collapse>
                 </Container>
             </Navbar>
         </Row>
