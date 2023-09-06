@@ -108,10 +108,10 @@ function RegistrationPage(props) {
                                 />
 
                                 <InputComponent 
-                                    label="Password"
+                                    label="Password again"
                                     name="repeatPassword"
                                     type="password"
-                                    placeholder="Enter password"
+                                    placeholder="Enter password again"
                                     icon={faKey}
                                     showAsterisk={errors.repeatPassword && touched.repeatPassword}
                                 />
@@ -126,7 +126,7 @@ function RegistrationPage(props) {
                                 />
 
                                 <InputComponent 
-                                    label="First Name"
+                                    label="Last Name"
                                     name="lastName"
                                     type="text"
                                     placeholder="Enter Last Name"

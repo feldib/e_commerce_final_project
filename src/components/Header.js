@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { Navbar, Nav, Container } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import { logOut } from '../fetching'
+import LoggedInNavbarItems from './LoggedInNavbarItems'
 
 function Header(props) { 
     return (
@@ -34,32 +34,12 @@ function Header(props) {
                             <Link className='nav-link' style={{ color: 'inherit', textDecoration: 'inherit'}} to="/contact">
                                 Contact us
                             </Link>
+                            
                             {props.loggedIn ?
-                                <>
-                                {props.user && !props.user.is_admin ?
-                                <>
-                                    <Link className='nav-link' style={{ color: 'inherit', textDecoration: 'inherit'}} to="/shopping_cart">
-                                        Shopping cart
-                                    </Link>
-
-                                    <Link className='nav-link' style={{ color: 'inherit', textDecoration: 'inherit'}} to="/user">
-                                        {props.user.first_name}'s Page
-                                    </Link>
-                                </>:
-
-                                <Link className='nav-link' style={{ color: 'inherit', textDecoration: 'inherit'}} to="/admin">
-                                    Admin Page
-                                </Link>
-                                }
-                                
-                                <Nav.Link
-                                    onClick={async()=>{
-                                        await logOut()
-                                    }}
-                                >
-                                    Log out
-                                </Nav.Link>
-                                </>
+                                <LoggedInNavbarItems 
+                                    first_name={props.user.first_name}
+                                    user={props.user}
+                                />
                             :
                                 <>
                                     <Link className='nav-link' style={{ color: 'inherit', textDecoration: 'inherit'}} to="/login">
