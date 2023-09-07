@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 import { useAxios, useLoading } from '../../fetching'
 import ArtworkDetails from '../../components/ArtworkDetails'
 
-function ArtworkPage() {
+function ArtworkPage(props) {
     const {artwork_id} = useParams()
 
     const artworkData = useAxios(`/artwork?id=${artwork_id}`)
@@ -14,6 +14,7 @@ function ArtworkPage() {
             <ArtworkDetails 
                 artwork = {artwork}
                 artwork_id = {artwork_id}
+                loggedIn = {props.loggedIn}
             />
         )
     })

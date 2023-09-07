@@ -110,7 +110,7 @@ function App() {
 
           <Route
             path='/artwork_page/:artwork_id'
-            element={<ArtworkPage />}
+            element={<ArtworkPage loggedIn={loggedIn} />}
           />
 
           <Route
