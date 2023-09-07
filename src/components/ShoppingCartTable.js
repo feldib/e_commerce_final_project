@@ -4,7 +4,11 @@ import { faHeart, faX, faPlus, faMinus} from '@fortawesome/free-solid-svg-icons'
 import { Row, Table, Col } from 'react-bootstrap'
 import { useLoading } from '../fetching'
 import { ToastContainer, toast } from 'react-toastify'
-import { removeFromShoppingList } from '../fetching'
+import { 
+    removeFromShoppingList, 
+    increaseShoppingListItemQuantity,
+    decreaseShoppingListItemQuantity 
+} from '../fetching'
 
 function ShoppingCartTable(props) {
     function makeDataLines(dataLines){
@@ -36,13 +40,29 @@ function ShoppingCartTable(props) {
                                 </Col>
                             </Col>
                             <Col>
-                                <p style={{cursor: "pointer"}}>
+                                <p 
+                                    style={{cursor: "pointer"}}
+                                    onClick={
+                                        async()=>{
+                                            await decreaseShoppingListItemQuantity(line.id)
+                                            window.location.reload()
+                                        }
+                                    }
+                                >
                                     <FontAwesomeIcon icon={faMinus} style={{color: "red"}} />
                                 </p>
                             </Col>
                             
                             <Col>
-                                <p style={{cursor: "pointer"}}>
+                                <p 
+                                    style={{cursor: "pointer"}}
+                                    onClick={
+                                        async()=>{
+                                            await increaseShoppingListItemQuantity(line.id)
+                                            window.location.reload()
+                                        }
+                                    }
+                                >
                                     <FontAwesomeIcon icon={faPlus} style={{color: "red"}} />
                                 </p>
                             </Col>

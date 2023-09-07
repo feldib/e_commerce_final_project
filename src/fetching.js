@@ -106,6 +106,13 @@ const removeFromShoppingList = (artwork_id) => {
     return axios.post(`${server_url}/users/remove_item_from_shopping_cart`, {artwork_id})
 }
 
+const increaseShoppingListItemQuantity = (artwork_id) => {
+    return axios.post(`${server_url}/users/increase_shopping_sart_item_quantity`, {artwork_id})
+}
+
+const decreaseShoppingListItemQuantity = (artwork_id) => {
+    return axios.post(`${server_url}/users/decrease_shopping_sart_item_quantity`, {artwork_id})
+}
 
 
 export {
@@ -119,5 +126,7 @@ export {
     getArtworkSearchResults,
     sendMessageToAdministrator,
     addToShoppingList,
-    removeFromShoppingList
+    removeFromShoppingList,
+    increaseShoppingListItemQuantity,
+    decreaseShoppingListItemQuantity
 }
