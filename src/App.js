@@ -100,7 +100,7 @@ function App() {
 
           <Route
             path='/shopping_cart'
-            element={<ShoppingCartPage />}
+            element={<ShoppingCartPage loggedIn={loggedIn} />}
           />
 
           <Route
