@@ -8,7 +8,7 @@ import BuyTable from '../../components/BuyTable'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 
-function Search() {
+function Search(props) {
 
     async function search(values){
         const qs = []
@@ -258,6 +258,7 @@ function Search() {
                         reccomendation = {false}
                         theadNeeded = {true}
                         dataLines = {searchResults}
+                        loggedIn = {props.loggedIn}
                     />
                 </Row>
             }
