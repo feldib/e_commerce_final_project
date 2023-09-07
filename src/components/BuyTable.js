@@ -5,6 +5,9 @@ import { Row, Table } from 'react-bootstrap'
 import { useLoading } from '../fetching'
 import { addToShoppingList } from '../fetching'
 import { ToastContainer, toast } from 'react-toastify'
+import { Link } from 'react-router-dom'
+import FavouriteButton from './FavouriteButton'
+import ShoppingCartButton from './ShoppingCartButton'
 
 function BuyTable(props) {
     function makeDataLines(dataLines){
@@ -13,82 +16,57 @@ function BuyTable(props) {
                 <tr key={index}>
                     <td>
                         <img
-                                src = {line.thumbnail}
-                                width="100"
-                                style={{objectFit: "contain"}}
-                                alt="place of thumbnail"
-                            />
+                            src = {line.thumbnail}
+                            width="100"
+                            style={{objectFit: "contain"}}
+                            alt="place of thumbnail"
+                        />
                     </td>
                     <td>
-                        {line.title}
+                        <Link to={`/artwork_page/${line.id}`}>
+                            <p>
+                                {line.title}
+                            </p>
+                        </Link>
                     </td>
                     <td>
-                        {line.artist_name}
+                        <p>
+                            {line.artist_name}
+                        </p>
                     </td>
                     <td>
-                        €{line.price}
+                        <p>
+                            €{line.price}
+                        </p>
                     </td>
                     <td>
-                        {line.quantity}
+                        <p>
+                            {line.quantity}
+                        </p>
                     </td>
                     <td className={`${props.reccomendation ? "d-none" : "d-none d-md-table-cell"}`}>
-                        {line.tags &&
-                            line.tags
-                            .map(tag => tag.tname)
-                            .join(", ")
-                        }
+                        <p>
+                            {line.tags &&
+                                line.tags
+                                .map(tag => tag.tname)
+                                .join(", ")
+                            }
+                        </p>
                     </td>
                     <td className={`${props.reccomendation ? "d-none" : "d-none d-md-table-cell"}`}>
-                        {line.cname}
+                        <p>
+                            {line.cname}
+                        </p>
                     </td>
                     <td>
                         <div className='container'>
-                            <Row>
-                                <p 
-                                    style={{cursor: "pointer"}}
-                                    onClick={
-                                        async()=>{
-                                            if(props.loggedIn){
-                                                addToShoppingList(line.id)
-                                                .then((response)=>{
-                                                    toast.success("Item added to shopping cart ", {
-                                                        className: "toast-success"
-                                                    })
-                                                }).catch((error)=>{
-                                                    toast.error("Item out of stock", {
-                                                        className: "toast-error"
-                                                    })
-                                                })
-                                                
-                                            }else{
-                                                toast.warning("Sign in or register to add to shopping cart! ", {
-                                                    className: "toast-warning"
-                                                })
-                                            }
-                                        }
-                                    }
-                                >
-                                    <FontAwesomeIcon icon={faBasketShopping} />
-                                </p>
-                            </Row>
-                            <Row>
-                                <p 
-                                    style={{cursor: "pointer"}}
-                                    onClick={
-                                        async()=>{
-                                            if(props.loggedIn){
-                                                // await addToFauforites(line.id)
-                                            }else{
-                                                toast.warning("Sign in or register to add to shopping list! ", {
-                                                    className: "toast-warning"
-                                                })
-                                            }
-                                        }
-                                    }
-                                >
-                                    <FontAwesomeIcon icon={faHeart} />
-                                </p>
-                            </Row>
+                            <ShoppingCartButton
+                                artwork_id={props.artwork_id}
+                                loggedIn={props.loggedIn}
+                            />
+                            <FavouriteButton
+                                loggedIn={props.loggedIn}
+                            />
                             <ToastContainer position='top-right'/>
                         </div>
                     </td>
