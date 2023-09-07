@@ -4,6 +4,7 @@ import { faHeart, faX, faPlus, faMinus} from '@fortawesome/free-solid-svg-icons'
 import { Row, Table, Col } from 'react-bootstrap'
 import { useLoading } from '../fetching'
 import { ToastContainer, toast } from 'react-toastify'
+import { removeFromShoppingList } from '../fetching'
 
 function ShoppingCartTable(props) {
     function makeDataLines(dataLines){
@@ -79,7 +80,15 @@ function ShoppingCartTable(props) {
                             </Row>
 
                             <Row>
-                                <p style={{cursor: "pointer"}}>
+                                <p 
+                                    style={{cursor: "pointer"}}
+                                    onClick={
+                                        async()=>{
+                                            await removeFromShoppingList(line.id)
+                                            window.location.reload()
+                                        }
+                                    }
+                                >
                                     <FontAwesomeIcon icon={faX} style={{color: "red"}} />
                                 </p>
                             </Row>

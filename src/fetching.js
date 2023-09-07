@@ -20,6 +20,7 @@ const useAxios = (url)=>{
     return data
 }
 
+
 const useLoading = (data, makeJSX)=>{
     const spinner = (
         <div className="d-flex justify-content-center">
@@ -101,6 +102,12 @@ const addToShoppingList = (artwork_id) => {
     return axios.post(`${server_url}/users/shopping_cart`, {artwork_id})
 }
 
+const removeFromShoppingList = (artwork_id) => {
+    return axios.post(`${server_url}/users/remove_item_from_shopping_cart`, {artwork_id})
+}
+
+
+
 export {
     useAxios,
     useLoading,
@@ -111,5 +118,6 @@ export {
     changePassword,
     getArtworkSearchResults,
     sendMessageToAdministrator,
-    addToShoppingList
+    addToShoppingList,
+    removeFromShoppingList
 }
