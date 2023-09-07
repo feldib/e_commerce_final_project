@@ -4,6 +4,11 @@ import { faHeart, faX, faPlus, faMinus} from '@fortawesome/free-solid-svg-icons'
 import { Row, Table, Col } from 'react-bootstrap'
 import { useLoading } from '../fetching'
 import { ToastContainer, toast } from 'react-toastify'
+import { Link } from 'react-router-dom'
+import FavouriteButton from './FavouriteButton'
+import ShoppingCartButton from './ShoppingCartButton'
+
+
 import { 
     removeFromShoppingList, 
     increaseShoppingListItemQuantity,
@@ -24,19 +29,29 @@ function ShoppingCartTable(props) {
                             />
                     </td>
                     <td>
-                        {line.title}
+                        <Link to={`/artwork_page/${line.id}`}>
+                            <p>
+                                {line.title}
+                            </p>
+                        </Link>
                     </td>
                     <td>
-                        {line.artist_name}
+                        <p>
+                            {line.artist_name}
+                        </p>
                     </td>
                     <td>
-                        €{line.price}
+                        <p>
+                            €{line.price}
+                        </p>
                     </td>
                     <td className='text-center'>
                         <Row>
                             <Col sm={12} lg={5}>
                                 <Col>
-                                    {line.quantity}
+                                    <p>
+                                        {line.quantity}
+                                    </p>
                                 </Col>
                             </Col>
                             <Col>
@@ -69,35 +84,24 @@ function ShoppingCartTable(props) {
                         </Row>
                     </td>
                     <td className={`${props.reccomendation ? "d-none" : "d-none d-md-table-cell"}`}>
-                        {line.tags &&
-                            line.tags
-                            .map(tag => tag.tname)
-                            .join(", ")
-                        }
+                        <p>
+                            {line.tags &&
+                                line.tags
+                                .map(tag => tag.tname)
+                                .join(", ")
+                            }
+                        </p>
                     </td>
                     <td className={`${props.reccomendation ? "d-none" : "d-none d-md-table-cell"}`}>
-                        {line.cname}
+                        <p>
+                            {line.cname}
+                        </p>
                     </td>
                     <td>
                         <div className='container'>                                   
-                            <Row>
-                                <p 
-                                    style={{cursor: "pointer"}}
-                                    onClick={
-                                        async()=>{
-                                            if(props.loggedIn){
-                                                // await addToFauforites(line.id)
-                                            }else{
-                                                toast.warning("Sign in or register to add to shopping list! ", {
-                                                    className: "toast-warning"
-                                                })
-                                            }
-                                        }
-                                    }
-                                >
-                                    <FontAwesomeIcon icon={faHeart} />
-                                </p>
-                            </Row>
+                            <FavouriteButton
+                                loggedIn={props.loggedIn}
+                            />
 
                             <Row>
                                 <p 
