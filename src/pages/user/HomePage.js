@@ -46,6 +46,7 @@ function HomePage(props) {
                                 reccomendation = {true}
                                 theadNeeded = {false}
                                 dataLines = {featured}
+                                loggedIn={props.loggedIn} 
                             />
                         }
                     </Col>
@@ -75,6 +76,7 @@ function HomePage(props) {
                                 reccomendation = {true}
                                 theadNeeded = {false}
                                 dataLines = {featured}
+                                loggedIn={props.loggedIn} 
                             />
                         }
                     </Col>
@@ -104,6 +106,7 @@ function HomePage(props) {
                                 reccomendation = {true}
                                 theadNeeded = {false}
                                 dataLines = {featured}
+                                loggedIn={props.loggedIn} 
                             />
                         }
                     </Col>

@@ -97,6 +97,10 @@ const sendMessageToAdministrator = (email, title, message)=>{
     return axios.post(`${server_url}/users/message_to_administrator`, {email, title, message})
 }
 
+const addToShoppingList = (artwork_id) => {
+    return axios.post(`${server_url}/users/shopping_cart`, {artwork_id})
+}
+
 export {
     useAxios,
     useLoading,
@@ -106,5 +110,6 @@ export {
     logIn,
     changePassword,
     getArtworkSearchResults,
-    sendMessageToAdministrator
+    sendMessageToAdministrator,
+    addToShoppingList
 }

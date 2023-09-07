@@ -77,7 +77,7 @@ function App() {
 
           <Route
             path='/search'
-            element={<Search />}
+            element={<Search  loggedIn={loggedIn} />}
           />
 
           <Route

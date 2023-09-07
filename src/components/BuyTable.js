@@ -3,6 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart, faBasketShopping} from '@fortawesome/free-solid-svg-icons'
 import { Row, Table } from 'react-bootstrap'
 import { useLoading } from '../fetching'
+import { addToShoppingList } from '../fetching'
+import { ToastContainer, toast } from 'react-toastify'
 
 function BuyTable(props) {
     function makeDataLines(dataLines){
@@ -42,15 +44,52 @@ function BuyTable(props) {
                     <td>
                         <div className='container'>
                             <Row>
-                                <p style={{cursor: "pointer"}}>
+                                <p 
+                                    style={{cursor: "pointer"}}
+                                    onClick={
+                                        async()=>{
+                                            if(props.loggedIn){
+                                                addToShoppingList(line.id)
+                                                .then((response)=>{
+                                                    toast.success("Item added to shopping cart ", {
+                                                        className: "toast-success"
+                                                    })
+                                                }).catch((error)=>{
+                                                    toast.error("Item out of stock", {
+                                                        className: "toast-error"
+                                                    })
+                                                })
+                                                
+                                            }else{
+                                                toast.warning("Sign in or register to add to shopping cart! ", {
+                                                    className: "toast-warning"
+                                                })
+                                            }
+                                        }
+                                    }
+                                >
                                     <FontAwesomeIcon icon={faBasketShopping} />
                                 </p>
                             </Row>
                             <Row>
-                                <p style={{cursor: "pointer"}}>
+                                <p 
+                                    style={{cursor: "pointer"}}
+                                    onClick={
+                                        async()=>{
+                                            if(props.loggedIn){
+                                                // await addToFauforites(line.id)
+                                            }else{
+                                                toast.warning("Sign in or register to add to shopping list! ", {
+                                                    className: "toast-warning"
+                                                })
+                                            }
+                                        }
+                                    }
+                                >
                                     <FontAwesomeIcon icon={faHeart} />
                                 </p>
                             </Row>
+                            <ToastContainer position='top-right'/>
                         </div>
                     </td>
                 </tr>
