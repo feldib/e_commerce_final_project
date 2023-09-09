@@ -144,7 +144,7 @@ function App() {
 
             <Route
               path='wishlist'
-              element={<WishList />}
+              element={<WishList loggedIn={loggedIn} />}
             />
           </Route>
 
