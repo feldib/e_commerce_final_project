@@ -8,70 +8,18 @@ import { ToastContainer, toast } from 'react-toastify'
 import { Link } from 'react-router-dom'
 import FavouriteButton from './FavouriteButton'
 import ShoppingCartButton from './ShoppingCartButton'
+import BuyTableDataLines from './BuyTableDataLines'
 
 function BuyTable(props) {
     function makeDataLines(dataLines){
         return (dataLines.map((line, index)=>{
             return (
-                <tr key={index}>
-                    <td>
-                        <img
-                            src = {line.thumbnail}
-                            width="100"
-                            style={{objectFit: "contain"}}
-                            alt="place of thumbnail"
-                        />
-                    </td>
-                    <td>
-                        <Link to={`/artwork_page/${line.id}`}>
-                            <p>
-                                {line.title}
-                            </p>
-                        </Link>
-                    </td>
-                    <td>
-                        <p>
-                            {line.artist_name}
-                        </p>
-                    </td>
-                    <td>
-                        <p>
-                            €{line.price}
-                        </p>
-                    </td>
-                    <td>
-                        <p>
-                            {line.quantity}
-                        </p>
-                    </td>
-                    <td className={`${props.reccomendation ? "d-none" : "d-none d-md-table-cell"}`}>
-                        <p>
-                            {line.tags &&
-                                line.tags
-                                .map(tag => tag.tname)
-                                .join(", ")
-                            }
-                        </p>
-                    </td>
-                    <td className={`${props.reccomendation ? "d-none" : "d-none d-md-table-cell"}`}>
-                        <p>
-                            {line.cname}
-                        </p>
-                    </td>
-                    <td>
-                        <div className='container'>
-                            <ShoppingCartButton
-                                artwork_id={line.id}
-                                loggedIn={props.loggedIn}
-                            />
-                            <FavouriteButton
-                                artwork_id={line.id}
-                                loggedIn={props.loggedIn}
-                            />
-                            <ToastContainer position='top-right'/>
-                        </div>
-                    </td>
-                </tr>
+                <BuyTableDataLines 
+                    reccomendation={props.reccomendation}
+                    line={line}
+                    index={index}
+                    loggedIn={props.loggedIn}
+                />
             )
         })
         )

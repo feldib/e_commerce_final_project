@@ -20,7 +20,6 @@ function ShoppingCartButton(props) {
                                 toast.success("Item added to shopping cart ", {
                                     className: "toast-success"
                                 })
-                                window.location.reload()
                             }).catch((error)=>{
                                 toast.error("Item out of stock", {
                                     className: "toast-error"

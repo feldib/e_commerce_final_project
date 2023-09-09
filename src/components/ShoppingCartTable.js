@@ -7,120 +7,25 @@ import { ToastContainer, toast } from 'react-toastify'
 import { Link } from 'react-router-dom'
 import FavouriteButton from './FavouriteButton'
 import ShoppingCartButton from './ShoppingCartButton'
-
-
+import server_url from '../server'
+import ShoppingCartDataLines from './ShoppingCartDataLines'
 import { 
     removeFromShoppingList, 
     increaseShoppingListItemQuantity,
-    decreaseShoppingListItemQuantity 
+    decreaseShoppingListItemQuantity,
+    useAxios
 } from '../fetching'
 
 function ShoppingCartTable(props) {
     function makeDataLines(dataLines){
         return (dataLines.map((line, index)=>{
             return (
-                <tr key={index}>
-                    <td>
-                        <img
-                                src = {line.thumbnail}
-                                width="100"
-                                style={{objectFit: "contain"}}
-                                alt="place of thumbnail"
-                            />
-                    </td>
-                    <td>
-                        <Link to={`/artwork_page/${line.id}`}>
-                            <p>
-                                {line.title}
-                            </p>
-                        </Link>
-                    </td>
-                    <td>
-                        <p>
-                            {line.artist_name}
-                        </p>
-                    </td>
-                    <td>
-                        <p>
-                            €{line.price}
-                        </p>
-                    </td>
-                    <td className='text-center'>
-                        <Row>
-                            <Col sm={12} lg={5}>
-                                <Col>
-                                    <p>
-                                        {line.quantity}
-                                    </p>
-                                </Col>
-                            </Col>
-                            <Col>
-                                <p 
-                                    style={{cursor: "pointer"}}
-                                    onClick={
-                                        async()=>{
-                                            await decreaseShoppingListItemQuantity(line.id)
-                                            window.location.reload()
-                                        }
-                                    }
-                                >
-                                    <FontAwesomeIcon icon={faMinus} style={{color: "red"}} />
-                                </p>
-                            </Col>
-                            
-                            <Col>
-                                <p 
-                                    style={{cursor: "pointer"}}
-                                    onClick={
-                                        async()=>{
-                                            await increaseShoppingListItemQuantity(line.id)
-                                            window.location.reload()
-                                        }
-                                    }
-                                >
-                                    <FontAwesomeIcon icon={faPlus} style={{color: "red"}} />
-                                </p>
-                            </Col>
-                        </Row>
-                    </td>
-                    <td className={`${props.reccomendation ? "d-none" : "d-none d-md-table-cell"}`}>
-                        <p>
-                            {line.tags &&
-                                line.tags
-                                .map(tag => tag.tname)
-                                .join(", ")
-                            }
-                        </p>
-                    </td>
-                    <td className={`${props.reccomendation ? "d-none" : "d-none d-md-table-cell"}`}>
-                        <p>
-                            {line.cname}
-                        </p>
-                    </td>
-                    <td>
-                        <div className='container'>                                   
-                            <FavouriteButton
-                                artwork_id={line.id}
-                                loggedIn={props.loggedIn}
-                            />
-
-                            <Row>
-                                <p 
-                                    style={{cursor: "pointer"}}
-                                    onClick={
-                                        async()=>{
-                                            await removeFromShoppingList(line.id)
-                                            window.location.reload()
-                                        }
-                                    }
-                                >
-                                    <FontAwesomeIcon icon={faX} style={{color: "red"}} />
-                                </p>
-                            </Row>
-                            <ToastContainer position='top-right'/>
-                        </div>
-                    </td>
-                </tr>
+                <ShoppingCartDataLines 
+                    reccomendation={props.reccomendation}
+                    line={line}
+                    index={index}
+                    loggedIn={props.loggedIn}
+                />
             )
         })
         )
