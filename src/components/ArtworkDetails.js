@@ -136,6 +136,7 @@ function ArtworkDetails(props) {
                         loggedIn={props.loggedIn}
                     />
                     <FavouriteButton
+                        artwork_id={props.artwork_id}
                         loggedIn={props.loggedIn}
                     />
                     <ToastContainer position='top-right'/>

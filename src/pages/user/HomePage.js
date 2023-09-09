@@ -2,7 +2,7 @@ import React from 'react'
 import { useAxios } from '../../fetching'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons'
-import { Col, Row, Container, Display } from 'react-bootstrap'
+import { Col, Row, Container } from 'react-bootstrap'
 import BuyTable from '../../components/BuyTable'
 
 function HomePage(props) {

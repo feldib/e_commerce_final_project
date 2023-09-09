@@ -114,6 +114,19 @@ const decreaseShoppingListItemQuantity = (artwork_id) => {
     return axios.post(`${server_url}/users/decrease_shopping_sart_item_quantity`, {artwork_id})
 }
 
+const addToWishlisted = (artwork_id) => {
+    return axios.post(`${server_url}/users/wishlisted`, {artwork_id})
+}
+
+const removeFromWishlisted = (artwork_id) => {
+    return axios.post(`${server_url}/users/remove_from_wishlisted`, {artwork_id})
+}
+
+const isWishlisted = async (artwork_id) => {
+    const result = await axios.post(`${server_url}/users/is_wishlisted`, {artwork_id})
+    const wishlisted = result.data
+    return wishlisted
+}
 
 export {
     useAxios,
@@ -128,5 +141,8 @@ export {
     addToShoppingList,
     removeFromShoppingList,
     increaseShoppingListItemQuantity,
-    decreaseShoppingListItemQuantity
+    decreaseShoppingListItemQuantity,
+    addToWishlisted,
+    removeFromWishlisted,
+    isWishlisted
 }

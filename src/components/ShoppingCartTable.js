@@ -100,6 +100,7 @@ function ShoppingCartTable(props) {
                     <td>
                         <div className='container'>                                   
                             <FavouriteButton
+                                artwork_id={line.id}
                                 loggedIn={props.loggedIn}
                             />
 
