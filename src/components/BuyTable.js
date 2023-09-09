@@ -61,10 +61,11 @@ function BuyTable(props) {
                     <td>
                         <div className='container'>
                             <ShoppingCartButton
-                                artwork_id={props.artwork_id}
+                                artwork_id={line.id}
                                 loggedIn={props.loggedIn}
                             />
                             <FavouriteButton
+                                artwork_id={line.id}
                                 loggedIn={props.loggedIn}
                             />
                             <ToastContainer position='top-right'/>
