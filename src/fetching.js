@@ -132,6 +132,10 @@ const updateUserData = async (field_name, value) => {
     return axios.post(`${server_url}/users/update_data`, {field_name, value})
 }
 
+const order = async (invoice_data) => {
+    return axios.post(`${server_url}/users/make_order`, {invoice_data})
+}
+
 export {
     useAxios,
     useLoading,
@@ -149,5 +153,6 @@ export {
     addToWishlisted,
     removeFromWishlisted,
     isWishlisted,
-    updateUserData
+    updateUserData,
+    order
 }

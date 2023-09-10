@@ -2,7 +2,8 @@ import * as Yup from 'yup'
 import UserDataComponent from '../../components/UserDataComponent'
 import { useFormik } from 'formik'
 import { Link } from 'react-router-dom'
-import { Button, Col, Row } from 'react-bootstrap'
+import { Button, Col, Row, Form } from 'react-bootstrap'
+import { order } from '../../fetching'
 
 function CheckoutPage(props) {
     const formik = useFormik({
@@ -27,9 +28,15 @@ function CheckoutPage(props) {
             phone_number: Yup.string()
                 .required("Email required")
         }),
+
+        onSubmit: (values) => {
+            order(values).then(
+                window.location.replace("user/order_history")
+            )
+        }
     })
     return (
-        <Row className='pb-5'>
+        <form className='pb-5' onSubmit={formik.handleSubmit}>
             <UserDataComponent 
                 title={"Invoice Data"}
                 formik={formik}
@@ -37,14 +44,12 @@ function CheckoutPage(props) {
             />
             <Row>
                 <Col className='text-center mb-5'>
-                    <Link to="/checkout">
-                        <Button>
-                            Order
-                        </Button>
-                    </Link>
+                    <Button type='submit'>
+                        Order
+                    </Button>
                 </Col>
             </Row>
-        </Row>
+        </form>
     )
 }
 
