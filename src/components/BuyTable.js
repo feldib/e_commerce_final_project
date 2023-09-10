@@ -20,6 +20,7 @@ function BuyTable(props) {
                     index={index}
                     loggedIn={props.loggedIn}
                     orderSummary={props.orderSummary}
+                    totalCost={props.totalCost}
                 />
             )
         })
@@ -55,7 +56,8 @@ function BuyTable(props) {
                         <th>Quantity</th>
                         <th className={`${props.reccomendation ? "d-none" : "d-none d-md-table-cell"}`}>Tags</th>
                         <th className={`${props.reccomendation ? "d-none" : "d-none d-md-table-cell"}`}>Categories</th>
-                        {!props.orderSummary && <th></th>}
+                        <th>{props.orderSummary && "Total Cost" }</th>
+                        
                     </tr>
                 </thead>
                 }

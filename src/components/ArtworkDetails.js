@@ -11,6 +11,7 @@ import ReviewsOfArtworks from './ReviewsOfArtwork'
 
 function ArtworkDetails(props) {
     const reviewsData = useAxios(`/reviews?id=${props.artwork_id}`)
+    const [quantity, setQuantity] = React.useState(props.artwork.quantity)
 
     const reviews = useLoading(reviewsData, (reviews)=>{
         return (
@@ -110,7 +111,7 @@ function ArtworkDetails(props) {
                     <Row>
                         <p>{"Available quantity: "}
                             {props.artwork ?
-                                props.artwork.quantity :
+                                quantity :
                                 <div className="d-flex justify-content-center">
                                     <div className="spinner-border" role="status" />
                                 </div>
@@ -131,10 +132,19 @@ function ArtworkDetails(props) {
                 </Col>
 
                 <Col>
-                    <ShoppingCartButton
-                        artwork_id={props.artwork_id}
-                        loggedIn={props.loggedIn}
-                    />
+                    <span onClick={
+                        ()=>{
+                            if(props.loggedIn && quantity>0){
+                                setQuantity(quantity-1)
+                            }
+                        }
+                    }>
+                        <ShoppingCartButton
+                            artwork_id={props.artwork_id}
+                            loggedIn={props.loggedIn}
+                        />
+                    </span>
+                    
                     <FavouriteButton
                         artwork_id={props.artwork_id}
                         loggedIn={props.loggedIn}
