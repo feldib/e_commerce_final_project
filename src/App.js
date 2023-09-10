@@ -109,7 +109,7 @@ function App() {
 
           <Route
             path='/checkout'
-            element={<CheckoutPage />}
+            element={<CheckoutPage user={user} />}
           />
 
           <Route
