@@ -57,27 +57,30 @@ function BuyTableDataLines(props) {
                     {props.line.cname}
                 </p>
             </td>
-            <td>
-                <div className='container'>
-                    <span onClick={
-                        ()=>{
-                            if(props.loggedIn && quantity>0){
-                                setQuantity(quantity-1)
+            {!props.orderSummary &&
+                <td>
+                    <div className='container'>
+                        <span onClick={
+                            ()=>{
+                                if(props.loggedIn && quantity>0){
+                                    setQuantity(quantity-1)
+                                }
                             }
-                        }
-                    }>
-                        <ShoppingCartButton
+                        }>
+                            <ShoppingCartButton
+                                artwork_id={props.line.id}
+                                loggedIn={props.loggedIn}
+                            />
+                        </span>
+                        <FavouriteButton
                             artwork_id={props.line.id}
                             loggedIn={props.loggedIn}
                         />
-                    </span>
-                    <FavouriteButton
-                        artwork_id={props.line.id}
-                        loggedIn={props.loggedIn}
-                    />
-                    <ToastContainer position='top-right'/>
-                </div>
-            </td>
+                        <ToastContainer position='top-right'/>
+                    </div>
+                </td>
+            }
+            
         </tr>
     )
 }
