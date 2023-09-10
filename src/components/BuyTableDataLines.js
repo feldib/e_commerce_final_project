@@ -57,8 +57,10 @@ function BuyTableDataLines(props) {
                     {props.line.cname}
                 </p>
             </td>
-            {!props.orderSummary &&
-                <td>
+            <td>
+                {props.orderSummary ?
+                    <p>€{quantity * props.line.price}</p>
+                :
                     <div className='container'>
                         <span onClick={
                             ()=>{
@@ -78,8 +80,9 @@ function BuyTableDataLines(props) {
                         />
                         <ToastContainer position='top-right'/>
                     </div>
-                </td>
-            }
+                
+                }
+            </td>
             
         </tr>
     )

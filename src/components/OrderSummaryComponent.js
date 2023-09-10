@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 function OrderSummaryComponent(props) {
     return (
-        <Container>
+        <Container className='pb-3'>
             <Row>
                 <Row className='mb-2 mt-5 mb-3'>
                     <h1 className='text-center'>{props.title}</h1>
