@@ -5,7 +5,7 @@ import UserData from '../../subpages/user/UserData'
 import WishList from '../../subpages/user/WishList'
 import { Outlet } from 'react-router-dom'
 import SubNavbar from '../../components/SubNavbar'
-import { faStar, faHeart, faInfoCircle, faArrowRotateBack } from '@fortawesome/free-solid-svg-icons'
+import { faStar, faHeart, faInfoCircle, faArrowRotateBack, faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 
 function ProfilePage(props) {
     return (
@@ -20,7 +20,8 @@ function ProfilePage(props) {
                     {linkText:"User Data",  linkTo:"", icon: faInfoCircle},
                     {linkText:"Order History",  linkTo:"", icon: faArrowRotateBack},
                     {linkText:"Wishlist",  linkTo:"wishlist", icon: faHeart},
-                    {linkText:"Reviews",  linkTo:"", icon: faStar}
+                    {linkText:"Reviews",  linkTo:"", icon: faStar},
+                    {linkText:"Shopping Cart",  linkTo:"/shopping_cart", icon: faShoppingCart},
                 ]}
             />
 
