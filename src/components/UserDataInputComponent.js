@@ -32,7 +32,8 @@ function UserDataInputComponents(props) {
 
                 {editing ?
                     <Button variant="primary" onClick={
-                        ()=>{
+                        (e)=>{
+                            e.preventDefault()
                             if(props.error){
                                 toast.error("Incorrect data", {
                                     className: "toast-error"
@@ -59,7 +60,7 @@ function UserDataInputComponents(props) {
                         <FontAwesomeIcon icon={faCheck} className='mx-3'/>
                     </Button>
                 :
-                    <Button variant="primary" type="submit" onClick={
+                    <Button variant="primary" onClick={
                         ()=>{setEditing(true)}
                     }>
                         <FontAwesomeIcon icon={faGear} className='mx-3'/>
