@@ -31,7 +31,7 @@ function CheckoutPage(props) {
 
         onSubmit: (values) => {
             order(values).then(
-                window.location.replace("user/order_history")
+                window.location.replace("receipt")
             )
         }
     })

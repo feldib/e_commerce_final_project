@@ -119,7 +119,7 @@ function App() {
 
           <Route
             path='/receipt'
-            element={<ReceiptPage user={user} />}
+            element={<ReceiptPage user={user}/>}
           />
 
           <Route

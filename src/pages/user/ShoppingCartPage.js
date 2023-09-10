@@ -8,6 +8,22 @@ import { Link } from 'react-router-dom'
 
 function ShoppingCartPage(props) {
     const shoppingListItems = useAxios("/users/shopping_cart")
+    const [totalCost, setTotalCost] = React.useState()
+    React.useEffect(()=>{
+        if(shoppingListItems){
+            setTotalCost(
+                shoppingListItems.filter((obj)=>{
+                    return {
+                        quantity: obj.quantity,
+                        price: obj.price
+                    }
+                }).reduce((total, obj)=>{
+                    return total + (obj.price * obj.quantity)
+                }, 0)
+            )
+        }
+        
+    }, [shoppingListItems])
     return (
         <Container>
             <Row>
@@ -25,16 +41,7 @@ function ShoppingCartPage(props) {
             <Row className='mt-4'>
                     {shoppingListItems &&
                         <h2>
-                            Order Summary: € {
-                                shoppingListItems.filter((obj)=>{
-                                    return {
-                                        quantity: obj.quantity,
-                                        price: obj.price
-                                    }
-                                }).reduce((total, obj)=>{
-                                    return total + (obj.price * obj.quantity)
-                                }, 0)
-                            }
+                            Order Summary: € {totalCost}
                         </h2>
                     }
             </Row>
@@ -42,7 +49,10 @@ function ShoppingCartPage(props) {
             <Row>
                 <Col className='text-center mb-5'>
                     <Link to="/checkout">
-                        <Button>
+                        <Button onClick={()=>{
+                            localStorage.removeItem("currentOrder")
+                            localStorage.setItem("currentOrder", JSON.stringify({items: shoppingListItems, totalCost}))
+                        }}>
                             Go to Checkout
                         </Button>
                     </Link>
