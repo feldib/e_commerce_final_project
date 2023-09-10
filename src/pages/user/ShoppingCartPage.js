@@ -4,6 +4,7 @@ import { faX } from '@fortawesome/free-solid-svg-icons'
 import { Col, Row, Container, Button, Table } from 'react-bootstrap'
 import ShoppingCartTable from '../../components/ShoppingCartTable'
 import { useAxios } from '../../fetching'
+import { Link } from 'react-router-dom'
 
 function ShoppingCartPage(props) {
     const shoppingListItems = useAxios("/users/shopping_cart")
@@ -40,9 +41,11 @@ function ShoppingCartPage(props) {
 
             <Row>
                 <Col className='text-center mb-5'>
-                    <Button>
-                        Go to Checkout
-                    </Button>
+                    <Link to="/checkout">
+                        <Button>
+                            Go to Checkout
+                        </Button>
+                    </Link>
                 </Col>
             </Row>
         </Container>

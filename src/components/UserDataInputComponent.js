@@ -38,11 +38,21 @@ function UserDataInputComponents(props) {
                                     className: "toast-error"
                                 })
                             }else{
-                                updateUserData(props.name, props.value)
+                                if(props.changeUserData){
+                                    updateUserData(props.name, props.value)
+                                    toast.success(`${props.label} changed successfully`, {
+                                        className: "toast-success"
+                                    })
+                                }else{
+                                    toast.success(`${props.label} changed successfully`, {
+                                        className: "toast-success"
+                                    })
+                                    toast.warning(`This only effects the invoice!`, {
+                                        className: "toast-warning"
+                                    })
+                                }
                                 setEditing(false)
-                                toast.success(`${props.label} changed successfully`, {
-                                    className: "toast-success"
-                                })
+                                
                             }
                         }
                     }>
