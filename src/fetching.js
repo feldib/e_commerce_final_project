@@ -128,6 +128,10 @@ const isWishlisted = async (artwork_id) => {
     return wishlisted
 }
 
+const updateUserData = async (field_name, value) => {
+    return axios.post(`${server_url}/users/update_data`, {field_name, value})
+}
+
 export {
     useAxios,
     useLoading,
@@ -144,5 +148,6 @@ export {
     decreaseShoppingListItemQuantity,
     addToWishlisted,
     removeFromWishlisted,
-    isWishlisted
+    isWishlisted,
+    updateUserData
 }

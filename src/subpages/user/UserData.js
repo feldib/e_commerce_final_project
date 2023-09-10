@@ -1,113 +1,112 @@
 import React from 'react'
-import { Col, Row, Button, Form, InputGroup } from 'react-bootstrap'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAsterisk, faUser, faKey, faQuestion, faHouse, faPhone,faGear } from '@fortawesome/free-solid-svg-icons'
+import { logIn } from '../../fetching'
+import { Container, Col, Row, Button, Form } from 'react-bootstrap'
+import { faUser, faKey, faQuestion, faHouse, faPhone } from '@fortawesome/free-solid-svg-icons'
+import { useFormik } from 'formik'
+import * as Yup from 'yup'
+import { ToastContainer, toast } from 'react-toastify'
+import UserDataInputComponents from '../../components/UserDataInputComponent'
 
-function UserData() {
+function UserData(props) {
+    const formik = useFormik({
+        initialValues: { 
+            email: props.user.email,
+            first_name: props.user.first_name,
+            last_name: props.user.last_name,
+            address: props.user.address || "",
+            phone_number: props.user.phone_number || ""
+        },
+
+        validationSchema : Yup.object().shape({
+            email: Yup.string()
+                .email("Invalid email"),
+            first_name: Yup.string(),
+            last_name:  Yup.string(),
+            address: Yup.string(),
+            phone_number: Yup.string()
+        }),
+
+
+    })
+
     return (
-        <Row>
-            <Col className='mx-5'>
-                <Form>
-                    <Form.Group className="mb-3">
-                        <Form.Label>Email address</Form.Label>
+        <Container>
+            <Row className='mb-2 mt-5 mb-3'>
+                <h1 className='text-center'>User Data</h1>
+            </Row>
+            <Row className='pb-5'> 
+                <Col className='mx-5 pb-5'>
+                    <UserDataInputComponents 
+                        label="Email address"
+                        name="email"
+                        type="email"
+                        placeholder="Enter email"
+                        icon={faUser}
+                        showAsterisk={formik.errors.email && formik.touched.email}
+                        error={formik.errors.email}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.email}
+                    />
 
-                        <InputGroup>
-                            <InputGroup.Text>
-                                <FontAwesomeIcon icon={faUser} className='mx-3'/>
-                            </InputGroup.Text>
+                    <UserDataInputComponents 
+                        label="First Name"
+                        name="first_name"
+                        type="text"
+                        placeholder="Enter First Name"
+                        icon={faQuestion}
+                        showAsterisk={formik.errors.first_name && formik.touched.first_name}
+                        error={formik.errors.first_name}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.first_name}
+                    />
 
-                            <Form.Control type="email" placeholder="email@example.co.il" disabled/>
+                    <UserDataInputComponents 
+                        label="Last Name"
+                        name="last_name"
+                        type="text"
+                        placeholder="Enter Last Name"
+                        icon={faQuestion}
+                        showAsterisk={formik.errors.last_name && formik.touched.last_name}
+                        error={formik.errors.last_name}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.last_name}
+                    />
 
-                            <Button variant="primary" type="submit">
-                                <FontAwesomeIcon icon={faGear} className='mx-3'/>
-                            </Button>
-                        </InputGroup>
-                    </Form.Group>
+                    <UserDataInputComponents 
+                        label="Address"
+                        name="address"
+                        type="textarea"
+                        placeholder="Enter Address"
+                        icon={faHouse}
+                        showAsterisk={formik.errors.address && formik.touched.address}
+                        error={formik.errors.address}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.address}
+                    />
 
-                    <Form.Group className="mb-3">
-                        <Form.Label>Password</Form.Label>
+                    <UserDataInputComponents 
+                        label="Phone Number"
+                        name="phone_number"
+                        type="text"
+                        placeholder="Enter Phone Number"
+                        icon={faPhone}
+                        showAsterisk={formik.errors.phone_number && formik.touched.phone_number}
+                        error={formik.errors.phone_number}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.phone_number}
+                    />
 
-                        <InputGroup>
-                            <InputGroup.Text>
-                                <FontAwesomeIcon icon={faKey} className='mx-3'/>
-                            </InputGroup.Text>
-
-                            <Form.Control type="password" placeholder="********" disabled/>
-
-                            <Button variant="primary" type="submit">
-                                <FontAwesomeIcon icon={faGear} className='mx-3'/>
-                            </Button>
-                        </InputGroup>
-                    </Form.Group>
-
-                    <Form.Group className="mb-3">
-                        <Form.Label>First Name</Form.Label>
-
-                        <InputGroup>
-                            <InputGroup.Text>
-                                <FontAwesomeIcon icon={faQuestion} className='mx-3'/>
-                            </InputGroup.Text>
-
-                            <Form.Control type="text" placeholder="James" disabled/>
-
-                            <Button variant="primary" type="submit">
-                                <FontAwesomeIcon icon={faGear} className='mx-3'/>
-                            </Button>
-                        </InputGroup>
-                    </Form.Group>
-
-                    <Form.Group className="mb-3">
-                        <Form.Label>Last Name</Form.Label>
-                        <InputGroup>
-                            <InputGroup.Text>
-                                <FontAwesomeIcon icon={faQuestion} className='mx-3'/>
-                            </InputGroup.Text>
-
-                            <Form.Control type="text" placeholder="Smith" disbaled />
-
-                            <Button variant="primary" type="submit">
-                                <FontAwesomeIcon icon={faGear} className='mx-3'/>
-                            </Button>
-                        </InputGroup>
-                    </Form.Group>
-
-                    <Form.Group className="mb-3">
-                        <Form.Label>Address</Form.Label>
-                        <InputGroup>
-                            <InputGroup.Text>
-                                <FontAwesomeIcon icon={faHouse} className='mx-3'/>
-                            </InputGroup.Text>
-
-                            <Form.Control type="text" placeholder="Budapest, Hungary" disabled />
-
-                            <Button variant="primary" type="submit">
-                                <FontAwesomeIcon icon={faGear} className='mx-3'/>
-                            </Button>
-                        </InputGroup>
-                    </Form.Group>
-
-                    <Form.Group className="mb-3">
-                        <Form.Label>Phone Number</Form.Label>
-                        <InputGroup>
-                            <InputGroup.Text>
-                                <FontAwesomeIcon icon={faPhone} className='mx-3'/>
-                            </InputGroup.Text>
-
-                            <Form.Control type="text" placeholder="+36 xx xxx xxxx" disabled />
-
-                            <Button variant="primary" type="submit">
-                                <FontAwesomeIcon icon={faGear} className='mx-3'/>
-                            </Button>
-                        </InputGroup>
-                    </Form.Group>
-
-                    <Button variant="primary" type="submit">
-                        Sign In
-                    </Button>
-                </Form>
-            </Col>
-        </Row>
+                    <ToastContainer position='top-right' />
+                </Col>
+            </Row>
+        </Container>
     )
 }
 
 export default UserData
+

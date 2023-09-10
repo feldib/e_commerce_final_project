@@ -38,8 +38,8 @@ function App() {
   const [user, setUser] = React.useState({id: 0})
   const [loggedIn, setLoggedIn] = React.useState(false)
 
-  React.useEffect(()=>{
-      axios.get(`${server_url}/logged_in`)
+  const getUserData = () => {
+    axios.get(`${server_url}/logged_in`)
       .then(res =>{
         if(res.data.Status === "Success"){
           setUser(res.data.user)
@@ -48,6 +48,10 @@ function App() {
           setLoggedIn(false)
         }
       })
+  }
+
+  React.useEffect(()=>{
+    getUserData()
   }, [])
 
   const settleSuccessfulLogIn = (userData)=>{
@@ -115,7 +119,7 @@ function App() {
 
           <Route
             path='/receipt'
-            element={<ReceiptPage />}
+            element={<ReceiptPage user={user} />}
           />
 
           <Route
@@ -134,12 +138,12 @@ function App() {
           >
             <Route
               path='data'
-              element={<UserData />}
+              element={<UserData user={user} />}
             />
 
             <Route
               path='order_history'
-              element={<OrderHistory />}
+              element={<OrderHistory user={user} />}
             />
 
             <Route
