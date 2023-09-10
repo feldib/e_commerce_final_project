@@ -17,8 +17,8 @@ function ProfilePage(props) {
             <SubNavbar 
                 navbarName="User pages"
                 linkObjects={[
-                    {linkText:"User Data",  linkTo:"", icon: faInfoCircle},
-                    {linkText:"Order History",  linkTo:"", icon: faArrowRotateBack},
+                    {linkText:"User Data",  linkTo:"data", icon: faInfoCircle},
+                    {linkText:"Order History",  linkTo:"order_history", icon: faArrowRotateBack},
                     {linkText:"Wishlist",  linkTo:"wishlist", icon: faHeart},
                     {linkText:"Reviews",  linkTo:"", icon: faStar},
                     {linkText:"Shopping Cart",  linkTo:"/shopping_cart", icon: faShoppingCart},
