@@ -4,10 +4,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons'
 import { Col, Row, Container } from 'react-bootstrap'
 import BuyTable from '../../components/BuyTable'
+import { users_url } from '../../utils/api_constants'
+import ReccomendationTable from '../../components/ReccomendationTable'
 
-function HomePage(props) {
-    const [featuredBuyTableHidden, setFeaturedBuyTableHidden] = React.useState(false)
-    const featured = useAxios("/featured?reccomdendation=true")
+function HomePage(props) {   
     return (
         <Container className='pb-5'>
             <Row className='pt-5 pb-5 jumbotron'>
@@ -21,95 +21,20 @@ function HomePage(props) {
             </Row>
 
             <Row className="mb-3 d-flex justify-content-evenly">
-                    <Col sx={12} md={5} lg={3} className="mb-2 mx-3">
+                <ReccomendationTable 
+                    title="Featured"
+                    path="/featured?reccomdendation=true"
+                    loggedIn={props.loggedIn} 
+                />
 
-                        <Row>
-                            <Col>
-                                <h4 className='text-center'>Featured</h4>
-                            </Col>
-                            <Col>
-                                <FontAwesomeIcon 
-                                    icon={
-                                        !featuredBuyTableHidden ?
-                                            faCaretDown :
-                                            faCaretUp
-                                    } 
-                                    onClick={(e)=>{
-                                        setFeaturedBuyTableHidden(!featuredBuyTableHidden)
-                                    }}
-                                />
-                            </Col>                                
-                        </Row>
-
-                        {!featuredBuyTableHidden &&
-                            <BuyTable 
-                                reccomendation = {true}
-                                theadNeeded = {false}
-                                dataLines = {featured}
-                                loggedIn={props.loggedIn} 
-                            />
-                        }
-                    </Col>
-
-                    <Col sx={12} md={5} lg={3} className="mb-2 mx-3">
-
-                        <Row>
-                            <Col>
-                                <h4 className='text-center'>Featured</h4>
-                            </Col>
-                            <Col>
-                                <FontAwesomeIcon 
-                                    icon={
-                                        !featuredBuyTableHidden ?
-                                            faCaretDown :
-                                            faCaretUp
-                                    } 
-                                    onClick={(e)=>{
-                                        setFeaturedBuyTableHidden(!featuredBuyTableHidden)
-                                    }}
-                                />
-                            </Col>                                
-                        </Row>
-
-                        {!featuredBuyTableHidden &&
-                            <BuyTable 
-                                reccomendation = {true}
-                                theadNeeded = {false}
-                                dataLines = {featured}
-                                loggedIn={props.loggedIn} 
-                            />
-                        }
-                    </Col>
-
-                    <Col sx={12} md={5} lg={3} className="mb-2 mx-3">
-
-                        <Row>
-                            <Col>
-                                <h4 className='text-center'>Featured</h4>
-                            </Col>
-                            <Col>
-                                <FontAwesomeIcon 
-                                    icon={
-                                        !featuredBuyTableHidden ?
-                                            faCaretDown :
-                                            faCaretUp
-                                    } 
-                                    onClick={(e)=>{
-                                        setFeaturedBuyTableHidden(!featuredBuyTableHidden)
-                                    }}
-                                />
-                            </Col>                                
-                        </Row>
-
-                        {!featuredBuyTableHidden &&
-                            <BuyTable 
-                                reccomendation = {true}
-                                theadNeeded = {false}
-                                dataLines = {featured}
-                                loggedIn={props.loggedIn} 
-                            />
-                        }
-                    </Col>
+                {props.loggedIn &&
+                    <ReccomendationTable 
+                        title="Wishlisted"
+                        path={`/${users_url}/wishlisted?reccomdendation=true`}
+                        loggedIn={props.loggedIn} 
+                    />
+                }
+                
             </Row>
         </Container>
     )
