@@ -5,27 +5,37 @@ import { Card, Row, Carousel } from 'react-bootstrap'
 
 function ReviewsOfArtworks(props) {
     return (
-        <Carousel >
-            {props.reviews.map((review, index)=>{
-                return (
-                    <Carousel.Item key={index}>
-                            <Card className='mx-5 p-3'>
-                                <Card.Title className="mb-2">
-                                    {review.title}
-                                </Card.Title>
+        <>
+            {props.reviews.length ?
+                <Carousel >
+                    {props.reviews.map((review, index)=>{
+                        return (
+                            <Carousel.Item className='px-5' key={index}>
+                                <Card className='mx-5 p-3' border='secondary'>
+                                    <Card.Title className="mb-2">
+                                        {review.title}
+                                    </Card.Title>
 
-                                <Card.Subtitle className="mb-2 text-muted">
-                                    by {review.name}
-                                </Card.Subtitle>
+                                    <Card.Subtitle className="mb-2 text-muted">
+                                        by {review.name}
+                                    </Card.Subtitle>
 
-                                <Card.Text className="mb-2">
-                                    {review.review_text}
-                                </Card.Text>
-                            </Card>
-                    </Carousel.Item>
-                )
-            })}
-        </Carousel>
+                                    <Card.Text className="mb-2">
+                                        {review.review_text}
+                                    </Card.Text>
+                                </Card>
+                            </Carousel.Item>
+                        )
+                    })}
+                </Carousel>
+
+                :
+
+                <p className='text-center'>
+                    ---- No reviews ----
+                </p>
+            }
+        </>
     )
 }
 
