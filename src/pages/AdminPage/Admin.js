@@ -14,11 +14,11 @@ function AdminPage(props) {
             <SubNavbar 
                 navbarName="Admin pages"
                 linkObjects={[
-                    {linkText:"Artworks",  linkTo:"", icon: faPalette},
-                    {linkText:"Users",  linkTo:"", icon: faPerson},
-                    {linkText:"Orders",  linkTo:"", icon: faArrowRotateBack},
-                    {linkText:"Reviews",  linkTo:"", icon: faStar},
-                    {linkText:"Messages",  linkTo:"", icon: faMessage}
+                    {linkText:"Artworks",  linkTo:"artworks", icon: faPalette},
+                    {linkText:"Users",  linkTo:"users", icon: faPerson},
+                    {linkText:"Orders",  linkTo:"orders", icon: faArrowRotateBack},
+                    {linkText:"Reviews",  linkTo:"reviews", icon: faStar},
+                    {linkText:"Messages",  linkTo:"messages", icon: faMessage}
                 ]}
             />
 

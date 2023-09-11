@@ -1,4 +1,4 @@
-import {server_url, users_url} from './utils/api_constants'
+import { server_url, users_url, admin_url } from './utils/api_constants'
 import axios from 'axios'
 
 const logOut = async()=>{
@@ -101,6 +101,14 @@ const leaveReview = async (artwork_id, title, review_text) => {
     return axios.post(`${server_url}/${users_url}/leave_review`, {artwork_id, title, review_text})
 }
 
+const approveReview = async (review_id) => {
+    return axios.post(`${server_url}/${admin_url}/approve_review`, {review_id})
+}
+
+const disapproveReview = async (review_id) => {
+    return axios.post(`${server_url}/${admin_url}/disapprove_review`, {review_id})
+}
+
 export {
     logOut,
     sendForgotPasswordEmail,
@@ -119,5 +127,7 @@ export {
     updateUserData,
     order,
     getLoggedIn,
-    leaveReview
+    leaveReview,
+    approveReview,
+    disapproveReview
 }
