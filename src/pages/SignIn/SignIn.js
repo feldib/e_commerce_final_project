@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { logIn } from '../../fetching'
-import InputComponent from '../../components/InputComponent'
+import InputComponent from '../../components/input/InputComponent'
 import { Col, Container, Row, Button, InputGroup } from 'react-bootstrap'
 import { faUser, faKey } from '@fortawesome/free-solid-svg-icons'
 import { Formik, Form } from 'formik'

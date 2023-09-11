@@ -5,7 +5,7 @@ import { Col, Row, Button, InputGroup, FloatingLabel, Form as RBForm} from 'reac
 import { Formik, Field, Form, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import { ToastContainer, toast } from 'react-toastify'
-import InputComponent from './InputComponent'
+import InputComponent from './input/InputComponent'
 import { leaveReview } from '../fetching'
 
 function LeaveReview(props) {
@@ -38,8 +38,8 @@ function LeaveReview(props) {
     }
 
     return (
-        <Row>
-            <Col className='mx-5 mt-5'>
+        <Row className='mx-5 mt-5 mb-5'>
+            <Col >
                 <Formik
                     initialValues={initialValues}
                     onSubmit={onSubmit}

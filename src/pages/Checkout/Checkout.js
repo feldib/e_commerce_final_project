@@ -1,7 +1,6 @@
 import * as Yup from 'yup'
-import UserDataComponent from '../../components/UserDataComponent'
+import UserDataComponent from '../../components/input/UserDataComponent'
 import { useFormik } from 'formik'
-import { Link } from 'react-router-dom'
 import { Button, Col, Row, Form } from 'react-bootstrap'
 import { order } from '../../fetching'
 

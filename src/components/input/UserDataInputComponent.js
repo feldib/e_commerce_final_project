@@ -4,7 +4,7 @@ import { faAsterisk, faGear, faCheck } from '@fortawesome/free-solid-svg-icons'
 import { Form, InputGroup, Button } from 'react-bootstrap'
 import {ErrorMessage} from 'formik'
 import {toast} from 'react-toastify'
-import { updateUserData } from '../fetching'
+import { updateUserData } from '../../fetching'
 
 
 function UserDataInputComponents(props) {

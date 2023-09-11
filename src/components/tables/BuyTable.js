@@ -1,17 +1,19 @@
 import React from 'react'
 import { Row, Table } from 'react-bootstrap'
-import useLoading from '../hooks/useLoading'
-import ShoppingCartDataLines from './ShoppingCartDataLines'
+import useLoading from '../../hooks/useLoading'
+import BuyTableDataLines from '../datalines/BuyTableDataLines'
 
-function ShoppingCartTable(props) {
+function BuyTable(props) {
     function makeDataLines(dataLines){
         return (dataLines.map((line, index)=>{
             return (
-                <ShoppingCartDataLines 
+                <BuyTableDataLines 
                     reccomendation={props.reccomendation}
                     line={line}
                     index={index}
                     loggedIn={props.loggedIn}
+                    orderSummary={props.orderSummary}
+                    totalCost={props.totalCost}
                 />
             )
         })
@@ -47,7 +49,8 @@ function ShoppingCartTable(props) {
                         <th>Quantity</th>
                         <th className={`${props.reccomendation ? "d-none" : "d-none d-md-table-cell"}`}>Tags</th>
                         <th className={`${props.reccomendation ? "d-none" : "d-none d-md-table-cell"}`}>Categories</th>
-                        <th></th>
+                        <th>{props.orderSummary && "Total Cost" }</th>
+                        
                     </tr>
                 </thead>
                 }
@@ -60,4 +63,4 @@ function ShoppingCartTable(props) {
     )
 }
 
-export default ShoppingCartTable
+export default BuyTable

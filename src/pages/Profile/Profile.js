@@ -1,7 +1,7 @@
 import React from 'react'
 import { Container, Row } from 'react-bootstrap'
 import { Outlet } from 'react-router-dom'
-import SubNavbar from '../../components/SubNavbar'
+import SubNavbar from '../../components/navbars/SubNavbar'
 import { faStar, faHeart, faInfoCircle, faArrowRotateBack, faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 
 function ProfilePage(props) {

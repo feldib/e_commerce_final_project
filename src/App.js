@@ -25,8 +25,8 @@ import Profile from './pages/Profile/Profile'
 import Admin from './pages/AdminPage/Admin'
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Header from "./components/Header"
-import Footer from "./components/Footer"
+import Header from "./components/navbars/Header"
+import Footer from "./components/navbars/Footer"
 import React from 'react'
 import { getLoggedIn } from './fetching.js'
 import axios from 'axios'

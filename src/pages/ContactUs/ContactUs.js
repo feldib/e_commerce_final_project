@@ -5,7 +5,7 @@ import { Col, Row, Container, Button, InputGroup, FloatingLabel, Form as RBForm 
 import { Formik, Field, Form, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import { ToastContainer, toast } from 'react-toastify'
-import InputComponent from '../../components/InputComponent'
+import InputComponent from '../../components/input/InputComponent'
 import { sendMessageToAdministrator } from '../../fetching'
 
 function ContactUsPage() {

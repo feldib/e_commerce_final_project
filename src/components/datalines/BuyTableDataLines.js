@@ -1,8 +1,8 @@
 import React from 'react'
 import { ToastContainer } from 'react-toastify'
 import { Link } from 'react-router-dom'
-import FavouriteButton from './FavouriteButton'
-import ShoppingCartButton from './ShoppingCartButton'
+import FavouriteButton from '../../components/buttons/FavouriteButton'
+import ShoppingCartButton from '../../components/buttons/ShoppingCartButton'
 
 function BuyTableDataLines(props) {
     const [quantity, setQuantity] = React.useState(props.line.quantity)

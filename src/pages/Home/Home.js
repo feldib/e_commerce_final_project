@@ -3,9 +3,8 @@ import useAxios from '../../hooks/useAxios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons'
 import { Col, Row, Container } from 'react-bootstrap'
-import BuyTable from '../../components/BuyTable'
 import { users_url } from '../../utils/api_constants'
-import ReccomendationTable from '../../components/ReccomendationTable'
+import ReccomendationTable from '../../components/tables/ReccomendationTable'
 
 function HomePage(props) {   
     return (

@@ -1,7 +1,7 @@
 import React from 'react'
 import { changePassword } from '../../fetching'
 import { Container, Row, Col, Button } from 'react-bootstrap'
-import InputComponent from '../../components/InputComponent'
+import InputComponent from '../../components/input/InputComponent'
 import { faKey } from '@fortawesome/free-solid-svg-icons'
 import { useLocation } from 'react-router-dom'
 import { Formik, Form } from 'formik'
