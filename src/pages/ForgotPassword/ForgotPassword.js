@@ -7,7 +7,7 @@ import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 import { ToastContainer, toast } from 'react-toastify'
 
-function ForgotPasword() {
+function ForgotPassword() {
     const [displayMessage, setDisplayMessage] = React.useState(false)
 
     const initialValues = {
@@ -73,4 +73,4 @@ function ForgotPasword() {
         )
 }
 
-export default ForgotPasword
+export default ForgotPassword

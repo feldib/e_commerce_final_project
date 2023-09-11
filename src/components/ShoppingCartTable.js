@@ -1,20 +1,7 @@
 import React from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHeart, faX, faPlus, faMinus} from '@fortawesome/free-solid-svg-icons'
-import { Row, Table, Col } from 'react-bootstrap'
-import { useLoading } from '../fetching'
-import { ToastContainer, toast } from 'react-toastify'
-import { Link } from 'react-router-dom'
-import FavouriteButton from './FavouriteButton'
-import ShoppingCartButton from './ShoppingCartButton'
-import server_url from '../server'
+import { Row, Table } from 'react-bootstrap'
+import useLoading from '../hooks/useLoading'
 import ShoppingCartDataLines from './ShoppingCartDataLines'
-import { 
-    removeFromShoppingList, 
-    increaseShoppingListItemQuantity,
-    decreaseShoppingListItemQuantity,
-    useAxios
-} from '../fetching'
 
 function ShoppingCartTable(props) {
     function makeDataLines(dataLines){

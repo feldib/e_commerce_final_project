@@ -1,6 +1,6 @@
 import React from 'react'
 import { Col, Dropdown } from 'react-bootstrap'
-import { useLoading } from '../fetching'
+import useLoading from '../hooks/useLoading'
 
 function CategoriesDropdown(props) {
     function createCategoryButtons(categories){

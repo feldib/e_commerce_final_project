@@ -1,7 +1,7 @@
 import React from 'react'
-import { Col, Row, Container, Button, Table } from 'react-bootstrap'
-import BuyTable from '../../components/BuyTable'
-import { useAxios } from '../../fetching'
+import { Row, Container } from 'react-bootstrap'
+import BuyTable from '../../../components/BuyTable'
+import useAxios from '../../../hooks/useAxios'
 
 function WishList(props) {
     const wishListed = useAxios("/users/wishlisted")

@@ -5,7 +5,6 @@ import { Row, Table, Col } from 'react-bootstrap'
 import { ToastContainer } from 'react-toastify'
 import { Link } from 'react-router-dom'
 import FavouriteButton from './FavouriteButton'
-import server_url from '../server'
 import { increaseShoppingListItemQuantity, decreaseShoppingListItemQuantity, removeFromShoppingList } from '../fetching'
 
 function ShoppingCartDataLines(props) {

@@ -1,48 +1,5 @@
-import React from 'react'
-import server_url from './server'
+import {server_url, users_url} from './utils/api_constants'
 import axios from 'axios'
-
-const useAxios = (url)=>{
-    const [data, setData] = React.useState()
-    React.useEffect(()=>{
-        (async()=>{
-            await axios.get(`${server_url}${url}`)
-            .then(function (results) {
-                setData(results.data)
-            })
-            .catch(function (error) {
-                setData(false)
-                console.log(error)
-            })
-        })()
-    }, [])
-
-    return data
-}
-
-
-const useLoading = (data, makeJSX)=>{
-    const spinner = (
-        <div className="d-flex justify-content-center">
-            <div className="spinner-border" role="status" />
-        </div>
-    )
-
-    const [result, setResult] = React.useState(spinner)
-    React.useEffect(()=>{
-        if(data){
-            setResult(
-                makeJSX(data)
-            )
-        }else{
-            setResult(
-                spinner
-            )
-        }
-    },[data])
-    
-    return result
-}
 
 const logOut = async()=>{
     await axios.get(`${server_url}/log_out`)
@@ -59,7 +16,7 @@ const sendForgotPasswordEmail = (email)=>{
 }
 
 const registerNewUser = async(email, password, firstName, lastName)=>{
-    return await axios.post(`${server_url}/users/new_user`, {
+    return await axios.post(`${server_url}/${users_url}/new_user`, {
         last_name: lastName,
         first_name: firstName, 
         email, 
@@ -95,50 +52,52 @@ const getArtworkSearchResults = async(queries, setter)=>{
 }
 
 const sendMessageToAdministrator = (email, title, message)=>{
-    return axios.post(`${server_url}/users/message_to_administrator`, {email, title, message})
+    return axios.post(`${server_url}/${users_url}/message_to_administrator`, {email, title, message})
 }
 
 const addToShoppingList = (artwork_id) => {
-    return axios.post(`${server_url}/users/shopping_cart`, {artwork_id})
+    return axios.post(`${server_url}/${users_url}/shopping_cart`, {artwork_id})
 }
 
 const removeFromShoppingList = (artwork_id) => {
-    return axios.post(`${server_url}/users/remove_item_from_shopping_cart`, {artwork_id})
+    return axios.post(`${server_url}/${users_url}/remove_item_from_shopping_cart`, {artwork_id})
 }
 
 const increaseShoppingListItemQuantity = (artwork_id) => {
-    return axios.post(`${server_url}/users/increase_shopping_sart_item_quantity`, {artwork_id})
+    return axios.post(`${server_url}/${users_url}/increase_shopping_sart_item_quantity`, {artwork_id})
 }
 
 const decreaseShoppingListItemQuantity = (artwork_id) => {
-    return axios.post(`${server_url}/users/decrease_shopping_sart_item_quantity`, {artwork_id})
+    return axios.post(`${server_url}/${users_url}/decrease_shopping_sart_item_quantity`, {artwork_id})
 }
 
 const addToWishlisted = (artwork_id) => {
-    return axios.post(`${server_url}/users/wishlisted`, {artwork_id})
+    return axios.post(`${server_url}/${users_url}/wishlisted`, {artwork_id})
 }
 
 const removeFromWishlisted = (artwork_id) => {
-    return axios.post(`${server_url}/users/remove_from_wishlisted`, {artwork_id})
+    return axios.post(`${server_url}/${users_url}/remove_from_wishlisted`, {artwork_id})
 }
 
 const isWishlisted = async (artwork_id) => {
-    const result = await axios.post(`${server_url}/users/is_wishlisted`, {artwork_id})
+    const result = await axios.post(`${server_url}/${users_url}/is_wishlisted`, {artwork_id})
     const wishlisted = result.data
     return wishlisted
 }
 
 const updateUserData = async (field_name, value) => {
-    return axios.post(`${server_url}/users/update_data`, {field_name, value})
+    return axios.post(`${server_url}/${users_url}/update_data`, {field_name, value})
 }
 
 const order = async (invoice_data) => {
-    return axios.post(`${server_url}/users/make_order`, {invoice_data})
+    return axios.post(`${server_url}/${users_url}/make_order`, {invoice_data})
+}
+
+const getLoggedIn = async () => {
+    return axios.get(`${server_url}/logged_in`)
 }
 
 export {
-    useAxios,
-    useLoading,
     logOut,
     sendForgotPasswordEmail,
     registerNewUser,
@@ -154,5 +113,6 @@ export {
     removeFromWishlisted,
     isWishlisted,
     updateUserData,
-    order
+    order,
+    getLoggedIn
 }

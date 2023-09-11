@@ -1,5 +1,6 @@
 import React from 'react'
-import { useAxios, getArtworkSearchResults } from '../../fetching'
+import useAxios from '../../hooks/useAxios'
+import { getArtworkSearchResults } from '../../fetching'
 import { Col, Row, Container, Button, Dropdown, InputGroup, Form } from 'react-bootstrap'
 import SearchField from '../../components/SearchField'
 import Query from '../../components/Query'

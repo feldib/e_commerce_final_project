@@ -1,5 +1,5 @@
 import React from 'react'
-import { useAxios } from '../../fetching'
+import useAxios from '../../hooks/useAxios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons'
 import { Col, Row, Container } from 'react-bootstrap'

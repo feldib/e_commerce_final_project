@@ -1,7 +1,8 @@
 import React from 'react'
 import { Row, Container, Button } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
-import { useAxios, useLoading } from '../../fetching'
+import useLoading from '../../hooks/useLoading'
+import useAxios from '../../hooks/useAxios'
 import ArtworkDetails from '../../components/ArtworkDetails'
 
 function ArtworkPage(props) {

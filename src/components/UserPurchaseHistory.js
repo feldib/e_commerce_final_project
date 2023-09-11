@@ -1,6 +1,6 @@
 import React from "react"
-import OrderHistory from "../subpages/user/OrderHistory"
-import { Button, Col, Row, Table} from 'react-bootstrap'
+import OrderHistory from "../pages/Profile/Outlet/OrderHistory";
+import { Button, Col, Row } from 'react-bootstrap'
 
 function UserPurchaseHistory() {
     return (
