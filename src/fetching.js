@@ -97,6 +97,10 @@ const getLoggedIn = async () => {
     return axios.get(`${server_url}/logged_in`)
 }
 
+const leaveReview = async (artwork_id, title, review_text) => {
+    return axios.post(`${server_url}/${users_url}/leave_review`, {artwork_id, title, review_text})
+}
+
 export {
     logOut,
     sendForgotPasswordEmail,
@@ -114,5 +118,6 @@ export {
     isWishlisted,
     updateUserData,
     order,
-    getLoggedIn
+    getLoggedIn,
+    leaveReview
 }

@@ -7,9 +7,11 @@ function OrderSummaryComponent(props) {
     return (
         <Container className='pb-3'>
             <Row>
-                <Row className='mb-2 mt-5 mb-3'>
-                    <h1 className='text-center'>{props.title}</h1>
-                </Row>
+                {props.title &&
+                    <Row className='mb-2 mt-5 mb-3'>
+                        <h2 className='text-start'>{props.title}</h2>
+                    </Row>
+                }
 
                 <BuyTable 
                     theadNeeded = {true}

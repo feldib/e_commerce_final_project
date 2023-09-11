@@ -7,6 +7,10 @@ function ReceiptPage(props) {
     const currentOrderData = JSON.parse(localStorage.getItem("currentOrder"))
     return (
     <Container>
+        <Row className='mb-2 mt-5 mb-3'>
+            <h1 className='text-center'>Receipt</h1>
+        </Row>
+        
         <OrderSummaryComponent 
             items={currentOrderData.items}
             totalCost={currentOrderData.totalCost}

@@ -1,41 +1,31 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleLeft, faAngleRight} from '@fortawesome/free-solid-svg-icons'
-import { Col, Row, Carousel, Form, Button } from 'react-bootstrap'
+import { Card, Row, Carousel } from 'react-bootstrap'
 
 function ReviewsOfArtworks(props) {
     return (
-        props.reviews.map((review, index)=>{
-            return (
-                <Col key={index}>
-                    <Row>
-                        <h6>
-                            {review.title}
-                        </h6>
-                    </Row>
+        <Carousel >
+            {props.reviews.map((review, index)=>{
+                return (
+                    <Carousel.Item key={index}>
+                            <Card className='mx-5 p-3'>
+                                <Card.Title className="mb-2">
+                                    {review.title}
+                                </Card.Title>
 
-                    <Row>
-                        <p>
-                            {review.review_text}
-                        </p>
-                    </Row>
+                                <Card.Subtitle className="mb-2 text-muted">
+                                    by {review.name}
+                                </Card.Subtitle>
 
-                    <Row className='text-center'>
-                        <Col>
-                            <FontAwesomeIcon icon={faAngleLeft} style={{
-                                padding: "2px"
-                            }} />
-                        </Col>
-                        
-                        <Col>
-                            <FontAwesomeIcon icon={faAngleRight} style={{
-                                padding: "2px"
-                            }} />
-                        </Col>
-                    </Row>
-                </Col>
-            )
-        })
+                                <Card.Text className="mb-2">
+                                    {review.review_text}
+                                </Card.Text>
+                            </Card>
+                    </Carousel.Item>
+                )
+            })}
+        </Carousel>
     )
 }
 
