@@ -123,7 +123,7 @@ function App() {
 
           <Route
             path='/contact'
-            element={<ContactUs />}
+            element={<ContactUs loggedIn={loggedIn} email={user.email} />}
           />
 
           <Route

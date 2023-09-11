@@ -8,12 +8,12 @@ import { ToastContainer, toast } from 'react-toastify'
 import InputComponent from '../../components/input/InputComponent'
 import { sendMessageToAdministrator } from '../../fetching'
 
-function ContactUsPage() {
+function ContactUs(props) {
     
     const form = React.useRef()
 
     const initialValues = {
-        email: '',
+        email: props.loggedIn ? props.email : '',
         title: '',
         message: ''
     }
@@ -135,4 +135,4 @@ function ContactUsPage() {
     )
 }
 
-export default ContactUsPage;
+export default ContactUs
