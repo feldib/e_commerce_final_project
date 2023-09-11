@@ -4,8 +4,8 @@ import { faHeart, faX, faPlus, faMinus} from '@fortawesome/free-solid-svg-icons'
 import { Row, Table, Col } from 'react-bootstrap'
 import { ToastContainer } from 'react-toastify'
 import { Link } from 'react-router-dom'
-import FavouriteButton from './FavouriteButton'
-import { increaseShoppingListItemQuantity, decreaseShoppingListItemQuantity, removeFromShoppingList } from '../fetching'
+import FavouriteButton from '../buttons/FavouriteButton'
+import { increaseShoppingListItemQuantity, decreaseShoppingListItemQuantity, removeFromShoppingList } from '../../fetching'
 
 function ShoppingCartDataLines(props) {
     return ( 

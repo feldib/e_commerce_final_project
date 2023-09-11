@@ -2,9 +2,9 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass, faFilter } from '@fortawesome/free-solid-svg-icons'
 import { Col, Row, Button, Form, InputGroup, Dropdown} from 'react-bootstrap'
-import UsersSearchResults from '../../../components/UsersSearchResults'
+import UsersSearchResults from '../../../components/tables/UsersSearchResults'
 import UserPurchaseHistory from '../../../components/UserPurchaseHistory'
-import SearchField from '../../../components/SearchField'
+import SearchField from '../../../components/input/SearchField'
 
 function Users() {
     return (

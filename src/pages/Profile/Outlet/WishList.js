@@ -1,6 +1,6 @@
 import React from 'react'
 import { Row, Container } from 'react-bootstrap'
-import BuyTable from '../../../components/BuyTable'
+import BuyTable from '../../../components/tables/BuyTable'
 import useAxios from '../../../hooks/useAxios'
 
 function WishList(props) {

@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart as faHeartRegular } from '@fortawesome/free-regular-svg-icons'
 import { faHeart as faHeartSolid } from '@fortawesome/free-solid-svg-icons'
 import { Row } from 'react-bootstrap'
-import { addToWishlisted, removeFromWishlisted, isWishlisted } from '../fetching'
+import { addToWishlisted, removeFromWishlisted, isWishlisted } from '../../fetching'
 import { toast } from 'react-toastify'
 
 function FavouriteButton(props) {

@@ -1,6 +1,6 @@
 import React from 'react'
-import UserNavbarMenuItems from './UserNavbarMenuItems'
-import { logOut } from '../fetching'
+import UserNavbarMenuItems from '../navbars/UserNavbarMenuItems'
+import { logOut } from '../../fetching'
 import { Link } from 'react-router-dom'
 import { Navbar, Nav, Container } from 'react-bootstrap'
 

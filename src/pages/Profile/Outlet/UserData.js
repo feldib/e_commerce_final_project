@@ -1,6 +1,6 @@
 import React from 'react'
 import * as Yup from 'yup'
-import UserDataComponent from '../../../components/UserDataComponent'
+import UserDataComponent from '../../../components/input/UserDataComponent'
 import { useFormik } from 'formik'
 
 function UserData(props) {

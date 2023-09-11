@@ -1,7 +1,7 @@
 import React from 'react'
 import { Navbar, Nav, Container, Row } from 'react-bootstrap'
 import { Outlet } from 'react-router-dom';
-import SubNavbar from '../../components/SubNavbar';
+import SubNavbar from '../../components/navbars/SubNavbar'
 import { faMessage, faStar, faPerson, faPalette, faArrowRotateBack } from '@fortawesome/free-solid-svg-icons'
 
 function AdminPage(props) {

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Col, Row, Container, Button, Table } from 'react-bootstrap'
-import BuyTable from './BuyTable'
+import BuyTable from './tables/BuyTable'
 import { Link } from 'react-router-dom'
 
 function OrderSummaryComponent(props) {

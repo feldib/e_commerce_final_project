@@ -1,10 +1,10 @@
 import React from 'react'
-import useAxios from '../hooks/useAxios'
+import useAxios from '../../hooks/useAxios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons'
 import { Col, Row, Container } from 'react-bootstrap'
 import BuyTable from './BuyTable'
-import { users_url } from '../utils/api_constants'
+import { users_url } from '../../utils/api_constants'
 
 function ReccomendationTable(props) {
     const [tableHidden, setTableHidden] = React.useState(false)
