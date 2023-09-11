@@ -8,6 +8,7 @@ import FavouriteButton from './FavouriteButton'
 import ShoppingCartButton from './ShoppingCartButton'
 import ReviewsOfArtworks from './ReviewsOfArtwork'
 import LeaveReview from './LeaveReview'
+import ArtworkPicturesCarousel from './ArtworkPicturesCarousel'
 
 function ArtworkDetails(props) {
     const reviewsData = useAxios(`/reviews?id=${props.artwork_id}`)
@@ -128,63 +129,9 @@ function ArtworkDetails(props) {
                 </Col>
             </Row>
 
-            <Row className='d-none d-lg-flex gx-5 gy-3 justify-content-center'>
-                <Col lg={3}>
-                    <img 
-                                src="https://d7hftxdivxxvm.cloudfront.net/?height=600&quality=80&resize_to=fit&src=https%3A%2F%2Fd32dm0rphc51dk.cloudfront.net%2Fpj1Kk4Od1CBV8tWBLk3zeA%2Fnormalized.jpg&width=800" 
-                                height="200"
-                                weight="200"
-                                style={{objectFit: "contain"}}
-                    />
-                </Col>
-
-                <Col lg={3}>
-                    <img 
-                                src="https://d7hftxdivxxvm.cloudfront.net/?height=600&quality=80&resize_to=fit&src=https%3A%2F%2Fd32dm0rphc51dk.cloudfront.net%2Fpj1Kk4Od1CBV8tWBLk3zeA%2Fnormalized.jpg&width=800" 
-                                height="200"
-                                weight="200"
-                                style={{objectFit: "contain"}}
-                    />
-                </Col>
-
-                <Col lg={3}>
-                    <img 
-                                src="https://d7hftxdivxxvm.cloudfront.net/?height=600&quality=80&resize_to=fit&src=https%3A%2F%2Fd32dm0rphc51dk.cloudfront.net%2Fpj1Kk4Od1CBV8tWBLk3zeA%2Fnormalized.jpg&width=800" 
-                                height="200"
-                                weight="200"
-                                style={{objectFit: "contain"}}
-                    />
-                </Col>
-            </Row>
-
-            <Row className='d-lg-none'>
-                <Carousel>
-                    <Carousel.Item>
-                        <img 
-                            src="https://d7hftxdivxxvm.cloudfront.net/?height=600&quality=80&resize_to=fit&src=https%3A%2F%2Fd32dm0rphc51dk.cloudfront.net%2Fpj1Kk4Od1CBV8tWBLk3zeA%2Fnormalized.jpg&width=800" 
-                            width="100%"
-                            style={{objectFit: "contain"}}
-                        />
-                    </Carousel.Item>
-
-
-                    <Carousel.Item>
-                        <img 
-                            src="https://d7hftxdivxxvm.cloudfront.net/?height=600&quality=80&resize_to=fit&src=https%3A%2F%2Fd32dm0rphc51dk.cloudfront.net%2Fpj1Kk4Od1CBV8tWBLk3zeA%2Fnormalized.jpg&width=800" 
-                            width="100%"
-                            style={{objectFit: "contain"}}
-                        />
-                    </Carousel.Item>
-
-                    <Carousel.Item>
-                        <img 
-                            src="https://d7hftxdivxxvm.cloudfront.net/?height=600&quality=80&resize_to=fit&src=https%3A%2F%2Fd32dm0rphc51dk.cloudfront.net%2Fpj1Kk4Od1CBV8tWBLk3zeA%2Fnormalized.jpg&width=800" 
-                            width="100%"
-                            style={{objectFit: "contain"}}
-                        />
-                    </Carousel.Item>
-                </Carousel>
-            </Row>
+            <ArtworkPicturesCarousel 
+                other_pictures = {props.artwork.other_pictures}
+            />
 
             <Row className='mt-5'>
                     <Row className='text-center'>
