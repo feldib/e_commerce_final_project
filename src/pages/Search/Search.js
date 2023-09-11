@@ -30,7 +30,9 @@ function Search(props) {
             artist_name: "", 
             category_id: "", 
             order: "asc", 
-            n: 10
+            n: 10,
+            min: "",
+            max: ""
         },
 
         onSubmit: (values) => search(values),
@@ -78,7 +80,16 @@ function Search(props) {
                                 name="min"
                                 value={formik.values.min}
                                 onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
+                                onBlur={
+                                    (e)=>{
+                                        const max = formik.values.max
+                                        if((max && max > formik.values.min) || !max){
+                                            formik.handleBlur(e)
+                                        }else{
+                                            formik.setFieldValue("max", "")
+                                        }
+                                    }
+                                }
                             />
 
                             <Form.Control
@@ -87,7 +98,16 @@ function Search(props) {
                                 name="max"
                                 value={formik.values.max}
                                 onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
+                                onBlur={
+                                    (e)=>{
+                                        const min = formik.values.min
+                                        if((min && min < formik.values.max) || !min){
+                                            formik.handleBlur(e)
+                                        }else{
+                                            formik.setFieldValue("max", "")
+                                        }
+                                    }
+                                }
                             />
                         </InputGroup>
                 </Row>
@@ -173,7 +193,8 @@ function Search(props) {
 
                 <Row>
                 {(
-                    formik.values.min && formik.values.max
+                    (formik.values.min && formik.values.max) &&
+                    formik.values.min <= formik.values.max
                 ) ?
                         <Query 
                             text = {`Between ${formik.values.min} and ${formik.values.max}`}
