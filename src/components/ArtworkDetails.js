@@ -7,6 +7,7 @@ import { ToastContainer, toast } from 'react-toastify'
 import FavouriteButton from './FavouriteButton'
 import ShoppingCartButton from './ShoppingCartButton'
 import ReviewsOfArtworks from './ReviewsOfArtwork'
+import LeaveReview from './LeaveReview'
 
 function ArtworkDetails(props) {
     const reviewsData = useAxios(`/reviews?id=${props.artwork_id}`)
@@ -210,23 +211,10 @@ function ArtworkDetails(props) {
                 </Carousel>
             </Row>
 
-            <Row>
-                <Col className='mx-5 mt-5'>
-                    <Form>
-                        <Form.Group className="mb-3">
-                            <Form.Label>
-                                <h4>Add a review</h4>
-                            </Form.Label>
-                            <Form.Control type="textarea" style={{height: "200px"}}/>
-                        </Form.Group>
-
-                        <Button variant="primary" type="submit">
-                            Submit
-                        </Button>
-                    </Form>
-                </Col>
-                
-            </Row>
+            <LeaveReview 
+                loggedIn={props.loggedIn}
+                artwork_id={props.artwork_id}
+            />
     </>
 )
 }
