@@ -1,36 +1,35 @@
-import HomePage from './pages/user/HomePage.js'
-import Search from './pages/user/Search.js'
-import SignInPage from './pages/user/SignInPage.js'
-import RegistrationPage from "./pages/user/RegistrationPage.js"
-import ShoppingCartPage from './pages/user/ShoppingCartPage.js'
-import CheckoutPage from "./pages/user/CheckoutPage.js"
-import ArtworkPage from './pages/user/ArtworkPage.js'
-import ReceiptPage from './pages/user/ReceiptPage.js'
-import ContactUsPage from './pages/user/ContactUsPage.js'
-import AboutUsPage from './pages/user/AboutUsPage.js'
+import Home from './pages/Home/Home'
+import Search from './pages/Search/Search'
+import SignIn from './pages/SignIn/SignIn'
+import Registration from "./pages/Registration/Registration"
+import ShoppingCart from './pages/ShoppingCart/ShoppingCart'
+import Checkout from "./pages/Checkout/Checkout"
+import Artwork from './pages/Artwork/Artwork'
+import Receipt from './pages/Receipt/Receipt'
+import ContactUs from './pages/ContactUs/ContactUs'
+import AboutUs from './pages/AboutUs/AboutUs'
 
-import UserData from './subpages/user/UserData.js'
-import OrderHistory from './subpages/user/OrderHistory.js'
-import WishList from './subpages/user/WishList.js'
+import UserData from './pages/Profile/Outlet/UserData'
+import OrderHistory from './pages/Profile/Outlet/OrderHistory.js'
+import WishList from './pages/Profile/Outlet/WishList'
 
-import Orders from './subpages/admin/Orders'
-import Reviews from './subpages/admin/Reviews'
-import Messages from './subpages/admin/Messages'
-import Users from './subpages/admin/Users'
-import Artworks from './subpages/admin/Artworks'
-import ForgotPasword from './pages/user/ForgotPasword.js'
-import ResetPassword from './pages/user/ResetPassword.js'
+import Orders from './pages/AdminPage/Outlet/Orders'
+import Reviews from './pages/AdminPage/Outlet/Reviews'
+import Messages from './pages/AdminPage/Outlet/Messages'
+import Users from './pages/AdminPage/Outlet/Users'
+import Artworks from './pages/AdminPage/Outlet/Artworks'
+import ForgotPassword from './pages/ForgotPassword/ForgotPassword'
+import ResetPassword from './pages/ResetPassword/ResetPassword'
 
-import ProfilePage from './pages/user/ProfilePage.js'
-import AdminPage from './pages/admin/AdminPage.js'
+import Profile from './pages/Profile/Profile'
+import Admin from './pages/AdminPage/Admin'
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from "./components/Header"
 import Footer from "./components/Footer"
 import React from 'react'
-import server_url from './server.js'
+import { getLoggedIn } from './fetching.js'
 import axios from 'axios'
-
 
 function App() {
   axios.defaults.withCredentials = true
@@ -39,7 +38,7 @@ function App() {
   const [loggedIn, setLoggedIn] = React.useState(false)
 
   const getUserData = () => {
-    axios.get(`${server_url}/logged_in`)
+    getLoggedIn()
       .then(res =>{
         if(res.data.Status === "Success"){
           setUser(res.data.user)
@@ -76,7 +75,7 @@ function App() {
         <Routes>
           <Route
             path='/'
-            element={<HomePage loggedIn={loggedIn} user={user} />}
+            element={<Home loggedIn={loggedIn} user={user} />}
           />
 
           <Route
@@ -87,7 +86,7 @@ function App() {
           <Route
             path='/login'
             element={
-              <SignInPage 
+              <SignIn 
                 settleSuccessfulLogIn = {settleSuccessfulLogIn}
               />
             }
@@ -96,7 +95,7 @@ function App() {
           <Route
             path='/register'
             element={
-              <RegistrationPage 
+              <Registration 
               settleSuccessfulRegistration = {settleSuccessfulRegistration}
               />
             }
@@ -104,37 +103,37 @@ function App() {
 
           <Route
             path='/shopping_cart'
-            element={<ShoppingCartPage loggedIn={loggedIn} />}
+            element={<ShoppingCart loggedIn={loggedIn} />}
           />
 
           <Route
             path='/checkout'
-            element={<CheckoutPage user={user} />}
+            element={<Checkout user={user} />}
           />
 
           <Route
             path='/artwork_page/:artwork_id'
-            element={<ArtworkPage loggedIn={loggedIn} />}
+            element={<Artwork loggedIn={loggedIn} />}
           />
 
           <Route
             path='/receipt'
-            element={<ReceiptPage user={user}/>}
+            element={<Receipt user={user}/>}
           />
 
           <Route
             path='/contact'
-            element={<ContactUsPage />}
+            element={<ContactUs />}
           />
 
           <Route
             path='/about'
-            element={<AboutUsPage />}
+            element={<AboutUs />}
           />
 
           <Route
             path='/user'
-            element={<ProfilePage user={user} />}
+            element={<Profile user={user} />}
           >
             <Route
               path='data'
@@ -154,7 +153,7 @@ function App() {
 
           <Route
             path='/admin'
-            element={<AdminPage />}
+            element={<Admin />}
           >
             <Route
               path='orders'
@@ -184,7 +183,7 @@ function App() {
 
           <Route
             path='forgot_password'
-            element={<ForgotPasword />}
+            element={<ForgotPassword />}
           />
 
           <Route

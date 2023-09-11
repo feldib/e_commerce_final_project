@@ -1,7 +1,8 @@
 import React from 'react'
-import { Col, Row, Table} from 'react-bootstrap'
-import { useAxios, useLoading } from '../../fetching'
-import OrderSummaryComponent from '../../components/OrderSummaryComponent'
+import { Col } from 'react-bootstrap'
+import useAxios from '../../../hooks/useAxios'
+import useLoading from '../../../hooks/useLoading'
+import OrderSummaryComponent from '../../../components/OrderSummaryComponent'
 
 function OrderHistory() {
     function representOrderDataCollection(orderDataCollection){

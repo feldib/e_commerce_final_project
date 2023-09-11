@@ -6,7 +6,6 @@ import { Formik, Field, Form, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import { ToastContainer, toast } from 'react-toastify'
 import InputComponent from '../../components/InputComponent'
-import server_url from '../../server'
 import { sendMessageToAdministrator } from '../../fetching'
 
 function ContactUsPage() {

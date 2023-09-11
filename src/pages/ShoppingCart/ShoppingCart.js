@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faX } from '@fortawesome/free-solid-svg-icons'
 import { Col, Row, Container, Button, Table } from 'react-bootstrap'
 import ShoppingCartTable from '../../components/ShoppingCartTable'
-import { useAxios } from '../../fetching'
+import useAxios from '../../hooks/useAxios'
 import { Link } from 'react-router-dom'
 
 function ShoppingCartPage(props) {

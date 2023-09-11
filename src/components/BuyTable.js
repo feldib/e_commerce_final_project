@@ -1,13 +1,6 @@
 import React from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHeart, faBasketShopping} from '@fortawesome/free-solid-svg-icons'
 import { Row, Table } from 'react-bootstrap'
-import { useLoading } from '../fetching'
-import { addToShoppingList } from '../fetching'
-import { ToastContainer, toast } from 'react-toastify'
-import { Link } from 'react-router-dom'
-import FavouriteButton from './FavouriteButton'
-import ShoppingCartButton from './ShoppingCartButton'
+import useLoading from '../hooks/useLoading'
 import BuyTableDataLines from './BuyTableDataLines'
 
 function BuyTable(props) {
