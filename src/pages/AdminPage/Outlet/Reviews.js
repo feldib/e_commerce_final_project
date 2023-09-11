@@ -2,8 +2,18 @@ import React from 'react'
 import { Col, Row} from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faX, faCheck } from '@fortawesome/free-solid-svg-icons'
+import useLoading from '../../../hooks/useLoading'
+import useAxios from '../../../hooks/useAxios'
+import { admin_url } from '../../../utils/api_constants'
+import AdminReview from '../../../components/AdminReview'
 
 function Reviews() {
+    const reviews = useAxios(`/${admin_url}/get_unapproved_reviews`)
+    const representReviews = useLoading(reviews, ((reviews)=>{
+        return reviews.map((review, index)=>{
+            return <AdminReview review={review} index={index+1} />
+        })
+    }))
     return (
         <Col>
             <Row className='text-center'>
@@ -11,135 +21,7 @@ function Reviews() {
             </Row>
 
             <Row>
-                <Row className='mb-5'>
-                    <Col>
-                        <Row>
-                            <h4>Review 3</h4>
-                        </Row>
-
-                        <Row>
-                            <p>Product: [title]</p>
-                        </Row>
-                        
-                        <Row>
-                            <p>Artist: [artist]</p>
-                        </Row>
-                        
-                        <Row>
-                            <p>User: [user's name]</p>
-                        </Row>
-
-                        <Row>
-                            <p>Lorem ipsum React Bootstrap textarea is an input dedicated for a large volume of text. It may be used in a variety of components like forms, comment sections and forums. Textareas don’t have to be boring. They can be enhanced with colors, shadows or rounded corners. React-bootstrap has some attributes like height width. Textarea is by default autosize; But you can set minimum height and width of textarea in react usin</p>
-                        </Row>
-
-                        <Row>
-                            <Col>
-                                <FontAwesomeIcon 
-                                    icon={faCheck} 
-                                    style={{color: "blue", cursor: "pointer"}} 
-                                    onClick={()=>{}}
-                                />
-                            </Col>
-
-                            <Col>
-                                <FontAwesomeIcon 
-                                    icon={faX} 
-                                    style={{color: "red", cursor: "pointer"}} 
-                                    onClick={()=>{}}
-                                />
-                            </Col>
-                        </Row>
-
-                    </Col>
-                </Row>
-
-                <Row className='mb-5'>
-                    <Col>
-                        <Row>
-                            <h4>Review 2</h4>
-                        </Row>
-
-                        <Row>
-                            <p>Product: [title]</p>
-                        </Row>
-                        
-                        <Row>
-                            <p>Artist: [artist]</p>
-                        </Row>
-                        
-                        <Row>
-                            <p>User: [user's name]</p>
-                        </Row>
-
-                        <Row>
-                            <p>Lorem ipsum React Bootstrap textarea is an input dedicated for a large volume of text. It may be used in a variety of components like forms, comment sections and forums. Textareas don’t have to be boring. They can be enhanced with colors, shadows or rounded corners. React-bootstrap has some attributes like height width. Textarea is by default autosize; But you can set minimum height and width of textarea in react usin</p>
-                        </Row>
-
-                        <Row>
-                            <Col>
-                                <FontAwesomeIcon 
-                                    icon={faCheck} 
-                                    style={{color: "blue", cursor: "pointer"}} 
-                                    onClick={()=>{}}
-                                />
-                            </Col>
-
-                            <Col>
-                                <FontAwesomeIcon 
-                                    icon={faX} 
-                                    style={{color: "red", cursor: "pointer"}} 
-                                    onClick={()=>{}}
-                                />
-                            </Col>
-                        </Row>
-
-                    </Col>
-                </Row>
-
-                <Row>
-                    <Col>
-                        <Row>
-                            <h4>Review 1</h4>
-                        </Row>
-
-                        <Row>
-                            <p>Product: [title]</p>
-                        </Row>
-                        
-                        <Row>
-                            <p>Artist: [artist]</p>
-                        </Row>
-                        
-                        <Row>
-                            <p>User: [user's name]</p>
-                        </Row>
-
-                        <Row>
-                            <p>Lorem ipsum React Bootstrap textarea is an input dedicated for a large volume of text. It may be used in a variety of components like forms, comment sections and forums. Textareas don’t have to be boring. They can be enhanced with colors, shadows or rounded corners. React-bootstrap has some attributes like height width. Textarea is by default autosize; But you can set minimum height and width of textarea in react usin</p>
-                        </Row>
-
-                        <Row>
-                            <Col>
-                                <FontAwesomeIcon 
-                                    icon={faCheck} 
-                                    style={{color: "blue", cursor: "pointer"}} 
-                                    onClick={()=>{}}
-                                />
-                            </Col>
-
-                            <Col>
-                                <FontAwesomeIcon 
-                                    icon={faX} 
-                                    style={{color: "red", cursor: "pointer"}} 
-                                    onClick={()=>{}}
-                                />
-                            </Col>
-                        </Row>
-
-                    </Col>
-                </Row>
-
+                {representReviews}
             </Row>
         </Col>
     )
