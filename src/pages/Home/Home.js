@@ -7,7 +7,7 @@ import BuyTable from '../../components/BuyTable'
 
 function HomePage(props) {
     const [featuredBuyTableHidden, setFeaturedBuyTableHidden] = React.useState(false)
-    const featured = useAxios("/users/recommendation/featured")
+    const featured = useAxios("/featured?reccomdendation=true")
     return (
         <Container className='pb-5'>
             <Row className='pt-5 pb-5 jumbotron'>
