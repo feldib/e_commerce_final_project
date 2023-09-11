@@ -9,6 +9,9 @@ import InputComponent from './input/InputComponent'
 import { leaveReview } from '../fetching'
 
 function LeaveReview(props) {
+
+    const form = React.useRef()
+
     const initialValues = {
         title: '',
         review_text: ''
@@ -30,6 +33,7 @@ function LeaveReview(props) {
             toast.info("The review has to be approved by the administrator", {
                 className: "toast-info"
             })
+            form.current.reset()
         }catch(error){
             toast.error("Error: couldn't save review", {
                 className: "toast-error"
@@ -46,7 +50,7 @@ function LeaveReview(props) {
                     validationSchema={reviewSchema}
                 >     
                     {({errors, touched})=>(
-                        <Form>
+                        <Form ref={form}>
                             <RBForm.Group className="mb-3">
                                 <RBForm.Label>
                                     <h4>Add a review</h4>

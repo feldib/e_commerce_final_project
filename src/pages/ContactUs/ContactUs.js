@@ -9,6 +9,9 @@ import InputComponent from '../../components/input/InputComponent'
 import { sendMessageToAdministrator } from '../../fetching'
 
 function ContactUsPage() {
+    
+    const form = React.useRef()
+
     const initialValues = {
         email: '',
         title: '',
@@ -31,6 +34,7 @@ function ContactUsPage() {
             toast.success("Message sent", {
                 className: "toast-success"
             })
+            form.current.reset()
         }catch(error){
             toast.error("Error: couldn't send message", {
                 className: "toast-error"
@@ -68,7 +72,7 @@ function ContactUsPage() {
                         validationSchema={contactUsSchema}
                     >     
                         {({errors, touched})=>(
-                            <Form>
+                            <Form ref={form}>
                                 <InputComponent 
                                     label="Email address"
                                     name="email"
