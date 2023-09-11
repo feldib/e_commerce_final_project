@@ -1,5 +1,5 @@
 import React from 'react'
-import { Col, Row, Carousel } from 'react-bootstrap'
+import { Col, Row, Carousel, Card } from 'react-bootstrap'
 
 function ArtworkPicturesCarousel(props) {
     return (<>
@@ -25,11 +25,13 @@ function ArtworkPicturesCarousel(props) {
                         {props.other_pictures.map((pic)=>{
                             return (
                                 <Carousel.Item>
-                                    <img 
-                                        src={`${pic.picture_path}`} 
-                                        width="100%"
-                                        style={{objectFit: "contain"}}
-                                    />
+                                    <Card>
+                                        <Card.Img 
+                                            src={`${pic.picture_path}`} 
+                                            width="100%"
+                                            style={{objectFit: "contain"}}
+                                        />
+                                    </Card>
                                 </Carousel.Item>
                             )
                         })}
