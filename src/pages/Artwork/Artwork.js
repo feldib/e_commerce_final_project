@@ -22,12 +22,7 @@ function ArtworkPage(props) {
 
     return (
         <Container className='pb-5 mb-5'>
-            <Row className='mb-2 mt-5 mb-3'>
-                <h1 className='text-center'>Artwork details</h1>
-            </Row>
-
             {artwork}
-
         </Container>
     )
 }

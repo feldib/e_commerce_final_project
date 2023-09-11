@@ -80,7 +80,7 @@ function LeaveReview(props) {
                                             <ErrorMessage 
                                                 component="div"
                                                 className='input-error-message'
-                                                name="message"
+                                                name="review_text"
                                             />
                                         </RBForm.Group>
                                         <Button variant="primary" type="submit" onClick={

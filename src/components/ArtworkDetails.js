@@ -1,5 +1,5 @@
 import React from 'react'
-import { Col, Row, Carousel, Form, Button } from 'react-bootstrap'
+import { Col, Row, Carousel, Card } from 'react-bootstrap'
 import useAxios from '../hooks/useAxios'
 import useLoading from '../hooks/useLoading'
 import { addToShoppingList } from '../fetching'
@@ -25,57 +25,51 @@ function ArtworkDetails(props) {
 
     return (
         <>
-            <Row>
-                <Col sm={12} lg={4}>
-                    <Row>
-                        <Col>
-                            <Row>
+            <Row className='mb-5 mt-5'>
+                <Col sm={12} lg={4} className='mb-3'>
+                    <Card className='mx-auto' style={{ width: '18rem' }} border='secondary'>
+                        <Card.Body className='p-3'>
+                            <Card.Title>
                                 <h3>
                                     {props.artwork.title}
                                 </h3>
-                            </Row>
-                            
-                            <Row>
+                            </Card.Title>
+
+                            <Card.Subtitle>
                                 <h6>
-                                {`by ${props.artwork.artist_name}`}
+                                    {`by ${props.artwork.artist_name}`}
                                 </h6>
-                            </Row>
-                        </Col>
-                    </Row>
+                            </Card.Subtitle>
+                        </Card.Body>
 
-                    <Row>
-                        <Col >
-                            <img 
-                                src={props.artwork.thumbnail} 
-                                height="200"
-                                weight="200"
-                                style={{objectFit: "contain"}}
-                            />
-                        </Col>
-                    </Row>
-                    
+                        <Card.Img 
+                            src={props.artwork.thumbnail} 
+                            variant='bottom'
+                        />
+                    </Card>                    
                 </Col>
-
 
                 <Col>
                     <Row>
                         <Col>
                             <Row>
-                                <h5>
-                                    Category:
-                                </h5>
+                                <h3>Description</h3>
                             </Row>
 
                             <Row>
-                                <p>{props.artwork.cname}</p>
+                                <p>{props.artwork.descript}</p>
+                            </Row>
+                        </Col>
+                    </Row>
+
+                    <Row className='mt-5'>
+                        <Col>
+                            <Row>
+                                <p><strong>{props.artwork.cname}</strong></p>
                             </Row>
                         </Col>
 
                         <Col>
-                            <Row>
-                                <h5>Tags:</h5>
-                            </Row>
-
                             <Row>
                                 <p>{props.artwork.tags.map((tag)=>{
                                     return tag.tname
@@ -86,70 +80,51 @@ function ArtworkDetails(props) {
                     </Row>
 
                     <Row>
-                        <h3>Description</h3>
-                    </Row>
+                        <Col>
+                            <Row>
+                                <p>{"Available quantity: "}
+                                    {props.artwork ?
+                                        quantity :
+                                        <div className="d-flex justify-content-center">
+                                            <div className="spinner-border" role="status" />
+                                        </div>
+                                    }
+                                </p>
+                            </Row>
 
-                    <Row>
-                        <p>{props.artwork.descript}</p>
-                    </Row>
-                </Col>
-            </Row>
+                            <Row>
+                                <p>{"Price: €"}
+                                    {props.artwork ?
+                                        props.artwork.price :
+                                        <div className="d-flex justify-content-center">
+                                            <div className="spinner-border" role="status" />
+                                        </div>
+                                    }
+                                </p>
+                            </Row>
+                        </Col>
 
-            <Row className='mt-5'>
-                <Col lg={6} sm={12}>
-                    <Row className='text-center'>
-                        <h4>REVIEWS</h4>
+                        <Col>
+                            <span onClick={
+                                ()=>{
+                                    if(props.loggedIn && quantity>0){
+                                        setQuantity(quantity-1)
+                                    }
+                                }
+                            }>
+                                <ShoppingCartButton
+                                    artwork_id={props.artwork_id}
+                                    loggedIn={props.loggedIn}
+                                />
+                            </span>
+                            
+                            <FavouriteButton
+                                artwork_id={props.artwork_id}
+                                loggedIn={props.loggedIn}
+                            />
+                            <ToastContainer position='top-right'/>
+                        </Col>
                     </Row>
-
-                    <Row>
-                        {reviews}
-                        
-                    </Row>
-                </Col>
-
-                <Col>
-                    <Row>
-                        <p>{"Available quantity: "}
-                            {props.artwork ?
-                                quantity :
-                                <div className="d-flex justify-content-center">
-                                    <div className="spinner-border" role="status" />
-                                </div>
-                            }
-                        </p>
-                    </Row>
-
-                    <Row>
-                        <p>{"Price: €"}
-                            {props.artwork ?
-                                props.artwork.price :
-                                <div className="d-flex justify-content-center">
-                                    <div className="spinner-border" role="status" />
-                                </div>
-                            }
-                        </p>
-                    </Row>
-                </Col>
-
-                <Col>
-                    <span onClick={
-                        ()=>{
-                            if(props.loggedIn && quantity>0){
-                                setQuantity(quantity-1)
-                            }
-                        }
-                    }>
-                        <ShoppingCartButton
-                            artwork_id={props.artwork_id}
-                            loggedIn={props.loggedIn}
-                        />
-                    </span>
-                    
-                    <FavouriteButton
-                        artwork_id={props.artwork_id}
-                        loggedIn={props.loggedIn}
-                    />
-                    <ToastContainer position='top-right'/>
                 </Col>
             </Row>
 
@@ -186,29 +161,39 @@ function ArtworkDetails(props) {
                 <Carousel>
                     <Carousel.Item>
                         <img 
-                                    src="https://d7hftxdivxxvm.cloudfront.net/?height=600&quality=80&resize_to=fit&src=https%3A%2F%2Fd32dm0rphc51dk.cloudfront.net%2Fpj1Kk4Od1CBV8tWBLk3zeA%2Fnormalized.jpg&width=800" 
-                                    width="100%"
-                                    style={{objectFit: "contain"}}
+                            src="https://d7hftxdivxxvm.cloudfront.net/?height=600&quality=80&resize_to=fit&src=https%3A%2F%2Fd32dm0rphc51dk.cloudfront.net%2Fpj1Kk4Od1CBV8tWBLk3zeA%2Fnormalized.jpg&width=800" 
+                            width="100%"
+                            style={{objectFit: "contain"}}
                         />
                     </Carousel.Item>
 
 
                     <Carousel.Item>
                         <img 
-                                    src="https://d7hftxdivxxvm.cloudfront.net/?height=600&quality=80&resize_to=fit&src=https%3A%2F%2Fd32dm0rphc51dk.cloudfront.net%2Fpj1Kk4Od1CBV8tWBLk3zeA%2Fnormalized.jpg&width=800" 
-                                    width="100%"
-                                    style={{objectFit: "contain"}}
+                            src="https://d7hftxdivxxvm.cloudfront.net/?height=600&quality=80&resize_to=fit&src=https%3A%2F%2Fd32dm0rphc51dk.cloudfront.net%2Fpj1Kk4Od1CBV8tWBLk3zeA%2Fnormalized.jpg&width=800" 
+                            width="100%"
+                            style={{objectFit: "contain"}}
                         />
                     </Carousel.Item>
 
                     <Carousel.Item>
                         <img 
-                                    src="https://d7hftxdivxxvm.cloudfront.net/?height=600&quality=80&resize_to=fit&src=https%3A%2F%2Fd32dm0rphc51dk.cloudfront.net%2Fpj1Kk4Od1CBV8tWBLk3zeA%2Fnormalized.jpg&width=800" 
-                                    width="100%"
-                                    style={{objectFit: "contain"}}
+                            src="https://d7hftxdivxxvm.cloudfront.net/?height=600&quality=80&resize_to=fit&src=https%3A%2F%2Fd32dm0rphc51dk.cloudfront.net%2Fpj1Kk4Od1CBV8tWBLk3zeA%2Fnormalized.jpg&width=800" 
+                            width="100%"
+                            style={{objectFit: "contain"}}
                         />
                     </Carousel.Item>
                 </Carousel>
+            </Row>
+
+            <Row className='mt-5'>
+                    <Row className='text-center'>
+                        <h4>REVIEWS</h4>
+                    </Row>
+
+                    <Row>
+                        {reviews}
+                    </Row>
             </Row>
 
             <LeaveReview 
