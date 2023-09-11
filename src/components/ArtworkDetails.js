@@ -1,5 +1,5 @@
 import React from 'react'
-import { Col, Row, Carousel, Card } from 'react-bootstrap'
+import { Col, Row, Card, ListGroupItem, ListGroup } from 'react-bootstrap'
 import useAxios from '../hooks/useAxios'
 import useLoading from '../hooks/useLoading'
 import { addToShoppingList } from '../fetching'
@@ -27,21 +27,47 @@ function ArtworkDetails(props) {
     return (
         <>
             <Row className='mb-5 mt-5'>
-                <Col sm={12} lg={4} className='mb-3'>
-                    <Card className='mx-auto' style={{ width: '18rem' }} border='secondary'>
+                <Col sm={12} md={4} className='mb-3'>
+                    <Card className='mx-auto' border='secondary'>
                         <Card.Body className='p-3'>
-                            <Card.Title>
-                                <h3>
-                                    {props.artwork.title}
-                                </h3>
-                            </Card.Title>
+                            <Row>
+                                <Col>
+                                    <Card.Title>
+                                        <h3>
+                                            {props.artwork.title}
+                                        </h3>
+                                    </Card.Title>
 
-                            <Card.Subtitle>
-                                <h6>
-                                    {`by ${props.artwork.artist_name}`}
-                                </h6>
-                            </Card.Subtitle>
+                                    <Card.Subtitle>
+                                        <h6>
+                                            {`by ${props.artwork.artist_name}`}
+                                        </h6>
+                                    </Card.Subtitle>
+                                </Col>
+
+                                <Col className='text-end px-3'>
+                                    <span onClick={
+                                        ()=>{
+                                            if(props.loggedIn && quantity>0){
+                                                setQuantity(quantity-1)
+                                            }
+                                        }
+                                    }>
+                                        <ShoppingCartButton
+                                            artwork_id={props.artwork_id}
+                                            loggedIn={props.loggedIn}
+                                        />
+                                    </span>
+                                    
+                                    <FavouriteButton
+                                        artwork_id={props.artwork_id}
+                                        loggedIn={props.loggedIn}
+                                    />
+                                    <ToastContainer position='top-right'/>
+                                </Col>
+                            </Row>
                         </Card.Body>
+                        
 
                         <Card.Img 
                             src={props.artwork.thumbnail} 
@@ -50,82 +76,89 @@ function ArtworkDetails(props) {
                     </Card>                    
                 </Col>
 
-                <Col>
-                    <Row>
-                        <Col>
+                <Col md={8} className='mb-3'>
+                    <Card className='mx-auto'  border='secondary'>
+                        <Card.Body className='p-3 px-3'>
                             <Row>
-                                <h3>Description</h3>
+                                <Col>
+                                    <Card.Title>
+                                        <h3>Description</h3>
+                                    </Card.Title>
+
+                                    <Card.Subtitle>
+                                        <p>{props.artwork.descript}</p>
+                                    </Card.Subtitle>
+                                </Col>
+
+                                <Col className='text-end px-3'>
+                                    <span onClick={
+                                        ()=>{
+                                            if(props.loggedIn && quantity>0){
+                                                setQuantity(quantity-1)
+                                            }
+                                        }
+                                    }>
+                                        <ShoppingCartButton
+                                            artwork_id={props.artwork_id}
+                                            loggedIn={props.loggedIn}
+                                        />
+                                    </span>
+                                    
+                                    <FavouriteButton
+                                        artwork_id={props.artwork_id}
+                                        loggedIn={props.loggedIn}
+                                    />
+                                    <ToastContainer position='top-right'/>
+                                </Col>
                             </Row>
 
-                            <Row>
-                                <p>{props.artwork.descript}</p>
-                            </Row>
-                        </Col>
-                    </Row>
+                            <ListGroup variant="flush">
+                                <ListGroupItem>
+                                    <Col>
+                                        <Row>
+                                            <p><strong>{props.artwork.cname}</strong></p>
+                                        </Row>
+                                    </Col>
 
-                    <Row className='mt-5'>
-                        <Col>
-                            <Row>
-                                <p><strong>{props.artwork.cname}</strong></p>
-                            </Row>
-                        </Col>
+                                    <Col>
+                                        <Row>
+                                            <p>{props.artwork.tags.map((tag)=>{
+                                                return tag.tname
+                                            }).join(", ")}</p>
+                                        </Row>
+                                    </Col>
+                                </ListGroupItem>
 
-                        <Col>
-                            <Row>
-                                <p>{props.artwork.tags.map((tag)=>{
-                                    return tag.tname
-                                }).join(", ")}</p>
-                            </Row>
-                        </Col>
+                                <ListGroupItem>
+                                    <Col>
+                                        <Row>
+                                            <p>{"Available quantity: "}
+                                                {props.artwork ?
+                                                    quantity :
+                                                    <div className="d-flex justify-content-center">
+                                                        <div className="spinner-border" role="status" />
+                                                    </div>
+                                                }
+                                            </p>
+                                        </Row>
 
-                    </Row>
+                                        <Row>
+                                            <p>{"Price: €"}
+                                                {props.artwork ?
+                                                    props.artwork.price :
+                                                    <div className="d-flex justify-content-center">
+                                                        <div className="spinner-border" role="status" />
+                                                    </div>
+                                                }
+                                            </p>
+                                        </Row>
+                                    </Col>
 
-                    <Row>
-                        <Col>
-                            <Row>
-                                <p>{"Available quantity: "}
-                                    {props.artwork ?
-                                        quantity :
-                                        <div className="d-flex justify-content-center">
-                                            <div className="spinner-border" role="status" />
-                                        </div>
-                                    }
-                                </p>
-                            </Row>
-
-                            <Row>
-                                <p>{"Price: €"}
-                                    {props.artwork ?
-                                        props.artwork.price :
-                                        <div className="d-flex justify-content-center">
-                                            <div className="spinner-border" role="status" />
-                                        </div>
-                                    }
-                                </p>
-                            </Row>
-                        </Col>
-
-                        <Col>
-                            <span onClick={
-                                ()=>{
-                                    if(props.loggedIn && quantity>0){
-                                        setQuantity(quantity-1)
-                                    }
-                                }
-                            }>
-                                <ShoppingCartButton
-                                    artwork_id={props.artwork_id}
-                                    loggedIn={props.loggedIn}
-                                />
-                            </span>
-                            
-                            <FavouriteButton
-                                artwork_id={props.artwork_id}
-                                loggedIn={props.loggedIn}
-                            />
-                            <ToastContainer position='top-right'/>
-                        </Col>
-                    </Row>
+                                    
+                                </ListGroupItem>
+                            </ListGroup>
+                        </Card.Body>
+                    </Card>
                 </Col>
             </Row>
 
