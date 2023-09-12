@@ -21,6 +21,7 @@ import Users from './pages/AdminPage/Outlet/Users'
 import Artworks from './pages/AdminPage/Outlet/Artworks'
 import ForgotPassword from './pages/ForgotPassword/ForgotPassword'
 import ResetPassword from './pages/ResetPassword/ResetPassword'
+import UserOrderHistory from './pages/AdminPage/Outlet/UserOrderHistory'
 
 import Profile from './pages/Profile/Profile'
 import Admin from './pages/AdminPage/Admin'
@@ -167,6 +168,11 @@ function App() {
             <Route
               path='orders'
               element={<Orders />}
+            />
+
+            <Route
+              path='order_history/:user_id'
+              element={<UserOrderHistory />}
             />
 
             <Route
