@@ -1,8 +1,9 @@
 import React from 'react'
-import { Col, Row} from 'react-bootstrap'
+import { Col, Row, Card } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faX, faCheck } from '@fortawesome/free-solid-svg-icons'
 import { approveReview, disapproveReview } from '../fetching'
+import { Link } from 'react-router-dom'
 
 function AdminReview(props) {
     const [showReview, setShowReview] = React.useState(true)
@@ -10,22 +11,23 @@ function AdminReview(props) {
         <>
             {showReview && 
                 <Row className='mb-5'>
-                    <Col>
-                        <Row>
-                            <h4>Review {props.index}</h4>
-                        </Row>
-
-                        <Row>
+                    <Card>
+                        <Card.Title>
                             <p>Title: {props.review.title}</p>
-                        </Row>
-                        
-                        <Row>
-                            <p>Artist: {props.review.artist_name}</p>
-                        </Row>
-                        
-                        <Row>
+                        </Card.Title>
+
+                        <Card.Subtitle>
                             <p>User: {props.review.name}</p>
-                        </Row>
+                        </Card.Subtitle>
+
+                        <Card.Subtitle>
+                            <p>
+                                About <Link to={`/artwork_page/${props.review.artwork_id}`}>
+                                    {props.review.artwork_title}
+                                </Link> by {props.review.artist_name}
+                            </p>
+                        </Card.Subtitle>
+                        
 
                         <Row>
                             <p>{props.review.reviews_text}</p>
@@ -55,7 +57,7 @@ function AdminReview(props) {
                             </Col>
                         </Row>
 
-                    </Col>
+                    </Card>
                 </Row>
             }
         </>
