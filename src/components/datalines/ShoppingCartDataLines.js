@@ -107,7 +107,7 @@ function ShoppingCartDataLines(props) {
                             <FontAwesomeIcon icon={faX} style={{color: "red"}} />
                         </p>
                     </Row>
-                    <ToastContainer position='top-right'/>
+                    <ToastContainer position='bottom-right'/>
                 </div>
             </td>
         </tr>
