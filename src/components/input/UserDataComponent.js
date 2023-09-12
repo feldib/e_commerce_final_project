@@ -3,15 +3,15 @@ import { Container, Col, Row } from 'react-bootstrap'
 import { faUser, faQuestion, faHouse, faPhone } from '@fortawesome/free-solid-svg-icons'
 import { ToastContainer } from 'react-toastify'
 import UserDataInputComponents from './UserDataInputComponent'
+import SubPageTitle from '../SubPageTitle'
 
 function UserDataChangingComponent(props) {
     return (
-        <Container>
-            <Row className='mt-5'>
-                <h1 className='text-center'>{props.title}</h1>
-            </Row>
-            <Row className='pb-5'> 
-                <Col className='mx-5 pb-5'>
+        <Container className='mb-5'>
+            <SubPageTitle title={`${props.title}`} />
+
+            <Row className='mb-5 floating-element'> 
+                <Col className='mx-5 mb-5'>
                     <UserDataInputComponents 
                         label="Email address"
                         name="email"

@@ -6,6 +6,7 @@ import InputComponent from '../../components/input/InputComponent'
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 import { ToastContainer, toast } from 'react-toastify'
+import PageTitle from '../../components/PageTitle'
 
 function ForgotPassword() {
     const [displayMessage, setDisplayMessage] = React.useState(false)
@@ -35,9 +36,7 @@ function ForgotPassword() {
 
     return (
         <Container className='pb-5'>
-            <Row className='mb-2 mt-5 mb-3'>
-                <h1 className='text-center'>Send email to reset password</h1>
-            </Row>     
+            <PageTitle title="Send email to reset password" />    
                 <Formik
                     initialValues={initialValues}
                     validationSchema={forgotPasswordSchema}

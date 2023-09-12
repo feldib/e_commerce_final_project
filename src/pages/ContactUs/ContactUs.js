@@ -7,6 +7,7 @@ import * as Yup from 'yup'
 import { ToastContainer, toast } from 'react-toastify'
 import InputComponent from '../../components/input/InputComponent'
 import { sendMessageToAdministrator } from '../../fetching'
+import PageTitle from '../../components/PageTitle'
 
 function ContactUs(props) {
     
@@ -44,11 +45,10 @@ function ContactUs(props) {
 
     return (
         <Container>
-            <Row className='mb-2 mt-5 mb-3'>
-                <h1 className='text-center'>Contact us</h1>
-            </Row>
-            <Row>
-                <Col sm={12} md={5} className='pb-5'>
+            <PageTitle title="Contact us" />
+
+            <Row className='mx-auto'>
+                <Col sm={12} md={5} className='pb-5 floating-element mx-2 my-2'>
                     <Row>
                         <h2>Company details</h2>
                     </Row>
@@ -60,7 +60,7 @@ function ContactUs(props) {
                     </Row>
                 </Col>
 
-                <Col sm={12} md={5} className='pb-5'>
+                <Col sm={12} md={5} className='pb-5 floating-element mx-2 my-2'>
                     <Row>
                         <h2>Message administrator</h2>
                     </Row>

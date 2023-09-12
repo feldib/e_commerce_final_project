@@ -7,6 +7,7 @@ import { faUser, faKey } from '@fortawesome/free-solid-svg-icons'
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 import { ToastContainer, toast } from 'react-toastify'
+import PageTitle from '../../components/PageTitle'
 
 function SignInPage(props) {
     const initialValues = {
@@ -37,9 +38,9 @@ function SignInPage(props) {
 
     return (
         <Container className='pb-5'>
-            <Row className='mb-2 mt-5 mb-3'>
-                <h1 className='text-center'>Log In</h1>
-            </Row>
+            <PageTitle 
+                title="Log In"
+            />
 
             <Formik
                 initialValues={initialValues}
@@ -47,48 +48,49 @@ function SignInPage(props) {
                 onSubmit={onSubmit}
             >
                 {({errors, touched})=>(
-                    <Row>
-                        <Col className='mx-3 pb-5'>
-                            <Form>
-                                <InputComponent 
-                                    label="Email address"
-                                    name="email"
-                                    type="email"
-                                    placeholder="Enter email"
-                                    icon={faUser}
-                                    showAsterisk={errors.email && touched.email}
-                                />
-        
-                                <InputComponent 
-                                    label="Password"
-                                    name="password"
-                                    type="password"
-                                    placeholder="Enter password"
-                                    icon={faKey}
-                                    showAsterisk={errors.password && touched.password}
-                                />
-        
-                                <Button variant="primary" type="submit">
-                                    Sign In
-                                </Button>
-                                <ToastContainer position='top-right'/>
-                            </Form>
-                        </Col>
+                    <Row className='floating-element'>
+                        <Row>
+                            <Col className='mx-3 pb-5'>
+                                <Form>
+                                    <InputComponent 
+                                        label="Email address"
+                                        name="email"
+                                        type="email"
+                                        placeholder="Enter email"
+                                        icon={faUser}
+                                        showAsterisk={errors.email && touched.email}
+                                    />
+            
+                                    <InputComponent 
+                                        label="Password"
+                                        name="password"
+                                        type="password"
+                                        placeholder="Enter password"
+                                        icon={faKey}
+                                        showAsterisk={errors.password && touched.password}
+                                    />
+            
+                                    <Button variant="primary" type="submit">
+                                        Sign In
+                                    </Button>
+                                    <ToastContainer position='top-right'/>
+                                </Form>
+                            </Col>
+                        </Row>
+
+                        <Row className='mx-5 pt-3'>
+                            <Col>
+                                <Link
+                                    to="/forgot_password"
+                                >
+                                Forgot password
+                                </Link>
+                            </Col>
+                        </Row>
                     </Row>
                 )
                 }
             </Formik>
-
-
-            <Row className='mx-5 pt-3'>
-                <Col>
-                    <Link
-                        to="/forgot_password"
-                    >
-                    Forgot password
-                    </Link>
-                </Col>
-            </Row>
         </Container>
     )
 }

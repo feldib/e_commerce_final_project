@@ -2,15 +2,14 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAsterisk, faUser, faKeyboard } from '@fortawesome/free-solid-svg-icons'
 import { Col, Row, Container, Button, Form, InputGroup, FloatingLabel } from 'react-bootstrap'
+import PageTitle from '../../components/PageTitle'
 
 function AboutUsPage() {
     return (
         <Container>
-            <Row className='mb-2 mt-5 mb-3'>
-                <h1 className='text-center'>About us</h1>
-            </Row>
+            <PageTitle title="About us" />
             <Row>
-                <Col className='pb-5'>
+                <Col className='pb-5 floating-element'>
                     <Row>
                         <h2>Our story</h2>
                     </Row>

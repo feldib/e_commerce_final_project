@@ -1,19 +1,51 @@
 @import url('https://fonts.googleapis.com/css2?family=Limelight&display=swap');
 
+:root {
+    --nav-color: #0C090D;
+    --translucent-dark-bg-color: #0c090dee;
+    --light-bg-color: #7DA5D9;
+    --warm: #E1944E;
+    --bright-warm: #ede1d6;
+    --rusty: #856E28;
+  }
+
 h1, h2, h3, h4, h5{
     font-family: 'Limelight';
 }
 
+table, td, tr{
+    background-color: none !important;
+}
+
+.floating-element, .page-title, .subpage-title{
+    background-color: var(--translucent-dark-bg-color) !important;
+    color: var(--bright-warm) !important;
+    border-radius: 10px !important;
+    padding: 1rem !important;
+    box-shadow: 12px 14px 40px -5px rgba(0,0,0,0.75) !important;
+    border: 1.5px solid var(--bright-warm) !important;
+}
+
+input, textarea, .dropdown-toggle{
+    background-color: var(--translucent-dark-bg-color) !important;
+    color: var(--bright-warm) !important;
+}
+
+.page-title, .subpage-title{
+    border-radius: 20px;
+    padding: 0.5rem;
+}
+
 html, #root{
-    background-color: #a1873d;
+    background-image: url("background.jpg");
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 #header, #header>div>div>div>a, #footer, #footer>div>div>div>a, .share-icon,  #header-toggler {
     font-family: 'Limelight';
     font-size: 1.5rem;
-    background-color: #071b19;
-    color: #a1873d;
+    background-color: var(--nav-color);
+    color: var(--warm);
 }
 
 td{
@@ -25,7 +57,8 @@ td{
 }
 
 .dropdown-menu{
-    background-color: #bea04f !important;
+    background-color: rgba(188, 183, 163, 0.671) !important;
+    font-weight: 600 !important;
 }
 
 .dropdown-toggle{
@@ -34,18 +67,15 @@ td{
 }
 
 button[type = "submit"], input[type = "submit"], .floating-back-button, .submit{
-    background-color: #2e778b  !important;
+    background-color: var(--light-bg-color)  !important;
     font-weight: 700 !important;
     color: #071b19  !important;
     border: 2px solid #071b19a2 !important;
     text-transform: capitalize !important;
 }
 
-input, textarea{
-    background-color: rgb(215, 199, 134) !important;
-}
-
-.input-group-text{
-    background-color: rgb(170, 152, 81) !important;
+.input-group-text, .dropdown-toggle{
+    background-color: rgba(188, 183, 163, 0.671) !important;
     color: #071b19 !important;
+    font-weight: 800 !important;
 }

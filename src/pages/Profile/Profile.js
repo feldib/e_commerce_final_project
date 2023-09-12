@@ -3,13 +3,14 @@ import { Container, Row } from 'react-bootstrap'
 import { Outlet } from 'react-router-dom'
 import SubNavbar from '../../components/navbars/SubNavbar'
 import { faStar, faHeart, faInfoCircle, faClockRotateLeft, faShoppingCart } from '@fortawesome/free-solid-svg-icons'
+import PageTitle from '../../components/PageTitle'
 
 function ProfilePage(props) {
     return (
         <Container>
-            <Row className='mb-2 mt-5 mb-3'>
-                <h1 className='text-center'>{props.user.first_name}'s page</h1>
-            </Row>
+             <PageTitle 
+                title={`${props.user.first_name}'s page`}
+            />
 
             <SubNavbar 
                 navbarName="User pages"
