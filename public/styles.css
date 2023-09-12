@@ -33,7 +33,7 @@ td{
     font-weight: 700 !important;
 }
 
-button[type = "submit"], input[type = "submit"], .submit{
+button[type = "submit"], input[type = "submit"], .floating-back-button, .submit{
     background-color: #2e778b  !important;
     font-weight: 700 !important;
     color: #071b19  !important;
