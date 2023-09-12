@@ -83,7 +83,7 @@ function UserDataChangingComponent(props) {
                             changeUserData={props.changeUserData}
                         />
 
-                        <ToastContainer position='top-right' />
+                        <ToastContainer position='bottom-right' />
                     </Col>
                 </Row>
                 {props.button}

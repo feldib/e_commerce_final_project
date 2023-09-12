@@ -109,6 +109,10 @@ const disapproveReview = async (review_id) => {
     return axios.post(`${server_url}/${admin_url}/disapprove_review`, {review_id})
 }
 
+const replyToMessage = async (message_id, email, reply_title, reply_text) => {
+    return axios.post(`${server_url}/${admin_url}/reply_to_message`, {message_id, email, reply_title, reply_text})
+}
+
 export {
     logOut,
     sendForgotPasswordEmail,
@@ -129,5 +133,6 @@ export {
     getLoggedIn,
     leaveReview,
     approveReview,
-    disapproveReview
+    disapproveReview,
+    replyToMessage
 }

@@ -87,7 +87,7 @@ function ResetPassword() {
                                 >
                                     Change password
                                 </Button>
-                                <ToastContainer position='top-right' />
+                                <ToastContainer position='bottom-right' />
                             </Form>
                         )}
                     </Formik>

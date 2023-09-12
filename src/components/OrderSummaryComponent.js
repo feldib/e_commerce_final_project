@@ -8,8 +8,8 @@ function OrderSummaryComponent(props) {
         <Row className='mb-3 floating-element'>
             <Row>
                 {props.title &&
-                    <Row className='mb-2 mt-5 mb-3'>
-                        <h2 className='text-start'>{props.title}</h2>
+                    <Row className='mb-2 mb-3'>
+                        <h2 className='text-center'>{props.title}</h2>
                     </Row>
                 }
 
@@ -27,7 +27,7 @@ function OrderSummaryComponent(props) {
                 />
             </Row>
 
-            <Row className='mt-4'>
+            <Row className='mt-4 text-start'>
                     {props.items &&
                         <h2>
                             Order Summary: € {

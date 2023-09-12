@@ -15,6 +15,9 @@ input::placeholder{
     opacity: 1;
 }
 
+.welcome{
+    -webkit-text-stroke: 1px black;
+}
 
 h1, h2, h3, h4, h5{
     font-family: 'Rubik';
@@ -64,8 +67,9 @@ html, #root{
     color: var(--warm);
 }
 
-td{
-    color: #a1873d;
+thead{
+    padding-bottom: 1rem;
+    border-bottom: 2px solid white !important;
 }
 
 #footer, #footer>div>div>div>a, .share-icon{
