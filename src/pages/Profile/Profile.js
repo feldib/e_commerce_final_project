@@ -17,7 +17,7 @@ function ProfilePage(props) {
                     {linkText:"User Data",  linkTo:"data", icon: faInfoCircle},
                     {linkText:"Order History",  linkTo:"order_history", icon: faArrowRotateBack},
                     {linkText:"Wishlist",  linkTo:"wishlist", icon: faHeart},
-                    {linkText:"Shopping Cart",  linkTo:"/shopping_cart", icon: faShoppingCart},
+                    {linkText:"Shopping Cart",  linkTo:"shopping_cart", icon: faShoppingCart},
                 ]}
             />
 
