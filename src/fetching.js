@@ -113,6 +113,10 @@ const replyToMessage = async (message_id, email, reply_title, reply_text) => {
     return axios.post(`${server_url}/${admin_url}/reply_to_message`, {message_id, email, reply_title, reply_text})
 }
 
+const getOrderHistory = async (user_id) => {
+    return axios.post(`${server_url}/${admin_url}/get_orders_of_user`, {user_id})
+}
+
 export {
     logOut,
     sendForgotPasswordEmail,
@@ -134,5 +138,6 @@ export {
     leaveReview,
     approveReview,
     disapproveReview,
-    replyToMessage
+    replyToMessage,
+    getOrderHistory
 }
