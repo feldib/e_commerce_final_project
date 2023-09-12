@@ -12,9 +12,10 @@ import AboutUs from './pages/AboutUs/AboutUs'
 import UserData from './pages/Profile/Outlet/UserData'
 import OrderHistory from './pages/Profile/Outlet/OrderHistory.js'
 import WishList from './pages/Profile/Outlet/WishList'
+import UserReviews from './pages/Profile/Outlet/UserReviews'
 
 import Orders from './pages/AdminPage/Outlet/Orders'
-import Reviews from './pages/AdminPage/Outlet/Reviews'
+import AdminReviews from './pages/AdminPage/Outlet/AdminReviews'
 import Messages from './pages/AdminPage/Outlet/Messages'
 import Users from './pages/AdminPage/Outlet/Users'
 import Artworks from './pages/AdminPage/Outlet/Artworks'
@@ -134,6 +135,11 @@ function App() {
             element={<Profile user={user} />}
           >
             <Route
+              path='reviews'
+              element={<UserReviews />}
+            />
+
+            <Route
               path='data'
               element={<UserData user={user} />}
             />
@@ -165,7 +171,7 @@ function App() {
 
             <Route
               path='reviews'
-              element={<Reviews />}
+              element={<AdminReviews />}
             />
 
             <Route
