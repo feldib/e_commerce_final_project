@@ -73,7 +73,7 @@ function BuyTableDataLines(props) {
                             artwork_id={props.line.id}
                             loggedIn={props.loggedIn}
                         />
-                        <ToastContainer position='top-right'/>
+                        <ToastContainer position='bottom-right'/>
                     </div>
                 
                 }
