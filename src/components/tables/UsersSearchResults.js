@@ -9,7 +9,7 @@ function UsersSearchResults() {
             </Row>
 
             <Row>
-                <Table className='table-hover'>
+                <table>
                     <thead>
                         <tr>
                             <th>First name(s)</th>
@@ -84,7 +84,7 @@ function UsersSearchResults() {
                             </td>
                         </tr>
                     </tbody>
-                </Table>
+                </table>
             </Row>
         </Row>
     )

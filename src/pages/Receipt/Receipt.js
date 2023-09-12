@@ -15,21 +15,22 @@ function ReceiptPage(props) {
         <OrderSummaryComponent 
             items={currentOrderData.items}
             totalCost={currentOrderData.totalCost}
+            button={
+                <Row>
+                    <Col className='text-center mb-5'>
+                        <Link to="/">
+                            <Button onClick={
+                                ()=>{
+                                    localStorage.removeItem("currentOrder")
+                                }
+                            }>
+                                Back to Shop
+                            </Button>
+                        </Link>
+                    </Col>
+                </Row>
+            }
         />
-
-        <Row>
-            <Col className='text-center mb-5'>
-                <Link to="/">
-                    <Button onClick={
-                        ()=>{
-                            localStorage.removeItem("currentOrder")
-                        }
-                    }>
-                        Back to Shop
-                    </Button>
-                </Link>
-            </Col>
-        </Row>
     </Container>
     )
 }

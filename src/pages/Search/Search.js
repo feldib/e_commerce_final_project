@@ -274,11 +274,10 @@ function Search(props) {
             </Row>
 
             {searchResults &&
-                <Row>
-                    <Row className='mb-3 mt-5'>
+                <Row className="floating-element mt-5 mb-5">
+                    <Row className='mb-3 mt-2'>
                         <h3 className='text-center'>Search results</h3>
                     </Row>
-                    
                     <BuyTable 
                         reccomendation = {false}
                         theadNeeded = {true}
@@ -288,8 +287,6 @@ function Search(props) {
                 </Row>
             }
             </Form>
-
-            
 
         </Container>            
     )

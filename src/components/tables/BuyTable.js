@@ -38,7 +38,7 @@ function BuyTable(props) {
     const dataLines = useLoading(props.dataLines, presentData)
     return (
         <Row>
-            <Table className='table-hover' variant='dark'>
+            <table classname='mb-5'>
                 {props.theadNeeded &&
                 <thead>
                     <tr>
@@ -58,7 +58,7 @@ function BuyTable(props) {
                 <tbody>
                     {dataLines}
                 </tbody>
-            </Table>
+            </table>
         </Row>
     )
 }

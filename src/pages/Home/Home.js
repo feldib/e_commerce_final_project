@@ -19,7 +19,7 @@ function HomePage(props) {
                 </h1>
             </Row>
 
-            <Row className="mb-3 d-flex justify-content-evenly">
+            <Row className="mb-3 mx-auto">
                 <ReccomendationTable 
                     title="Featured"
                     path="/featured?n=2"

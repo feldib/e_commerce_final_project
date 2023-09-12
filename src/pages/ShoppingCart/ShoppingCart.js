@@ -25,38 +25,39 @@ function ShoppingCartPage(props) {
         
     }, [shoppingListItems])
     return (
-        <Container>
-            <Row>
-                <PageTitle 
-                    title="Shopping Cart"
-                />
+        <Container className='pb-5 mb-5'>
+            <PageTitle 
+                title="Shopping Cart"
+            />
 
+            <Row className='floating-element'>
                 <ShoppingCartTable 
                     theadNeeded = {true}
                     dataLines = {shoppingListItems}
                     loggedIn={props.loggedIn} 
                 />
-            </Row>
+            
 
-            <Row className='mt-4'>
-                    {shoppingListItems &&
-                        <h2>
-                            Order Summary: € {totalCost}
-                        </h2>
-                    }
-            </Row>
+                <Row className='mt-4'>
+                        {shoppingListItems &&
+                            <h2>
+                                Order Summary: € {totalCost}
+                            </h2>
+                        }
+                </Row>
 
-            <Row>
-                <Col className='text-center mb-5'>
-                    <Link to="/checkout">
-                        <Button onClick={()=>{
-                            localStorage.removeItem("currentOrder")
-                            localStorage.setItem("currentOrder", JSON.stringify({items: shoppingListItems, totalCost}))
-                        }}>
-                            Go to Checkout
-                        </Button>
-                    </Link>
-                </Col>
+                <Row>
+                    <Col className='text-center mb-5'>
+                        <Link to="/checkout">
+                            <Button onClick={()=>{
+                                localStorage.removeItem("currentOrder")
+                                localStorage.setItem("currentOrder", JSON.stringify({items: shoppingListItems, totalCost}))
+                            }}>
+                                Go to Checkout
+                            </Button>
+                        </Link>
+                    </Col>
+                </Row>
             </Row>
         </Container>
     )

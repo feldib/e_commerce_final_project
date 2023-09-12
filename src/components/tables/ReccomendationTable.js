@@ -10,7 +10,7 @@ function ReccomendationTable(props) {
     const [tableHidden, setTableHidden] = React.useState(false)
     const data = useAxios(props.path)
     return (
-        <Col sm={12} md={5} className="mb-2 mx-3 floating-element">
+        <Col sm={12} md={5} className="mb-3 mx-auto floating-element">
             <Row>
                 <Col>
                     <h4 className='text-center'>{props.title}</h4>

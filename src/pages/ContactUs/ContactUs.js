@@ -44,11 +44,11 @@ function ContactUs(props) {
     }
 
     return (
-        <Container>
+        <Container className='mb-5 pb-3'>
             <PageTitle title="Contact us" />
 
-            <Row className='mx-auto'>
-                <Col sm={12} md={5} className='pb-5 floating-element mx-2 my-2'>
+            <Row className='mx-auto mb-5'>
+                <Col sm={12} md={5} className='mb-5 floating-element mx-auto my-2'>
                     <Row>
                         <h2>Company details</h2>
                     </Row>
@@ -60,7 +60,7 @@ function ContactUs(props) {
                     </Row>
                 </Col>
 
-                <Col sm={12} md={5} className='pb-5 floating-element mx-2 my-2'>
+                <Col sm={12} md={5} className='mb-5 floating-element mx-auto my-2'>
                     <Row>
                         <h2>Message administrator</h2>
                     </Row>
