@@ -11,7 +11,7 @@ function AdminReview(props) {
         <>
             {showReview && 
                 <Row className='mb-5'>
-                    <Card>
+                    <Card className='p-3'>
                         <Card.Title>
                             <p>Title: {props.review.title}</p>
                         </Card.Title>
@@ -22,7 +22,7 @@ function AdminReview(props) {
 
                         <Card.Subtitle>
                             <p>
-                                About <Link to={`/artwork_page/${props.review.artwork_id}`}>
+                                Item: <Link to={`/artwork_page/${props.review.artwork_id}`}>
                                     {props.review.artwork_title}
                                 </Link> by {props.review.artist_name}
                             </p>

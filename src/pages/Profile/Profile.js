@@ -2,7 +2,7 @@ import React from 'react'
 import { Container, Row } from 'react-bootstrap'
 import { Outlet } from 'react-router-dom'
 import SubNavbar from '../../components/navbars/SubNavbar'
-import { faStar, faHeart, faInfoCircle, faArrowRotateBack, faShoppingCart } from '@fortawesome/free-solid-svg-icons'
+import { faStar, faHeart, faInfoCircle, faClockRotateLeft, faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 
 function ProfilePage(props) {
     return (
@@ -15,7 +15,7 @@ function ProfilePage(props) {
                 navbarName="User pages"
                 linkObjects={[
                     {linkText:"User Data",  linkTo:"data", icon: faInfoCircle},
-                    {linkText:"Order History",  linkTo:"order_history", icon: faArrowRotateBack},
+                    {linkText:"Order History",  linkTo:"order_history", icon: faClockRotateLeft},
                     {linkText:"Wishlist",  linkTo:"wishlist", icon: faHeart},
                     {linkText:"Shopping Cart",  linkTo:"shopping_cart", icon: faShoppingCart},
                 ]}

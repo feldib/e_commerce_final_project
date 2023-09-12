@@ -2,7 +2,7 @@ import React from 'react'
 import { Navbar, Nav, Container, Row } from 'react-bootstrap'
 import { Outlet } from 'react-router-dom';
 import SubNavbar from '../../components/navbars/SubNavbar'
-import { faMessage, faStar, faPerson, faPalette, faArrowRotateBack } from '@fortawesome/free-solid-svg-icons'
+import { faMessage, faStar, faPerson, faPalette, faClockRotateLeft } from '@fortawesome/free-solid-svg-icons'
 
 function AdminPage(props) {
     return (
@@ -16,7 +16,7 @@ function AdminPage(props) {
                 linkObjects={[
                     {linkText:"Artworks",  linkTo:"artworks", icon: faPalette},
                     {linkText:"Users",  linkTo:"users", icon: faPerson},
-                    {linkText:"Orders",  linkTo:"orders", icon: faArrowRotateBack},
+                    {linkText:"Orders",  linkTo:"orders", icon: faClockRotateLeft},
                     {linkText:"Reviews",  linkTo:"reviews", icon: faStar},
                     {linkText:"Messages",  linkTo:"messages", icon: faMessage}
                 ]}
