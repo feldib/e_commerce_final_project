@@ -62,7 +62,7 @@ function ForgotPassword() {
                                 <Button variant="primary" type="submit">
                                     Send link
                                 </Button>
-                                <ToastContainer position='top-right' />
+                                <ToastContainer position='bottom-right' />
                             </Form>
                         </Col>
                     </Row>

@@ -143,7 +143,7 @@ function RegistrationPage(props) {
                                 }>
                                     Register
                                 </Button>
-                                <ToastContainer position='top-right' />
+                                <ToastContainer position='bottom-right' />
                             </Form>    
                         )}
                     </Formik>
