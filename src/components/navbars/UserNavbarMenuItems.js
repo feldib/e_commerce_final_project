@@ -9,7 +9,7 @@ function UserNavbarMenuItems(props) {
             </Link>
 
             <Link className='nav-link' style={{ color: 'inherit', textDecoration: 'inherit'}} to="/user">
-                {props.first_name}'s Page
+                {props.first_name}
             </Link>
         </>
     )

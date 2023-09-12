@@ -27,7 +27,7 @@ function ShoppingCartPage(props) {
     return (
         <Container className='pb-5 mb-5'>
             <PageTitle 
-                title="Shopping Cart"
+                title="Shopping cart"
             />
 
             <Row className='floating-element'>
