@@ -13,8 +13,17 @@ h1, h2, h3, h4, h5{
     font-family: 'Limelight';
 }
 
-table, td, tr{
-    background-color: none !important;
+tr {
+    border-radius: 5px;
+    padding: 10px;
+}
+
+td{
+    padding: 5px !important; 
+}
+
+tbody > tr:hover{
+    background-color: #7da5d944;
 }
 
 .floating-element, .page-title, .subpage-title{

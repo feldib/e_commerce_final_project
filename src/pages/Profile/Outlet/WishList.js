@@ -10,12 +10,13 @@ function WishList(props) {
         <Container className='mb-5 pb-5'>
             <Row>
                 <SubPageTitle title="Wishlisted" />
-
-                <BuyTable 
-                    theadNeeded = {true}
-                    dataLines = {wishListed}
-                    loggedIn={props.loggedIn} 
-                />
+                <Row className='floating-element'>
+                    <BuyTable 
+                        theadNeeded = {true}
+                        dataLines = {wishListed}
+                        loggedIn={props.loggedIn} 
+                    />
+                </Row>
             </Row>
         </Container>
     )

@@ -43,7 +43,7 @@ function ForgotPassword() {
                     onSubmit={onSubmit}
                 >
                     {({errors, touched})=>(
-                        <Row>
+                        <Row className="floating-element">
                             <Col className='mx-5 pb-5'>
                             <Form>
                                 <InputComponent 

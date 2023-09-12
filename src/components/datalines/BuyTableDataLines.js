@@ -23,7 +23,7 @@ function BuyTableDataLines(props) {
                     </p>
                 </Link>
             </td>
-            <td>
+            <td className={`${props.reccomendation ? "d-none" : "d-none d-md-table-cell"}`}>
                 <p>
                     {props.line.artist_name}
                 </p>
@@ -33,7 +33,7 @@ function BuyTableDataLines(props) {
                     €{props.line.price}
                 </p>
             </td>
-            <td className='text-center'>
+            <td className={`text-center ${props.reccomendation ? "d-none" : "d-none d-md-table-cell"}`}>
                 <p>
                     {quantity}
                 </p>

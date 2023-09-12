@@ -36,7 +36,7 @@ function ShoppingCartTable(props) {
     const dataLines = useLoading(props.dataLines, presentData)
     return (
         <Row>
-            <Table className='table-hover' variant='dark'>
+            <table>
                 {props.theadNeeded &&
                 <thead>
                     <tr>
@@ -55,7 +55,7 @@ function ShoppingCartTable(props) {
                 <tbody>
                     {dataLines}
                 </tbody>
-            </Table>
+            </table>
         </Row>
     )
 }

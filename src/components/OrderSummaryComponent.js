@@ -36,6 +36,9 @@ function OrderSummaryComponent(props) {
                         </h2>
                     }
             </Row>
+            {props.button &&
+                <>{props.button}</>
+            }
         </Row>
     )
 }

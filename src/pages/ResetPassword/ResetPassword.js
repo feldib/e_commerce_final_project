@@ -45,7 +45,7 @@ function ResetPassword() {
              <PageTitle 
                 title="Reset Password"
             />
-            <Row>
+            <Row className='floating-element'>
                 <Col className='mx-5 pb-5'>
                     <Formik
                         initialValues={initialValues}

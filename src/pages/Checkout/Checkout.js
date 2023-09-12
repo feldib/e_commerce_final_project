@@ -40,14 +40,16 @@ function CheckoutPage(props) {
                 title={"Invoice Data"}
                 formik={formik}
                 changeUserData={false}
+                button={
+                    <Row>
+                        <Col className='text-center mb-5'>
+                            <Button type='submit'>
+                                Order
+                            </Button>
+                        </Col>
+                </Row>
+                }
             />
-            <Row>
-                <Col className='text-center mb-5'>
-                    <Button type='submit'>
-                        Order
-                    </Button>
-                </Col>
-            </Row>
         </form>
     )
 }
