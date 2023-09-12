@@ -40,12 +40,10 @@ function App() {
   const getUserData = () => {
     getLoggedIn()
       .then(res =>{
-        if(res.data.Status === "Success"){
-          setUser(res.data.user)
-          setLoggedIn(true)
-        }else{
-          setLoggedIn(false)
-        }
+        setUser(res.data.user)
+        setLoggedIn(true)
+      }).catch((error)=>{
+        console.log(error)
       })
   }
 
@@ -148,6 +146,11 @@ function App() {
             <Route
               path='wishlist'
               element={<WishList loggedIn={loggedIn} />}
+            />
+
+            <Route
+              path='shopping_cart'
+              element={<ShoppingCart loggedIn={loggedIn} />}
             />
           </Route>
 

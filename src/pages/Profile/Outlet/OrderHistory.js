@@ -3,6 +3,7 @@ import { Col } from 'react-bootstrap'
 import useAxios from '../../../hooks/useAxios'
 import useLoading from '../../../hooks/useLoading'
 import OrderSummaryComponent from '../../../components/OrderSummaryComponent'
+import { users_url } from '../../../utils/api_constants'
 
 function OrderHistory() {
     function representOrderDataCollection(orderDataCollection){
@@ -18,7 +19,7 @@ function OrderHistory() {
         })
     }
 
-    const orderDataCollection = useAxios("/get_orders_of_user")
+    const orderDataCollection = useAxios(`/${users_url}/get_orders_of_user`)
     const ordersRepresented = useLoading(orderDataCollection, representOrderDataCollection)
     return (
         <Col className='mb-5 pb-5'>
