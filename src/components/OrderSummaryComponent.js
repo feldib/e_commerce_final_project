@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 function OrderSummaryComponent(props) {
     return (
-        <Container className='pb-3'>
+        <Row className='mb-3 floating-element'>
             <Row>
                 {props.title &&
                     <Row className='mb-2 mt-5 mb-3'>
@@ -36,7 +36,7 @@ function OrderSummaryComponent(props) {
                         </h2>
                     }
             </Row>
-        </Container>
+        </Row>
     )
 }
 

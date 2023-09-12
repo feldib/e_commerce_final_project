@@ -2,14 +2,15 @@ import React from 'react'
 import { Col, Row, Container, Table, Button } from 'react-bootstrap'
 import OrderSummaryComponent from '../../components/OrderSummaryComponent'
 import { Link } from 'react-router-dom'
+import PageTitle from '../../components/PageTitle'
 
 function ReceiptPage(props) {
     const currentOrderData = JSON.parse(localStorage.getItem("currentOrder"))
     return (
     <Container>
-        <Row className='mb-2 mt-5 mb-3'>
-            <h1 className='text-center'>Receipt</h1>
-        </Row>
+         <PageTitle 
+            title="Receipt"
+        />
         
         <OrderSummaryComponent 
             items={currentOrderData.items}

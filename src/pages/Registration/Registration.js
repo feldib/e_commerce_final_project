@@ -7,16 +7,17 @@ import { faUser, faKey, faQuestion } from '@fortawesome/free-solid-svg-icons'
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 import { ToastContainer, toast } from 'react-toastify'
+import PageTitle from '../../components/PageTitle'
 
 const attemptRegistration = async (values, settleSuccessfulRegistration) => {
     await registerNewUser(values.email, values.password, values.firstName, values.lastName)
-        .then(function (response) {
-            console.log("reponse: ", JSON.stringify(response))
-            logIn(values.email, values.password, settleSuccessfulRegistration)
-        })
-        .catch((error)=>{
-            console.log(error)
-        })
+    .then(function (response) {
+        console.log("reponse: ", JSON.stringify(response))
+        logIn(values.email, values.password, settleSuccessfulRegistration)
+    })
+    .catch((error)=>{
+        console.log(error)
+    })
 }
 
 function RegistrationPage(props) {
@@ -65,11 +66,11 @@ function RegistrationPage(props) {
 
     return (
         <Container>
-            <Row className='mb-2 mt-5 mb-3'>
-                <h1 className='text-center'>Register</h1>
-            </Row>
-            <Row className='pb-5'> 
-                <Col className='mx-5 pb-5'>
+             <PageTitle 
+                title="Register"
+            />
+            <Row className='pb-5 floating-element'> 
+                <Col className='mx-5 pb-5 '>
                     <Formik
                         initialValues={initialValues}
                         onSubmit={onSubmit}

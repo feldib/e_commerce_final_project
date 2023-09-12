@@ -2,13 +2,12 @@ import React from 'react'
 import { Button, Col, Row, Form, InputGroup} from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faAsterisk } from '@fortawesome/free-solid-svg-icons'
+import SubPageTitle from '../../../components/SubPageTitle'
 
 function Messages() {
     return (
         <Col>
-            <Row className='text-center'>
-                <h2>Unanswered messages</h2>
-            </Row>
+            <SubPageTitle title="Unanswered messages" />
 
             <Row>
                 <Row className='mb-5'>

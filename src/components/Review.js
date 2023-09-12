@@ -11,7 +11,7 @@ function Review(props) {
         <>
             {showReview && 
                 <Row className='mb-5'>
-                    <Card className='p-3'>
+                    <Card className='p-3 floating-element'>
                         <Card.Title>
                             <p>Title: {props.review.title}</p>
                         </Card.Title>

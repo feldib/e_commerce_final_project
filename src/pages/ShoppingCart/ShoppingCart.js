@@ -1,10 +1,10 @@
 import React from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faX } from '@fortawesome/free-solid-svg-icons'
 import { Col, Row, Container, Button, Table } from 'react-bootstrap'
 import ShoppingCartTable from '../../components/tables/ShoppingCartTable'
 import useAxios from '../../hooks/useAxios'
 import { Link } from 'react-router-dom'
+import PageTitle from '../../components/PageTitle'
+import SubPageTitle from '../../components/SubPageTitle'
 
 function ShoppingCartPage(props) {
     const shoppingListItems = useAxios("/users/shopping_cart")
@@ -27,9 +27,9 @@ function ShoppingCartPage(props) {
     return (
         <Container>
             <Row>
-                <Row className='mb-2 mt-5 mb-3'>
-                    <h1 className='text-center'>Shopping Cart</h1>
-                </Row>
+                <PageTitle 
+                    title="Shopping Cart"
+                />
 
                 <ShoppingCartTable 
                     theadNeeded = {true}

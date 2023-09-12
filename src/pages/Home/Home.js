@@ -9,8 +9,8 @@ import ReccomendationTable from '../../components/tables/ReccomendationTable'
 function HomePage(props) {   
     return (
         <Container className='pb-5'>
-            <Row className='pt-5 pb-5 jumbotron'>
-                <h1 className='display-2 text-center'>
+            <Row className='mt-5 mb-5 jumbotron'>
+                <h1 className='display-2 text-center page-title'>
                     Welcome to Artworks Market{`${
                         props.loggedIn ?
                             ` ${props.user.first_name}`:

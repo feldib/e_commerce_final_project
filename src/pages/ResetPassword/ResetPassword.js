@@ -7,6 +7,7 @@ import { useLocation } from 'react-router-dom'
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 import { ToastContainer, toast } from 'react-toastify'
+import PageTitle from '../../components/PageTitle'
 
 function ResetPassword() {
 
@@ -41,9 +42,9 @@ function ResetPassword() {
 
     return (
         <Container className='pb-5'>
-            <Row className='mb-2 mt-5 mb-3'>
-                <h1 className='text-center'>Reset password</h1>
-            </Row>
+             <PageTitle 
+                title="Reset Password"
+            />
             <Row>
                 <Col className='mx-5 pb-5'>
                     <Formik

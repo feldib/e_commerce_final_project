@@ -6,6 +6,7 @@ import useLoading from '../../../hooks/useLoading'
 import useAxios from '../../../hooks/useAxios'
 import { admin_url } from '../../../utils/api_constants'
 import Review from '../../../components/Review'
+import SubPageTitle from '../../../components/SubPageTitle'
 
 function Reviews() {
     const reviews = useAxios(`/${admin_url}/get_unapproved_reviews`)
@@ -16,9 +17,7 @@ function Reviews() {
     }))
     return (
         <Col>
-            <Row className='text-center'>
-                <h2>New reviews</h2>
-            </Row>
+            <SubPageTitle title="New reviews" />
 
             <Row>
                 {representReviews}
