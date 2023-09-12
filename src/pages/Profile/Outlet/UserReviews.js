@@ -4,20 +4,20 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faX, faCheck } from '@fortawesome/free-solid-svg-icons'
 import useLoading from '../../../hooks/useLoading'
 import useAxios from '../../../hooks/useAxios'
-import { admin_url } from '../../../utils/api_constants'
-import AdminReview from '../../../components/AdminReview'
+import { users_url } from '../../../utils/api_constants'
+import Review from '../../../components/Review'
 
 function Reviews() {
-    const reviews = useAxios(`/${admin_url}/get_unapproved_reviews`)
+    const reviews = useAxios(`/${users_url}/get_reviews_of_user`)
     const representReviews = useLoading(reviews, ((reviews)=>{
         return reviews.map((review, index)=>{
-            return <AdminReview review={review} index={index+1} />
+            return <Review review={review} index={index+1} admin={false} />
         })
     }))
     return (
         <Col>
             <Row className='text-center'>
-                <h2>New reviews</h2>
+                <h2>Past reviews</h2>
             </Row>
 
             <Row>
