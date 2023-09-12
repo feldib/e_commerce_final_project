@@ -12,11 +12,10 @@ const attemptRegistration = async (values, settleSuccessfulRegistration) => {
     await registerNewUser(values.email, values.password, values.firstName, values.lastName)
         .then(function (response) {
             console.log("reponse: ", JSON.stringify(response))
-            if(response.data === true){
-                logIn(values.email, values.password, settleSuccessfulRegistration)
-            }else{
-                throw Error("Wrong email or password")
-            }
+            logIn(values.email, values.password, settleSuccessfulRegistration)
+        })
+        .catch((error)=>{
+            console.log(error)
         })
 }
 

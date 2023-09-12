@@ -22,14 +22,14 @@ function HomePage(props) {
             <Row className="mb-3 d-flex justify-content-evenly">
                 <ReccomendationTable 
                     title="Featured"
-                    path="/featured?reccomdendation=true"
+                    path="/featured?n=2"
                     loggedIn={props.loggedIn} 
                 />
 
                 {props.loggedIn &&
                     <ReccomendationTable 
                         title="Wishlisted"
-                        path={`/${users_url}/wishlisted?reccomdendation=true`}
+                        path={`/${users_url}/wishlisted?n=2`}
                         loggedIn={props.loggedIn} 
                     />
                 }
