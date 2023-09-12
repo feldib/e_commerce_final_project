@@ -13,7 +13,7 @@ function Header(props) {
                     <Navbar.Brand>
                         <Link style={{ color: 'inherit', textDecoration: 'inherit'}} to="/">
                             <img
-                                src='/logo.jpg'
+                                src='/logo.png'
                                 width="100"
                                 className="d-inline-block align-top"
                                 alt="React Bootstrap logo"
@@ -30,10 +30,10 @@ function Header(props) {
                                 Search
                             </Link>
                             <Link className='nav-link' style={{ color: 'inherit', textDecoration: 'inherit'}} to="/about">
-                                About us
+                                About
                             </Link>
                             <Link className='nav-link' style={{ color: 'inherit', textDecoration: 'inherit'}} to="/contact">
-                                Contact us
+                                Contact
                             </Link>
                             
                             {props.loggedIn ?
