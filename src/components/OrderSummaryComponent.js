@@ -13,6 +13,12 @@ function OrderSummaryComponent(props) {
                     </Row>
                 }
 
+                {props.user &&
+                    <Row className='mb-2 mt-5 mb-3'>
+                        <h3 className='text-start'>User: {props.user.user_name}</h3>
+                    </Row>
+                }
+
                 <BuyTable 
                     theadNeeded = {true}
                     dataLines = {props.items}
