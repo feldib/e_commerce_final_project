@@ -25,7 +25,7 @@ function BuyTable(props) {
 
     return (
         <Row>
-            <table className='mb-5'>
+            <table className='mb-3'>
                 {props.theadNeeded &&
                 <thead>
                     <tr>

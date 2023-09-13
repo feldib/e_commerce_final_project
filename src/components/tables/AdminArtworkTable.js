@@ -22,7 +22,7 @@ function AdminArtworkTable(props) {
 
     return (
         <Row>
-            <table classname='mb-5'>
+            <table classname='mb-3'>
                 <thead>
                     <tr>
                         <th></th>
