@@ -23,7 +23,7 @@ function ProfilePage(props) {
                 ]}
             />
 
-            <Row>
+            <Row className='pb-5'>
                 <Outlet />
             </Row>
         </Container>

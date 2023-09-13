@@ -2,6 +2,7 @@ import React from 'react'
 import { Row, Table } from 'react-bootstrap'
 import useLoading from '../../hooks/useLoading'
 import ShoppingCartDataLines from '../datalines/ShoppingCartDataLines'
+import { presentData } from '../../helpers/helpers'
 
 function ShoppingCartTable(props) {
     function makeDataLines(dataLines){
@@ -18,22 +19,7 @@ function ShoppingCartTable(props) {
         )
     }
 
-    function presentData(dataLines){
-        if(dataLines.length > 0){
-            return makeDataLines(dataLines)
-        }
-        else{
-            return (
-                <tr>
-                    <td colspan="8">
-                        <h6 className='text-center'>No results</h6>
-                    </td>
-                </tr>
-            )
-        }
-    }
-
-    const dataLines = useLoading(props.dataLines, presentData)
+    const dataLines = useLoading(props.dataLines, (dataLines)=>{return presentData(dataLines, makeDataLines)})
     return (
         <Row>
             <table>
