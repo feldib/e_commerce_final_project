@@ -1,7 +1,8 @@
 import React from 'react'
-import { Row, Table } from 'react-bootstrap'
+import { Row } from 'react-bootstrap'
 import useLoading from '../../hooks/useLoading'
 import AdminArtworkTableDatalines from '../datalines/AdminArtworkTableDatalines'
+import { presentData } from '../../helpers/helpers'
 
 function AdminArtworkTable(props) {
     function makeDataLines(dataLines){
@@ -17,22 +18,7 @@ function AdminArtworkTable(props) {
         )
     }
 
-    function presentData(dataLines){
-        if(dataLines.length > 0){
-            return makeDataLines(dataLines)
-        }
-        else{
-            return (
-                <tr>
-                    <td colspan="8">
-                        <h6 className='text-center'>No results</h6>
-                    </td>
-                </tr>
-            )
-        }
-    }
-
-    const dataLines = useLoading(props.dataLines, presentData)
+    const dataLines = useLoading(props.dataLines, (dataLines)=>{return presentData(dataLines, makeDataLines)})
 
     return (
         <Row>

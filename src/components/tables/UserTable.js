@@ -2,6 +2,7 @@ import React from 'react'
 import UserTableDataLines from '../datalines/UserTableDataLines'
 import useLoading from '../../hooks/useLoading'
 import { Row } from 'react-bootstrap'
+import { presentData } from '../../helpers/helpers'
 
 function UserTable(props) {
     function makeDataLines(dataLines){
@@ -15,22 +16,7 @@ function UserTable(props) {
         )
     }
 
-    function presentData(dataLines){
-        if(dataLines.length > 0){
-            return makeDataLines(dataLines)
-        }
-        else{
-            return (
-                <tr>
-                    <td colspan="8">
-                        <h6 className='text-center'>No results</h6>
-                    </td>
-                </tr>
-            )
-        }
-    }
-
-    const dataLines = useLoading(props.users, presentData)
+    const dataLines = useLoading(props.users, (dataLines)=>{return presentData(dataLines, makeDataLines)})
     return (
         <Row>
             <table classname='mb-5'>
