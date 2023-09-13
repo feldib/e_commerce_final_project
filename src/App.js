@@ -192,7 +192,7 @@ function App() {
 
             <Route
               path='artworks'
-              element={<Artworks />}
+              element={<Artworks loggedIn={loggedIn} />}
             />
           </Route>
 

@@ -117,6 +117,25 @@ const getOrderHistory = async (user_id) => {
     return axios.post(`${server_url}/${admin_url}/get_orders_of_user`, {user_id})
 }
 
+const removeArtwork = async (artwork_id) => {
+    console.log(`${server_url}/${admin_url}/remove_artwork`)
+    return axios.post(`${server_url}/${admin_url}/remove_artwork`, {artwork_id})
+}
+
+const addToFeatured = (artwork_id) => {
+    return axios.post(`${server_url}/${admin_url}/featured`, {artwork_id})
+}
+
+const removeFromFeatured = (artwork_id) => {
+    return axios.post(`${server_url}/${admin_url}/remove_from_featured`, {artwork_id})
+}
+
+const isFeatured = async (artwork_id) => {
+    const result = await axios.post(`${server_url}/${admin_url}/is_featured`, {artwork_id})
+    const favourited = result.data
+    return favourited
+}
+
 export {
     logOut,
     sendForgotPasswordEmail,
@@ -139,5 +158,9 @@ export {
     approveReview,
     disapproveReview,
     replyToMessage,
-    getOrderHistory
+    getOrderHistory,
+    removeArtwork,
+    addToFeatured, 
+    removeFromFeatured, 
+    isFeatured
 }

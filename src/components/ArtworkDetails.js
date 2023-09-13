@@ -63,7 +63,7 @@ function ArtworkDetails(props) {
                                         artwork_id={props.artwork_id}
                                         loggedIn={props.loggedIn}
                                     />
-                                    <ToastContainer position='top-right'/>
+                                    <ToastContainer position='bottom-right'/>
                                 </Col>
                             </Row>
                         </Card.Body>
@@ -108,7 +108,7 @@ function ArtworkDetails(props) {
                                         artwork_id={props.artwork_id}
                                         loggedIn={props.loggedIn}
                                     />
-                                    <ToastContainer position='top-right'/>
+                                    <ToastContainer position='bottom-right'/>
                                 </Col>
                             </Row>
 
