@@ -12,19 +12,34 @@ function NewArtworkInputComponent(props) {
                 <FontAwesomeIcon icon={faAsterisk} style={{color: "red"}} className='mx-3'/>
             }
             <InputGroup>
-                <InputGroup.Text>
-                    <FontAwesomeIcon icon={props.icon} className='mx-3'/>
-                </InputGroup.Text>
-
-                <input
-                    className='form-control'
-                    id={props.name} 
-                    name={props.name} 
-                    type={props.type} 
-                    placeholder={props.placeholder}
-                    onChange={props.formik.handleChange}
-                    value={props.formik.values[props.name]} 
-                />
+                {props.type !== "textarea" &&
+                    <InputGroup.Text>
+                        <FontAwesomeIcon icon={props.icon} className='mx-3'/>
+                    </InputGroup.Text>
+                }
+                
+                {props.type === "textarea" ?
+                    <textarea
+                        className='form-control'
+                        id={props.name} 
+                        name={props.name} 
+                        type={props.type} 
+                        placeholder={props.placeholder}
+                        onChange={props.formik.handleChange}
+                        value={props.formik.values[props.name]} 
+                        rows={4}
+                    />
+                :
+                    <input
+                        className='form-control'
+                        id={props.name} 
+                        name={props.name} 
+                        type={props.type} 
+                        placeholder={props.placeholder}
+                        onChange={props.formik.handleChange}
+                        value={props.formik.values[props.name]} 
+                    />
+                }
             </InputGroup>
 
             {props.formik.errors[props.name] && 

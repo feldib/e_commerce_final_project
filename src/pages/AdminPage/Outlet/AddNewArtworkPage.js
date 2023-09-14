@@ -2,17 +2,16 @@ import React from 'react'
 import NewArtworkInputComponent from '../../../components/input/NewArtworkInputComponent'
 import { Container, Col, Row, Button, Form, Dropdown } from 'react-bootstrap'
 import { faDollarSign, faQuestion, faImages, faPlus } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { ToastContainer, toast } from 'react-toastify'
 import PageTitle from '../../../components/PageTitle'
-import CategoriesDropdown from '../../../components/input/CategoriesDropdown'
 import FloatingBackButton from '../../../components/buttons/FloatingBackButton'
 import useAxios from '../../../hooks/useAxios'
 import useLoading from '../../../hooks/useLoading'
 import { json, useNavigate } from 'react-router-dom'
-import { WithContext as ReactTags } from 'react-tag-input';
+import { WithContext as ReactTags } from 'react-tag-input'
+import { addNewArtwork } from '../../../fetching'
 
 function AddNewArtworkPage(props) {
 
@@ -45,15 +44,25 @@ function AddNewArtworkPage(props) {
             quantity: '',
             category_id: '',
             thumbnail: '',
-            other_pictures: []
+            other_pictures: [],
+            description: ""
         },
 
         onSubmit: (values)=>{
             const tags = values.tags.map(obj => obj.text)
-            const other_pictures = values.other_pictures.map(obj => obj.text)
-            console.log(JSON.stringify(
-                {...values, tags, other_pictures}
-            ))
+            const other_pictures = values.other_pictures.map(obj => obj.text)                
+
+            addNewArtwork({...values, tags, other_pictures}).then((response)=>{
+                toast.success("Artwork added successfully to database", {
+                    className: "toast-success"
+                })
+            }).catch((error)=>{
+                toast.error("Error: could not add artwork.", {
+                    className: "toast-error"
+                })
+                console.log(error)
+            })
+            
         },
 
         validationSchema: Yup.object().shape({
@@ -68,6 +77,7 @@ function AddNewArtworkPage(props) {
             category_id: Yup.number()
                 .required("Category required"),
             thumbnail: Yup.string()
+                .required("Thumbnail is required!")
                 .url("Please enter valid url"),
             tags: Yup.array()
                 .min(3, "Add minimum 3 tags!")
@@ -83,7 +93,9 @@ function AddNewArtworkPage(props) {
                         id: Yup.string(),
                         text: Yup.string().url("Please enter valid ur!")
                     })
-                )
+                ),
+            description: Yup.string()
+                .required("Description required"),
         })
 
     })
@@ -174,6 +186,7 @@ function AddNewArtworkPage(props) {
                                     className='input-error-message'
                                 >
                                     {formik.errors.tags[0].text}
+                                    {formik.errors.tags}
                                 </div>
                             }
                         </Form.Group>
@@ -246,6 +259,15 @@ function AddNewArtworkPage(props) {
                                 </div>
                             }
                         </Form.Group>
+
+                        <NewArtworkInputComponent 
+                            label="Description"
+                            name="description"
+                            type="textarea"
+                            placeholder="Enter description"
+                            icon={faQuestion}
+                            formik={formik}
+                        />
 
                         <Button variant="primary" type="submit" onClick={
                             ()=>{
