@@ -112,51 +112,47 @@ function ArtworkDetails(props) {
                                 </Col>
                             </Row>
 
-                            <ListGroup variant="flush">
-                                <ListGroupItem>
-                                    <Col>
-                                        <Row>
-                                            <p><strong>{props.artwork.cname}</strong></p>
-                                        </Row>
-                                    </Col>
+                            <Row>
+                                <Col>
+                                    <Row>
+                                        <p><strong>{props.artwork.cname}</strong></p>
+                                    </Row>
+                                </Col>
 
-                                    <Col>
-                                        <Row>
-                                            <p>{props.artwork.tags.map((tag)=>{
-                                                return tag.tname
-                                            }).join(", ")}</p>
-                                        </Row>
-                                    </Col>
-                                </ListGroupItem>
+                                <Col>
+                                    <Row>
+                                        <p>{props.artwork.tags.map((tag)=>{
+                                            return tag.tname
+                                        }).join(", ")}</p>
+                                    </Row>
+                                </Col>
+                            </Row>
 
-                                <ListGroupItem>
-                                    <Col>
-                                        <Row>
-                                            <p>{"Available quantity: "}
-                                                {props.artwork ?
-                                                    quantity :
-                                                    <div className="d-flex justify-content-center">
-                                                        <div className="spinner-border" role="status" />
-                                                    </div>
-                                                }
-                                            </p>
-                                        </Row>
+                            <Row>
+                                <Col>
+                                    <Row>
+                                        <p>{"Available quantity: "}
+                                            {props.artwork ?
+                                                quantity :
+                                                <div className="d-flex justify-content-center">
+                                                    <div className="spinner-border" role="status" />
+                                                </div>
+                                            }
+                                        </p>
+                                    </Row>
 
-                                        <Row>
-                                            <p>{"Price: €"}
-                                                {props.artwork ?
-                                                    props.artwork.price :
-                                                    <div className="d-flex justify-content-center">
-                                                        <div className="spinner-border" role="status" />
-                                                    </div>
-                                                }
-                                            </p>
-                                        </Row>
-                                    </Col>
-
-                                    
-                                </ListGroupItem>
-                            </ListGroup>
+                                    <Row>
+                                        <p>{"Price: €"}
+                                            {props.artwork ?
+                                                props.artwork.price :
+                                                <div className="d-flex justify-content-center">
+                                                    <div className="spinner-border" role="status" />
+                                                </div>
+                                            }
+                                        </p>
+                                    </Row>
+                                </Col>
+                            </Row>
                         </Card.Body>
                     </Card>
                 </Col>
@@ -168,7 +164,9 @@ function ArtworkDetails(props) {
 
             <Row className='mt-5'>
                     <Row className='text-center'>
-                        <h4>REVIEWS</h4>
+                        <Col xs={5} md={4} className='mx-auto'>
+                            <h4 className='subpage-title'>Reviews</h4>
+                        </Col>
                     </Row>
 
                     <Row>

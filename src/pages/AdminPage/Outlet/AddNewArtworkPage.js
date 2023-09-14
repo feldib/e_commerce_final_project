@@ -71,9 +71,11 @@ function AddNewArtworkPage(props) {
             artist_name: Yup.string()
                 .required("Name required"),
             price: Yup.number()
-                .required("Price required"),
+                .required("Price required")
+                .min(1),
             quantity: Yup.number()
-                .required("Quantity required"),
+                .required("Quantity required")
+                .min(1),
             category_id: Yup.number()
                 .required("Category required"),
             thumbnail: Yup.string()

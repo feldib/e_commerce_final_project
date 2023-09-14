@@ -16,7 +16,7 @@ function ReviewsOfArtworks(props) {
                                         {review.title}
                                     </Card.Title>
 
-                                    <Card.Subtitle className="mb-2 text-muted">
+                                    <Card.Subtitle className="mb-2 custom-muted">
                                         by {review.name}
                                     </Card.Subtitle>
 
@@ -31,7 +31,7 @@ function ReviewsOfArtworks(props) {
 
                 :
 
-                <p className='text-center'>
+                <p className='text-center floating-element'>
                     ---- No reviews ----
                 </p>
             }
