@@ -136,6 +136,10 @@ const isFeatured = async (artwork_id) => {
     return favourited
 }
 
+const addNewArtwork = (artwork) => {
+    return axios.post(`${server_url}/${admin_url}/add_new_artwork`, {artwork})
+}
+
 export {
     logOut,
     sendForgotPasswordEmail,
@@ -162,5 +166,6 @@ export {
     removeArtwork,
     addToFeatured, 
     removeFromFeatured, 
-    isFeatured
+    isFeatured,
+    addNewArtwork
 }
