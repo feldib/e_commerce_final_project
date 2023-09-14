@@ -5,7 +5,7 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 
 function FloatingBackButton(props) {
     return (
-        <Col className='position-fixed fixed-bottom text-center mb-4'>
+        <Col style={{width: "20px"}} className='position-fixed fixed-bottom text-center mb-4 mx-auto'>
             <Button className='mb-5 floating-back-button' variant="primary" onClick={()=>{
                 props.navigate(-1)
             }}>

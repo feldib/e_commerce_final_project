@@ -22,6 +22,7 @@ import Artworks from './pages/AdminPage/Outlet/Artworks'
 import ForgotPassword from './pages/ForgotPassword/ForgotPassword'
 import ResetPassword from './pages/ResetPassword/ResetPassword'
 import UserOrderHistory from './pages/AdminPage/Outlet/UserOrderHistory'
+import AddNewArtworkPage from './pages/AdminPage/Outlet/AddNewArtworkPage'
 
 import Profile from './pages/Profile/Profile'
 import Admin from './pages/AdminPage/Admin'
@@ -165,6 +166,12 @@ function App() {
             path='/admin'
             element={<Admin />}
           >
+
+            <Route
+              path='add_new_artwork'
+              element={<AddNewArtworkPage />}
+            />
+
             <Route
               path='orders'
               element={<Orders />}
