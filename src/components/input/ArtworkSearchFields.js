@@ -77,8 +77,11 @@ function ArtworkSearchFields(props) {
             <Row>
                 <CategoriesDropdown 
                     categories = {props.categories}
-                    category_id="category_id"
-                    setValue={props.formik.setFieldValue}
+                    setValue={
+                        (value) => {
+                            props.formik.setFieldValue("category_id", value)
+                        }
+                    }
                 />
 
                 <Col>

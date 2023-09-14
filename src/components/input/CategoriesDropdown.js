@@ -26,7 +26,7 @@ function CategoriesDropdown(props) {
         <Col className='mx-auto mb-3'>
             <Dropdown 
                 onSelect={(e)=>{
-                    props.setValue("category_id", e)
+                    props.setValue(e)
                 }}
             >
                 <Dropdown.Toggle variant='outilne-dark'>Categories</Dropdown.Toggle>
