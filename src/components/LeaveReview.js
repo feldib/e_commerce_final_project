@@ -42,7 +42,7 @@ function LeaveReview(props) {
     }
 
     return (
-        <Row className='mx-5 mt-5 mb-5'>
+        <Row className='mx-5 mt-5 mb-5 floating-element'>
             <Col >
                 <Formik
                     initialValues={initialValues}
