@@ -56,6 +56,7 @@ function ArtworkDetails(props) {
                                         <ShoppingCartButton
                                             artwork_id={props.artwork_id}
                                             loggedIn={props.loggedIn}
+                                            quantity={quantity}
                                         />
                                     </span>
                                     
@@ -63,7 +64,6 @@ function ArtworkDetails(props) {
                                         artwork_id={props.artwork_id}
                                         loggedIn={props.loggedIn}
                                     />
-                                    <ToastContainer position='bottom-right'/>
                                 </Col>
                             </Row>
                         </Card.Body>
@@ -101,6 +101,7 @@ function ArtworkDetails(props) {
                                         <ShoppingCartButton
                                             artwork_id={props.artwork_id}
                                             loggedIn={props.loggedIn}
+                                            quantity={quantity}
                                         />
                                     </span>
                                     

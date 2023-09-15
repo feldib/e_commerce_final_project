@@ -6,6 +6,11 @@ import { ToastContainer } from 'react-toastify'
 import { Link } from 'react-router-dom'
 import FavouriteButton from '../buttons/FavouriteButton'
 import { increaseShoppingListItemQuantity, decreaseShoppingListItemQuantity, removeFromShoppingList } from '../../fetching'
+import {
+    increaseLocalStorageShoppingCartQuantity,
+    decreaseLocalStorageShoppingCartQuantity,
+    removeLocalStorageShoppingCartQuantity 
+} from '../../helpers/helpers'
 
 function ShoppingCartDataLines(props) {
     return ( 
@@ -49,7 +54,11 @@ function ShoppingCartDataLines(props) {
                             style={{cursor: "pointer"}}
                             onClick={
                                 async()=>{
-                                    await decreaseShoppingListItemQuantity(props.line.id)
+                                    if(props.loggedIn){
+                                        await decreaseShoppingListItemQuantity(props.line.id)
+                                    }else{
+                                        decreaseLocalStorageShoppingCartQuantity(props.line.id)
+                                    }
                                     window.location.reload()
                                 }
                             }
@@ -63,7 +72,11 @@ function ShoppingCartDataLines(props) {
                             style={{cursor: "pointer"}}
                             onClick={
                                 async()=>{
-                                    await increaseShoppingListItemQuantity(props.line.id)
+                                    if(props.loggedIn){
+                                        await increaseShoppingListItemQuantity(props.line.id)
+                                    }else{
+                                        increaseLocalStorageShoppingCartQuantity(props.line.id, props.line.stored_amount)
+                                    }
                                     window.location.reload()
                                 }
                             }
@@ -99,8 +112,13 @@ function ShoppingCartDataLines(props) {
                             style={{cursor: "pointer"}}
                             onClick={
                                 async()=>{
-                                    await removeFromShoppingList(props.line.id)
-                                    window.location.reload()
+                                    if(props.loggedIn){
+                                        await removeFromShoppingList(props.line.id)
+                                        window.location.reload()
+                                    }else{
+                                        removeLocalStorageShoppingCartQuantity(props.line.id)
+                                        window.location.reload()
+                                    }
                                 }
                             }
                         >

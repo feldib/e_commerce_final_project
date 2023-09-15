@@ -108,7 +108,6 @@ function LeaveReview(props) {
                     )}
                 </Formik>
 
-                <ToastContainer position='top-right' />
             </Col>
             
         </Row>

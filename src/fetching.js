@@ -140,6 +140,21 @@ const addNewArtwork = (artwork) => {
     return axios.post(`${server_url}/${admin_url}/add_new_artwork`, {artwork})
 }
 
+const getDataOfArtworks = async (shoppingCart) => {
+    const results = await Promise.all(
+        shoppingCart.map(async(item)=>{
+            const results = await axios.get(`${server_url}/find_artwork_by_id?artwork_id=${item.artwork_id}`)
+            const resObj = {
+                stored_amount: results.data.quantity,
+                ...results.data,
+                quantity: item.quantity
+            }
+            return resObj
+        })
+    )
+    return results
+}
+
 export {
     logOut,
     sendForgotPasswordEmail,
@@ -167,5 +182,6 @@ export {
     addToFeatured, 
     removeFromFeatured, 
     isFeatured,
-    addNewArtwork
+    addNewArtwork,
+    getDataOfArtworks
 }

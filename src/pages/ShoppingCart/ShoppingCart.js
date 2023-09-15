@@ -1,13 +1,14 @@
 import React from 'react'
 import { Col, Row, Container, Button, Table } from 'react-bootstrap'
 import ShoppingCartTable from '../../components/tables/ShoppingCartTable'
-import useAxios from '../../hooks/useAxios'
+import useShoppingList from '../../hooks/useShoppingList'
 import { Link } from 'react-router-dom'
 import PageTitle from '../../components/PageTitle'
 import SubPageTitle from '../../components/SubPageTitle'
 
 function ShoppingCartPage(props) {
-    const shoppingListItems = useAxios("/users/shopping_cart")
+    let shoppingListItems = useShoppingList(props.loggedIn)
+
     const [totalCost, setTotalCost] = React.useState()
     React.useEffect(()=>{
         if(shoppingListItems){
