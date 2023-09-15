@@ -2,16 +2,22 @@ import React from 'react'
 import { faBasketShopping} from '@fortawesome/free-solid-svg-icons'
 import { addToShoppingList } from '../../fetching'
 import SinglePurposeButton from './SinglePurposeButton'
+import { increaseLocalStorageShoppingCartQuantity } from '../../helpers/helpers.js'
+
 
 function ShoppingCartButton(props) {
     return (
         <SinglePurposeButton 
             loggedIn = {props.loggedIn}
-            actionOnSuccess = {addToShoppingList}
+            actionOnLoggedIn = {addToShoppingList}
+            actionOnNotLoggedIn = {
+                ()=>{
+                    increaseLocalStorageShoppingCartQuantity(props.artwork_id, props.quantity)
+                }
+            }
             artwork_id = {props.artwork_id}
             toastSuccessMessage = "Item added to shopping cart"
             toastErrorMessage = "Item out of stock"
-            toastWarningMessage = "Sign in or register to add to shopping cart!"
             icon = {faBasketShopping}
         />
     )

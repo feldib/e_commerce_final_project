@@ -11,7 +11,7 @@ function SinglePurposeButton(props) {
                 onClick={
                     async()=>{
                         if(props.loggedIn){
-                            props.actionOnSuccess(parseInt(props.artwork_id))
+                            props.actionOnLoggedIn(parseInt(props.artwork_id))
                             .then((response)=>{
                                 toast.success(props.toastSuccessMessage, {
                                     className: "toast-success"
@@ -23,9 +23,13 @@ function SinglePurposeButton(props) {
                             })
                             
                         }else{
-                            toast.warning(props.toastWarningMessage, {
-                                className: "toast-warning"
-                            })
+                            if(props.actionOnNotLoggedIn){
+                                props.actionOnNotLoggedIn()
+                            }else{
+                                toast.warning(props.toastWarningMessage, {
+                                    className: "toast-warning"
+                                })
+                            }
                         }
                     }
                 }

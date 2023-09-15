@@ -67,6 +67,7 @@ function BuyTableDataLines(props) {
                             <ShoppingCartButton
                                 artwork_id={props.line.id}
                                 loggedIn={props.loggedIn}
+                                quantity={quantity}
                             />
                         </span>
                         <FavouriteButton
