@@ -49,7 +49,12 @@ function ShoppingCartPage(props) {
 
                 <Row>
                     <Col className='text-center mb-5'>
-                        <Link to="/checkout">
+                        <Link 
+                            to={props.loggedIn ? "/checkout" : "/login"}
+                            state = {{
+                                to_checkout: props.loggedIn ? false : true
+                            }}
+                        >
                             <Button onClick={()=>{
                                 localStorage.removeItem("currentOrder")
                                 localStorage.setItem("currentOrder", JSON.stringify({items: shoppingListItems, totalCost}))

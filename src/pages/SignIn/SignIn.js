@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { logIn } from '../../fetching'
 import InputComponent from '../../components/input/InputComponent'
 import { Col, Container, Row, Button, InputGroup } from 'react-bootstrap'
@@ -10,6 +10,9 @@ import { ToastContainer, toast } from 'react-toastify'
 import PageTitle from '../../components/PageTitle'
 
 function SignInPage(props) {
+
+    const {to_checkout} = useLocation().state || false
+
     const initialValues = {
         email: '',
         password: ''
@@ -17,7 +20,9 @@ function SignInPage(props) {
 
     async function onSubmit(values){
         try{
-            await logIn(values.email, values.password, props.settleSuccessfulLogIn)
+            await logIn(values.email, values.password, (userData)=>{
+                props.settleSuccessfulLogIn(to_checkout, userData)
+            })
             toast.success("Logged in", {
                 className: "toast-success"
             })

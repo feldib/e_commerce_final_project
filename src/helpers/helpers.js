@@ -1,4 +1,4 @@
-import {getDataOfArtworks} from '../fetching'
+import {getDataOfArtworks, replaceSavedShoppingCart} from '../fetching'
 
 const presentData = (dataLines, makeDataLines) => {
     if(dataLines.length > 0){
@@ -75,8 +75,12 @@ const getLocatStorageShoppingCart = async () => {
         const data = await getDataOfArtworks(shoppingCart)
         return data
     }
+}
 
-    
+const replacePreviousShoppingCart = async () => {
+    const shopping_cart = JSON.parse(localStorage.getItem("shopping_cart"))
+    replaceSavedShoppingCart(shopping_cart)
+    localStorage.removeItem("shopping_cart")
 }
 
 export {
@@ -84,5 +88,6 @@ export {
     increaseLocalStorageShoppingCartQuantity,
     decreaseLocalStorageShoppingCartQuantity,
     removeLocalStorageShoppingCartQuantity,
-    getLocatStorageShoppingCart
+    getLocatStorageShoppingCart,
+    replacePreviousShoppingCart
 }

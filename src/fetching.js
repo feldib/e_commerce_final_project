@@ -155,6 +155,10 @@ const getDataOfArtworks = async (shoppingCart) => {
     return results
 }
 
+const replaceSavedShoppingCart = (shopping_cart) => {
+    return axios.post(`${server_url}/${users_url}/replace_saved_shopping_cart`, {shopping_cart})
+}
+
 export {
     logOut,
     sendForgotPasswordEmail,
@@ -183,5 +187,6 @@ export {
     removeFromFeatured, 
     isFeatured,
     addNewArtwork,
-    getDataOfArtworks
+    getDataOfArtworks,
+    replaceSavedShoppingCart
 }
