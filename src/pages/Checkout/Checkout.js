@@ -8,6 +8,20 @@ import React from 'react'
 import { json } from 'react-router-dom'
 
 function CheckoutPage(props) {
+
+    const validationSchema = Yup.object().shape({
+        email: Yup.string()
+            .required("Email required")
+            .email("Invalid email"),
+        first_name: Yup.string()
+            .required("Email required"),
+        last_name:  Yup.string()
+            .required("Email required"),
+        address: Yup.string()
+            .required("Email required"),
+        phone_number: Yup.string()
+            .required("Email required")
+    })
     
     const formik = useFormik({
         enableReinitialize: true,
@@ -19,19 +33,7 @@ function CheckoutPage(props) {
             phone_number: props.user.phone_number || ""
         },
 
-        validationSchema : Yup.object().shape({
-            email: Yup.string()
-                .required("Email required")
-                .email("Invalid email"),
-            first_name: Yup.string()
-                .required("Email required"),
-            last_name:  Yup.string()
-                .required("Email required"),
-            address: Yup.string()
-                .required("Email required"),
-            phone_number: Yup.string()
-                .required("Email required")
-        }),
+        validationSchema,
 
         onSubmit: (values) => {
             order(values).then(
