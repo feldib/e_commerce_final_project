@@ -33,6 +33,9 @@ import Footer from "./components/navbars/Footer"
 import React from 'react'
 import { getLoggedIn } from './fetching.js'
 import axios from 'axios'
+import { confirmAlert } from 'react-confirm-alert'
+import 'react-confirm-alert/src/react-confirm-alert.css'
+import { replacePreviousShoppingCart } from './helpers/helpers'
 
 function App() {
   axios.defaults.withCredentials = true
@@ -54,13 +57,45 @@ function App() {
     getUserData()
   }, [])
 
-  const settleSuccessfulLogIn = (userData)=>{
+  const settleSuccessfulLogIn = (to_checkout, userData)=>{
     setUser(userData)
-    window.location.replace(
-      userData.is_admin ? 
-      "/admin" :
-      "/user"
-    )
+    if(to_checkout){
+      confirmAlert({
+        title: 'Replace shopping cart',
+        message: 'Do you want to replace your current shopping cart with this one?',
+        buttons: [
+          {
+            label: 'Yes',
+            onClick: () => {
+              replacePreviousShoppingCart()
+
+              window.location.replace(
+                "/checkout"
+              )
+            }
+          },
+          {
+            label: 'No',
+            onClick: () => {
+              localStorage.removeItem("shopping_cart")
+
+              window.location.replace(
+                userData.is_admin ? 
+                "/admin" :
+                "/user"
+              )
+            }
+          }
+        ]
+      })
+    }else{
+      window.location.replace(
+        userData.is_admin ? 
+        "/admin" :
+        "/user"
+      )
+    }
+    
   }
 
   const settleSuccessfulRegistration = (userData)=>{

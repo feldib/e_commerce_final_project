@@ -3,8 +3,10 @@ import UserDataComponent from '../../components/input/UserDataComponent'
 import { useFormik } from 'formik'
 import { Button, Col, Row, Form } from 'react-bootstrap'
 import { order } from '../../fetching'
+import { json } from 'react-router-dom'
 
 function CheckoutPage(props) {
+    
     const formik = useFormik({
         initialValues: { 
             email: props.user.email,
@@ -34,6 +36,7 @@ function CheckoutPage(props) {
             )
         }
     })
+
     return (
         <form className='pb-5' onSubmit={formik.handleSubmit}>
             <UserDataComponent 
