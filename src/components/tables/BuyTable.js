@@ -33,7 +33,7 @@ function BuyTable(props) {
                         <th>Title</th>
                         <th>Artist</th>
                         <th>Price</th>
-                        <th>Quantity</th>
+                        <th className={`${props.reccomendation ? "d-none" : "d-none d-md-table-cell"}`}>Quantity</th>
                         <th className={`${props.reccomendation ? "d-none" : "d-none d-md-table-cell"}`}>Tags</th>
                         <th className={`${props.reccomendation ? "d-none" : "d-none d-md-table-cell"}`}>Categories</th>
                         <th>{props.orderSummary && "Total Cost" }</th>

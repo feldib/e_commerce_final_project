@@ -20,8 +20,8 @@ const increaseLocalStorageShoppingCartQuantity = (artwork_id, stored_amount) => 
 
     const existingRecordIndex = shoppingCart.findIndex((item => item.artwork_id===artwork_id))
 
-    if(stored_amount > 0 ){
-        if(existingRecordIndex<0){
+    if(stored_amount > 0){
+        if(existingRecordIndex < 0){
             shoppingCart.push({
                 artwork_id,
                 quantity: 1
@@ -31,8 +31,11 @@ const increaseLocalStorageShoppingCartQuantity = (artwork_id, stored_amount) => 
         else if(shoppingCart[existingRecordIndex].quantity < stored_amount){
             shoppingCart[existingRecordIndex].quantity++
             localStorage.setItem("shopping_cart", JSON.stringify(shoppingCart))
+        }else{
+            throw new Error("Item is out of stock")
         }
-        
+    }else{
+        throw new Error("Item is out of stock")
     }
 }
 
