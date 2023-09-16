@@ -14,6 +14,26 @@ function ArtworkDetails(props) {
     const reviewsData = useAxios(`/reviews?id=${props.artwork_id}`)
     const [quantity, setQuantity] = React.useState(props.artwork.quantity)
 
+    React.useEffect(()=>{
+
+        if(!props.loggedIn){
+            const signedOutShoppingCart = JSON.parse(localStorage.getItem('shopping_cart')) || []
+            if(signedOutShoppingCart.length){
+                const index = signedOutShoppingCart.findIndex((item)=>{
+
+                    return item.artwork_id === parseInt(props.artwork_id)
+                })
+                if(index !== -1){
+                    setQuantity(
+                        props.artwork.quantity - signedOutShoppingCart[index].quantity
+                    ) 
+                }
+            }
+        }
+
+
+    }, [])
+
     const reviews = useLoading(reviewsData, (reviews)=>{
         return (
             <ReviewsOfArtworks 
@@ -21,8 +41,6 @@ function ArtworkDetails(props) {
             />
         )
     })
-
-    const [reviewIndex, setReviewIndex] = React.useState(0)
 
     return (
         <>

@@ -6,15 +6,35 @@ import ShoppingCartButton from '../../components/buttons/ShoppingCartButton'
 
 function BuyTableDataLines(props) {
     const [quantity, setQuantity] = React.useState(props.line.quantity)
+
+    React.useEffect(()=>{
+
+        if(!props.loggedIn){
+            const signedOutShoppingCart = JSON.parse(localStorage.getItem('shopping_cart')) || []
+            if(signedOutShoppingCart.length){
+                const index = signedOutShoppingCart.findIndex((item)=>{
+                    return item.artwork_id === props.line.id
+                })
+                if(index !== -1){
+                    setQuantity(
+                        props.line.quantity - signedOutShoppingCart[index].quantity
+                    ) 
+                }
+            }
+        }
+
+
+    }, [])
+    
     return ( 
         <tr key={props.index}>
             <td>
                 <img
-                        src = {props.line.thumbnail}
-                        width="100"
-                        style={{objectFit: "contain"}}
-                        alt="place of thumbnail"
-                    />
+                    src = {props.line.thumbnail}
+                    width="100"
+                    style={{objectFit: "contain"}}
+                    alt="place of thumbnail"
+                />
             </td>
             <td>
                 <Link to={`/artwork_page/${props.line.id}`}>
@@ -59,7 +79,7 @@ function BuyTableDataLines(props) {
                     <div className='container'>
                         <span onClick={
                             ()=>{
-                                if(props.loggedIn && quantity>0){
+                                if(quantity>0){
                                     setQuantity(quantity-1)
                                 }
                             }
