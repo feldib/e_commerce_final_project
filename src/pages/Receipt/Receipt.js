@@ -7,7 +7,7 @@ import PageTitle from '../../components/PageTitle'
 function ReceiptPage(props) {
     const currentOrderData = JSON.parse(localStorage.getItem("currentOrder"))
     return (
-    <Container>
+    <Container className='pb-5'>
          <PageTitle 
             title="Receipt"
         />

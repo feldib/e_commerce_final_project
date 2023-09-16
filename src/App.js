@@ -58,8 +58,15 @@ function App() {
   }, [])
 
   const settleSuccessfulLogIn = (to_checkout, userData)=>{
+    const checkout_path = "/checkout"
+    const user_path = userData.is_admin ? "/admin" : "/user"
+    const path = to_checkout ? checkout_path : user_path
+
+    const signed_out_shopping_cart = localStorage.getItem("shopping_cart")
+
     setUser(userData)
-    if(to_checkout){
+  
+    if(signed_out_shopping_cart){
       confirmAlert({
         title: 'Replace shopping cart',
         message: 'Do you want to replace your current shopping cart with this one?',
@@ -68,39 +75,27 @@ function App() {
             label: 'Yes',
             onClick: () => {
               replacePreviousShoppingCart()
-
-              window.location.replace(
-                "/checkout"
-              )
+              window.location = path 
             }
           },
           {
             label: 'No',
             onClick: () => {
               localStorage.removeItem("shopping_cart")
-
-              window.location.replace(
-                userData.is_admin ? 
-                "/admin" :
-                "/user"
-              )
+              window.location = user_path
             }
           }
         ]
       })
     }else{
-      window.location.replace(
-        userData.is_admin ? 
-        "/admin" :
-        "/user"
-      )
+      window.location = path
     }
     
   }
 
   const settleSuccessfulRegistration = (userData)=>{
     setUser(userData)
-    window.location.replace("/user")
+    window.location = "/user"
   }
 
   return (
