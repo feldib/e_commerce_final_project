@@ -6,8 +6,13 @@ import { getOrderHistory } from '../../../fetching'
 import SubPageTitle from '../../../components/SubPageTitle'
 import FloatingBackButton from '../../../components/buttons/FloatingBackButton'
 import { useNavigate, useParams } from 'react-router-dom'
+import { redirectIfNotloggedIn, redirectIfNotAdmin } from '../../../helpers/helpers'
 
-function UserOrderHistory() {
+
+function UserOrderHistory(props) {
+    redirectIfNotloggedIn()
+    redirectIfNotAdmin(props.isAdmin)
+
     const [orderDataCollection, setOrderDataCollection] = React.useState()
 
     React.useEffect(()=>{

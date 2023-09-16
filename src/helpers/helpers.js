@@ -1,4 +1,9 @@
-import {getDataOfArtworks, replaceSavedShoppingCart} from '../fetching'
+import {
+    getDataOfArtworks, 
+    replaceSavedShoppingCart,
+    getLoggedIn,
+    logIn
+} from '../fetching'
 
 const presentData = (dataLines, makeDataLines) => {
     if(dataLines.length > 0){
@@ -83,11 +88,25 @@ const replacePreviousShoppingCart = async () => {
     localStorage.removeItem("shopping_cart")
 }
 
+const redirectIfNotloggedIn = () => {
+    getLoggedIn().catch(()=>{
+        window.location.replace("/login")
+    })
+}
+
+const redirectIfNotAdmin = (isAdmin) => {
+    if(!isAdmin){
+        window.location.replace("/user")
+    }
+}
+
 export {
     presentData,
     increaseLocalStorageShoppingCartQuantity,
     decreaseLocalStorageShoppingCartQuantity,
     removeLocalStorageShoppingCartQuantity,
     getLocatStorageShoppingCart,
-    replacePreviousShoppingCart
+    replacePreviousShoppingCart,
+    redirectIfNotloggedIn,
+    redirectIfNotAdmin
 }

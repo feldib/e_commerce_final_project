@@ -5,8 +5,11 @@ import ArtworkSearchComponent from '../../../components/input/ArtworkSearchCompo
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom'
+import { redirectIfNotloggedIn, redirectIfNotAdmin } from '../../../helpers/helpers'
 
 function Search(props) {
+    redirectIfNotloggedIn()
+    redirectIfNotAdmin(props.isAdmin)
 
     return (
         <Container className='pb-5 mb-5'>
