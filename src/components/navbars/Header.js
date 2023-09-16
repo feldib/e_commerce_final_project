@@ -5,8 +5,12 @@ import { Navbar, Nav, Container } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import LoggedInNavbarItems from './LoggedInNavbarItems'
 import NotLoggedInNavbarItems from './NotLoggedInNavbarItems'
+import { ToastContainer, toast } from 'react-toastify'
 
 function Header(props) { 
+    const [expanded, setExpanded] = React.useState(false)
+
+    const signed_out_shopping_cart = JSON.parse(localStorage.getItem("shopping_cart")) || []
     return (
             <Navbar id='header' expand="lg">
                 <Container>
@@ -37,7 +41,17 @@ function Header(props) {
                             </Link>
                             
                             {!props.user.is_admin &&
-                                <Link className='nav-link' style={{ color: 'inherit', textDecoration: 'inherit'}} to="/shopping_cart">
+                                <Link 
+                                    className='nav-link' style={{ color: 'inherit', textDecoration: 'inherit'}} 
+                                    to = {!signed_out_shopping_cart.length ? "#": "/shopping_cart"}
+                                    onClick={()=>{
+                                        if(!signed_out_shopping_cart.length){
+                                            toast.warning("Shopping list is empty.", {
+                                                className: "toast-warning"
+                                            })
+                                        }
+                                    }}
+                                >
                                     Shopping cart
                                 </Link>
                             }
@@ -53,6 +67,9 @@ function Header(props) {
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
+
+                
+
             </Navbar>
     )
 }
