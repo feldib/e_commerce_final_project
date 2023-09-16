@@ -4,7 +4,20 @@ import UserDataComponent from '../../../components/input/UserDataComponent'
 import { useFormik } from 'formik'
 
 function UserData(props) {
+    const validationSchema = Yup.object().shape({
+        email: Yup.string()
+            .email("Invalid email")
+            .required("Email required"),
+        first_name: Yup.string()
+            .required("Email required"),
+        last_name:  Yup.string()
+            .required("Email required"),
+        address: Yup.string(),
+        phone_number: Yup.string()
+    })
+
     const formik = useFormik({
+        enableReinitialize: true,
         initialValues: { 
             email: props.user.email,
             first_name: props.user.first_name,
@@ -13,14 +26,7 @@ function UserData(props) {
             phone_number: props.user.phone_number || ""
         },
 
-        validationSchema : Yup.object().shape({
-            email: Yup.string()
-                .email("Invalid email"),
-            first_name: Yup.string(),
-            last_name:  Yup.string(),
-            address: Yup.string(),
-            phone_number: Yup.string()
-        }),
+        validationSchema,
 
 
     })
