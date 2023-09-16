@@ -2,7 +2,7 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart, faX, faPlus, faMinus} from '@fortawesome/free-solid-svg-icons'
 import { Row, Table, Col } from 'react-bootstrap'
-import { ToastContainer } from 'react-toastify'
+import { toast, ToastContainer } from 'react-toastify'
 import { Link } from 'react-router-dom'
 import FavouriteButton from '../buttons/FavouriteButton'
 import { increaseShoppingListItemQuantity, decreaseShoppingListItemQuantity, removeFromShoppingList } from '../../fetching'
@@ -73,11 +73,29 @@ function ShoppingCartDataLines(props) {
                             onClick={
                                 async()=>{
                                     if(props.loggedIn){
-                                        await increaseShoppingListItemQuantity(props.line.id)
+                                        await increaseShoppingListItemQuantity(props.line.id).then((response)=>{
+                                            toast.success("Item added to shopping cart", {
+                                                className: "toast-success"
+                                            })
+                                            window.location.reload()
+                                        }).catch((error)=>{
+                                            toast.error("Item out of stock", {
+                                                className: "toast-error"
+                                            })
+                                        })
                                     }else{
-                                        increaseLocalStorageShoppingCartQuantity(props.line.id, props.line.stored_amount)
+                                        try{
+                                            increaseLocalStorageShoppingCartQuantity(props.line.id, props.line.stored_amount)
+                                            toast.success("Item added to shopping cart", {
+                                                className: "toast-success"
+                                            })
+                                            window.location.reload()
+                                        }catch(error){
+                                            toast.error("Item out of stock", {
+                                                className: "toast-error"
+                                            })
+                                        }
                                     }
-                                    window.location.reload()
                                 }
                             }
                         >

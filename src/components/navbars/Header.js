@@ -36,6 +36,12 @@ function Header(props) {
                                 Contact
                             </Link>
                             
+                            {!props.user.is_admin &&
+                                <Link className='nav-link' style={{ color: 'inherit', textDecoration: 'inherit'}} to="/shopping_cart">
+                                    Shopping cart
+                                </Link>
+                            }
+                            
                             {props.loggedIn ?
                                 <LoggedInNavbarItems 
                                     first_name={props.user.first_name}

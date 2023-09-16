@@ -24,11 +24,16 @@ function SinglePurposeButton(props) {
                             
                         }else{
                             if(props.actionOnNotLoggedIn){
-                                props.actionOnNotLoggedIn()
-                            }else{
-                                toast.warning(props.toastWarningMessage, {
-                                    className: "toast-warning"
-                                })
+                                try{
+                                    props.actionOnNotLoggedIn()
+                                    toast.success(props.toastSuccessMessage, {
+                                        className: "toast-success"
+                                    })
+                                }catch(error){
+                                    toast.error(props.toastErrorMessage, {
+                                        className: "toast-error"
+                                    })
+                                }
                             }
                         }
                     }
