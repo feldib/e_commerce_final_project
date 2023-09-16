@@ -4,8 +4,11 @@ import { Outlet } from 'react-router-dom'
 import SubNavbar from '../../components/navbars/SubNavbar'
 import { faStar, faHeart, faInfoCircle, faClockRotateLeft, faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 import PageTitle from '../../components/PageTitle'
+import { redirectIfNotloggedIn } from '../../helpers/helpers'
 
 function ProfilePage(props) {
+    redirectIfNotloggedIn()
+    
     return (
         <Container>
              <PageTitle 

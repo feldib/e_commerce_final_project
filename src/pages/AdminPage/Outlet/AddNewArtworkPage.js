@@ -12,8 +12,11 @@ import useLoading from '../../../hooks/useLoading'
 import { json, useNavigate } from 'react-router-dom'
 import { WithContext as ReactTags } from 'react-tag-input'
 import { addNewArtwork } from '../../../fetching'
+import { redirectIfNotloggedIn, redirectIfNotAdmin } from '../../../helpers/helpers'
 
 function AddNewArtworkPage(props) {
+    redirectIfNotloggedIn()
+    redirectIfNotAdmin(props.isAdmin)
 
     const categories = useAxios("/categories")
 

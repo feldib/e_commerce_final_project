@@ -4,8 +4,12 @@ import { Outlet } from 'react-router-dom';
 import SubNavbar from '../../components/navbars/SubNavbar'
 import { faMessage, faStar, faPerson, faPalette, faClockRotateLeft } from '@fortawesome/free-solid-svg-icons'
 import PageTitle from '../../components/PageTitle';
+import { redirectIfNotloggedIn, redirectIfNotAdmin } from '../../helpers/helpers'
 
 function AdminPage(props) {
+    redirectIfNotloggedIn()
+    redirectIfNotAdmin(props.isAdmin)
+
     return (
         <Container className='pb-5'>
             <PageTitle title="Admin page" />
