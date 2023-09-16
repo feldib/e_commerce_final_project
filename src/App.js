@@ -36,6 +36,7 @@ import axios from 'axios'
 import { confirmAlert } from 'react-confirm-alert'
 import 'react-confirm-alert/src/react-confirm-alert.css'
 import { replacePreviousShoppingCart } from './helpers/helpers'
+import { ToastContainer } from 'react-toastify'
 
 function App() {
   axios.defaults.withCredentials = true
@@ -249,6 +250,8 @@ function App() {
       </div>
 
       <Footer />
+
+      <ToastContainer position='bottom-right' />
     </BrowserRouter>
 
   )
