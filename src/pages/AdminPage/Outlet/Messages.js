@@ -5,11 +5,8 @@ import useAxios from '../../../hooks/useAxios'
 import useLoading from '../../../hooks/useLoading'
 import { admin_url } from '../../../utils/api_constants'
 import UnansweredMessage from '../../../components/UnansweredMessage'
-import { redirectIfNotloggedIn, redirectIfNotAdmin } from '../../../helpers/helpers'
 
 function Messages(props) {
-    redirectIfNotloggedIn()
-    redirectIfNotAdmin()
     
     const messages = useAxios(`/${admin_url}/unanswered_messages`)
     const messagesRepresented = useLoading(messages, ((messages)=>{

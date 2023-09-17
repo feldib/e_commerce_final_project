@@ -4,11 +4,8 @@ import useAxios from '../../../hooks/useAxios'
 import useLoading from '../../../hooks/useLoading'
 import { admin_url } from '../../../utils/api_constants'
 import UserTable from '../../../components/tables/UserTable'
-import { redirectIfNotloggedIn, redirectIfNotAdmin } from '../../../helpers/helpers'
 
 function Users(props) {
-    redirectIfNotloggedIn()
-    redirectIfNotAdmin()
 
     const users = useAxios(`/${admin_url}/users`)
     const usersRepresented = useLoading(users, (users)=>{

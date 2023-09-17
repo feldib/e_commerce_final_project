@@ -12,11 +12,8 @@ import useLoading from '../../../hooks/useLoading'
 import { json, useNavigate } from 'react-router-dom'
 import { WithContext as ReactTags } from 'react-tag-input'
 import { addNewArtwork } from '../../../fetching'
-import { redirectIfNotloggedIn, redirectIfNotAdmin } from '../../../helpers/helpers'
 
 function AddNewArtworkPage(props) {
-    redirectIfNotloggedIn()
-    redirectIfNotAdmin()
 
     const categories = useAxios("/categories")
 
@@ -51,7 +48,7 @@ function AddNewArtworkPage(props) {
             description: ""
         },
 
-        onSubmit: (values)=>{
+        onSubmit: (values, actions)=>{
             const tags = values.tags.map(obj => obj.text)
             const other_pictures = values.other_pictures.map(obj => obj.text)                
 
@@ -59,6 +56,7 @@ function AddNewArtworkPage(props) {
                 toast.success("Artwork added successfully to database", {
                     className: "toast-success"
                 })
+                actions.resetForm()
             }).catch((error)=>{
                 toast.error("Error: could not add artwork.", {
                     className: "toast-error"

@@ -7,12 +7,9 @@ import useAxios from '../../../hooks/useAxios'
 import { admin_url } from '../../../utils/api_constants'
 import Review from '../../../components/Review'
 import SubPageTitle from '../../../components/SubPageTitle'
-import { redirectIfNotloggedIn, redirectIfNotAdmin } from '../../../helpers/helpers'
 
 
 function Reviews(props) {
-    redirectIfNotloggedIn()
-    redirectIfNotAdmin()
 
     const reviews = useAxios(`/${admin_url}/get_unapproved_reviews`)
     const representReviews = useLoading(reviews, ((reviews)=>{
