@@ -25,6 +25,7 @@ function ResetPassword() {
             toast.success("Password changed successfully", {
                 className: "toast-success"
             })
+            window.location = "/login"
         }).catch(()=>{
             toast.error("Error: couldn't change password", {
                 className: "toast-error"
