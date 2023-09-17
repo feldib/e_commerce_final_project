@@ -97,6 +97,10 @@ const getLoggedIn = async () => {
     return axios.get(`${server_url}/logged_in`)
 }
 
+const getIsAdmin = async () => {
+    return axios.get(`${server_url}/${admin_url}/is_admin`)
+}
+
 const leaveReview = async (artwork_id, title, review_text) => {
     return axios.post(`${server_url}/${users_url}/leave_review`, {artwork_id, title, review_text})
 }
@@ -188,5 +192,6 @@ export {
     isFeatured,
     addNewArtwork,
     getDataOfArtworks,
-    replaceSavedShoppingCart
+    replaceSavedShoppingCart,
+    getIsAdmin
 }

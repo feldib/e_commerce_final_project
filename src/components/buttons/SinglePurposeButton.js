@@ -7,6 +7,7 @@ function SinglePurposeButton(props) {
     return (
         <Row>
             <p 
+                className='table-button'
                 style={{cursor: "pointer"}}
                 onClick={
                     async()=>{

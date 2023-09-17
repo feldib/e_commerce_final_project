@@ -195,42 +195,42 @@ function App() {
 
           <Route
             path='/admin'
-            element={<Admin isAdmin={user.is_admin} />}
+            element={<Admin  />}
           >
 
             <Route
               path='add_new_artwork'
-              element={<AddNewArtworkPage isAdmin={user.is_admin} />}
+              element={<AddNewArtworkPage  />}
             />
 
             <Route
               path='orders'
-              element={<Orders isAdmin={user.is_admin} />}
+              element={<Orders  />}
             />
 
             <Route
               path='order_history/:user_id'
-              element={<UserOrderHistory isAdmin={user.is_admin} />}
+              element={<UserOrderHistory  />}
             />
 
             <Route
               path='reviews'
-              element={<AdminReviews isAdmin={user.is_admin} />}
+              element={<AdminReviews  />}
             />
 
             <Route
               path='messages'
-              element={<Messages isAdmin={user.is_admin} />}
+              element={<Messages  />}
             />
 
             <Route
               path='users'
-              element={<Users isAdmin={user.is_admin} />}
+              element={<Users  />}
             />
 
             <Route
               path='artworks'
-              element={<Artworks isAdmin={user.is_admin} loggedIn={loggedIn} />}
+              element={<Artworks  loggedIn={loggedIn} />}
             />
           </Route>
 

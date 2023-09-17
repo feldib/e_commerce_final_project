@@ -9,7 +9,7 @@ import { redirectIfNotloggedIn, redirectIfNotAdmin } from '../../../helpers/help
 
 function Messages(props) {
     redirectIfNotloggedIn()
-    redirectIfNotAdmin(props.isAdmin)
+    redirectIfNotAdmin()
     
     const messages = useAxios(`/${admin_url}/unanswered_messages`)
     const messagesRepresented = useLoading(messages, ((messages)=>{

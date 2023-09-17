@@ -2,6 +2,7 @@ import {
     getDataOfArtworks, 
     replaceSavedShoppingCart,
     getLoggedIn,
+    getIsAdmin,
     logIn
 } from '../fetching'
 
@@ -95,9 +96,9 @@ const redirectIfNotloggedIn = () => {
 }
 
 const redirectIfNotAdmin = (isAdmin) => {
-    if(!isAdmin){
+    getIsAdmin().catch(()=>{
         window.location.replace("/user")
-    }
+    })
 }
 
 export {

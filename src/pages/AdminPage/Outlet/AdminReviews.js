@@ -12,7 +12,7 @@ import { redirectIfNotloggedIn, redirectIfNotAdmin } from '../../../helpers/help
 
 function Reviews(props) {
     redirectIfNotloggedIn()
-    redirectIfNotAdmin(props.isAdmin)
+    redirectIfNotAdmin()
 
     const reviews = useAxios(`/${admin_url}/get_unapproved_reviews`)
     const representReviews = useLoading(reviews, ((reviews)=>{

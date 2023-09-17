@@ -11,7 +11,7 @@ import { redirectIfNotloggedIn, redirectIfNotAdmin } from '../../../helpers/help
 
 function UserOrderHistory(props) {
     redirectIfNotloggedIn()
-    redirectIfNotAdmin(props.isAdmin)
+    redirectIfNotAdmin()
 
     const [orderDataCollection, setOrderDataCollection] = React.useState()
 

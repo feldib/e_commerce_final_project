@@ -8,7 +8,7 @@ import { redirectIfNotloggedIn, redirectIfNotAdmin } from '../../helpers/helpers
 
 function AdminPage(props) {
     redirectIfNotloggedIn()
-    redirectIfNotAdmin(props.isAdmin)
+    redirectIfNotAdmin()
 
     return (
         <Container className='pb-5'>
