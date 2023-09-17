@@ -16,7 +16,7 @@ import { redirectIfNotloggedIn, redirectIfNotAdmin } from '../../../helpers/help
 
 function AddNewArtworkPage(props) {
     redirectIfNotloggedIn()
-    redirectIfNotAdmin(props.isAdmin)
+    redirectIfNotAdmin()
 
     const categories = useAxios("/categories")
 

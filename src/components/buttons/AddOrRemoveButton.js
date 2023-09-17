@@ -21,6 +21,7 @@ function AddOrRemoveFromButton(props) {
     return (   
         <Row className='py-2'>
             <span 
+                className='table-button'
                 style={{cursor: "pointer"}}
                 onClick={
                     async()=>{

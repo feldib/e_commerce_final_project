@@ -5,15 +5,22 @@ import SubNavbar from '../../components/navbars/SubNavbar'
 import { faStar, faHeart, faInfoCircle, faClockRotateLeft, faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 import PageTitle from '../../components/PageTitle'
 import { redirectIfNotloggedIn } from '../../helpers/helpers'
+import useLoading from '../../hooks/useLoading'
 
 function ProfilePage(props) {
     redirectIfNotloggedIn()
+
+    const title  = useLoading(props.user.first_name, (first_name)=>{
+        return (
+            <PageTitle 
+                title={`${first_name}'s page`}
+            />
+        )
+    })
     
     return (
         <Container>
-             <PageTitle 
-                title={`${props.user.first_name}'s page`}
-            />
+             {title}
 
             <SubNavbar 
                 navbarName="User pages"

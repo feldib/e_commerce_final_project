@@ -9,6 +9,8 @@ import { ToastContainer, toast } from 'react-toastify'
 
 function Header(props) { 
     const [expanded, setExpanded] = React.useState(false)
+
+    const [shoppingCartPath, setShoppingCartPath] = React.useState("#")
     
     return (
             <Navbar id='header' expand="lg">
@@ -42,6 +44,7 @@ function Header(props) {
                             {!props.user.is_admin &&
                                 <a 
                                     className='nav-link' style={{ color: 'inherit', textDecoration: 'inherit', cursor: "pointer"}} 
+                                    href={shoppingCartPath}
                                     onClick={()=>{
                                         const signed_out_shopping_cart = JSON.parse(localStorage.getItem("shopping_cart")) || []
 
@@ -51,7 +54,10 @@ function Header(props) {
                                             })
 
                                         }else{
-                                            window.location = !signed_out_shopping_cart.length ? "#": "/shopping_cart"
+                                            setShoppingCartPath(!(JSON.parse(localStorage.getItem("shopping_cart")) || []) ?
+                                                "#": 
+                                                "/shopping_cart"
+                                            )
                                         }
                                     }}
                                 >

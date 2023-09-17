@@ -38,7 +38,9 @@ function ArtworkSearchComponent(props) {
 
         validationSchema: Yup.object().shape({
             min: Yup.number()
-                .min()
+                .min(0),
+            max: Yup.number()
+                .min(1),
         })
 
     })

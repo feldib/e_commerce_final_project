@@ -8,7 +8,7 @@ import { redirectIfNotloggedIn, redirectIfNotAdmin } from '../../../helpers/help
 
 function Users(props) {
     redirectIfNotloggedIn()
-    redirectIfNotAdmin(props.isAdmin)
+    redirectIfNotAdmin()
 
     const users = useAxios(`/${admin_url}/users`)
     const usersRepresented = useLoading(users, (users)=>{

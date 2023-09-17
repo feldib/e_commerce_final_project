@@ -4,10 +4,11 @@ import useAxios from '../../../hooks/useAxios'
 import useLoading from '../../../hooks/useLoading'
 import { admin_url } from '../../../utils/api_constants'
 import OrderSummaryComponent from '../../../components/OrderSummaryComponent'
-import { redirectIfNotloggedIn } from '../../../helpers/helpers'
+import { redirectIfNotloggedIn, redirectIfNotAdmin } from '../../../helpers/helpers'
 
-function Orders() {
+function Orders(props) {
     redirectIfNotloggedIn()
+    redirectIfNotAdmin()
 
     function representOrderDataCollection(orderDataCollection){
         const len = orderDataCollection.length
