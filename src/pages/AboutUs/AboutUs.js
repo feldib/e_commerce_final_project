@@ -10,7 +10,7 @@ function AboutUsPage() {
             <PageTitle title="About us" />
             <Row className='mb-5'>
                 <Col className='pb-5 floating-element'>
-                    <Row>
+                    <Row className='text-center'>
                         <h2>Our story</h2>
                     </Row>
 

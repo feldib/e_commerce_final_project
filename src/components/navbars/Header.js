@@ -29,7 +29,7 @@ function Header(props) {
                     <Navbar.Toggle aria-controls="menu-items">
                         <FontAwesomeIcon id="header-toggler" icon={faBars} />
                     </Navbar.Toggle>
-                    <Navbar.Collapse id="menu-items">
+                    <Navbar.Collapse className='mx-3' id="menu-items">
                         <Nav className='mx-auto'>
                             <Link className='nav-link' style={{ color: 'inherit', textDecoration: 'inherit'}} to="/search">
                                 Search

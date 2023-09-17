@@ -13,10 +13,9 @@ function ReccomendationTable(props) {
         <Col sm={12} md={5} className="mb-3 mx-auto floating-element">
             <Row>
                 <Col>
-                    <h4 className='text-center'>{props.title}</h4>
-                </Col>
-                <Col>
+                    <h4 className='text-center'>{`${props.title}`}
                     <FontAwesomeIcon 
+                        className='toggle-reccommendation mx-2'
                         icon={
                             !tableHidden ?
                                 faCaretDown :
@@ -26,6 +25,7 @@ function ReccomendationTable(props) {
                             setTableHidden(!tableHidden)
                         }}
                     />
+                    </h4>
                 </Col>                                
             </Row>
 

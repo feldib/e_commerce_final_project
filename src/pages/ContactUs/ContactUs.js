@@ -49,7 +49,7 @@ function ContactUs(props) {
 
             <Row className='mx-auto mb-5'>
                 <Col sm={12} md={5} className='mb-5 floating-element mx-auto my-2'>
-                    <Row>
+                    <Row className='text-center'>
                         <h2>Company details</h2>
                     </Row>
 
@@ -61,7 +61,7 @@ function ContactUs(props) {
                 </Col>
 
                 <Col sm={12} md={5} className='mb-5 floating-element mx-auto my-2'>
-                    <Row>
+                    <Row className='text-center'>
                         <h2>Message administrator</h2>
                     </Row>
 
