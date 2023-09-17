@@ -7,7 +7,8 @@ function Queries(props) {
         <Row>
             {(
                 (props.formik.values.min && props.formik.values.max) &&
-                props.formik.values.min <= props.formik.values.max
+                props.formik.values.min > 0 && props.formik.values.max >= 1 &&
+                props.formik.values.min < props.formik.values.max
             ) ?
                     <Query 
                         text = {`Between ${props.formik.values.min} and ${props.formik.values.max}`}
@@ -20,7 +21,7 @@ function Queries(props) {
                         }
                     />
                 :
-                    props.formik.values.min ?
+                    props.formik.values.min && props.formik.values.min > 0 ?
                     <Query 
                         text = {`Minimum: ${props.formik.values.min}`}
                         remove = {
@@ -31,7 +32,7 @@ function Queries(props) {
                         }
                     />:
 
-                    props.formik.values.max &&
+                    props.formik.values.max && props.formik.values.max >= 1 &&
                     <Query 
                         text = {`Maximum: ${props.formik.values.max}`}
                         remove = {

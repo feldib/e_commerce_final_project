@@ -44,10 +44,12 @@ function ArtworkSearchFields(props) {
                             onChange={props.formik.handleChange}
                             onBlur={
                                 (e)=>{
+                                    props.formik.handleBlur(e)
+                                    if(props.formik.values.min < 0){
+                                        props.formik.setFieldValue("min", "")
+                                    }
                                     const max = props.formik.values.max
-                                    if((max && max > props.formik.values.min) || !max){
-                                        props.formik.handleBlur(e)
-                                    }else{
+                                    if(!((max && max > props.formik.values.min) || !max)){
                                         props.formik.setFieldValue("max", "")
                                     }
                                 }
@@ -62,10 +64,9 @@ function ArtworkSearchFields(props) {
                             onChange={props.formik.handleChange}
                             onBlur={
                                 (e)=>{
+                                    props.formik.handleBlur(e)
                                     const min = props.formik.values.min
-                                    if((min && min < props.formik.values.max) || !min){
-                                        props.formik.handleBlur(e)
-                                    }else{
+                                    if(!(min && min < props.formik.values.max) || !min){
                                         props.formik.setFieldValue("max", "")
                                     }
                                 }
