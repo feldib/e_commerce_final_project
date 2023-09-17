@@ -7,7 +7,12 @@ function RemoveArtworkButton(props) {
     return (
         <SinglePurposeButton 
             loggedIn = {props.loggedIn}
-            actionOnLoggedIn = {removeArtwork}
+            actionOnLoggedIn = {
+                (artwork_id)=>{
+                    props.removeLineFromView()
+                    return removeArtwork(artwork_id)
+                }
+            }
             artwork_id = {props.artwork_id}
             toastSuccessMessage = "Artwork removed successfully"
             toastErrorMessage = "Error: item could not be removed"
