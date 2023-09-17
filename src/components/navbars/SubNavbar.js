@@ -13,11 +13,15 @@ function SubNavbar(props) {
                                 return (
                                     <Link className='nav-link' style={{ color: 'inherit', textDecoration: 'inherit'}} to={`${obj.linkTo}`}> 
                                         <Col>
-                                            <Row>
-                                                <FontAwesomeIcon size='2xl' icon={obj.icon} />
+                                            <Row className='text-center'>
+                                                <Col>
+                                                    <FontAwesomeIcon size='2xl' icon={obj.icon} />
+                                                </Col>
                                             </Row>
-                                            <Row>
-                                                <p>{obj.linkText}</p>
+                                            <Row className='text-center'>
+                                                <Col>
+                                                    <p>{obj.linkText}</p>
+                                                </Col>
                                             </Row>
                                         </Col>
                                     </Link>
