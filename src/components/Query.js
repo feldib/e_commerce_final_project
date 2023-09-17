@@ -5,7 +5,7 @@ import { Col } from 'react-bootstrap'
 
 function Query(props) {
     return (
-        <Col className='floating-element mb-3 mx-auto' xs={10} md={6} >
+        <Col className='floating-element mb-3 mx-auto' xs={7} sm={6} md={6} >
             <p>
                 <FontAwesomeIcon icon={faFilter} style={{
                     color: "red",
@@ -15,7 +15,7 @@ function Query(props) {
                 }} />
                 <span style={{
                     margin: "10px",
-                    fontSize: "1.5rem"
+                    fontSize: "1.4rem"
                 }}>{props.text}</span>
                 <span
                     className='mx-1'

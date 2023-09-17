@@ -84,7 +84,7 @@ function ArtworkSearchFields(props) {
                     }
                 />
 
-                <Col>
+                <Col className='mb-3'>
                     <Dropdown
                         value={props.formik.values.n}
                         onSelect={(e)=>{
@@ -117,7 +117,7 @@ function ArtworkSearchFields(props) {
                     </Dropdown>
                 </Col>
                 
-                <Col>
+                <Col className='mb-4'>
                     <Dropdown 
                         value={props.formik.values.order}
                         onSelect={(e)=>{

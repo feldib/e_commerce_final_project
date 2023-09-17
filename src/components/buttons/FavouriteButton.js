@@ -14,7 +14,7 @@ function FavouriteButton(props) {
             removeFromAdded = {removeFromWishlisted}
             loggedIn = {props.loggedIn}
             artwork_id = {props.artwork_id}
-            toastWarningMessage = "Sign in or register to add to shopping list! "
+            toastWarningMessage = "Sign in or register to add to wishlist! "
             filledButton = {<FontAwesomeIcon icon={faHeartSolid}  /> }
             regularButton = {<FontAwesomeIcon icon={faHeartRegular}  />}
         />

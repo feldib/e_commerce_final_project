@@ -36,7 +36,7 @@ tbody > tr:hover{
     background-color: #7da5d944;
 }
 
-.floating-element, .page-title, .subpage-title, .card{
+.floating-element, .page-title, .subpage-title, .card, .toast-warning, .toast-success, .toast-error{
     background-color: var(--translucent-dark-bg-color) !important;
     color: var(--bright-warm) !important;
     border-radius: 10px !important;
@@ -61,7 +61,7 @@ input, textarea, .dropdown-toggle{
 }
 
 html, #root{
-    background-image: url("background.jpg");
+    background-image: url("background.png");
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
@@ -100,7 +100,7 @@ button[type = "submit"], input[type = "submit"], .floating-back-button, .submit{
 }
 
 .input-group-text, .dropdown-toggle{
-    background-color: rgba(188, 183, 163, 0.671) !important;
+    background-color: var(--bright-warm) !important;
     color: #071b19 !important;
     font-weight: 800 !important;
 }
@@ -133,3 +133,9 @@ button[type = "submit"], input[type = "submit"], .floating-back-button, .submit{
     width: 100%;
     padding-left: 20px;
   }
+
+.toast-warning, .toast-success, .toast-error{
+    background-color: #352e36ee !important;
+    padding: 10px !important;
+    box-shadow: 12px 14px 40px -5px rgba(0, 0, 0, 0.283) !important;
+}

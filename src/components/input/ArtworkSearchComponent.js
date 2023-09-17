@@ -7,6 +7,7 @@ import AdminArtworkTable from '../../components/tables/AdminArtworkTable'
 import ArtworkSearchFields from './ArtworkSearchFields'
 import Queries from '../Queries'
 import { useFormik } from 'formik'
+import * as Yup from 'yup'
 
 function ArtworkSearchComponent(props) {
     async function search(values){
@@ -34,6 +35,11 @@ function ArtworkSearchComponent(props) {
         },
 
         onSubmit: (values) => search(values),
+
+        validationSchema: Yup.object().shape({
+            min: Yup.number()
+                .min()
+        })
 
     })
 

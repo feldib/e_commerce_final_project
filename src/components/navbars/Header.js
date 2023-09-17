@@ -9,8 +9,7 @@ import { ToastContainer, toast } from 'react-toastify'
 
 function Header(props) { 
     const [expanded, setExpanded] = React.useState(false)
-
-    const signed_out_shopping_cart = JSON.parse(localStorage.getItem("shopping_cart")) || []
+    
     return (
             <Navbar id='header' expand="lg">
                 <Container>
@@ -41,19 +40,23 @@ function Header(props) {
                             </Link>
                             
                             {!props.user.is_admin &&
-                                <Link 
-                                    className='nav-link' style={{ color: 'inherit', textDecoration: 'inherit'}} 
-                                    to = {!signed_out_shopping_cart.length ? "#": "/shopping_cart"}
+                                <a 
+                                    className='nav-link' style={{ color: 'inherit', textDecoration: 'inherit', cursor: "pointer"}} 
                                     onClick={()=>{
+                                        const signed_out_shopping_cart = JSON.parse(localStorage.getItem("shopping_cart")) || []
+
                                         if(!signed_out_shopping_cart.length){
                                             toast.warning("Shopping list is empty.", {
                                                 className: "toast-warning"
                                             })
+
+                                        }else{
+                                            window.location = !signed_out_shopping_cart.length ? "#": "/shopping_cart"
                                         }
                                     }}
                                 >
                                     Shopping cart
-                                </Link>
+                                </a>
                             }
                             
                             {props.loggedIn ?
