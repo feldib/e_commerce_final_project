@@ -7,10 +7,8 @@ import useAxios from '../../../hooks/useAxios'
 import { users_url } from '../../../utils/api_constants'
 import Review from '../../../components/Review'
 import SubPageTitle from '../../../components/SubPageTitle'
-import { redirectIfNotloggedIn } from '../../../helpers/helpers'
 
 function Reviews() {
-    redirectIfNotloggedIn()
 
     const reviews = useAxios(`/${users_url}/get_reviews_of_user`)
     const representReviews = useLoading(reviews, ((reviews)=>{

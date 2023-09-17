@@ -5,10 +5,8 @@ import useLoading from '../../../hooks/useLoading'
 import OrderSummaryComponent from '../../../components/OrderSummaryComponent'
 import { users_url } from '../../../utils/api_constants'
 import SubPageTitle from '../../../components/SubPageTitle'
-import { redirectIfNotloggedIn } from '../../../helpers/helpers'
 
 function OrderHistory() {
-    redirectIfNotloggedIn()
 
     function representOrderDataCollection(orderDataCollection){
         const len = orderDataCollection.length

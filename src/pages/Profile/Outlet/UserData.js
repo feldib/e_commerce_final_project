@@ -2,10 +2,8 @@ import React from 'react'
 import * as Yup from 'yup'
 import UserDataComponent from '../../../components/input/UserDataComponent'
 import { useFormik } from 'formik'
-import { redirectIfNotloggedIn } from '../../../helpers/helpers'
 
 function UserData(props) {
-    redirectIfNotloggedIn()
     const validationSchema = Yup.object().shape({
         email: Yup.string()
             .email("Invalid email")
