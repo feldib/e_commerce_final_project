@@ -23,7 +23,6 @@ const useShoppingList = (loggedIn) =>{
                 })
                 .catch(function (error) {
                     setData(false)
-                    console.log(error)
                 })
             }
             })()

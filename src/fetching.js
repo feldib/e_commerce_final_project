@@ -27,7 +27,6 @@ const registerNewUser = async(email, password, firstName, lastName)=>{
 const logIn = async(email, password, settleSuccess)=>{
     await axios.post(`${server_url}/login`, {email, password})
     .then(function (response) {
-        console.log("login response.data: ", response.data)
         const userData = response.data
         settleSuccess(userData)
     })
@@ -122,7 +121,6 @@ const getOrderHistory = async (user_id) => {
 }
 
 const removeArtwork = async (artwork_id) => {
-    console.log(`${server_url}/${admin_url}/remove_artwork`)
     return axios.post(`${server_url}/${admin_url}/remove_artwork`, {artwork_id})
 }
 
