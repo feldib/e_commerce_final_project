@@ -2,8 +2,7 @@ import {
     getDataOfArtworks, 
     replaceSavedShoppingCart,
     getLoggedIn,
-    getIsAdmin,
-    logIn
+    getIsAdmin
 } from '../fetching'
 
 const presentData = (dataLines, makeDataLines) => {

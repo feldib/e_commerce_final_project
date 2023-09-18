@@ -1,5 +1,5 @@
 import React from 'react'
-import { Col, Row, Table} from 'react-bootstrap'
+import { Col } from 'react-bootstrap'
 import useAxios from '../../../hooks/useAxios'
 import useLoading from '../../../hooks/useLoading'
 import { admin_url } from '../../../utils/api_constants'

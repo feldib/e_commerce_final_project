@@ -1,7 +1,5 @@
 import React from 'react'
 import { Col, Row} from 'react-bootstrap'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faX, faCheck } from '@fortawesome/free-solid-svg-icons'
 import useLoading from '../../../hooks/useLoading'
 import useAxios from '../../../hooks/useAxios'
 import { users_url } from '../../../utils/api_constants'

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Row, Table } from 'react-bootstrap'
+import { Row } from 'react-bootstrap'
 import useLoading from '../../hooks/useLoading'
 import BuyTableDataLines from '../datalines/BuyTableDataLines'
 import { presentData } from '../../helpers/helpers'
@@ -12,6 +12,7 @@ function BuyTable(props) {
                     reccomendation={props.reccomendation}
                     line={line}
                     index={index}
+                    key={index}
                     loggedIn={props.loggedIn}
                     orderSummary={props.orderSummary}
                     totalCost={props.totalCost}

@@ -6,7 +6,6 @@ import FeatureButton from '../buttons/FeatureButton'
 
 function AdminArtworkTableDatalines(props) {
     const [ lineVisible, setLineVisible ] = React.useState(true)
-    const [ quantity, setQuantity ] = React.useState(props.line.quantity)
 
     const removeLineFromView = () => {setLineVisible(false)}
 
@@ -41,7 +40,7 @@ function AdminArtworkTableDatalines(props) {
                     </td>
                     <td className={"d-none d-md-table-cell"}>
                         <p>
-                            {quantity}
+                            {props.line.quantity}
                         </p>
                     </td>
                     <td className={"d-none d-md-table-cell"}>
