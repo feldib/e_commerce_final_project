@@ -1,7 +1,7 @@
 import React from 'react'
 import useAxios from '../../hooks/useAxios'
 import { getArtworkSearchResults } from '../../fetching'
-import { Row, Button, Form } from 'react-bootstrap'
+import { Row, Form } from 'react-bootstrap'
 import BuyTable from '../../components/tables/BuyTable'
 import AdminArtworkTable from '../../components/tables/AdminArtworkTable'
 import ArtworkSearchFields from './ArtworkSearchFields'

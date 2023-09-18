@@ -5,11 +5,9 @@ import { Navbar, Nav, Container } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import LoggedInNavbarItems from './LoggedInNavbarItems'
 import NotLoggedInNavbarItems from './NotLoggedInNavbarItems'
-import { ToastContainer, toast } from 'react-toastify'
+import { toast } from 'react-toastify'
 
 function Header(props) { 
-    const [expanded, setExpanded] = React.useState(false)
-
     const [shoppingCartPath, setShoppingCartPath] = React.useState("#")
     
     return (

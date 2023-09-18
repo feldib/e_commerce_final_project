@@ -1,7 +1,5 @@
 import React from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAsterisk, faUser, faKeyboard } from '@fortawesome/free-solid-svg-icons'
-import { Col, Row, Container, Button, Form, InputGroup, FloatingLabel } from 'react-bootstrap'
+import { Col, Row, Container } from 'react-bootstrap'
 import PageTitle from '../../components/PageTitle'
 
 function AboutUsPage() {

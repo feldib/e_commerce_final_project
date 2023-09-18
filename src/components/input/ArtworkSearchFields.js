@@ -1,12 +1,7 @@
 import React from 'react'
-import useAxios from '../../hooks/useAxios'
-import { getArtworkSearchResults } from '../../fetching'
 import { Col, Row, Button, Dropdown, InputGroup, Form } from 'react-bootstrap'
 import SearchField from '../../components/input/SearchField'
-import Query from '../../components/Query'
 import CategoriesDropdown from '../../components/input/CategoriesDropdown'
-import BuyTable from '../../components/tables/BuyTable'
-import { useFormik } from 'formik'
 
 function ArtworkSearchFields(props) {
 
