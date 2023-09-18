@@ -27,22 +27,12 @@ const presentData = (dataLines, makeDataLines) => {
 const increaseLocalStorageShoppingCartQuantity = (artwork_id, stored_amount) => {
     const shoppingCart = JSON.parse(localStorage.getItem('shopping_cart')) || []
 
-    const existingRecordIndex = shoppingCart.findIndex((item => item.artwork_id===artwork_id))
-
-    console.log("artwork_id: ", artwork_id)
-    console.log("existingRecordIndex: ", existingRecordIndex)
-
-    if(existingRecordIndex>=0){
-            console.log("shoppingCart[existingRecordIndex].quantity", shoppingCart[existingRecordIndex].quantity)
-
-    }
-    console.log("stored amount: ", stored_amount)
-    console.log()
+    const existingRecordIndex = shoppingCart.findIndex((item => item.artwork_id === parseInt(artwork_id)))
 
     if(stored_amount > 0){
         if(existingRecordIndex < 0){
             shoppingCart.push({
-                artwork_id,
+                artwork_id: parseInt(artwork_id),
                 quantity: 1
             })
             localStorage.setItem("shopping_cart", JSON.stringify(shoppingCart))
