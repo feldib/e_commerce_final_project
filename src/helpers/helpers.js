@@ -5,6 +5,10 @@ import {
     getIsAdmin
 } from '../fetching'
 
+import axios from 'axios'
+
+import { server_url } from '../utils/api_constants'
+
 const presentData = (dataLines, makeDataLines) => {
     if(dataLines.length > 0){
         return makeDataLines(dataLines)
@@ -25,6 +29,16 @@ const increaseLocalStorageShoppingCartQuantity = (artwork_id, stored_amount) => 
 
     const existingRecordIndex = shoppingCart.findIndex((item => item.artwork_id===artwork_id))
 
+    console.log("artwork_id: ", artwork_id)
+    console.log("existingRecordIndex: ", existingRecordIndex)
+
+    if(existingRecordIndex>=0){
+            console.log("shoppingCart[existingRecordIndex].quantity", shoppingCart[existingRecordIndex].quantity)
+
+    }
+    console.log("stored amount: ", stored_amount)
+    console.log()
+
     if(stored_amount > 0){
         if(existingRecordIndex < 0){
             shoppingCart.push({
@@ -33,7 +47,7 @@ const increaseLocalStorageShoppingCartQuantity = (artwork_id, stored_amount) => 
             })
             localStorage.setItem("shopping_cart", JSON.stringify(shoppingCart))
         }
-        else if(shoppingCart[existingRecordIndex].quantity < stored_amount){
+        else if(shoppingCart[existingRecordIndex].quantity > 0){
             shoppingCart[existingRecordIndex].quantity++
             localStorage.setItem("shopping_cart", JSON.stringify(shoppingCart))
         }else{
@@ -100,6 +114,34 @@ const redirectIfNotAdmin = (isAdmin) => {
     })
 }
 
+const checkIfShoppingCartIsEmpty = async (loggedIn) => {
+    if(loggedIn){
+        return axios.get(`${server_url}/users/shopping_cart`)
+        .then(function (results) {
+            if(results.data.length){
+                return true
+            }else{
+                return false
+            }
+        })
+        .catch(function (error) {
+            return false
+        })
+    }else{
+        return getLocatStorageShoppingCart()
+        .then((artworks_in_shopping_cart)=>{
+            if(artworks_in_shopping_cart.length){
+                return true
+            }else{
+                return false
+            }
+        })
+        .catch(function (error) {
+            return false
+        })
+    }
+}
+
 export {
     presentData,
     increaseLocalStorageShoppingCartQuantity,
@@ -108,5 +150,6 @@ export {
     getLocatStorageShoppingCart,
     replacePreviousShoppingCart,
     redirectIfNotloggedIn,
-    redirectIfNotAdmin
+    redirectIfNotAdmin,
+    checkIfShoppingCartIsEmpty
 }
