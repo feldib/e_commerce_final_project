@@ -5,7 +5,6 @@ import { Row, Form } from 'react-bootstrap'
 import BuyTable from '../../components/tables/BuyTable'
 import AdminArtworkTable from '../../components/tables/AdminArtworkTable'
 import ArtworkSearchFields from './ArtworkSearchFields'
-import Queries from '../Queries'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 
@@ -55,8 +54,6 @@ function ArtworkSearchComponent(props) {
                 formik={formik}
                 categories={categories}
             />
-
-            <Queries formik={formik} categories={categories} />
 
             {searchResults &&
                 <Row className="floating-element mt-5 mb-5">

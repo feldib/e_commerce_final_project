@@ -2,6 +2,7 @@ import React from 'react'
 import { Col, Row, Button, Dropdown, InputGroup, Form } from 'react-bootstrap'
 import SearchField from '../../components/input/SearchField'
 import CategoriesDropdown from '../../components/input/CategoriesDropdown'
+import Queries from '../Queries'
 
 function ArtworkSearchFields(props) {
 
@@ -151,6 +152,8 @@ function ArtworkSearchFields(props) {
                     </Button>
                 </Col>
             </Row>
+
+            <Queries formik={props.formik} categories={props.categories} />
         </div>
     )
 }
