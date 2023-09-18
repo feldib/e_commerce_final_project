@@ -17,11 +17,11 @@ function ShoppingCartDataLines(props) {
         <tr key={props.index}>
             <td>
                 <img
-                        src = {props.line.thumbnail}
-                        width="100"
-                        style={{objectFit: "contain"}}
-                        alt="place of thumbnail"
-                    />
+                    src = {props.line.thumbnail}
+                    width="100"
+                    style={{objectFit: "contain"}}
+                    alt="place of thumbnail"
+                />
             </td>
             <td>
                 <Link to={`/artwork_page/${props.line.id}`}>
@@ -52,6 +52,7 @@ function ShoppingCartDataLines(props) {
                     <Col>
                         <p 
                             style={{cursor: "pointer"}}
+                            className='table-button'
                             onClick={
                                 async()=>{
                                     if(props.loggedIn){
@@ -70,6 +71,7 @@ function ShoppingCartDataLines(props) {
                     <Col>
                         <p 
                             style={{cursor: "pointer"}}
+                            className='table-button'
                             onClick={
                                 async()=>{
                                     if(props.loggedIn){
@@ -119,29 +121,36 @@ function ShoppingCartDataLines(props) {
                 </p>
             </td>
             <td>
-                <div className='container'>                                   
-                    <FavouriteButton
-                        artwork_id={props.line.id}
-                        loggedIn={props.loggedIn}
-                    />
+                <div className='container text-center'>  
+                    <Row>
+                        <Col>                          
+                            <FavouriteButton
+                                artwork_id={props.line.id}
+                                loggedIn={props.loggedIn}
+                            />
+                        </Col> 
+                    </Row>      
 
                     <Row>
-                        <p 
-                            style={{cursor: "pointer"}}
-                            onClick={
-                                async()=>{
-                                    if(props.loggedIn){
-                                        await removeFromShoppingList(props.line.id)
-                                        window.location.reload()
-                                    }else{
-                                        removeLocalStorageShoppingCartQuantity(props.line.id)
-                                        window.location.reload()
+                        <Col>
+                            <p 
+                                style={{cursor: "pointer"}}
+                                className='table-button'
+                                onClick={
+                                    async()=>{
+                                        if(props.loggedIn){
+                                            await removeFromShoppingList(props.line.id)
+                                            window.location.reload()
+                                        }else{
+                                            removeLocalStorageShoppingCartQuantity(props.line.id)
+                                            window.location.reload()
+                                        }
                                     }
                                 }
-                            }
-                        >
-                            <FontAwesomeIcon icon={faX} style={{color: "red"}} />
-                        </p>
+                            >
+                                <FontAwesomeIcon icon={faX} style={{color: "red"}} />
+                            </p>
+                        </Col>
                     </Row>
                     <ToastContainer position='bottom-right'/>
                 </div>

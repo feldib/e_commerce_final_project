@@ -10,6 +10,11 @@
     --rusty: #856E28;
 }
 
+@keyframes fade-in {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
 input::placeholder{
     color: rgba(243, 235, 235, 0.338) !important;
     opacity: 1;
@@ -43,6 +48,10 @@ tbody > tr:hover{
     padding: 1rem !important;
     box-shadow: 12px 14px 40px -5px rgba(0,0,0,0.75) !important;
     border: 1.5px solid var(--bright-warm) !important;
+}
+
+.floating-element, .page-title, .subpage-title, .card, .subnavbar{
+    animation: fade-in 0.6s;
 }
 
 .page-title, .subpage-title{
