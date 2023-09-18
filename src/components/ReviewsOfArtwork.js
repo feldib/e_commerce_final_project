@@ -10,7 +10,7 @@ function ReviewsOfArtworks(props) {
                 <Carousel >
                     {props.reviews.map((review, index)=>{
                         return (
-                            <Carousel.Item className='px-5' key={index}>
+                            <Carousel.Item className='mb-5 px-5' key={index}>
                                 <Card className='mx-5 p-3' border='secondary'>
                                     <Card.Title className="mb-2">
                                         {review.title}
