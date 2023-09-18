@@ -19,7 +19,8 @@ function ShoppingCartDataLines(props) {
                 <img
                     src = {props.line.thumbnail}
                     width="100"
-                    style={{objectFit: "contain"}}
+                    height="100"
+                    style={{objectFit: "cover"}}
                     alt="place of thumbnail"
                 />
             </td>
