@@ -24,8 +24,8 @@ function UserTable(props) {
                     <tr>
                         <th>Name</th>
                         <th>Email</th>
-                        <th>Address</th>
-                        <th>Phone number</th>
+                        <th className="d-none d-md-table-cell">Address</th>
+                        <th className="d-none d-md-table-cell">Phone number</th>
                     </tr>
                 </thead>
 

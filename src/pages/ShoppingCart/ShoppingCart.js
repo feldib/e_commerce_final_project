@@ -31,7 +31,7 @@ function ShoppingCartPage(props) {
                 title="Shopping cart"
             />
 
-            <Row className='floating-element'>
+            <Row className='floating-element mb-5'>
                 <ShoppingCartTable 
                     theadNeeded = {true}
                     dataLines = {shoppingListItems}
