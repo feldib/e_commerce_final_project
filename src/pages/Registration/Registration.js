@@ -12,7 +12,6 @@ import PageTitle from '../../components/PageTitle'
 const attemptRegistration = async (values, settleSuccessfulRegistration) => {
     await registerNewUser(values.email, values.password, values.firstName, values.lastName)
     .then(function (response) {
-        console.log("reponse: ", JSON.stringify(response))
         logIn(values.email, values.password, settleSuccessfulRegistration)
     })
     .catch((error)=>{
