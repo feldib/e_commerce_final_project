@@ -125,14 +125,14 @@ function ArtworkSearchFields(props) {
                         <Dropdown.Menu>
                             <Dropdown.Item
                                 href=""
-                                eventKey="asc"
+                                eventKey="desc"
                             >
                                 Newest to oldest
                             </Dropdown.Item>
 
                             <Dropdown.Item
                                 href=""
-                                eventKey="desc"
+                                eventKey="asc"
                             >
                                 Oldest to newest
                             </Dropdown.Item>

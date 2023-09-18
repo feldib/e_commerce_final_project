@@ -17,6 +17,7 @@ function AdminArtworkTableDatalines(props) {
                         <img
                             src = {props.line.thumbnail}
                             width="100"
+                            height="100"
                             style={{objectFit: "contain"}}
                             alt="place of thumbnail"
                         />

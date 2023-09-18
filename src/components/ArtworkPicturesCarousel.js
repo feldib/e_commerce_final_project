@@ -4,16 +4,17 @@ import { Col, Row, Carousel, Card } from 'react-bootstrap'
 function ArtworkPicturesCarousel(props) {
     return (<>
         {props.other_pictures.length > 0 &&
-            <Row>
-                <Col md={8} lg={6} className='mx-auto'>
+            <Row >
+                <Col sm={9} md={8} className='mx-auto'>
                     <Carousel>
-                        {props.other_pictures.map((pic)=>{
+                        {props.other_pictures.map((pic, index)=>{
                             return (
-                                <Carousel.Item>
-                                    <Card>
+                                <Carousel.Item className='mb-5 px-3' key={index}>
+                                    <Card className='mx-5 p-2' border='secondary'>
                                         <Card.Img 
                                             src={`${pic.picture_path}`} 
-                                            width="100%"
+                                            width="500px"
+                                            height="300px"
                                             style={{objectFit: "contain"}}
                                         />
                                     </Card>

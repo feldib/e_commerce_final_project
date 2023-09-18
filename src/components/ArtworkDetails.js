@@ -118,7 +118,6 @@ function ArtworkDetails(props) {
                                         ()=>{
                                             if(quantity>0){
                                                 setQuantity(quantity-1)
-                                                alert(quantity)
                                             }
                                         }
                                     }>

@@ -9,8 +9,13 @@ function AddOrRemoveFromButton(props) {
     React.useEffect(()=>{
         (async()=>{
             if(props.loggedIn){
-                const isAddedOrNot = await props.isAdded(props.artwork_id)
-                setAdded(isAddedOrNot)
+                try{
+                    const isAddedOrNot = await props.isAdded(props.artwork_id)
+                    setAdded(isAddedOrNot)
+                }catch{
+                    console.log("Not authenticated")
+                }
+                
             }
         })()
         if(needsToBeRefreshed){
