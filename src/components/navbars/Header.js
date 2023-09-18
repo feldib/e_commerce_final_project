@@ -6,9 +6,11 @@ import { Link } from 'react-router-dom'
 import LoggedInNavbarItems from './LoggedInNavbarItems'
 import NotLoggedInNavbarItems from './NotLoggedInNavbarItems'
 import { toast } from 'react-toastify'
+import useShoppingList from '../../hooks/useShoppingList'
+import { checkIfShoppingCartIsEmpty } from '../../helpers/helpers'
 
 function Header(props) { 
-    const [shoppingCartPath, setShoppingCartPath] = React.useState("#")
+    let shoppingListItems = useShoppingList(props.loggedIn)
     
     return (
             <Navbar id='header' expand="lg">
@@ -42,20 +44,17 @@ function Header(props) {
                             {!props.user.is_admin &&
                                 <a 
                                     className='nav-link' style={{ color: 'inherit', textDecoration: 'inherit', cursor: "pointer"}} 
-                                    href={shoppingCartPath}
-                                    onClick={()=>{
-                                        const signed_out_shopping_cart = JSON.parse(localStorage.getItem("shopping_cart")) || []
+                                    href="#"
+                                    onClick={async()=>{
+                                        const isShoppingCartEmpty = await checkIfShoppingCartIsEmpty(props.loggedIn)
 
-                                        if(!signed_out_shopping_cart.length){
+                                        if(!isShoppingCartEmpty){
                                             toast.warning("Shopping list is empty.", {
                                                 className: "toast-warning"
                                             })
 
                                         }else{
-                                            setShoppingCartPath(!(JSON.parse(localStorage.getItem("shopping_cart")) || []) ?
-                                                "#": 
-                                                "/shopping_cart"
-                                            )
+                                            window.location = "/shopping_cart"
                                         }
                                     }}
                                 >

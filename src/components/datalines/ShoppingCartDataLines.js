@@ -87,7 +87,10 @@ function ShoppingCartDataLines(props) {
                                         })
                                     }else{
                                         try{
-                                            increaseLocalStorageShoppingCartQuantity(props.line.id, props.line.stored_amount)
+                                            increaseLocalStorageShoppingCartQuantity(
+                                                    props.line.id, 
+                                                    props.line.stored_amount - props.line.quantity
+                                                )
                                             toast.success("Item added to shopping cart", {
                                                 className: "toast-success"
                                             })

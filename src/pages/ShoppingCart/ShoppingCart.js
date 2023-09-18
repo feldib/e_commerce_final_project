@@ -7,7 +7,7 @@ import PageTitle from '../../components/PageTitle'
 import SubPageTitle from '../../components/SubPageTitle'
 
 function ShoppingCartPage(props) {
-    let shoppingListItems = useShoppingList(props.loggedIn)
+    const shoppingListItems = useShoppingList(props.loggedIn)
 
     const [totalCost, setTotalCost] = React.useState()
     React.useEffect(()=>{

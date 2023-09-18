@@ -22,7 +22,30 @@ function BuyTable(props) {
         )
     }
 
-    const dataLines = useLoading(props.dataLines, (dataLines)=>{return presentData(dataLines, makeDataLines)})
+    const dataLines = useLoading(props.dataLines, (dataLines)=>{
+        return presentData(
+            dataLines.filter((line)=>{
+
+                const shoppingCart = JSON.parse(localStorage.getItem('shopping_cart')) || []
+
+                if(shoppingCart.length){
+                    const existingRecordIndex = shoppingCart.findIndex((item => item.artwork_id === line.id))
+
+                    if((existingRecordIndex >= 0) && (shoppingCart[existingRecordIndex].quantity > 0)){
+                        return (
+                            ( line.quantity - shoppingCart[existingRecordIndex].quantity ) > 0
+                        )
+                    }else{
+                        return line.quantity
+                    }
+                }else{
+                    return line.quantity
+                }
+
+            }), 
+            makeDataLines
+            )
+    })
 
     return (
         <Row>
