@@ -21,7 +21,7 @@ function Header(props) {
                                 src='/logo.png'
                                 width="100"
                                 className="d-inline-block align-top"
-                                alt="React Bootstrap logo"
+                                alt="Artwork market logo"
                             />
                         </Link>
 
