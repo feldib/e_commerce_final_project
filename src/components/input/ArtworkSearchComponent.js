@@ -1,7 +1,7 @@
 import React from 'react'
 import useAxios from '../../hooks/useAxios'
 import { getArtworkSearchResults } from '../../fetching'
-import { Row, Form } from 'react-bootstrap'
+import { Row, Form, Col, Button } from 'react-bootstrap'
 import BuyTable from '../../components/tables/BuyTable'
 import AdminArtworkTable from '../../components/tables/AdminArtworkTable'
 import ArtworkSearchFields from './ArtworkSearchFields'
@@ -21,16 +21,20 @@ function ArtworkSearchComponent(props) {
         await getArtworkSearchResults(qs, setSearchResults)
     }
 
+    const [pageNumber, setPageNumber] = React.useState(1)
 
     const formik = useFormik({
+        enableReinitialize: true,
+
         initialValues: { 
             title: "", 
             artist_name: "", 
             category_id: "", 
             order: "asc", 
-            n: 10,
+            n: "10",
             min: "",
-            max: ""
+            max: "",
+            offset: 0
         },
 
         onSubmit: (values) => search(values),
@@ -48,6 +52,8 @@ function ArtworkSearchComponent(props) {
 
     const [searchResults, setSearchResults] = React.useState()
 
+    const results = React.useRef()
+
     return (
         <Form onSubmit={formik.handleSubmit}>
             <ArtworkSearchFields 
@@ -56,25 +62,56 @@ function ArtworkSearchComponent(props) {
             />
 
             {searchResults &&
-                <Row className="floating-element mt-5 mb-5">
-                    <Row className='mb-3 mt-2'>
-                        <h3 className='text-center'>Search results</h3>
-                    </Row>
-                    {props.admin ?
-                        <AdminArtworkTable 
-                            dataLines = {searchResults}
-                            loggedIn = {props.loggedIn}
-                        />
-                    :
-                        <BuyTable 
-                            reccomendation = {false}
-                            theadNeeded = {true}
-                            dataLines = {searchResults}
-                            loggedIn = {props.loggedIn}
-                        />
+
+                    <Row className="floating-element mt-5 mb-5">
+                        <Row className='mb-3 mt-2' ref={results}>
+                            <h3 className='text-center'>Search results</h3>
+                        </Row>
+                        {props.admin ?
+                            <AdminArtworkTable 
+                                dataLines = {searchResults}
+                                loggedIn = {props.loggedIn}
+                            />
+                        :
+                            <BuyTable 
+                                reccomendation = {false}
+                                theadNeeded = {true}
+                                dataLines = {searchResults}
+                                loggedIn = {props.loggedIn}
+                            />
+                        }
+
+                    {formik.values.n <= searchResults.length &&
+                        <Row className="pb-5 text-center">
+
+                            {pageNumber !== 1 &&
+
+                            <Col className="mx-auto">
+                                <Button onClick={(e)=>{
+                                    setPageNumber( pageNumber - 1 )
+                                    formik.setFieldValue("offset", pageNumber / parseInt(formik.values.n))
+                                    formik.handleSubmit(formik.values)
+                                    results.current.scrollIntoView({behaviour: "instant"})
+                                }}>
+                                    Back {formik.values.n}
+                                </Button>
+                            </Col>
+
+                            }
+
+                            <Col className="mx-auto">
+                                <Button onClick={(e)=>{
+                                    setPageNumber( pageNumber + 1 )
+                                    formik.setFieldValue("offset", pageNumber * parseInt(formik.values.n))
+                                    formik.handleSubmit(formik.values)
+                                    results.current.scrollIntoView({behaviour: "instant"})
+                                }}>
+                                    Next {formik.values.n}
+                                </Button>
+                            </Col>
+                        </Row>
                     }
-                    
-                </Row>
+                    </Row>                 
             }
             </Form>
     )

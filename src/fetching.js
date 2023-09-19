@@ -41,6 +41,7 @@ const changePassword = async(token, email, newPassword)=>{
 }
 
 const getArtworkSearchResults = async(queries, setter)=>{
+    console.log("queries:", JSON.stringify(queries))
     axios.get(`${server_url}/search_artworks${`?${queries.join("&")}`}`)
     .then(function (artw) {
         setter(artw.data)
