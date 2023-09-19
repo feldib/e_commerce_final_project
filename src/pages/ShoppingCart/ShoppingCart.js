@@ -1,10 +1,9 @@
 import React from 'react'
-import { Col, Row, Container, Button, Table } from 'react-bootstrap'
+import { Col, Row, Container, Button } from 'react-bootstrap'
 import ShoppingCartTable from '../../components/tables/ShoppingCartTable'
 import useShoppingList from '../../hooks/useShoppingList'
 import { Link } from 'react-router-dom'
 import PageTitle from '../../components/PageTitle'
-import SubPageTitle from '../../components/SubPageTitle'
 
 function ShoppingCartPage(props) {
     const shoppingListItems = useShoppingList(props.loggedIn)

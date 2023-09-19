@@ -1,5 +1,5 @@
 import React from 'react'
-import { Col, Row, Container, Table, Button } from 'react-bootstrap'
+import { Col, Row, Container, Button } from 'react-bootstrap'
 import OrderSummaryComponent from '../../components/OrderSummaryComponent'
 import { Link } from 'react-router-dom'
 import PageTitle from '../../components/PageTitle'

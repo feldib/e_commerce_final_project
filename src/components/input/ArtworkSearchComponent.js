@@ -82,17 +82,20 @@ function ArtworkSearchComponent(props) {
                         }
 
                     {formik.values.n <= searchResults.length &&
-                        <Row className="pb-5 text-center">
+                        <Row className="pt-3 pb-3 text-center">
 
                             {pageNumber !== 1 &&
 
                             <Col className="mx-auto">
-                                <Button onClick={(e)=>{
-                                    setPageNumber( pageNumber - 1 )
-                                    formik.setFieldValue("offset", pageNumber / parseInt(formik.values.n))
-                                    formik.handleSubmit(formik.values)
-                                    results.current.scrollIntoView({behaviour: "instant"})
-                                }}>
+                                <Button 
+                                    className='submit'
+                                    onClick={(e)=>{
+                                        setPageNumber( pageNumber - 1 )
+                                        formik.setFieldValue("offset", pageNumber / parseInt(formik.values.n))
+                                        formik.handleSubmit(formik.values)
+                                        results.current.scrollIntoView({behaviour: "instant"})
+                                    }}
+                                >
                                     Back {formik.values.n}
                                 </Button>
                             </Col>
@@ -100,12 +103,15 @@ function ArtworkSearchComponent(props) {
                             }
 
                             <Col className="mx-auto">
-                                <Button onClick={(e)=>{
-                                    setPageNumber( pageNumber + 1 )
-                                    formik.setFieldValue("offset", pageNumber * parseInt(formik.values.n))
-                                    formik.handleSubmit(formik.values)
-                                    results.current.scrollIntoView({behaviour: "instant"})
-                                }}>
+                                <Button 
+                                    className='submit'
+                                    onClick={(e)=>{
+                                        setPageNumber( pageNumber + 1 )
+                                        formik.setFieldValue("offset", pageNumber * parseInt(formik.values.n))
+                                        formik.handleSubmit(formik.values)
+                                        results.current.scrollIntoView({behaviour: "instant"})
+                                    }}
+                                >
                                     Next {formik.values.n}
                                 </Button>
                             </Col>

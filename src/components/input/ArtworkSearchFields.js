@@ -87,10 +87,18 @@ function ArtworkSearchFields(props) {
                         onSelect={(e)=>{
                             props.formik.setFieldValue("n", e)
                             props.formik.setFieldValue("offset", 0)
+                            props.formik.handleSubmit(props.formik.values)
                         }}
                     >
                         <Dropdown.Toggle variant='outilne-dark'>Number of artworks shown</Dropdown.Toggle>
                         <Dropdown.Menu>
+                            <Dropdown.Item
+                                href=""
+                                eventKey="5"
+                            >
+                                5
+                            </Dropdown.Item>
+
                             <Dropdown.Item
                                 href=""
                                 eventKey="10"

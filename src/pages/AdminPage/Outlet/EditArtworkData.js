@@ -1,6 +1,6 @@
 import React from 'react'
 import ChangeArtworkDataInputComponent from '../../../components/input/ChangeArtworkDataInputComponent'
-import { Container, Col, Row, Button, Form, Dropdown } from 'react-bootstrap'
+import { Container, Col, Row, Form, Dropdown } from 'react-bootstrap'
 import { faDollarSign, faQuestion, faImages } from '@fortawesome/free-solid-svg-icons'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'

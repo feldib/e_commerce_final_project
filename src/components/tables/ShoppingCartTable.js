@@ -1,5 +1,5 @@
 import React from 'react'
-import { Row, Table } from 'react-bootstrap'
+import { Row } from 'react-bootstrap'
 import useLoading from '../../hooks/useLoading'
 import ShoppingCartDataLines from '../datalines/ShoppingCartDataLines'
 import { presentData } from '../../helpers/helpers'

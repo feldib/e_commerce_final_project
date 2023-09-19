@@ -1,11 +1,9 @@
 import * as Yup from 'yup'
 import UserDataComponent from '../../components/input/UserDataComponent'
 import { useFormik } from 'formik'
-import { Button, Col, Row, Form } from 'react-bootstrap'
+import { Button, Col, Row } from 'react-bootstrap'
 import { order } from '../../fetching'
-import useLoading from '../../hooks/useLoading'
 import React from 'react'
-import { json } from 'react-router-dom'
 
 function CheckoutPage(props) {
 

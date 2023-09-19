@@ -2,7 +2,7 @@ import React from 'react'
 import UserNavbarMenuItems from '../navbars/UserNavbarMenuItems'
 import { logOut } from '../../fetching'
 import { Link } from 'react-router-dom'
-import { Navbar, Nav, Container } from 'react-bootstrap'
+import { Nav } from 'react-bootstrap'
 
 function LoggedInNavbarItems(props) {
     return (

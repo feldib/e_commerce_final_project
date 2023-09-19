@@ -1,10 +1,10 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAsterisk, faKeyboard } from '@fortawesome/free-solid-svg-icons'
-import { Col, Row, Button, InputGroup, FloatingLabel, Form as RBForm} from 'react-bootstrap'
+import { Col, Row, Button, FloatingLabel, Form as RBForm} from 'react-bootstrap'
 import { Formik, Field, Form, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
-import { ToastContainer, toast } from 'react-toastify'
+import { toast } from 'react-toastify'
 import InputComponent from './input/InputComponent'
 import { leaveReview } from '../fetching'
 
