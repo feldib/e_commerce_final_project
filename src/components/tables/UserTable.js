@@ -18,7 +18,7 @@ function UserTable(props) {
 
     const dataLines = useLoading(props.users, (dataLines)=>{return presentData(dataLines, makeDataLines)})
     return (
-        <Row>
+        <Row className='text-center'>
             <table classname='mb-3'>
                 <thead>
                     <tr>
