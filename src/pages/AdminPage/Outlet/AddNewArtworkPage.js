@@ -105,10 +105,11 @@ function AddNewArtworkPage(props) {
 
     const KeyCodes = {
         comma: 188,
-        enter: 13
+        enter: 13,
+        space: 32
     }
       
-    const delimiters = [KeyCodes.comma, KeyCodes.enter];
+    const delimiters = [KeyCodes.comma, KeyCodes.enter, KeyCodes.space];
 
     const [tags, setTags] = React.useState([])
 
