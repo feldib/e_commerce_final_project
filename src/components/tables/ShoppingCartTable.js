@@ -28,7 +28,7 @@ function ShoppingCartTable(props) {
                         <th></th>
                         <th>Title</th>
                         <th>Artist</th>
-                        <th>Price</th>
+                        <th>Total cost</th>
                         <th>Quantity</th>
                         <th className={`${props.reccomendation ? "d-none" : "d-none d-md-table-cell"}`}>Tags</th>
                         <th className={`${props.reccomendation ? "d-none" : "d-none d-md-table-cell"}`}>Categories</th>

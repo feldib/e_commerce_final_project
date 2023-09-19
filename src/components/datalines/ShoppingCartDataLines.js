@@ -38,7 +38,7 @@ function ShoppingCartDataLines(props) {
             </td>
             <td>
                 <p>
-                    €{props.line.price}
+                    €{props.line.price * props.line.quantity}
                 </p>
             </td>
             <td className='text-center'>

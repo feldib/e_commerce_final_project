@@ -20,12 +20,12 @@ function UserTableDataLines(props) {
                     {props.line.email}
                 </p>
             </td>
-            <td>
+            <td className='d-none d-md-table-cell'>
                 <p>
                     {props.line.address}
                 </p>
             </td>
-            <td>
+            <td className="d-none d-md-table-cell">
                 <p>
                     {props.line.phone_number}
                 </p>
