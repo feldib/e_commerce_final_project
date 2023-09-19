@@ -4,6 +4,7 @@ import BuyTable from '../../../components/tables/BuyTable'
 import useAxios from '../../../hooks/useAxios'
 import SubPageTitle from '../../../components/SubPageTitle'
 
+
 function WishList(props) {
     const wishListed = useAxios("/users/wishlisted")
     return (

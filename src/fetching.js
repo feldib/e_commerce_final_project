@@ -1,5 +1,6 @@
 import { server_url, users_url, admin_url } from './utils/api_constants'
 import axios from 'axios'
+axios.defaults.withCredentials = true
 
 const logOut = async()=>{
     await axios.get(`${server_url}/log_out`)

@@ -5,6 +5,7 @@ import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons'
 import { Col, Row } from 'react-bootstrap'
 import BuyTable from './BuyTable'
 
+
 function ReccomendationTable(props) {
     const [tableHidden, setTableHidden] = React.useState(false)
     const data = useAxios(props.path)

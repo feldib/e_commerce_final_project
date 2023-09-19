@@ -32,7 +32,6 @@ import Header from "./components/navbars/Header"
 import Footer from "./components/navbars/Footer"
 import React from 'react'
 import { getLoggedIn } from './fetching.js'
-import axios from 'axios'
 import { confirmAlert } from 'react-confirm-alert'
 import 'react-confirm-alert/src/react-confirm-alert.css'
 import { replacePreviousShoppingCart } from './helpers/helpers'
@@ -40,8 +39,7 @@ import { ToastContainer } from 'react-toastify'
 import EditArtworkData from './pages/AdminPage/Outlet/EditArtworkData'
 
 function App() {
-  axios.defaults.withCredentials = true
-
+  //context for help, instead of props drilling like loggedIn
   const [user, setUser] = React.useState({id: 0})
   const [loggedIn, setLoggedIn] = React.useState(false)
 

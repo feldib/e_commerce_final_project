@@ -9,6 +9,8 @@ import axios from 'axios'
 
 import { server_url } from '../utils/api_constants'
 
+axios.defaults.withCredentials = true
+
 const presentData = (dataLines, makeDataLines) => {
     if(dataLines.length > 0){
         return makeDataLines(dataLines)

@@ -1,6 +1,7 @@
 import React from 'react'
 import { server_url } from '../utils/api_constants'
 import axios from 'axios'
+axios.defaults.withCredentials = true
 
 const useAxios = (url)=>{
     const [data, setData] = React.useState()

@@ -5,6 +5,7 @@ import useLoading from '../../../hooks/useLoading'
 import { admin_url } from '../../../utils/api_constants'
 import UserTable from '../../../components/tables/UserTable'
 
+
 function Users(props) {
 
     const users = useAxios(`/${admin_url}/users`)

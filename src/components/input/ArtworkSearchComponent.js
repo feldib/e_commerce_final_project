@@ -8,6 +8,7 @@ import ArtworkSearchFields from './ArtworkSearchFields'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 
+
 function ArtworkSearchComponent(props) {
     async function search(values){
         const qs = []

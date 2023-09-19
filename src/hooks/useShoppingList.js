@@ -2,6 +2,7 @@ import React from 'react'
 import { server_url } from '../utils/api_constants'
 import axios from 'axios'
 import { getLocatStorageShoppingCart } from '../helpers/helpers'
+axios.defaults.withCredentials = true
 
 const useShoppingList = (loggedIn) =>{
     const [data, setData] = React.useState([])

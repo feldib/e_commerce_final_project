@@ -6,6 +6,7 @@ import OrderSummaryComponent from '../../../components/OrderSummaryComponent'
 import { users_url } from '../../../utils/api_constants'
 import SubPageTitle from '../../../components/SubPageTitle'
 
+
 function OrderHistory() {
 
     function representOrderDataCollection(orderDataCollection){
