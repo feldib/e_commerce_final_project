@@ -13,6 +13,7 @@ import { useNavigate } from 'react-router-dom'
 import { WithContext as ReactTags } from 'react-tag-input'
 import { addNewArtwork } from '../../../fetching'
 
+
 function AddNewArtworkPage(props) {
 
     const categories = useAxios("/categories")

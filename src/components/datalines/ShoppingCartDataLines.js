@@ -13,6 +13,8 @@ import {
 } from '../../helpers/helpers'
 
 function ShoppingCartDataLines(props) {
+    const [quantity, setQuantity] = React.useState(props.line.quantity)
+
     return ( 
         <tr key={props.index}>
             <td>
@@ -38,7 +40,7 @@ function ShoppingCartDataLines(props) {
             </td>
             <td>
                 <p>
-                    €{props.line.price * props.line.quantity}
+                    €{props.line.price * quantity}
                 </p>
             </td>
             <td className='text-center'>
@@ -46,7 +48,7 @@ function ShoppingCartDataLines(props) {
                     <Col sm={12} lg={5}>
                         <Col>
                             <p>
-                                {props.line.quantity}
+                                {quantity}
                             </p>
                         </Col>
                     </Col>
@@ -56,12 +58,17 @@ function ShoppingCartDataLines(props) {
                             className='table-button'
                             onClick={
                                 async()=>{
+                                    //upon increase/decrease - go to the ancestor and update props quantity
                                     if(props.loggedIn){
                                         await decreaseShoppingListItemQuantity(props.line.id)
                                     }else{
                                         decreaseLocalStorageShoppingCartQuantity(props.line.id)
                                     }
-                                    window.location.reload()
+
+                                    if(quantity>0){
+                                        setQuantity(quantity - 1)
+                                    }
+                                    
                                 }
                             }
                         >
@@ -80,7 +87,7 @@ function ShoppingCartDataLines(props) {
                                             toast.success("Item added to shopping cart", {
                                                 className: "toast-success"
                                             })
-                                            window.location.reload()
+                                            setQuantity(quantity + 1)
                                         }).catch((error)=>{
                                             toast.error("Item out of stock", {
                                                 className: "toast-error"
@@ -90,12 +97,12 @@ function ShoppingCartDataLines(props) {
                                         try{
                                             increaseLocalStorageShoppingCartQuantity(
                                                     props.line.id, 
-                                                    props.line.stored_amount - props.line.quantity
+                                                    props.line.stored_amount - quantity
                                                 )
                                             toast.success("Item added to shopping cart", {
                                                 className: "toast-success"
                                             })
-                                            window.location.reload()
+                                            setQuantity(quantity + 1)
                                         }catch(error){
                                             toast.error("Item out of stock", {
                                                 className: "toast-error"
@@ -144,10 +151,10 @@ function ShoppingCartDataLines(props) {
                                     async()=>{
                                         if(props.loggedIn){
                                             await removeFromShoppingList(props.line.id)
-                                            window.location.reload()
+                                            setQuantity(0)
                                         }else{
                                             removeLocalStorageShoppingCartQuantity(props.line.id)
-                                            window.location.reload()
+                                            setQuantity(0)
                                         }
                                     }
                                 }

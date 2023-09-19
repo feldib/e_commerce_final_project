@@ -185,4 +185,7 @@ button:hover, input[type = "submit"]:hover, .submit:hover, a>p:hover, .navbar-to
   position: static;
   width: auto;
   height: auto;
+  color: black;
+  background-color: blue;
+  font-size: 1.5rem;
 }

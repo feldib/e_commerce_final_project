@@ -10,6 +10,7 @@ import ReviewsOfArtworks from './ReviewsOfArtwork'
 import LeaveReview from './LeaveReview'
 import ArtworkPicturesCarousel from './ArtworkPicturesCarousel'
 
+
 function ArtworkDetails(props) {
     const reviewsData = useAxios(`/reviews?id=${props.artwork_id}`)
     const [quantity, setQuantity] = React.useState(props.artwork.quantity)

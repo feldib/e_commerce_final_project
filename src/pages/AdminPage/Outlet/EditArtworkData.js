@@ -14,6 +14,7 @@ import { WithContext as ReactTags } from 'react-tag-input'
 import { addNewArtwork } from '../../../fetching'
 import { updateArtworkData } from '../../../fetching'
 
+
 function EditArtworkData(props) {
 
     const {artwork_id} = useParams()
