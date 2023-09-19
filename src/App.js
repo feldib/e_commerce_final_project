@@ -102,6 +102,9 @@ function App() {
 
   return (
     <BrowserRouter>
+
+      <a href="#main" className='skip-to-content'>Skip to content</a>
+
       <Header loggedIn={loggedIn} user={user} />
 
       <div id="main" className='pb-5 vh-100'>

@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 function SubNavbar(props) {
     return (
         <Row>
+            <a href="#subpage" className='skip-to-content'>Skip to subpage content</a>
             <Navbar>
                 <Container>
                         <Nav className='subnavbar d-flex flex-wrap mx-3 justify-content-around w-100 floating-element'>

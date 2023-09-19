@@ -14,10 +14,12 @@ function FeatureButton(props) {
             filledButton = {<img 
                                 src='/trophy_filled.png' 
                                 height="25px"
+                                alt='remove from featured'
                             /> }
             regularButton = {<img 
                                 src='/trophy_regular.png' 
                                 height="25px"
+                                alt='add to featured'
                             />}
         />
     )
