@@ -16,7 +16,7 @@ function UserOrderHistory(props) {
         getOrderHistory(user_id).then((orders)=>{
             setOrderDataCollection(orders.data)
         })
-    }, [])
+    })
 
     const navigate = useNavigate()
     const {user_id} = useParams()

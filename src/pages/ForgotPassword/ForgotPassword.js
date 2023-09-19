@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Row, Col, Button, InputGroup } from 'react-bootstrap'
+import { Container, Row, Col, Button } from 'react-bootstrap'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 import { sendForgotPasswordEmail } from '../../fetching'
 import InputComponent from '../../components/input/InputComponent'
