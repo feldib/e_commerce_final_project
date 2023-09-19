@@ -149,20 +149,26 @@ function EditArtworkData(props) {
 
     React.useEffect(()=>{
         formik.setFieldValue("tags", tags)
-        updateArtworkData(props.artwork_id, "tags", formik.values.tags.map(
-            (tag) => {
-                return { tname: tag.text } 
-            }
-        ))
+        if(tags.length >= 3){
+            updateArtworkData(artwork_id, "tags", tags.map(
+                (tag) => {
+                    return { tname: tag.text } 
+                }
+            ))
+        }
+        
     }, [tags])
 
     React.useEffect(()=>{
         formik.setFieldValue("other_pictures", imgUrls)
-        updateArtworkData(props.artwork_id, "other_pictures", formik.values.tags.map(
-            (tag) => {
-                return { picture_path: tag.text } 
-            }
-        ))
+        if(imgUrls.length && !formik.errors.other_pictures){
+            updateArtworkData(artwork_id, "other_pictures", imgUrls.map(
+                (pic) => {
+                    return { picture_path: pic.text } 
+                }
+            ))
+        }
+        
     }, [imgUrls])
 
     const createHandleDelete = (tgs, setTgs) => {

@@ -60,6 +60,7 @@ function ChangeArtworkDataInputComponent(props) {
                                 toast.success(`${props.label} changed successfully`, {
                                     className: "toast-success"
                                 })
+                                setEditing(false)
                             }
                         }
                     }>
