@@ -110,10 +110,11 @@ function EditArtworkData(props) {
 
     const KeyCodes = {
         comma: 188,
-        enter: 13
+        enter: 13,
+        space: 32
     }
       
-    const delimiters = [KeyCodes.comma, KeyCodes.enter];
+    const delimiters = [KeyCodes.comma, KeyCodes.enter, KeyCodes.space];
 
     const [tags, setTags] = React.useState([])
 
@@ -188,7 +189,7 @@ function EditArtworkData(props) {
     return (
         <Container>
              <PageTitle 
-                title="Add new artwork"
+                title="Edit artwork data"
             />
             <Row className='pb-5 floating-element'> 
                 <Col className='mx-5 pb-5 '>

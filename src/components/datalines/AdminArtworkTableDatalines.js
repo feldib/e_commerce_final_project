@@ -23,7 +23,7 @@ function AdminArtworkTableDatalines(props) {
                         />
                     </td>
                     <td>
-                        <Link to={`/artwork_page/${props.line.id}`}>
+                        <Link to={`/admin/edit_artwork/${props.line.id}`}>
                             <p>
                                 {props.line.title}
                             </p>
