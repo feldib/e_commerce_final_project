@@ -88,6 +88,10 @@ const updateUserData = async (field_name, value) => {
     return axios.post(`${server_url}/${users_url}/update_data`, {field_name, value})
 }
 
+const updateArtworkData = async (artwork_id, field_name, value) => {
+    return axios.post(`${server_url}/${admin_url}/update_artwork_data`, {artwork_id, field_name, value})
+}
+
 const order = async (invoice_data) => {
     return axios.post(`${server_url}/${users_url}/make_order`, {invoice_data})
 }
@@ -191,5 +195,6 @@ export {
     addNewArtwork,
     getDataOfArtworks,
     replaceSavedShoppingCart,
-    getIsAdmin
+    getIsAdmin,
+    updateArtworkData
 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import NewArtworkInputComponent from '../../../components/input/NewArtworkInputComponent'
+import ChangeArtworkDataInputComponent from '../../../components/input/ChangeArtworkDataInputComponent'
 import { Container, Col, Row, Button, Form, Dropdown } from 'react-bootstrap'
 import { faDollarSign, faQuestion, faImages } from '@fortawesome/free-solid-svg-icons'
 import { useFormik } from 'formik'
@@ -9,11 +9,15 @@ import PageTitle from '../../../components/PageTitle'
 import FloatingBackButton from '../../../components/buttons/FloatingBackButton'
 import useAxios from '../../../hooks/useAxios'
 import useLoading from '../../../hooks/useLoading'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { WithContext as ReactTags } from 'react-tag-input'
 import { addNewArtwork } from '../../../fetching'
+import { updateArtworkData } from '../../../fetching'
 
-function AddNewArtworkPage(props) {
+function EditArtworkData(props) {
+
+    const {artwork_id} = useParams()
+    const artworkData = useAxios(`/artwork?id=${artwork_id}`)
 
     const categories = useAxios("/categories")
 
@@ -37,15 +41,15 @@ function AddNewArtworkPage(props) {
 
     const formik = useFormik({
         initialValues: {
-            title: '',
-            artist_name: '',
-            price: '',
+            title: "",
+            artist_name: "",
+            price: "",
             tags: [],
-            quantity: '',
-            category_id: '',
-            thumbnail: '',
+            quantity: "",
+            category_id: "",
+            thumbnail: "",
             other_pictures: [],
-            description: ""
+            descript: ""
         },
 
         onSubmit: (values, actions)=>{
@@ -97,11 +101,12 @@ function AddNewArtworkPage(props) {
                         text: Yup.string().url("Please enter valid ur!")
                     })
                 ),
-            description: Yup.string()
+            descript: Yup.string()
                 .required("Description required"),
         })
 
     })
+
 
     const KeyCodes = {
         comma: 188,
@@ -115,11 +120,55 @@ function AddNewArtworkPage(props) {
     const [imgUrls, setImgUrls] = React.useState([])
 
     React.useEffect(()=>{
+        if(artworkData){
+
+            formik.setValues(
+                {
+                    title: artworkData.title,
+                    artist_name: artworkData.artist_name,
+                    price: artworkData.price,
+                    tags: artworkData.tags,
+                    quantity: artworkData.quantity,
+                    category_id: artworkData.category_id,
+                    thumbnail: artworkData.thumbnail,
+                    other_pictures: artworkData.other_pictures,
+                    descript: artworkData.descript
+                }
+            )
+            setTags(artworkData.tags.map((obj)=>{
+                return {id: obj.tname, text:obj.tname}
+            }))
+            setImgUrls(artworkData.other_pictures.map((obj)=>{
+                return {id: obj.picture_path, text:obj.picture_path}
+            }))
+
+            
+        }
+    }, [artworkData])
+
+
+    React.useEffect(()=>{
         formik.setFieldValue("tags", tags)
+        if(tags.length >= 3){
+            updateArtworkData(artwork_id, "tags", tags.map(
+                (tag) => {
+                    return { tname: tag.text } 
+                }
+            ))
+        }
+        
     }, [tags])
 
     React.useEffect(()=>{
         formik.setFieldValue("other_pictures", imgUrls)
+        if(imgUrls.length && !formik.errors.other_pictures){
+            updateArtworkData(artwork_id, "other_pictures", imgUrls.map(
+                (pic) => {
+                    return { picture_path: pic.text } 
+                }
+            ))
+        }
+        
     }, [imgUrls])
 
     const createHandleDelete = (tgs, setTgs) => {
@@ -145,31 +194,34 @@ function AddNewArtworkPage(props) {
                 <Col className='mx-5 pb-5 '>
                     <Form onSubmit={formik.handleSubmit}>
 
-                        <NewArtworkInputComponent 
+                        <ChangeArtworkDataInputComponent 
                             label="Title"
                             name="title"
                             type="text"
                             placeholder="Enter title"
                             icon={faQuestion}
                             formik={formik}
+                            artwork_id={artwork_id}
                         />
 
-                        <NewArtworkInputComponent 
+                        <ChangeArtworkDataInputComponent 
                             label="Artist"
                             name="artist_name"
                             type="text"
                             placeholder="Enter name of artist"
                             icon={faQuestion}
                             formik={formik}
+                            artwork_id={artwork_id}
                         />
 
-                        <NewArtworkInputComponent 
+                        <ChangeArtworkDataInputComponent 
                             label="Price"
                             name="price"
                             type="number"
                             placeholder="Enter price of artwork"
                             icon={faDollarSign}
                             formik={formik}
+                            artwork_id={artwork_id}
                         />
 
                         <Form.Group className="pb-3">
@@ -195,13 +247,14 @@ function AddNewArtworkPage(props) {
                         </Form.Group>
                         
                         
-                        <NewArtworkInputComponent 
+                        <ChangeArtworkDataInputComponent 
                             label="Quantity"
                             name="quantity"
                             type="number"
                             placeholder="Enter quantity"
                             icon={faQuestion}
                             formik={formik}
+                            artwork_id={artwork_id}
                         />
 
                         <Form.Group className="pb-3">
@@ -230,13 +283,14 @@ function AddNewArtworkPage(props) {
                             }
                         </Form.Group>
 
-                        <NewArtworkInputComponent 
+                        <ChangeArtworkDataInputComponent 
                             label="Thumbnail"
                             name="thumbnail"
                             type="text"
                             placeholder="Enter thumbnail url"
                             icon={faImages}
                             formik={formik}
+                            artwork_id={artwork_id}
                         />
 
                         <Form.Group className="pb-3">
@@ -263,26 +317,15 @@ function AddNewArtworkPage(props) {
                             }
                         </Form.Group>
 
-                        <NewArtworkInputComponent 
+                        <ChangeArtworkDataInputComponent 
                             label="Description"
-                            name="description"
+                            name="descript"
                             type="textarea"
                             placeholder="Enter description"
                             icon={faQuestion}
                             formik={formik}
+                            artwork_id={artwork_id}
                         />
-
-                        <Button variant="primary" type="submit" onClick={
-                            ()=>{
-                                Object.keys(formik.errors).length && (
-                                    toast.error("Incorrect data", {
-                                    className: "toast-error"
-                                })
-                                )
-                            }
-                        }>
-                            Add new artwork
-                        </Button>
                         <ToastContainer position='bottom-right' />
                     </Form>
                 </Col>
@@ -295,4 +338,4 @@ function AddNewArtworkPage(props) {
     )
 }
 
-export default AddNewArtworkPage
+export default EditArtworkData

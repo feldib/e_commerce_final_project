@@ -99,6 +99,7 @@ const redirectIfNotloggedIn = () => {
 }
 
 const redirectIfNotAdmin = (isAdmin) => {
+    redirectIfNotloggedIn()
     getIsAdmin().catch(()=>{
         window.location.replace("/user")
     })

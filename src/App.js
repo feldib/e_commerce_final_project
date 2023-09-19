@@ -37,6 +37,7 @@ import { confirmAlert } from 'react-confirm-alert'
 import 'react-confirm-alert/src/react-confirm-alert.css'
 import { replacePreviousShoppingCart } from './helpers/helpers'
 import { ToastContainer } from 'react-toastify'
+import EditArtworkData from './pages/AdminPage/Outlet/EditArtworkData'
 
 function App() {
   axios.defaults.withCredentials = true
@@ -201,6 +202,11 @@ function App() {
             <Route
               path='add_new_artwork'
               element={<AddNewArtworkPage  />}
+            />
+
+            <Route
+              path='edit_artwork/:artwork_id'
+              element={<EditArtworkData  />}
             />
 
             <Route
