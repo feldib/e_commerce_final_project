@@ -45,13 +45,14 @@ function ShoppingCartDataLines(props) {
             </td>
             <td className='text-center'>
                 <Row>
-                    <Col sm={12} lg={5}>
+                    <Col className='d-xl-none' sm={12}>
                         <Col>
                             <p>
                                 {quantity}
                             </p>
                         </Col>
                     </Col>
+
                     <Col>
                         <p 
                             style={{cursor: "pointer"}}
@@ -74,6 +75,16 @@ function ShoppingCartDataLines(props) {
                         >
                             <FontAwesomeIcon icon={faMinus} style={{color: "red"}} />
                         </p>
+                    </Col>
+
+                    <Col className='d-none d-xl-inline' xl={1} style={{
+                        marginRight: "10px"
+                    }}>
+                        <Col>
+                            <p>
+                                {quantity}
+                            </p>
+                        </Col>
                     </Col>
                     
                     <Col>

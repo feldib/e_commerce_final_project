@@ -82,7 +82,6 @@ function ArtworkSearchComponent(props) {
                             />
                         }
 
-                    {formik.values.n <= searchResults.length &&
                         <Row className="pt-3 pb-3 text-center">
 
                             {pageNumber !== 1 &&
@@ -103,6 +102,8 @@ function ArtworkSearchComponent(props) {
 
                             }
 
+                            {formik.values.n <= searchResults.length &&
+
                             <Col className="mx-auto">
                                 <Button 
                                     className='submit'
@@ -116,8 +117,8 @@ function ArtworkSearchComponent(props) {
                                     Next {formik.values.n}
                                 </Button>
                             </Col>
+                            }
                         </Row>
-                    }
                     </Row>                 
             }
             </Form>

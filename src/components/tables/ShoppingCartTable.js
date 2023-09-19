@@ -20,7 +20,7 @@ function ShoppingCartTable(props) {
     }
     const dataLines = useLoading(props.dataLines, (dataLines)=>{return presentData(dataLines, makeDataLines)})
     return (
-        <Row>
+        <Row className='text-center'>
             <table>
                 {props.theadNeeded &&
                 <thead>

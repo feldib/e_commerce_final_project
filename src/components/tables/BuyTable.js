@@ -48,7 +48,7 @@ function BuyTable(props) {
     })
 
     return (
-        <Row>
+        <Row className='text-center'>
             <table className='mb-3'>
                 {props.theadNeeded &&
                 <thead>
