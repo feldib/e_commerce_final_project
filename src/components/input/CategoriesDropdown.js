@@ -31,6 +31,14 @@ function CategoriesDropdown(props) {
             >
                 <Dropdown.Toggle variant='outilne-dark'>Categories</Dropdown.Toggle>
                 <Dropdown.Menu className='px-3'>
+                        <Dropdown.Item
+                            eventKey={""}
+                            key={"all"}
+                            id={"all"}
+                            style={{cursor: "pointer"}}
+                        >
+                            All
+                        </Dropdown.Item>
                     {categories}
                 </Dropdown.Menu>
             </Dropdown>

@@ -14,6 +14,7 @@ function Queries(props) {
                         text = {`Between ${props.formik.values.min} and ${props.formik.values.max}`}
                         remove = {
                             ()=>{
+                                props.resetPageNumber()
                                 props.formik.setFieldValue('max', '')
                                 props.formik.setFieldValue('min', '')
                                 props.formik.submitForm()
@@ -26,6 +27,7 @@ function Queries(props) {
                         text = {`Minimum: ${props.formik.values.min}`}
                         remove = {
                             ()=>{
+                                props.resetPageNumber()
                                 props.formik.setFieldValue('min', '')
                                 props.formik.submitForm()
                             }
@@ -37,6 +39,7 @@ function Queries(props) {
                         text = {`Maximum: ${props.formik.values.max}`}
                         remove = {
                             ()=>{
+                                props.resetPageNumber()
                                 props.formik.setFieldValue('max', '')
                                 props.formik.submitForm()
                             }
@@ -49,6 +52,7 @@ function Queries(props) {
                 text = {`Title: ${props.formik.values.title}`}
                 remove = {
                     ()=>{
+                        props.resetPageNumber()
                         props.formik.setFieldValue('title', '')
                         props.formik.submitForm()
                     }
@@ -61,6 +65,7 @@ function Queries(props) {
                     text = {`Artist: ${props.formik.values.artist_name}`}
                     remove = {
                         ()=>{
+                            props.resetPageNumber()
                             props.formik.setFieldValue('artist_name', '')
                             props.formik.submitForm()
                         }
@@ -76,6 +81,7 @@ function Queries(props) {
                         }).cname
                     }`}
                     remove = {()=>{
+                        props.resetPageNumber()
                         props.formik.setFieldValue('category_id', '')
                         props.formik.submitForm()
                     }}

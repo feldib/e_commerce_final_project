@@ -41,7 +41,7 @@ tbody > tr:hover{
     background-color: #7da5d944;
 }
 
-.floating-element, .page-title, .subpage-title, .card, .toast-warning, .toast-success, .toast-error{
+.floating-element, .page-title, .subpage-title, .card, .toast-warning, .toast-success, .toast-error, .toast-info{
     background-color: var(--translucent-dark-bg-color) !important;
     color: var(--bright-warm) !important;
     border-radius: 10px !important;
