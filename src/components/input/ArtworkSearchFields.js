@@ -87,7 +87,6 @@ function ArtworkSearchFields(props) {
                         onSelect={(e)=>{
                             props.formik.setFieldValue("n", e)
                             props.formik.setFieldValue("offset", 0)
-                            props.formik.handleSubmit(props.formik.values)
                         }}
                     >
                         <Dropdown.Toggle variant='outilne-dark'>Number of artworks shown</Dropdown.Toggle>
@@ -158,8 +157,8 @@ function ArtworkSearchFields(props) {
                         type="submit"
                         onClick={
                             ()=>{
-                                props.formik.setFieldValue("offset", 0)
                                 props.resetPageNumber()
+                                props.formik.setFieldValue("offset", 0)
                             }
                         }
                     >
@@ -168,7 +167,7 @@ function ArtworkSearchFields(props) {
                 </Col>
             </Row>
 
-            <Queries formik={props.formik} categories={props.categories} />
+            <Queries resetPageNumber={props.resetPageNumber} formik={props.formik} categories={props.categories} />
         </div>
     )
 }
