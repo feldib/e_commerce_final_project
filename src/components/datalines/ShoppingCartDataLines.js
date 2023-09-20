@@ -15,6 +15,10 @@ import {
 function ShoppingCartDataLines(props) {
     const [quantity, setQuantity] = React.useState(props.line.quantity)
 
+    React.useEffect(()=>{
+        props.changeCosts(props.index, props.line.price * quantity)
+    }, [quantity])
+
     return ( 
         <tr key={props.index}>
             <td>
@@ -68,6 +72,7 @@ function ShoppingCartDataLines(props) {
 
                                     if(quantity>0){
                                         setQuantity(quantity - 1)
+                                        
                                     }
                                     
                                 }

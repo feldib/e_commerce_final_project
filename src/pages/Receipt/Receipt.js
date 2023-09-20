@@ -19,11 +19,14 @@ function ReceiptPage(props) {
                 <Row>
                     <Col className='text-center mb-5'>
                         <Link to="/">
-                            <Button onClick={
-                                ()=>{
-                                    localStorage.removeItem("currentOrder")
+                            <Button 
+                                className='submit'
+                                onClick={
+                                    ()=>{
+                                        localStorage.removeItem("currentOrder")
+                                    }
                                 }
-                            }>
+                            >
                                 Back to Shop
                             </Button>
                         </Link>

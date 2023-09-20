@@ -8,22 +8,10 @@ import PageTitle from '../../components/PageTitle'
 function ShoppingCartPage(props) {
     const shoppingListItems = useShoppingList(props.loggedIn)
 
-    const [totalCost, setTotalCost] = React.useState()
-    React.useEffect(()=>{
-        if(shoppingListItems){
-            setTotalCost(
-                shoppingListItems.filter((obj)=>{
-                    return {
-                        quantity: obj.quantity,
-                        price: obj.price
-                    }
-                }).reduce((total, obj)=>{
-                    return total + (obj.price * obj.quantity)
-                }, 0)
-            )
-        }
-        
-    }, [shoppingListItems])
+    const [costs, setCosts] = React.useState({})
+
+    const [totalCost, setTotalCost] = React.useState(0)
+
     return (
         <Container className='pb-5 mb-5'>
             <PageTitle 
@@ -34,7 +22,23 @@ function ShoppingCartPage(props) {
                 <ShoppingCartTable 
                     theadNeeded = {true}
                     dataLines = {shoppingListItems}
-                    loggedIn={props.loggedIn} 
+                    loggedIn={props.loggedIn}
+                    changeCosts={
+                        (key, newCost) => {
+                            const temp = costs
+
+                            temp[key] = newCost
+
+                            setCosts(temp)
+
+                            setTotalCost(
+                                Object.values(costs).reduce(
+                                    (acc, curr) => acc + curr,
+                                    0
+                                )
+                            )
+                        }
+                    }
                 />
             
 
@@ -54,10 +58,13 @@ function ShoppingCartPage(props) {
                                 to_checkout: props.loggedIn ? false : true
                             }}
                         >
-                            <Button onClick={()=>{
-                                localStorage.removeItem("currentOrder")
-                                localStorage.setItem("currentOrder", JSON.stringify({items: shoppingListItems, totalCost}))
-                            }}>
+                            <Button 
+                                className='submit'
+                                onClick={()=>{
+                                    localStorage.removeItem("currentOrder")
+                                    localStorage.setItem("currentOrder", JSON.stringify({items: shoppingListItems, totalCost}))
+                                }}
+                            >
                                 Go to Checkout
                             </Button>
                         </Link>

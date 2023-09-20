@@ -13,6 +13,7 @@ function ShoppingCartTable(props) {
                     line={line}
                     index={index}
                     loggedIn={props.loggedIn}
+                    changeCosts={props.changeCosts}
                 />
             )
         })
