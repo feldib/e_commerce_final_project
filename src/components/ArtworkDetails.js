@@ -69,7 +69,7 @@ function ArtworkDetails(props) {
                                     </Card.Subtitle>
                                 </Col>
 
-                                <Col className='text-end px-3'>
+                                <Col xs={1} className='text-center px-3'>
                                     <span onClick={
                                         ()=>{
                                             if(props.loggedIn && quantity>0){
@@ -105,7 +105,7 @@ function ArtworkDetails(props) {
                         <Card.Body className='p-3 px-3'>
                             <Row>
                                 <Col>
-                                    <Card.Title>
+                                    <Card.Title className='mb-4'>
                                         <h3>Description</h3>
                                     </Card.Title>
 
@@ -114,7 +114,7 @@ function ArtworkDetails(props) {
                                     </Card.Subtitle>
                                 </Col>
 
-                                <Col className='text-end px-3'>
+                                <Col xs={1} className='text-center px-3'>
                                     <span onClick={
                                         ()=>{
                                             if(quantity>0){
