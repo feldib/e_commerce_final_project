@@ -157,7 +157,7 @@ button:hover, input[type = "submit"]:hover, .submit:hover, a>p:hover, .navbar-to
     padding-left: 20px;
   }
 
-.toast-warning, .toast-success, .toast-error{
+.toast-warning, .toast-success, .toast-error, .toast-info{
     background-color: #352e36ee !important;
     padding: 10px !important;
     box-shadow: 12px 14px 40px -5px rgba(0, 0, 0, 0.283) !important;

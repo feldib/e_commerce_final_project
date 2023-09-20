@@ -8,18 +8,23 @@ import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 import { ToastContainer, toast } from 'react-toastify'
 import PageTitle from '../../components/PageTitle'
-
-const attemptRegistration = async (values, settleSuccessfulRegistration) => {
-    await registerNewUser(values.email, values.password, values.firstName, values.lastName)
-    .then(function (response) {
-        logIn(values.email, values.password, settleSuccessfulRegistration)
-    })
-    .catch((error)=>{
-        console.log(error)
-    })
-}
+import { useLocation } from 'react-router-dom'
 
 function RegistrationPage(props) {
+
+    const {to_checkout} = useLocation().state || false
+
+    const attemptRegistration = async (values, settleSuccessfulRegistration) => {
+        await registerNewUser(values.email, values.password, values.firstName, values.lastName)
+        .then(function (response) {
+            logIn(values.email, values.password, (userData)=>{
+                props.settleSuccessfulRegistration(to_checkout, userData)
+            })
+        })
+        .catch((error)=>{
+            console.log(error)
+        })
+    }
 
     const initialValues = {
         email: '',
