@@ -20,6 +20,7 @@ function ArtworkSearchComponent(props) {
             }
         }
         await getArtworkSearchResults(qs, setSearchResults)
+        
     }
 
     const [pageNumber, setPageNumber] = React.useState(1)
@@ -32,7 +33,7 @@ function ArtworkSearchComponent(props) {
             artist_name: "", 
             category_id: "", 
             order: "asc", 
-            n: "10",
+            n: "5",
             min: "",
             max: "",
             offset: 0
@@ -60,6 +61,9 @@ function ArtworkSearchComponent(props) {
             <ArtworkSearchFields 
                 formik={formik}
                 categories={categories}
+                resetPageNumber={()=>{
+                    setPageNumber(1)
+                }}
             />
 
             {searchResults &&

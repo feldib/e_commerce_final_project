@@ -93,11 +93,6 @@ function App() {
     
   }
 
-  const settleSuccessfulRegistration = (userData)=>{
-    setUser(userData)
-    window.location = "/user"
-  }
-
   return (
     <BrowserRouter>
 
@@ -130,7 +125,7 @@ function App() {
             path='/register'
             element={
               <Registration 
-              settleSuccessfulRegistration = {settleSuccessfulRegistration}
+              settleSuccessfulRegistration = {settleSuccessfulLogIn}
               />
             }
           />

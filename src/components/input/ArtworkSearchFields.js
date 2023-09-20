@@ -159,6 +159,7 @@ function ArtworkSearchFields(props) {
                         onClick={
                             ()=>{
                                 props.formik.setFieldValue("offset", 0)
+                                props.resetPageNumber()
                             }
                         }
                     >
