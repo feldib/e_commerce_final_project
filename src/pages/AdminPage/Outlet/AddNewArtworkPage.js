@@ -139,11 +139,11 @@ function AddNewArtworkPage(props) {
     const [chosenCategory, setChoseCategory] = React.useState("Choose")
 
     return (
-        <Container>
+        <Container className='px-3'>
              <PageTitle 
                 title="Add new artwork"
             />
-            <Row className='pb-5 floating-element'> 
+            <Row className='mx-auto pb-5 floating-element'> 
                 <Col className='mx-5 pb-5 '>
                     <Form onSubmit={formik.handleSubmit}>
 

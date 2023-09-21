@@ -71,7 +71,7 @@ function ArtworkSearchFields(props) {
                     </InputGroup>
             </Row>
             
-            <Row>
+            <Row className='mx-auto'>
                 <CategoriesDropdown 
                     categories = {props.categories}
                     setValue={

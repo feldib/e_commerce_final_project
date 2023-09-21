@@ -9,9 +9,9 @@ function WishList(props) {
     const wishListed = useAxios("/users/wishlisted")
     return (
         <Container className='mb-5 pb-5'>
-            <Row>
+            <Row className='px-3'>
                 <SubPageTitle title="Wishlisted" />
-                <Row className='floating-element'>
+                <Row className='mx-auto floating-element'>
                     <BuyTable 
                         theadNeeded = {true}
                         dataLines = {wishListed}

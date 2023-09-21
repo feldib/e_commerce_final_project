@@ -42,7 +42,7 @@ function SignInPage(props) {
     })
 
     return (
-        <Container className='pb-5'>
+        <Container className='px-3 pb-5'>
             <PageTitle 
                 title="Log In"
             />
@@ -53,7 +53,7 @@ function SignInPage(props) {
                 onSubmit={onSubmit}
             >
                 {({errors, touched})=>(
-                    <Row className='floating-element'>
+                    <Row className='mx-auto floating-element'>
                         <Row>
                             <Col className='mx-3 pb-5'>
                                 <Form>

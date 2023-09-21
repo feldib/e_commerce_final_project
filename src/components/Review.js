@@ -10,7 +10,7 @@ function Review(props) {
     return (
         <>
             {showReview && 
-                <Row className='mb-5'>
+                <Row className='mx-auto mb-5'>
                     <Card className='p-3 floating-element'>
                         <Card.Title>
                             <p>Title: {props.review.title}</p>

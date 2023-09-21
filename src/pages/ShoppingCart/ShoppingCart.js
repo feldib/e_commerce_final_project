@@ -18,7 +18,7 @@ function ShoppingCartPage(props) {
                 title="Shopping cart"
             />
 
-            <Row className='floating-element mb-5'>
+            <Row className='px-3 mx-auto floating-element mb-5'>
                 <ShoppingCartTable 
                     theadNeeded = {true}
                     dataLines = {shoppingListItems}

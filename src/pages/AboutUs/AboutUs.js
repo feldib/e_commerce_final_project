@@ -4,9 +4,9 @@ import PageTitle from '../../components/PageTitle'
 
 function AboutUsPage() {
     return (
-        <Container className='pb-5'>
+        <Container className='px-3 pb-5'>
             <PageTitle title="About us" />
-            <Row className='mb-5'>
+            <Row className='mx-auto mb-5'>
                 <Col className='pb-5 floating-element'>
                     <Row className='text-center'>
                         <h2>Our story</h2>

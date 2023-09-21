@@ -16,7 +16,7 @@ function Messages(props) {
         })
     }))
     return (
-        <Col>
+        <Col className='mx-3'>
             <SubPageTitle title="Unanswered messages" />
 
             <Row>

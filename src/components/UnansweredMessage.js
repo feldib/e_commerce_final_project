@@ -38,7 +38,7 @@ function UnansweredMessage(props) {
     })
 
     return (
-        <Row className='mb-5 floating-element p-3'> 
+        <Row className='mx-auto mb-5 floating-element p-3'> 
             {replied ?
                 <Col>
                     <h4>Reply sent successfully!</h4>
