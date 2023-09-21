@@ -10,20 +10,16 @@ import * as Yup from 'yup'
 
 
 function ArtworkSearchComponent(props) {
+
+    const [searchResults, setSearchResults] = React.useState()
+
+    const [pageNumber, setPageNumber] = React.useState(0)
+
     async function search(values){
-        const qs = []
-        for (const [key, value] of Object.entries(values)) {
-            if(value){
-                qs.push(
-                    `${key}=${value}`
-                )
-            }
-        }
-        await getArtworkSearchResults(qs, setSearchResults)
+        const results = await getArtworkSearchResults(values, pageNumber)
+        setSearchResults(results)
         
     }
-
-    const [pageNumber, setPageNumber] = React.useState(1)
 
     const formik = useFormik({
         enableReinitialize: true,
@@ -36,10 +32,12 @@ function ArtworkSearchComponent(props) {
             n: "5",
             min: "",
             max: "",
-            offset: 0
         },
 
-        onSubmit: (values) => search(values),
+        onSubmit: (values) => {
+            setPageNumber(1)
+            search(values)
+        },
 
         validationSchema: Yup.object().shape({
             min: Yup.number()
@@ -52,9 +50,13 @@ function ArtworkSearchComponent(props) {
 
     const categories = useAxios("/categories")
 
-    const [searchResults, setSearchResults] = React.useState()
-
     const results = React.useRef()
+
+    React.useEffect(()=>{
+        if(pageNumber){
+            search(formik.values)
+        }
+    }, [pageNumber])
 
     return (
         <Form onSubmit={formik.handleSubmit}>
@@ -88,15 +90,13 @@ function ArtworkSearchComponent(props) {
 
                         <Row className="pt-3 pb-3 text-center">
 
-                            {pageNumber !== 1 &&
+                            {pageNumber > 1 &&
 
                             <Col className="mx-auto">
                                 <Button 
                                     className='submit'
                                     onClick={(e)=>{
                                         setPageNumber( pageNumber - 1 )
-                                        formik.setFieldValue("offset", pageNumber / parseInt(formik.values.n))
-                                        formik.handleSubmit(formik.values)
                                         results.current.scrollIntoView({behaviour: "instant"})
                                     }}
                                 >
@@ -106,15 +106,13 @@ function ArtworkSearchComponent(props) {
 
                             }
 
-                            {formik.values.n <= searchResults.length &&
+                            {searchResults.length >= pageNumber * formik.values.n &&
 
                             <Col className="mx-auto">
                                 <Button 
                                     className='submit'
-                                    onClick={(e)=>{
+                                    onClick={async (e)=>{
                                         setPageNumber( pageNumber + 1 )
-                                        formik.setFieldValue("offset", pageNumber * parseInt(formik.values.n))
-                                        formik.handleSubmit(formik.values)
                                         results.current.scrollIntoView({behaviour: "instant"})
                                     }}
                                 >

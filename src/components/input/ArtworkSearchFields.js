@@ -86,7 +86,6 @@ function ArtworkSearchFields(props) {
                         value={props.formik.values.n}
                         onSelect={(e)=>{
                             props.formik.setFieldValue("n", e)
-                            props.formik.setFieldValue("offset", 0)
                         }}
                     >
                         <Dropdown.Toggle variant='outilne-dark'>Number of artworks shown</Dropdown.Toggle>
@@ -158,7 +157,6 @@ function ArtworkSearchFields(props) {
                         onClick={
                             ()=>{
                                 props.resetPageNumber()
-                                props.formik.setFieldValue("offset", 0)
                             }
                         }
                     >

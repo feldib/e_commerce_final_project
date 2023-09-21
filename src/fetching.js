@@ -41,14 +41,21 @@ const changePassword = async(token, email, newPassword)=>{
     })
 }
 
-const getArtworkSearchResults = async(queries, setter)=>{
-    console.log("queries:", JSON.stringify(queries))
-    axios.get(`${server_url}/search_artworks${`?${queries.join("&")}`}`)
+const getArtworkSearchResults = async(objects, pageNumber)=>{
+    const queries = Object.entries(objects).map(([key, value])=>{
+        return `${key}=${value}`
+    }).join("&")
+    
+    return axios.get(`${server_url}/search_artworks${
+        queries.length ? ("?" + queries) : ""
+    }${objects.n ? ("&offset=" + objects.n * (pageNumber-1)) : ""}
+    `)
     .then(function (artw) {
-        setter(artw.data)
+        return artw.data
     })
     .catch(function (error) {
         console.log(error)
+        return 
     })
 }
 
