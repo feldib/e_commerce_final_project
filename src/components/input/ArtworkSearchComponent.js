@@ -17,8 +17,7 @@ function ArtworkSearchComponent(props) {
 
     async function search(values){
         const results = await getArtworkSearchResults(values, pageNumber)
-        setSearchResults(results)
-        
+        setSearchResults(results)        
     }
 
     const formik = useFormik({
@@ -57,6 +56,13 @@ function ArtworkSearchComponent(props) {
             search(formik.values)
         }
     }, [pageNumber])
+
+    React.useEffect(()=>{
+        if(results.current){
+            results.current.scrollIntoView({behaviour: "instant"})
+        }
+        
+    }, [searchResults])
 
     return (
         <Form onSubmit={formik.handleSubmit}>
@@ -97,7 +103,6 @@ function ArtworkSearchComponent(props) {
                                     className='submit'
                                     onClick={(e)=>{
                                         setPageNumber( pageNumber - 1 )
-                                        results.current.scrollIntoView({behaviour: "instant"})
                                     }}
                                 >
                                     Back {formik.values.n}
@@ -113,7 +118,6 @@ function ArtworkSearchComponent(props) {
                                     className='submit'
                                     onClick={async (e)=>{
                                         setPageNumber( pageNumber + 1 )
-                                        results.current.scrollIntoView({behaviour: "instant"})
                                     }}
                                 >
                                     Next {formik.values.n}
