@@ -69,11 +69,11 @@ function RegistrationPage(props) {
     })
 
     return (
-        <Container className='pb-5'>
+        <Container className='pb-5 px-3'>
              <PageTitle 
                 title="Register"
             />
-            <Row className='mb-5 pb-5 floating-element'> 
+            <Row className='mx-auto mb-5 pb-5 floating-element'> 
                 <Col className='mx-5 pb-5 '>
                     <Formik
                         initialValues={initialValues}

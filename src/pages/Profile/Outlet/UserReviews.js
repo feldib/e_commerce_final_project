@@ -16,7 +16,7 @@ function Reviews() {
         })
     }))
     return (
-        <Col>
+        <Col className='mx-auto'>
             <SubPageTitle title="Past reviews" />
 
             <Row>

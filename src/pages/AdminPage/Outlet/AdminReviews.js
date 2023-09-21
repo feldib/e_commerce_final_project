@@ -17,7 +17,7 @@ function Reviews(props) {
         })
     }))
     return (
-        <Col>
+        <Col className='mx-auto'>
             <SubPageTitle title="New reviews" />
 
             <Row>

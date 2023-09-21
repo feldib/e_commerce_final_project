@@ -7,10 +7,10 @@ import SubPageTitle from '../SubPageTitle'
 
 function UserDataChangingComponent(props) {
     return (
-        <Container className='mb-5'>
+        <Container className='px-3 mb-5'>
             <SubPageTitle title={`${props.title}`} />
 
-            <Row className='mb-5 floating-element'>
+            <Row className='mx-auto mb-5 floating-element'>
                 <Row> 
                     <Col className='mx-5 mb-5'>
                         <UserDataInputComponents 
