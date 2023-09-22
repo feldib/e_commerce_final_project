@@ -46,6 +46,7 @@ function BuyTable(props) {
             makeDataLines
             )
     })
+    
 
     return (
         <Row className='text-center mx-auto'>

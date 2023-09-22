@@ -29,6 +29,11 @@ function HomePage(props) {
                     path="/newest?n=2"
                 />
 
+                <ReccomendationTable 
+                    title="Most wishlisted"
+                    path="/most_wishlisted?n=2"
+                />
+
                 {loggedIn &&
                     <ReccomendationTable 
                         title="Wishlisted"
