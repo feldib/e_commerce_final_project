@@ -24,6 +24,11 @@ function HomePage(props) {
                     path="/featured?n=2"
                 />
 
+                <ReccomendationTable 
+                    title="Newest"
+                    path="/newest?n=2"
+                />
+
                 {loggedIn &&
                     <ReccomendationTable 
                         title="Wishlisted"
