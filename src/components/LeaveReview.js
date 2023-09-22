@@ -7,8 +7,11 @@ import * as Yup from 'yup'
 import { toast } from 'react-toastify'
 import InputComponent from './input/InputComponent'
 import { leaveReview } from '../fetching'
+import { UserDataContext } from '../App'
 
 function LeaveReview(props) {
+
+    const {user, loggedIn} = React.useContext(UserDataContext)
 
     const form = React.useRef()
 
@@ -56,7 +59,7 @@ function LeaveReview(props) {
                                     <h4>Add a review</h4>
                                 </RBForm.Label>
         
-                                {props.loggedIn ?
+                                {loggedIn ?
                                     <>
                                         <InputComponent 
                                             label="Title"

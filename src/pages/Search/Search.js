@@ -12,7 +12,6 @@ function Search(props) {
             />
 
         <ArtworkSearchComponent 
-            loggedIn={props.loggedIn}
             admin={false}
         />
 

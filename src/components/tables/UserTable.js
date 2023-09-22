@@ -3,8 +3,12 @@ import UserTableDataLines from '../datalines/UserTableDataLines'
 import useLoading from '../../hooks/useLoading'
 import { Row } from 'react-bootstrap'
 import { presentData } from '../../helpers/helpers'
+import { UserDataContext } from '../../App'
 
 function UserTable(props) {
+
+    const {user, loggedIn} = React.useContext(UserDataContext)
+    
     function makeDataLines(dataLines){
         return (dataLines.map((line, index)=>{
             return (

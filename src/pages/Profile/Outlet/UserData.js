@@ -2,8 +2,10 @@ import React from 'react'
 import * as Yup from 'yup'
 import UserDataComponent from '../../../components/input/UserDataComponent'
 import { useFormik } from 'formik'
+import { UserDataContext } from '../../../App'
 
 function UserData(props) {
+    const {user, loggedIn} = React.useContext(UserDataContext)
     const validationSchema = Yup.object().shape({
         email: Yup.string()
             .email("Invalid email")
@@ -19,11 +21,11 @@ function UserData(props) {
     const formik = useFormik({
         enableReinitialize: true,
         initialValues: { 
-            email: props.user.email,
-            first_name: props.user.first_name,
-            last_name: props.user.last_name,
-            address: props.user.address || "",
-            phone_number: props.user.phone_number || ""
+            email: user.email,
+            first_name: user.first_name,
+            last_name: user.last_name,
+            address: user.address || "",
+            phone_number: user.phone_number || ""
         },
 
         validationSchema,

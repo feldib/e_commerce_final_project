@@ -5,6 +5,8 @@ import ShoppingCartDataLines from '../datalines/ShoppingCartDataLines'
 import { presentData } from '../../helpers/helpers'
 
 function ShoppingCartTable(props) {
+
+
     function makeDataLines(dataLines){
         return (dataLines.map((line, index)=>{
             return (
@@ -12,7 +14,6 @@ function ShoppingCartTable(props) {
                     reccomendation={props.reccomendation}
                     line={line}
                     index={index}
-                    loggedIn={props.loggedIn}
                     changeCosts={props.changeCosts}
                 />
             )

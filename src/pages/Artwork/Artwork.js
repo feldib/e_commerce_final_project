@@ -6,7 +6,6 @@ import useAxios from '../../hooks/useAxios'
 import ArtworkDetails from '../../components/ArtworkDetails'
 import FloatingBackButton from '../../components/buttons/FloatingBackButton'
 
-
 function ArtworkPage(props) {
     const navigatedFromRouter = !(useLocation().key === "default")
     
@@ -21,7 +20,6 @@ function ArtworkPage(props) {
             <ArtworkDetails 
                 artwork = {artwork}
                 artwork_id = {artwork_id}
-                loggedIn = {props.loggedIn}
             />
         )
     })

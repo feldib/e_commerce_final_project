@@ -4,9 +4,12 @@ import ShoppingCartTable from '../../components/tables/ShoppingCartTable'
 import useShoppingList from '../../hooks/useShoppingList'
 import { Link } from 'react-router-dom'
 import PageTitle from '../../components/PageTitle'
+import { UserDataContext } from '../../App'
 
 function ShoppingCartPage(props) {
-    const shoppingListItems = useShoppingList(props.loggedIn)
+    const {user, loggedIn} = React.useContext(UserDataContext)
+
+    const shoppingListItems = useShoppingList(loggedIn)
 
     const [costs, setCosts] = React.useState({})
 
@@ -22,7 +25,6 @@ function ShoppingCartPage(props) {
                 <ShoppingCartTable 
                     theadNeeded = {true}
                     dataLines = {shoppingListItems}
-                    loggedIn={props.loggedIn}
                     changeCosts={
                         (key, newCost) => {
                             const temp = costs
@@ -53,9 +55,9 @@ function ShoppingCartPage(props) {
                 <Row>
                     <Col className='text-center mb-5'>
                         <Link 
-                            to={props.loggedIn ? "/checkout" : "/login"}
+                            to={loggedIn ? "/checkout" : "/login"}
                             state = {{
-                                to_checkout: props.loggedIn ? false : true
+                                to_checkout: loggedIn ? false : true
                             }}
                         >
                             <Button 

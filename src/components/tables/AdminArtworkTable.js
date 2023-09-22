@@ -5,13 +5,14 @@ import AdminArtworkTableDatalines from '../datalines/AdminArtworkTableDatalines'
 import { presentData } from '../../helpers/helpers'
 
 function AdminArtworkTable(props) {
+
+
     function makeDataLines(dataLines){
         return (dataLines.map((line, index)=>{
             return (
                 <AdminArtworkTableDatalines 
                     line={line}
                     index={index}
-                    loggedIn={props.loggedIn}
                 />
             )
         })

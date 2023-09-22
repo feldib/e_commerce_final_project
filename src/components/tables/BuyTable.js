@@ -5,6 +5,7 @@ import BuyTableDataLines from '../datalines/BuyTableDataLines'
 import { presentData } from '../../helpers/helpers'
 
 function BuyTable(props) {
+
     function makeDataLines(dataLines){
         return (dataLines.map((line, index)=>{
             return (
@@ -13,7 +14,6 @@ function BuyTable(props) {
                     line={line}
                     index={index}
                     key={index}
-                    loggedIn={props.loggedIn}
                     orderSummary={props.orderSummary}
                     totalCost={props.totalCost}
                 />

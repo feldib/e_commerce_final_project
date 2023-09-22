@@ -8,12 +8,10 @@ import Artwork from './pages/Artwork/Artwork'
 import Receipt from './pages/Receipt/Receipt'
 import ContactUs from './pages/ContactUs/ContactUs'
 import AboutUs from './pages/AboutUs/AboutUs'
-
 import UserData from './pages/Profile/Outlet/UserData'
 import OrderHistory from './pages/Profile/Outlet/OrderHistory.js'
 import WishList from './pages/Profile/Outlet/WishList'
 import UserReviews from './pages/Profile/Outlet/UserReviews'
-
 import Orders from './pages/AdminPage/Outlet/Orders'
 import AdminReviews from './pages/AdminPage/Outlet/AdminReviews'
 import Messages from './pages/AdminPage/Outlet/Messages'
@@ -23,10 +21,8 @@ import ForgotPassword from './pages/ForgotPassword/ForgotPassword'
 import ResetPassword from './pages/ResetPassword/ResetPassword'
 import UserOrderHistory from './pages/AdminPage/Outlet/UserOrderHistory'
 import AddNewArtworkPage from './pages/AdminPage/Outlet/AddNewArtworkPage'
-
 import Profile from './pages/Profile/Profile'
 import Admin from './pages/AdminPage/Admin'
-
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from "./components/navbars/Header"
 import Footer from "./components/navbars/Footer"
@@ -38,7 +34,14 @@ import { replacePreviousShoppingCart } from './helpers/helpers'
 import { ToastContainer } from 'react-toastify'
 import EditArtworkData from './pages/AdminPage/Outlet/EditArtworkData'
 
-function App() {
+export const UserDataContext = React.createContext({
+  user: {
+    id: 0
+  },
+  loggedIn: false
+})
+
+export default function App() {
   //context for help, instead of props drilling like loggedIn
   const [user, setUser] = React.useState({id: 0})
   const [loggedIn, setLoggedIn] = React.useState(false)
@@ -95,168 +98,167 @@ function App() {
 
   return (
     <BrowserRouter>
+      <UserDataContext.Provider value={{user, loggedIn}}>
+        <a href="#main" className='skip-to-content'>Skip to content</a>
 
-      <a href="#main" className='skip-to-content'>Skip to content</a>
+        <Header   />
 
-      <Header loggedIn={loggedIn} user={user} />
+        <div id="main" className='pb-5 vh-100'>
+          <Routes>
+            <Route
+              path='/'
+              element={<Home   />}
+            />
 
-      <div id="main" className='pb-5 vh-100'>
-        <Routes>
-          <Route
-            path='/'
-            element={<Home loggedIn={loggedIn} user={user} />}
-          />
+            <Route
+              path='/search'
+              element={<Search   />}
+            />
 
-          <Route
-            path='/search'
-            element={<Search  loggedIn={loggedIn} />}
-          />
+            <Route
+              path='/login'
+              element={
+                <SignIn 
+                  settleSuccessfulLogIn = {settleSuccessfulLogIn}
+                />
+              }
+            />
 
-          <Route
-            path='/login'
-            element={
-              <SignIn 
-                settleSuccessfulLogIn = {settleSuccessfulLogIn}
+            <Route
+              path='/register'
+              element={
+                <Registration 
+                settleSuccessfulRegistration = {settleSuccessfulLogIn}
+                />
+              }
+            />
+
+            <Route
+              path='/shopping_cart'
+              element={<ShoppingCart  />}
+            />
+
+            <Route
+              path='/checkout'
+              element={<Checkout  />}
+            />
+
+            <Route
+              path='/artwork_page/:artwork_id'
+              element={<Artwork  />}
+            />
+
+            <Route
+              path='/receipt'
+              element={<Receipt />}
+            />
+
+            <Route
+              path='/contact'
+              element={<ContactUs />}
+            />
+
+            <Route
+              path='/about'
+              element={<AboutUs />}
+            />
+
+            <Route
+              path='/user'
+              element={<Profile  />}
+            >
+              <Route
+                path='reviews'
+                element={<UserReviews />}
               />
-            }
-          />
 
-          <Route
-            path='/register'
-            element={
-              <Registration 
-              settleSuccessfulRegistration = {settleSuccessfulLogIn}
+              <Route
+                path='data'
+                element={<UserData  />}
               />
-            }
-          />
 
-          <Route
-            path='/shopping_cart'
-            element={<ShoppingCart loggedIn={loggedIn} />}
-          />
+              <Route
+                path='order_history'
+                element={<OrderHistory  />}
+              />
 
-          <Route
-            path='/checkout'
-            element={<Checkout user={user} />}
-          />
+              <Route
+                path='wishlist'
+                element={<WishList  />}
+              />
 
-          <Route
-            path='/artwork_page/:artwork_id'
-            element={<Artwork loggedIn={loggedIn} />}
-          />
+              <Route
+                path='shopping_cart'
+                element={<ShoppingCart  />}
+              />
+            </Route>
 
-          <Route
-            path='/receipt'
-            element={<Receipt user={user}/>}
-          />
-
-          <Route
-            path='/contact'
-            element={<ContactUs loggedIn={loggedIn} email={user.email} />}
-          />
-
-          <Route
-            path='/about'
-            element={<AboutUs />}
-          />
-
-          <Route
-            path='/user'
-            element={<Profile user={user} />}
-          >
             <Route
-              path='reviews'
-              element={<UserReviews />}
+              path='/admin'
+              element={<Admin  />}
+            >
+
+              <Route
+                path='add_new_artwork'
+                element={<AddNewArtworkPage  />}
+              />
+
+              <Route
+                path='edit_artwork/:artwork_id'
+                element={<EditArtworkData  />}
+              />
+
+              <Route
+                path='orders'
+                element={<Orders  />}
+              />
+
+              <Route
+                path='order_history/:user_id'
+                element={<UserOrderHistory  />}
+              />
+
+              <Route
+                path='reviews'
+                element={<AdminReviews  />}
+              />
+
+              <Route
+                path='messages'
+                element={<Messages  />}
+              />
+
+              <Route
+                path='users'
+                element={<Users  />}
+              />
+
+              <Route
+                path='artworks'
+                element={<Artworks   />}
+              />
+            </Route>
+
+            <Route
+              path='forgot_password'
+              element={<ForgotPassword />}
             />
 
             <Route
-              path='data'
-              element={<UserData user={user} />}
+              path='reset_password'
+              element={<ResetPassword />}
             />
 
-            <Route
-              path='order_history'
-              element={<OrderHistory user={user} />}
-            />
+          </Routes>
 
-            <Route
-              path='wishlist'
-              element={<WishList loggedIn={loggedIn} />}
-            />
+        </div>
 
-            <Route
-              path='shopping_cart'
-              element={<ShoppingCart loggedIn={loggedIn} />}
-            />
-          </Route>
+        <Footer />
 
-          <Route
-            path='/admin'
-            element={<Admin  />}
-          >
+        <ToastContainer position='bottom-right' />
 
-            <Route
-              path='add_new_artwork'
-              element={<AddNewArtworkPage  />}
-            />
-
-            <Route
-              path='edit_artwork/:artwork_id'
-              element={<EditArtworkData  />}
-            />
-
-            <Route
-              path='orders'
-              element={<Orders  />}
-            />
-
-            <Route
-              path='order_history/:user_id'
-              element={<UserOrderHistory  />}
-            />
-
-            <Route
-              path='reviews'
-              element={<AdminReviews  />}
-            />
-
-            <Route
-              path='messages'
-              element={<Messages  />}
-            />
-
-            <Route
-              path='users'
-              element={<Users  />}
-            />
-
-            <Route
-              path='artworks'
-              element={<Artworks  loggedIn={loggedIn} />}
-            />
-          </Route>
-
-          <Route
-            path='forgot_password'
-            element={<ForgotPassword />}
-          />
-
-          <Route
-            path='reset_password'
-            element={<ResetPassword />}
-          />
-
-        </Routes>
-
-
-      </div>
-
-      <Footer />
-
-      <ToastContainer position='bottom-right' />
+      </UserDataContext.Provider>
     </BrowserRouter>
 
   )
 }
-
-export default App

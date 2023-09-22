@@ -2,8 +2,11 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Row, } from 'react-bootstrap'
 import { toast } from 'react-toastify'
+import { UserDataContext } from '../../App'
 
 function SinglePurposeButton(props) {
+    const {user, loggedIn} = React.useContext(UserDataContext)
+
     return (
         <Row>
             <p 
@@ -11,7 +14,7 @@ function SinglePurposeButton(props) {
                 style={{cursor: "pointer"}}
                 onClick={
                     async()=>{
-                        if(props.loggedIn){
+                        if(loggedIn){
                             props.actionOnLoggedIn(parseInt(props.artwork_id))
                             .then((response)=>{
                                 toast.success(props.toastSuccessMessage, {

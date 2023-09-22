@@ -4,8 +4,12 @@ import { useFormik } from 'formik'
 import { Button, Col, Row } from 'react-bootstrap'
 import { order } from '../../fetching'
 import React from 'react'
+import { UserDataContext } from '../../App.js'
 
 function CheckoutPage(props) {
+
+    const {user, loggedIn} = React.useContext(UserDataContext)
+
 
     const validationSchema = Yup.object().shape({
         email: Yup.string()
@@ -24,11 +28,11 @@ function CheckoutPage(props) {
     const formik = useFormik({
         enableReinitialize: true,
         initialValues: { 
-            email: props.user.email || "",
-            first_name: props.user.first_name || "",
-            last_name: props.user.last_name || "",
-            address: props.user.address || "",
-            phone_number: props.user.phone_number || ""
+            email: user.email || "",
+            first_name: user.first_name || "",
+            last_name: user.last_name || "",
+            address: user.address || "",
+            phone_number: user.phone_number || ""
         },
 
         validationSchema,

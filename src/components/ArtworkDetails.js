@@ -9,15 +9,18 @@ import ShoppingCartButton from './buttons/ShoppingCartButton'
 import ReviewsOfArtworks from './ReviewsOfArtwork'
 import LeaveReview from './LeaveReview'
 import ArtworkPicturesCarousel from './ArtworkPicturesCarousel'
-
+import { UserDataContext } from '../App.js'
 
 function ArtworkDetails(props) {
+
+    const {user, loggedIn} = React.useContext(UserDataContext)
+
     const reviewsData = useAxios(`/reviews?id=${props.artwork_id}`)
     const [quantity, setQuantity] = React.useState(props.artwork.quantity)
 
     React.useEffect(()=>{
 
-        if(!props.loggedIn){
+        if(!loggedIn){
             const signedOutShoppingCart = JSON.parse(localStorage.getItem('shopping_cart')) || []
 
             if(signedOutShoppingCart.length){
@@ -72,21 +75,19 @@ function ArtworkDetails(props) {
                                 <Col xs={1} className='text-center px-3'>
                                     <span onClick={
                                         ()=>{
-                                            if(props.loggedIn && quantity>0){
+                                            if(loggedIn && quantity>0){
                                                 setQuantity(quantity-1)
                                             }
                                         }
                                     }>
                                         <ShoppingCartButton
                                             artwork_id={props.artwork_id}
-                                            loggedIn={props.loggedIn}
                                             quantity={quantity}
                                         />
                                     </span>
                                     
                                     <FavouriteButton
                                         artwork_id={props.artwork_id}
-                                        loggedIn={props.loggedIn}
                                     />
                                 </Col>
                             </Row>
@@ -124,14 +125,12 @@ function ArtworkDetails(props) {
                                     }>
                                         <ShoppingCartButton
                                             artwork_id={props.artwork_id}
-                                            loggedIn={props.loggedIn}
                                             quantity={quantity}
                                         />
                                     </span>
                                     
                                     <FavouriteButton
                                         artwork_id={props.artwork_id}
-                                        loggedIn={props.loggedIn}
                                     />
                                     <ToastContainer position='bottom-right'/>
                                 </Col>
@@ -200,7 +199,6 @@ function ArtworkDetails(props) {
             </Row>
 
             <LeaveReview 
-                loggedIn={props.loggedIn}
                 artwork_id={props.artwork_id}
             />
     </>

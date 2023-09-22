@@ -26,7 +26,6 @@ function Search(props) {
             </Row>
 
             <ArtworkSearchComponent 
-                loggedIn={props.loggedIn}
                 admin={true}
             />
 
