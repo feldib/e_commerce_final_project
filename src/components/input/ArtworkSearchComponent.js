@@ -76,7 +76,7 @@ function ArtworkSearchComponent(props) {
 
             {searchResults &&
 
-                    <Row className="floating-element mt-5 mb-5">
+                    <Row className="floating-element mt-5 mb-5 mx-2">
                         <Row className='mb-3 mt-2' ref={results}>
                             <h3 className='text-center'>Search results</h3>
                         </Row>

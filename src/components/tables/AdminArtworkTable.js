@@ -21,7 +21,7 @@ function AdminArtworkTable(props) {
     const dataLines = useLoading(props.dataLines, (dataLines)=>{return presentData(dataLines, makeDataLines)})
 
     return (
-        <Row className='text-center'>
+        <Row className='text-center mx-auto'>
             <table classname='mb-3'>
                 <thead>
                     <tr>

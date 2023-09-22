@@ -7,7 +7,7 @@ import Queries from '../Queries'
 function ArtworkSearchFields(props) {
 
     return (
-        <div className='floating-element mb-3'>
+        <div className='floating-element mb-3 mx-5'>
             <SearchField
                 what="Title"
                 name="title"
