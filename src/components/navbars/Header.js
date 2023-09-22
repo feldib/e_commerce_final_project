@@ -8,9 +8,12 @@ import NotLoggedInNavbarItems from './NotLoggedInNavbarItems'
 import { toast } from 'react-toastify'
 import useShoppingList from '../../hooks/useShoppingList'
 import { checkIfShoppingCartIsEmpty } from '../../helpers/helpers'
+import { UserDataContext } from '../../App'
 
 function Header(props) { 
-    let shoppingListItems = useShoppingList(props.loggedIn)
+    const {user, loggedIn} = React.useContext(UserDataContext)
+
+    let shoppingListItems = useShoppingList(loggedIn)
     
     return (
             <Navbar id='header' expand="lg">
@@ -41,12 +44,12 @@ function Header(props) {
                                 Contact
                             </Link>
                             
-                            {!props.user.is_admin &&
+                            {!user.is_admin &&
                                 <a 
                                     className='nav-link' style={{ color: 'inherit', textDecoration: 'inherit', cursor: "pointer"}} 
                                     href="#"
                                     onClick={async()=>{
-                                        const isShoppingCartEmpty = await checkIfShoppingCartIsEmpty(props.loggedIn)
+                                        const isShoppingCartEmpty = await checkIfShoppingCartIsEmpty(loggedIn)
 
                                         if(!isShoppingCartEmpty){
                                             toast.warning("Shopping list is empty.", {
@@ -62,11 +65,8 @@ function Header(props) {
                                 </a>
                             }
                             
-                            {props.loggedIn ?
-                                <LoggedInNavbarItems 
-                                    first_name={props.user.first_name}
-                                    user={props.user}
-                                />
+                            {loggedIn ?
+                                <LoggedInNavbarItems/>
                             :
                                 <NotLoggedInNavbarItems />
                             }

@@ -7,9 +7,10 @@ import AdminArtworkTable from '../../components/tables/AdminArtworkTable'
 import ArtworkSearchFields from './ArtworkSearchFields'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-
+import { UserDataContext } from '../../App'
 
 function ArtworkSearchComponent(props) {
+    const {user, loggedIn} = React.useContext(UserDataContext)
 
     const [searchResults, setSearchResults] = React.useState()
 
@@ -83,14 +84,12 @@ function ArtworkSearchComponent(props) {
                         {props.admin ?
                             <AdminArtworkTable 
                                 dataLines = {searchResults}
-                                loggedIn = {props.loggedIn}
                             />
                         :
                             <BuyTable 
                                 reccomendation = {false}
                                 theadNeeded = {true}
                                 dataLines = {searchResults}
-                                loggedIn = {props.loggedIn}
                             />
                         }
 

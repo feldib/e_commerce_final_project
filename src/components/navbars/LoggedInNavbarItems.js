@@ -3,13 +3,16 @@ import UserNavbarMenuItems from '../navbars/UserNavbarMenuItems'
 import { logOut } from '../../fetching'
 import { Link } from 'react-router-dom'
 import { Nav } from 'react-bootstrap'
+import { UserDataContext } from '../../App.js'
 
 function LoggedInNavbarItems(props) {
+    const {user, loggedIn} = React.useContext(UserDataContext)
+
     return (
         <>
-            {props.user && !props.user.is_admin ?
+            {user && !user.is_admin ?
                 <UserNavbarMenuItems 
-                    first_name={props.first_name}
+                    first_name={user.first_name}
                 />
             :
                 <Link className='nav-link' style={{ color: 'inherit', textDecoration: 'inherit'}} to="/admin">

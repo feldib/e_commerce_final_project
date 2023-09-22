@@ -1,14 +1,16 @@
 import React from 'react'
 import { addToFeatured, removeFromFeatured, isFeatured } from '../../fetching'
 import AddOrRemoveFromButton from './AddOrRemoveButton'
+import { UserDataContext } from '../../App'
 
 function FeatureButton(props) {
+    const {user, loggedIn} = React.useContext(UserDataContext)
+
     return (   
         <AddOrRemoveFromButton 
             isAdded = {isFeatured}
             addToAdded = {addToFeatured}
             removeFromAdded = {removeFromFeatured}
-            loggedIn = {props.loggedIn}
             artwork_id = {props.artwork_id}
             toastWarningMessage = "Sign in as an admin to add to favourites "
             filledButton = {<img 

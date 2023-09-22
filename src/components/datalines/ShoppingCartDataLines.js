@@ -11,8 +11,12 @@ import {
     decreaseLocalStorageShoppingCartQuantity,
     removeLocalStorageShoppingCartQuantity 
 } from '../../helpers/helpers'
+import { UserDataContext } from '../../App'
 
 function ShoppingCartDataLines(props) {
+
+    const {user, loggedIn} = React.useContext(UserDataContext)
+
     const [quantity, setQuantity] = React.useState(props.line.quantity)
 
     React.useEffect(()=>{
@@ -64,7 +68,7 @@ function ShoppingCartDataLines(props) {
                             onClick={
                                 async()=>{
                                     //upon increase/decrease - go to the ancestor and update props quantity
-                                    if(props.loggedIn){
+                                    if(loggedIn){
                                         await decreaseShoppingListItemQuantity(props.line.id)
                                     }else{
                                         decreaseLocalStorageShoppingCartQuantity(props.line.id)
@@ -98,7 +102,7 @@ function ShoppingCartDataLines(props) {
                             className='table-button'
                             onClick={
                                 async()=>{
-                                    if(props.loggedIn){
+                                    if(loggedIn){
                                         await increaseShoppingListItemQuantity(props.line.id).then((response)=>{
                                             toast.success("Item added to shopping cart", {
                                                 className: "toast-success"
@@ -153,7 +157,6 @@ function ShoppingCartDataLines(props) {
                         <Col>                          
                             <FavouriteButton
                                 artwork_id={props.line.id}
-                                loggedIn={props.loggedIn}
                             />
                         </Col> 
                     </Row>      
@@ -165,7 +168,7 @@ function ShoppingCartDataLines(props) {
                                 className='table-button'
                                 onClick={
                                     async()=>{
-                                        if(props.loggedIn){
+                                        if(loggedIn){
                                             await removeFromShoppingList(props.line.id)
                                             setQuantity(0)
                                         }else{

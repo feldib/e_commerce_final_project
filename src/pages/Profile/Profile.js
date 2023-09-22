@@ -6,11 +6,13 @@ import { faStar, faHeart, faInfoCircle, faClockRotateLeft, faShoppingCart } from
 import PageTitle from '../../components/PageTitle'
 import { redirectIfNotloggedIn } from '../../helpers/helpers'
 import useLoading from '../../hooks/useLoading'
+import { UserDataContext } from '../../App'
 
 function ProfilePage(props) {
+    const {user, loggedIn} = React.useContext(UserDataContext)
     redirectIfNotloggedIn()
 
-    const title  = useLoading(props.user.first_name, (first_name)=>{
+    const title  = useLoading(user.first_name, (first_name)=>{
         return (
             <PageTitle 
                 title={`${first_name}'s page`}

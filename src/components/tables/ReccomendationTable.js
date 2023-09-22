@@ -7,6 +7,8 @@ import BuyTable from './BuyTable'
 
 
 function ReccomendationTable(props) {
+
+
     const [tableHidden, setTableHidden] = React.useState(false)
     const data = useAxios(props.path)
     return (
@@ -34,7 +36,6 @@ function ReccomendationTable(props) {
                     reccomendation = {true}
                     theadNeeded = {false}
                     dataLines = {data}
-                    loggedIn={props.loggedIn} 
                 />
             }
         </Col>

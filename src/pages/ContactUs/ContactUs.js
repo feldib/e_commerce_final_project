@@ -8,13 +8,14 @@ import { ToastContainer, toast } from 'react-toastify'
 import InputComponent from '../../components/input/InputComponent'
 import { sendMessageToAdministrator } from '../../fetching'
 import PageTitle from '../../components/PageTitle'
+import { UserDataContext } from '../../App'
 
 function ContactUs(props) {
-    
+    const {loggedIn, user} = React.useContext(UserDataContext)
     const form = React.useRef()
 
     const initialValues = {
-        email: props.loggedIn ? props.email : '',
+        email: loggedIn ? user.email : '',
         title: '',
         message: ''
     }

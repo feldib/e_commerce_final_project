@@ -2,15 +2,17 @@ import React from 'react'
 import { Row, Container } from 'react-bootstrap'
 import { users_url } from '../../utils/api_constants'
 import ReccomendationTable from '../../components/tables/ReccomendationTable'
+import { UserDataContext } from '../../App'
 
 function HomePage(props) {   
+    const {user, loggedIn} = React.useContext(UserDataContext)
     return (
         <Container className='px-3 pb-5'>
             <Row className='mx-auto mt-5 mb-5 jumbotron'>
                 <h1 className='display-2 text-center page-title'>
                     Welcome to Artworks Market{`${
-                        props.loggedIn ?
-                            ` ${props.user.first_name}`:
+                        loggedIn ?
+                            ` ${user.first_name}`:
                             ""
                     }!`}
                 </h1>
@@ -20,14 +22,12 @@ function HomePage(props) {
                 <ReccomendationTable 
                     title="Featured"
                     path="/featured?n=2"
-                    loggedIn={props.loggedIn} 
                 />
 
-                {props.loggedIn &&
+                {loggedIn &&
                     <ReccomendationTable 
                         title="Wishlisted"
                         path={`/${users_url}/wishlisted?n=2`}
-                        loggedIn={props.loggedIn} 
                     />
                 }
                 

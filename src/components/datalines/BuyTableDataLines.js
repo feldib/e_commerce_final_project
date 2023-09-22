@@ -3,13 +3,17 @@ import { ToastContainer } from 'react-toastify'
 import { Link } from 'react-router-dom'
 import FavouriteButton from '../../components/buttons/FavouriteButton'
 import ShoppingCartButton from '../../components/buttons/ShoppingCartButton'
+import { UserDataContext } from '../../App'
 
 function BuyTableDataLines(props) {
+
+    const {user, loggedIn} = React.useContext(UserDataContext)
+
     const [quantity, setQuantity] = React.useState(props.line.quantity)
 
     React.useEffect(()=>{
 
-        if(!props.loggedIn){
+        if(!loggedIn){
             const signedOutShoppingCart = JSON.parse(localStorage.getItem('shopping_cart')) || []
             if(signedOutShoppingCart.length){
                 const index = signedOutShoppingCart.findIndex((item)=>{
@@ -87,13 +91,11 @@ function BuyTableDataLines(props) {
                         }>
                             <ShoppingCartButton
                                 artwork_id={props.line.id}
-                                loggedIn={props.loggedIn}
                                 quantity={quantity}
                             />
                         </span>
                         <FavouriteButton
                             artwork_id={props.line.id}
-                            loggedIn={props.loggedIn}
                         />
                         <ToastContainer position='bottom-right'/>
                     </div>
