@@ -8,7 +8,6 @@ import BuyTable from './BuyTable'
 
 function ReccomendationTable(props) {
 
-
     const [tableHidden, setTableHidden] = React.useState(false)
     const data = useAxios(props.path)
     return (
