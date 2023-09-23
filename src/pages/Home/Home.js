@@ -1,7 +1,7 @@
 import React from 'react'
 import { Row, Container } from 'react-bootstrap'
 import { users_url } from '../../utils/api_constants'
-import ReccomendationTable from '../../components/tables/ReccomendationTable'
+import Reccomendations from '../../components/Reccomendations'
 import { UserDataContext } from '../../App'
 
 function HomePage(props) {   
@@ -19,23 +19,23 @@ function HomePage(props) {
             </Row>
 
             <Row className="mx-auto mb-3 d-flex justify-content-evenly">
-                <ReccomendationTable 
+                <Reccomendations 
                     title="Featured"
                     path="/featured"
                 />
 
-                <ReccomendationTable 
+                <Reccomendations 
                     title="Newest"
                     path="/newest"
                 />
 
-                <ReccomendationTable 
+                <Reccomendations 
                     title="Most wishlisted"
                     path="/most_wishlisted"
                 />
 
                 {loggedIn &&
-                    <ReccomendationTable 
+                    <Reccomendations 
                         title="Wishlisted"
                         path={`/${users_url}/wishlisted`}
                     />

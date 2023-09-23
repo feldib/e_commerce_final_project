@@ -1,15 +1,15 @@
 import React from 'react'
-import useAxios from '../../hooks/useAxios'
+import useAxios from '../hooks/useAxios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons'
 import { Col, Row, Card, Carousel } from 'react-bootstrap'
-import FavouriteButton from '../buttons/FavouriteButton'
-import ShoppingCartButton from '../buttons/ShoppingCartButton'
-import { UserDataContext } from '../../App'
+import FavouriteButton from './buttons/FavouriteButton'
+import ShoppingCartButton from './buttons/ShoppingCartButton'
+import { UserDataContext } from '../App'
 import { Link } from 'react-router-dom'
 import { useMediaQuery } from 'react-responsive'
 
-function ReccomendationTable(props) {
+function Reccomendations(props) {
     const {user, loggedIn} = React.useContext(UserDataContext)
 
     const [tableHidden, setTableHidden] = React.useState(false)
@@ -105,4 +105,4 @@ function ReccomendationTable(props) {
     )
 }
 
-export default ReccomendationTable
+export default Reccomendations
