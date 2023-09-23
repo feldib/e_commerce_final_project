@@ -1,11 +1,14 @@
 import React from 'react'
-import { Container, Col, Row } from 'react-bootstrap'
+import { Container, Col, Row, Form } from 'react-bootstrap'
 import { faUser, faQuestion, faHouse, faPhone } from '@fortawesome/free-solid-svg-icons'
 import { ToastContainer } from 'react-toastify'
 import UserDataInputComponents from './UserDataInputComponent'
 import SubPageTitle from '../SubPageTitle'
 
 function UserDataChangingComponent(props) {
+
+    const [changeUserData, setChangeUserData] = React.useState(!props.checkout)
+
     return (
         <Container className='px-3 mb-5'>
             <SubPageTitle title={`${props.title}`} />
@@ -24,7 +27,7 @@ function UserDataChangingComponent(props) {
                             onChange={props.formik.handleChange}
                             onBlur={props.formik.handleBlur}
                             value={props.formik.values.email}
-                            changeUserData={props.changeUserData}
+                            changeUserData={changeUserData}
                         />
 
                         <UserDataInputComponents 
@@ -38,7 +41,7 @@ function UserDataChangingComponent(props) {
                             onChange={props.formik.handleChange}
                             onBlur={props.formik.handleBlur}
                             value={props.formik.values.first_name}
-                            changeUserData={props.changeUserData}
+                            changeUserData={changeUserData}
                         />
 
                         <UserDataInputComponents 
@@ -52,7 +55,7 @@ function UserDataChangingComponent(props) {
                             onChange={props.formik.handleChange}
                             onBlur={props.formik.handleBlur}
                             value={props.formik.values.last_name}
-                            changeUserData={props.changeUserData}
+                            changeUserData={changeUserData}
                         />
 
                         <UserDataInputComponents 
@@ -66,7 +69,7 @@ function UserDataChangingComponent(props) {
                             onChange={props.formik.handleChange}
                             onBlur={props.formik.handleBlur}
                             value={props.formik.values.address}
-                            changeUserData={props.changeUserData}
+                            changeUserData={changeUserData}
                         />
 
                         <UserDataInputComponents 
@@ -80,8 +83,21 @@ function UserDataChangingComponent(props) {
                             onChange={props.formik.handleChange}
                             onBlur={props.formik.handleBlur}
                             value={props.formik.values.phone_number}
-                            changeUserData={props.changeUserData}
+                            changeUserData={changeUserData}
                         />
+
+                        { props.checkout &&
+                        
+                        <Form.Check
+                            label="Save data"
+                            onChange={
+                                ()=>{
+                                    setChangeUserData( !changeUserData )
+                                }
+                            }
+                        />
+
+                        }
 
                         <ToastContainer position='bottom-right' />
                     </Col>

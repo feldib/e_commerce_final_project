@@ -37,7 +37,6 @@ function UserData(props) {
         <UserDataComponent 
             title={"User Data"}
             formik={formik}
-            changeUserData={true}
         />
     )
 }

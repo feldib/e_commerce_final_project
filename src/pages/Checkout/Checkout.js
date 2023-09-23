@@ -50,7 +50,7 @@ function CheckoutPage(props) {
                 <UserDataComponent 
                     title={"Invoice Data"}
                     formik={formik}
-                    changeUserData={false}
+                    checkout={true}
                     button={
                         <Row>
                             <Col className='text-center mb-5'>
