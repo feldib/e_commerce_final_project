@@ -21,23 +21,23 @@ function HomePage(props) {
             <Row className="mx-auto mb-3 d-flex justify-content-evenly">
                 <ReccomendationTable 
                     title="Featured"
-                    path="/featured?n=2"
+                    path="/featured"
                 />
 
                 <ReccomendationTable 
                     title="Newest"
-                    path="/newest?n=2"
+                    path="/newest"
                 />
 
                 <ReccomendationTable 
                     title="Most wishlisted"
-                    path="/most_wishlisted?n=2"
+                    path="/most_wishlisted"
                 />
 
                 {loggedIn &&
                     <ReccomendationTable 
                         title="Wishlisted"
-                        path={`/${users_url}/wishlisted?n=2`}
+                        path={`/${users_url}/wishlisted`}
                     />
                 }
                 

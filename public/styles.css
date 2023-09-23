@@ -41,7 +41,7 @@ tbody > tr:hover{
     background-color: #7da5d944;
 }
 
-.floating-element, .page-title, .subpage-title, .card, .toast-warning, .toast-success, .toast-error, .toast-info{
+.floating-element, .page-title, .subpage-title, .card, .toast-warning, .toast-success, .toast-error, .toast-info, .reccomendation-title{
     background-color: var(--translucent-dark-bg-color) !important;
     color: var(--bright-warm) !important;
     border-radius: 10px !important;
@@ -50,7 +50,7 @@ tbody > tr:hover{
     border: 1.5px solid var(--bright-warm) !important;
 }
 
-.floating-element, .page-title, .subpage-title, .card, .subnavbar{
+.floating-element, .page-title, .subpage-title, .card, .subnavbar, .reccomendation-title{
     animation: fade-in 0.6s;
 }
 
