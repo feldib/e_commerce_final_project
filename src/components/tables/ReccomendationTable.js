@@ -2,25 +2,28 @@ import React from 'react'
 import useAxios from '../../hooks/useAxios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons'
-import { Col, Row, Card } from 'react-bootstrap'
-import BuyTable from './BuyTable'
+import { Col, Row, Card, Carousel } from 'react-bootstrap'
 import FavouriteButton from '../buttons/FavouriteButton'
 import ShoppingCartButton from '../buttons/ShoppingCartButton'
 import { UserDataContext } from '../../App'
 import { Link } from 'react-router-dom'
+import { useMediaQuery } from 'react-responsive'
 
 function ReccomendationTable(props) {
     const {user, loggedIn} = React.useContext(UserDataContext)
 
     const [tableHidden, setTableHidden] = React.useState(false)
-    const data = useAxios(props.path)
+    const data = useAxios(`${props.path}?n=10`)
+
+    const isMd = useMediaQuery({ minWidth: '768px' })
+
     return (
         <Col xs={12} lg={5} className="mb-3 mx-auto">
             <Row>
-                <Col>
-                    <h4 className='text-center subpage-title'>{`${props.title}`}
+                <Col xs={7} md={5} lg={7} className='mx-auto'>
+                    <h4 className='text-center reccomendation-title'>{`${props.title}`}
                     <FontAwesomeIcon 
-                        className='toggle-reccommendation mx-2 d-lg-none'
+                        className='toggle-reccommendation mx-2 d-md-none'
                         icon={
                             !tableHidden ?
                                 faCaretDown :
@@ -34,10 +37,10 @@ function ReccomendationTable(props) {
                 </Col>                                
             </Row>
 
-            {!tableHidden && data &&
-                <>{data.map((artwork)=>{
+            {(!tableHidden || isMd) && data &&
+                <Carousel >{data.map((artwork, index)=>{
                     return(
-                        <Col className='mb-3'>
+                        <Carousel.Item interval={3000} className='mb-5 px-none' key={index}>
                         <Card className='mx-auto' border='secondary'>
                             <Card.Body className='p-3'>
                                 <Row>
@@ -89,9 +92,9 @@ function ReccomendationTable(props) {
                                 variant='bottom'
                             />
                         </Card>                    
-                    </Col>)
+                    </Carousel.Item>)
 
-                })}</>
+                })}</Carousel>
             }
         </Col>
                 
