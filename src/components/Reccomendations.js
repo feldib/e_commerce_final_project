@@ -1,15 +1,15 @@
 import React from 'react'
-import useAxios from '../../hooks/useAxios'
+import useAxios from '../hooks/useAxios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons'
 import { Col, Row, Card, Carousel } from 'react-bootstrap'
-import FavouriteButton from '../buttons/FavouriteButton'
-import ShoppingCartButton from '../buttons/ShoppingCartButton'
-import { UserDataContext } from '../../App'
+import FavouriteButton from './buttons/FavouriteButton'
+import ShoppingCartButton from './buttons/ShoppingCartButton'
+import { UserDataContext } from '../App'
 import { Link } from 'react-router-dom'
 import { useMediaQuery } from 'react-responsive'
 
-function ReccomendationTable(props) {
+function Reccomendations(props) {
     const {user, loggedIn} = React.useContext(UserDataContext)
 
     const [tableHidden, setTableHidden] = React.useState(false)
@@ -18,6 +18,8 @@ function ReccomendationTable(props) {
     const isMd = useMediaQuery({ minWidth: '768px' })
 
     return (
+        <>{data && data.length > 0 &&
+        
         <Col xs={12} lg={5} className="mb-3 mx-auto">
             <Row>
                 <Col xs={7} md={5} lg={7} className='mx-auto'>
@@ -97,8 +99,10 @@ function ReccomendationTable(props) {
                 })}</Carousel>
             }
         </Col>
+        
+        }</>
                 
     )
 }
 
-export default ReccomendationTable
+export default Reccomendations
