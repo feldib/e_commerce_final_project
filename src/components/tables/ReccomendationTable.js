@@ -18,6 +18,8 @@ function ReccomendationTable(props) {
     const isMd = useMediaQuery({ minWidth: '768px' })
 
     return (
+        <>{data && data.length > 0 &&
+        
         <Col xs={12} lg={5} className="mb-3 mx-auto">
             <Row>
                 <Col xs={7} md={5} lg={7} className='mx-auto'>
@@ -97,6 +99,8 @@ function ReccomendationTable(props) {
                 })}</Carousel>
             }
         </Col>
+        
+        }</>
                 
     )
 }
