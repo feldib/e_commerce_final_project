@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import FavouriteButton from '../../components/buttons/FavouriteButton'
 import ShoppingCartButton from '../../components/buttons/ShoppingCartButton'
 import { UserDataContext } from '../../App'
+import { server_url } from '../../utils/api_constants'
 
 function BuyTableDataLines(props) {
 
@@ -34,7 +35,7 @@ function BuyTableDataLines(props) {
         <tr key={props.index}>
             <td>
                 <img
-                    src = {props.line.thumbnail}
+                    src = {`${server_url}/${props.line.thumbnail}`}
                     width="100"
                     height="100"
                     style={{objectFit: "cover"}}

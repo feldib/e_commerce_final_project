@@ -10,6 +10,7 @@ import ReviewsOfArtworks from './ReviewsOfArtwork'
 import LeaveReview from './LeaveReview'
 import ArtworkPicturesCarousel from './ArtworkPicturesCarousel'
 import { UserDataContext } from '../App.js'
+import { server_url } from '../utils/api_constants'
 
 function ArtworkDetails(props) {
 
@@ -95,7 +96,7 @@ function ArtworkDetails(props) {
                         
 
                         <Card.Img 
-                            src={props.artwork.thumbnail} 
+                            src={`${server_url}/${props.artwork.thumbnail}`} 
                             variant='bottom'
                         />
                     </Card>                    

@@ -8,6 +8,7 @@ import ShoppingCartButton from './buttons/ShoppingCartButton'
 import { UserDataContext } from '../App'
 import { Link } from 'react-router-dom'
 import { useMediaQuery } from 'react-responsive'
+import { server_url } from '../utils/api_constants'
 
 function Reccomendations(props) {
     const {loggedIn} = React.useContext(UserDataContext)
@@ -86,7 +87,7 @@ function Reccomendations(props) {
                             
 
                             <Card.Img 
-                                src={artwork.thumbnail}
+                                src={`${server_url}/${artwork.thumbnail}`}
                                 width="500"
                                 height="300"
                                 style={{objectFit: "cover"}}
