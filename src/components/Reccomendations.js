@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom'
 import { useMediaQuery } from 'react-responsive'
 
 function Reccomendations(props) {
-    const {user, loggedIn} = React.useContext(UserDataContext)
+    const {loggedIn} = React.useContext(UserDataContext)
 
     const [tableHidden, setTableHidden] = React.useState(false)
     const data = useAxios(`${props.path}?n=10`)

@@ -1,3 +1,4 @@
+import { Form } from 'react-hook-form'
 import { server_url, users_url, admin_url } from './utils/api_constants'
 import axios from 'axios'
 axios.defaults.withCredentials = true
@@ -155,6 +156,43 @@ const addNewArtwork = (artwork) => {
     return axios.post(`${server_url}/${admin_url}/add_new_artwork`, {artwork})
 }
 
+const addNewThumbnail = (artwork_id, thumbnail) => {
+    let formData = new FormData()
+    
+    formData.append('thumbnail', thumbnail)
+
+    return axios.post(
+        `${server_url}/${admin_url}/thumbnail?artwork_id=${artwork_id}`, 
+        formData,
+        {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            }
+        }  
+    )
+}
+
+const addNewOtherPictures = (artwork_id, other_pictures) => {
+
+    return Promise.all(other_pictures.map(async (picture) => {
+        let formData = new FormData()
+    
+        formData.append('picture', picture)
+
+        await axios.post(
+            `${server_url}/${admin_url}/picture?artwork_id=${artwork_id}`, 
+            formData,
+            {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                }
+            }
+        )  
+
+    }))
+
+}
+
 const getDataOfArtworks = async (shoppingCart) => {
     const results = await Promise.all(
         shoppingCart.map(async(item)=>{
@@ -205,5 +243,7 @@ export {
     getDataOfArtworks,
     replaceSavedShoppingCart,
     getIsAdmin,
-    updateArtworkData
+    updateArtworkData,
+    addNewThumbnail,
+    addNewOtherPictures
 }
