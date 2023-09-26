@@ -193,6 +193,32 @@ const addNewOtherPictures = (artwork_id, other_pictures) => {
 
 }
 
+const addNewOtherPicture = async(artwork_id, picture) => {
+
+    let formData = new FormData()
+
+    formData.append('picture', picture)
+
+    await axios.post(
+        `${server_url}/${admin_url}/picture?artwork_id=${artwork_id}`, 
+        formData,
+        {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            }
+        }
+    )  
+
+}
+
+const removePicture = async(artwork_id, file_name) => {
+    await axios.post(
+        `${server_url}/${admin_url}/remove_picture`, 
+        {artwork_id, file_name},
+    )  
+
+}
+
 const getDataOfArtworks = async (shoppingCart) => {
     const results = await Promise.all(
         shoppingCart.map(async(item)=>{
@@ -210,6 +236,22 @@ const getDataOfArtworks = async (shoppingCart) => {
 
 const replaceSavedShoppingCart = (shopping_cart) => {
     return axios.post(`${server_url}/${users_url}/replace_saved_shopping_cart`, {shopping_cart})
+}
+
+const replaceThumbnail = (artwork_id, thumbnail) => {
+    let formData = new FormData()
+    
+    formData.append('thumbnail', thumbnail)
+
+    return axios.post(
+        `${server_url}/${admin_url}/replace_thumbnail?artwork_id=${artwork_id}`, 
+        formData,
+        {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            }
+        }  
+    )
 }
 
 export {
@@ -245,5 +287,8 @@ export {
     getIsAdmin,
     updateArtworkData,
     addNewThumbnail,
-    addNewOtherPictures
+    addNewOtherPictures,
+    addNewOtherPicture,
+    replaceThumbnail,
+    removePicture
 }

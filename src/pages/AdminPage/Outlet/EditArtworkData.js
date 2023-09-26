@@ -1,19 +1,24 @@
 import React from 'react'
 import ChangeArtworkDataInputComponent from '../../../components/input/ChangeArtworkDataInputComponent'
-import { Container, Col, Row, Form, Dropdown } from 'react-bootstrap'
-import { faDollarSign, faQuestion, faImages } from '@fortawesome/free-solid-svg-icons'
+import { Container, Col, Row, Form, Dropdown, InputGroup } from 'react-bootstrap'
+import { faAsterisk, faDollarSign, faQuestion, faImages, faX } from '@fortawesome/free-solid-svg-icons'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import { ToastContainer, toast } from 'react-toastify'
+import { ToastContainer } from 'react-toastify'
 import PageTitle from '../../../components/PageTitle'
 import FloatingBackButton from '../../../components/buttons/FloatingBackButton'
 import useAxios from '../../../hooks/useAxios'
 import useLoading from '../../../hooks/useLoading'
 import { useNavigate, useParams } from 'react-router-dom'
 import { WithContext as ReactTags } from 'react-tag-input'
-import { addNewArtwork } from '../../../fetching'
 import { updateArtworkData } from '../../../fetching'
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { server_url } from '../../../utils/api_constants'
+import { 
+    addNewOtherPicture,
+    replaceThumbnail,
+    removePicture
+} from '../../../fetching'
 
 function EditArtworkData(props) {
 
@@ -40,6 +45,14 @@ function EditArtworkData(props) {
 
     const navigate = useNavigate()
 
+    const MAX_IMAGE_SIZE = 102400 //100KB
+
+    const validImageExtensions = ['jpg', 'gif', 'png', 'jpeg', 'svg', 'webp']
+
+    function isValidImage(fileName) {
+        return fileName && validImageExtensions.indexOf(fileName.split('.').pop()) > -1;
+    }
+
     const formik = useFormik({
         initialValues: {
             title: "",
@@ -51,24 +64,6 @@ function EditArtworkData(props) {
             thumbnail: "",
             other_pictures: [],
             descript: ""
-        },
-
-        onSubmit: (values, actions)=>{
-            const tags = values.tags.map(obj => obj.text)
-            const other_pictures = values.other_pictures.map(obj => obj.text)                
-
-            addNewArtwork({...values, tags, other_pictures}).then((response)=>{
-                toast.success("Artwork added successfully to database", {
-                    className: "toast-success"
-                })
-                actions.resetForm()
-            }).catch((error)=>{
-                toast.error("Error: could not add artwork.", {
-                    className: "toast-error"
-                })
-                console.log(error)
-            })
-            
         },
 
         validationSchema: Yup.object().shape({
@@ -84,9 +79,15 @@ function EditArtworkData(props) {
                 .min(1),
             category_id: Yup.number()
                 .required("Category required"),
-            thumbnail: Yup.string()
-                .required("Thumbnail is required!")
-                .url("Please enter valid url"),
+            thumbnail: Yup
+                .mixed()
+                .required("Thumbnail required")
+                .test("is-valid-type", "Not a valid image type",
+                    value => isValidImage(value && value.name)
+                )
+                .test("is-valid-size", "Max allowed size is 100KB",
+                    value => value && value.size <= MAX_IMAGE_SIZE
+                ),
             tags: Yup.array()
                 .min(3, "Add minimum 3 tags!")
                 .of(
@@ -97,12 +98,15 @@ function EditArtworkData(props) {
                 ),
             other_pictures: Yup.array()
                 .of(
-                    Yup.object().shape({
-                        id: Yup.string(),
-                        text: Yup.string().url("Please enter valid ur!")
-                    })
-                ),
-            descript: Yup.string()
+                    Yup.mixed()
+                        .test("is-valid-type", "Not a valid image type",
+                            value => isValidImage(value && value.name)
+                        )
+                        .test("is-valid-size", "Max allowed size is 100KB",
+                            value => value && value.size <= MAX_IMAGE_SIZE
+                        )
+                    ),
+            description: Yup.string()
                 .required("Description required"),
         })
 
@@ -140,10 +144,6 @@ function EditArtworkData(props) {
             setTags(artworkData.tags.map((obj)=>{
                 return {id: obj.tname, text:obj.tname}
             }))
-            setImgUrls(artworkData.other_pictures.map((obj)=>{
-                return {id: obj.picture_path, text:obj.picture_path}
-            }))
-
             
         }
     }, [artworkData])
@@ -160,18 +160,6 @@ function EditArtworkData(props) {
         }
         
     }, [tags])
-
-    React.useEffect(()=>{
-        formik.setFieldValue("other_pictures", imgUrls)
-        if(imgUrls.length && !formik.errors.other_pictures){
-            updateArtworkData(artwork_id, "other_pictures", imgUrls.map(
-                (pic) => {
-                    return { picture_path: pic.text } 
-                }
-            ))
-        }
-        
-    }, [imgUrls])
 
     const createHandleDelete = (tgs, setTgs) => {
         return (i) => {
@@ -194,7 +182,7 @@ function EditArtworkData(props) {
             />
             <Row className='mx-auto pb-5 floating-element'> 
                 <Col className='mx-5 pb-5 '>
-                    <Form onSubmit={formik.handleSubmit}>
+                    <Form>
 
                         <ChangeArtworkDataInputComponent 
                             label="Title"
@@ -285,38 +273,125 @@ function EditArtworkData(props) {
                             }
                         </Form.Group>
 
-                        <ChangeArtworkDataInputComponent 
-                            label="Thumbnail"
-                            name="thumbnail"
-                            type="text"
-                            placeholder="Enter thumbnail url"
-                            icon={faImages}
-                            formik={formik}
-                            artwork_id={artwork_id}
-                        />
+                        <Form.Group className="pb-3">
+                            <Form.Label>Thumbnail</Form.Label>
+                            {formik.errors.thumbnail &&
+                                <FontAwesomeIcon icon={faAsterisk} style={{color: "red"}} className='mx-3'/>
+                            }
+                            <InputGroup>
+                                <InputGroup.Text>
+                                    <FontAwesomeIcon icon={faImages} className='mx-3'/>
+                                </InputGroup.Text>
+
+                                <Form.Control 
+                                    type="file" 
+                                    placeholder="Upload thumbnail" 
+                                    onChange={async (e)=>{
+                                        await replaceThumbnail(artwork_id, e.currentTarget.files[0])
+                                        formik.setFieldValue("thumbnail", e.currentTarget.files[0].name)
+                                    }}
+                                />
+                            </InputGroup>
+
+                            {formik.values.thumbnail &&
+                                <Col 
+                                    className='mb-3 uploaded-image-container'
+                                    style={{
+                                        position: "relative",
+                                        height: "150px",
+                                        width: "150px",
+                                    }}
+                                >
+                                    <img 
+                                        src={`${server_url}/${formik.values.thumbnail}`} 
+                                        className='mt-3 uploaded-image'
+                                    />
+
+                                    <FontAwesomeIcon 
+                                        icon={faX} 
+                                        className='remove-uploaded-image'
+                                        onClick={
+                                            ()=>{
+                                                formik.setFieldValue("thumbnail", "")
+                                            }
+                                        }
+                                    />
+                                </Col>
+                            }
+
+                            {formik.errors.thumbnail}
+                        </Form.Group>
 
                         <Form.Group className="pb-3">
                             <Form.Label>Images</Form.Label>
-                            <ReactTags
-                                tags={formik.values.other_pictures}
-                                // suggestions={suggestions}
-                                delimiters={delimiters}
-                                handleDelete={createHandleDelete(imgUrls, setImgUrls)}
-                                handleAddition={createHandleAddition(imgUrls, setImgUrls)}
-                                inputFieldPosition="bottom"
-                                placeholder='Add new image URL'
-                                inputProps = {{
-                                    disabled: (formik.errors.other_pictures),
-                                  }}
-                                // autocomplete
-                            />
-                            {formik.errors.other_pictures && 
-                                <div
-                                    className='input-error-message'
-                                >
-                                    {formik.errors.other_pictures[0].text}
-                                </div>
+                            {formik.errors.other_pictures &&
+                                <FontAwesomeIcon icon={faAsterisk} style={{color: "red"}} className='mx-3'/>
                             }
+                            <InputGroup>
+                                <InputGroup.Text>
+                                    <FontAwesomeIcon icon={faImages} className='mx-3'/>
+                                </InputGroup.Text>
+
+                                <Form.Control 
+                                    type="file" 
+                                    placeholder="Upload other pictures" 
+                                    onChange={async(e)=>{
+                                        await addNewOtherPicture(artwork_id, e.currentTarget.files[0])
+
+                                        formik.setFieldValue("other_pictures", [
+                                            ...formik.values.other_pictures,
+                                            e.currentTarget.files[0].name
+                                        ])
+                                    }}
+                                />
+                            </InputGroup>
+
+                            {formik.values.other_pictures &&
+                                <Row>{formik.values.other_pictures.map((pic, index)=>{                                    
+                                    return (
+                                        <Col 
+                                            key={index}
+                                            className='mb-3 uploaded-image-container'
+                                            style={{
+                                                position: "relative",
+                                                height: "150px",
+                                                width: "150px",
+                                            }}
+                                        >
+                                            <img 
+                                                src={`${server_url}/${pic}`} 
+                                                className='mt-3 uploaded-image'
+                                            />
+
+                                            <FontAwesomeIcon 
+                                                icon={faX} 
+                                                className='remove-uploaded-image'
+                                                onClick={
+                                                    ()=>{
+                                                        const newArray = formik.values.other_pictures
+
+                                                        const picToRemove = newArray.splice(index)
+
+                                                        removePicture(
+                                                            artwork_id, 
+                                                            picToRemove.toString().split('/').pop()
+                                                        )
+                                                        
+                                                        formik.setFieldValue(
+                                                            "other_pictures", 
+                                                            newArray
+                                                        )
+                                                        
+                                                    }
+                                                }
+                                            />
+                                        </Col>
+                                        )
+                                    })
+                                }</Row> 
+                            }
+
+                            {formik.errors.other_pictures}
                         </Form.Group>
 
                         <ChangeArtworkDataInputComponent 
