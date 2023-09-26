@@ -1,5 +1,6 @@
 import React from 'react'
 import { Col, Row, Carousel, Card } from 'react-bootstrap'
+import { server_url } from '../utils/api_constants'
 
 function ArtworkPicturesCarousel(props) {
     return (<>
@@ -12,7 +13,7 @@ function ArtworkPicturesCarousel(props) {
                                 <Carousel.Item className='mb-5 px-3' key={index}>
                                     <Card className='mx-5 p-2' border='secondary'>
                                         <Card.Img 
-                                            src={`${pic.picture_path}`} 
+                                            src={`${server_url}/${pic}`} 
                                             width="500px"
                                             height="300px"
                                             style={{objectFit: "contain"}}

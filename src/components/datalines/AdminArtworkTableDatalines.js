@@ -3,6 +3,7 @@ import { ToastContainer } from 'react-toastify'
 import { Link } from 'react-router-dom'
 import RemoveArtworkButton from '../buttons/RemoveArtworkButton'
 import FeatureButton from '../buttons/FeatureButton'
+import { server_url } from '../../utils/api_constants'
 
 function AdminArtworkTableDatalines(props) {
     const [ lineVisible, setLineVisible ] = React.useState(true)
@@ -15,7 +16,7 @@ function AdminArtworkTableDatalines(props) {
                 <tr key={props.index}>
                     <td>
                         <img
-                            src = {props.line.thumbnail}
+                            src = {`${server_url}/${props.line.thumbnail}`}
                             width="100"
                             height="100"
                             style={{objectFit: "contain"}}
