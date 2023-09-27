@@ -288,7 +288,7 @@ function EditArtworkData(props) {
                                     placeholder="Upload thumbnail" 
                                     onChange={async (e)=>{
                                         await replaceThumbnail(artwork_id, e.currentTarget.files[0])
-                                        formik.setFieldValue("thumbnail", e.currentTarget.files[0].name)
+                                        formik.setFieldValue("thumbnail", `images/${artwork_id}/thumbnail/${e.target.files[0].name}`)
                                     }}
                                 />
                             </InputGroup>
@@ -335,12 +335,12 @@ function EditArtworkData(props) {
                                 <Form.Control 
                                     type="file" 
                                     placeholder="Upload other pictures" 
-                                    onChange={async(e)=>{
-                                        await addNewOtherPicture(artwork_id, e.currentTarget.files[0])
+                                    onChange={async(e)=>{                                        
+                                        await addNewOtherPicture(artwork_id, `images/${artwork_id}/other_pictures/${e.target.files[0].name}`)
 
                                         formik.setFieldValue("other_pictures", [
                                             ...formik.values.other_pictures,
-                                            e.currentTarget.files[0].name
+                                            e.target.files[0].name
                                         ])
                                     }}
                                 />
