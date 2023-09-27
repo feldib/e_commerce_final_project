@@ -136,8 +136,10 @@ function EditArtworkData(props) {
                     tags: artworkData.tags,
                     quantity: artworkData.quantity,
                     category_id: artworkData.category_id,
-                    thumbnail: artworkData.thumbnail,
-                    other_pictures: artworkData.other_pictures,
+                    thumbnail: `${server_url}/${artworkData.thumbnail}`,
+                    other_pictures: artworkData.other_pictures.map((pic)=>{
+                        return `${server_url}/${pic}`
+                    }),
                     descript: artworkData.descript
                 }
             )
@@ -287,8 +289,8 @@ function EditArtworkData(props) {
                                     type="file" 
                                     placeholder="Upload thumbnail" 
                                     onChange={async (e)=>{
-                                        await replaceThumbnail(artwork_id, e.currentTarget.files[0])
-                                        formik.setFieldValue("thumbnail", `images/${artwork_id}/thumbnail/${e.target.files[0].name}`)
+                                        await replaceThumbnail(artwork_id, e.target.files[0])
+                                        formik.setFieldValue("thumbnail", URL.createObjectURL(e.target.files[0]))
                                     }}
                                 />
                             </InputGroup>
@@ -303,7 +305,7 @@ function EditArtworkData(props) {
                                     }}
                                 >
                                     <img 
-                                        src={`${server_url}/${formik.values.thumbnail}`} 
+                                        src={formik.values.thumbnail}
                                         className='mt-3 uploaded-image'
                                     />
 
@@ -336,11 +338,11 @@ function EditArtworkData(props) {
                                     type="file" 
                                     placeholder="Upload other pictures" 
                                     onChange={async(e)=>{                                        
-                                        await addNewOtherPicture(artwork_id, `images/${artwork_id}/other_pictures/${e.target.files[0].name}`)
+                                        await addNewOtherPicture(artwork_id, e.target.files[0])
 
                                         formik.setFieldValue("other_pictures", [
                                             ...formik.values.other_pictures,
-                                            e.target.files[0].name
+                                            URL.createObjectURL(e.target.files[0])
                                         ])
                                     }}
                                 />
@@ -359,22 +361,29 @@ function EditArtworkData(props) {
                                             }}
                                         >
                                             <img 
-                                                src={`${server_url}/${pic}`} 
+                                                src={pic} 
                                                 className='mt-3 uploaded-image'
                                             />
 
                                             <FontAwesomeIcon 
                                                 icon={faX} 
                                                 className='remove-uploaded-image'
+                                                id={pic}
                                                 onClick={
-                                                    ()=>{
-                                                        const newArray = formik.values.other_pictures
+                                                    (e)=>{
+                                                        const indexOfPicToRemove = formik.values.other_pictures.findIndex((pic)=>{
+                                                            return pic === e.target.id
+                                                        })
 
-                                                        const picToRemove = newArray.splice(index)
+                                                        const newArray = formik.values.other_pictures.filter(
+                                                            (pic, index)=>{
+                                                                return index !== indexOfPicToRemove
+                                                            }
+                                                        )
 
                                                         removePicture(
                                                             artwork_id, 
-                                                            picToRemove.toString().split('/').pop()
+                                                            e.target.id.split('/').pop()
                                                         )
                                                         
                                                         formik.setFieldValue(
