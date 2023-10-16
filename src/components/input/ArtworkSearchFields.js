@@ -62,7 +62,7 @@ function ArtworkSearchFields(props) {
                                 (e)=>{
                                     props.formik.handleBlur(e)
                                     const min = props.formik.values.min
-                                    if(!(min && min < props.formik.values.max) || !min){
+                                    if(min!==undefined && min >= props.formik.values.max){
                                         props.formik.setFieldValue("max", "")
                                     }
                                 }
