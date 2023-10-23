@@ -147,6 +147,20 @@ function ArtworkSearchFields(props) {
                     </Dropdown>
                 </Col>
 
+                <Col className='mb-3'>
+                    <Form.Check 
+                        type="switch"
+                        label="Only featured"
+                        id="only_featured"
+                        onChange={()=>{
+                            props.formik.setFieldValue(
+                                "only_featured",
+                                !props.formik.values.only_featured
+                            )
+                        }}
+                    />
+                </Col>
+
             </Row>
 
             <Row className='mx-auto mb-3 text-end'>

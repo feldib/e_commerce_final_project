@@ -32,6 +32,7 @@ function ArtworkSearchComponent(props) {
             n: "5",
             min: "",
             max: "",
+            only_featured: false
         },
 
         onSubmit: (values) => {
