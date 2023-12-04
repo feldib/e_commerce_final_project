@@ -12,6 +12,7 @@ import {
     removeLocalStorageShoppingCartQuantity 
 } from '../../helpers/helpers'
 import { UserDataContext } from '../../App'
+import { server_url } from '../../utils/api_constants'
 
 function ShoppingCartDataLines(props) {
 
@@ -27,7 +28,7 @@ function ShoppingCartDataLines(props) {
         <tr key={props.index}>
             <td>
                 <img
-                    src = {props.line.thumbnail}
+                    src = {`${server_url}/${props.line.thumbnail}`}
                     width="100"
                     height="100"
                     style={{objectFit: "cover"}}
