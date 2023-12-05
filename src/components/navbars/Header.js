@@ -14,9 +14,15 @@ function Header(props) {
     const {user, loggedIn} = React.useContext(UserDataContext)
 
     let shoppingListItems = useShoppingList(loggedIn)
+
+    const [expanded, setExpanded] = React.useState(false)
+
+    const toggleExpanded = () => {setExpanded(!expanded)}
+
+    const closeExpandedNav = () => {setExpanded(false)}
     
     return (
-            <Navbar id='header' expand="lg">
+            <Navbar id='header' expand="lg" expanded={expanded}>
                 <Container>
                     <Navbar.Brand>
                         <Link style={{ color: 'inherit', textDecoration: 'inherit'}} to="/">
@@ -29,18 +35,37 @@ function Header(props) {
                         </Link>
 
                     </Navbar.Brand>
-                    <Navbar.Toggle aria-controls="menu-items">
+                    <Navbar.Toggle 
+                        onClick={
+                            () => toggleExpanded()
+                        } aria-controls="menu-items"
+                    >
                         <FontAwesomeIcon id="header-toggler" icon={faBars} />
                     </Navbar.Toggle>
                     <Navbar.Collapse className='mx-3' id="menu-items">
                         <Nav className='mx-auto'>
-                            <Link className='nav-link' style={{ color: 'inherit', textDecoration: 'inherit'}} to="/search">
+                            <Link 
+                                onClick = {()=>closeExpandedNav()}
+                                className='nav-link' 
+                                style={{ color: 'inherit', textDecoration: 'inherit'}} 
+                                to="/search"
+                            >
                                 Search
                             </Link>
-                            <Link className='nav-link' style={{ color: 'inherit', textDecoration: 'inherit'}} to="/about">
+                            <Link  
+                                onClick = {()=>closeExpandedNav()}
+                                className='nav-link' 
+                                style={{ color: 'inherit', textDecoration: 'inherit'}} 
+                                to="/about"
+                            >
                                 About
                             </Link>
-                            <Link className='nav-link' style={{ color: 'inherit', textDecoration: 'inherit'}} to="/contact">
+                            <Link 
+                                onClick = {()=>closeExpandedNav()}
+                                className='nav-link' 
+                                style={{ color: 'inherit', textDecoration: 'inherit'}} 
+                                to="/contact"
+                            >
                                 Contact
                             </Link>
                             
@@ -49,6 +74,8 @@ function Header(props) {
                                     className='nav-link' style={{ color: 'inherit', textDecoration: 'inherit', cursor: "pointer"}} 
                                     href="#"
                                     onClick={async()=>{
+                                        closeExpandedNav()
+
                                         const isShoppingCartEmpty = await checkIfShoppingCartIsEmpty(loggedIn)
 
                                         if(!isShoppingCartEmpty){
@@ -66,9 +93,9 @@ function Header(props) {
                             }
                             
                             {loggedIn ?
-                                <LoggedInNavbarItems/>
+                                <LoggedInNavbarItems closeExpandedNav={closeExpandedNav}/>
                             :
-                                <NotLoggedInNavbarItems />
+                                <NotLoggedInNavbarItems closeExpandedNav={closeExpandedNav}/>
                             }
                         </Nav>
                     </Navbar.Collapse>
