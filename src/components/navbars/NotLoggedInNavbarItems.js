@@ -1,14 +1,23 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-function NotLoggedInNavbarItems() {
+function NotLoggedInNavbarItems(props) {
         return (
         <>
-            <Link className='nav-link' style={{ color: 'inherit', textDecoration: 'inherit'}} to="/login">
+            <Link 
+                onClick = {()=>props.closeExpandedNav()}
+                className='nav-link' 
+                style={{ color: 'inherit', textDecoration: 'inherit'}} to="/login"
+            >
                 Log in
             </Link>
 
-            <Link className='nav-link' style={{ color: 'inherit', textDecoration: 'inherit'}} to="/register">
+            <Link 
+                onClick = {()=>props.closeExpandedNav()}
+                className='nav-link' 
+                style={{ color: 'inherit', textDecoration: 'inherit'}} 
+                to="/register"
+            >
                 Register
             </Link>
         </>

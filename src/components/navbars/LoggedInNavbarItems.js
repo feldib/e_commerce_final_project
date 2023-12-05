@@ -13,15 +13,22 @@ function LoggedInNavbarItems(props) {
             {user && !user.is_admin ?
                 <UserNavbarMenuItems 
                     first_name={user.first_name}
+                    closeExpandedNav = {props.closeExpandedNav}
                 />
             :
-                <Link className='nav-link' style={{ color: 'inherit', textDecoration: 'inherit'}} to="/admin">
+                <Link 
+                    onClick = {()=>props.closeExpandedNav()}
+                    className='nav-link' 
+                    style={{ color: 'inherit', textDecoration: 'inherit'}} 
+                    to="/admin"
+                >
                     Admin Page
                 </Link>
             }
             
             <Nav.Link
                 onClick={async()=>{
+                    props.closeExpandedNav()
                     await logOut()
                 }}
             >
