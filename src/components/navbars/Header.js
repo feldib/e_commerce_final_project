@@ -9,12 +9,15 @@ import { toast } from 'react-toastify'
 import useShoppingList from '../../hooks/useShoppingList'
 import { checkIfShoppingCartIsEmpty } from '../../helpers/helpers'
 import { UserDataContext } from '../../App'
+import { useNavigate } from 'react-router-dom'
 
 export const ExpandedNavContext = React.createContext({
     closeExpandedNav: ()=>{}
 })
 
 function Header(props) { 
+    const navigate = useNavigate()
+
     const {user, loggedIn} = React.useContext(UserDataContext)
 
     let shoppingListItems = useShoppingList(loggedIn)
@@ -89,7 +92,7 @@ function Header(props) {
                                                 })
 
                                             }else{
-                                                window.location = "/shopping_cart"
+                                                navigate("/shopping_cart")
                                             }
                                         }}
                                     >
