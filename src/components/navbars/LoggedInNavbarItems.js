@@ -4,20 +4,21 @@ import { logOut } from '../../fetching'
 import { Link } from 'react-router-dom'
 import { Nav } from 'react-bootstrap'
 import { UserDataContext } from '../../App.js'
+import { ExpandedNavContext } from './Header.js'
 
-function LoggedInNavbarItems(props) {
+function LoggedInNavbarItems() {
     const {user, loggedIn} = React.useContext(UserDataContext)
+    const {closeExpandedNav} = React.useContext(ExpandedNavContext)
 
     return (
         <>
             {user && !user.is_admin ?
                 <UserNavbarMenuItems 
                     first_name={user.first_name}
-                    closeExpandedNav = {props.closeExpandedNav}
                 />
             :
                 <Link 
-                    onClick = {()=>props.closeExpandedNav()}
+                    onClick = {closeExpandedNav}
                     className='nav-link' 
                     style={{ color: 'inherit', textDecoration: 'inherit'}} 
                     to="/admin"
@@ -28,7 +29,7 @@ function LoggedInNavbarItems(props) {
             
             <Nav.Link
                 onClick={async()=>{
-                    props.closeExpandedNav()
+                    closeExpandedNav()
                     await logOut()
                 }}
             >
