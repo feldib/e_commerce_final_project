@@ -10,6 +10,10 @@ import useShoppingList from '../../hooks/useShoppingList'
 import { checkIfShoppingCartIsEmpty } from '../../helpers/helpers'
 import { UserDataContext } from '../../App'
 
+export const ExpandedNavContext = React.createContext({
+    closeExpandedNav: ()=>{}
+})
+
 function Header(props) { 
     const {user, loggedIn} = React.useContext(UserDataContext)
 
@@ -22,88 +26,90 @@ function Header(props) {
     const closeExpandedNav = () => {setExpanded(false)}
     
     return (
-            <Navbar id='header' expand="lg" expanded={expanded}>
-                <Container>
-                    <Navbar.Brand>
-                        <Link style={{ color: 'inherit', textDecoration: 'inherit'}} to="/">
-                            <img
-                                src='/logo.png'
-                                width="100"
-                                className="d-inline-block align-top"
-                                alt="Artwork market logo"
-                            />
-                        </Link>
-
-                    </Navbar.Brand>
-                    <Navbar.Toggle 
-                        onClick={
-                            () => toggleExpanded()
-                        } aria-controls="menu-items"
-                    >
-                        <FontAwesomeIcon id="header-toggler" icon={faBars} />
-                    </Navbar.Toggle>
-                    <Navbar.Collapse className='mx-3' id="menu-items">
-                        <Nav className='mx-auto'>
-                            <Link 
-                                onClick = {()=>closeExpandedNav()}
-                                className='nav-link' 
-                                style={{ color: 'inherit', textDecoration: 'inherit'}} 
-                                to="/search"
-                            >
-                                Search
+            <ExpandedNavContext.Provider value={{closeExpandedNav}}>
+                <Navbar id='header' expand="lg" expanded={expanded}>
+                    <Container>
+                        <Navbar.Brand>
+                            <Link style={{ color: 'inherit', textDecoration: 'inherit'}} to="/">
+                                <img
+                                    src='/logo.png'
+                                    width="100"
+                                    className="d-inline-block align-top"
+                                    alt="Artwork market logo"
+                                />
                             </Link>
-                            <Link  
-                                onClick = {()=>closeExpandedNav()}
-                                className='nav-link' 
-                                style={{ color: 'inherit', textDecoration: 'inherit'}} 
-                                to="/about"
-                            >
-                                About
-                            </Link>
-                            <Link 
-                                onClick = {()=>closeExpandedNav()}
-                                className='nav-link' 
-                                style={{ color: 'inherit', textDecoration: 'inherit'}} 
-                                to="/contact"
-                            >
-                                Contact
-                            </Link>
-                            
-                            {!user.is_admin &&
-                                <a 
-                                    className='nav-link' style={{ color: 'inherit', textDecoration: 'inherit', cursor: "pointer"}} 
-                                    href="#"
-                                    onClick={async()=>{
-                                        closeExpandedNav()
 
-                                        const isShoppingCartEmpty = await checkIfShoppingCartIsEmpty(loggedIn)
-
-                                        if(!isShoppingCartEmpty){
-                                            toast.warning("Shopping list is empty.", {
-                                                className: "toast-warning"
-                                            })
-
-                                        }else{
-                                            window.location = "/shopping_cart"
-                                        }
-                                    }}
+                        </Navbar.Brand>
+                        <Navbar.Toggle 
+                            onClick={
+                                () => toggleExpanded()
+                            } aria-controls="menu-items"
+                        >
+                            <FontAwesomeIcon id="header-toggler" icon={faBars} />
+                        </Navbar.Toggle>
+                        <Navbar.Collapse className='mx-3' id="menu-items">
+                            <Nav className='mx-auto'>
+                                <Link 
+                                    onClick = {()=>closeExpandedNav()}
+                                    className='nav-link' 
+                                    style={{ color: 'inherit', textDecoration: 'inherit'}} 
+                                    to="/search"
                                 >
-                                    Shopping cart
-                                </a>
-                            }
-                            
-                            {loggedIn ?
-                                <LoggedInNavbarItems closeExpandedNav={closeExpandedNav}/>
-                            :
-                                <NotLoggedInNavbarItems closeExpandedNav={closeExpandedNav}/>
-                            }
-                        </Nav>
-                    </Navbar.Collapse>
-                </Container>
+                                    Search
+                                </Link>
+                                <Link  
+                                    onClick = {()=>closeExpandedNav()}
+                                    className='nav-link' 
+                                    style={{ color: 'inherit', textDecoration: 'inherit'}} 
+                                    to="/about"
+                                >
+                                    About
+                                </Link>
+                                <Link 
+                                    onClick = {()=>closeExpandedNav()}
+                                    className='nav-link' 
+                                    style={{ color: 'inherit', textDecoration: 'inherit'}} 
+                                    to="/contact"
+                                >
+                                    Contact
+                                </Link>
+                                
+                                {!user.is_admin &&
+                                    <a 
+                                        className='nav-link' style={{ color: 'inherit', textDecoration: 'inherit', cursor: "pointer"}} 
+                                        href="#"
+                                        onClick={async()=>{
+                                            closeExpandedNav()
 
-                
+                                            const isShoppingCartEmpty = await checkIfShoppingCartIsEmpty(loggedIn)
 
-            </Navbar>
+                                            if(!isShoppingCartEmpty){
+                                                toast.warning("Shopping list is empty.", {
+                                                    className: "toast-warning"
+                                                })
+
+                                            }else{
+                                                window.location = "/shopping_cart"
+                                            }
+                                        }}
+                                    >
+                                        Shopping cart
+                                    </a>
+                                }
+                                
+                                {loggedIn ?
+                                    <LoggedInNavbarItems/>
+                                :
+                                    <NotLoggedInNavbarItems/>
+                                }
+                            </Nav>
+                        </Navbar.Collapse>
+                    </Container>
+
+                    
+
+                </Navbar>
+            </ExpandedNavContext.Provider>
     )
 }
 
