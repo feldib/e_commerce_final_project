@@ -5,8 +5,11 @@ import { Button, Col, Row } from 'react-bootstrap'
 import { order } from '../../fetching'
 import React from 'react'
 import { UserDataContext } from '../../App.js'
+import { useNavigate } from 'react-router-dom'
 
 function CheckoutPage(props) {
+
+    const navigate = useNavigate()
 
     const {user, loggedIn} = React.useContext(UserDataContext)
 
@@ -39,7 +42,7 @@ function CheckoutPage(props) {
 
         onSubmit: (values) => {
             order(values).then(
-                window.location = "receipt"
+                navigate("/receipt")
             )
         }
     })
