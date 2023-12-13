@@ -8,7 +8,6 @@ import { increaseLocalStorageShoppingCartQuantity } from '../../helpers/helpers.
 function ShoppingCartButton(props) {
     return (
         <SinglePurposeButton 
-            loggedIn = {props.loggedIn}
             actionOnLoggedIn = {addToShoppingList}
             actionOnNotLoggedIn = {
                 ()=>{

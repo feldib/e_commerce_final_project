@@ -217,3 +217,8 @@ button:hover, input[type = "submit"]:hover, .submit:hover, a>p:hover, .navbar-to
     transform: scale(1.1) !important;
     cursor: pointer;
 }
+
+.reccommendation-button {
+    position: relative;
+    z-index: 1000;
+}
