@@ -9,11 +9,8 @@ import { server_url } from '../../utils/api_constants'
 function BuyTableDataLines(props) {
 
     const {user, loggedIn} = React.useContext(UserDataContext)
-
     const [quantity, setQuantity] = React.useState(props.line.quantity)
-
     React.useEffect(()=>{
-
         if(!loggedIn){
             const signedOutShoppingCart = JSON.parse(localStorage.getItem('shopping_cart')) || []
             if(signedOutShoppingCart.length){
@@ -27,8 +24,6 @@ function BuyTableDataLines(props) {
                 }
             }
         }
-
-
     }, [])
     
     return ( 

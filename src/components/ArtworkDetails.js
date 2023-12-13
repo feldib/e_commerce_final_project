@@ -14,25 +14,17 @@ import { server_url } from '../utils/api_constants'
 
 function ArtworkDetails(props) {
 
-    const {user, loggedIn} = React.useContext(UserDataContext)
-
     const reviewsData = useAxios(`/reviews?id=${props.artwork_id}`)
+
+    const {user, loggedIn} = React.useContext(UserDataContext)
     const [quantity, setQuantity] = React.useState(props.artwork.quantity)
-
     React.useEffect(()=>{
-
         if(!loggedIn){
             const signedOutShoppingCart = JSON.parse(localStorage.getItem('shopping_cart')) || []
-
             if(signedOutShoppingCart.length){
                 const index = signedOutShoppingCart.findIndex((item)=>{
-
-                    console.log(item.artwork_id == props.artwork_id)
-
                     return item.artwork_id == props.artwork_id
                 })
-
-
                 if(index !== -1){
                     setQuantity(
                         props.artwork.quantity - signedOutShoppingCart[index].quantity
@@ -40,8 +32,6 @@ function ArtworkDetails(props) {
                 }
             }
         }
-
-
     }, [])
 
     const reviews = useLoading(reviewsData, (reviews)=>{

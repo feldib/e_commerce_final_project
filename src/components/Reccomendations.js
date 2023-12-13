@@ -2,13 +2,10 @@ import React from 'react'
 import useAxios from '../hooks/useAxios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons'
-import { Col, Row, Card, Carousel } from 'react-bootstrap'
-import FavouriteButton from './buttons/FavouriteButton'
-import ShoppingCartButton from './buttons/ShoppingCartButton'
+import { Col, Row, Carousel } from 'react-bootstrap'
 import { UserDataContext } from '../App'
-import { Link } from 'react-router-dom'
 import { useMediaQuery } from 'react-responsive'
-import { server_url } from '../utils/api_constants'
+import ReccomendationCard from './ReccomendationCard'
 
 function Reccomendations(props) {
     const {loggedIn} = React.useContext(UserDataContext)
@@ -43,59 +40,13 @@ function Reccomendations(props) {
             {(!tableHidden || isMd) && data &&
                 <Carousel >{data.map((artwork, index)=>{
                     return(
-                        <Carousel.Item interval={3000} className='mb-5 px-none' key={index}>
-                        <Card className='mx-auto' border='secondary'>
-                            <Card.Body className='p-3'>
-                                <Row>
-                                    <Col>
-                                        <Card.Title>
-                                            <Link to={`/artwork_page/${artwork.id}`}>
-                                                <h3>
-                                                    {artwork.title}
-                                                </h3>
-                                            </Link>
-                                        </Card.Title>
-
-                                        <Card.Subtitle>
-                                            <h6>
-                                                {`by ${artwork.artist_name}`}
-                                            </h6>
-                                        </Card.Subtitle>
-                                    </Col>
-
-                                    <Col xs={1} className='text-center px-3'>
-                                        <span onClick={
-                                            ()=>{
-                                                if(loggedIn && artwork.quantity>0){
-                                                    // props.decreaseQuantity()
-
-                                                }
-                                            }
-                                        }>
-                                            <ShoppingCartButton
-                                                artwork_id={artwork.id}
-                                                quantity={artwork.quantity}
-                                            />
-                                        </span>
-                                        
-                                        <FavouriteButton
-                                            artwork_id={artwork.id}
-                                        />
-                                    </Col>
-                                </Row>
-                            </Card.Body>
-                            
-
-                            <Card.Img 
-                                src={`${server_url}/${artwork.thumbnail}`}
-                                width="500"
-                                height="300"
-                                style={{objectFit: "cover"}}
-                                alt="place of thumbnail"
-                                variant='bottom'
+                        <Carousel.Item interval={3000} className='mb-5 px-none'>
+                            <ReccomendationCard
+                                key={index}
+                                artwork={artwork}
                             />
-                        </Card>                    
-                    </Carousel.Item>)
+                        </Carousel.Item>
+                    )
 
                 })}</Carousel>
             }
