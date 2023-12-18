@@ -5,26 +5,13 @@ import FavouriteButton from './buttons/FavouriteButton'
 import ShoppingCartButton from './buttons/ShoppingCartButton'
 import { Link } from 'react-router-dom'
 import { UserDataContext } from '../App';
+import useQuantity from '../hooks/useQuantity';
 
 function ReccomendationCard(props) {
 
-    const {user, loggedIn} = React.useContext(UserDataContext)
-    const [quantity, setQuantity] = React.useState(props.artwork.quantity)
-    React.useEffect(()=>{
-        if(!loggedIn){
-            const signedOutShoppingCart = JSON.parse(localStorage.getItem('shopping_cart')) || []
-            if(signedOutShoppingCart.length){
-                const index = signedOutShoppingCart.findIndex((item)=>{
-                    return item.artwork_id === props.artwork.id
-                })
-                if(index !== -1){
-                    setQuantity(
-                        props.artwork.quantity - signedOutShoppingCart[index].quantity
-                    ) 
-                }
-            }
-        }
-    }, [])
+    const {loggedIn} = React.useContext(UserDataContext)
+
+    const {quantity, setQuantity} = useQuantity(loggedIn, props.artwork.quantity, props.artwork.id)
 
     return (
         <Card className='mx-auto' border='secondary'>
