@@ -11,28 +11,18 @@ import LeaveReview from './LeaveReview'
 import ArtworkPicturesCarousel from './ArtworkPicturesCarousel'
 import { UserDataContext } from '../App.js'
 import { server_url } from '../utils/api_constants'
+import useQuantity from '../hooks/useQuantity.js'
 
 function ArtworkDetails(props) {
 
     const reviewsData = useAxios(`/reviews?id=${props.artwork_id}`)
 
-    const {user, loggedIn} = React.useContext(UserDataContext)
-    const [quantity, setQuantity] = React.useState(props.artwork.quantity)
-    React.useEffect(()=>{
-        if(!loggedIn){
-            const signedOutShoppingCart = JSON.parse(localStorage.getItem('shopping_cart')) || []
-            if(signedOutShoppingCart.length){
-                const index = signedOutShoppingCart.findIndex((item)=>{
-                    return item.artwork_id == props.artwork_id
-                })
-                if(index !== -1){
-                    setQuantity(
-                        props.artwork.quantity - signedOutShoppingCart[index].quantity
-                    ) 
-                }
-            }
-        }
-    }, [])
+    const {loggedIn} = React.useContext(UserDataContext)
+
+    const {quantity, setQuantity} = useQuantity(loggedIn, {
+        ...props.artwork,
+        id: parseInt(props.artwork_id)
+    })
 
     const reviews = useLoading(reviewsData, (reviews)=>{
         return (
@@ -66,7 +56,7 @@ function ArtworkDetails(props) {
                                 <Col xs={1} className='text-center px-3'>
                                     <span onClick={
                                         ()=>{
-                                            if(loggedIn && quantity>0){
+                                            if(quantity>0){
                                                 setQuantity(quantity-1)
                                             }
                                         }

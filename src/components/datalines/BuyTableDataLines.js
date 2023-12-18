@@ -5,26 +5,13 @@ import FavouriteButton from '../../components/buttons/FavouriteButton'
 import ShoppingCartButton from '../../components/buttons/ShoppingCartButton'
 import { UserDataContext } from '../../App'
 import { server_url } from '../../utils/api_constants'
+import useQuantity from '../../hooks/useQuantity'
 
 function BuyTableDataLines(props) {
 
-    const {user, loggedIn} = React.useContext(UserDataContext)
-    const [quantity, setQuantity] = React.useState(props.line.quantity)
-    React.useEffect(()=>{
-        if(!loggedIn){
-            const signedOutShoppingCart = JSON.parse(localStorage.getItem('shopping_cart')) || []
-            if(signedOutShoppingCart.length){
-                const index = signedOutShoppingCart.findIndex((item)=>{
-                    return item.artwork_id === props.line.id
-                })
-                if(index !== -1){
-                    setQuantity(
-                        props.line.quantity - signedOutShoppingCart[index].quantity
-                    ) 
-                }
-            }
-        }
-    }, [])
+    const {loggedIn} = React.useContext(UserDataContext)
+
+    const {quantity, setQuantity} = useQuantity(loggedIn, props.line)
     
     return ( 
         <tr key={props.index}>
