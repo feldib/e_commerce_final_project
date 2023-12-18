@@ -13,9 +13,9 @@ function AboutUsPage() {
                     </Row>
 
                     <Row>
-                        <p>Lorem ipsum.</p>
-                        <p>Lorem ipsum; dolor. sit amet?</p>
-                        <p>React Bootstrap textarea is an input dedicated for a large volume of text. It may be used in a variety of components like forms, comment sections and forums. Textareas don’t have to be boring. They can be enhanced with colors, shadows or rounded corners. React-bootstrap has some attributes like height width. Textarea is by default autosize; But you can set minimum height and width of textarea in react using react-bootstrap.</p>
+                        <p>Welcome to our world of art! Our story began with a simple yet profound passion: the love for creativity in all its forms. We envisioned a platform that celebrates not just the beauty of art but also the stories behind each masterpiece. Driven by our admiration for diverse artistic expressions, we embarked on a journey to create a space where artists and art enthusiasts converge.</p>
+                        <p>Our goal is to bridge the gap between creators and appreciators, fostering a community that thrives on inspiration and imagination. Art has the incredible power to evoke emotions, provoke thoughts, and ignite conversations. Through our platform, we aim to showcase the vibrant tapestry of artistic endeavors while honoring the unique narratives woven into every brushstroke, sculpture, and creation.</p>
+                        <p>Join us on this enchanting voyage as we curate a collection of exceptional artworks, each with its own tale to tell. Together, let's celebrate the essence of creativity and the boundless stories that reside within each artistic marvel.</p>
                     </Row>
                 </Col>
 
