@@ -11,7 +11,7 @@ function ReccomendationCard(props) {
 
     const {loggedIn} = React.useContext(UserDataContext)
 
-    const {quantity, setQuantity} = useQuantity(loggedIn, props.artwork)
+    const {quantity, setQuantity} = useQuantity(loggedIn, props.artwork.quantity, props.artwork.id)
 
     return (
         <Card className='mx-auto' border='secondary'>

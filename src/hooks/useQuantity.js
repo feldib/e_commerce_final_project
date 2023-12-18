@@ -2,20 +2,20 @@ import React from 'react'
 import axios from 'axios'
 axios.defaults.withCredentials = true
 
-const useQuantity = (loggedIn, artwork)=>{
-    const [quantity, setQuantity] = React.useState(artwork.quantity)
+const useQuantity = (loggedIn, inStock, artworkId)=>{
+    const [quantity, setQuantity] = React.useState(inStock)
     React.useEffect(()=>{
         
         if(!loggedIn){
             const signedOutShoppingCart = JSON.parse(localStorage.getItem('shopping_cart')) || []
             if(signedOutShoppingCart.length){
                 const index = signedOutShoppingCart.findIndex((item)=>{
-                    return item.artwork_id === artwork.id
+                    return item.artwork_id === artworkId
                 })
-                
+
                 if(index !== -1){
                     setQuantity(
-                        artwork.quantity - signedOutShoppingCart[index].quantity
+                        inStock - signedOutShoppingCart[index].quantity
                     ) 
                 }
             }

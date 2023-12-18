@@ -11,7 +11,7 @@ function BuyTableDataLines(props) {
 
     const {loggedIn} = React.useContext(UserDataContext)
 
-    const {quantity, setQuantity} = useQuantity(loggedIn, props.line)
+    const {quantity, setQuantity} = useQuantity(loggedIn, props.line.quantity, props.line.id)
     
     return ( 
         <tr key={props.index}>

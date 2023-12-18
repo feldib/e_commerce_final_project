@@ -19,10 +19,7 @@ function ArtworkDetails(props) {
 
     const {loggedIn} = React.useContext(UserDataContext)
 
-    const {quantity, setQuantity} = useQuantity(loggedIn, {
-        ...props.artwork,
-        id: parseInt(props.artwork_id)
-    })
+    const {quantity, setQuantity} = useQuantity(loggedIn, props.artwork.quantity, parseInt(props.artwork_id))
 
     const reviews = useLoading(reviewsData, (reviews)=>{
         return (
