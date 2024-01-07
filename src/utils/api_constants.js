@@ -1,4 +1,5 @@
-const server_url = "http://localhost:3000"
+
+const server_url = process.env.REACT_APP_SERVER_URL
 const users_url = "users"
 const admin_url = "admin"
 
