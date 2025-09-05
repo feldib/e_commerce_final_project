@@ -1,7 +1,7 @@
-"use client"
+"use client";
 import React from "react";
 import UserNavbarMenuItems from "./UserNavbarMenuItems";
-import { logOut } from "@/fetching/fetching";
+import { serverLogOut } from "@/fetching/fetching";
 import Link from "next/link";
 import { Nav } from "react-bootstrap";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
@@ -9,7 +9,7 @@ import { ExpandedNavContext } from "./Header";
 import { useRouter } from "next/navigation";
 
 function LoggedInNavbarItems() {
-  const { user } = React.useContext(UserDataContext);
+  const { user, logOut: contextLogOut } = React.useContext(UserDataContext);
   const { closeExpandedNav } = React.useContext(ExpandedNavContext);
   const router = useRouter();
 
@@ -31,7 +31,9 @@ function LoggedInNavbarItems() {
       <Nav.Link
         onClick={async () => {
           closeExpandedNav();
-          await logOut(router);
+          await serverLogOut();
+          contextLogOut();
+          router.push("/");
         }}
       >
         Log out

@@ -1,8 +1,11 @@
-"use client"
+"use client";
 import React, { JSX } from "react";
 import { getLoggedIn } from "@/fetching/fetching";
 import "react-confirm-alert/src/react-confirm-alert.css";
-import { getShoppingCartFromLocalStorage, replacePreviousShoppingCart } from "@/helpers/helpers";
+import {
+  getShoppingCartFromLocalStorage,
+  replacePreviousShoppingCart,
+} from "@/helpers/helpers";
 import { confirmAlert } from "react-confirm-alert";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
@@ -16,9 +19,14 @@ export type UserDataContextType = {
     last_name: string;
     address: string;
     phone_number: string;
-  },
+  };
   loggedIn: boolean;
-  settleSuccessfulLogIn: (to_checkout: boolean, userData: any, router: AppRouterInstance) => void;
+  settleSuccessfulLogIn: (
+    to_checkout: boolean,
+    userData: any,
+    router: AppRouterInstance
+  ) => void;
+  logOut: () => void;
 };
 
 const initialValues: UserDataContextType = {
@@ -29,21 +37,25 @@ const initialValues: UserDataContextType = {
     is_admin: false,
     first_name: "",
     last_name: "",
-    address:  "",
+    address: "",
     phone_number: "",
   },
   loggedIn: false,
   settleSuccessfulLogIn: () => {},
+  logOut: () => {},
 };
 
-export const UserDataContext = React.createContext<UserDataContextType>(initialValues);
+export const UserDataContext =
+  React.createContext<UserDataContextType>(initialValues);
 
 export default function UserDataProvider({
   children,
 }: {
   children: React.ReactNode;
 }): JSX.Element {
-  const [user, setUser] = React.useState<UserDataContextType["user"]>(initialValues.user);
+  const [user, setUser] = React.useState<UserDataContextType["user"]>(
+    initialValues.user
+  );
   const [loggedIn, setLoggedIn] = React.useState(initialValues.loggedIn);
 
   const getUserData = () => {
@@ -58,41 +70,51 @@ export default function UserDataProvider({
       });
   };
 
-  const settleSuccessfulLogIn = (to_checkout: boolean, userData: any, router: AppRouterInstance) => {
-  const checkout_path = "/checkout";
-  const user_path = userData.is_admin ? "/admin" : "/user";
-  const path = to_checkout ? checkout_path : user_path;
+  const settleSuccessfulLogIn = (
+    to_checkout: boolean,
+    userData: any,
+    router: AppRouterInstance
+  ) => {
+    const checkout_path = "/checkout";
+    const user_path = userData.is_admin ? "/admin" : "/user";
+    const path = to_checkout ? checkout_path : user_path;
 
-  const signed_out_shopping_cart = getShoppingCartFromLocalStorage();
+    const signed_out_shopping_cart = getShoppingCartFromLocalStorage();
 
-  setUser(userData);
+    setUser(userData);
+    setLoggedIn(true);
 
-  if (signed_out_shopping_cart) {
-    confirmAlert({
-      title: "Replace shopping cart",
-      message:
-        "Do you want to replace your current shopping cart with this one?",
-      buttons: [
-        {
-          label: "Yes",
-          onClick: () => {
-            replacePreviousShoppingCart();
-            router.push(path);
+    if (signed_out_shopping_cart) {
+      confirmAlert({
+        title: "Replace shopping cart",
+        message:
+          "Do you want to replace your current shopping cart with this one?",
+        buttons: [
+          {
+            label: "Yes",
+            onClick: () => {
+              replacePreviousShoppingCart();
+              router.push(path);
+            },
           },
-        },
-        {
-          label: "No",
-          onClick: () => {
-            localStorage.removeItem("shopping_cart");
-            router.push(user_path);
+          {
+            label: "No",
+            onClick: () => {
+              localStorage.removeItem("shopping_cart");
+              router.push(user_path);
+            },
           },
-        },
-      ],
-    });
-  } else {
-    router.push(path);
-  }
-};
+        ],
+      });
+    } else {
+      router.push(path);
+    }
+  };
+
+  const logOut = () => {
+    setUser(initialValues.user);
+    setLoggedIn(false);
+  };
 
   React.useEffect(() => {
     getUserData();
@@ -100,7 +122,7 @@ export default function UserDataProvider({
 
   return React.createElement(
     UserDataContext.Provider,
-    { value: { user, loggedIn, settleSuccessfulLogIn } },
-    children,
+    { value: { user, loggedIn, settleSuccessfulLogIn, logOut } },
+    children
   );
 }
