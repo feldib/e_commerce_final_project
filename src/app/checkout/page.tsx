@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { Button, Col, Row } from "react-bootstrap";
@@ -9,7 +9,7 @@ import { UserDataContext } from "@/components/providers/UserDataProvider";
 import UserDataChangingComponent from "@/components/input/UserDataComponent";
 
 function CheckoutPage() {
-  const router = useRouter();;
+  const router = useRouter();
 
   const { user } = React.useContext(UserDataContext);
 

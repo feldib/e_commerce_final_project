@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import { useRouter, useParams } from "next/navigation";
@@ -21,7 +21,12 @@ function ArtworkPage() {
   const artworkData = useAxios(`/artwork?id=${artwork_id}`);
 
   const artwork = useLoading(artworkData, (artwork) => {
-    return <ArtworkDetails artwork={artwork} artwork_id={artwork_id ? parseInt(artwork_id as string) : 0} />; //TODO
+    return (
+      <ArtworkDetails
+        artwork={artwork}
+        artwork_id={artwork_id ? parseInt(artwork_id as string) : 0}
+      />
+    ); //TODO
   });
 
   return (

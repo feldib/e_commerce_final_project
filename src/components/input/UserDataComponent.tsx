@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from "react";
 import { Container, Col, Row, Form } from "react-bootstrap";
 import {
@@ -68,7 +68,8 @@ function UserDataChangingComponent(props: UserDataChangingComponentProps) {
               placeholder="Enter Last Name"
               icon={faQuestion}
               showAsterisk={
-                !!props.formik.errors.last_name && !!props.formik.touched.last_name
+                !!props.formik.errors.last_name &&
+                !!props.formik.touched.last_name
               }
               error={props.formik.errors.last_name}
               onChange={props.formik.handleChange}

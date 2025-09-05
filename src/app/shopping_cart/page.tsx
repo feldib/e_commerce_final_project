@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from "react";
 import { Col, Row, Container, Button } from "react-bootstrap";
 import ShoppingCartTable from "../../components/tables/ShoppingCartTable";
@@ -43,9 +43,7 @@ function ShoppingCartPage() {
 
         <Row>
           <Col className="text-center mb-5">
-            <Link
-              href={loggedIn ? "/checkout" : "/login"}
-            >
+            <Link href={loggedIn ? "/checkout" : "/login"}>
               <Button
                 className="submit"
                 onClick={() => {

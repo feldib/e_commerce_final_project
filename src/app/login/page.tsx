@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { logIn } from "@/fetching/fetching";
@@ -96,10 +96,10 @@ function SignInPageInner() {
   );
 }
 
-export default function SignInPage () {
+export default function SignInPage() {
   return (
     <Suspense>
       <SignInPageInner />
     </Suspense>
-  )
-};
+  );
+}

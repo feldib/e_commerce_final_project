@@ -11,7 +11,6 @@ type FeatureButtonProps = {
 };
 
 function FeatureButton(props: FeatureButtonProps) {
-
   return (
     <AddOrRemoveFromButton
       isAdded={isFeatured}

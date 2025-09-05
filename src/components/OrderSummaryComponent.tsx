@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from "react";
 import { Row } from "react-bootstrap";
 import BuyTable from "./tables/BuyTable";
