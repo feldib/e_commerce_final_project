@@ -19,7 +19,7 @@ export const registerNewUser = async (
   email: string,
   password: string,
   firstName: string,
-  lastName: string
+  lastName: string,
 ): Promise<{ data: { user: User } }> => {
   return await axios.post(`${server_url}/${users_url}/new_user`, {
     last_name: lastName,
@@ -32,7 +32,7 @@ export const registerNewUser = async (
 export const logIn = async (
   email: string,
   password: string,
-  settleSuccess: (userData: { user: User }) => void
+  settleSuccess: (userData: { user: User }) => void,
 ): Promise<void> => {
   await axios
     .post(`${server_url}/login`, { email, password })
@@ -45,7 +45,7 @@ export const logIn = async (
 export const changePassword = async (
   token: string | null,
   email: string | null,
-  newPassword: string
+  newPassword: string,
 ): Promise<void> => {
   await axios.post(`${server_url}/reset_password`, {
     token,
@@ -66,7 +66,7 @@ export const getIsAdmin = async (): Promise<{
 
 export const updateUserData = async (
   field_name: string,
-  value: string
+  value: string,
 ): Promise<{ data: User }> => {
   return axios.post(`${server_url}/${users_url}/update_data`, {
     field_name,
@@ -80,7 +80,7 @@ export const updateUserData = async (
 
 export const getArtworkSearchResults = async (
   objects: any,
-  pageNumber: number
+  pageNumber: number,
 ): Promise<Artwork[]> => {
   const queries = Object.entries(objects)
     .map(([key, value]) => `${key}=${value}`)
@@ -90,7 +90,7 @@ export const getArtworkSearchResults = async (
     .get(
       `${server_url}/search_artworks${queries.length ? "?" + queries : ""}${
         objects.n ? "&offset=" + objects.n * (pageNumber - 1) : ""
-      }`
+      }`,
     )
     .then((res) => res.data)
     .catch((error) => {
@@ -100,12 +100,12 @@ export const getArtworkSearchResults = async (
 };
 
 export const getDataOfArtworks = async (
-  shoppingCart: any
+  shoppingCart: any,
 ): Promise<Artwork[]> => {
   const results = await Promise.all(
     shoppingCart.map(async (item: any) => {
       const results = await axios.get(
-        `${server_url}/find_artwork_by_id?artwork_id=${item.artwork_id}`
+        `${server_url}/find_artwork_by_id?artwork_id=${item.artwork_id}`,
       );
       const data = results.data as Artwork & { quantity?: number };
       const resObj = {
@@ -113,7 +113,7 @@ export const getDataOfArtworks = async (
         quantity: item.quantity,
       };
       return resObj as Artwork;
-    })
+    }),
   );
   return results;
 };
@@ -129,7 +129,7 @@ export interface ArtworkSent {
 }
 
 export const addNewArtwork = async (
-  artwork: ArtworkSent
+  artwork: ArtworkSent,
 ): Promise<{ data: number }> => {
   return await axios.post(`${server_url}/${admin_url}/add_new_artwork`, {
     artwork,
@@ -139,7 +139,7 @@ export const addNewArtwork = async (
 export const updateArtworkData = async (
   artwork_id: number,
   field_name: string,
-  value: any
+  value: any,
 ): Promise<{ data: Artwork }> => {
   return axios.post(`${server_url}/${admin_url}/update_artwork_data`, {
     artwork_id,
@@ -165,37 +165,37 @@ export const addToShoppingList = async (artwork_id: number): Promise<any> => {
 };
 
 export const removeFromShoppingList = async (
-  artwork_id: number
+  artwork_id: number,
 ): Promise<any> => {
   await axios.post(
     `${server_url}/${users_url}/remove_item_from_shopping_cart`,
-    { artwork_id }
+    { artwork_id },
   );
   // returns void
 };
 
 export const increaseShoppingListItemQuantity = async (
-  artwork_id: number
+  artwork_id: number,
 ): Promise<any> => {
   await axios.post(
     `${server_url}/${users_url}/increase_shopping_cart_item_quantity`,
-    { artwork_id }
+    { artwork_id },
   );
   // returns void
 };
 
 export const decreaseShoppingListItemQuantity = async (
-  artwork_id: number
+  artwork_id: number,
 ): Promise<any> => {
   await axios.post(
     `${server_url}/${users_url}/decrease_shopping_cart_item_quantity`,
-    { artwork_id }
+    { artwork_id },
   );
   // returns void
 };
 
 export const replaceSavedShoppingCart = async (
-  shopping_cart: any
+  shopping_cart: any,
 ): Promise<void> => {
   await axios.post(`${server_url}/${users_url}/replace_saved_shopping_cart`, {
     shopping_cart,
@@ -209,7 +209,7 @@ export const addToWishlisted = async (artwork_id: number): Promise<any> => {
 };
 
 export const removeFromWishlisted = async (
-  artwork_id: number
+  artwork_id: number,
 ): Promise<any> => {
   await axios.post(`${server_url}/${users_url}/remove_from_wishlisted`, {
     artwork_id,
@@ -238,7 +238,7 @@ export const getOrderHistory = async (user_id: number): Promise<Order[]> => {
     `${server_url}/${admin_url}/get_orders_of_user`,
     {
       user_id,
-    }
+    },
   );
   return res.data as Order[];
 };
@@ -250,7 +250,7 @@ export const getOrderHistory = async (user_id: number): Promise<Order[]> => {
 export const leaveReview = async (
   artwork_id: number,
   title: string,
-  review_text: string
+  review_text: string,
 ): Promise<void> => {
   await axios.post(`${server_url}/${users_url}/leave_review`, {
     artwork_id,
@@ -300,7 +300,7 @@ export const isFeatured = async (artwork_id: number): Promise<boolean> => {
 export const sendMessageToAdministrator = async (
   email: string,
   title: string,
-  message: string
+  message: string,
 ): Promise<void> => {
   await axios.post(`${server_url}/${users_url}/message_to_administrator`, {
     email,
@@ -313,7 +313,7 @@ export const replyToMessage = async (
   message_id: string,
   email: string,
   reply_title: string,
-  reply_text: string
+  reply_text: string,
 ): Promise<void> => {
   await axios.post(`${server_url}/${admin_url}/reply_to_message`, {
     message_id,
@@ -334,7 +334,7 @@ export const getUnansweredMessages = async (): Promise<Message[]> => {
 
 export const addNewThumbnail = async (
   artwork_id: number,
-  thumbnail: Blob
+  thumbnail: Blob,
 ): Promise<any> => {
   const formData = new FormData();
   formData.append("thumbnail", thumbnail);
@@ -343,22 +343,22 @@ export const addNewThumbnail = async (
     formData,
     {
       headers: { "Content-Type": "multipart/form-data" },
-    }
+    },
   );
 };
 
 export const addNewOtherPictures = (
   artwork_id: number,
-  other_pictures: Blob[]
+  other_pictures: Blob[],
 ): Promise<any[]> => {
   return Promise.all(
-    other_pictures.map((picture) => addNewOtherPicture(artwork_id, picture))
+    other_pictures.map((picture) => addNewOtherPicture(artwork_id, picture)),
   );
 };
 
 export const addNewOtherPicture = async (
   artwork_id: number,
-  picture: Blob
+  picture: Blob,
 ): Promise<any> => {
   const formData = new FormData();
   formData.append("picture", picture);
@@ -367,13 +367,13 @@ export const addNewOtherPicture = async (
     formData,
     {
       headers: { "Content-Type": "multipart/form-data" },
-    }
+    },
   );
 };
 
 export const removePicture = async (
   artwork_id: number,
-  file_name: string
+  file_name: string,
 ): Promise<any> => {
   await axios.post(`${server_url}/${admin_url}/remove_picture`, {
     artwork_id,
@@ -383,7 +383,7 @@ export const removePicture = async (
 
 export const replaceThumbnail = async (
   artwork_id: number,
-  thumbnail: Blob
+  thumbnail: Blob,
 ): Promise<any> => {
   const formData = new FormData();
   formData.append("thumbnail", thumbnail);
@@ -392,6 +392,6 @@ export const replaceThumbnail = async (
     formData,
     {
       headers: { "Content-Type": "multipart/form-data" },
-    }
+    },
   );
 };

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from "react";
 
 const useLoading = (data: any, makeJSX: (data: any) => React.JSX.Element) => {

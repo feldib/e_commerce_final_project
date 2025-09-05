@@ -2,7 +2,10 @@ import React from "react";
 import { Row } from "react-bootstrap";
 import useLoading from "../../hooks/useLoading";
 import BuyTableDataLines from "../datalines/BuyTableDataLines";
-import { presentData, getShoppingCartFromLocalStorage } from "@/helpers/helpers";
+import {
+  presentData,
+  getShoppingCartFromLocalStorage,
+} from "@/helpers/helpers";
 
 type BuyTableProps = {
   dataLines: any;
@@ -26,33 +29,36 @@ function BuyTable(props: BuyTableProps) {
     });
   }
 
-  const dataLines = useLoading(props.dataLines, (dataLines: any[]) : React.JSX.Element => {
-    return presentData(
-      dataLines.filter((line: any) => {
-      const shoppingCart = getShoppingCartFromLocalStorage();
+  const dataLines = useLoading(
+    props.dataLines,
+    (dataLines: any[]): React.JSX.Element => {
+      return presentData(
+        dataLines.filter((line: any) => {
+          const shoppingCart = getShoppingCartFromLocalStorage();
 
-        if (shoppingCart.length) {
-          const existingRecordIndex = shoppingCart.findIndex(
-            (item: any) => item.artwork_id === line.id,
-          );
-
-          if (
-            existingRecordIndex >= 0 &&
-            shoppingCart[existingRecordIndex].quantity > 0
-          ) {
-            return (
-              line.quantity - shoppingCart[existingRecordIndex].quantity > 0
+          if (shoppingCart.length) {
+            const existingRecordIndex = shoppingCart.findIndex(
+              (item: any) => item.artwork_id === line.id,
             );
+
+            if (
+              existingRecordIndex >= 0 &&
+              shoppingCart[existingRecordIndex].quantity > 0
+            ) {
+              return (
+                line.quantity - shoppingCart[existingRecordIndex].quantity > 0
+              );
+            } else {
+              return line.quantity;
+            }
           } else {
             return line.quantity;
           }
-        } else {
-          return line.quantity;
-        }
-      }),
-      makeDataLines,
-    );
-  });
+        }),
+        makeDataLines,
+      );
+    },
+  );
 
   return (
     <Row className="text-center mx-auto">
