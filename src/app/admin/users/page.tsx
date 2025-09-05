@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from "react";
 import { Col, Row } from "react-bootstrap";
 import useAxios from "../../../hooks/useAxios";

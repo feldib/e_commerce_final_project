@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from "react";
 import { server_url } from "../utils/api_constants";
 import { Col, Row, Card, Carousel } from "react-bootstrap";

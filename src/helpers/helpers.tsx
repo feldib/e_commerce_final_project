@@ -15,8 +15,8 @@ axios.defaults.withCredentials = true;
 
 const presentData = (
   dataLines: any[],
-  makeDataLines: (dataLines: any[]) => React.JSX.Element
-) : React.JSX.Element=> {
+  makeDataLines: (dataLines: any[]) => React.JSX.Element,
+): React.JSX.Element => {
   if (dataLines.length > 0) {
     return makeDataLines(dataLines);
   } else {
@@ -37,7 +37,8 @@ const increaseLocalStorageShoppingCartQuantity = (
   const shoppingCart = getShoppingCartFromLocalStorage();
 
   const existingRecordIndex = shoppingCart.findIndex(
-    (item: { artwork_id: number; quantity: number }) => item.artwork_id === artwork_id,
+    (item: { artwork_id: number; quantity: number }) =>
+      item.artwork_id === artwork_id,
   );
 
   if (stored_amount > 0) {
@@ -61,7 +62,8 @@ const increaseLocalStorageShoppingCartQuantity = (
 const decreaseLocalStorageShoppingCartQuantity = (artwork_id: number) => {
   const shoppingCart = getShoppingCartFromLocalStorage();
   const existingRecordIndex = shoppingCart.findIndex(
-    (item: { artwork_id: number; quantity: number }) => item.artwork_id === artwork_id,
+    (item: { artwork_id: number; quantity: number }) =>
+      item.artwork_id === artwork_id,
   );
 
   if (
@@ -82,7 +84,8 @@ const removeLocalStorageShoppingCartQuantity = (artwork_id: number) => {
   const shoppingCart = getShoppingCartFromLocalStorage();
 
   const existingRecordIndex = shoppingCart.findIndex(
-    (item: { artwork_id: number; quantity: number }) => item.artwork_id === artwork_id,
+    (item: { artwork_id: number; quantity: number }) =>
+      item.artwork_id === artwork_id,
   );
 
   if (
@@ -95,7 +98,7 @@ const removeLocalStorageShoppingCartQuantity = (artwork_id: number) => {
 };
 
 const getLocatStorageShoppingCart = async () => {
-  let shoppingCart = getShoppingCartFromLocalStorage();
+  const shoppingCart = getShoppingCartFromLocalStorage();
   if (!shoppingCart) {
     return [];
   } else {
@@ -154,12 +157,12 @@ const checkIfShoppingCartIsEmpty = async (loggedIn: boolean) => {
 
 // Returns the shopping cart array from localStorage, or an empty array if not present or invalid
 function getShoppingCartFromLocalStorage() {
-    const shoppingCartString = localStorage.getItem("shopping_cart");
-    try {
-        return shoppingCartString ? JSON.parse(shoppingCartString) : [];
-    } catch {
-        return [];
-    }
+  const shoppingCartString = localStorage.getItem("shopping_cart");
+  try {
+    return shoppingCartString ? JSON.parse(shoppingCartString) : [];
+  } catch {
+    return [];
+  }
 }
 
 export {

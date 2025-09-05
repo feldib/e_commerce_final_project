@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from "react";
 import NewArtworkInputComponent from "../../../components/input/NewArtworkInputComponent";
 import {
@@ -25,7 +25,10 @@ import FloatingBackButton from "../../../components/buttons/FloatingBackButton";
 import useAxios from "../../../hooks/useAxios";
 import useLoading from "../../../hooks/useLoading";
 import { useRouter } from "next/navigation";
-import { WithContext as ReactTags, Tag as ReactTagInputTag} from "react-tag-input";
+import {
+  WithContext as ReactTags,
+  Tag as ReactTagInputTag,
+} from "react-tag-input";
 import {
   addNewThumbnail,
   addNewOtherPictures,
@@ -158,13 +161,19 @@ function AddNewArtworkPage() {
     formik.setFieldValue("tags", tags);
   }, [tags]);
 
-  const createHandleDelete = (tgs: ReactTagInputTag[], setTgs: React.Dispatch<React.SetStateAction<ReactTagInputTag[]>>) => {
+  const createHandleDelete = (
+    tgs: ReactTagInputTag[],
+    setTgs: React.Dispatch<React.SetStateAction<ReactTagInputTag[]>>,
+  ) => {
     return (i: number) => {
       setTgs(tgs.filter((tag, index) => index !== i));
     };
   };
 
-  const createHandleAddition = (tgs: ReactTagInputTag[], setTgs: React.Dispatch<React.SetStateAction<ReactTagInputTag[]>>) => {
+  const createHandleAddition = (
+    tgs: ReactTagInputTag[],
+    setTgs: React.Dispatch<React.SetStateAction<ReactTagInputTag[]>>,
+  ) => {
     return (tag: ReactTagInputTag) => {
       setTgs([...tgs, tag]);
     };
@@ -275,7 +284,10 @@ function AddNewArtworkPage() {
                   placeholder="Upload thumbnail"
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     if (e.currentTarget.files) {
-                      formik.setFieldValue("thumbnail", e.currentTarget.files[0]);
+                      formik.setFieldValue(
+                        "thumbnail",
+                        e.currentTarget.files[0],
+                      );
                     }
                   }}
                 />

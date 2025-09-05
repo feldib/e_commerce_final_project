@@ -133,7 +133,7 @@ function ArtworkSearchFields(props: ArtworkSearchFieldsProps) {
             onChange={() => {
               props.formik.setFieldValue(
                 "only_featured",
-                !props.formik.values.only_featured
+                !props.formik.values.only_featured,
               );
             }}
           />

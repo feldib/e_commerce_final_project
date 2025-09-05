@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
@@ -21,7 +21,7 @@ function Header() {
 
   const { user, loggedIn } = React.useContext(UserDataContext);
 
-  let shoppingListItems = useShoppingList(loggedIn);
+  const shoppingListItems = useShoppingList(loggedIn);
 
   const [expanded, setExpanded] = React.useState(false);
 

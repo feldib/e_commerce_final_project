@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from "react";
 import {
   Button,
@@ -109,7 +109,9 @@ function UnansweredMessage(props: UnansweredMessageProps) {
                         type="textarea"
                         placeholder="Enter title"
                         icon={faKeyboard}
-                        showAsterisk={!!errors.reply_title && !!touched.reply_title}
+                        showAsterisk={
+                          !!errors.reply_title && !!touched.reply_title
+                        }
                       />
 
                       <RBForm.Group className="mb-3">

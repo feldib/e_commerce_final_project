@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { Col, Row, Container, Button } from "react-bootstrap";
 import OrderSummaryComponent from "../../components/OrderSummaryComponent";
 import Link from "next/link";
@@ -7,11 +7,18 @@ import PageTitle from "../../components/PageTitle";
 import React, { useEffect, useState } from "react";
 
 function ReceiptPage() {
-  const [currentOrderData, setCurrentOrderData] = useState<{ items: any[]; totalCost: number }>({ items: [], totalCost: 0 });
+  const [currentOrderData, setCurrentOrderData] = useState<{
+    items: any[];
+    totalCost: number;
+  }>({ items: [], totalCost: 0 });
 
   useEffect(() => {
     const currentOrderString = localStorage.getItem("currentOrder");
-    setCurrentOrderData(currentOrderString ? JSON.parse(currentOrderString) : { items: [], totalCost: 0 });
+    setCurrentOrderData(
+      currentOrderString
+        ? JSON.parse(currentOrderString)
+        : { items: [], totalCost: 0 },
+    );
   }, []);
 
   return (

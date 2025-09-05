@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { Suspense } from "react";
 import { changePassword } from "@/fetching/fetching";
 import { Container, Row, Col, Button } from "react-bootstrap";
@@ -71,7 +71,9 @@ function ResetPasswordInner() {
                   type="password"
                   placeholder="Enter repeat password"
                   icon={faKey}
-                  showAsterisk={!!errors.repeatPassword && !!touched.repeatPassword}
+                  showAsterisk={
+                    !!errors.repeatPassword && !!touched.repeatPassword
+                  }
                 />
 
                 <Button
@@ -96,10 +98,10 @@ function ResetPasswordInner() {
   );
 }
 
-export default function ResetPassword () {
+export default function ResetPassword() {
   return (
     <Suspense>
       <ResetPasswordInner />
     </Suspense>
-  )
-};
+  );
+}

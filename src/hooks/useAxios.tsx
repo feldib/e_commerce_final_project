@@ -1,10 +1,10 @@
-"use client"
+"use client";
 import React from "react";
 import { server_url } from "../utils/api_constants";
 import axios from "axios";
 axios.defaults.withCredentials = true;
 
-const useAxios = (url: String) => {
+const useAxios = (url: string) => {
   const [data, setData] = React.useState<any>(undefined);
   React.useEffect(() => {
     (async () => {

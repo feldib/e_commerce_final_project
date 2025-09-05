@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from "react";
 import ChangeArtworkDataInputComponent from "../../../components/input/ChangeArtworkDataInputComponent";
 import {
@@ -115,7 +115,7 @@ function EditArtworkData() {
     }),
     onSubmit: (values) => {
       // there is no single submission
-      return
+      return;
     },
   });
 
@@ -165,13 +165,19 @@ function EditArtworkData() {
     }
   }, [tags]);
 
-  const createHandleDelete = (tgs: any[], setTgs: React.Dispatch<React.SetStateAction<any[]>>) => {
+  const createHandleDelete = (
+    tgs: any[],
+    setTgs: React.Dispatch<React.SetStateAction<any[]>>,
+  ) => {
     return (i: number) => {
       setTgs(tgs.filter((tag, index) => index !== i));
     };
   };
 
-  const createHandleAddition = (tgs: any[], setTgs: React.Dispatch<React.SetStateAction<any[]>>) => {
+  const createHandleAddition = (
+    tgs: any[],
+    setTgs: React.Dispatch<React.SetStateAction<any[]>>,
+  ) => {
     return (tag: any) => {
       setTgs([...tgs, tag]);
     };
@@ -228,9 +234,7 @@ function EditArtworkData() {
                 // autocomplete
               />
               {formik.errors.tags && (
-                <div className="input-error-message">
-                  {formik.errors.tags}
-                </div>
+                <div className="input-error-message">{formik.errors.tags}</div>
               )}
             </Form.Group>
 
@@ -344,13 +348,13 @@ function EditArtworkData() {
                   onChange={async (e: React.ChangeEvent<HTMLInputElement>) => {
                     const files = e.target.files;
                     if (files) {
-                    await addNewOtherPicture(artworkId, files[0]);
+                      await addNewOtherPicture(artworkId, files[0]);
 
-                    formik.setFieldValue("other_pictures", [
-                      ...formik.values.other_pictures,
-                      URL.createObjectURL(files[0]),
-                    ]);
-                  }
+                      formik.setFieldValue("other_pictures", [
+                        ...formik.values.other_pictures,
+                        URL.createObjectURL(files[0]),
+                      ]);
+                    }
                   }}
                 />
               </InputGroup>
@@ -388,10 +392,7 @@ function EditArtworkData() {
                                 },
                               );
 
-                            removePicture(
-                              artworkId,
-                              id.split("/").pop() || "",
-                            );
+                            removePicture(artworkId, id.split("/").pop() || "");
 
                             formik.setFieldValue("other_pictures", newArray);
                           }}

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from "react";
 import { ToastContainer } from "react-toastify";
 import Link from "next/link";
@@ -57,9 +57,7 @@ function AdminArtworkTableDatalines(props: AdminArtworkTableDatalinesProps) {
           </td>
           <td>
             <div className="container">
-              <FeatureButton
-                artwork_id={props.line.id}
-              />
+              <FeatureButton artwork_id={props.line.id} />
 
               <RemoveArtworkButton
                 artwork_id={props.line.id}

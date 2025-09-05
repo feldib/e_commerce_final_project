@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { Suspense } from "react";
 import { registerNewUser } from "@/fetching/fetching";
 import { logIn } from "@/fetching/fetching";
@@ -19,7 +19,10 @@ function RegistrationPageInner(props: RegistrationPageProps) {
   const searchParams = useSearchParams();
   const to_checkout = searchParams.get("to_checkout");
 
-  const attemptRegistration = async (values: any, settleSuccessfulRegistration: any) => {
+  const attemptRegistration = async (
+    values: any,
+    settleSuccessfulRegistration: any,
+  ) => {
     await registerNewUser(
       values.email,
       values.password,
@@ -118,7 +121,9 @@ function RegistrationPageInner(props: RegistrationPageProps) {
                   type="password"
                   placeholder="Enter password again"
                   icon={faKey}
-                  showAsterisk={!!errors.repeatPassword && !!touched.repeatPassword}
+                  showAsterisk={
+                    !!errors.repeatPassword && !!touched.repeatPassword
+                  }
                 />
 
                 <InputComponent
@@ -161,10 +166,10 @@ function RegistrationPageInner(props: RegistrationPageProps) {
   );
 }
 
-export default function RegistrationPage (props: RegistrationPageProps) {
+export default function RegistrationPage(props: RegistrationPageProps) {
   return (
     <Suspense>
       <RegistrationPageInner {...props} />
     </Suspense>
-  )
-};
+  );
+}

@@ -22,7 +22,7 @@ function BuyTableDataLines(props: BuyTableDataLinesProps) {
   const { quantity, setQuantity } = useQuantity(
     loggedIn,
     props.line.quantity,
-    props.line.id
+    props.line.id,
   );
 
   return (
