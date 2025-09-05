@@ -98,7 +98,7 @@ const removeLocalStorageShoppingCartQuantity = (artwork_id: number) => {
 };
 
 const getLocatStorageShoppingCart = async () => {
-  let shoppingCart = getShoppingCartFromLocalStorage();
+  const shoppingCart = getShoppingCartFromLocalStorage();
   if (!shoppingCart) {
     return [];
   } else {

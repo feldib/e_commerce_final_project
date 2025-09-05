@@ -21,7 +21,7 @@ function Header() {
 
   const { user, loggedIn } = React.useContext(UserDataContext);
 
-  let shoppingListItems = useShoppingList(loggedIn);
+  const shoppingListItems = useShoppingList(loggedIn);
 
   const [expanded, setExpanded] = React.useState(false);
 
