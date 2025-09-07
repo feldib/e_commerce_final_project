@@ -1,12 +1,9 @@
+import { Review } from "@/fetching/types";
 import React from "react";
 import { Card, Carousel } from "react-bootstrap";
 
 type ReviewsOfArtworksProps = {
-  reviews: {
-    title: string;
-    name: string;
-    review_text: string;
-  }[];
+  reviews: Review[];
 };
 
 function ReviewsOfArtworks(props: ReviewsOfArtworksProps) {

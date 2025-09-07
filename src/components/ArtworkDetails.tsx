@@ -12,6 +12,7 @@ import ArtworkPicturesCarousel from "./ArtworkPicturesCarousel";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
 import { server_url } from "../utils/api_constants";
 import useQuantity from "../hooks/useQuantity";
+import { Review, Tag } from "@/fetching/types";
 
 type ArtworkDetailsProps = {
   artwork_id: number;
@@ -29,17 +30,17 @@ type ArtworkDetailsProps = {
 };
 
 function ArtworkDetails(props: ArtworkDetailsProps) {
-  const reviewsData = useAxios(`/reviews?id=${props.artwork_id}`);
+  const reviewsData = useAxios(`/reviews?id=${props.artwork_id}`) as Review[];
 
   const { loggedIn } = React.useContext(UserDataContext);
 
   const { quantity, setQuantity } = useQuantity(
     loggedIn,
     props.artwork.quantity,
-    props.artwork_id,
+    props.artwork_id
   );
 
-  const reviews = useLoading(reviewsData, (reviews: any[]) => {
+  const reviews = useLoading(reviewsData, (reviews) => {
     return <ReviewsOfArtworks reviews={reviews} />;
   });
 
@@ -132,7 +133,7 @@ function ArtworkDetails(props: ArtworkDetailsProps) {
                   <Row>
                     <p>
                       {props.artwork.tags
-                        .map((tag: any) => {
+                        .map((tag: Tag) => {
                           return tag.tname;
                         })
                         .join(", ")}
