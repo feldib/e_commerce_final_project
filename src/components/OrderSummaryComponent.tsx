@@ -1,25 +1,30 @@
-"use client";
 import React from "react";
 import { Row } from "react-bootstrap";
 import BuyTable from "./tables/BuyTable";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
+import { OrderItem } from "../fetching/types";
 
 type OrderSummaryComponentProps = {
   title?: string;
-  items: any;
+  items: OrderItem[];
   totalCost: number;
   button?: React.ReactNode;
 };
 
-function OrderSummaryComponent(props: OrderSummaryComponentProps) {
+function OrderSummaryComponent({
+  title,
+  items,
+  totalCost,
+  button,
+}: OrderSummaryComponentProps) {
   const { user } = React.useContext(UserDataContext);
 
   return (
     <Row className="mb-3 floating-element">
       <Row>
-        {props.title && (
+        {title && (
           <Row className="mb-2 mb-3">
-            <h2 className="text-center">{props.title}</h2>
+            <h2 className="text-center">{title}</h2>
           </Row>
         )}
 
@@ -31,16 +36,16 @@ function OrderSummaryComponent(props: OrderSummaryComponentProps) {
 
         <BuyTable
           theadNeeded={true}
-          dataLines={props.items}
+          dataLines={items}
           orderSummary={true}
           reccomendation={false}
         />
       </Row>
 
       <Row className="mt-4 text-start">
-        {props.items && <h2>Order Summary: € {props.totalCost}</h2>}
+        {items && <h2>Order Summary: € {totalCost}</h2>}
       </Row>
-      {props.button && <>{props.button}</>}
+      {button && <>{button}</>}
     </Row>
   );
 }

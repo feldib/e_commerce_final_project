@@ -3,34 +3,41 @@ import { Row } from "react-bootstrap";
 import useLoading from "../../hooks/useLoading";
 import ShoppingCartDataLines from "../datalines/ShoppingCartDataLines";
 import { presentData } from "../../helpers/helpers";
+import { Artwork } from "@/fetching/types";
 
 type ShoppingCartTableProps = {
-  dataLines: any;
+  dataLines: Artwork[];
   reccomendation?: boolean;
   changeCosts: (index: number, cost: number) => void;
   theadNeeded: boolean;
 };
 
-function ShoppingCartTable(props: ShoppingCartTableProps) {
-  function makeDataLines(dataLines: any) {
-    return dataLines.map((line: any, index: number) => {
+function ShoppingCartTable({
+  dataLines,
+  reccomendation = false,
+  changeCosts,
+  theadNeeded,
+}: ShoppingCartTableProps) {
+  function makeDataLines(dataLinesGenerated: Artwork[]) {
+    return dataLinesGenerated.map((line: Artwork, index: number) => {
       return (
         <ShoppingCartDataLines
-          reccomendation={props.reccomendation}
+          key={index}
+          reccomendation={reccomendation}
           line={line}
           index={index}
-          changeCosts={props.changeCosts}
+          changeCosts={changeCosts}
         />
       );
     });
   }
-  const dataLines = useLoading(props.dataLines, (dataLines) => {
+  const dataLinesGenerated = useLoading(dataLines, (dataLines) => {
     return presentData(dataLines, makeDataLines);
   });
   return (
     <Row className="text-center">
       <table>
-        {props.theadNeeded && (
+        {theadNeeded && (
           <thead>
             <tr>
               <th></th>
@@ -39,12 +46,12 @@ function ShoppingCartTable(props: ShoppingCartTableProps) {
               <th>Total cost</th>
               <th>Quantity</th>
               <th
-                className={`${props.reccomendation ? "d-none" : "d-none d-md-table-cell"}`}
+                className={`${reccomendation ? "d-none" : "d-none d-md-table-cell"}`}
               >
                 Tags
               </th>
               <th
-                className={`${props.reccomendation ? "d-none" : "d-none d-md-table-cell"}`}
+                className={`${reccomendation ? "d-none" : "d-none d-md-table-cell"}`}
               >
                 Categories
               </th>
@@ -53,7 +60,7 @@ function ShoppingCartTable(props: ShoppingCartTableProps) {
           </thead>
         )}
 
-        <tbody>{dataLines}</tbody>
+        <tbody>{dataLinesGenerated}</tbody>
       </table>
     </Row>
   );

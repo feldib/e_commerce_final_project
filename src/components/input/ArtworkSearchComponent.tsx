@@ -8,14 +8,13 @@ import AdminArtworkTable from "../tables/AdminArtworkTable";
 import ArtworkSearchFields from "./ArtworkSearchFields";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { UserDataContext } from "../providers/UserDataProvider";
-import { Artwork } from "@/fetching/types";
+import { Artwork, Category } from "@/fetching/types";
 
 type ArtworkSearchComponentProps = {
   admin?: boolean;
 };
 
-function ArtworkSearchComponent(props: ArtworkSearchComponentProps) {
+function ArtworkSearchComponent({ admin }: ArtworkSearchComponentProps) {
   const [searchResults, setSearchResults] = React.useState<Artwork[]>();
 
   const [pageNumber, setPageNumber] = React.useState(0);
@@ -50,7 +49,7 @@ function ArtworkSearchComponent(props: ArtworkSearchComponentProps) {
     }),
   });
 
-  const categories = useAxios("/categories");
+  const categories = useAxios("/categories") as Category[];
 
   const results = React.useRef<HTMLDivElement>(null);
 
@@ -82,7 +81,7 @@ function ArtworkSearchComponent(props: ArtworkSearchComponentProps) {
           >
             <h3 className="text-center">Search results</h3>
           </Row>
-          {props.admin ? (
+          {admin ? (
             <AdminArtworkTable dataLines={searchResults} />
           ) : (
             <BuyTable
@@ -97,7 +96,7 @@ function ArtworkSearchComponent(props: ArtworkSearchComponentProps) {
               <Col className="mx-auto">
                 <Button
                   className="submit"
-                  onClick={(e) => {
+                  onClick={() => {
                     setPageNumber(pageNumber - 1);
                   }}
                 >
@@ -110,7 +109,7 @@ function ArtworkSearchComponent(props: ArtworkSearchComponentProps) {
               <Col className="mx-auto">
                 <Button
                   className="submit"
-                  onClick={async (e) => {
+                  onClick={async () => {
                     setPageNumber(pageNumber + 1);
                   }}
                 >

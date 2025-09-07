@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Row } from "react-bootstrap";
 import { toast } from "react-toastify";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
+import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 
 type SinglePurposeButtonProps = {
   artwork_id: number;
@@ -11,10 +12,17 @@ type SinglePurposeButtonProps = {
   actionOnNotLoggedIn?: () => void;
   toastSuccessMessage: string;
   toastErrorMessage: string;
-  icon: any;
+  icon: IconDefinition;
 };
 
-function SinglePurposeButton(props: SinglePurposeButtonProps) {
+function SinglePurposeButton({
+  artwork_id,
+  actionOnLoggedIn,
+  actionOnNotLoggedIn,
+  toastSuccessMessage,
+  toastErrorMessage,
+  icon,
+}: SinglePurposeButtonProps) {
   const { loggedIn } = React.useContext(UserDataContext);
 
   return (
@@ -24,27 +32,26 @@ function SinglePurposeButton(props: SinglePurposeButtonProps) {
         style={{ cursor: "pointer" }}
         onClick={async () => {
           if (loggedIn) {
-            props
-              .actionOnLoggedIn(props.artwork_id)
-              .then((response) => {
-                toast.success(props.toastSuccessMessage, {
+            actionOnLoggedIn(artwork_id)
+              .then(() => {
+                toast.success(toastSuccessMessage, {
                   className: "toast-success",
                 });
               })
-              .catch((error) => {
-                toast.error(props.toastErrorMessage, {
+              .catch(() => {
+                toast.error(toastErrorMessage, {
                   className: "toast-error",
                 });
               });
           } else {
-            if (props.actionOnNotLoggedIn) {
+            if (actionOnNotLoggedIn) {
               try {
-                props.actionOnNotLoggedIn();
-                toast.success(props.toastSuccessMessage, {
+                actionOnNotLoggedIn();
+                toast.success(toastSuccessMessage, {
                   className: "toast-success",
                 });
-              } catch (error) {
-                toast.error(props.toastErrorMessage, {
+              } catch {
+                toast.error(toastErrorMessage, {
                   className: "toast-error",
                 });
               }
@@ -52,7 +59,7 @@ function SinglePurposeButton(props: SinglePurposeButtonProps) {
           }
         }}
       >
-        <FontAwesomeIcon icon={props.icon} />
+        <FontAwesomeIcon icon={icon} />
       </p>
     </Row>
   );

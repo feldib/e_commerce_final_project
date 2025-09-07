@@ -12,7 +12,10 @@ type AdminArtworkTableDatalinesProps = {
   index: number;
 };
 
-function AdminArtworkTableDatalines(props: AdminArtworkTableDatalinesProps) {
+function AdminArtworkTableDatalines({
+  line,
+  index,
+}: AdminArtworkTableDatalinesProps) {
   const [lineVisible, setLineVisible] = React.useState(true);
 
   const removeLineFromView = () => {
@@ -22,10 +25,11 @@ function AdminArtworkTableDatalines(props: AdminArtworkTableDatalinesProps) {
   return (
     <>
       {lineVisible && (
-        <tr key={props.index}>
+        <tr key={index}>
           <td>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={`${server_url}/${props.line.thumbnail}`}
+              src={`${server_url}/${line.thumbnail}`}
               width="100"
               height="100"
               style={{ objectFit: "contain" }}
@@ -33,34 +37,31 @@ function AdminArtworkTableDatalines(props: AdminArtworkTableDatalinesProps) {
             />
           </td>
           <td>
-            <Link href={`/admin/edit_artwork/${props.line.id}`}>
-              <p>{props.line.title}</p>
+            <Link href={`/admin/edit_artwork/${line.id}`}>
+              <p>{line.title}</p>
             </Link>
           </td>
           <td>
-            <p>{props.line.artist_name}</p>
+            <p>{line.artist_name}</p>
           </td>
           <td className={"d-none d-md-table-cell"}>
-            <p>€{props.line.price}</p>
+            <p>€{line.price}</p>
           </td>
           <td className={"d-none d-md-table-cell"}>
-            <p>{props.line.quantity}</p>
+            <p>{line.quantity}</p>
           </td>
           <td className={"d-none d-md-table-cell"}>
-            <p>
-              {props.line.tags &&
-                props.line.tags.map((tag) => tag.tname).join(", ")}
-            </p>
+            <p>{line.tags && line.tags.map((tag) => tag.tname).join(", ")}</p>
           </td>
           <td className={"d-none d-md-table-cell"}>
-            <p>{props.line.cname}</p>
+            <p>{line.cname}</p>
           </td>
           <td>
             <div className="container">
-              <FeatureButton artwork_id={props.line.id} />
+              <FeatureButton artwork_id={line.id} />
 
               <RemoveArtworkButton
-                artwork_id={props.line.id}
+                artwork_id={line.id}
                 removeLineFromView={removeLineFromView}
               />
 

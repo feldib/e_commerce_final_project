@@ -10,32 +10,46 @@ import * as Yup from "yup";
 import { ToastContainer, toast } from "react-toastify";
 import PageTitle from "../../components/PageTitle";
 import { useSearchParams } from "next/navigation";
+import { User } from "../../fetching/types";
 
 type RegistrationPageProps = {
-  settleSuccessfulRegistration: (to_checkout: boolean, userData: any) => void;
+  settleSuccessfulRegistration: (
+    to_checkout: boolean,
+    userData: { user: User }
+  ) => void;
 };
 
-function RegistrationPageInner(props: RegistrationPageProps) {
+function RegistrationPageInner({
+  settleSuccessfulRegistration,
+}: RegistrationPageProps) {
   const searchParams = useSearchParams();
   const to_checkout = searchParams.get("to_checkout");
 
   const attemptRegistration = async (
-    values: any,
-    settleSuccessfulRegistration: any,
+    values: {
+      email: string;
+      password: string;
+      firstName: string;
+      lastName: string;
+    },
+    settleSuccessfulRegistration: (
+      to_checkout: boolean,
+      userData: { user: User }
+    ) => void
   ) => {
     await registerNewUser(
       values.email,
       values.password,
       values.firstName,
-      values.lastName,
+      values.lastName
     )
-      .then(function (response) {
+      .then(function () {
         logIn(values.email, values.password, (userData) => {
           settleSuccessfulRegistration(to_checkout, userData);
         });
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
+        console.log("Registration failed");
       });
   };
 
@@ -50,13 +64,20 @@ function RegistrationPageInner(props: RegistrationPageProps) {
     phone: "",
   };
 
-  async function onSubmit(values: any) {
+  async function onSubmit(values: {
+    email: string;
+    password: string;
+    firstName: string;
+    lastName: string;
+    address: string;
+    phone: string;
+  }) {
     try {
-      await attemptRegistration(values, props.settleSuccessfulRegistration);
+      await attemptRegistration(values, settleSuccessfulRegistration);
       toast.success("Registration successful", {
         className: "toast-success",
       });
-    } catch (error) {
+    } catch {
       toast.error("A user is registered with email already", {
         className: "toast-error",
       });

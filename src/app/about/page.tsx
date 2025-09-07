@@ -35,7 +35,7 @@ const AboutUsPage: React.FC = () => {
             <p>
               Join us on this enchanting voyage as we curate a collection of
               exceptional artworks, each with its own tale to tell. Together,
-              let's celebrate the essence of creativity and the boundless
+              let&#39;s celebrate the essence of creativity and the boundless
               stories that reside within each artistic marvel.
             </p>
           </Row>

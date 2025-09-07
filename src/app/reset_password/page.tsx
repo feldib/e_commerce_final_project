@@ -10,8 +10,13 @@ import * as Yup from "yup";
 import { ToastContainer, toast } from "react-toastify";
 import PageTitle from "../../components/PageTitle";
 
+type ResetPasswordFormValues = {
+  password: string;
+  repeatPassword: string;
+};
+
 function ResetPasswordInner() {
-  const initialValues = {
+  const initialValues: ResetPasswordFormValues = {
     password: "",
     repeatPassword: "",
   };
@@ -20,7 +25,7 @@ function ResetPasswordInner() {
 
   const router = useRouter();
 
-  const onSubmit = (values: any) => {
+  const onSubmit = (values: ResetPasswordFormValues) => {
     const token = searchParams.get("token");
     const email = searchParams.get("email");
     changePassword(token, email, values.password)
@@ -80,10 +85,11 @@ function ResetPasswordInner() {
                   variant="primary"
                   type="submit"
                   onClick={() => {
-                    Object.keys(errors).length &&
+                    if (Object.keys(errors).length) {
                       toast.error("Incorrect data", {
                         className: "toast-error",
                       });
+                    }
                   }}
                 >
                   Change password

@@ -35,43 +35,49 @@ import {
   addNewArtwork,
 } from "@/fetching/fetching";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Category } from "@/fetching/types";
+import {
+  MAX_IMAGE_SIZE,
+  TAG_DELIMITERS,
+  VALID_IMAGE_EXTENSIONS,
+} from "@/utils/constants";
+
+interface AddNewArtworkFormValues extends Record<string, unknown> {
+  title: string;
+  artist_name: string;
+  price: number;
+  tags: ReactTagInputTag[];
+  quantity: number;
+  category_id: number;
+  thumbnail: Blob | undefined;
+  other_pictures: Blob[];
+  description: string;
+}
 
 function AddNewArtworkPage() {
-  const categories = useAxios("/categories");
+  const categories = useAxios("/categories") as Category[];
 
   const categoriesRepresented = useLoading(categories, (categories) => {
-    return categories.map((cat: any, index: number) => {
-      return (
-        <Dropdown.Item eventKey={JSON.stringify(cat)} key={index}>
-          {cat.cname}
-        </Dropdown.Item>
-      );
-    });
+    return (
+      <>
+        {categories.map((cat: Category, index: number) => (
+          <Dropdown.Item eventKey={JSON.stringify(cat)} key={index}>
+            {cat.cname}
+          </Dropdown.Item>
+        ))}
+      </>
+    );
   });
 
   const router = useRouter();
 
-  const MAX_IMAGE_SIZE = 102400; //100KB
-
-  const validImageExtensions = ["jpg", "gif", "png", "jpeg", "svg", "webp"];
-
   function isValidImage(fileName: string): boolean {
     if (!fileName) return false;
     const ext = fileName.split(".").pop()?.toLowerCase() || "";
-    return validImageExtensions.includes(ext);
+    return VALID_IMAGE_EXTENSIONS.includes(ext);
   }
 
-  const formik = useFormik<{
-    title: string;
-    artist_name: string;
-    price: number;
-    tags: ReactTagInputTag[];
-    quantity: number;
-    category_id: number;
-    thumbnail: any;
-    other_pictures: any[];
-    description: string;
-  }>({
+  const formik = useFormik<AddNewArtworkFormValues>({
     initialValues: {
       title: "",
       artist_name: "",
@@ -79,7 +85,7 @@ function AddNewArtworkPage() {
       tags: [],
       quantity: 0,
       category_id: 0,
-      thumbnail: "",
+      thumbnail: undefined,
       other_pictures: [],
       description: "",
     },
@@ -95,7 +101,9 @@ function AddNewArtworkPage() {
 
           const artwork_id = response.data;
 
-          await addNewThumbnail(artwork_id, values.thumbnail);
+          if (values.thumbnail) {
+            await addNewThumbnail(artwork_id, values.thumbnail);
+          }
 
           await addNewOtherPictures(artwork_id, values.other_pictures);
 
@@ -118,12 +126,12 @@ function AddNewArtworkPage() {
       thumbnail: Yup.mixed()
         .required("Thumbnail required")
         .test("is-valid-type", "Not a valid image type", (value) =>
-          isValidImage(value instanceof File ? value.name : ""),
+          isValidImage(value instanceof File ? value.name : "")
         )
         .test(
           "is-valid-size",
           "Max allowed size is 100KB",
-          (value) => value instanceof File && value.size <= MAX_IMAGE_SIZE,
+          (value) => value instanceof File && value.size <= MAX_IMAGE_SIZE
         ),
       tags: Yup.array()
         .min(3, "Add minimum 3 tags!")
@@ -131,39 +139,31 @@ function AddNewArtworkPage() {
           Yup.object().shape({
             id: Yup.string(),
             text: Yup.string(),
-          }),
+          })
         ),
       other_pictures: Yup.array().of(
         Yup.mixed()
           .test("is-valid-type", "Not a valid image type", (value) =>
-            isValidImage(value instanceof File ? value.name : ""),
+            isValidImage(value instanceof File ? value.name : "")
           )
           .test(
             "is-valid-size",
             "Max allowed size is 100KB",
-            (value) => value instanceof File && value.size <= MAX_IMAGE_SIZE,
-          ),
+            (value) => value instanceof File && value.size <= MAX_IMAGE_SIZE
+          )
       ),
     }),
   });
-
-  const KeyCodes = {
-    comma: 188,
-    enter: 13,
-    space: 32,
-  };
-
-  const delimiters = [KeyCodes.comma, KeyCodes.enter, KeyCodes.space];
 
   const [tags, setTags] = React.useState<ReactTagInputTag[]>([]);
 
   React.useEffect(() => {
     formik.setFieldValue("tags", tags);
-  }, [tags]);
+  }, [tags, formik]);
 
   const createHandleDelete = (
     tgs: ReactTagInputTag[],
-    setTgs: React.Dispatch<React.SetStateAction<ReactTagInputTag[]>>,
+    setTgs: React.Dispatch<React.SetStateAction<ReactTagInputTag[]>>
   ) => {
     return (i: number) => {
       setTgs(tgs.filter((tag, index) => index !== i));
@@ -172,7 +172,7 @@ function AddNewArtworkPage() {
 
   const createHandleAddition = (
     tgs: ReactTagInputTag[],
-    setTgs: React.Dispatch<React.SetStateAction<ReactTagInputTag[]>>,
+    setTgs: React.Dispatch<React.SetStateAction<ReactTagInputTag[]>>
   ) => {
     return (tag: ReactTagInputTag) => {
       setTgs([...tgs, tag]);
@@ -219,7 +219,7 @@ function AddNewArtworkPage() {
               <ReactTags
                 tags={formik.values.tags}
                 // suggestions={suggestions}
-                delimiters={delimiters}
+                delimiters={TAG_DELIMITERS}
                 handleDelete={createHandleDelete(tags, setTags)}
                 handleAddition={createHandleAddition(tags, setTags)}
                 inputFieldPosition="bottom"
@@ -286,7 +286,7 @@ function AddNewArtworkPage() {
                     if (e.currentTarget.files) {
                       formik.setFieldValue(
                         "thumbnail",
-                        e.currentTarget.files[0],
+                        e.currentTarget.files[0]
                       );
                     }
                   }}
@@ -302,9 +302,11 @@ function AddNewArtworkPage() {
                     width: "150px",
                   }}
                 >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={URL.createObjectURL(formik.values.thumbnail)}
                     className="mt-3 uploaded-image"
+                    alt="Uploaded thumbnail"
                   />
 
                   <FontAwesomeIcon
@@ -361,9 +363,11 @@ function AddNewArtworkPage() {
                           width: "150px",
                         }}
                       >
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
                           src={URL.createObjectURL(pic)}
                           className="mt-3 uploaded-image"
+                          alt="Uploaded other picture"
                         />
 
                         <FontAwesomeIcon
@@ -398,10 +402,11 @@ function AddNewArtworkPage() {
               variant="primary"
               type="submit"
               onClick={() => {
-                Object.keys(formik.errors).length &&
+                if (Object.keys(formik.errors).length) {
                   toast.error("Incorrect data", {
                     className: "toast-error",
                   });
+                }
               }}
             >
               Add new artwork

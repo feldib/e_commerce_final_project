@@ -5,20 +5,18 @@ import {
   getIsAdmin,
 } from "@/fetching/fetching";
 
-import axios from "axios";
-
 import { server_url } from "../utils/api_constants";
 import React from "react";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
+import { ShoppingCartItem } from "@/fetching/types";
+import axiosConfigured from "@/utils/axiosConfigured";
 
-axios.defaults.withCredentials = true;
-
-const presentData = (
-  dataLines: any[],
-  makeDataLines: (dataLines: any[]) => React.JSX.Element,
+const presentData = <T,>(
+  dataLines: T[],
+  makeDataLines: (dataLines: T[]) => React.JSX.Element[]
 ): React.JSX.Element => {
   if (dataLines.length > 0) {
-    return makeDataLines(dataLines);
+    return <>{makeDataLines(dataLines)}</>;
   } else {
     return (
       <tr>
@@ -32,13 +30,12 @@ const presentData = (
 
 const increaseLocalStorageShoppingCartQuantity = (
   artwork_id: number,
-  stored_amount: number,
+  stored_amount: number
 ) => {
   const shoppingCart = getShoppingCartFromLocalStorage();
 
   const existingRecordIndex = shoppingCart.findIndex(
-    (item: { artwork_id: number; quantity: number }) =>
-      item.artwork_id === artwork_id,
+    (item: ShoppingCartItem) => item.artwork_id === artwork_id
   );
 
   if (stored_amount > 0) {
@@ -62,8 +59,7 @@ const increaseLocalStorageShoppingCartQuantity = (
 const decreaseLocalStorageShoppingCartQuantity = (artwork_id: number) => {
   const shoppingCart = getShoppingCartFromLocalStorage();
   const existingRecordIndex = shoppingCart.findIndex(
-    (item: { artwork_id: number; quantity: number }) =>
-      item.artwork_id === artwork_id,
+    (item: ShoppingCartItem) => item.artwork_id === artwork_id
   );
 
   if (
@@ -84,8 +80,7 @@ const removeLocalStorageShoppingCartQuantity = (artwork_id: number) => {
   const shoppingCart = getShoppingCartFromLocalStorage();
 
   const existingRecordIndex = shoppingCart.findIndex(
-    (item: { artwork_id: number; quantity: number }) =>
-      item.artwork_id === artwork_id,
+    (item: ShoppingCartItem) => item.artwork_id === artwork_id
   );
 
   if (
@@ -128,7 +123,7 @@ const redirectIfNotAdmin = (router: AppRouterInstance) => {
 
 const checkIfShoppingCartIsEmpty = async (loggedIn: boolean) => {
   if (loggedIn) {
-    return axios
+    return axiosConfigured
       .get(`${server_url}/users/shopping_cart`)
       .then(function (results) {
         if (Array.isArray(results.data) && results.data.length) {
@@ -137,7 +132,7 @@ const checkIfShoppingCartIsEmpty = async (loggedIn: boolean) => {
           return false;
         }
       })
-      .catch(function (error) {
+      .catch(function () {
         return false;
       });
   } else {
@@ -149,14 +144,14 @@ const checkIfShoppingCartIsEmpty = async (loggedIn: boolean) => {
           return false;
         }
       })
-      .catch(function (error) {
+      .catch(function () {
         return false;
       });
   }
 };
 
 // Returns the shopping cart array from localStorage, or an empty array if not present or invalid
-function getShoppingCartFromLocalStorage() {
+function getShoppingCartFromLocalStorage(): ShoppingCartItem[] {
   const shoppingCartString = localStorage.getItem("shopping_cart");
   try {
     return shoppingCartString ? JSON.parse(shoppingCartString) : [];

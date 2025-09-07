@@ -16,20 +16,26 @@ type BuyTableDataLinesProps = {
   reccomendation?: boolean;
 };
 
-function BuyTableDataLines(props: BuyTableDataLinesProps) {
+function BuyTableDataLines({
+  line,
+  index,
+  orderSummary = false,
+  reccomendation = false,
+}: BuyTableDataLinesProps) {
   const { loggedIn } = React.useContext(UserDataContext);
 
   const { quantity, setQuantity } = useQuantity(
     loggedIn,
-    props.line.quantity,
-    props.line.id,
+    line.quantity,
+    line.id
   );
 
   return (
-    <tr key={props.index}>
+    <tr key={index}>
       <td>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={`${server_url}/${props.line.thumbnail}`}
+          src={`${server_url}/${line.thumbnail}`}
           width="100"
           height="100"
           style={{ objectFit: "cover" }}
@@ -37,47 +43,32 @@ function BuyTableDataLines(props: BuyTableDataLinesProps) {
         />
       </td>
       <td>
-        <Link href={`/artwork_page/${props.line.id}`}>
-          <p>{props.line.title}</p>
+        <Link href={`/artwork_page/${line.id}`}>
+          <p>{line.title}</p>
         </Link>
       </td>
-      <td
-        className={`${
-          props.reccomendation ? "d-none" : "d-none d-md-table-cell"
-        }`}
-      >
-        <p>{props.line.artist_name}</p>
+      <td className={`${reccomendation ? "d-none" : "d-none d-md-table-cell"}`}>
+        <p>{line.artist_name}</p>
       </td>
       <td>
-        <p>€{props.line.price}</p>
+        <p>€{line.price}</p>
       </td>
       <td
         className={`text-center ${
-          props.reccomendation ? "d-none" : "d-none d-md-table-cell"
+          reccomendation ? "d-none" : "d-none d-md-table-cell"
         }`}
       >
         <p>{quantity}</p>
       </td>
-      <td
-        className={`${
-          props.reccomendation ? "d-none" : "d-none d-md-table-cell"
-        }`}
-      >
-        <p>
-          {props.line.tags &&
-            props.line.tags.map((tag) => tag.tname).join(", ")}
-        </p>
+      <td className={`${reccomendation ? "d-none" : "d-none d-md-table-cell"}`}>
+        <p>{line.tags && line.tags.map((tag) => tag.tname).join(", ")}</p>
       </td>
-      <td
-        className={`${
-          props.reccomendation ? "d-none" : "d-none d-md-table-cell"
-        }`}
-      >
-        <p>{props.line.cname}</p>
+      <td className={`${reccomendation ? "d-none" : "d-none d-md-table-cell"}`}>
+        <p>{line.cname}</p>
       </td>
       <td>
-        {props.orderSummary ? (
-          <p>€{quantity * props.line.price}</p>
+        {orderSummary ? (
+          <p>€{quantity * line.price}</p>
         ) : (
           <div className="container">
             <span
@@ -87,12 +78,9 @@ function BuyTableDataLines(props: BuyTableDataLinesProps) {
                 }
               }}
             >
-              <ShoppingCartButton
-                artwork_id={props.line.id}
-                quantity={quantity}
-              />
+              <ShoppingCartButton artwork_id={line.id} quantity={quantity} />
             </span>
-            <FavouriteButton artwork_id={props.line.id} />
+            <FavouriteButton artwork_id={line.id} />
             <ToastContainer position="bottom-right" />
           </div>
         )}

@@ -8,22 +8,19 @@ import {
   removeFromWishlisted,
   isWishlisted,
 } from "@/fetching/fetching";
-import { UserDataContext } from "@/components/providers/UserDataProvider";
 import AddOrRemoveFromButton from "./AddOrRemoveButton";
 
 type FavouriteButtonProps = {
   artwork_id: number;
 };
 
-function FavouriteButton(props: FavouriteButtonProps) {
-  const { user, loggedIn } = React.useContext(UserDataContext);
-
+function FavouriteButton({ artwork_id }: FavouriteButtonProps) {
   return (
     <AddOrRemoveFromButton
       isAdded={isWishlisted}
       addToAdded={addToWishlisted}
       removeFromAdded={removeFromWishlisted}
-      artwork_id={props.artwork_id}
+      artwork_id={artwork_id}
       toastWarningMessage="Sign in or register to add to wishlist! "
       filledButton={<FontAwesomeIcon icon={faHeartSolid} />}
       regularButton={<FontAwesomeIcon icon={faHeartRegular} />}

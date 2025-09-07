@@ -2,16 +2,17 @@ import React from "react";
 import { Navbar, Nav, Container, Col, Row } from "react-bootstrap";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 
 type SubNavbarProps = {
   linkObjects: Array<{
     linkTo: string;
-    icon: any;
+    icon: IconDefinition;
     linkText: string;
   }>;
 };
 
-function SubNavbar(props: SubNavbarProps) {
+function SubNavbar({ linkObjects }: SubNavbarProps) {
   return (
     <Row>
       <a href="#subpage" className="skip-to-content">
@@ -20,9 +21,10 @@ function SubNavbar(props: SubNavbarProps) {
       <Navbar>
         <Container>
           <Nav className="subnavbar d-flex flex-wrap mx-3 justify-content-around w-100 floating-element">
-            {props.linkObjects.map((obj) => {
+            {linkObjects.map((obj, index) => {
               return (
                 <Link
+                  key={index}
                   className="nav-link"
                   style={{ color: "inherit", textDecoration: "inherit" }}
                   href={`${obj.linkTo}`}

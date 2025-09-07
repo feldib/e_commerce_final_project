@@ -3,30 +3,35 @@ import { Col, Row, Button, Dropdown, InputGroup, Form } from "react-bootstrap";
 import SearchField from "./SearchField";
 import CategoriesDropdown from "./CategoriesDropdown";
 import Queries from "../Queries";
+import { SearchFormikInstance, Category } from "../../fetching/types";
 
 type ArtworkSearchFieldsProps = {
-  formik: any;
-  categories: any;
+  formik: SearchFormikInstance;
+  categories: Category[];
   resetPageNumber: () => void;
 };
 
-function ArtworkSearchFields(props: ArtworkSearchFieldsProps) {
+function ArtworkSearchFields({
+  formik,
+  categories,
+  resetPageNumber,
+}: ArtworkSearchFieldsProps) {
   return (
     <div className="floating-element mb-3 mx-5">
       <SearchField
         what="Title"
         name="title"
-        onChange={props.formik.handleChange}
-        onBlur={props.formik.handleBlur}
-        value={props.formik.values.title}
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
+        value={formik.values.title}
       />
 
       <SearchField
         what="Artist"
         name="artist_name"
-        onChange={props.formik.handleChange}
-        onBlur={props.formik.handleBlur}
-        value={props.formik.values.artist_name}
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
+        value={formik.values.artist_name}
       />
 
       <Row lg={6} sx={8} className="mx-auto mb-5 mt-5">
@@ -37,16 +42,16 @@ function ArtworkSearchFields(props: ArtworkSearchFieldsProps) {
             type="number"
             placeholder="Minimum"
             name="min"
-            value={props.formik.values.min}
-            onChange={props.formik.handleChange}
+            value={formik.values.min}
+            onChange={formik.handleChange}
             onBlur={(e) => {
-              props.formik.handleBlur(e);
-              if (props.formik.values.min < 0) {
-                props.formik.setFieldValue("min", "");
+              formik.handleBlur(e);
+              if (formik.values.min < 0) {
+                formik.setFieldValue("min", "");
               }
-              const max = props.formik.values.max;
-              if (!((max && max > props.formik.values.min) || !max)) {
-                props.formik.setFieldValue("max", "");
+              const max = formik.values.max;
+              if (!((max && max > formik.values.min) || !max)) {
+                formik.setFieldValue("max", "");
               }
             }}
           />
@@ -55,13 +60,13 @@ function ArtworkSearchFields(props: ArtworkSearchFieldsProps) {
             type="number"
             placeholder="Maximum"
             name="max"
-            value={props.formik.values.max}
-            onChange={props.formik.handleChange}
+            value={formik.values.max}
+            onChange={formik.handleChange}
             onBlur={(e) => {
-              props.formik.handleBlur(e);
-              const min = props.formik.values.min;
-              if (min !== undefined && min >= props.formik.values.max) {
-                props.formik.setFieldValue("max", "");
+              formik.handleBlur(e);
+              const min = formik.values.min;
+              if (min >= formik.values.max) {
+                formik.setFieldValue("max", "");
               }
             }}
           />
@@ -70,17 +75,17 @@ function ArtworkSearchFields(props: ArtworkSearchFieldsProps) {
 
       <Row className="mx-auto">
         <CategoriesDropdown
-          categories={props.categories}
+          categories={categories}
           setValue={(value: string | number) => {
-            props.formik.setFieldValue("category_id", value);
+            formik.setFieldValue("category_id", value);
           }}
         />
 
         <Col className="mb-3">
           <Dropdown
-            // value={props.formik.values.n}
+            // value={formik.values.n}
             onSelect={(e) => {
-              props.formik.setFieldValue("n", e);
+              formik.setFieldValue("n", e);
             }}
           >
             <Dropdown.Toggle variant="outilne-dark">
@@ -109,7 +114,7 @@ function ArtworkSearchFields(props: ArtworkSearchFieldsProps) {
         <Col className="mb-4">
           <Dropdown
             onSelect={(e) => {
-              props.formik.setFieldValue("order", e);
+              formik.setFieldValue("order", e);
             }}
           >
             <Dropdown.Toggle variant="outilne-dark">Order by</Dropdown.Toggle>
@@ -131,9 +136,9 @@ function ArtworkSearchFields(props: ArtworkSearchFieldsProps) {
             label="Only featured"
             id="only_featured"
             onChange={() => {
-              props.formik.setFieldValue(
+              formik.setFieldValue(
                 "only_featured",
-                !props.formik.values.only_featured,
+                !formik.values.only_featured
               );
             }}
           />
@@ -146,7 +151,7 @@ function ArtworkSearchFields(props: ArtworkSearchFieldsProps) {
             className="submit"
             type="submit"
             onClick={() => {
-              props.resetPageNumber();
+              resetPageNumber();
             }}
           >
             Search
@@ -155,9 +160,9 @@ function ArtworkSearchFields(props: ArtworkSearchFieldsProps) {
       </Row>
 
       <Queries
-        resetPageNumber={props.resetPageNumber}
-        formik={props.formik}
-        categories={props.categories}
+        resetPageNumber={resetPageNumber}
+        formik={formik}
+        categories={categories}
       />
     </div>
   );

@@ -1,19 +1,17 @@
 "use client";
 import React from "react";
-import { server_url } from "../utils/api_constants";
-import axios from "axios";
 import { getLocatStorageShoppingCart } from "../helpers/helpers";
-axios.defaults.withCredentials = true;
+import { getShoppingCart } from "@/fetching/fetching";
+import { ShoppingCartItem } from "@/fetching/types";
 
 const useShoppingList = (loggedIn: boolean) => {
-  const [data, setData] = React.useState<any[]>([]);
+  const [data, setData] = React.useState<ShoppingCartItem[]>([]);
   React.useEffect(() => {
     (async () => {
       if (loggedIn) {
-        await axios
-          .get(`${server_url}/users/shopping_cart`)
-          .then(function (results) {
-            setData(results.data as any[]);
+        await getShoppingCart()
+          .then((results) => {
+            setData(results);
           })
           .catch(function (error) {
             setData([]);
@@ -24,7 +22,7 @@ const useShoppingList = (loggedIn: boolean) => {
           .then((artworks_in_shopping_cart) => {
             setData(artworks_in_shopping_cart);
           })
-          .catch(function (error) {
+          .catch(function () {
             setData([]);
           });
       }

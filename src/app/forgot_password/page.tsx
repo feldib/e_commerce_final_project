@@ -12,11 +12,15 @@ import PageTitle from "../../components/PageTitle";
 function ForgotPassword() {
   const [displayMessage, setDisplayMessage] = React.useState(false);
 
-  const initialValues = {
+  type ForgotPasswordFormValues = {
+    email: string;
+  };
+
+  const initialValues: ForgotPasswordFormValues = {
     email: "",
   };
 
-  const onSubmit = (values: any) => {
+  const onSubmit = (values: ForgotPasswordFormValues) => {
     sendForgotPasswordEmail(values.email)
       .then(() => {
         setDisplayMessage(true);

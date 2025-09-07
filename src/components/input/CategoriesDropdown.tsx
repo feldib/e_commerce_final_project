@@ -1,33 +1,38 @@
 import React from "react";
 import { Col, Dropdown } from "react-bootstrap";
 import useLoading from "../../hooks/useLoading";
+import { Category } from "@/fetching/types";
 
 type CategoriesDropdownProps = {
-  categories: any;
-  setValue: (value: string | number) => void;
+  categories: Category[];
+  setValue: (value: string) => void;
 };
 
-function CategoriesDropdown(props: CategoriesDropdownProps) {
-  function createCategoryButtons(categories: any) {
-    return categories.map((category: any, index: number) => {
-      return (
-        <Dropdown.Item
-          eventKey={category.id}
-          key={index}
-          id={category.id}
-          style={{ cursor: "pointer" }}
-        >
-          {category.cname}
-        </Dropdown.Item>
-      );
-    });
+function CategoriesDropdown({ categories, setValue }: CategoriesDropdownProps) {
+  function createCategoryButtons(cats: Category[]) {
+    return (
+      <>
+        {cats.map((category: Category, index: number) => (
+          <Dropdown.Item
+            eventKey={category.id}
+            key={index}
+            id={JSON.stringify(category.id)}
+            style={{ cursor: "pointer" }}
+          >
+            {category.cname}
+          </Dropdown.Item>
+        ))}
+      </>
+    );
   }
-  const categories = useLoading(props.categories, createCategoryButtons);
+  const cats = useLoading(categories, createCategoryButtons);
   return (
     <Col className="mx-auto mb-3">
       <Dropdown
-        onSelect={(e: any) => {
-          props.setValue(e);
+        onSelect={(e: string | null) => {
+          if (e !== null) {
+            setValue(e);
+          }
         }}
       >
         <Dropdown.Toggle variant="outilne-dark">Categories</Dropdown.Toggle>
@@ -40,7 +45,7 @@ function CategoriesDropdown(props: CategoriesDropdownProps) {
           >
             All
           </Dropdown.Item>
-          {categories}
+          {cats}
         </Dropdown.Menu>
       </Dropdown>
     </Col>

@@ -38,18 +38,22 @@ function ContactUs() {
     message: Yup.string().required("Message required"),
   });
 
-  const onSubmit = async (values: any) => {
+  const onSubmit = async (values: {
+    email: string;
+    title: string;
+    message: string;
+  }) => {
     try {
       await sendMessageToAdministrator(
         values.email,
         values.title,
-        values.message,
+        values.message
       );
       toast.success("Message sent", {
         className: "toast-success",
       });
       form?.current?.reset();
-    } catch (error) {
+    } catch {
       toast.error("Error: couldn't send message", {
         className: "toast-error",
       });

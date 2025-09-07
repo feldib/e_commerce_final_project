@@ -2,10 +2,11 @@
 import React, { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import { useRouter, useParams } from "next/navigation";
-import useLoading from "../../hooks/useLoading";
-import useAxios from "../../hooks/useAxios";
-import ArtworkDetails from "../../components/ArtworkDetails";
-import FloatingBackButton from "../../components/buttons/FloatingBackButton";
+import useLoading from "../../../hooks/useLoading";
+import useAxios from "../../../hooks/useAxios";
+import ArtworkDetails from "../../../components/ArtworkDetails";
+import FloatingBackButton from "../../../components/buttons/FloatingBackButton";
+import { Artwork } from "@/fetching/types";
 
 function ArtworkPage() {
   const [navigatedFromRouter, setNavigatedFromRouter] = useState(false);
@@ -18,15 +19,15 @@ function ArtworkPage() {
 
   const { artwork_id } = useParams();
 
-  const artworkData = useAxios(`/artwork?id=${artwork_id}`);
+  const artworkData = useAxios(`/artwork?id=${artwork_id}`) as Artwork;
 
-  const artwork = useLoading(artworkData, (artwork) => {
+  const artwork = useLoading(artworkData, (artwork: Artwork) => {
     return (
       <ArtworkDetails
         artwork={artwork}
         artwork_id={artwork_id ? parseInt(artwork_id as string) : 0}
       />
-    ); //TODO
+    );
   });
 
   return (

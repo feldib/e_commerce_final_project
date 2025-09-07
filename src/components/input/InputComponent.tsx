@@ -1,6 +1,6 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAsterisk } from "@fortawesome/free-solid-svg-icons";
+import { faAsterisk, IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { Form, InputGroup } from "react-bootstrap";
 import { Field, ErrorMessage } from "formik";
 
@@ -9,15 +9,22 @@ type InputComponentProps = {
   name: string;
   type: string;
   placeholder: string;
-  icon: any;
+  icon: IconDefinition;
   showAsterisk?: boolean;
 };
 
-function InputComponent(props: InputComponentProps) {
+function InputComponent({
+  label,
+  name,
+  type,
+  placeholder,
+  icon,
+  showAsterisk = false,
+}: InputComponentProps) {
   return (
     <Form.Group className="pb-3">
-      <Form.Label>{props.label}</Form.Label>
-      {props.showAsterisk && (
+      <Form.Label>{label}</Form.Label>
+      {showAsterisk && (
         <FontAwesomeIcon
           icon={faAsterisk}
           style={{ color: "red" }}
@@ -26,20 +33,20 @@ function InputComponent(props: InputComponentProps) {
       )}
       <InputGroup>
         <InputGroup.Text>
-          <FontAwesomeIcon icon={props.icon} className="mx-3" />
+          <FontAwesomeIcon icon={icon} className="mx-3" />
         </InputGroup.Text>
 
         <Field
           className="form-control"
-          name={props.name}
-          type={props.type}
-          placeholder={props.placeholder}
+          name={name}
+          type={type}
+          placeholder={placeholder}
         />
       </InputGroup>
       <ErrorMessage
         component="div"
         className="input-error-message"
-        name={props.name}
+        name={name}
       />
     </Form.Group>
   );

@@ -17,7 +17,7 @@ import { faKeyboard, faAsterisk } from "@fortawesome/free-solid-svg-icons";
 
 type UnansweredMessageProps = {
   message: {
-    id: string;
+    id: number;
     email: string;
     message_title: string;
     message_txt: string;
@@ -29,7 +29,7 @@ type ReplyToMessageProps = {
   reply_text: string;
 };
 
-function UnansweredMessage(props: UnansweredMessageProps) {
+function UnansweredMessage({ message }: UnansweredMessageProps) {
   const [replying, setReplying] = React.useState(false);
   const [replied, setReplied] = React.useState(false);
 
@@ -40,10 +40,10 @@ function UnansweredMessage(props: UnansweredMessageProps) {
 
   const onSubmit = (values: ReplyToMessageProps) => {
     replyToMessage(
-      props.message.id,
-      props.message.email,
+      message.id,
+      message.email,
       values.reply_title,
-      values.reply_text,
+      values.reply_text
     )
       .then(() => {
         toast.success("Reply sent successfully", {
@@ -72,15 +72,15 @@ function UnansweredMessage(props: UnansweredMessageProps) {
       ) : (
         <Col>
           <Row>
-            <h4 className="text-center">{props.message.message_title}</h4>
+            <h4 className="text-center">{message.message_title}</h4>
           </Row>
 
           <Row>
-            <h5 className="text-center">{props.message.email}</h5>
+            <h5 className="text-center">{message.email}</h5>
           </Row>
 
           <Row>
-            <p>{props.message.message_txt}</p>
+            <p>{message.message_txt}</p>
           </Row>
 
           <Row>

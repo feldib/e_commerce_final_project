@@ -7,7 +7,6 @@ import Link from "next/link";
 import LoggedInNavbarItems from "./LoggedInNavbarItems";
 import NotLoggedInNavbarItems from "./NotLoggedInNavbarItems";
 import { toast } from "react-toastify";
-import useShoppingList from "../../hooks/useShoppingList";
 import { checkIfShoppingCartIsEmpty } from "../../helpers/helpers";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
 import { useRouter } from "next/navigation";
@@ -20,8 +19,6 @@ function Header() {
   const router = useRouter();
 
   const { user, loggedIn } = React.useContext(UserDataContext);
-
-  const shoppingListItems = useShoppingList(loggedIn);
 
   const [expanded, setExpanded] = React.useState(false);
 
@@ -42,6 +39,7 @@ function Header() {
               style={{ color: "inherit", textDecoration: "inherit" }}
               href="/"
             >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/logo.png"
                 width="100"

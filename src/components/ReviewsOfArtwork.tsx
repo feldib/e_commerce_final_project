@@ -1,22 +1,17 @@
+import { Review } from "@/fetching/types";
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
-import { Card, Row, Carousel } from "react-bootstrap";
+import { Card, Carousel } from "react-bootstrap";
 
 type ReviewsOfArtworksProps = {
-  reviews: {
-    title: string;
-    name: string;
-    review_text: string;
-  }[];
+  reviews: Review[];
 };
 
-function ReviewsOfArtworks(props: ReviewsOfArtworksProps) {
+function ReviewsOfArtworks({ reviews }: ReviewsOfArtworksProps) {
   return (
     <>
-      {props.reviews.length ? (
+      {reviews.length ? (
         <Carousel>
-          {props.reviews.map((review, index) => {
+          {reviews.map((review, index) => {
             return (
               <Carousel.Item className="mb-5 px-5" key={index}>
                 <Card className="mx-5 p-3" border="secondary">

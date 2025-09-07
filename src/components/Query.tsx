@@ -8,7 +8,7 @@ type QueryProps = {
   remove: () => void;
 };
 
-function Query(props: QueryProps) {
+function Query({ text, remove }: QueryProps) {
   return (
     <Col className="mb-3" xs={12} sm={6} md={6}>
       <p>
@@ -27,13 +27,9 @@ function Query(props: QueryProps) {
             fontSize: "1.4rem",
           }}
         >
-          {props.text}
+          {text}
         </span>
-        <span
-          className="mx-1"
-          style={{ cursor: "pointer" }}
-          onClick={props.remove}
-        >
+        <span className="mx-1" style={{ cursor: "pointer" }} onClick={remove}>
           ❌
         </span>
       </p>

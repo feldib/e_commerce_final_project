@@ -4,35 +4,33 @@ import useAxios from "../hooks/useAxios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 import { Col, Row, Carousel } from "react-bootstrap";
-import { UserDataContext } from "@/components/providers/UserDataProvider";
 import { useMediaQuery } from "react-responsive";
 import ReccomendationCard from "./ReccomendationCard";
+import { Artwork } from "@/fetching/types";
 
 type ReccomendationsProps = {
   title: string;
   path: string;
 };
 
-function Reccomendations(props: ReccomendationsProps) {
-  const { loggedIn } = React.useContext(UserDataContext);
-
+function Reccomendations({ title, path }: ReccomendationsProps) {
   const [tableHidden, setTableHidden] = React.useState(false);
-  const data = useAxios(`${props.path}?n=10`);
+  const recommendations = useAxios(`${path}?n=10`) as Artwork[];
 
   const isMd = useMediaQuery({ minWidth: "768px" });
 
   return (
     <>
-      {data && data.length > 0 && (
+      {recommendations && recommendations.length > 0 && (
         <Col xs={12} lg={5} className="mb-3 mx-auto">
           <Row>
             <Col xs={7} md={5} lg={7} className="mx-auto">
               <h4 className="text-center reccomendation-title">
-                {`${props.title}`}
+                {`${title}`}
                 <FontAwesomeIcon
                   className="toggle-reccommendation mx-2 d-md-none"
                   icon={!tableHidden ? faCaretDown : faCaretUp}
-                  onClick={(e) => {
+                  onClick={() => {
                     setTableHidden(!tableHidden);
                   }}
                 />
@@ -40,12 +38,16 @@ function Reccomendations(props: ReccomendationsProps) {
             </Col>
           </Row>
 
-          {(!tableHidden || isMd) && data && (
+          {(!tableHidden || isMd) && recommendations && (
             <Carousel>
-              {data.map((artwork: any, index: number) => {
+              {recommendations.map((artwork: Artwork, index: number) => {
                 return (
-                  <Carousel.Item interval={3000} className="mb-5 px-none">
-                    <ReccomendationCard key={index} artwork={artwork} />
+                  <Carousel.Item
+                    key={index}
+                    interval={3000}
+                    className="mb-5 px-none"
+                  >
+                    <ReccomendationCard artwork={artwork} />
                   </Carousel.Item>
                 );
               })}

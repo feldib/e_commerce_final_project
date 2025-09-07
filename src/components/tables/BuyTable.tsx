@@ -6,39 +6,45 @@ import {
   presentData,
   getShoppingCartFromLocalStorage,
 } from "@/helpers/helpers";
+import { Artwork, ShoppingCartItem } from "../../fetching/types";
 
 type BuyTableProps = {
-  dataLines: any;
+  dataLines: Artwork[];
   reccomendation?: boolean;
   orderSummary?: boolean;
   theadNeeded: boolean;
 };
 
-function BuyTable(props: BuyTableProps) {
-  function makeDataLines(dataLines: any) {
-    return dataLines.map((line: any, index: number) => {
+function BuyTable({
+  dataLines,
+  reccomendation = false,
+  orderSummary = false,
+  theadNeeded = true,
+}: BuyTableProps) {
+  function makeDataLines(dataLinesGenerated: Artwork[]): React.JSX.Element[] {
+    return dataLinesGenerated.map((line: Artwork, index: number) => {
       return (
         <BuyTableDataLines
-          reccomendation={props.reccomendation}
+          reccomendation={reccomendation}
           line={line}
           index={index}
           key={index}
-          orderSummary={props.orderSummary}
+          orderSummary={orderSummary}
         />
       );
     });
   }
 
-  const dataLines = useLoading(
-    props.dataLines,
-    (dataLines: any[]): React.JSX.Element => {
+  const dataLinesGenerated = useLoading(
+    dataLines,
+    (dataLines): React.JSX.Element => {
       return presentData(
-        dataLines.filter((line: any) => {
+        (dataLines as Artwork[]).filter((line: Artwork) => {
           const shoppingCart = getShoppingCartFromLocalStorage();
 
           if (shoppingCart.length) {
             const existingRecordIndex = shoppingCart.findIndex(
-              (item: any) => item.artwork_id === line.id,
+              (item: ShoppingCartItem) => item.artwork_id === line.id
             );
 
             if (
@@ -55,15 +61,15 @@ function BuyTable(props: BuyTableProps) {
             return line.quantity;
           }
         }),
-        makeDataLines,
+        makeDataLines
       );
-    },
+    }
   );
 
   return (
     <Row className="text-center mx-auto">
       <table className="mb-3">
-        {props.theadNeeded && (
+        {theadNeeded && (
           <thead>
             <tr>
               <th></th>
@@ -71,26 +77,26 @@ function BuyTable(props: BuyTableProps) {
               <th className="d-none d-md-table-cell">Artist</th>
               <th>Price</th>
               <th
-                className={`${props.reccomendation ? "d-none" : "d-none d-md-table-cell"}`}
+                className={`${reccomendation ? "d-none" : "d-none d-md-table-cell"}`}
               >
                 Quantity
               </th>
               <th
-                className={`${props.reccomendation ? "d-none" : "d-none d-md-table-cell"}`}
+                className={`${reccomendation ? "d-none" : "d-none d-md-table-cell"}`}
               >
                 Tags
               </th>
               <th
-                className={`${props.reccomendation ? "d-none" : "d-none d-md-table-cell"}`}
+                className={`${reccomendation ? "d-none" : "d-none d-md-table-cell"}`}
               >
                 Categories
               </th>
-              <th>{props.orderSummary && "Total Cost"}</th>
+              <th>{orderSummary && "Total Cost"}</th>
             </tr>
           </thead>
         )}
 
-        <tbody>{dataLines}</tbody>
+        <tbody>{dataLinesGenerated}</tbody>
       </table>
     </Row>
   );

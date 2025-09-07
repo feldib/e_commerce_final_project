@@ -14,8 +14,16 @@ type AddOrRemoveFromButtonProps = {
   toastWarningMessage: string;
 };
 
-function AddOrRemoveFromButton(props: AddOrRemoveFromButtonProps) {
-  const { user, loggedIn } = React.useContext(UserDataContext);
+function AddOrRemoveFromButton({
+  artwork_id,
+  isAdded,
+  addToAdded,
+  removeFromAdded,
+  filledButton,
+  regularButton,
+  toastWarningMessage,
+}: AddOrRemoveFromButtonProps) {
+  const { loggedIn } = React.useContext(UserDataContext);
 
   const [added, setAdded] = React.useState(false);
   const [needsToBeRefreshed, setNeedsToBeRefreshed] = React.useState(false);
@@ -24,7 +32,7 @@ function AddOrRemoveFromButton(props: AddOrRemoveFromButtonProps) {
     (async () => {
       if (loggedIn) {
         try {
-          const isAddedOrNot = await props.isAdded(props.artwork_id);
+          const isAddedOrNot = await isAdded(artwork_id);
           setAdded(isAddedOrNot);
         } catch {
           console.log("Not authenticated");
@@ -44,20 +52,20 @@ function AddOrRemoveFromButton(props: AddOrRemoveFromButtonProps) {
         onClick={async () => {
           if (loggedIn) {
             if (added) {
-              await props.removeFromAdded(props.artwork_id);
+              await removeFromAdded(artwork_id);
               setNeedsToBeRefreshed(true);
             } else {
-              await props.addToAdded(props.artwork_id);
+              await addToAdded(artwork_id);
               setNeedsToBeRefreshed(true);
             }
           } else {
-            toast.warning(props.toastWarningMessage, {
+            toast.warning(toastWarningMessage, {
               className: "toast-warning",
             });
           }
         }}
       >
-        {added ? <>{props.filledButton}</> : <>{props.regularButton}</>}
+        {added ? <>{filledButton}</> : <>{regularButton}</>}
       </span>
     </Row>
   );

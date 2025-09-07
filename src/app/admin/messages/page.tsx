@@ -6,13 +6,18 @@ import useAxios from "../../../hooks/useAxios";
 import useLoading from "../../../hooks/useLoading";
 import { admin_url } from "../../../utils/api_constants";
 import UnansweredMessage from "../../../components/UnansweredMessage";
+import { Message } from "../../../fetching/types";
 
 function Messages() {
   const messages = useAxios(`/${admin_url}/unanswered_messages`);
   const messagesRepresented = useLoading(messages, (messages) => {
-    return messages.map((message: any) => {
-      return <UnansweredMessage message={message} />;
-    });
+    return (
+      <>
+        {(messages as Message[]).map((message: Message, index: number) => {
+          return <UnansweredMessage key={index} message={message} />;
+        })}
+      </>
+    );
   });
   return (
     <Col className="mx-3">

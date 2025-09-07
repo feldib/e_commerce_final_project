@@ -12,34 +12,25 @@ import ArtworkPicturesCarousel from "./ArtworkPicturesCarousel";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
 import { server_url } from "../utils/api_constants";
 import useQuantity from "../hooks/useQuantity";
+import { Artwork, Review, Tag } from "@/fetching/types";
 
 type ArtworkDetailsProps = {
   artwork_id: number;
-  artwork: {
-    title: string;
-    artist_name: string;
-    thumbnail: string;
-    quantity: number;
-    tags: Array<{ tname: string }>;
-    cname: string;
-    descript: string;
-    price: number;
-    other_pictures: string[];
-  };
+  artwork: Artwork;
 };
 
-function ArtworkDetails(props: ArtworkDetailsProps) {
-  const reviewsData = useAxios(`/reviews?id=${props.artwork_id}`);
+function ArtworkDetails({ artwork_id, artwork }: ArtworkDetailsProps) {
+  const reviewsData = useAxios(`/reviews?id=${artwork_id}`) as Review[];
 
   const { loggedIn } = React.useContext(UserDataContext);
 
   const { quantity, setQuantity } = useQuantity(
     loggedIn,
-    props.artwork.quantity,
-    props.artwork_id,
+    artwork.quantity,
+    artwork_id
   );
 
-  const reviews = useLoading(reviewsData, (reviews: any[]) => {
+  const reviews = useLoading(reviewsData, (reviews) => {
     return <ReviewsOfArtworks reviews={reviews} />;
   });
 
@@ -52,11 +43,11 @@ function ArtworkDetails(props: ArtworkDetailsProps) {
               <Row>
                 <Col>
                   <Card.Title>
-                    <h3>{props.artwork.title}</h3>
+                    <h3>{artwork.title}</h3>
                   </Card.Title>
 
                   <Card.Subtitle>
-                    <h6>{`by ${props.artwork.artist_name}`}</h6>
+                    <h6>{`by ${artwork.artist_name}`}</h6>
                   </Card.Subtitle>
                 </Col>
 
@@ -69,18 +60,18 @@ function ArtworkDetails(props: ArtworkDetailsProps) {
                     }}
                   >
                     <ShoppingCartButton
-                      artwork_id={props.artwork_id}
+                      artwork_id={artwork_id}
                       quantity={quantity}
                     />
                   </span>
 
-                  <FavouriteButton artwork_id={props.artwork_id} />
+                  <FavouriteButton artwork_id={artwork_id} />
                 </Col>
               </Row>
             </Card.Body>
 
             <Card.Img
-              src={`${server_url}/${props.artwork.thumbnail}`}
+              src={`${server_url}/${artwork.thumbnail}`}
               variant="bottom"
             />
           </Card>
@@ -96,7 +87,7 @@ function ArtworkDetails(props: ArtworkDetailsProps) {
                   </Card.Title>
 
                   <Card.Subtitle>
-                    <p>{props.artwork.descript}</p>
+                    <p>{artwork.descript}</p>
                   </Card.Subtitle>
                 </Col>
 
@@ -109,12 +100,12 @@ function ArtworkDetails(props: ArtworkDetailsProps) {
                     }}
                   >
                     <ShoppingCartButton
-                      artwork_id={props.artwork_id}
+                      artwork_id={artwork_id}
                       quantity={quantity}
                     />
                   </span>
 
-                  <FavouriteButton artwork_id={props.artwork_id} />
+                  <FavouriteButton artwork_id={artwork_id} />
                   <ToastContainer position="bottom-right" />
                 </Col>
               </Row>
@@ -123,7 +114,7 @@ function ArtworkDetails(props: ArtworkDetailsProps) {
                 <Col>
                   <Row>
                     <p>
-                      <strong>{props.artwork.cname}</strong>
+                      <strong>{artwork.cname}</strong>
                     </p>
                   </Row>
                 </Col>
@@ -131,8 +122,8 @@ function ArtworkDetails(props: ArtworkDetailsProps) {
                 <Col>
                   <Row>
                     <p>
-                      {props.artwork.tags
-                        .map((tag: any) => {
+                      {artwork.tags
+                        .map((tag: Tag) => {
                           return tag.tname;
                         })
                         .join(", ")}
@@ -146,7 +137,7 @@ function ArtworkDetails(props: ArtworkDetailsProps) {
                   <Row>
                     <p>
                       {"Available quantity: "}
-                      {props.artwork ? (
+                      {artwork ? (
                         quantity
                       ) : (
                         <div className="d-flex justify-content-center">
@@ -159,8 +150,8 @@ function ArtworkDetails(props: ArtworkDetailsProps) {
                   <Row>
                     <p>
                       {"Price: €"}
-                      {props.artwork ? (
-                        props.artwork.price
+                      {artwork ? (
+                        artwork.price
                       ) : (
                         <div className="d-flex justify-content-center">
                           <div className="spinner-border" role="status" />
@@ -175,7 +166,7 @@ function ArtworkDetails(props: ArtworkDetailsProps) {
         </Col>
       </Row>
 
-      <ArtworkPicturesCarousel other_pictures={props.artwork.other_pictures} />
+      <ArtworkPicturesCarousel other_pictures={artwork.other_pictures} />
 
       <Row className="mt-5">
         <Row className="text-center">
@@ -187,7 +178,7 @@ function ArtworkDetails(props: ArtworkDetailsProps) {
         <Row>{reviews}</Row>
       </Row>
 
-      <LeaveReview artwork_id={props.artwork_id} />
+      <LeaveReview artwork_id={artwork_id} />
     </>
   );
 }
