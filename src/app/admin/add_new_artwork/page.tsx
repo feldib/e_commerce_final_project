@@ -402,10 +402,11 @@ function AddNewArtworkPage() {
               variant="primary"
               type="submit"
               onClick={() => {
-                Object.keys(formik.errors).length &&
+                if (Object.keys(formik.errors).length) {
                   toast.error("Incorrect data", {
                     className: "toast-error",
                   });
+                }
               }}
             >
               Add new artwork
