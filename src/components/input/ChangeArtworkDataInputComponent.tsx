@@ -10,9 +10,10 @@ import {
 import { Form, InputGroup, Button } from "react-bootstrap";
 import { toast } from "react-toastify";
 import { updateArtworkData } from "@/fetching/fetching";
+import { FormikProps } from "formik";
 
 type ChangeArtworkDataInputComponentProps = {
-  formik: any;
+  formik: FormikProps<Record<string, unknown>>;
   name: string;
   label: string;
   type: string;
@@ -52,7 +53,7 @@ function ChangeArtworkDataInputComponent(
             name={props.name}
             placeholder={props.placeholder}
             onChange={props.formik.handleChange}
-            value={props.formik.values[props.name]}
+            value={String(props.formik.values[props.name] || "")}
             rows={4}
             disabled={!editing}
           />
@@ -64,7 +65,7 @@ function ChangeArtworkDataInputComponent(
             type={props.type}
             placeholder={props.placeholder}
             onChange={props.formik.handleChange}
-            value={props.formik.values[props.name]}
+            value={String(props.formik.values[props.name] || "")}
             disabled={!editing}
           />
         )}
@@ -74,7 +75,7 @@ function ChangeArtworkDataInputComponent(
             variant="primary"
             onClick={(e) => {
               e.preventDefault();
-              if (props.formik.error) {
+              if (Object.keys(props.formik.errors).length > 0) {
                 toast.error("Incorrect data", {
                   className: "toast-error",
                 });
@@ -82,7 +83,7 @@ function ChangeArtworkDataInputComponent(
                 updateArtworkData(
                   props.artwork_id,
                   props.name,
-                  props.formik.values[props.name]
+                  String(props.formik.values[props.name] || "")
                 );
                 toast.success(`${props.label} changed successfully`, {
                   className: "toast-success",
@@ -107,7 +108,7 @@ function ChangeArtworkDataInputComponent(
 
       {props.formik.errors[props.name] && (
         <div className="input-error-message">
-          {props.formik.errors[props.name]}
+          {String(props.formik.errors[props.name])}
         </div>
       )}
     </Form.Group>

@@ -1,15 +1,9 @@
 import React from "react";
 import Link from "next/link";
+import { User } from "@/fetching/types";
 
 type UserTableDataLinesProps = {
-  line: {
-    id: number;
-    first_name: string;
-    last_name: string;
-    email: string;
-    address: string;
-    phone_number: string;
-  };
+  line: User;
   index: number;
 };
 

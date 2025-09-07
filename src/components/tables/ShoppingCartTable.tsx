@@ -3,17 +3,18 @@ import { Row } from "react-bootstrap";
 import useLoading from "../../hooks/useLoading";
 import ShoppingCartDataLines from "../datalines/ShoppingCartDataLines";
 import { presentData } from "../../helpers/helpers";
+import { Artwork } from "@/fetching/types";
 
 type ShoppingCartTableProps = {
-  dataLines: any;
+  dataLines: Artwork[];
   reccomendation?: boolean;
   changeCosts: (index: number, cost: number) => void;
   theadNeeded: boolean;
 };
 
 function ShoppingCartTable(props: ShoppingCartTableProps) {
-  function makeDataLines(dataLines: any) {
-    return dataLines.map((line: any, index: number) => {
+  function makeDataLines(dataLines: Artwork[]) {
+    return dataLines.map((line: Artwork, index: number) => {
       return (
         <ShoppingCartDataLines
           key={index}

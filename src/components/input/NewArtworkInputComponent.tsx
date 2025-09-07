@@ -2,6 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAsterisk, IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { Form, InputGroup } from "react-bootstrap";
+import { FormikProps } from "formik";
 
 type NewArtworkInputComponentProps = {
   label: string;
@@ -9,7 +10,7 @@ type NewArtworkInputComponentProps = {
   type: string;
   placeholder: string;
   icon: IconDefinition;
-  formik: any;
+  formik: FormikProps<Record<string, unknown>>;
 };
 
 function NewArtworkInputComponent(props: NewArtworkInputComponentProps) {
@@ -39,7 +40,7 @@ function NewArtworkInputComponent(props: NewArtworkInputComponentProps) {
             name={props.name}
             placeholder={props.placeholder}
             onChange={props.formik.handleChange}
-            value={props.formik.values[props.name]}
+            value={String(props.formik.values[props.name] || "")}
             rows={4}
           />
         ) : (
@@ -50,14 +51,14 @@ function NewArtworkInputComponent(props: NewArtworkInputComponentProps) {
             type={props.type}
             placeholder={props.placeholder}
             onChange={props.formik.handleChange}
-            value={props.formik.values[props.name]}
+            value={String(props.formik.values[props.name] || "")}
           />
         )}
       </InputGroup>
 
       {props.formik.errors[props.name] && (
         <div className="input-error-message">
-          {props.formik.errors[props.name]}
+          {String(props.formik.errors[props.name])}
         </div>
       )}
     </Form.Group>

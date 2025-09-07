@@ -3,15 +3,15 @@ import UserTableDataLines from "../datalines/UserTableDataLines";
 import useLoading from "../../hooks/useLoading";
 import { Row } from "react-bootstrap";
 import { presentData } from "../../helpers/helpers";
-import { Artwork } from "@/fetching/types";
+import { User } from "@/fetching/types";
 
 type UserTableProps = {
-  users: Artwork[];
+  users: User[];
 };
 
 function UserTable(props: UserTableProps) {
-  function makeDataLines(dataLines: any) {
-    return dataLines.map((line: any, index: number) => {
+  function makeDataLines(dataLines: User[]) {
+    return dataLines.map((line: User, index: number) => {
       return <UserTableDataLines key={index} line={line} index={index} />;
     });
   }

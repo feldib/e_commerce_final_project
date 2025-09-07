@@ -10,11 +10,12 @@ import {
 import { ToastContainer } from "react-toastify";
 import UserDataInputComponents from "./UserDataInputComponent";
 import SubPageTitle from "../SubPageTitle";
+import { FormikProps } from "formik";
 
 type UserDataChangingComponentProps = {
   title: string;
   checkout?: boolean;
-  formik: any;
+  formik: FormikProps<Record<string, string>>;
   button?: React.ReactNode;
 };
 
@@ -35,7 +36,7 @@ function UserDataChangingComponent(props: UserDataChangingComponentProps) {
               placeholder="Enter email"
               icon={faUser}
               showAsterisk={
-                props.formik.errors.email && props.formik.touched.email
+                !!(props.formik.errors.email && props.formik.touched.email)
               }
               error={props.formik.errors.email}
               onChange={props.formik.handleChange}

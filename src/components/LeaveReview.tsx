@@ -20,12 +20,17 @@ type LeaveReviewProps = {
   artwork_id: number;
 };
 
+type ReviewFormValues = {
+  title: string;
+  review_text: string;
+};
+
 function LeaveReview(props: LeaveReviewProps) {
   const { loggedIn } = React.useContext(UserDataContext);
 
   const form = React.useRef<HTMLFormElement | null>(null);
 
-  const initialValues = {
+  const initialValues: ReviewFormValues = {
     title: "",
     review_text: "",
   };
@@ -35,7 +40,7 @@ function LeaveReview(props: LeaveReviewProps) {
     review_text: Yup.string().required("Review text required"),
   });
 
-  const onSubmit = async (values: any) => {
+  const onSubmit = async (values: ReviewFormValues) => {
     try {
       await leaveReview(props.artwork_id, values.title, values.review_text);
       toast.success("Review saved", {
@@ -106,10 +111,11 @@ function LeaveReview(props: LeaveReviewProps) {
                       variant="primary"
                       type="submit"
                       onClick={() => {
-                        Object.keys(errors).length &&
+                        if (Object.keys(errors).length) {
                           toast.error("Incorrect data", {
                             className: "toast-error",
                           });
+                        }
                       }}
                     >
                       Submit
