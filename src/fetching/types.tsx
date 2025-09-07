@@ -69,3 +69,32 @@ export interface Message {
   message_txt: string;
   message_time: string;
 }
+
+export interface SearchParams {
+  title?: string;
+  artist_name?: string;
+  category_id?: string;
+  order?: string;
+  n?: number;
+  min?: string;
+  max?: string;
+  only_featured?: boolean;
+}
+
+export interface ArtworkSent {
+  title: string;
+  artist_name: string;
+  price: number;
+  quantity: number;
+  description: string;
+  category_id: number;
+  tags: string[];
+}
+
+export interface InvoiceData {
+  items: { artwork_id: number; quantity: number; price: number }[];
+  totalCost: number;
+  billing_address: string;
+  shipping_address: string;
+  phone_number: string;
+}

@@ -1,6 +1,14 @@
 import axiosConfigured from "@/utils/axiosConfigured";
 import { server_url, users_url, admin_url } from "../utils/api_constants";
-import type { User, Artwork, Order, Message } from "./types";
+import {
+  User,
+  Artwork,
+  Order,
+  Message,
+  SearchParams,
+  ArtworkSent,
+  InvoiceData,
+} from "./types";
 
 // ===================
 // User-related
@@ -10,8 +18,8 @@ export const serverLogOut = async (): Promise<void> => {
   await axiosConfigured.get(`${server_url}/log_out`).catch(console.log);
 };
 
-export const sendForgotPasswordEmail = async (email: string): Promise<any> => {
-  return await axiosConfigured.post(`${server_url}/forgot_password`, { email });
+export const sendForgotPasswordEmail = async (email: string): Promise<void> => {
+  await axiosConfigured.post(`${server_url}/forgot_password`, { email });
 };
 
 export const registerNewUser = async (
@@ -78,7 +86,7 @@ export const updateUserData = async (
 // ===================
 
 export const getArtworkSearchResults = async (
-  objects: any,
+  objects: SearchParams,
   pageNumber: number
 ): Promise<Artwork[]> => {
   const queries = Object.entries(objects)
@@ -99,10 +107,10 @@ export const getArtworkSearchResults = async (
 };
 
 export const getDataOfArtworks = async (
-  shoppingCart: any
+  shoppingCart: { artwork_id: number; quantity: number }[]
 ): Promise<Artwork[]> => {
   const results = await Promise.all(
-    shoppingCart.map(async (item: any) => {
+    shoppingCart.map(async (item: { artwork_id: number; quantity: number }) => {
       const results = await axiosConfigured.get(
         `${server_url}/find_artwork_by_id?artwork_id=${item.artwork_id}`
       );
@@ -116,16 +124,6 @@ export const getDataOfArtworks = async (
   );
   return results;
 };
-
-export interface ArtworkSent {
-  title: string;
-  artist_name: string;
-  price: number;
-  quantity: number;
-  description: string;
-  category_id: number;
-  tags: string[];
-}
 
 export const addNewArtwork = async (
   artwork: ArtworkSent
@@ -141,7 +139,7 @@ export const addNewArtwork = async (
 export const updateArtworkData = async (
   artwork_id: number,
   field_name: string,
-  value: any
+  value: string | number | boolean
 ): Promise<{ data: Artwork }> => {
   return axiosConfigured.post(
     `${server_url}/${admin_url}/update_artwork_data`,
@@ -153,7 +151,7 @@ export const updateArtworkData = async (
   );
 };
 
-export const removeArtwork = async (artwork_id: number): Promise<any> => {
+export const removeArtwork = async (artwork_id: number): Promise<void> => {
   await axiosConfigured.post(`${server_url}/${admin_url}/remove_artwork`, {
     artwork_id,
   });
@@ -173,7 +171,7 @@ export const getShoppingCart = async (): Promise<
   return res.data as { artwork_id: number; quantity: number }[];
 };
 
-export const addToShoppingList = async (artwork_id: number): Promise<any> => {
+export const addToShoppingList = async (artwork_id: number): Promise<void> => {
   await axiosConfigured.post(`${server_url}/${users_url}/shopping_cart`, {
     artwork_id,
   });
@@ -182,7 +180,7 @@ export const addToShoppingList = async (artwork_id: number): Promise<any> => {
 
 export const removeFromShoppingList = async (
   artwork_id: number
-): Promise<any> => {
+): Promise<void> => {
   await axiosConfigured.post(
     `${server_url}/${users_url}/remove_item_from_shopping_cart`,
     { artwork_id }
@@ -192,7 +190,7 @@ export const removeFromShoppingList = async (
 
 export const increaseShoppingListItemQuantity = async (
   artwork_id: number
-): Promise<any> => {
+): Promise<void> => {
   await axiosConfigured.post(
     `${server_url}/${users_url}/increase_shopping_cart_item_quantity`,
     { artwork_id }
@@ -202,7 +200,7 @@ export const increaseShoppingListItemQuantity = async (
 
 export const decreaseShoppingListItemQuantity = async (
   artwork_id: number
-): Promise<any> => {
+): Promise<void> => {
   await axiosConfigured.post(
     `${server_url}/${users_url}/decrease_shopping_cart_item_quantity`,
     { artwork_id }
@@ -211,7 +209,7 @@ export const decreaseShoppingListItemQuantity = async (
 };
 
 export const replaceSavedShoppingCart = async (
-  shopping_cart: any
+  shopping_cart: { artwork_id: number; quantity: number }[]
 ): Promise<void> => {
   await axiosConfigured.post(
     `${server_url}/${users_url}/replace_saved_shopping_cart`,
@@ -222,7 +220,7 @@ export const replaceSavedShoppingCart = async (
   // returns void
 };
 
-export const addToWishlisted = async (artwork_id: number): Promise<any> => {
+export const addToWishlisted = async (artwork_id: number): Promise<void> => {
   await axiosConfigured.post(`${server_url}/${users_url}/wishlisted`, {
     artwork_id,
   });
@@ -231,7 +229,7 @@ export const addToWishlisted = async (artwork_id: number): Promise<any> => {
 
 export const removeFromWishlisted = async (
   artwork_id: number
-): Promise<any> => {
+): Promise<void> => {
   await axiosConfigured.post(
     `${server_url}/${users_url}/remove_from_wishlisted`,
     {
@@ -255,7 +253,7 @@ export const isWishlisted = async (artwork_id: number): Promise<boolean> => {
 // Orders
 // ===================
 
-export const order = async (invoice_data: any): Promise<any> => {
+export const order = async (invoice_data: InvoiceData): Promise<void> => {
   await axiosConfigured.post(`${server_url}/${users_url}/make_order`, {
     invoice_data,
   });
@@ -288,14 +286,14 @@ export const leaveReview = async (
   });
 };
 
-export const approveReview = async (review_id: string): Promise<any> => {
+export const approveReview = async (review_id: string): Promise<void> => {
   await axiosConfigured.post(`${server_url}/${admin_url}/approve_review`, {
     review_id,
   });
   // returns void
 };
 
-export const disapproveReview = async (review_id: string): Promise<any> => {
+export const disapproveReview = async (review_id: string): Promise<void> => {
   await axiosConfigured.post(`${server_url}/${admin_url}/disapprove_review`, {
     review_id,
   });
@@ -306,14 +304,14 @@ export const disapproveReview = async (review_id: string): Promise<any> => {
 // Featured
 // ===================
 
-export const addToFeatured = async (artwork_id: number): Promise<any> => {
+export const addToFeatured = async (artwork_id: number): Promise<void> => {
   await axiosConfigured.post(`${server_url}/${admin_url}/featured`, {
     artwork_id,
   });
   // returns void
 };
 
-export const removeFromFeatured = async (artwork_id: number): Promise<any> => {
+export const removeFromFeatured = async (artwork_id: number): Promise<void> => {
   await axiosConfigured.post(
     `${server_url}/${admin_url}/remove_from_featured`,
     {
@@ -379,7 +377,7 @@ export const getUnansweredMessages = async (): Promise<Message[]> => {
 export const addNewThumbnail = async (
   artwork_id: number,
   thumbnail: Blob
-): Promise<any> => {
+): Promise<void> => {
   const formData = new FormData();
   formData.append("thumbnail", thumbnail);
   await axiosConfigured.post(
@@ -394,7 +392,7 @@ export const addNewThumbnail = async (
 export const addNewOtherPictures = (
   artwork_id: number,
   other_pictures: Blob[]
-): Promise<any[]> => {
+): Promise<void[]> => {
   return Promise.all(
     other_pictures.map((picture) => addNewOtherPicture(artwork_id, picture))
   );
@@ -403,7 +401,7 @@ export const addNewOtherPictures = (
 export const addNewOtherPicture = async (
   artwork_id: number,
   picture: Blob
-): Promise<any> => {
+): Promise<void> => {
   const formData = new FormData();
   formData.append("picture", picture);
   await axiosConfigured.post(
@@ -418,7 +416,7 @@ export const addNewOtherPicture = async (
 export const removePicture = async (
   artwork_id: number,
   file_name: string
-): Promise<any> => {
+): Promise<void> => {
   await axiosConfigured.post(`${server_url}/${admin_url}/remove_picture`, {
     artwork_id,
     file_name,
@@ -428,7 +426,7 @@ export const removePicture = async (
 export const replaceThumbnail = async (
   artwork_id: number,
   thumbnail: Blob
-): Promise<any> => {
+): Promise<void> => {
   const formData = new FormData();
   formData.append("thumbnail", thumbnail);
   await axiosConfigured.post(
