@@ -20,9 +20,10 @@ function SubNavbar(props: SubNavbarProps) {
       <Navbar>
         <Container>
           <Nav className="subnavbar d-flex flex-wrap mx-3 justify-content-around w-100 floating-element">
-            {props.linkObjects.map((obj) => {
+            {props.linkObjects.map((obj, index) => {
               return (
                 <Link
+                  key={index}
                   className="nav-link"
                   style={{ color: "inherit", textDecoration: "inherit" }}
                   href={`${obj.linkTo}`}
