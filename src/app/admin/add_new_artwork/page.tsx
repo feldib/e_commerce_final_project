@@ -36,7 +36,11 @@ import {
 } from "@/fetching/fetching";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Category } from "@/fetching/types";
-import { MAX_IMAGE_SIZE, VALID_IMAGE_EXTENSIONS } from "@/utils/constants";
+import {
+  MAX_IMAGE_SIZE,
+  TAG_DELIMITERS,
+  VALID_IMAGE_EXTENSIONS,
+} from "@/utils/constants";
 
 function AddNewArtworkPage() {
   const categories = useAxios("/categories") as Category[];
@@ -149,14 +153,6 @@ function AddNewArtworkPage() {
     }),
   });
 
-  const KeyCodes = {
-    comma: 188,
-    enter: 13,
-    space: 32,
-  };
-
-  const delimiters = [KeyCodes.comma, KeyCodes.enter, KeyCodes.space];
-
   const [tags, setTags] = React.useState<ReactTagInputTag[]>([]);
 
   React.useEffect(() => {
@@ -221,7 +217,7 @@ function AddNewArtworkPage() {
               <ReactTags
                 tags={formik.values.tags}
                 // suggestions={suggestions}
-                delimiters={delimiters}
+                delimiters={TAG_DELIMITERS}
                 handleDelete={createHandleDelete(tags, setTags)}
                 handleAddition={createHandleAddition(tags, setTags)}
                 inputFieldPosition="bottom"

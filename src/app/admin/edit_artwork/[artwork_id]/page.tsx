@@ -17,6 +17,7 @@ import {
   faX,
 } from "@fortawesome/free-solid-svg-icons";
 import { useFormik } from "formik";
+import { FormikProps } from "formik";
 import * as Yup from "yup";
 import { ToastContainer } from "react-toastify";
 import PageTitle from "../../../../components/PageTitle";
@@ -24,7 +25,7 @@ import FloatingBackButton from "../../../../components/buttons/FloatingBackButto
 import useAxios from "../../../../hooks/useAxios";
 import useLoading from "../../../../hooks/useLoading";
 import { useRouter, useParams } from "next/navigation";
-import { WithContext as ReactTags } from "react-tag-input";
+import { WithContext as ReactTags, Tag as ReactTag } from "react-tag-input";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { server_url } from "../../../../utils/api_constants";
 import {
@@ -33,13 +34,29 @@ import {
   removePicture,
   updateArtworkData,
 } from "@/fetching/fetching";
-import { Category } from "@/fetching/types";
-import { MAX_IMAGE_SIZE, VALID_IMAGE_EXTENSIONS } from "@/utils/constants";
+import { Category, Artwork, Tag } from "@/fetching/types";
+import {
+  MAX_IMAGE_SIZE,
+  TAG_DELIMITERS,
+  VALID_IMAGE_EXTENSIONS,
+} from "@/utils/constants";
+
+interface EditArtworkFormValues extends Record<string, unknown> {
+  title: string;
+  artist_name: string;
+  price: string;
+  tags: ReactTag[];
+  quantity: string;
+  category_id: string;
+  thumbnail: string;
+  other_pictures: string[];
+  description: string;
+}
 
 function EditArtworkData() {
   const { artwork_id: artworkIdString } = useParams();
   const artworkId = Number(artworkIdString);
-  const artworkData = useAxios(`/artwork?id=${artworkId}`);
+  const artworkData = useAxios(`/artwork?id=${artworkId}`) as Artwork;
 
   const categories = useAxios("/categories") as Category[];
 
@@ -63,17 +80,17 @@ function EditArtworkData() {
     return VALID_IMAGE_EXTENSIONS.includes(ext);
   }
 
-  const formik = useFormik({
+  const formik = useFormik<EditArtworkFormValues>({
     initialValues: {
       title: "",
       artist_name: "",
       price: "",
-      tags: [],
+      tags: [] as ReactTag[],
       quantity: "",
       category_id: "",
       thumbnail: "",
-      other_pictures: [],
-      descript: "",
+      other_pictures: [] as string[],
+      description: "",
     },
 
     validationSchema: Yup.object().shape({
@@ -119,36 +136,32 @@ function EditArtworkData() {
     },
   });
 
-  const KeyCodes = {
-    comma: 188,
-    enter: 13,
-    space: 32,
-  };
-
-  const delimiters = [KeyCodes.comma, KeyCodes.enter, KeyCodes.space];
-
-  const [tags, setTags] = React.useState<any[]>([]);
+  const [tags, setTags] = React.useState<ReactTag[]>([]);
 
   React.useEffect(() => {
     if (artworkData) {
+      const transformedTags =
+        artworkData.tags?.map((obj: { tname: string }) => ({
+          id: obj.tname,
+          text: obj.tname,
+          className: "",
+        })) || [];
+
       formik.setValues({
         title: artworkData.title,
         artist_name: artworkData.artist_name,
-        price: artworkData.price,
-        tags: artworkData.tags,
-        quantity: artworkData.quantity,
-        category_id: artworkData.category_id,
+        price: artworkData.price.toString(),
+        tags: transformedTags,
+        quantity: artworkData.quantity.toString(),
+        category_id: artworkData.category_id.toString(),
         thumbnail: `${server_url}/${artworkData.thumbnail}`,
-        other_pictures: artworkData.other_pictures.map((pic: string) => {
-          return `${server_url}/${pic}`;
-        }),
-        descript: artworkData.descript,
+        other_pictures:
+          artworkData.other_pictures?.map((pic: string) => {
+            return `${server_url}/${pic}`;
+          }) || [],
+        description: artworkData.description || "",
       });
-      setTags(
-        artworkData.tags.map((obj: any) => {
-          return { id: obj.tname, text: obj.tname };
-        })
-      );
+      setTags(transformedTags);
     }
   }, [artworkData]);
 
@@ -158,16 +171,18 @@ function EditArtworkData() {
       updateArtworkData(
         artworkId,
         "tags",
-        tags.map((tag: any) => {
-          return { tname: tag.text };
-        })
+        JSON.stringify(
+          tags.map((tag: ReactTag) => {
+            return { tname: tag.text };
+          })
+        )
       );
     }
-  }, [tags]);
+  }, [tags, artworkId, formik]);
 
   const createHandleDelete = (
-    tgs: any[],
-    setTgs: React.Dispatch<React.SetStateAction<any[]>>
+    tgs: ReactTag[],
+    setTgs: React.Dispatch<React.SetStateAction<ReactTag[]>>
   ) => {
     return (i: number) => {
       setTgs(tgs.filter((tag, index) => index !== i));
@@ -175,10 +190,10 @@ function EditArtworkData() {
   };
 
   const createHandleAddition = (
-    tgs: any[],
-    setTgs: React.Dispatch<React.SetStateAction<any[]>>
+    tgs: ReactTag[],
+    setTgs: React.Dispatch<React.SetStateAction<ReactTag[]>>
   ) => {
-    return (tag: any) => {
+    return (tag: ReactTag) => {
       setTgs([...tgs, tag]);
     };
   };
@@ -226,7 +241,7 @@ function EditArtworkData() {
               <ReactTags
                 tags={formik.values.tags}
                 // suggestions={suggestions}
-                delimiters={delimiters}
+                delimiters={TAG_DELIMITERS}
                 handleDelete={createHandleDelete(tags, setTags)}
                 handleAddition={createHandleAddition(tags, setTags)}
                 inputFieldPosition="bottom"
@@ -234,7 +249,9 @@ function EditArtworkData() {
                 // autocomplete
               />
               {formik.errors.tags && (
-                <div className="input-error-message">{formik.errors.tags}</div>
+                <div className="input-error-message">
+                  {formik.errors.tags as string}
+                </div>
               )}
             </Form.Group>
 
@@ -408,7 +425,7 @@ function EditArtworkData() {
 
             <ChangeArtworkDataInputComponent
               label="Description"
-              name="descript"
+              name="description"
               type="textarea"
               placeholder="Enter description"
               icon={faQuestion}
