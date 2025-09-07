@@ -21,13 +21,13 @@ function RegistrationPageInner(props: RegistrationPageProps) {
 
   const attemptRegistration = async (
     values: any,
-    settleSuccessfulRegistration: any,
+    settleSuccessfulRegistration: any
   ) => {
     await registerNewUser(
       values.email,
       values.password,
       values.firstName,
-      values.lastName,
+      values.lastName
     )
       .then(function () {
         logIn(values.email, values.password, (userData) => {
