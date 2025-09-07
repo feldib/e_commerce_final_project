@@ -19,12 +19,17 @@ type UserDataChangingComponentProps = {
   button?: React.ReactNode;
 };
 
-function UserDataChangingComponent(props: UserDataChangingComponentProps) {
-  const [changeUserData, setChangeUserData] = React.useState(!props.checkout);
+function UserDataChangingComponent({
+  title,
+  checkout = false,
+  formik,
+  button,
+}: UserDataChangingComponentProps) {
+  const [changeUserData, setChangeUserData] = React.useState(!checkout);
 
   return (
     <Container className="px-3 mb-5">
-      <SubPageTitle title={`${props.title}`} />
+      <SubPageTitle title={`${title}`} />
 
       <Row className="mx-auto mb-5 floating-element">
         <Row>
@@ -35,13 +40,11 @@ function UserDataChangingComponent(props: UserDataChangingComponentProps) {
               type="email"
               placeholder="Enter email"
               icon={faUser}
-              showAsterisk={
-                !!(props.formik.errors.email && props.formik.touched.email)
-              }
-              error={props.formik.errors.email}
-              onChange={props.formik.handleChange}
-              onBlur={props.formik.handleBlur}
-              value={props.formik.values.email}
+              showAsterisk={!!(formik.errors.email && formik.touched.email)}
+              error={formik.errors.email}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.email}
               changeUserData={changeUserData}
             />
 
@@ -52,13 +55,12 @@ function UserDataChangingComponent(props: UserDataChangingComponentProps) {
               placeholder="Enter First Name"
               icon={faQuestion}
               showAsterisk={
-                !!props.formik.errors.first_name &&
-                !!props.formik.touched.first_name
+                !!formik.errors.first_name && !!formik.touched.first_name
               }
-              error={props.formik.errors.first_name}
-              onChange={props.formik.handleChange}
-              onBlur={props.formik.handleBlur}
-              value={props.formik.values.first_name}
+              error={formik.errors.first_name}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.first_name}
               changeUserData={changeUserData}
             />
 
@@ -69,13 +71,12 @@ function UserDataChangingComponent(props: UserDataChangingComponentProps) {
               placeholder="Enter Last Name"
               icon={faQuestion}
               showAsterisk={
-                !!props.formik.errors.last_name &&
-                !!props.formik.touched.last_name
+                !!formik.errors.last_name && !!formik.touched.last_name
               }
-              error={props.formik.errors.last_name}
-              onChange={props.formik.handleChange}
-              onBlur={props.formik.handleBlur}
-              value={props.formik.values.last_name}
+              error={formik.errors.last_name}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.last_name}
               changeUserData={changeUserData}
             />
 
@@ -85,13 +86,11 @@ function UserDataChangingComponent(props: UserDataChangingComponentProps) {
               type="textarea"
               placeholder="Enter Address"
               icon={faHouse}
-              showAsterisk={
-                !!props.formik.errors.address && !!props.formik.touched.address
-              }
-              error={props.formik.errors.address}
-              onChange={props.formik.handleChange}
-              onBlur={props.formik.handleBlur}
-              value={props.formik.values.address}
+              showAsterisk={!!formik.errors.address && !!formik.touched.address}
+              error={formik.errors.address}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.address}
               changeUserData={changeUserData}
             />
 
@@ -102,17 +101,16 @@ function UserDataChangingComponent(props: UserDataChangingComponentProps) {
               placeholder="Enter Phone Number"
               icon={faPhone}
               showAsterisk={
-                !!props.formik.errors.phone_number &&
-                !!props.formik.touched.phone_number
+                !!formik.errors.phone_number && !!formik.touched.phone_number
               }
-              error={props.formik.errors.phone_number}
-              onChange={props.formik.handleChange}
-              onBlur={props.formik.handleBlur}
-              value={props.formik.values.phone_number}
+              error={formik.errors.phone_number}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.phone_number}
               changeUserData={changeUserData}
             />
 
-            {props.checkout && (
+            {checkout && (
               <Form.Check
                 label="Save data"
                 onChange={() => {
@@ -124,7 +122,7 @@ function UserDataChangingComponent(props: UserDataChangingComponentProps) {
             <ToastContainer position="bottom-right" />
           </Col>
         </Row>
-        {props.button}
+        {button}
       </Row>
     </Container>
   );

@@ -8,11 +8,11 @@ type CategoriesDropdownProps = {
   setValue: (value: string) => void;
 };
 
-function CategoriesDropdown(props: CategoriesDropdownProps) {
-  function createCategoryButtons(categories: Category[]) {
+function CategoriesDropdown({ categories, setValue }: CategoriesDropdownProps) {
+  function createCategoryButtons(cats: Category[]) {
     return (
       <>
-        {categories.map((category: Category, index: number) => (
+        {cats.map((category: Category, index: number) => (
           <Dropdown.Item
             eventKey={category.id}
             key={index}
@@ -25,13 +25,13 @@ function CategoriesDropdown(props: CategoriesDropdownProps) {
       </>
     );
   }
-  const categories = useLoading(props.categories, createCategoryButtons);
+  const cats = useLoading(categories, createCategoryButtons);
   return (
     <Col className="mx-auto mb-3">
       <Dropdown
         onSelect={(e: string | null) => {
           if (e !== null) {
-            props.setValue(e);
+            setValue(e);
           }
         }}
       >
@@ -45,7 +45,7 @@ function CategoriesDropdown(props: CategoriesDropdownProps) {
           >
             All
           </Dropdown.Item>
-          {categories}
+          {cats}
         </Dropdown.Menu>
       </Dropdown>
     </Col>

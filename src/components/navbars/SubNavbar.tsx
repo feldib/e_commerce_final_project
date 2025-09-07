@@ -12,7 +12,7 @@ type SubNavbarProps = {
   }>;
 };
 
-function SubNavbar(props: SubNavbarProps) {
+function SubNavbar({ linkObjects }: SubNavbarProps) {
   return (
     <Row>
       <a href="#subpage" className="skip-to-content">
@@ -21,7 +21,7 @@ function SubNavbar(props: SubNavbarProps) {
       <Navbar>
         <Container>
           <Nav className="subnavbar d-flex flex-wrap mx-3 justify-content-around w-100 floating-element">
-            {props.linkObjects.map((obj, index) => {
+            {linkObjects.map((obj, index) => {
               return (
                 <Link
                   key={index}

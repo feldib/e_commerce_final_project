@@ -10,13 +10,13 @@ type FeatureButtonProps = {
   artwork_id: number;
 };
 
-function FeatureButton(props: FeatureButtonProps) {
+function FeatureButton({ artwork_id }: FeatureButtonProps) {
   return (
     <AddOrRemoveFromButton
       isAdded={isFeatured}
       addToAdded={addToFeatured}
       removeFromAdded={removeFromFeatured}
-      artwork_id={props.artwork_id}
+      artwork_id={artwork_id}
       toastWarningMessage="Sign in as an admin to add to favourites "
       filledButton={
         // eslint-disable-next-line @next/next/no-img-element

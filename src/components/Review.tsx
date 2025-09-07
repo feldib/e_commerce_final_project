@@ -13,51 +13,49 @@ type ReviewProps = {
   index: number;
 };
 
-function Review(props: ReviewProps) {
+function Review({ review, admin, index }: ReviewProps) {
   const [showReview, setShowReview] = React.useState(true);
   return (
     <>
       {showReview && (
-        <Row className="mx-auto mb-5" key={props.index}>
+        <Row className="mx-auto mb-5" key={index}>
           <Card className="p-3 floating-element">
             <Card.Title>
-              <p>Title: {props.review.title}</p>
+              <p>Title: {review.title}</p>
             </Card.Title>
 
-            {props.admin ? (
+            {admin ? (
               <Card.Subtitle>
-                <p>User: {props.review.name}</p>
+                <p>User: {review.name}</p>
               </Card.Subtitle>
             ) : (
               <Card.Subtitle>
-                <p>
-                  {props.review.approved ? "Approved" : "Awaits evaluation"}
-                </p>
+                <p>{review.approved ? "Approved" : "Awaits evaluation"}</p>
               </Card.Subtitle>
             )}
 
             <Card.Subtitle>
               <p>
                 Item:{" "}
-                <Link href={`/artwork_page/${props.review.artwork_id}`}>
-                  {props.review.artwork_title}
+                <Link href={`/artwork_page/${review.artwork_id}`}>
+                  {review.artwork_title}
                 </Link>{" "}
-                by {props.review.artist_name}
+                by {review.artist_name}
               </p>
             </Card.Subtitle>
 
             <Row>
-              <p>{props.review.review_text}</p>
+              <p>{review.review_text}</p>
             </Row>
 
-            {props.admin && (
+            {admin && (
               <Row>
                 <Col>
                   <FontAwesomeIcon
                     icon={faCheck}
                     style={{ color: "blue", cursor: "pointer" }}
                     onClick={() => {
-                      approveReview(props.review.id);
+                      approveReview(review.id);
                       setShowReview(false);
                     }}
                   />
@@ -68,7 +66,7 @@ function Review(props: ReviewProps) {
                     icon={faX}
                     style={{ color: "red", cursor: "pointer" }}
                     onClick={() => {
-                      disapproveReview(props.review.id);
+                      disapproveReview(review.id);
                       setShowReview(false);
                     }}
                   />

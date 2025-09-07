@@ -14,13 +14,13 @@ type FavouriteButtonProps = {
   artwork_id: number;
 };
 
-function FavouriteButton(props: FavouriteButtonProps) {
+function FavouriteButton({ artwork_id }: FavouriteButtonProps) {
   return (
     <AddOrRemoveFromButton
       isAdded={isWishlisted}
       addToAdded={addToWishlisted}
       removeFromAdded={removeFromWishlisted}
-      artwork_id={props.artwork_id}
+      artwork_id={artwork_id}
       toastWarningMessage="Sign in or register to add to wishlist! "
       filledButton={<FontAwesomeIcon icon={faHeartSolid} />}
       regularButton={<FontAwesomeIcon icon={faHeartRegular} />}

@@ -25,12 +25,24 @@ type UserDataInputComponentsProps = {
   changeUserData?: boolean;
 };
 
-function UserDataInputComponents(props: UserDataInputComponentsProps) {
+function UserDataInputComponents({
+  label,
+  name,
+  type,
+  placeholder,
+  icon,
+  showAsterisk = false,
+  error,
+  onChange,
+  onBlur,
+  value,
+  changeUserData = true,
+}: UserDataInputComponentsProps) {
   const [editing, setEditing] = React.useState(false);
   return (
     <Form.Group className="pb-3">
-      <Form.Label>{props.label}</Form.Label>
-      {props.showAsterisk && (
+      <Form.Label>{label}</Form.Label>
+      {showAsterisk && (
         <FontAwesomeIcon
           icon={faAsterisk}
           style={{ color: "red" }}
@@ -39,16 +51,16 @@ function UserDataInputComponents(props: UserDataInputComponentsProps) {
       )}
       <InputGroup>
         <InputGroup.Text>
-          <FontAwesomeIcon icon={props.icon} className="mx-3" />
+          <FontAwesomeIcon icon={icon} className="mx-3" />
         </InputGroup.Text>
 
         <Form.Control
-          name={props.name}
-          type={props.type}
-          placeholder={props.placeholder}
-          onChange={props.onChange}
-          onBlur={props.onBlur}
-          defaultValue={props.value}
+          name={name}
+          type={type}
+          placeholder={placeholder}
+          onChange={onChange}
+          onBlur={onBlur}
+          defaultValue={value}
           disabled={!editing}
         />
 
@@ -57,18 +69,18 @@ function UserDataInputComponents(props: UserDataInputComponentsProps) {
             variant="primary"
             onClick={(e) => {
               e.preventDefault();
-              if (props.error) {
+              if (error) {
                 toast.error("Incorrect data", {
                   className: "toast-error",
                 });
               } else {
-                if (props.changeUserData) {
-                  updateUserData(props.name, props.value);
-                  toast.success(`${props.label} changed successfully`, {
+                if (changeUserData) {
+                  updateUserData(name, value);
+                  toast.success(`${label} changed successfully`, {
                     className: "toast-success",
                   });
                 } else {
-                  toast.success(`${props.label} changed successfully`, {
+                  toast.success(`${label} changed successfully`, {
                     className: "toast-success",
                   });
                   toast.warning(`This only effects the invoice!`, {
@@ -92,9 +104,7 @@ function UserDataInputComponents(props: UserDataInputComponentsProps) {
           </Button>
         )}
       </InputGroup>
-      {props.error ? (
-        <div className="input-error-message">{props.error}</div>
-      ) : null}
+      {error ? <div className="input-error-message">{error}</div> : null}
     </Form.Group>
   );
 }

@@ -15,23 +15,28 @@ type BuyTableProps = {
   theadNeeded: boolean;
 };
 
-function BuyTable(props: BuyTableProps) {
-  function makeDataLines(dataLines: Artwork[]): React.JSX.Element[] {
-    return dataLines.map((line: Artwork, index: number) => {
+function BuyTable({
+  dataLines,
+  reccomendation = false,
+  orderSummary = false,
+  theadNeeded = true,
+}: BuyTableProps) {
+  function makeDataLines(dataLinesGenerated: Artwork[]): React.JSX.Element[] {
+    return dataLinesGenerated.map((line: Artwork, index: number) => {
       return (
         <BuyTableDataLines
-          reccomendation={props.reccomendation}
+          reccomendation={reccomendation}
           line={line}
           index={index}
           key={index}
-          orderSummary={props.orderSummary}
+          orderSummary={orderSummary}
         />
       );
     });
   }
 
-  const dataLines = useLoading(
-    props.dataLines,
+  const dataLinesGenerated = useLoading(
+    dataLines,
     (dataLines): React.JSX.Element => {
       return presentData(
         (dataLines as Artwork[]).filter((line: Artwork) => {
@@ -64,7 +69,7 @@ function BuyTable(props: BuyTableProps) {
   return (
     <Row className="text-center mx-auto">
       <table className="mb-3">
-        {props.theadNeeded && (
+        {theadNeeded && (
           <thead>
             <tr>
               <th></th>
@@ -72,26 +77,26 @@ function BuyTable(props: BuyTableProps) {
               <th className="d-none d-md-table-cell">Artist</th>
               <th>Price</th>
               <th
-                className={`${props.reccomendation ? "d-none" : "d-none d-md-table-cell"}`}
+                className={`${reccomendation ? "d-none" : "d-none d-md-table-cell"}`}
               >
                 Quantity
               </th>
               <th
-                className={`${props.reccomendation ? "d-none" : "d-none d-md-table-cell"}`}
+                className={`${reccomendation ? "d-none" : "d-none d-md-table-cell"}`}
               >
                 Tags
               </th>
               <th
-                className={`${props.reccomendation ? "d-none" : "d-none d-md-table-cell"}`}
+                className={`${reccomendation ? "d-none" : "d-none d-md-table-cell"}`}
               >
                 Categories
               </th>
-              <th>{props.orderSummary && "Total Cost"}</th>
+              <th>{orderSummary && "Total Cost"}</th>
             </tr>
           </thead>
         )}
 
-        <tbody>{dataLines}</tbody>
+        <tbody>{dataLinesGenerated}</tbody>
       </table>
     </Row>
   );

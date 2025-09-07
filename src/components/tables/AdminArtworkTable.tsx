@@ -9,11 +9,11 @@ type AdminArtworkTableProps = {
   dataLines: Artwork[];
 };
 
-function AdminArtworkTable(props: AdminArtworkTableProps) {
-  function makeDataLines(dataLines: Artwork[]): React.JSX.Element {
+function AdminArtworkTable({ dataLines }: AdminArtworkTableProps) {
+  function makeDataLines(dataLinesGenerated: Artwork[]): React.JSX.Element {
     return (
       <>
-        {dataLines.map((line: Artwork, index: number) => {
+        {dataLinesGenerated.map((line: Artwork, index: number) => {
           return (
             <AdminArtworkTableDatalines key={index} line={line} index={index} />
           );
@@ -22,7 +22,7 @@ function AdminArtworkTable(props: AdminArtworkTableProps) {
     );
   }
 
-  const dataLines = useLoading(props.dataLines, (dataLines) => {
+  const dataLinesGenerated = useLoading(dataLines, (dataLines) => {
     return presentData(dataLines as Artwork[], makeDataLines);
   });
 
@@ -42,7 +42,7 @@ function AdminArtworkTable(props: AdminArtworkTableProps) {
           </tr>
         </thead>
 
-        <tbody>{dataLines}</tbody>
+        <tbody>{dataLinesGenerated}</tbody>
       </table>
     </Row>
   );

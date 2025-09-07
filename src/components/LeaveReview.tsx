@@ -25,7 +25,7 @@ type ReviewFormValues = {
   review_text: string;
 };
 
-function LeaveReview(props: LeaveReviewProps) {
+function LeaveReview({ artwork_id }: LeaveReviewProps) {
   const { loggedIn } = React.useContext(UserDataContext);
 
   const form = React.useRef<HTMLFormElement | null>(null);
@@ -42,7 +42,7 @@ function LeaveReview(props: LeaveReviewProps) {
 
   const onSubmit = async (values: ReviewFormValues) => {
     try {
-      await leaveReview(props.artwork_id, values.title, values.review_text);
+      await leaveReview(artwork_id, values.title, values.review_text);
       toast.success("Review saved", {
         className: "toast-success",
       });

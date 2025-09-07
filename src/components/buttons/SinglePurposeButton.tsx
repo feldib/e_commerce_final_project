@@ -15,7 +15,14 @@ type SinglePurposeButtonProps = {
   icon: IconDefinition;
 };
 
-function SinglePurposeButton(props: SinglePurposeButtonProps) {
+function SinglePurposeButton({
+  artwork_id,
+  actionOnLoggedIn,
+  actionOnNotLoggedIn,
+  toastSuccessMessage,
+  toastErrorMessage,
+  icon,
+}: SinglePurposeButtonProps) {
   const { loggedIn } = React.useContext(UserDataContext);
 
   return (
@@ -25,27 +32,26 @@ function SinglePurposeButton(props: SinglePurposeButtonProps) {
         style={{ cursor: "pointer" }}
         onClick={async () => {
           if (loggedIn) {
-            props
-              .actionOnLoggedIn(props.artwork_id)
+            actionOnLoggedIn(artwork_id)
               .then(() => {
-                toast.success(props.toastSuccessMessage, {
+                toast.success(toastSuccessMessage, {
                   className: "toast-success",
                 });
               })
               .catch(() => {
-                toast.error(props.toastErrorMessage, {
+                toast.error(toastErrorMessage, {
                   className: "toast-error",
                 });
               });
           } else {
-            if (props.actionOnNotLoggedIn) {
+            if (actionOnNotLoggedIn) {
               try {
-                props.actionOnNotLoggedIn();
-                toast.success(props.toastSuccessMessage, {
+                actionOnNotLoggedIn();
+                toast.success(toastSuccessMessage, {
                   className: "toast-success",
                 });
               } catch {
-                toast.error(props.toastErrorMessage, {
+                toast.error(toastErrorMessage, {
                   className: "toast-error",
                 });
               }
@@ -53,7 +59,7 @@ function SinglePurposeButton(props: SinglePurposeButtonProps) {
           }
         }}
       >
-        <FontAwesomeIcon icon={props.icon} />
+        <FontAwesomeIcon icon={icon} />
       </p>
     </Row>
   );

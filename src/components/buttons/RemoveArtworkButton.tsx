@@ -8,14 +8,17 @@ type RemoveArtworkButtonProps = {
   artwork_id: number;
 };
 
-function RemoveArtworkButton(props: RemoveArtworkButtonProps) {
+function RemoveArtworkButton({
+  removeLineFromView,
+  artwork_id,
+}: RemoveArtworkButtonProps) {
   return (
     <SinglePurposeButton
       actionOnLoggedIn={(artwork_id) => {
-        props.removeLineFromView();
+        removeLineFromView();
         return removeArtwork(artwork_id);
       }}
-      artwork_id={props.artwork_id}
+      artwork_id={artwork_id}
       toastSuccessMessage="Artwork removed successfully"
       toastErrorMessage="Error: item could not be removed"
       icon={faX}

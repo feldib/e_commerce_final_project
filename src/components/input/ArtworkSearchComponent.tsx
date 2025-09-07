@@ -14,7 +14,7 @@ type ArtworkSearchComponentProps = {
   admin?: boolean;
 };
 
-function ArtworkSearchComponent(props: ArtworkSearchComponentProps) {
+function ArtworkSearchComponent({ admin }: ArtworkSearchComponentProps) {
   const [searchResults, setSearchResults] = React.useState<Artwork[]>();
 
   const [pageNumber, setPageNumber] = React.useState(0);
@@ -81,7 +81,7 @@ function ArtworkSearchComponent(props: ArtworkSearchComponentProps) {
           >
             <h3 className="text-center">Search results</h3>
           </Row>
-          {props.admin ? (
+          {admin ? (
             <AdminArtworkTable dataLines={searchResults} />
           ) : (
             <BuyTable

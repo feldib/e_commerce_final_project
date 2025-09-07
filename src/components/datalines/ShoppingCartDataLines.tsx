@@ -27,21 +27,26 @@ type ShoppingCartDataLinesProps = {
   reccomendation?: boolean;
 };
 
-function ShoppingCartDataLines(props: ShoppingCartDataLinesProps) {
+function ShoppingCartDataLines({
+  line,
+  index,
+  changeCosts,
+  reccomendation = false,
+}: ShoppingCartDataLinesProps) {
   const { loggedIn } = React.useContext(UserDataContext);
 
-  const [quantity, setQuantity] = React.useState(props.line.quantity);
+  const [quantity, setQuantity] = React.useState(line.quantity);
 
   React.useEffect(() => {
-    props.changeCosts(props.index, props.line.price * quantity);
+    changeCosts(index, line.price * quantity);
   }, [quantity]);
 
   return (
-    <tr key={props.index}>
+    <tr key={index}>
       <td>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={`${server_url}/${props.line.thumbnail}`}
+          src={`${server_url}/${line.thumbnail}`}
           width="100"
           height="100"
           style={{ objectFit: "cover" }}
@@ -49,15 +54,15 @@ function ShoppingCartDataLines(props: ShoppingCartDataLinesProps) {
         />
       </td>
       <td>
-        <Link href={`/artwork_page/${props.line.id}`}>
-          <p>{props.line.title}</p>
+        <Link href={`/artwork_page/${line.id}`}>
+          <p>{line.title}</p>
         </Link>
       </td>
       <td>
-        <p>{props.line.artist_name}</p>
+        <p>{line.artist_name}</p>
       </td>
       <td>
-        <p>€{props.line.price * quantity}</p>
+        <p>€{line.price * quantity}</p>
       </td>
       <td className="text-center">
         <Row>
@@ -74,9 +79,9 @@ function ShoppingCartDataLines(props: ShoppingCartDataLinesProps) {
               onClick={async () => {
                 //upon increase/decrease - go to the ancestor and update props quantity
                 if (loggedIn) {
-                  await decreaseShoppingListItemQuantity(props.line.id);
+                  await decreaseShoppingListItemQuantity(line.id);
                 } else {
-                  decreaseLocalStorageShoppingCartQuantity(props.line.id);
+                  decreaseLocalStorageShoppingCartQuantity(line.id);
                 }
 
                 if (quantity > 0) {
@@ -106,7 +111,7 @@ function ShoppingCartDataLines(props: ShoppingCartDataLinesProps) {
               className="table-button"
               onClick={async () => {
                 if (loggedIn) {
-                  await increaseShoppingListItemQuantity(props.line.id)
+                  await increaseShoppingListItemQuantity(line.id)
                     .then(() => {
                       toast.success("Item added to shopping cart", {
                         className: "toast-success",
@@ -121,8 +126,8 @@ function ShoppingCartDataLines(props: ShoppingCartDataLinesProps) {
                 } else {
                   try {
                     increaseLocalStorageShoppingCartQuantity(
-                      props.line.id,
-                      props.line.stored_amount - quantity
+                      line.id,
+                      line.stored_amount - quantity
                     );
                     toast.success("Item added to shopping cart", {
                       className: "toast-success",
@@ -141,24 +146,17 @@ function ShoppingCartDataLines(props: ShoppingCartDataLinesProps) {
           </Col>
         </Row>
       </td>
-      <td
-        className={`${props.reccomendation ? "d-none" : "d-none d-md-table-cell"}`}
-      >
-        <p>
-          {props.line.tags &&
-            props.line.tags.map((tag) => tag.tname).join(", ")}
-        </p>
+      <td className={`${reccomendation ? "d-none" : "d-none d-md-table-cell"}`}>
+        <p>{line.tags && line.tags.map((tag) => tag.tname).join(", ")}</p>
       </td>
-      <td
-        className={`${props.reccomendation ? "d-none" : "d-none d-md-table-cell"}`}
-      >
-        <p>{props.line.cname}</p>
+      <td className={`${reccomendation ? "d-none" : "d-none d-md-table-cell"}`}>
+        <p>{line.cname}</p>
       </td>
       <td>
         <div className="container text-center">
           <Row>
             <Col>
-              <FavouriteButton artwork_id={props.line.id} />
+              <FavouriteButton artwork_id={line.id} />
             </Col>
           </Row>
 
@@ -169,10 +167,10 @@ function ShoppingCartDataLines(props: ShoppingCartDataLinesProps) {
                 className="table-button"
                 onClick={async () => {
                   if (loggedIn) {
-                    await removeFromShoppingList(props.line.id);
+                    await removeFromShoppingList(line.id);
                     setQuantity(0);
                   } else {
-                    removeLocalStorageShoppingCartQuantity(props.line.id);
+                    removeLocalStorageShoppingCartQuantity(line.id);
                     setQuantity(0);
                   }
                 }}

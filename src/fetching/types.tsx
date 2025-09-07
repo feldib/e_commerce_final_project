@@ -6,6 +6,7 @@ export interface User {
   address?: string;
   phone_number?: string;
   is_admin?: boolean;
+  user_name?: string;
 }
 
 export interface Artwork {

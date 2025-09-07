@@ -13,9 +13,9 @@ type ReccomendationsProps = {
   path: string;
 };
 
-function Reccomendations(props: ReccomendationsProps) {
+function Reccomendations({ title, path }: ReccomendationsProps) {
   const [tableHidden, setTableHidden] = React.useState(false);
-  const recommendations = useAxios(`${props.path}?n=10`) as Artwork[];
+  const recommendations = useAxios(`${path}?n=10`) as Artwork[];
 
   const isMd = useMediaQuery({ minWidth: "768px" });
 
@@ -26,7 +26,7 @@ function Reccomendations(props: ReccomendationsProps) {
           <Row>
             <Col xs={7} md={5} lg={7} className="mx-auto">
               <h4 className="text-center reccomendation-title">
-                {`${props.title}`}
+                {`${title}`}
                 <FontAwesomeIcon
                   className="toggle-reccommendation mx-2 d-md-none"
                   icon={!tableHidden ? faCaretDown : faCaretUp}

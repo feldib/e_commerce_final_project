@@ -9,18 +9,24 @@ type SearchFieldProps = {
   onBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
 };
 
-function SearchField(props: SearchFieldProps) {
+function SearchField({
+  what,
+  name,
+  value,
+  onChange,
+  onBlur,
+}: SearchFieldProps) {
   return (
     <Row lg={6} sx={8} className="mx-auto mb-1 mt-5">
       <InputGroup>
-        <InputGroup.Text>{props.what}</InputGroup.Text>
+        <InputGroup.Text>{what}</InputGroup.Text>
         <Form.Control
           className="form-control"
           type="text"
-          name={props.name}
-          value={props.value}
-          onChange={props.onChange}
-          onBlur={props.onBlur}
+          name={name}
+          value={value}
+          onChange={onChange}
+          onBlur={onBlur}
         />
       </InputGroup>
     </Row>

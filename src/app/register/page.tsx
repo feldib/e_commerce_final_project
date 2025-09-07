@@ -19,7 +19,9 @@ type RegistrationPageProps = {
   ) => void;
 };
 
-function RegistrationPageInner(props: RegistrationPageProps) {
+function RegistrationPageInner({
+  settleSuccessfulRegistration,
+}: RegistrationPageProps) {
   const searchParams = useSearchParams();
   const to_checkout = searchParams.get("to_checkout");
 
@@ -71,7 +73,7 @@ function RegistrationPageInner(props: RegistrationPageProps) {
     phone: string;
   }) {
     try {
-      await attemptRegistration(values, props.settleSuccessfulRegistration);
+      await attemptRegistration(values, settleSuccessfulRegistration);
       toast.success("Registration successful", {
         className: "toast-success",
       });

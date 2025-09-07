@@ -26,14 +26,21 @@ type ChangeArtworkDataInputComponentProps<
 
 function ChangeArtworkDataInputComponent<
   T extends Record<string, unknown> = Record<string, unknown>,
->(props: ChangeArtworkDataInputComponentProps<T>) {
-  const showAsterisk =
-    props.formik.errors[props.name] && props.formik.touched[props.name];
+>({
+  formik,
+  name,
+  label,
+  type,
+  icon,
+  artwork_id,
+  placeholder,
+}: ChangeArtworkDataInputComponentProps<T>) {
+  const showAsterisk = formik.errors[name] && formik.touched[name];
   const [editing, setEditing] = React.useState(false);
 
   return (
     <Form.Group className="pb-3">
-      <Form.Label>{props.label}</Form.Label>
+      <Form.Label>{label}</Form.Label>
       {showAsterisk && (
         <FontAwesomeIcon
           icon={faAsterisk}
@@ -42,32 +49,32 @@ function ChangeArtworkDataInputComponent<
         />
       )}
       <InputGroup>
-        {props.type !== "textarea" && (
+        {type !== "textarea" && (
           <InputGroup.Text>
-            <FontAwesomeIcon icon={props.icon} className="mx-3" />
+            <FontAwesomeIcon icon={icon} className="mx-3" />
           </InputGroup.Text>
         )}
 
-        {props.type === "textarea" ? (
+        {type === "textarea" ? (
           <textarea
             className="form-control"
-            id={props.name}
-            name={props.name}
-            placeholder={props.placeholder}
-            onChange={props.formik.handleChange}
-            value={String(props.formik.values[props.name] || "")}
+            id={name}
+            name={name}
+            placeholder={placeholder}
+            onChange={formik.handleChange}
+            value={String(formik.values[name] || "")}
             rows={4}
             disabled={!editing}
           />
         ) : (
           <input
             className="form-control"
-            id={props.name}
-            name={props.name}
-            type={props.type}
-            placeholder={props.placeholder}
-            onChange={props.formik.handleChange}
-            value={String(props.formik.values[props.name] || "")}
+            id={name}
+            name={name}
+            type={type}
+            placeholder={placeholder}
+            onChange={formik.handleChange}
+            value={String(formik.values[name] || "")}
             disabled={!editing}
           />
         )}
@@ -77,17 +84,17 @@ function ChangeArtworkDataInputComponent<
             variant="primary"
             onClick={(e) => {
               e.preventDefault();
-              if (Object.keys(props.formik.errors).length > 0) {
+              if (Object.keys(formik.errors).length > 0) {
                 toast.error("Incorrect data", {
                   className: "toast-error",
                 });
               } else {
                 updateArtworkData(
-                  props.artwork_id,
-                  props.name,
-                  String(props.formik.values[props.name] || "")
+                  artwork_id,
+                  name,
+                  String(formik.values[name] || "")
                 );
-                toast.success(`${props.label} changed successfully`, {
+                toast.success(`${label} changed successfully`, {
                   className: "toast-success",
                 });
                 setEditing(false);
@@ -108,10 +115,8 @@ function ChangeArtworkDataInputComponent<
         )}
       </InputGroup>
 
-      {props.formik.errors[props.name] && (
-        <div className="input-error-message">
-          {String(props.formik.errors[props.name])}
-        </div>
+      {formik.errors[name] && (
+        <div className="input-error-message">{String(formik.errors[name])}</div>
       )}
     </Form.Group>
   );
