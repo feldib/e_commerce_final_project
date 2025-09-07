@@ -6,17 +6,18 @@ import {
   presentData,
   getShoppingCartFromLocalStorage,
 } from "@/helpers/helpers";
+import { Artwork, ShoppingCartItem } from "../../fetching/types";
 
 type BuyTableProps = {
-  dataLines: any;
+  dataLines: Artwork[];
   reccomendation?: boolean;
   orderSummary?: boolean;
   theadNeeded: boolean;
 };
 
 function BuyTable(props: BuyTableProps) {
-  function makeDataLines(dataLines: any) {
-    return dataLines.map((line: any, index: number) => {
+  function makeDataLines(dataLines: Artwork[]): React.JSX.Element[] {
+    return dataLines.map((line: Artwork, index: number) => {
       return (
         <BuyTableDataLines
           reccomendation={props.reccomendation}
@@ -31,14 +32,14 @@ function BuyTable(props: BuyTableProps) {
 
   const dataLines = useLoading(
     props.dataLines,
-    (dataLines: any[]): React.JSX.Element => {
+    (dataLines): React.JSX.Element => {
       return presentData(
-        dataLines.filter((line: any) => {
+        (dataLines as Artwork[]).filter((line: Artwork) => {
           const shoppingCart = getShoppingCartFromLocalStorage();
 
           if (shoppingCart.length) {
             const existingRecordIndex = shoppingCart.findIndex(
-              (item: any) => item.artwork_id === line.id,
+              (item: ShoppingCartItem) => item.artwork_id === line.id
             );
 
             if (
@@ -55,9 +56,9 @@ function BuyTable(props: BuyTableProps) {
             return line.quantity;
           }
         }),
-        makeDataLines,
+        makeDataLines
       );
-    },
+    }
   );
 
   return (
