@@ -6,6 +6,7 @@ import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 import { Col, Row, Carousel } from "react-bootstrap";
 import { useMediaQuery } from "react-responsive";
 import ReccomendationCard from "./ReccomendationCard";
+import { Artwork } from "@/fetching/types";
 
 type ReccomendationsProps = {
   title: string;
@@ -14,13 +15,13 @@ type ReccomendationsProps = {
 
 function Reccomendations(props: ReccomendationsProps) {
   const [tableHidden, setTableHidden] = React.useState(false);
-  const data = useAxios(`${props.path}?n=10`);
+  const recommendations = useAxios(`${props.path}?n=10`) as any[];
 
   const isMd = useMediaQuery({ minWidth: "768px" });
 
   return (
     <>
-      {data && data.length > 0 && (
+      {recommendations && recommendations.length > 0 && (
         <Col xs={12} lg={5} className="mb-3 mx-auto">
           <Row>
             <Col xs={7} md={5} lg={7} className="mx-auto">
@@ -37,9 +38,9 @@ function Reccomendations(props: ReccomendationsProps) {
             </Col>
           </Row>
 
-          {(!tableHidden || isMd) && data && (
+          {(!tableHidden || isMd) && recommendations && (
             <Carousel>
-              {data.map((artwork: any, index: number) => {
+              {recommendations.map((artwork: Artwork, index: number) => {
                 return (
                   <Carousel.Item
                     key={index}

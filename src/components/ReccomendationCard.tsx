@@ -7,15 +7,10 @@ import ShoppingCartButton from "./buttons/ShoppingCartButton";
 import Link from "next/link";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
 import useQuantity from "../hooks/useQuantity";
+import { Artwork } from "@/fetching/types";
 
 type ReccomendationCardProps = {
-  artwork: {
-    id: number;
-    title: string;
-    artist_name: string;
-    thumbnail: string;
-    quantity: number;
-  };
+  artwork: Artwork;
 };
 
 function ReccomendationCard(props: ReccomendationCardProps) {

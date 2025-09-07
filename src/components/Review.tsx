@@ -5,18 +5,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX, faCheck } from "@fortawesome/free-solid-svg-icons";
 import { approveReview, disapproveReview } from "@/fetching/fetching";
 import Link from "next/link";
+import { Review as ReviewType } from "@/fetching/types";
 
 type ReviewProps = {
-  review: {
-    id: string;
-    title: string;
-    name: string;
-    artwork_id: number;
-    artwork_title: string;
-    artist_name: string;
-    review_text: string;
-    approved: boolean;
-  };
+  review: ReviewType;
   admin: boolean;
   index: number;
 };

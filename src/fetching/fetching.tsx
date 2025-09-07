@@ -286,14 +286,14 @@ export const leaveReview = async (
   });
 };
 
-export const approveReview = async (review_id: string): Promise<void> => {
+export const approveReview = async (review_id: number): Promise<void> => {
   await axiosConfigured.post(`${server_url}/${admin_url}/approve_review`, {
     review_id,
   });
   // returns void
 };
 
-export const disapproveReview = async (review_id: string): Promise<void> => {
+export const disapproveReview = async (review_id: number): Promise<void> => {
   await axiosConfigured.post(`${server_url}/${admin_url}/disapprove_review`, {
     review_id,
   });

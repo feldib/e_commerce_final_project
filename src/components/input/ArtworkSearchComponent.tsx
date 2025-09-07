@@ -8,7 +8,7 @@ import AdminArtworkTable from "../tables/AdminArtworkTable";
 import ArtworkSearchFields from "./ArtworkSearchFields";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { Artwork } from "@/fetching/types";
+import { Artwork, Category } from "@/fetching/types";
 
 type ArtworkSearchComponentProps = {
   admin?: boolean;
@@ -49,7 +49,7 @@ function ArtworkSearchComponent(props: ArtworkSearchComponentProps) {
     }),
   });
 
-  const categories = useAxios("/categories");
+  const categories = useAxios("/categories") as Category[];
 
   const results = React.useRef<HTMLDivElement>(null);
 

@@ -12,21 +12,11 @@ import ArtworkPicturesCarousel from "./ArtworkPicturesCarousel";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
 import { server_url } from "../utils/api_constants";
 import useQuantity from "../hooks/useQuantity";
-import { Review, Tag } from "@/fetching/types";
+import { Artwork, Review, Tag } from "@/fetching/types";
 
 type ArtworkDetailsProps = {
   artwork_id: number;
-  artwork: {
-    title: string;
-    artist_name: string;
-    thumbnail: string;
-    quantity: number;
-    tags: Array<{ tname: string }>;
-    cname: string;
-    descript: string;
-    price: number;
-    other_pictures: string[];
-  };
+  artwork: Artwork;
 };
 
 function ArtworkDetails(props: ArtworkDetailsProps) {
