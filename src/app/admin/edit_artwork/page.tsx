@@ -33,22 +33,25 @@ import {
   removePicture,
   updateArtworkData,
 } from "@/fetching/fetching";
+import { Category } from "@/fetching/types";
 
 function EditArtworkData() {
   const { artwork_id: artworkIdString } = useParams();
   const artworkId = Number(artworkIdString);
   const artworkData = useAxios(`/artwork?id=${artworkId}`);
 
-  const categories = useAxios("/categories");
+  const categories = useAxios("/categories") as Category[];
 
   const categoriesRepresented = useLoading(categories, (categories) => {
-    return categories.map((cat: any, index: number) => {
-      return (
-        <Dropdown.Item eventKey={JSON.stringify(cat)} key={index}>
-          {cat.cname}
-        </Dropdown.Item>
-      );
-    });
+    return (
+      <>
+        {categories.map((cat: Category, index: number) => (
+          <Dropdown.Item eventKey={JSON.stringify(cat)} key={index}>
+            {cat.cname}
+          </Dropdown.Item>
+        ))}
+      </>
+    );
   });
 
   const router = useRouter();
