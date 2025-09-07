@@ -18,7 +18,7 @@ const useQuantity = (loggedIn: boolean, inStock: number, artworkId: number) => {
       }
       console.log(
         "signedOutShoppingCart",
-        JSON.stringify(signedOutShoppingCart)
+        JSON.stringify(signedOutShoppingCart),
       );
     }
   }, []);

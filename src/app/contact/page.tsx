@@ -43,7 +43,7 @@ function ContactUs() {
       await sendMessageToAdministrator(
         values.email,
         values.title,
-        values.message
+        values.message,
       );
       toast.success("Message sent", {
         className: "toast-success",

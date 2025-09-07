@@ -118,12 +118,12 @@ function AddNewArtworkPage() {
       thumbnail: Yup.mixed()
         .required("Thumbnail required")
         .test("is-valid-type", "Not a valid image type", (value) =>
-          isValidImage(value instanceof File ? value.name : "")
+          isValidImage(value instanceof File ? value.name : ""),
         )
         .test(
           "is-valid-size",
           "Max allowed size is 100KB",
-          (value) => value instanceof File && value.size <= MAX_IMAGE_SIZE
+          (value) => value instanceof File && value.size <= MAX_IMAGE_SIZE,
         ),
       tags: Yup.array()
         .min(3, "Add minimum 3 tags!")
@@ -131,18 +131,18 @@ function AddNewArtworkPage() {
           Yup.object().shape({
             id: Yup.string(),
             text: Yup.string(),
-          })
+          }),
         ),
       other_pictures: Yup.array().of(
         Yup.mixed()
           .test("is-valid-type", "Not a valid image type", (value) =>
-            isValidImage(value instanceof File ? value.name : "")
+            isValidImage(value instanceof File ? value.name : ""),
           )
           .test(
             "is-valid-size",
             "Max allowed size is 100KB",
-            (value) => value instanceof File && value.size <= MAX_IMAGE_SIZE
-          )
+            (value) => value instanceof File && value.size <= MAX_IMAGE_SIZE,
+          ),
       ),
     }),
   });
@@ -163,7 +163,7 @@ function AddNewArtworkPage() {
 
   const createHandleDelete = (
     tgs: ReactTagInputTag[],
-    setTgs: React.Dispatch<React.SetStateAction<ReactTagInputTag[]>>
+    setTgs: React.Dispatch<React.SetStateAction<ReactTagInputTag[]>>,
   ) => {
     return (i: number) => {
       setTgs(tgs.filter((tag, index) => index !== i));
@@ -172,7 +172,7 @@ function AddNewArtworkPage() {
 
   const createHandleAddition = (
     tgs: ReactTagInputTag[],
-    setTgs: React.Dispatch<React.SetStateAction<ReactTagInputTag[]>>
+    setTgs: React.Dispatch<React.SetStateAction<ReactTagInputTag[]>>,
   ) => {
     return (tag: ReactTagInputTag) => {
       setTgs([...tgs, tag]);
@@ -286,7 +286,7 @@ function AddNewArtworkPage() {
                     if (e.currentTarget.files) {
                       formik.setFieldValue(
                         "thumbnail",
-                        e.currentTarget.files[0]
+                        e.currentTarget.files[0],
                       );
                     }
                   }}

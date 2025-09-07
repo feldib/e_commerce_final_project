@@ -85,12 +85,12 @@ function EditArtworkData() {
       thumbnail: Yup.mixed()
         .required("Thumbnail required")
         .test("is-valid-type", "Not a valid image type", (value) =>
-          isValidImage(value instanceof File ? value.name : "")
+          isValidImage(value instanceof File ? value.name : ""),
         )
         .test(
           "is-valid-size",
           "Max allowed size is 100KB",
-          (value) => value instanceof File && value.size <= MAX_IMAGE_SIZE
+          (value) => value instanceof File && value.size <= MAX_IMAGE_SIZE,
         ),
       tags: Yup.array()
         .min(3, "Add minimum 3 tags!")
@@ -98,18 +98,18 @@ function EditArtworkData() {
           Yup.object().shape({
             id: Yup.string(),
             text: Yup.string(),
-          })
+          }),
         ),
       other_pictures: Yup.array().of(
         Yup.mixed()
           .test("is-valid-type", "Not a valid image type", (value) =>
-            isValidImage(value instanceof File ? value.name : "")
+            isValidImage(value instanceof File ? value.name : ""),
           )
           .test(
             "is-valid-size",
             "Max allowed size is 100KB",
-            (value) => value instanceof File && value.size <= MAX_IMAGE_SIZE
-          )
+            (value) => value instanceof File && value.size <= MAX_IMAGE_SIZE,
+          ),
       ),
       description: Yup.string().required("Description required"),
     }),
@@ -147,7 +147,7 @@ function EditArtworkData() {
       setTags(
         artworkData.tags.map((obj: any) => {
           return { id: obj.tname, text: obj.tname };
-        })
+        }),
       );
     }
   }, [artworkData]);
@@ -160,14 +160,14 @@ function EditArtworkData() {
         "tags",
         tags.map((tag: any) => {
           return { tname: tag.text };
-        })
+        }),
       );
     }
   }, [tags]);
 
   const createHandleDelete = (
     tgs: any[],
-    setTgs: React.Dispatch<React.SetStateAction<any[]>>
+    setTgs: React.Dispatch<React.SetStateAction<any[]>>,
   ) => {
     return (i: number) => {
       setTgs(tgs.filter((tag, index) => index !== i));
@@ -176,7 +176,7 @@ function EditArtworkData() {
 
   const createHandleAddition = (
     tgs: any[],
-    setTgs: React.Dispatch<React.SetStateAction<any[]>>
+    setTgs: React.Dispatch<React.SetStateAction<any[]>>,
   ) => {
     return (tag: any) => {
       setTgs([...tgs, tag]);
@@ -294,7 +294,7 @@ function EditArtworkData() {
                       await replaceThumbnail(artworkId, files[0]);
                       formik.setFieldValue(
                         "thumbnail",
-                        URL.createObjectURL(files[0])
+                        URL.createObjectURL(files[0]),
                       );
                     }
                   }}
@@ -389,7 +389,7 @@ function EditArtworkData() {
                               formik.values.other_pictures.filter(
                                 (pic, index) => {
                                   return index !== indexOfPicToRemove;
-                                }
+                                },
                               );
 
                             removePicture(artworkId, id.split("/").pop() || "");
