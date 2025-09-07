@@ -39,6 +39,7 @@ function ShoppingCartDataLines(props: ShoppingCartDataLinesProps) {
   return (
     <tr key={props.index}>
       <td>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={`${server_url}/${props.line.thumbnail}`}
           width="100"
@@ -121,7 +122,7 @@ function ShoppingCartDataLines(props: ShoppingCartDataLinesProps) {
                   try {
                     increaseLocalStorageShoppingCartQuantity(
                       props.line.id,
-                      props.line.stored_amount - quantity,
+                      props.line.stored_amount - quantity
                     );
                     toast.success("Item added to shopping cart", {
                       className: "toast-success",

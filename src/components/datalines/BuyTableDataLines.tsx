@@ -22,12 +22,13 @@ function BuyTableDataLines(props: BuyTableDataLinesProps) {
   const { quantity, setQuantity } = useQuantity(
     loggedIn,
     props.line.quantity,
-    props.line.id,
+    props.line.id
   );
 
   return (
     <tr key={props.index}>
       <td>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={`${server_url}/${props.line.thumbnail}`}
           width="100"

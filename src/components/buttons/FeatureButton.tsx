@@ -19,6 +19,7 @@ function FeatureButton(props: FeatureButtonProps) {
       artwork_id={props.artwork_id}
       toastWarningMessage="Sign in as an admin to add to favourites "
       filledButton={
+        // eslint-disable-next-line @next/next/no-img-element
         <img
           src="/trophy_filled.png"
           height="25px"
@@ -26,6 +27,7 @@ function FeatureButton(props: FeatureButtonProps) {
         />
       }
       regularButton={
+        // eslint-disable-next-line @next/next/no-img-element
         <img src="/trophy_regular.png" height="25px" alt="add to featured" />
       }
     />

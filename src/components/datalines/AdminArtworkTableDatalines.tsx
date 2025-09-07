@@ -24,6 +24,7 @@ function AdminArtworkTableDatalines(props: AdminArtworkTableDatalinesProps) {
       {lineVisible && (
         <tr key={props.index}>
           <td>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={`${server_url}/${props.line.thumbnail}`}
               width="100"
