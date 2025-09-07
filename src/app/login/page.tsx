@@ -32,7 +32,7 @@ function SignInPageInner() {
       toast.success("Logged in", {
         className: "toast-success",
       });
-    } catch (error) {
+    } catch {
       toast.error("Incorrect email or password", {
         className: "toast-error",
       });

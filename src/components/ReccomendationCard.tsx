@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { server_url } from "../utils/api_constants";
-import { Col, Row, Card, Carousel } from "react-bootstrap";
+import { Col, Row, Card } from "react-bootstrap";
 import FavouriteButton from "./buttons/FavouriteButton";
 import ShoppingCartButton from "./buttons/ShoppingCartButton";
 import Link from "next/link";

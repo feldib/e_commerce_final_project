@@ -29,13 +29,13 @@ function RegistrationPageInner(props: RegistrationPageProps) {
       values.firstName,
       values.lastName,
     )
-      .then(function (response) {
+      .then(function () {
         logIn(values.email, values.password, (userData) => {
           settleSuccessfulRegistration(to_checkout, userData);
         });
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
+        console.log("Registration failed");
       });
   };
 
@@ -56,7 +56,7 @@ function RegistrationPageInner(props: RegistrationPageProps) {
       toast.success("Registration successful", {
         className: "toast-success",
       });
-    } catch (error) {
+    } catch {
       toast.error("A user is registered with email already", {
         className: "toast-error",
       });

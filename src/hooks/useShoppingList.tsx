@@ -21,7 +21,7 @@ const useShoppingList = (loggedIn: boolean) => {
           .then((artworks_in_shopping_cart) => {
             setData(artworks_in_shopping_cart);
           })
-          .catch(function (error) {
+          .catch(function () {
             setData([]);
           });
       }

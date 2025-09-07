@@ -8,7 +8,6 @@ import AdminArtworkTable from "../tables/AdminArtworkTable";
 import ArtworkSearchFields from "./ArtworkSearchFields";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { UserDataContext } from "../providers/UserDataProvider";
 import { Artwork } from "@/fetching/types";
 
 type ArtworkSearchComponentProps = {
@@ -97,7 +96,7 @@ function ArtworkSearchComponent(props: ArtworkSearchComponentProps) {
               <Col className="mx-auto">
                 <Button
                   className="submit"
-                  onClick={(e) => {
+                  onClick={() => {
                     setPageNumber(pageNumber - 1);
                   }}
                 >
@@ -110,7 +109,7 @@ function ArtworkSearchComponent(props: ArtworkSearchComponentProps) {
               <Col className="mx-auto">
                 <Button
                   className="submit"
-                  onClick={async (e) => {
+                  onClick={async () => {
                     setPageNumber(pageNumber + 1);
                   }}
                 >

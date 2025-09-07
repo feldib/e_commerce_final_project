@@ -15,7 +15,7 @@ type AddOrRemoveFromButtonProps = {
 };
 
 function AddOrRemoveFromButton(props: AddOrRemoveFromButtonProps) {
-  const { user, loggedIn } = React.useContext(UserDataContext);
+  const { loggedIn } = React.useContext(UserDataContext);
 
   const [added, setAdded] = React.useState(false);
   const [needsToBeRefreshed, setNeedsToBeRefreshed] = React.useState(false);

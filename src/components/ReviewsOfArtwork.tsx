@@ -1,7 +1,5 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
-import { Card, Row, Carousel } from "react-bootstrap";
+import { Card, Carousel } from "react-bootstrap";
 
 type ReviewsOfArtworksProps = {
   reviews: {

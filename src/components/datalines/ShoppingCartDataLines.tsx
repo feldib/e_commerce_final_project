@@ -106,13 +106,13 @@ function ShoppingCartDataLines(props: ShoppingCartDataLinesProps) {
               onClick={async () => {
                 if (loggedIn) {
                   await increaseShoppingListItemQuantity(props.line.id)
-                    .then((response) => {
+                    .then(() => {
                       toast.success("Item added to shopping cart", {
                         className: "toast-success",
                       });
                       setQuantity(quantity + 1);
                     })
-                    .catch((error) => {
+                    .catch(() => {
                       toast.error("Item out of stock", {
                         className: "toast-error",
                       });
@@ -127,7 +127,7 @@ function ShoppingCartDataLines(props: ShoppingCartDataLinesProps) {
                       className: "toast-success",
                     });
                     setQuantity(quantity + 1);
-                  } catch (error) {
+                  } catch {
                     toast.error("Item out of stock", {
                       className: "toast-error",
                     });

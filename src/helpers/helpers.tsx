@@ -133,7 +133,7 @@ const checkIfShoppingCartIsEmpty = async (loggedIn: boolean) => {
           return false;
         }
       })
-      .catch(function (error) {
+      .catch(function () {
         return false;
       });
   } else {
@@ -145,7 +145,7 @@ const checkIfShoppingCartIsEmpty = async (loggedIn: boolean) => {
           return false;
         }
       })
-      .catch(function (error) {
+      .catch(function () {
         return false;
       });
   }

@@ -4,7 +4,6 @@ import useAxios from "../hooks/useAxios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 import { Col, Row, Carousel } from "react-bootstrap";
-import { UserDataContext } from "@/components/providers/UserDataProvider";
 import { useMediaQuery } from "react-responsive";
 import ReccomendationCard from "./ReccomendationCard";
 
@@ -30,7 +29,7 @@ function Reccomendations(props: ReccomendationsProps) {
                 <FontAwesomeIcon
                   className="toggle-reccommendation mx-2 d-md-none"
                   icon={!tableHidden ? faCaretDown : faCaretUp}
-                  onClick={(e) => {
+                  onClick={() => {
                     setTableHidden(!tableHidden);
                   }}
                 />

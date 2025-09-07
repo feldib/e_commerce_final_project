@@ -49,7 +49,7 @@ function ContactUs() {
         className: "toast-success",
       });
       form?.current?.reset();
-    } catch (error) {
+    } catch {
       toast.error("Error: couldn't send message", {
         className: "toast-error",
       });

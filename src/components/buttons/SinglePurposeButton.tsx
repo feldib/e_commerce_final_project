@@ -26,12 +26,12 @@ function SinglePurposeButton(props: SinglePurposeButtonProps) {
           if (loggedIn) {
             props
               .actionOnLoggedIn(props.artwork_id)
-              .then((response) => {
+              .then(() => {
                 toast.success(props.toastSuccessMessage, {
                   className: "toast-success",
                 });
               })
-              .catch((error) => {
+              .catch(() => {
                 toast.error(props.toastErrorMessage, {
                   className: "toast-error",
                 });
@@ -43,7 +43,7 @@ function SinglePurposeButton(props: SinglePurposeButtonProps) {
                 toast.success(props.toastSuccessMessage, {
                   className: "toast-success",
                 });
-              } catch (error) {
+              } catch {
                 toast.error(props.toastErrorMessage, {
                   className: "toast-error",
                 });

@@ -8,7 +8,6 @@ import {
   removeFromWishlisted,
   isWishlisted,
 } from "@/fetching/fetching";
-import { UserDataContext } from "@/components/providers/UserDataProvider";
 import AddOrRemoveFromButton from "./AddOrRemoveButton";
 
 type FavouriteButtonProps = {
@@ -16,8 +15,6 @@ type FavouriteButtonProps = {
 };
 
 function FavouriteButton(props: FavouriteButtonProps) {
-  const { user, loggedIn } = React.useContext(UserDataContext);
-
   return (
     <AddOrRemoveFromButton
       isAdded={isWishlisted}

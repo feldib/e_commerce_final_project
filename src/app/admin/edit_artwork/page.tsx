@@ -113,7 +113,7 @@ function EditArtworkData() {
       ),
       description: Yup.string().required("Description required"),
     }),
-    onSubmit: (values) => {
+    onSubmit: () => {
       // there is no single submission
       return;
     },

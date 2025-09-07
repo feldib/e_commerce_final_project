@@ -21,7 +21,7 @@ type LeaveReviewProps = {
 };
 
 function LeaveReview(props: LeaveReviewProps) {
-  const { user, loggedIn } = React.useContext(UserDataContext);
+  const { loggedIn } = React.useContext(UserDataContext);
 
   const form = React.useRef<HTMLFormElement | null>(null);
 
@@ -45,7 +45,7 @@ function LeaveReview(props: LeaveReviewProps) {
         className: "toast-info",
       });
       form?.current?.reset();
-    } catch (error) {
+    } catch {
       toast.error("Error: couldn't save review", {
         className: "toast-error",
       });
