@@ -1,6 +1,6 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAsterisk } from "@fortawesome/free-solid-svg-icons";
+import { faAsterisk, IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { Form, InputGroup } from "react-bootstrap";
 
 type NewArtworkInputComponentProps = {
@@ -8,7 +8,7 @@ type NewArtworkInputComponentProps = {
   name: string;
   type: string;
   placeholder: string;
-  icon: any;
+  icon: IconDefinition;
   formik: any;
 };
 

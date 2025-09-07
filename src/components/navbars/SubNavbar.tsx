@@ -2,11 +2,12 @@ import React from "react";
 import { Navbar, Nav, Container, Col, Row } from "react-bootstrap";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 
 type SubNavbarProps = {
   linkObjects: Array<{
     linkTo: string;
-    icon: any;
+    icon: IconDefinition;
     linkText: string;
   }>;
 };

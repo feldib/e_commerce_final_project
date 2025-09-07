@@ -1,7 +1,12 @@
 "use client";
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAsterisk, faCheck, faGear } from "@fortawesome/free-solid-svg-icons";
+import {
+  faAsterisk,
+  faCheck,
+  faGear,
+  IconDefinition,
+} from "@fortawesome/free-solid-svg-icons";
 import { Form, InputGroup, Button } from "react-bootstrap";
 import { toast } from "react-toastify";
 import { updateArtworkData } from "@/fetching/fetching";
@@ -11,13 +16,13 @@ type ChangeArtworkDataInputComponentProps = {
   name: string;
   label: string;
   type: string;
-  icon: any;
+  icon: IconDefinition;
   artwork_id: number;
   placeholder: string;
 };
 
 function ChangeArtworkDataInputComponent(
-  props: ChangeArtworkDataInputComponentProps,
+  props: ChangeArtworkDataInputComponentProps
 ) {
   const showAsterisk =
     props.formik.errors[props.name] && props.formik.touched[props.name];
@@ -77,7 +82,7 @@ function ChangeArtworkDataInputComponent(
                 updateArtworkData(
                   props.artwork_id,
                   props.name,
-                  props.formik.values[props.name],
+                  props.formik.values[props.name]
                 );
                 toast.success(`${props.label} changed successfully`, {
                   className: "toast-success",
