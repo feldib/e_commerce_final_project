@@ -34,6 +34,7 @@ import {
   updateArtworkData,
 } from "@/fetching/fetching";
 import { Category } from "@/fetching/types";
+import { MAX_IMAGE_SIZE, VALID_IMAGE_EXTENSIONS } from "@/utils/constants";
 
 function EditArtworkData() {
   const { artwork_id: artworkIdString } = useParams();
@@ -56,14 +57,10 @@ function EditArtworkData() {
 
   const router = useRouter();
 
-  const MAX_IMAGE_SIZE = 102400; //100KB
-
-  const validImageExtensions = ["jpg", "gif", "png", "jpeg", "svg", "webp"];
-
   function isValidImage(fileName: string): boolean {
     if (!fileName) return false;
     const ext = fileName.split(".").pop()?.toLowerCase() || "";
-    return validImageExtensions.includes(ext);
+    return VALID_IMAGE_EXTENSIONS.includes(ext);
   }
 
   const formik = useFormik({
