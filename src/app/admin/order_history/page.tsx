@@ -25,6 +25,7 @@ function UserOrderHistory() {
     return orders.map((orderData: any, index: number) => {
       return (
         <OrderSummaryComponent
+          key={index}
           title={`Order ${len - index}`}
           items={orderData.items}
           totalCost={orderData.totalCost}
@@ -35,7 +36,7 @@ function UserOrderHistory() {
 
   const ordersRepresented = useLoading(
     orderDataCollection,
-    representOrderDataCollection,
+    representOrderDataCollection
   );
   return (
     <Col className="mb-5 pb-5">

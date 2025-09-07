@@ -12,6 +12,7 @@ function Orders() {
     return orderDataCollection.map((orderData: any, index: number) => {
       return (
         <OrderSummaryComponent
+          key={index}
           title={`Order ${len - index}`}
           items={orderData.items}
           totalCost={orderData.totalCost}

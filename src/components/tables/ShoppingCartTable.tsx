@@ -16,6 +16,7 @@ function ShoppingCartTable(props: ShoppingCartTableProps) {
     return dataLines.map((line: any, index: number) => {
       return (
         <ShoppingCartDataLines
+          key={index}
           reccomendation={props.reccomendation}
           line={line}
           index={index}

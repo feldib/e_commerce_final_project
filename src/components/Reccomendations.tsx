@@ -14,8 +14,6 @@ type ReccomendationsProps = {
 };
 
 function Reccomendations(props: ReccomendationsProps) {
-  const { loggedIn } = React.useContext(UserDataContext);
-
   const [tableHidden, setTableHidden] = React.useState(false);
   const data = useAxios(`${props.path}?n=10`);
 
@@ -44,8 +42,12 @@ function Reccomendations(props: ReccomendationsProps) {
             <Carousel>
               {data.map((artwork: any, index: number) => {
                 return (
-                  <Carousel.Item interval={3000} className="mb-5 px-none">
-                    <ReccomendationCard key={index} artwork={artwork} />
+                  <Carousel.Item
+                    key={index}
+                    interval={3000}
+                    className="mb-5 px-none"
+                  >
+                    <ReccomendationCard artwork={artwork} />
                   </Carousel.Item>
                 );
               })}

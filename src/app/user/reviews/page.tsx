@@ -11,7 +11,9 @@ function Reviews() {
   const reviews = useAxios(`/${users_url}/get_reviews_of_user`);
   const representReviews = useLoading(reviews, (reviews) => {
     return reviews.map((review: any, index: number) => {
-      return <Review review={review} index={index + 1} admin={false} />;
+      return (
+        <Review key={index} review={review} index={index + 1} admin={false} />
+      );
     });
   });
   return (

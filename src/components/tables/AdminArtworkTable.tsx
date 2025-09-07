@@ -12,7 +12,9 @@ type AdminArtworkTableProps = {
 function AdminArtworkTable(props: AdminArtworkTableProps) {
   function makeDataLines(dataLines: any) {
     return dataLines.map((line: any, index: number) => {
-      return <AdminArtworkTableDatalines line={line} index={index} />;
+      return (
+        <AdminArtworkTableDatalines key={index} line={line} index={index} />
+      );
     });
   }
 

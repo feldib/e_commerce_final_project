@@ -10,8 +10,8 @@ import UnansweredMessage from "../../../components/UnansweredMessage";
 function Messages() {
   const messages = useAxios(`/${admin_url}/unanswered_messages`);
   const messagesRepresented = useLoading(messages, (messages) => {
-    return messages.map((message: any) => {
-      return <UnansweredMessage message={message} />;
+    return messages.map((message: any, index: number) => {
+      return <UnansweredMessage key={index} message={message} />;
     });
   });
   return (

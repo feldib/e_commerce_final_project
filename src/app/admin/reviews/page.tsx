@@ -11,7 +11,9 @@ function Reviews() {
   const reviews = useAxios(`/${admin_url}/get_unapproved_reviews`);
   const representReviews = useLoading(reviews, (reviews) => {
     return reviews.map((review: any, index: number) => {
-      return <Review review={review} index={index + 1} admin={true} />;
+      return (
+        <Review key={index} review={review} index={index + 1} admin={true} />
+      );
     });
   });
   return (

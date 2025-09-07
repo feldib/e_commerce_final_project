@@ -12,7 +12,7 @@ type UserTableProps = {
 function UserTable(props: UserTableProps) {
   function makeDataLines(dataLines: any) {
     return dataLines.map((line: any, index: number) => {
-      return <UserTableDataLines line={line} index={index} />;
+      return <UserTableDataLines key={index} line={line} index={index} />;
     });
   }
 
