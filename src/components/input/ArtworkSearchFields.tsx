@@ -3,10 +3,11 @@ import { Col, Row, Button, Dropdown, InputGroup, Form } from "react-bootstrap";
 import SearchField from "./SearchField";
 import CategoriesDropdown from "./CategoriesDropdown";
 import Queries from "../Queries";
+import { SearchFormikInstance, Category } from "../../fetching/types";
 
 type ArtworkSearchFieldsProps = {
-  formik: any;
-  categories: any;
+  formik: SearchFormikInstance;
+  categories: Category[];
   resetPageNumber: () => void;
 };
 
@@ -60,7 +61,7 @@ function ArtworkSearchFields(props: ArtworkSearchFieldsProps) {
             onBlur={(e) => {
               props.formik.handleBlur(e);
               const min = props.formik.values.min;
-              if (min !== undefined && min >= props.formik.values.max) {
+              if (min >= props.formik.values.max) {
                 props.formik.setFieldValue("max", "");
               }
             }}
@@ -133,7 +134,7 @@ function ArtworkSearchFields(props: ArtworkSearchFieldsProps) {
             onChange={() => {
               props.formik.setFieldValue(
                 "only_featured",
-                !props.formik.values.only_featured,
+                !props.formik.values.only_featured
               );
             }}
           />

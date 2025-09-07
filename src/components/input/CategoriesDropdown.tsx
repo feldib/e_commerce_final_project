@@ -1,15 +1,16 @@
 import React from "react";
 import { Col, Dropdown } from "react-bootstrap";
 import useLoading from "../../hooks/useLoading";
+import { Category } from "@/fetching/types";
 
 type CategoriesDropdownProps = {
-  categories: any;
+  categories: Category[];
   setValue: (value: string | number) => void;
 };
 
 function CategoriesDropdown(props: CategoriesDropdownProps) {
-  function createCategoryButtons(categories: any) {
-    return categories.map((category: any, index: number) => {
+  function createCategoryButtons(categories: Category[]) {
+    return categories.map((category: Category, index: number) => {
       return (
         <Dropdown.Item
           eventKey={category.id}

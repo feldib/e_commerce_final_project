@@ -29,6 +29,11 @@ export interface Tag {
   tname: string;
 }
 
+export interface Category {
+  id: number;
+  cname: string;
+}
+
 export interface Review {
   id: number;
   user_id: number;
@@ -71,14 +76,14 @@ export interface Message {
 }
 
 export interface SearchParams {
-  title?: string;
-  artist_name?: string;
-  category_id?: string;
-  order?: string;
-  n?: number;
-  min?: string;
-  max?: string;
-  only_featured?: boolean;
+  title: string;
+  artist_name: string;
+  category_id: string;
+  order: string;
+  n: number;
+  min: number;
+  max: number;
+  only_featured: boolean;
 }
 
 export interface ArtworkSent {
@@ -98,3 +103,10 @@ export interface InvoiceData {
   shipping_address: string;
   phone_number: string;
 }
+
+// Formik Types - using FormikProps from formik
+import { FormikProps } from "formik";
+
+export type SearchFormikInstance = FormikProps<SearchParams>;
+export type UserFormikInstance = FormikProps<User>;
+export type ArtworkFormikInstance = FormikProps<ArtworkSent>;

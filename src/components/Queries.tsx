@@ -1,11 +1,12 @@
 import React from "react";
 import { Row } from "react-bootstrap";
 import Query from "./Query";
+import { SearchFormikInstance, Category } from "../fetching/types";
 
 type QueriesProps = {
-  formik: any;
+  formik: SearchFormikInstance;
   resetPageNumber: () => void;
-  categories: any[];
+  categories: Category[];
 };
 
 function Queries(props: QueriesProps) {
@@ -74,8 +75,8 @@ function Queries(props: QueriesProps) {
         <Query
           text={`${
             props.categories.find((cat) => {
-              return cat.id === parseInt(props.formik.values.category_id);
-            }).cname
+              return cat.id === parseInt(props.formik.values.category_id!);
+            })?.cname || "Unknown Category"
           }`}
           remove={() => {
             props.resetPageNumber();
