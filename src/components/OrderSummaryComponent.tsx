@@ -1,12 +1,12 @@
-"use client";
 import React from "react";
 import { Row } from "react-bootstrap";
 import BuyTable from "./tables/BuyTable";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
+import { OrderItem } from "../fetching/types";
 
 type OrderSummaryComponentProps = {
   title?: string;
-  items: any;
+  items: OrderItem[];
   totalCost: number;
   button?: React.ReactNode;
 };

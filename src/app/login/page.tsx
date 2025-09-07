@@ -10,6 +10,7 @@ import * as Yup from "yup";
 import { ToastContainer, toast } from "react-toastify";
 import PageTitle from "../../components/PageTitle";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
+import { User } from "../../fetching/types";
 import Link from "next/link";
 
 function SignInPageInner() {
@@ -26,7 +27,7 @@ function SignInPageInner() {
 
   async function onSubmit(values: { email: string; password: string }) {
     try {
-      await logIn(values.email, values.password, (userData: any) => {
+      await logIn(values.email, values.password, (userData: { user: User }) => {
         settleSuccessfulLogIn(to_checkout, userData, router);
       });
       toast.success("Logged in", {

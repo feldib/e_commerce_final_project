@@ -22,7 +22,7 @@ type ChangeArtworkDataInputComponentProps = {
 };
 
 function ChangeArtworkDataInputComponent(
-  props: ChangeArtworkDataInputComponentProps,
+  props: ChangeArtworkDataInputComponentProps
 ) {
   const showAsterisk =
     props.formik.errors[props.name] && props.formik.touched[props.name];
@@ -82,7 +82,7 @@ function ChangeArtworkDataInputComponent(
                 updateArtworkData(
                   props.artwork_id,
                   props.name,
-                  props.formik.values[props.name],
+                  props.formik.values[props.name]
                 );
                 toast.success(`${props.label} changed successfully`, {
                   className: "toast-success",

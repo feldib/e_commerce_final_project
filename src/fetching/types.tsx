@@ -75,6 +75,11 @@ export interface Message {
   message_time: string;
 }
 
+export interface ShoppingCartItem {
+  artwork_id: number;
+  quantity: number;
+}
+
 export interface SearchParams {
   title: string;
   artist_name: string;

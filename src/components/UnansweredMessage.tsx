@@ -17,7 +17,7 @@ import { faKeyboard, faAsterisk } from "@fortawesome/free-solid-svg-icons";
 
 type UnansweredMessageProps = {
   message: {
-    id: string;
+    id: number;
     email: string;
     message_title: string;
     message_txt: string;
@@ -43,7 +43,7 @@ function UnansweredMessage(props: UnansweredMessageProps) {
       props.message.id,
       props.message.email,
       values.reply_title,
-      values.reply_text,
+      values.reply_text
     )
       .then(() => {
         toast.success("Reply sent successfully", {

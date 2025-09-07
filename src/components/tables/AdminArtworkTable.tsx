@@ -10,16 +10,20 @@ type AdminArtworkTableProps = {
 };
 
 function AdminArtworkTable(props: AdminArtworkTableProps) {
-  function makeDataLines(dataLines: any) {
-    return dataLines.map((line: any, index: number) => {
-      return (
-        <AdminArtworkTableDatalines key={index} line={line} index={index} />
-      );
-    });
+  function makeDataLines(dataLines: Artwork[]): React.JSX.Element {
+    return (
+      <>
+        {dataLines.map((line: Artwork, index: number) => {
+          return (
+            <AdminArtworkTableDatalines key={index} line={line} index={index} />
+          );
+        })}
+      </>
+    );
   }
 
   const dataLines = useLoading(props.dataLines, (dataLines) => {
-    return presentData(dataLines, makeDataLines);
+    return presentData(dataLines as Artwork[], makeDataLines);
   });
 
   return (

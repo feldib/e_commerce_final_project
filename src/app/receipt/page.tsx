@@ -3,12 +3,13 @@ import { Col, Row, Container, Button } from "react-bootstrap";
 import OrderSummaryComponent from "../../components/OrderSummaryComponent";
 import Link from "next/link";
 import PageTitle from "../../components/PageTitle";
+import { OrderItem } from "../../fetching/types";
 
 import React, { useEffect, useState } from "react";
 
 function ReceiptPage() {
   const [currentOrderData, setCurrentOrderData] = useState<{
-    items: any[];
+    items: OrderItem[];
     totalCost: number;
   }>({ items: [], totalCost: 0 });
 
@@ -17,7 +18,7 @@ function ReceiptPage() {
     setCurrentOrderData(
       currentOrderString
         ? JSON.parse(currentOrderString)
-        : { items: [], totalCost: 0 },
+        : { items: [], totalCost: 0 }
     );
   }, []);
 

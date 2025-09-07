@@ -15,7 +15,7 @@ type ReccomendationsProps = {
 
 function Reccomendations(props: ReccomendationsProps) {
   const [tableHidden, setTableHidden] = React.useState(false);
-  const recommendations = useAxios(`${props.path}?n=10`) as any[];
+  const recommendations = useAxios(`${props.path}?n=10`) as Artwork[];
 
   const isMd = useMediaQuery({ minWidth: "768px" });
 

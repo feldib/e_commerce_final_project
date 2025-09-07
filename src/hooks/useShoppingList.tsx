@@ -2,9 +2,10 @@
 import React from "react";
 import { getLocatStorageShoppingCart } from "../helpers/helpers";
 import { getShoppingCart } from "@/fetching/fetching";
+import { ShoppingCartItem } from "@/fetching/types";
 
 const useShoppingList = (loggedIn: boolean) => {
-  const [data, setData] = React.useState<any[]>([]);
+  const [data, setData] = React.useState<ShoppingCartItem[]>([]);
   React.useEffect(() => {
     (async () => {
       if (loggedIn) {
