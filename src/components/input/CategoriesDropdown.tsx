@@ -5,30 +5,34 @@ import { Category } from "@/fetching/types";
 
 type CategoriesDropdownProps = {
   categories: Category[];
-  setValue: (value: string | number) => void;
+  setValue: (value: string) => void;
 };
 
 function CategoriesDropdown(props: CategoriesDropdownProps) {
   function createCategoryButtons(categories: Category[]) {
-    return categories.map((category: Category, index: number) => {
-      return (
-        <Dropdown.Item
-          eventKey={category.id}
-          key={index}
-          id={category.id}
-          style={{ cursor: "pointer" }}
-        >
-          {category.cname}
-        </Dropdown.Item>
-      );
-    });
+    return (
+      <>
+        {categories.map((category: Category, index: number) => (
+          <Dropdown.Item
+            eventKey={category.id}
+            key={index}
+            id={JSON.stringify(category.id)}
+            style={{ cursor: "pointer" }}
+          >
+            {category.cname}
+          </Dropdown.Item>
+        ))}
+      </>
+    );
   }
   const categories = useLoading(props.categories, createCategoryButtons);
   return (
     <Col className="mx-auto mb-3">
       <Dropdown
-        onSelect={(e: any) => {
-          props.setValue(e);
+        onSelect={(e: string | null) => {
+          if (e !== null) {
+            props.setValue(e);
+          }
         }}
       >
         <Dropdown.Toggle variant="outilne-dark">Categories</Dropdown.Toggle>
