@@ -164,6 +164,15 @@ export const removeArtwork = async (artwork_id: number): Promise<any> => {
 // Shopping Cart / Wishlist
 // ===================
 
+export const getShoppingCart = async (): Promise<
+  { artwork_id: number; quantity: number }[]
+> => {
+  const res = await axiosConfigured.get(
+    `${server_url}/${users_url}/shopping_cart`
+  );
+  return res.data as { artwork_id: number; quantity: number }[];
+};
+
 export const addToShoppingList = async (artwork_id: number): Promise<any> => {
   await axiosConfigured.post(`${server_url}/${users_url}/shopping_cart`, {
     artwork_id,

@@ -1,18 +1,16 @@
 "use client";
 import React from "react";
-import { server_url } from "../utils/api_constants";
 import { getLocatStorageShoppingCart } from "../helpers/helpers";
-import axiosConfigured from "@/utils/axiosConfigured";
+import { getShoppingCart } from "@/fetching/fetching";
 
 const useShoppingList = (loggedIn: boolean) => {
   const [data, setData] = React.useState<any[]>([]);
   React.useEffect(() => {
     (async () => {
       if (loggedIn) {
-        await axiosConfigured
-          .get(`${server_url}/users/shopping_cart`)
-          .then(function (results) {
-            setData(results.data as any[]);
+        await getShoppingCart()
+          .then((results) => {
+            setData(results);
           })
           .catch(function (error) {
             setData([]);

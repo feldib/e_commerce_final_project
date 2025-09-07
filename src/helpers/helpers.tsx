@@ -8,7 +8,6 @@ import {
 import { server_url } from "../utils/api_constants";
 import React from "react";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
-import axiosConfigured from "@/utils/axiosConfigured";
 
 const presentData = (
   dataLines: any[],
