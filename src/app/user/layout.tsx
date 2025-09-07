@@ -15,7 +15,7 @@ import useLoading from "../../hooks/useLoading";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
 import { useRouter } from "next/navigation";
 
-function ProfilePage({ children }: React.PropsWithChildren<{}>) {
+function ProfilePage({ children }: React.PropsWithChildren<React.ReactNode>) {
   const { user } = React.useContext(UserDataContext);
   const router = useRouter();
   redirectIfNotloggedIn(router);

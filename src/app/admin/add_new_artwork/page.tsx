@@ -68,8 +68,8 @@ function AddNewArtworkPage() {
     tags: ReactTagInputTag[];
     quantity: number;
     category_id: number;
-    thumbnail: any;
-    other_pictures: any[];
+    thumbnail: Blob | undefined;
+    other_pictures: Blob[];
     description: string;
   }>({
     initialValues: {
@@ -79,7 +79,7 @@ function AddNewArtworkPage() {
       tags: [],
       quantity: 0,
       category_id: 0,
-      thumbnail: "",
+      thumbnail: undefined,
       other_pictures: [],
       description: "",
     },
@@ -95,7 +95,9 @@ function AddNewArtworkPage() {
 
           const artwork_id = response.data;
 
-          await addNewThumbnail(artwork_id, values.thumbnail);
+          if (values.thumbnail) {
+            await addNewThumbnail(artwork_id, values.thumbnail);
+          }
 
           await addNewOtherPictures(artwork_id, values.other_pictures);
 
@@ -118,12 +120,12 @@ function AddNewArtworkPage() {
       thumbnail: Yup.mixed()
         .required("Thumbnail required")
         .test("is-valid-type", "Not a valid image type", (value) =>
-          isValidImage(value instanceof File ? value.name : ""),
+          isValidImage(value instanceof File ? value.name : "")
         )
         .test(
           "is-valid-size",
           "Max allowed size is 100KB",
-          (value) => value instanceof File && value.size <= MAX_IMAGE_SIZE,
+          (value) => value instanceof File && value.size <= MAX_IMAGE_SIZE
         ),
       tags: Yup.array()
         .min(3, "Add minimum 3 tags!")
@@ -131,18 +133,18 @@ function AddNewArtworkPage() {
           Yup.object().shape({
             id: Yup.string(),
             text: Yup.string(),
-          }),
+          })
         ),
       other_pictures: Yup.array().of(
         Yup.mixed()
           .test("is-valid-type", "Not a valid image type", (value) =>
-            isValidImage(value instanceof File ? value.name : ""),
+            isValidImage(value instanceof File ? value.name : "")
           )
           .test(
             "is-valid-size",
             "Max allowed size is 100KB",
-            (value) => value instanceof File && value.size <= MAX_IMAGE_SIZE,
-          ),
+            (value) => value instanceof File && value.size <= MAX_IMAGE_SIZE
+          )
       ),
     }),
   });
@@ -159,11 +161,11 @@ function AddNewArtworkPage() {
 
   React.useEffect(() => {
     formik.setFieldValue("tags", tags);
-  }, [tags]);
+  }, [tags, formik]);
 
   const createHandleDelete = (
     tgs: ReactTagInputTag[],
-    setTgs: React.Dispatch<React.SetStateAction<ReactTagInputTag[]>>,
+    setTgs: React.Dispatch<React.SetStateAction<ReactTagInputTag[]>>
   ) => {
     return (i: number) => {
       setTgs(tgs.filter((tag, index) => index !== i));
@@ -172,7 +174,7 @@ function AddNewArtworkPage() {
 
   const createHandleAddition = (
     tgs: ReactTagInputTag[],
-    setTgs: React.Dispatch<React.SetStateAction<ReactTagInputTag[]>>,
+    setTgs: React.Dispatch<React.SetStateAction<ReactTagInputTag[]>>
   ) => {
     return (tag: ReactTagInputTag) => {
       setTgs([...tgs, tag]);
@@ -286,7 +288,7 @@ function AddNewArtworkPage() {
                     if (e.currentTarget.files) {
                       formik.setFieldValue(
                         "thumbnail",
-                        e.currentTarget.files[0],
+                        e.currentTarget.files[0]
                       );
                     }
                   }}
