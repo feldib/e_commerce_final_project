@@ -12,9 +12,11 @@ import { toast } from "react-toastify";
 import { updateArtworkData } from "@/fetching/fetching";
 import { FormikProps } from "formik";
 
-type ChangeArtworkDataInputComponentProps = {
-  formik: FormikProps<Record<string, unknown>>;
-  name: string;
+type ChangeArtworkDataInputComponentProps<
+  T extends Record<string, unknown> = Record<string, unknown>,
+> = {
+  formik: FormikProps<T>;
+  name: string & keyof T;
   label: string;
   type: string;
   icon: IconDefinition;
@@ -22,9 +24,9 @@ type ChangeArtworkDataInputComponentProps = {
   placeholder: string;
 };
 
-function ChangeArtworkDataInputComponent(
-  props: ChangeArtworkDataInputComponentProps
-) {
+function ChangeArtworkDataInputComponent<
+  T extends Record<string, unknown> = Record<string, unknown>,
+>(props: ChangeArtworkDataInputComponentProps<T>) {
   const showAsterisk =
     props.formik.errors[props.name] && props.formik.touched[props.name];
   const [editing, setEditing] = React.useState(false);

@@ -17,7 +17,6 @@ import {
   faX,
 } from "@fortawesome/free-solid-svg-icons";
 import { useFormik } from "formik";
-import { FormikProps } from "formik";
 import * as Yup from "yup";
 import { ToastContainer } from "react-toastify";
 import PageTitle from "../../../../components/PageTitle";
@@ -34,7 +33,7 @@ import {
   removePicture,
   updateArtworkData,
 } from "@/fetching/fetching";
-import { Category, Artwork, Tag } from "@/fetching/types";
+import { Category, Artwork } from "@/fetching/types";
 import {
   MAX_IMAGE_SIZE,
   TAG_DELIMITERS,
@@ -163,7 +162,7 @@ function EditArtworkData() {
       });
       setTags(transformedTags);
     }
-  }, [artworkData]);
+  }, [artworkData, formik]);
 
   React.useEffect(() => {
     formik.setFieldValue("tags", tags);
@@ -327,9 +326,11 @@ function EditArtworkData() {
                     width: "150px",
                   }}
                 >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={formik.values.thumbnail}
                     className="mt-3 uploaded-image"
+                    alt="Uploaded thumbnail"
                   />
 
                   <FontAwesomeIcon
@@ -389,7 +390,12 @@ function EditArtworkData() {
                           width: "150px",
                         }}
                       >
-                        <img src={pic} className="mt-3 uploaded-image" />
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={pic}
+                          alt="Uploaded other picture"
+                          className="mt-3 uploaded-image"
+                        />
 
                         <FontAwesomeIcon
                           icon={faX}

@@ -4,16 +4,20 @@ import { faAsterisk, IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { Form, InputGroup } from "react-bootstrap";
 import { FormikProps } from "formik";
 
-type NewArtworkInputComponentProps = {
+type NewArtworkInputComponentProps<
+  T extends Record<string, unknown> = Record<string, unknown>,
+> = {
   label: string;
-  name: string;
+  name: string & keyof T;
   type: string;
   placeholder: string;
   icon: IconDefinition;
-  formik: FormikProps<Record<string, unknown>>;
+  formik: FormikProps<T>;
 };
 
-function NewArtworkInputComponent(props: NewArtworkInputComponentProps) {
+function NewArtworkInputComponent<
+  T extends Record<string, unknown> = Record<string, unknown>,
+>(props: NewArtworkInputComponentProps<T>) {
   const showAsterisk =
     props.formik.errors[props.name] && props.formik.touched[props.name];
   return (

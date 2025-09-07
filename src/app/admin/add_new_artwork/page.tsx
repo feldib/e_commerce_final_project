@@ -42,6 +42,18 @@ import {
   VALID_IMAGE_EXTENSIONS,
 } from "@/utils/constants";
 
+interface AddNewArtworkFormValues extends Record<string, unknown> {
+  title: string;
+  artist_name: string;
+  price: number;
+  tags: ReactTagInputTag[];
+  quantity: number;
+  category_id: number;
+  thumbnail: Blob | undefined;
+  other_pictures: Blob[];
+  description: string;
+}
+
 function AddNewArtworkPage() {
   const categories = useAxios("/categories") as Category[];
 
@@ -65,17 +77,7 @@ function AddNewArtworkPage() {
     return VALID_IMAGE_EXTENSIONS.includes(ext);
   }
 
-  const formik = useFormik<{
-    title: string;
-    artist_name: string;
-    price: number;
-    tags: ReactTagInputTag[];
-    quantity: number;
-    category_id: number;
-    thumbnail: Blob | undefined;
-    other_pictures: Blob[];
-    description: string;
-  }>({
+  const formik = useFormik<AddNewArtworkFormValues>({
     initialValues: {
       title: "",
       artist_name: "",
@@ -300,9 +302,11 @@ function AddNewArtworkPage() {
                     width: "150px",
                   }}
                 >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={URL.createObjectURL(formik.values.thumbnail)}
                     className="mt-3 uploaded-image"
+                    alt="Uploaded thumbnail"
                   />
 
                   <FontAwesomeIcon
@@ -359,9 +363,11 @@ function AddNewArtworkPage() {
                           width: "150px",
                         }}
                       >
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
                           src={URL.createObjectURL(pic)}
                           className="mt-3 uploaded-image"
+                          alt="Uploaded other picture"
                         />
 
                         <FontAwesomeIcon
