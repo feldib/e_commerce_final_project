@@ -32,7 +32,7 @@ function ShoppingCartPage() {
             setCosts(temp);
 
             setTotalCost(
-              Object.values(costs).reduce((acc, curr) => acc + curr, 0),
+              Object.values(costs).reduce((acc, curr) => acc + curr, 0)
             );
           }}
         />
@@ -42,22 +42,24 @@ function ShoppingCartPage() {
         </Row>
 
         <Row>
-          <Col className="text-center mb-5">
-            <Link href={loggedIn ? "/checkout" : "/login"}>
-              <Button
-                className="submit"
-                onClick={() => {
-                  localStorage.removeItem("currentOrder");
-                  localStorage.setItem(
-                    "currentOrder",
-                    JSON.stringify({ items: shoppingListItems, totalCost }),
-                  );
-                }}
-              >
-                Go to Checkout
-              </Button>
-            </Link>
-          </Col>
+          {shoppingListItems.length !== 0 && (
+            <Col className="text-center mb-5">
+              <Link href={loggedIn ? "/checkout" : "/login"}>
+                <Button
+                  className="submit"
+                  onClick={() => {
+                    localStorage.removeItem("currentOrder");
+                    localStorage.setItem(
+                      "currentOrder",
+                      JSON.stringify({ items: shoppingListItems, totalCost })
+                    );
+                  }}
+                >
+                  Go to Checkout
+                </Button>
+              </Link>
+            </Col>
+          )}
         </Row>
       </Row>
     </Container>
