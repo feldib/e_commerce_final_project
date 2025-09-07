@@ -5,17 +5,14 @@ import {
   getIsAdmin,
 } from "@/fetching/fetching";
 
-import axios from "axios";
-
 import { server_url } from "../utils/api_constants";
 import React from "react";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
-
-axios.defaults.withCredentials = true;
+import axiosConfigured from "@/utils/axiosConfigured";
 
 const presentData = (
   dataLines: any[],
-  makeDataLines: (dataLines: any[]) => React.JSX.Element,
+  makeDataLines: (dataLines: any[]) => React.JSX.Element
 ): React.JSX.Element => {
   if (dataLines.length > 0) {
     return makeDataLines(dataLines);
@@ -32,13 +29,13 @@ const presentData = (
 
 const increaseLocalStorageShoppingCartQuantity = (
   artwork_id: number,
-  stored_amount: number,
+  stored_amount: number
 ) => {
   const shoppingCart = getShoppingCartFromLocalStorage();
 
   const existingRecordIndex = shoppingCart.findIndex(
     (item: { artwork_id: number; quantity: number }) =>
-      item.artwork_id === artwork_id,
+      item.artwork_id === artwork_id
   );
 
   if (stored_amount > 0) {
@@ -63,7 +60,7 @@ const decreaseLocalStorageShoppingCartQuantity = (artwork_id: number) => {
   const shoppingCart = getShoppingCartFromLocalStorage();
   const existingRecordIndex = shoppingCart.findIndex(
     (item: { artwork_id: number; quantity: number }) =>
-      item.artwork_id === artwork_id,
+      item.artwork_id === artwork_id
   );
 
   if (
@@ -85,7 +82,7 @@ const removeLocalStorageShoppingCartQuantity = (artwork_id: number) => {
 
   const existingRecordIndex = shoppingCart.findIndex(
     (item: { artwork_id: number; quantity: number }) =>
-      item.artwork_id === artwork_id,
+      item.artwork_id === artwork_id
   );
 
   if (

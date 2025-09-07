@@ -1,9 +1,6 @@
 "use client";
 import React from "react";
-import axios from "axios";
 import { getShoppingCartFromLocalStorage } from "@/helpers/helpers";
-
-axios.defaults.withCredentials = true;
 
 const useQuantity = (loggedIn: boolean, inStock: number, artworkId: number) => {
   const [quantity, setQuantity] = React.useState(inStock);
@@ -21,7 +18,7 @@ const useQuantity = (loggedIn: boolean, inStock: number, artworkId: number) => {
       }
       console.log(
         "signedOutShoppingCart",
-        JSON.stringify(signedOutShoppingCart),
+        JSON.stringify(signedOutShoppingCart)
       );
     }
   }, []);

@@ -1,14 +1,13 @@
 "use client";
 import React from "react";
 import { server_url } from "../utils/api_constants";
-import axios from "axios";
-axios.defaults.withCredentials = true;
+import axiosConfigured from "@/utils/axiosConfigured";
 
-const useAxios = (url: string) => {
+const useaxiosConfigured = (url: string) => {
   const [data, setData] = React.useState<any>(undefined);
   React.useEffect(() => {
     (async () => {
-      await axios
+      await axiosConfigured
         .get(`${server_url}${url}`)
         .then(function (results) {
           setData(results.data);
@@ -23,4 +22,4 @@ const useAxios = (url: string) => {
   return data;
 };
 
-export default useAxios;
+export default useaxiosConfigured;
