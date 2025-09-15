@@ -90,13 +90,25 @@ export const getArtworkSearchResults = async (
   objects: SearchParams,
   pageNumber: number
 ): Promise<Artwork[]> => {
-  const queries = Object.entries(objects)
+  const objectsCopy = { ...objects };
+  // Filter out empty values, but handle min/max correctly
+  const min = objectsCopy.min;
+  const max = objectsCopy.max;
+  if (min && max && max < min) {
+    objectsCopy.max = 0; // reset max if it's less than min
+  }
+  const filteredObjects = Object.entries(objectsCopy)
+    .filter(([key, value]) => {
+      if (key === "min" && value === 0) return false;
+      if (key === "max" && value === 0) return false;
+      return true;
+    })
     .map(([key, value]) => `${key}=${value}`)
     .join("&");
 
   return axiosConfigured
     .get(
-      `${server_url}/search_artworks${queries.length ? "?" + queries : ""}${
+      `${server_url}/search_artworks${filteredObjects.length ? "?" + filteredObjects : ""}${
         objects.n ? "&offset=" + objects.n * (pageNumber - 1) : ""
       }`
     )

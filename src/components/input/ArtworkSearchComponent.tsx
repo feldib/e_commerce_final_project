@@ -8,7 +8,7 @@ import AdminArtworkTable from "../tables/AdminArtworkTable";
 import ArtworkSearchFields from "./ArtworkSearchFields";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { Artwork, Category } from "@/fetching/types";
+import { Artwork, Category, SearchParams } from "@/fetching/types";
 
 type ArtworkSearchComponentProps = {
   admin?: boolean;
@@ -19,10 +19,13 @@ function ArtworkSearchComponent({ admin }: ArtworkSearchComponentProps) {
 
   const [pageNumber, setPageNumber] = React.useState(0);
 
-  async function search(values: any) {
-    const results = await getArtworkSearchResults(values, pageNumber);
-    setSearchResults(results);
-  }
+  const search = React.useCallback(
+    async (values: SearchParams) => {
+      const results = await getArtworkSearchResults(values, pageNumber);
+      setSearchResults(results);
+    },
+    [pageNumber]
+  );
 
   const formik = useFormik({
     enableReinitialize: true,
@@ -33,8 +36,8 @@ function ArtworkSearchComponent({ admin }: ArtworkSearchComponentProps) {
       category_id: "",
       order: "asc",
       n: 5,
-      min: "",
-      max: "",
+      min: 0,
+      max: 0,
       only_featured: false,
     },
 
@@ -57,7 +60,7 @@ function ArtworkSearchComponent({ admin }: ArtworkSearchComponentProps) {
     if (pageNumber) {
       search(formik.values);
     }
-  }, [pageNumber]);
+  }, [pageNumber, search, formik.values]);
 
   React.useEffect(() => {
     results.current?.scrollIntoView({ behavior: "instant" });
