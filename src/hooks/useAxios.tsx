@@ -17,7 +17,7 @@ const useAxios = (url: string) => {
           console.log(error);
         });
     })();
-  }, []);
+  });
 
   return data;
 };
