@@ -5,9 +5,10 @@ import useAxios from "../../../hooks/useAxios";
 import useLoading from "../../../hooks/useLoading";
 import { admin_url } from "../../../utils/api_constants";
 import UserTable from "../../../components/tables/UserTable";
+import { User } from "@/fetching/types";
 
 function Users() {
-  const users = useAxios(`/${admin_url}/users`);
+  const users = useAxios(`/${admin_url}/users`) as User[];
   const usersRepresented = useLoading(users, (users) => {
     return <UserTable users={users} />;
   });
