@@ -6,6 +6,9 @@ WORKDIR /app
 ARG NEXT_PUBLIC_SERVER_URL
 ENV NEXT_PUBLIC_SERVER_URL=$NEXT_PUBLIC_SERVER_URL
 
+# Disable Next.js telemetry
+ENV NEXT_TELEMETRY_DISABLED=1
+
 # Copy package files first for better caching
 COPY package.json package-lock.json ./
 
@@ -28,6 +31,7 @@ RUN addgroup -g 1001 -S nodejs && \
 
 # Set environment
 ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
 
 # Copy package files
 COPY package.json package-lock.json ./
