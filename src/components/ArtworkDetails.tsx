@@ -123,7 +123,7 @@ function ArtworkDetails({ artwork_id, artwork }: ArtworkDetailsProps) {
                   <Row>
                     <p>
                       {artwork.tags
-                        .map((tag: Tag) => {
+                        ?.map((tag: Tag) => {
                           return tag.tname;
                         })
                         .join(", ")}
@@ -166,7 +166,7 @@ function ArtworkDetails({ artwork_id, artwork }: ArtworkDetailsProps) {
         </Col>
       </Row>
 
-      <ArtworkPicturesCarousel other_pictures={artwork.other_pictures} />
+      <ArtworkPicturesCarousel other_pictures={artwork.other_pictures ?? []} />
 
       <Row className="mt-5">
         <Row className="text-center">
