@@ -4,10 +4,10 @@ import Link from "next/link";
 import { ExpandedNavContext } from "./Header";
 
 type UserNavbarMenuItemsProps = {
-  item: string;
+  first_name: string;
 };
 
-function UserNavbarMenuItems({ item }: UserNavbarMenuItemsProps) {
+function UserNavbarMenuItems({ first_name }: UserNavbarMenuItemsProps) {
   const { closeExpandedNav } = React.useContext(ExpandedNavContext);
 
   return (
@@ -18,7 +18,7 @@ function UserNavbarMenuItems({ item }: UserNavbarMenuItemsProps) {
         className="nav-link"
         style={{ color: "inherit", textDecoration: "inherit" }}
       >
-        {item}
+        {first_name}
       </Link>
     </>
   );
