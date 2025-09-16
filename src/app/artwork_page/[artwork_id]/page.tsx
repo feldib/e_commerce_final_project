@@ -2,10 +2,10 @@
 import React, { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import { useRouter, useParams } from "next/navigation";
-import useLoading from "../../../hooks/useLoading";
-import useAxios from "../../../hooks/useAxios";
-import ArtworkDetails from "../../../components/ArtworkDetails";
-import FloatingBackButton from "../../../components/buttons/FloatingBackButton";
+import useLoading from "@/hooks/useLoading";
+import useAxios from "@/hooks/useAxios";
+import ArtworkDetails from "@/components/ArtworkDetails";
+import FloatingBackButton from "@/components/buttons/FloatingBackButton";
 import { Artwork } from "@/fetching/types";
 
 function ArtworkPage() {

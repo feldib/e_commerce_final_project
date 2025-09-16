@@ -2,11 +2,11 @@
 import React from "react";
 import { ToastContainer } from "react-toastify";
 import Link from "next/link";
-import FavouriteButton from "../buttons/FavouriteButton";
-import ShoppingCartButton from "../buttons/ShoppingCartButton";
-import { UserDataContext } from "../providers/UserDataProvider";
-import { server_url } from "../../utils/api_constants";
-import useQuantity from "../../hooks/useQuantity";
+import FavouriteButton from "@/components/buttons/FavouriteButton";
+import ShoppingCartButton from "@/components/buttons/ShoppingCartButton";
+import { UserDataContext } from "@/components/providers/UserDataProvider";
+import { server_url } from "@/utils/api_constants";
+import useQuantity from "@/hooks/useQuantity";
 import { Artwork } from "@/fetching/types";
 
 type BuyTableDataLinesProps = {

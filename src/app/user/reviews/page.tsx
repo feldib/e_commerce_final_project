@@ -1,11 +1,11 @@
 "use client";
 import React from "react";
 import { Col, Row } from "react-bootstrap";
-import useLoading from "../../../hooks/useLoading";
-import useAxios from "../../../hooks/useAxios";
-import { users_url } from "../../../utils/api_constants";
-import Review from "../../../components/Review";
-import SubPageTitle from "../../../components/SubPageTitle";
+import useLoading from "@/hooks/useLoading";
+import useAxios from "@/hooks/useAxios";
+import { users_url } from "@/utils/api_constants";
+import Review from "@/components/Review";
+import SubPageTitle from "@/components/SubPageTitle";
 import { Review as ReviewType } from "@/fetching/types";
 
 function Reviews() {

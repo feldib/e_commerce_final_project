@@ -1,7 +1,7 @@
 import React from "react";
 import { faBasketShopping } from "@fortawesome/free-solid-svg-icons";
 import SinglePurposeButton from "./SinglePurposeButton";
-import { increaseLocalStorageShoppingCartQuantity } from "../../helpers/helpers";
+import { increaseLocalStorageShoppingCartQuantity } from "@/helpers/helpers";
 import { addToShoppingList } from "@/fetching/fetching";
 
 type ShoppingCartButtonProps = {

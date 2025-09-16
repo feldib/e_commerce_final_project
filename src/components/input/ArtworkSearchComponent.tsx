@@ -1,10 +1,10 @@
 "use client";
 import React from "react";
-import useAxios from "../../hooks/useAxios";
+import useAxios from "@/hooks/useAxios";
 import { getArtworkSearchResults } from "@/fetching/fetching";
 import { Row, Form, Col, Button } from "react-bootstrap";
-import BuyTable from "../tables/BuyTable";
-import AdminArtworkTable from "../tables/AdminArtworkTable";
+import BuyTable from "@/components/tables/BuyTable";
+import AdminArtworkTable from "@/components/tables/AdminArtworkTable";
 import ArtworkSearchFields from "./ArtworkSearchFields";
 import { useFormik } from "formik";
 import * as Yup from "yup";

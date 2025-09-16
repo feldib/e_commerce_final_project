@@ -1,11 +1,11 @@
 "use client";
 import React from "react";
 import { Col } from "react-bootstrap";
-import useAxios from "../../../hooks/useAxios";
-import useLoading from "../../../hooks/useLoading";
-import { admin_url } from "../../../utils/api_constants";
-import OrderSummaryComponent from "../../../components/OrderSummaryComponent";
-import { Order } from "../../../fetching/types";
+import useAxios from "@/hooks/useAxios";
+import useLoading from "@/hooks/useLoading";
+import { admin_url } from "@/utils/api_constants";
+import OrderSummaryComponent from "@/components/OrderSummaryComponent";
+import { Order } from "@/fetching/types";
 
 function Orders() {
   function representOrderDataCollection(orderDataCollection: Order[]) {

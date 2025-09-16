@@ -9,7 +9,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { ToastContainer } from "react-toastify";
 import UserDataInputComponents from "./UserDataInputComponent";
-import SubPageTitle from "../SubPageTitle";
+import SubPageTitle from "@/components/SubPageTitle";
 import { FormikProps } from "formik";
 
 type UserDataChangingComponentProps = {

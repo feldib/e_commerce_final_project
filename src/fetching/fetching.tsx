@@ -1,5 +1,5 @@
 import axiosConfigured from "@/utils/axiosConfigured";
-import { server_url, users_url, admin_url } from "../utils/api_constants";
+import { server_url, users_url, admin_url } from "@/utils/api_constants";
 import {
   User,
   Artwork,

@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import useAxios from "../hooks/useAxios";
+import useAxios from "@/hooks/useAxios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 import { Col, Row, Carousel } from "react-bootstrap";

@@ -5,7 +5,7 @@ import {
   getIsAdmin,
 } from "@/fetching/fetching";
 
-import { server_url } from "../utils/api_constants";
+import { server_url } from "@/utils/api_constants";
 import React from "react";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { ShoppingCartItem } from "@/fetching/types";

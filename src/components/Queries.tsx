@@ -1,7 +1,7 @@
 import React from "react";
 import { Row } from "react-bootstrap";
 import Query from "./Query";
-import { SearchFormikInstance, Category } from "../fetching/types";
+import { SearchFormikInstance, Category } from "@/fetching/types";
 
 type QueriesProps = {
   formik: SearchFormikInstance;

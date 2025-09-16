@@ -1,7 +1,7 @@
 import React from "react";
 import { Container } from "react-bootstrap";
-import PageTitle from "../../components/PageTitle";
-import ArtworkSearchComponent from "../../components/input/ArtworkSearchComponent";
+import PageTitle from "@/components/PageTitle";
+import ArtworkSearchComponent from "@/components/input/ArtworkSearchComponent";
 
 function Search() {
   return (

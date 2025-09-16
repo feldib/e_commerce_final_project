@@ -1,8 +1,8 @@
 import React from "react";
 import { Row } from "react-bootstrap";
-import useLoading from "../../hooks/useLoading";
-import ShoppingCartDataLines from "../datalines/ShoppingCartDataLines";
-import { presentData } from "../../helpers/helpers";
+import useLoading from "@/hooks/useLoading";
+import ShoppingCartDataLines from "@/components/datalines/ShoppingCartDataLines";
+import { presentData } from "@/helpers/helpers";
 import { Artwork } from "@/fetching/types";
 
 type ShoppingCartTableProps = {

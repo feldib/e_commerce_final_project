@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
 import { Row, Container } from "react-bootstrap";
-import { users_url } from "../utils/api_constants";
-import Reccomendations from "../components/Reccomendations";
+import { users_url } from "@/utils/api_constants";
+import Reccomendations from "@/components/Reccomendations";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
 
 function HomePage() {

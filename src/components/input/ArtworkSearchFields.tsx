@@ -2,8 +2,8 @@ import React from "react";
 import { Col, Row, Button, Dropdown, InputGroup, Form } from "react-bootstrap";
 import SearchField from "./SearchField";
 import CategoriesDropdown from "./CategoriesDropdown";
-import Queries from "../Queries";
-import { SearchFormikInstance, Category } from "../../fetching/types";
+import Queries from "@/components/Queries";
+import { SearchFormikInstance, Category } from "@/fetching/types";
 
 type ArtworkSearchFieldsProps = {
   formik: SearchFormikInstance;

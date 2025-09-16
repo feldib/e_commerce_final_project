@@ -1,12 +1,12 @@
 "use client";
 import React from "react";
-import { server_url } from "../utils/api_constants";
+import { server_url } from "@/utils/api_constants";
 import { Col, Row, Card } from "react-bootstrap";
 import FavouriteButton from "./buttons/FavouriteButton";
 import ShoppingCartButton from "./buttons/ShoppingCartButton";
 import Link from "next/link";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
-import useQuantity from "../hooks/useQuantity";
+import useQuantity from "@/hooks/useQuantity";
 import { Artwork } from "@/fetching/types";
 
 type ReccomendationCardProps = {

@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import ChangeArtworkDataInputComponent from "../../../../components/input/ChangeArtworkDataInputComponent";
+import ChangeArtworkDataInputComponent from "@/components/input/ChangeArtworkDataInputComponent";
 import {
   Container,
   Col,
@@ -19,14 +19,14 @@ import {
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { ToastContainer } from "react-toastify";
-import PageTitle from "../../../../components/PageTitle";
-import FloatingBackButton from "../../../../components/buttons/FloatingBackButton";
-import useAxios from "../../../../hooks/useAxios";
-import useLoading from "../../../../hooks/useLoading";
+import PageTitle from "@/components/PageTitle";
+import FloatingBackButton from "@/components/buttons/FloatingBackButton";
+import useAxios from "@/hooks/useAxios";
+import useLoading from "@/hooks/useLoading";
 import { useRouter, useParams } from "next/navigation";
 import { WithContext as ReactTags, Tag as ReactTag } from "react-tag-input";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { server_url } from "../../../../utils/api_constants";
+import { server_url } from "@/utils/api_constants";
 import {
   addNewOtherPicture,
   replaceThumbnail,

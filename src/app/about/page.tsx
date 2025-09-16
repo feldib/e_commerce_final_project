@@ -1,7 +1,7 @@
 import React from "react";
 import { Col, Row, Container } from "react-bootstrap";
 
-import PageTitle from "../../components/PageTitle";
+import PageTitle from "@/components/PageTitle";
 
 const AboutUsPage: React.FC = () => {
   return (

@@ -1,9 +1,9 @@
 "use client";
 import React from "react";
 import { Row, Container } from "react-bootstrap";
-import BuyTable from "../../../components/tables/BuyTable";
-import useAxios from "../../../hooks/useAxios";
-import SubPageTitle from "../../../components/SubPageTitle";
+import BuyTable from "@/components/tables/BuyTable";
+import useAxios from "@/hooks/useAxios";
+import SubPageTitle from "@/components/SubPageTitle";
 import { Artwork } from "@/fetching/types";
 
 function WishList() {

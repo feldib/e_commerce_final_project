@@ -2,15 +2,15 @@
 import React, { Suspense } from "react";
 import { registerNewUser } from "@/fetching/fetching";
 import { logIn } from "@/fetching/fetching";
-import InputComponent from "../../components/input/InputComponent";
+import InputComponent from "@/components/input/InputComponent";
 import { Container, Col, Row, Button } from "react-bootstrap";
 import { faUser, faKey, faQuestion } from "@fortawesome/free-solid-svg-icons";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { ToastContainer, toast } from "react-toastify";
-import PageTitle from "../../components/PageTitle";
+import PageTitle from "@/components/PageTitle";
 import { useSearchParams } from "next/navigation";
-import { User } from "../../fetching/types";
+import { User } from "@/fetching/types";
 
 type RegistrationPageProps = {
   settleSuccessfulRegistration: (
