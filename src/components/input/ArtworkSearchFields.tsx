@@ -2,8 +2,8 @@ import React from "react";
 import { Col, Row, Button, Dropdown, InputGroup, Form } from "react-bootstrap";
 import SearchField from "./SearchField";
 import CategoriesDropdown from "./CategoriesDropdown";
-import Queries from "../Queries";
-import { SearchFormikInstance, Category } from "../../fetching/types";
+import Queries from "@/components/Queries";
+import { SearchFormikInstance, Category } from "@/fetching/types";
 
 type ArtworkSearchFieldsProps = {
   formik: SearchFormikInstance;
@@ -42,16 +42,20 @@ function ArtworkSearchFields({
             type="number"
             placeholder="Minimum"
             name="min"
-            value={formik.values.min}
-            onChange={formik.handleChange}
+            value={formik.values.min === 0 ? "" : formik.values.min}
+            onChange={(e) => {
+              const value =
+                e.target.value === "" ? 0 : parseInt(e.target.value);
+              formik.setFieldValue("min", value);
+            }}
             onBlur={(e) => {
               formik.handleBlur(e);
               if (formik.values.min < 0) {
-                formik.setFieldValue("min", "");
+                formik.setFieldValue("min", 0);
               }
               const max = formik.values.max;
-              if (!((max && max > formik.values.min) || !max)) {
-                formik.setFieldValue("max", "");
+              if (max > 0 && max <= formik.values.min) {
+                formik.setFieldValue("max", 0);
               }
             }}
           />
@@ -60,13 +64,17 @@ function ArtworkSearchFields({
             type="number"
             placeholder="Maximum"
             name="max"
-            value={formik.values.max}
-            onChange={formik.handleChange}
+            value={formik.values.max === 0 ? "" : formik.values.max}
+            onChange={(e) => {
+              const value =
+                e.target.value === "" ? 0 : parseInt(e.target.value);
+              formik.setFieldValue("max", value);
+            }}
             onBlur={(e) => {
               formik.handleBlur(e);
               const min = formik.values.min;
-              if (min >= formik.values.max) {
-                formik.setFieldValue("max", "");
+              if (min > 0 && min >= formik.values.max) {
+                formik.setFieldValue("max", 0);
               }
             }}
           />

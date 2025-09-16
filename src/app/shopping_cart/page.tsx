@@ -1,10 +1,10 @@
 "use client";
 import React from "react";
 import { Col, Row, Container, Button } from "react-bootstrap";
-import ShoppingCartTable from "../../components/tables/ShoppingCartTable";
-import useShoppingList from "../../hooks/useShoppingList";
+import ShoppingCartTable from "@/components/tables/ShoppingCartTable";
+import useShoppingList from "@/hooks/useShoppingList";
 import Link from "next/link";
-import PageTitle from "../../components/PageTitle";
+import PageTitle from "@/components/PageTitle";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
 
 function ShoppingCartPage() {

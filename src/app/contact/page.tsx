@@ -17,9 +17,9 @@ import {
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { ToastContainer, toast } from "react-toastify";
-import InputComponent from "../../components/input/InputComponent";
+import InputComponent from "@/components/input/InputComponent";
 import { sendMessageToAdministrator } from "@/fetching/fetching";
-import PageTitle from "../../components/PageTitle";
+import PageTitle from "@/components/PageTitle";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
 
 function ContactUs() {

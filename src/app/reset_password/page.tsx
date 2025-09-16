@@ -2,13 +2,13 @@
 import React, { Suspense } from "react";
 import { changePassword } from "@/fetching/fetching";
 import { Container, Row, Col, Button } from "react-bootstrap";
-import InputComponent from "../../components/input/InputComponent";
+import InputComponent from "@/components/input/InputComponent";
 import { faKey } from "@fortawesome/free-solid-svg-icons";
 import { useSearchParams, useRouter } from "next/navigation";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { ToastContainer, toast } from "react-toastify";
-import PageTitle from "../../components/PageTitle";
+import PageTitle from "@/components/PageTitle";
 
 type ResetPasswordFormValues = {
   password: string;

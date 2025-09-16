@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import NewArtworkInputComponent from "../../../components/input/NewArtworkInputComponent";
+import NewArtworkInputComponent from "@/components/input/NewArtworkInputComponent";
 import {
   Container,
   Col,
@@ -20,10 +20,10 @@ import {
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { ToastContainer, toast } from "react-toastify";
-import PageTitle from "../../../components/PageTitle";
-import FloatingBackButton from "../../../components/buttons/FloatingBackButton";
-import useAxios from "../../../hooks/useAxios";
-import useLoading from "../../../hooks/useLoading";
+import PageTitle from "@/components/PageTitle";
+import FloatingBackButton from "@/components/buttons/FloatingBackButton";
+import useAxios from "@/hooks/useAxios";
+import useLoading from "@/hooks/useLoading";
 import { useRouter } from "next/navigation";
 import {
   WithContext as ReactTags,

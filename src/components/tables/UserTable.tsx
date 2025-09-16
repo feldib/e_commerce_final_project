@@ -1,8 +1,8 @@
 import React from "react";
-import UserTableDataLines from "../datalines/UserTableDataLines";
-import useLoading from "../../hooks/useLoading";
+import UserTableDataLines from "@/components/datalines/UserTableDataLines";
+import useLoading from "@/hooks/useLoading";
 import { Row } from "react-bootstrap";
-import { presentData } from "../../helpers/helpers";
+import { presentData } from "@/helpers/helpers";
 import { User } from "@/fetching/types";
 
 type UserTableProps = {

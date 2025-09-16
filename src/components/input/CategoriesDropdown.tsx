@@ -1,6 +1,6 @@
 import React from "react";
 import { Col, Dropdown } from "react-bootstrap";
-import useLoading from "../../hooks/useLoading";
+import useLoading from "@/hooks/useLoading";
 import { Category } from "@/fetching/types";
 
 type CategoriesDropdownProps = {

@@ -1,18 +1,18 @@
 "use client";
+import { UserDataContext } from "@/components/providers/UserDataProvider";
+import { Artwork, Review, Tag } from "@/fetching/types";
 import React from "react";
-import { Col, Row, Card } from "react-bootstrap";
-import useAxios from "../hooks/useAxios";
-import useLoading from "../hooks/useLoading";
+import { Card, Col, Row } from "react-bootstrap";
 import { ToastContainer } from "react-toastify";
+import useAxios from "@/hooks/useAxios";
+import useLoading from "@/hooks/useLoading";
+import useQuantity from "@/hooks/useQuantity";
+import { server_url } from "@/utils/api_constants";
+import ArtworkPicturesCarousel from "./ArtworkPicturesCarousel";
 import FavouriteButton from "./buttons/FavouriteButton";
 import ShoppingCartButton from "./buttons/ShoppingCartButton";
-import ReviewsOfArtworks from "./ReviewsOfArtwork";
 import LeaveReview from "./LeaveReview";
-import ArtworkPicturesCarousel from "./ArtworkPicturesCarousel";
-import { UserDataContext } from "@/components/providers/UserDataProvider";
-import { server_url } from "../utils/api_constants";
-import useQuantity from "../hooks/useQuantity";
-import { Artwork, Review, Tag } from "@/fetching/types";
+import ReviewsOfArtworks from "./ReviewsOfArtwork";
 
 type ArtworkDetailsProps = {
   artwork_id: number;
@@ -87,7 +87,7 @@ function ArtworkDetails({ artwork_id, artwork }: ArtworkDetailsProps) {
                   </Card.Title>
 
                   <Card.Subtitle>
-                    <p>{artwork.descript}</p>
+                    <p>{artwork.description}</p>
                   </Card.Subtitle>
                 </Col>
 
@@ -123,7 +123,7 @@ function ArtworkDetails({ artwork_id, artwork }: ArtworkDetailsProps) {
                   <Row>
                     <p>
                       {artwork.tags
-                        .map((tag: Tag) => {
+                        ?.map((tag: Tag) => {
                           return tag.tname;
                         })
                         .join(", ")}
@@ -166,7 +166,7 @@ function ArtworkDetails({ artwork_id, artwork }: ArtworkDetailsProps) {
         </Col>
       </Row>
 
-      <ArtworkPicturesCarousel other_pictures={artwork.other_pictures} />
+      <ArtworkPicturesCarousel other_pictures={artwork.other_pictures ?? []} />
 
       <Row className="mt-5">
         <Row className="text-center">

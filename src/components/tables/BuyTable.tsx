@@ -1,12 +1,12 @@
 import React from "react";
 import { Row } from "react-bootstrap";
-import useLoading from "../../hooks/useLoading";
-import BuyTableDataLines from "../datalines/BuyTableDataLines";
+import useLoading from "@/hooks/useLoading";
+import BuyTableDataLines from "@/components/datalines/BuyTableDataLines";
 import {
   presentData,
   getShoppingCartFromLocalStorage,
 } from "@/helpers/helpers";
-import { Artwork, ShoppingCartItem } from "../../fetching/types";
+import { Artwork, ShoppingCartItem } from "@/fetching/types";
 
 type BuyTableProps = {
   dataLines: Artwork[];

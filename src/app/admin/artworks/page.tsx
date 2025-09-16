@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import PageTitle from "../../../components/PageTitle";
-import ArtworkSearchComponent from "../../../components/input/ArtworkSearchComponent";
+import PageTitle from "@/components/PageTitle";
+import ArtworkSearchComponent from "@/components/input/ArtworkSearchComponent";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";

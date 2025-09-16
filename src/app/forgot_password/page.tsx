@@ -3,11 +3,11 @@ import React from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { sendForgotPasswordEmail } from "@/fetching/fetching";
-import InputComponent from "../../components/input/InputComponent";
+import InputComponent from "@/components/input/InputComponent";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { ToastContainer, toast } from "react-toastify";
-import PageTitle from "../../components/PageTitle";
+import PageTitle from "@/components/PageTitle";
 
 function ForgotPassword() {
   const [displayMessage, setDisplayMessage] = React.useState(false);

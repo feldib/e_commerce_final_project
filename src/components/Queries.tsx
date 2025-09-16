@@ -1,7 +1,7 @@
 import React from "react";
 import { Row } from "react-bootstrap";
 import Query from "./Query";
-import { SearchFormikInstance, Category } from "../fetching/types";
+import { SearchFormikInstance, Category } from "@/fetching/types";
 
 type QueriesProps = {
   formik: SearchFormikInstance;
@@ -12,37 +12,34 @@ type QueriesProps = {
 function Queries({ formik, resetPageNumber, categories }: QueriesProps) {
   return (
     <Row>
-      {formik.values.min &&
-      formik.values.max &&
-      formik.values.min > 0 &&
-      formik.values.max >= 1 &&
+      {formik.values.min > 0 &&
+      formik.values.max > 0 &&
       formik.values.min < formik.values.max ? (
         <Query
           text={`Between ${formik.values.min} and ${formik.values.max}`}
           remove={() => {
             resetPageNumber();
-            formik.setFieldValue("max", "");
-            formik.setFieldValue("min", "");
+            formik.setFieldValue("max", 0);
+            formik.setFieldValue("min", 0);
             formik.submitForm();
           }}
         />
-      ) : formik.values.min && formik.values.min > 0 ? (
+      ) : formik.values.min > 0 ? (
         <Query
           text={`Minimum: ${formik.values.min}`}
           remove={() => {
             resetPageNumber();
-            formik.setFieldValue("min", "");
+            formik.setFieldValue("min", 0);
             formik.submitForm();
           }}
         />
       ) : (
-        formik.values.max &&
-        formik.values.max >= 1 && (
+        formik.values.max > 0 && (
           <Query
             text={`Maximum: ${formik.values.max}`}
             remove={() => {
               resetPageNumber();
-              formik.setFieldValue("max", "");
+              formik.setFieldValue("max", 0);
               formik.submitForm();
             }}
           />

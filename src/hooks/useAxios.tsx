@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { server_url } from "../utils/api_constants";
+import { server_url } from "@/utils/api_constants";
 import axiosConfigured from "@/utils/axiosConfigured";
 
 const useAxios = (url: string) => {
@@ -17,6 +17,7 @@ const useAxios = (url: string) => {
           console.log(error);
         });
     })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return data;

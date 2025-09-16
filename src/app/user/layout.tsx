@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { Container, Row } from "react-bootstrap";
-import SubNavbar from "../../components/navbars/SubNavbar";
+import SubNavbar from "@/components/navbars/SubNavbar";
 import {
   faStar,
   faHeart,
@@ -9,9 +9,9 @@ import {
   faClockRotateLeft,
   faShoppingCart,
 } from "@fortawesome/free-solid-svg-icons";
-import PageTitle from "../../components/PageTitle";
-import { redirectIfNotloggedIn } from "../../helpers/helpers";
-import useLoading from "../../hooks/useLoading";
+import PageTitle from "@/components/PageTitle";
+import { redirectIfNotloggedIn } from "@/helpers/helpers";
+import useLoading from "@/hooks/useLoading";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
 import { useRouter } from "next/navigation";
 

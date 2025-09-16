@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { Container, Row } from "react-bootstrap";
-import SubNavbar from "../../components/navbars/SubNavbar";
+import SubNavbar from "@/components/navbars/SubNavbar";
 import {
   faMessage,
   faStar,
@@ -9,11 +9,8 @@ import {
   faPalette,
   faClockRotateLeft,
 } from "@fortawesome/free-solid-svg-icons";
-import PageTitle from "../../components/PageTitle";
-import {
-  redirectIfNotloggedIn,
-  redirectIfNotAdmin,
-} from "../../helpers/helpers";
+import PageTitle from "@/components/PageTitle";
+import { redirectIfNotloggedIn, redirectIfNotAdmin } from "@/helpers/helpers";
 import { useRouter } from "next/navigation";
 
 function AdminPage({ children }: { children: React.ReactNode }) {

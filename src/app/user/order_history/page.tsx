@@ -1,12 +1,12 @@
 "use client";
 import React from "react";
 import { Col } from "react-bootstrap";
-import useAxios from "../../../hooks/useAxios";
-import useLoading from "../../../hooks/useLoading";
-import OrderSummaryComponent from "../../../components/OrderSummaryComponent";
-import { users_url } from "../../../utils/api_constants";
-import SubPageTitle from "../../../components/SubPageTitle";
-import { Order } from "../../../fetching/types";
+import useAxios from "@/hooks/useAxios";
+import useLoading from "@/hooks/useLoading";
+import OrderSummaryComponent from "@/components/OrderSummaryComponent";
+import { users_url } from "@/utils/api_constants";
+import SubPageTitle from "@/components/SubPageTitle";
+import { Order } from "@/fetching/types";
 
 function OrderHistory() {
   function representOrderDataCollection(

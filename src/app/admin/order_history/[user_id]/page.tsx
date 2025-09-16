@@ -1,13 +1,13 @@
 "use client";
 import React from "react";
 import { Col } from "react-bootstrap";
-import useLoading from "../../../../hooks/useLoading";
-import OrderSummaryComponent from "../../../../components/OrderSummaryComponent";
+import useLoading from "@/hooks/useLoading";
+import OrderSummaryComponent from "@/components/OrderSummaryComponent";
 import { getOrderHistory } from "@/fetching/fetching";
-import SubPageTitle from "../../../../components/SubPageTitle";
-import FloatingBackButton from "../../../../components/buttons/FloatingBackButton";
+import SubPageTitle from "@/components/SubPageTitle";
+import FloatingBackButton from "@/components/buttons/FloatingBackButton";
 import { useRouter, useParams } from "next/navigation";
-import { Order } from "../../../../fetching/types";
+import { Order } from "@/fetching/types";
 
 function UserOrderHistory() {
   const [orderDataCollection, setOrderDataCollection] =

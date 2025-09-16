@@ -7,7 +7,7 @@ import Link from "next/link";
 import LoggedInNavbarItems from "./LoggedInNavbarItems";
 import NotLoggedInNavbarItems from "./NotLoggedInNavbarItems";
 import { toast } from "react-toastify";
-import { checkIfShoppingCartIsEmpty } from "../../helpers/helpers";
+import { checkIfShoppingCartIsEmpty } from "@/helpers/helpers";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
 import { useRouter } from "next/navigation";
 

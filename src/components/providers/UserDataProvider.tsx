@@ -75,7 +75,7 @@ export default function UserDataProvider({
     setUser(userData);
     setLoggedIn(true);
 
-    if (signed_out_shopping_cart) {
+    if (signed_out_shopping_cart.length > 0) {
       confirmAlert({
         title: "Replace shopping cart",
         message:

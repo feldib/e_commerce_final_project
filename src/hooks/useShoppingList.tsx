@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { getLocatStorageShoppingCart } from "../helpers/helpers";
+import { getLocatStorageShoppingCart } from "@/helpers/helpers";
 import { getShoppingCart } from "@/fetching/fetching";
 import { ShoppingCartItem } from "@/fetching/types";
 

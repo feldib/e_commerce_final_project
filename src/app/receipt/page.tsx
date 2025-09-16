@@ -1,9 +1,9 @@
 "use client";
 import { Col, Row, Container, Button } from "react-bootstrap";
-import OrderSummaryComponent from "../../components/OrderSummaryComponent";
+import OrderSummaryComponent from "@/components/OrderSummaryComponent";
 import Link from "next/link";
-import PageTitle from "../../components/PageTitle";
-import { OrderItem } from "../../fetching/types";
+import PageTitle from "@/components/PageTitle";
+import { OrderItem } from "@/fetching/types";
 
 import React, { useEffect, useState } from "react";
 

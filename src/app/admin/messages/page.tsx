@@ -1,12 +1,12 @@
 "use client";
 import React from "react";
 import { Col, Row } from "react-bootstrap";
-import SubPageTitle from "../../../components/SubPageTitle";
-import useAxios from "../../../hooks/useAxios";
-import useLoading from "../../../hooks/useLoading";
-import { admin_url } from "../../../utils/api_constants";
-import UnansweredMessage from "../../../components/UnansweredMessage";
-import { Message } from "../../../fetching/types";
+import SubPageTitle from "@/components/SubPageTitle";
+import useAxios from "@/hooks/useAxios";
+import useLoading from "@/hooks/useLoading";
+import { admin_url } from "@/utils/api_constants";
+import UnansweredMessage from "@/components/UnansweredMessage";
+import { Message } from "@/fetching/types";
 
 function Messages() {
   const messages = useAxios(`/${admin_url}/unanswered_messages`);

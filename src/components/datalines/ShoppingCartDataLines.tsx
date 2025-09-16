@@ -5,7 +5,7 @@ import { faX, faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
 import { Row, Col } from "react-bootstrap";
 import { toast, ToastContainer } from "react-toastify";
 import Link from "next/link";
-import FavouriteButton from "../buttons/FavouriteButton";
+import FavouriteButton from "@/components/buttons/FavouriteButton";
 import {
   increaseShoppingListItemQuantity,
   decreaseShoppingListItemQuantity,
@@ -15,7 +15,7 @@ import {
   increaseLocalStorageShoppingCartQuantity,
   decreaseLocalStorageShoppingCartQuantity,
   removeLocalStorageShoppingCartQuantity,
-} from "../../helpers/helpers";
+} from "@/helpers/helpers";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
 import { server_url } from "@/utils/api_constants";
 import { Artwork } from "@/fetching/types";
