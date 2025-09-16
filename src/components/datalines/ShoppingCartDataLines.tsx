@@ -39,6 +39,7 @@ function ShoppingCartDataLines({
 
   React.useEffect(() => {
     changeCosts(index, line.price * quantity);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [quantity]);
 
   return (
