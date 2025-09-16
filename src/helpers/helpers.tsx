@@ -8,7 +8,7 @@ import {
 import { server_url } from "@/utils/api_constants";
 import React from "react";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
-import { ShoppingCartItem } from "@/fetching/types";
+import { ShoppingCartItem, Artwork } from "@/fetching/types";
 import axiosConfigured from "@/utils/axiosConfigured";
 
 const presentData = <T,>(
@@ -92,7 +92,7 @@ const removeLocalStorageShoppingCartQuantity = (artwork_id: number) => {
   }
 };
 
-const getLocatStorageShoppingCart = async () => {
+const getLocalStorageShoppingCart = async (): Promise<Artwork[]> => {
   const shoppingCart = getShoppingCartFromLocalStorage();
   if (!shoppingCart) {
     return [];
@@ -136,7 +136,7 @@ const checkIfShoppingCartIsEmpty = async (loggedIn: boolean) => {
         return false;
       });
   } else {
-    return getLocatStorageShoppingCart()
+    return getLocalStorageShoppingCart()
       .then((artworks_in_shopping_cart) => {
         if (artworks_in_shopping_cart.length) {
           return true;
@@ -165,7 +165,7 @@ export {
   increaseLocalStorageShoppingCartQuantity,
   decreaseLocalStorageShoppingCartQuantity,
   removeLocalStorageShoppingCartQuantity,
-  getLocatStorageShoppingCart,
+  getLocalStorageShoppingCart,
   replacePreviousShoppingCart,
   redirectIfNotloggedIn,
   redirectIfNotAdmin,

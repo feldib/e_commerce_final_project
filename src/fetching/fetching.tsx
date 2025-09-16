@@ -175,13 +175,11 @@ export const removeArtwork = async (artwork_id: number): Promise<void> => {
 // Shopping Cart / Wishlist
 // ===================
 
-export const getShoppingCart = async (): Promise<
-  { artwork_id: number; quantity: number }[]
-> => {
+export const getShoppingCart = async (): Promise<Artwork[]> => {
   const res = await axiosConfigured.get(
     `${server_url}/${users_url}/shopping_cart`
   );
-  return res.data as { artwork_id: number; quantity: number }[];
+  return res.data as Artwork[];
 };
 
 export const addToShoppingList = async (artwork_id: number): Promise<void> => {
