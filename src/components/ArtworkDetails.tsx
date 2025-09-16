@@ -87,7 +87,7 @@ function ArtworkDetails({ artwork_id, artwork }: ArtworkDetailsProps) {
                   </Card.Title>
 
                   <Card.Subtitle>
-                    <p>{artwork.descript}</p>
+                    <p>{artwork.description}</p>
                   </Card.Subtitle>
                 </Col>
 
