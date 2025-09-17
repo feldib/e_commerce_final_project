@@ -39,7 +39,7 @@ function Reccomendations({ title, path }: ReccomendationsProps) {
           </Row>
 
           {(!tableHidden || isMd) && recommendations && (
-            <Carousel>
+            <Carousel pause="hover" className="recommendation-carousel">
               {recommendations.map((artwork: Artwork, index: number) => {
                 return (
                   <Carousel.Item

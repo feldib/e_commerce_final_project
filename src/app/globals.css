@@ -49,6 +49,29 @@ td {
   padding: 5px !important;
 }
 
+/* Recommendation Carousel Controls */
+.recommendation-carousel .carousel-control-prev,
+.recommendation-carousel .carousel-control-next {
+  width: 5%;
+  height: 50%;
+  top: 25%;
+  border-radius: 5px;
+}
+
+.recommendation-carousel .carousel-control-prev {
+  left: 2px;
+}
+
+.recommendation-carousel .carousel-control-next {
+  right: 2px;
+}
+
+.recommendation-carousel .carousel-control-prev-icon,
+.recommendation-carousel .carousel-control-next-icon {
+  width: 15px;
+  height: 15px;
+}
+
 tbody > tr:hover {
   background-color: #7da5d944;
 }
