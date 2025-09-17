@@ -9,7 +9,7 @@ import {
   TelegramIcon,
   RedditShareButton,
   RedditIcon,
-} from "react-share";
+} from "next-share";
 
 function Footer() {
   const [hostname, setHostname] = useState("");
