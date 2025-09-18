@@ -159,7 +159,8 @@ function AddNewArtworkPage() {
 
   React.useEffect(() => {
     formik.setFieldValue("tags", tags);
-  }, [tags, formik]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tags]);
 
   const createHandleDelete = (
     tgs: ReactTagInputTag[],

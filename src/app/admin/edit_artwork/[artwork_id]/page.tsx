@@ -162,7 +162,8 @@ function EditArtworkData() {
       });
       setTags(transformedTags);
     }
-  }, [artworkData, formik]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [artworkData]);
 
   React.useEffect(() => {
     formik.setFieldValue("tags", tags);
@@ -177,7 +178,8 @@ function EditArtworkData() {
         )
       );
     }
-  }, [tags, artworkId, formik]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tags, artworkId]);
 
   const createHandleDelete = (
     tgs: ReactTag[],

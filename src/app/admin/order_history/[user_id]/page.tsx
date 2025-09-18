@@ -20,7 +20,7 @@ function UserOrderHistory() {
     getOrderHistory(userId).then((orders: Order[]) => {
       setOrderDataCollection(orders);
     });
-  });
+  }, [userId]);
 
   function representOrderDataCollection(orders: Order[]) {
     const len = orders.length;
