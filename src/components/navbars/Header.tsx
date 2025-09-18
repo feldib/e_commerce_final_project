@@ -60,7 +60,7 @@ function Header() {
                 onClick={() => closeExpandedNav()}
                 className="nav-link"
                 style={{ color: "inherit", textDecoration: "inherit" }}
-                href="/search"
+                href={user.is_admin ? "/admin/artworks" : "/search"}
               >
                 Search
               </Link>
