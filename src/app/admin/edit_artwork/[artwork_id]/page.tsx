@@ -165,18 +165,23 @@ function EditArtworkData() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [artworkData]);
 
+  const [initialTagsLoaded, setInitialTagsLoaded] = React.useState(false);
+
   React.useEffect(() => {
     formik.setFieldValue("tags", tags);
-    if (tags.length >= 3) {
+    // Only update server if this is not the initial load and tags have actually changed
+    if (initialTagsLoaded && tags.length >= 3) {
       updateArtworkData(
         artworkId,
         "tags",
-        JSON.stringify(
-          tags.map((tag: ReactTag) => {
-            return { tname: tag.text };
-          })
-        )
+        tags.map((tag: ReactTag) => {
+          return { tname: tag.text };
+        })
       );
+    }
+    // Mark that initial tags have been loaded after first render
+    if (!initialTagsLoaded && tags.length > 0) {
+      setInitialTagsLoaded(true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tags, artworkId]);
@@ -186,7 +191,7 @@ function EditArtworkData() {
     setTgs: React.Dispatch<React.SetStateAction<ReactTag[]>>
   ) => {
     return (i: number) => {
-      setTgs(tgs.filter((tag, index) => index !== i));
+      setTgs(tgs.filter((_, index) => index !== i));
     };
   };
 
