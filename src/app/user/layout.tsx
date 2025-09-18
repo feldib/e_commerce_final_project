@@ -40,7 +40,7 @@ function ProfilePage({ children }: React.PropsWithChildren<React.ReactNode>) {
           { linkText: "Reviews", linkTo: "reviews", icon: faStar },
           {
             linkText: "Shopping Cart",
-            linkTo: "/shopping_cart",
+            linkTo: "shopping_cart",
             icon: faShoppingCart,
           },
         ]}

@@ -144,10 +144,11 @@ function UnansweredMessage({ message }: UnansweredMessageProps) {
                         variant="primary"
                         type="submit"
                         onClick={() => {
-                          Object.keys(errors).length &&
+                          if (Object.keys(errors).length) {
                             toast.error("Incorrect data", {
                               className: "toast-error",
                             });
+                          }
                         }}
                       >
                         Send

@@ -24,6 +24,7 @@ const useQuantity = (loggedIn: boolean, inStock: number, artworkId: number) => {
         JSON.stringify(signedOutShoppingCart)
       );
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return { quantity, setQuantity };

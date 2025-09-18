@@ -23,7 +23,7 @@ function RegistrationPageInner({
   settleSuccessfulRegistration,
 }: RegistrationPageProps) {
   const searchParams = useSearchParams();
-  const to_checkout = searchParams.get("to_checkout");
+  const to_checkout = searchParams.get("to_checkout") === "true";
 
   const attemptRegistration = async (
     values: {
@@ -169,10 +169,11 @@ function RegistrationPageInner({
                   variant="primary"
                   type="submit"
                   onClick={() => {
-                    Object.keys(errors).length &&
+                    if (Object.keys(errors).length) {
                       toast.error("Incorrect data", {
                         className: "toast-error",
                       });
+                    }
                   }}
                 >
                   Register

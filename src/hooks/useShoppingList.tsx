@@ -1,11 +1,11 @@
 "use client";
 import React from "react";
-import { getLocatStorageShoppingCart } from "@/helpers/helpers";
+import { getLocalStorageShoppingCart } from "@/helpers/helpers";
 import { getShoppingCart } from "@/fetching/fetching";
-import { ShoppingCartItem } from "@/fetching/types";
+import { Artwork } from "@/fetching/types";
 
 const useShoppingList = (loggedIn: boolean) => {
-  const [data, setData] = React.useState<ShoppingCartItem[]>([]);
+  const [data, setData] = React.useState<Artwork[]>([]);
   React.useEffect(() => {
     (async () => {
       if (loggedIn) {
@@ -18,7 +18,7 @@ const useShoppingList = (loggedIn: boolean) => {
             console.log(error);
           });
       } else {
-        await getLocatStorageShoppingCart()
+        await getLocalStorageShoppingCart()
           .then((artworks_in_shopping_cart) => {
             setData(artworks_in_shopping_cart);
           })
