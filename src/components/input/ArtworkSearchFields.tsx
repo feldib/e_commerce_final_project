@@ -73,7 +73,8 @@ function ArtworkSearchFields({
             onBlur={(e) => {
               formik.handleBlur(e);
               const min = formik.values.min;
-              if (min > 0 && min >= formik.values.max) {
+              const max = formik.values.max;
+              if (min > 0 && max > 0 && min > max) {
                 formik.setFieldValue("max", 0);
               }
             }}
@@ -93,7 +94,7 @@ function ArtworkSearchFields({
           <Dropdown
             // value={formik.values.n}
             onSelect={(e) => {
-              formik.setFieldValue("n", e);
+              formik.setFieldValue("n", Number(e));
             }}
           >
             <Dropdown.Toggle variant="outilne-dark">

@@ -1,15 +1,16 @@
 import axiosConfigured from "@/utils/axiosConfigured";
 import { server_url, users_url, admin_url } from "@/utils/api_constants";
 import {
-  User,
   Artwork,
-  Order,
-  Message,
-  SearchParams,
-  ArtworkSent,
-  InvoiceData,
+  User,
   ShoppingCartItem,
+  SearchParams,
+  Order,
+  ArtworkSent,
+  Message,
+  InvoiceData,
 } from "./types";
+import { searchArtworksGraphQL } from "@/utils/graphqlSearch";
 
 // ===================
 // User-related
@@ -90,33 +91,12 @@ export const getArtworkSearchResults = async (
   objects: SearchParams,
   pageNumber: number
 ): Promise<Artwork[]> => {
-  const objectsCopy = { ...objects };
-  // Filter out empty values, but handle min/max correctly
-  const min = objectsCopy.min;
-  const max = objectsCopy.max;
-  if (min && max && max < min) {
-    objectsCopy.max = 0; // reset max if it's less than min
+  try {
+    return await searchArtworksGraphQL(objects, pageNumber);
+  } catch (error) {
+    console.log(error);
+    return [];
   }
-  const filteredObjects = Object.entries(objectsCopy)
-    .filter(([key, value]) => {
-      if (key === "min" && value === 0) return false;
-      if (key === "max" && value === 0) return false;
-      return true;
-    })
-    .map(([key, value]) => `${key}=${value}`)
-    .join("&");
-
-  return axiosConfigured
-    .get(
-      `${server_url}/search_artworks${filteredObjects.length ? "?" + filteredObjects : ""}${
-        objects.n ? "&offset=" + objects.n * (pageNumber - 1) : ""
-      }`
-    )
-    .then((res) => res.data)
-    .catch((error) => {
-      console.log(error);
-      return [];
-    });
 };
 
 export const getDataOfArtworks = async (
