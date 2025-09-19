@@ -6,12 +6,27 @@ body {
 }
 
 :root {
+  /* Default/User Theme Colors */
   --nav-color: #0c090d;
-  --translucent-dark-bg-color: #0c090dee;
+  --translucent-bg-color: #0c090dee;
   --light-bg-color: #7da5d9;
   --warm: #e1944e;
   --bright-warm: #ede1d6;
   --rusty: #856e28;
+  --input-color: #071b19;
+  --input-border-color: #071b19a2;
+}
+
+/* Admin Theme Colors */
+.admin-theme {
+  --nav-color: #ede1d6;
+  --translucent-bg-color: #ede1d6cf;
+  --light-bg-color: #d97d7d;
+  --warm: black;
+  --bright-warm: #0c090d;
+  --rusty: #574f4f;
+  --input-color: #ede1d6;
+  --input-border-color: #071b19;
 }
 
 @keyframes fade-in {
@@ -85,7 +100,7 @@ tbody > tr:hover {
 .toast-error,
 .toast-info,
 .reccomendation-title {
-  background-color: var(--translucent-dark-bg-color) !important;
+  background-color: var(--translucent-bg-color) !important;
   color: var(--bright-warm) !important;
   border-radius: 10px !important;
   padding: 1rem !important;
@@ -109,14 +124,14 @@ tbody > tr:hover {
 
 .list-group,
 .list-group-item {
-  background-color: var(--translucent-dark-bg-color) !important;
+  background-color: var(--translucent-bg-color) !important;
   color: var(--bright-warm) !important;
 }
 
 input,
 textarea,
 .dropdown-toggle {
-  background-color: var(--translucent-dark-bg-color) !important;
+  background-color: var(--translucent-bg-color) !important;
   color: var(--bright-warm) !important;
 }
 
@@ -171,14 +186,18 @@ input[type="submit"],
 .submit {
   background-color: var(--light-bg-color) !important;
   font-weight: 700 !important;
-  color: #071b19 !important;
-  border: 2px solid #071b19a2 !important;
+  color: var(--input-color) !important;
+  border: 2px solid var(--input-border-color) !important;
   text-transform: capitalize !important;
 }
 
 a > p {
   font-size: 1.3rem;
   text-decoration: none !important;
+}
+
+.navbar-toggler {
+  border: none !important;
 }
 
 button:hover,
@@ -194,7 +213,7 @@ a:hover,
 .input-group-text,
 .dropdown-toggle {
   background-color: var(--bright-warm) !important;
-  color: #071b19 !important;
+  color: var(--input-color) !important;
   font-weight: 800 !important;
 }
 

@@ -82,22 +82,35 @@ function ChangeArtworkDataInputComponent<
         {editing ? (
           <Button
             variant="primary"
-            onClick={(e) => {
+            onClick={async (e) => {
               e.preventDefault();
-              if (Object.keys(formik.errors).length > 0) {
+
+              // Only check for errors in the current field being updated, not the entire form
+              const currentFieldError = formik.errors[name];
+              const hasCurrentFieldError =
+                currentFieldError && formik.touched[name];
+
+              if (hasCurrentFieldError) {
                 toast.error("Incorrect data", {
                   className: "toast-error",
                 });
               } else {
-                updateArtworkData(
-                  artwork_id,
-                  name,
-                  String(formik.values[name] || "")
-                );
-                toast.success(`${label} changed successfully`, {
-                  className: "toast-success",
-                });
-                setEditing(false);
+                try {
+                  await updateArtworkData(
+                    artwork_id,
+                    name,
+                    String(formik.values[name] || "")
+                  );
+                  toast.success(`${label} changed successfully`, {
+                    className: "toast-success",
+                  });
+                  setEditing(false);
+                } catch (error) {
+                  toast.error("Error updating artwork data", {
+                    className: "toast-error",
+                  });
+                  console.error("Error updating artwork:", error);
+                }
               }
             }}
           >

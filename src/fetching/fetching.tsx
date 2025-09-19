@@ -132,7 +132,7 @@ export const addNewArtwork = async (
 export const updateArtworkData = async (
   artwork_id: number,
   field_name: string,
-  value: string | number | boolean
+  value: string | number | boolean | { tname: string }[]
 ): Promise<{ data: Artwork }> => {
   return axiosConfigured.post(
     `${server_url}/${admin_url}/update_artwork_data`,
