@@ -7,7 +7,6 @@ import {
 import AddOrRemoveFromButton from "./AddOrRemoveButton";
 import TrophyFilled from "../svg_components/trophy_filled";
 import TrophyRegular from "../svg_components/trophy_regular";
-import { UserDataContext } from "../providers/UserDataProvider";
 
 type FeatureButtonProps = {
   artwork_id: number;
