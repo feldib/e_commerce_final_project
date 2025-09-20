@@ -87,6 +87,7 @@ function ArtworkSearchFields({
           categories={categories}
           setValue={(value: string | number) => {
             formik.setFieldValue("category_id", value);
+            resetPageNumber();
           }}
         />
 
