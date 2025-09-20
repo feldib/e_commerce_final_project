@@ -152,7 +152,8 @@ html,
 #footer,
 #footer > div > div > div > a,
 .share-icon,
-#header-toggler {
+#header-toggler,
+#header-mobile-shopping-cart {
   font-family: "Rubik";
 
   background-color: var(--nav-color);
@@ -204,8 +205,10 @@ button:hover,
 input[type="submit"]:hover,
 .submit:hover,
 a > p:hover,
-.navbar-toggler:hover,
 a:hover,
+#header-toggler:hover,
+#header-mobile-shopping-cart:hover,
+#header-desktop-shopping-cart:hover,
 .toggle-reccommendation:hover {
   transform: scale(1.1) !important;
 }
