@@ -20,35 +20,34 @@ function Queries({
 }: QueriesProps) {
   return (
     <Row>
-      {searchedValues && 
-       searchedValues.min > 0 &&
-       searchedValues.max > 0 &&
-       searchedValues.min < searchedValues.max && (
-        <Query
-          text={`Between ${searchedValues.min} and ${searchedValues.max}`}
-          remove={() => {
-            formik.setFieldValue("max", 0);
-            formik.setFieldValue("min", 0);
-            triggerSearchWithUpdatedValues({ max: 0, min: 0 });
-          }}
-        />
-      )}
+      {searchedValues &&
+        searchedValues.min > 0 &&
+        searchedValues.max > 0 &&
+        searchedValues.min < searchedValues.max && (
+          <Query
+            text={`Between ${searchedValues.min} and ${searchedValues.max}`}
+            remove={() => {
+              formik.setFieldValue("max", 0);
+              formik.setFieldValue("min", 0);
+              triggerSearchWithUpdatedValues({ max: 0, min: 0 });
+            }}
+          />
+        )}
 
-      {searchedValues && 
-       searchedValues.min > 0 && 
-       !(searchedValues.max > 0 && searchedValues.min < searchedValues.max) && (
-        <Query
-          text={`Minimum: ${searchedValues.min}`}
-          remove={() => {
-            formik.setFieldValue("min", 0);
-            triggerSearchWithUpdatedValues({ min: 0 });
-          }}
-        />
-      )}
+      {searchedValues &&
+        searchedValues.min > 0 &&
+        (searchedValues.max === 0 ||
+          searchedValues.min >= searchedValues.max) && (
+          <Query
+            text={`Minimum: ${searchedValues.min}`}
+            remove={() => {
+              formik.setFieldValue("min", 0);
+              triggerSearchWithUpdatedValues({ min: 0 });
+            }}
+          />
+        )}
 
-      {searchedValues && 
-       searchedValues.max > 0 && 
-       !(searchedValues.min > 0) && (
+      {searchedValues && searchedValues.max > 0 && searchedValues.min === 0 && (
         <Query
           text={`Maximum: ${searchedValues.max}`}
           remove={() => {
