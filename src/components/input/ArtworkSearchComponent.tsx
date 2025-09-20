@@ -16,15 +16,17 @@ type ArtworkSearchComponentProps = {
 
 function ArtworkSearchComponent({ admin }: ArtworkSearchComponentProps) {
   const [searchResults, setSearchResults] = React.useState<Artwork[]>();
+  const [searchedValues, setSearchedValues] = React.useState<SearchParams>();
 
   const [pageNumber, setPageNumber] = React.useState(0);
 
   const search = React.useCallback(
-    async (values: SearchParams) => {
-      const results = await getArtworkSearchResults(values, pageNumber);
+    async (values: SearchParams, page: number) => {
+      const results = await getArtworkSearchResults(values, page);
       setSearchResults(results);
+      setSearchedValues(values);
     },
-    [pageNumber]
+    []
   );
 
   const formik = useFormik({
@@ -43,7 +45,7 @@ function ArtworkSearchComponent({ admin }: ArtworkSearchComponentProps) {
 
     onSubmit: (values) => {
       setPageNumber(1);
-      search(values);
+      search(values, 1);
     },
 
     validationSchema: Yup.object().shape({
@@ -54,13 +56,16 @@ function ArtworkSearchComponent({ admin }: ArtworkSearchComponentProps) {
 
   const categories = useAxios("/categories") as Category[];
 
-  const results = React.useRef<HTMLDivElement>(null);
+  const triggerSearchWithUpdatedValues = React.useCallback(
+    (updatedValues: Partial<SearchParams>) => {
+      const newValues = { ...formik.values, ...updatedValues };
+      setPageNumber(1);
+      search(newValues, 1);
+    },
+    [search, formik.values]
+  );
 
-  React.useEffect(() => {
-    if (pageNumber) {
-      search(formik.values);
-    }
-  }, [pageNumber, search, formik.values]);
+  const results = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
     results.current?.scrollIntoView({ behavior: "instant" });
@@ -71,9 +76,8 @@ function ArtworkSearchComponent({ admin }: ArtworkSearchComponentProps) {
       <ArtworkSearchFields
         formik={formik}
         categories={categories}
-        resetPageNumber={() => {
-          setPageNumber(1);
-        }}
+        triggerSearchWithUpdatedValues={triggerSearchWithUpdatedValues}
+        searchedValues={searchedValues}
       />
 
       {searchResults && (
@@ -100,7 +104,9 @@ function ArtworkSearchComponent({ admin }: ArtworkSearchComponentProps) {
                 <Button
                   className="submit"
                   onClick={() => {
-                    setPageNumber(pageNumber - 1);
+                    const newPageNumber = pageNumber - 1;
+                    setPageNumber(newPageNumber);
+                    search(formik.values, newPageNumber);
                   }}
                 >
                   Back {formik.values.n}
@@ -112,8 +118,10 @@ function ArtworkSearchComponent({ admin }: ArtworkSearchComponentProps) {
               <Col className="mx-auto">
                 <Button
                   className="submit"
-                  onClick={async () => {
-                    setPageNumber(pageNumber + 1);
+                  onClick={() => {
+                    const newPageNumber = pageNumber + 1;
+                    setPageNumber(newPageNumber);
+                    search(formik.values, newPageNumber);
                   }}
                 >
                   Next {formik.values.n}

@@ -3,18 +3,22 @@ import { Col, Row, Button, Dropdown, InputGroup, Form } from "react-bootstrap";
 import SearchField from "./SearchField";
 import CategoriesDropdown from "./CategoriesDropdown";
 import Queries from "@/components/Queries";
-import { SearchFormikInstance, Category } from "@/fetching/types";
+import { SearchFormikInstance, Category, SearchParams } from "@/fetching/types";
 
 type ArtworkSearchFieldsProps = {
   formik: SearchFormikInstance;
   categories: Category[];
-  resetPageNumber: () => void;
+  triggerSearchWithUpdatedValues: (
+    updatedValues: Partial<SearchParams>
+  ) => void;
+  searchedValues?: SearchParams;
 };
 
 function ArtworkSearchFields({
   formik,
   categories,
-  resetPageNumber,
+  triggerSearchWithUpdatedValues,
+  searchedValues,
 }: ArtworkSearchFieldsProps) {
   return (
     <div className="floating-element mb-3 mx-5">
@@ -87,7 +91,7 @@ function ArtworkSearchFields({
           categories={categories}
           setValue={(value: string | number) => {
             formik.setFieldValue("category_id", value);
-            resetPageNumber();
+            triggerSearchWithUpdatedValues({ category_id: value.toString() });
           }}
         />
 
@@ -96,6 +100,7 @@ function ArtworkSearchFields({
             // value={formik.values.n}
             onSelect={(e) => {
               formik.setFieldValue("n", Number(e));
+              triggerSearchWithUpdatedValues({ n: Number(e) });
             }}
           >
             <Dropdown.Toggle variant="outilne-dark">
@@ -125,6 +130,7 @@ function ArtworkSearchFields({
           <Dropdown
             onSelect={(e) => {
               formik.setFieldValue("order", e);
+              triggerSearchWithUpdatedValues({ order: e as string });
             }}
           >
             <Dropdown.Toggle variant="outilne-dark">Order by</Dropdown.Toggle>
@@ -146,10 +152,9 @@ function ArtworkSearchFields({
             label="Only featured"
             id="only_featured"
             onChange={() => {
-              formik.setFieldValue(
-                "only_featured",
-                !formik.values.only_featured
-              );
+              const newValue = !formik.values.only_featured;
+              formik.setFieldValue("only_featured", newValue);
+              triggerSearchWithUpdatedValues({ only_featured: newValue });
             }}
           />
         </Col>
@@ -161,7 +166,7 @@ function ArtworkSearchFields({
             className="submit"
             type="submit"
             onClick={() => {
-              resetPageNumber();
+              triggerSearchWithUpdatedValues({});
             }}
           >
             Search
@@ -170,9 +175,10 @@ function ArtworkSearchFields({
       </Row>
 
       <Queries
-        resetPageNumber={resetPageNumber}
         formik={formik}
         categories={categories}
+        triggerSearchWithUpdatedValues={triggerSearchWithUpdatedValues}
+        searchedValues={searchedValues}
       />
     </div>
   );

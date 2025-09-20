@@ -1,84 +1,93 @@
 import React from "react";
 import { Row } from "react-bootstrap";
 import Query from "./Query";
-import { SearchFormikInstance, Category } from "@/fetching/types";
+import { SearchFormikInstance, Category, SearchParams } from "@/fetching/types";
 
 type QueriesProps = {
   formik: SearchFormikInstance;
-  resetPageNumber: () => void;
   categories: Category[];
+  triggerSearchWithUpdatedValues: (
+    updatedValues: Partial<SearchParams>
+  ) => void;
+  searchedValues?: SearchParams;
 };
 
-function Queries({ formik, resetPageNumber, categories }: QueriesProps) {
+function Queries({
+  formik,
+  categories,
+  triggerSearchWithUpdatedValues,
+  searchedValues,
+}: QueriesProps) {
   return (
     <Row>
-      {formik.values.min > 0 &&
-      formik.values.max > 0 &&
-      formik.values.min < formik.values.max ? (
+      {searchedValues && 
+       searchedValues.min > 0 &&
+       searchedValues.max > 0 &&
+       searchedValues.min < searchedValues.max && (
         <Query
-          text={`Between ${formik.values.min} and ${formik.values.max}`}
+          text={`Between ${searchedValues.min} and ${searchedValues.max}`}
           remove={() => {
-            resetPageNumber();
             formik.setFieldValue("max", 0);
             formik.setFieldValue("min", 0);
-            formik.submitForm();
+            triggerSearchWithUpdatedValues({ max: 0, min: 0 });
           }}
         />
-      ) : formik.values.min > 0 ? (
+      )}
+
+      {searchedValues && 
+       searchedValues.min > 0 && 
+       !(searchedValues.max > 0 && searchedValues.min < searchedValues.max) && (
         <Query
-          text={`Minimum: ${formik.values.min}`}
+          text={`Minimum: ${searchedValues.min}`}
           remove={() => {
-            resetPageNumber();
             formik.setFieldValue("min", 0);
-            formik.submitForm();
+            triggerSearchWithUpdatedValues({ min: 0 });
           }}
         />
-      ) : (
-        formik.values.max > 0 && (
-          <Query
-            text={`Maximum: ${formik.values.max}`}
-            remove={() => {
-              resetPageNumber();
-              formik.setFieldValue("max", 0);
-              formik.submitForm();
-            }}
-          />
-        )
       )}
 
-      {formik.values.title && (
+      {searchedValues && 
+       searchedValues.max > 0 && 
+       !(searchedValues.min > 0) && (
         <Query
-          text={`Title: ${formik.values.title}`}
+          text={`Maximum: ${searchedValues.max}`}
           remove={() => {
-            resetPageNumber();
+            formik.setFieldValue("max", 0);
+            triggerSearchWithUpdatedValues({ max: 0 });
+          }}
+        />
+      )}
+
+      {searchedValues && searchedValues.title && (
+        <Query
+          text={`Title: ${searchedValues.title}`}
+          remove={() => {
             formik.setFieldValue("title", "");
-            formik.submitForm();
+            triggerSearchWithUpdatedValues({ title: "" });
           }}
         />
       )}
 
-      {formik.values.artist_name && (
+      {searchedValues && searchedValues.artist_name && (
         <Query
-          text={`Artist: ${formik.values.artist_name}`}
+          text={`Artist: ${searchedValues.artist_name}`}
           remove={() => {
-            resetPageNumber();
             formik.setFieldValue("artist_name", "");
-            formik.submitForm();
+            triggerSearchWithUpdatedValues({ artist_name: "" });
           }}
         />
       )}
 
-      {formik.values.category_id && (
+      {searchedValues && searchedValues.category_id && (
         <Query
           text={`${
             categories.find((cat) => {
-              return cat.id === parseInt(formik.values.category_id!);
+              return cat.id === parseInt(searchedValues.category_id!);
             })?.cname || "Unknown Category"
           }`}
           remove={() => {
-            resetPageNumber();
             formik.setFieldValue("category_id", "");
-            formik.submitForm();
+            triggerSearchWithUpdatedValues({ category_id: "" });
           }}
         />
       )}
