@@ -11,7 +11,7 @@ function HomePage() {
     <Container className="px-3 pb-5">
       <Row className="mx-auto mt-5 mb-5 jumbotron">
         <h1 className="display-2 text-center page-title">
-          Welcome to Artworks Market
+          Welcome to Artwork Market
           {`${loggedIn ? ` ${user.first_name}` : ""}!`}
         </h1>
       </Row>
