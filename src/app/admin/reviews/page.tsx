@@ -9,9 +9,7 @@ import SubPageTitle from "@/components/SubPageTitle";
 import { Review as ReviewType } from "@/fetching/types";
 
 function Reviews() {
-  const reviews = useAxios(
-    `/${admin_url}/get_unapproved_reviews`
-  ) as ReviewType[];
+  const reviews = useAxios(`/${admin_url}/unapproved_reviews`) as ReviewType[];
   const representReviews = useLoading(reviews, (reviews) => {
     return (
       <>

@@ -22,7 +22,7 @@ function Orders() {
     });
   }
 
-  const orders = useAxios(`/${admin_url}/get_orders`);
+  const orders = useAxios(`/${admin_url}/orders`);
   const ordersRepresented = useLoading(orders, (orders) => (
     <>{representOrderDataCollection(orders as Order[])}</>
   ));
