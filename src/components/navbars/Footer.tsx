@@ -15,7 +15,9 @@ function Footer() {
   const [hostname, setHostname] = useState("");
 
   useEffect(() => {
-    setHostname(window.location.hostname);
+    if (typeof window !== "undefined") {
+      setHostname(window.location.hostname);
+    }
   }, []);
   return (
     <Navbar id="footer" fixed="bottom">
