@@ -1,7 +1,7 @@
 import React from "react";
 import UserTableDataLines from "@/components/datalines/UserTableDataLines";
 import useLoading from "@/hooks/useLoading";
-import { Row } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import { presentData } from "@/helpers/helpers";
 import { User } from "@/fetching/types";
 
@@ -21,18 +21,22 @@ function UserTable({ users }: UserTableProps) {
   });
   return (
     <Row className="text-center">
-      <table className="mb-3">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th className="d-none d-md-table-cell">Address</th>
-            <th className="d-none d-md-table-cell">Phone number</th>
-          </tr>
-        </thead>
+      {users.length !== 0 ? (
+        <table className="mb-3">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th className="d-none d-md-table-cell">Address</th>
+              <th className="d-none d-md-table-cell">Phone number</th>
+            </tr>
+          </thead>
 
-        <tbody>{dataLines}</tbody>
-      </table>
+          <tbody>{dataLines}</tbody>
+        </table>
+      ) : (
+        <Col className="text-center">--- No users ---</Col>
+      )}
     </Row>
   );
 }

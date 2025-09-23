@@ -9,13 +9,21 @@ import UnansweredMessage from "@/components/UnansweredMessage";
 import { Message } from "@/fetching/types";
 
 function Messages() {
-  const messages = useAxios(`/${admin_url}/unanswered_messages`);
+  const messages = useAxios(`/${admin_url}/unanswered_messages`) as Message[];
   const messagesRepresented = useLoading(messages, (messages) => {
     return (
       <>
-        {(messages as Message[]).map((message: Message, index: number) => {
-          return <UnansweredMessage key={index} message={message} />;
-        })}
+        {messages.length !== 0 ? (
+          <>
+            {messages.map((message: Message, index: number) => {
+              return <UnansweredMessage key={index} message={message} />;
+            })}
+          </>
+        ) : (
+          <Row className="px-3 mx-auto floating-element mb-5">
+            <Col className="text-center">--- No messages ---</Col>
+          </Row>
+        )}
       </>
     );
   });

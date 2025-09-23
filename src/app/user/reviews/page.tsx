@@ -10,12 +10,25 @@ import { Review as ReviewType } from "@/fetching/types";
 
 function Reviews() {
   const reviews = useAxios(`/${users_url}/get_reviews_of_user`) as ReviewType[];
-  const representReviews = useLoading(reviews, (reviews: ReviewType[]) => {
+  const representReviews = useLoading(reviews, (reviews) => {
     return (
       <>
-        {reviews.map((review, index) => (
-          <Review key={index} review={review} index={index + 1} admin={false} />
-        ))}
+        {reviews.length !== 0 ? (
+          <>
+            {reviews.map((review, index) => (
+              <Review
+                key={index}
+                review={review}
+                index={index + 1}
+                admin={false}
+              />
+            ))}
+          </>
+        ) : (
+          <Row className="px-3 mx-auto floating-element mb-5">
+            <Col className="text-center">--- No reviews ---</Col>
+          </Row>
+        )}
       </>
     );
   });

@@ -9,20 +9,32 @@ import SubPageTitle from "@/components/SubPageTitle";
 import { Review as ReviewType } from "@/fetching/types";
 
 function Reviews() {
-  const reviews = useAxios(`/${admin_url}/get_unapproved_reviews`);
+  const reviews = useAxios(
+    `/${admin_url}/get_unapproved_reviews`
+  ) as ReviewType[];
   const representReviews = useLoading(reviews, (reviews) => {
     return (
       <>
-        {(reviews as ReviewType[]).map((review: ReviewType, index: number) => {
-          return (
-            <Review
-              key={index}
-              review={review}
-              index={index + 1}
-              admin={true}
-            />
-          );
-        })}
+        {reviews.length !== 0 ? (
+          <>
+            {(reviews as ReviewType[]).map(
+              (review: ReviewType, index: number) => {
+                return (
+                  <Review
+                    key={index}
+                    review={review}
+                    index={index + 1}
+                    admin={true}
+                  />
+                );
+              }
+            )}
+          </>
+        ) : (
+          <Row className="px-3 mx-auto floating-element mb-5">
+            <Col className="text-center">--- No reviews ---</Col>
+          </Row>
+        )}
       </>
     );
   });
