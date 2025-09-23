@@ -27,9 +27,11 @@ function OrderHistory() {
     );
   }
 
-  const orderDataCollection = useAxios(`/${users_url}/get_orders_of_user`);
+  const orderDataCollection = useAxios(
+    `/${users_url}/get_orders_of_user`
+  ) as Order[];
   const ordersRepresented = useLoading(orderDataCollection, (orders) =>
-    representOrderDataCollection(orders as Order[])
+    representOrderDataCollection(orders)
   );
   return (
     <Col className="mb-5 pb-5">

@@ -22,10 +22,11 @@ function Orders() {
     });
   }
 
-  const orders = useAxios(`/${admin_url}/orders`);
-  const ordersRepresented = useLoading(orders, (orders) => (
-    <>{representOrderDataCollection(orders as Order[])}</>
-  ));
+  const orders = useAxios(`/${admin_url}/orders`) as Order[];
+
+  const ordersRepresented = useLoading(orders, (orders) => {
+    return <>{representOrderDataCollection(orders)}</>;
+  });
   return <Col className="mb-5 pb-5">{ordersRepresented}</Col>;
 }
 

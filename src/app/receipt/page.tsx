@@ -3,13 +3,13 @@ import { Col, Row, Container, Button } from "react-bootstrap";
 import OrderSummaryComponent from "@/components/OrderSummaryComponent";
 import Link from "next/link";
 import PageTitle from "@/components/PageTitle";
-import { OrderItem } from "@/fetching/types";
+import { Artwork } from "@/fetching/types";
 
 import React, { useEffect, useState } from "react";
 
 function ReceiptPage() {
   const [currentOrderData, setCurrentOrderData] = useState<{
-    items: OrderItem[];
+    items: Artwork[];
     totalCost: number;
   }>({ items: [], totalCost: 0 });
 

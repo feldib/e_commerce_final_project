@@ -49,22 +49,10 @@ export interface Review {
   name?: string; // for joined user name
 }
 
-export interface OrderItem {
-  thumbnail?: string;
-  cname?: string;
-  tags?: Tag[];
-  price: number;
-  quantity: number;
-  id: number;
-  cost: number;
-  title: string;
-  artist_name: string;
-}
-
 export interface Order {
-  time_ordered: string;
+  time_ordered: number; // Backend returns number (timestamp)
   totalCost: number;
-  items: OrderItem[];
+  items: Artwork[];
   user?: { user_name: string; user_id: number };
 }
 

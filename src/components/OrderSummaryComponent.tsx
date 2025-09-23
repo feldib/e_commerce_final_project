@@ -2,11 +2,11 @@ import React from "react";
 import { Row, Col } from "react-bootstrap";
 import BuyTable from "./tables/BuyTable";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
-import { OrderItem } from "@/fetching/types";
+import { Artwork } from "@/fetching/types";
 
 type OrderSummaryComponentProps = {
   title?: string;
-  items: OrderItem[];
+  items: Artwork[];
   totalCost: number;
   button?: React.ReactNode;
 };
@@ -50,7 +50,7 @@ function OrderSummaryComponent({
           {button && <>{button}</>}
         </>
       ) : (
-        <Col className="text-center">--- Shopping cart is empty ---</Col>
+        <Col className="text-center">--- No orders ---</Col>
       )}
     </Row>
   );
