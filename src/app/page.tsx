@@ -1,9 +1,12 @@
 "use client";
 import React from "react";
-import { Row, Container } from "react-bootstrap";
+
+import { Container,Row } from "react-bootstrap";
+
 import { users_url } from "@/utils/apiConstants";
-import Recommendations from "@/components/Recommendations";
+
 import { UserDataContext } from "@/components/providers/UserDataProvider";
+import Recommendations from "@/components/Recommendations";
 
 function HomePage() {
   const { user, loggedIn } = React.useContext(UserDataContext);

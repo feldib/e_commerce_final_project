@@ -1,5 +1,7 @@
 import React from "react";
-import { Col, Row, Carousel, Card } from "react-bootstrap";
+
+import { Card,Carousel, Col, Row } from "react-bootstrap";
+
 import { server_url } from "@/utils/apiConstants";
 
 type ArtworkPicturesCarouselProps = {

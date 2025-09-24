@@ -1,10 +1,15 @@
 "use client";
 import React from "react";
-import { ToastContainer } from "react-toastify";
+
 import Link from "next/link";
-import RemoveArtworkButton from "@/components/buttons/RemoveArtworkButton";
-import FeatureButton from "@/components/buttons/FeatureButton";
+
+import { ToastContainer } from "react-toastify";
+
 import { server_url } from "@/utils/apiConstants";
+
+import FeatureButton from "@/components/buttons/FeatureButton";
+import RemoveArtworkButton from "@/components/buttons/RemoveArtworkButton";
+
 import { Artwork } from "@/fetching/types";
 
 type AdminArtworkTableDatalinesProps = {

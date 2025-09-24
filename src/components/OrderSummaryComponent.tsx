@@ -1,7 +1,10 @@
 import React from "react";
-import { Row, Col } from "react-bootstrap";
-import BuyTable from "./tables/BuyTable";
+
+import { Col,Row } from "react-bootstrap";
+
 import { Artwork } from "@/fetching/types";
+
+import BuyTable from "./tables/BuyTable";
 
 type OrderSummaryComponentProps = {
   title?: string;

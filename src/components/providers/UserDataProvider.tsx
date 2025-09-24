@@ -1,14 +1,17 @@
 "use client";
 import React, { JSX } from "react";
+import { confirmAlert } from "react-confirm-alert";
+
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
+
 import { getLoggedIn } from "@/fetching/fetching";
 import { User } from "@/fetching/types";
+
 import "react-confirm-alert/src/react-confirm-alert.css";
 import {
   getShoppingCartFromLocalStorage,
   replacePreviousShoppingCart,
 } from "@/helpers/helpers";
-import { confirmAlert } from "react-confirm-alert";
-import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
 export type UserDataContextType = {
   user: User;

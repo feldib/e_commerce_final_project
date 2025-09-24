@@ -1,16 +1,17 @@
+import { admin_url,server_url, users_url } from "@/utils/apiConstants";
 import axiosConfigured from "@/utils/axiosConfigured";
-import { server_url, users_url, admin_url } from "@/utils/apiConstants";
+import { searchArtworksGraphQL } from "@/utils/graphqlSearch";
+
 import {
   Artwork,
-  User,
-  ShoppingCartItem,
-  SearchParams,
-  Order,
   ArtworkSent,
-  Message,
   InvoiceData,
+  Message,
+  Order,
+  SearchParams,
+  ShoppingCartItem,
+  User,
 } from "./types";
-import { searchArtworksGraphQL } from "@/utils/graphqlSearch";
 
 // ===================
 // User-related

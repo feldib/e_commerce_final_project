@@ -1,19 +1,22 @@
 "use client";
 import React from "react";
+
+import { faAsterisk,faKeyboard } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   Button,
   Col,
-  Row,
-  Form as RBForm,
   FloatingLabel,
+  Form as RBForm,
+  Row,
 } from "react-bootstrap";
-import { Formik, Form, ErrorMessage, Field } from "formik";
-import InputComponent from "./input/InputComponent";
-import { ToastContainer, toast } from "react-toastify";
+import { ErrorMessage, Field,Form, Formik } from "formik";
 import * as Yup from "yup";
+import { toast,ToastContainer } from "react-toastify";
+
 import { replyToMessage } from "@/fetching/fetching";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faKeyboard, faAsterisk } from "@fortawesome/free-solid-svg-icons";
+
+import InputComponent from "./input/InputComponent";
 
 type UnansweredMessageProps = {
   message: {

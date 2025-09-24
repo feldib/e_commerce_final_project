@@ -1,14 +1,19 @@
 "use client";
 import React from "react";
-import useAxios from "@/hooks/useAxios";
-import { getArtworkSearchResults } from "@/fetching/fetching";
-import { Row, Form, Col, Button } from "react-bootstrap";
-import BuyTable from "@/components/tables/BuyTable";
-import AdminArtworkTable from "@/components/tables/AdminArtworkTable";
-import ArtworkSearchFields from "./ArtworkSearchFields";
+
+import { Button,Col, Form, Row } from "react-bootstrap";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+
+import AdminArtworkTable from "@/components/tables/AdminArtworkTable";
+import BuyTable from "@/components/tables/BuyTable";
+
+import { getArtworkSearchResults } from "@/fetching/fetching";
 import { Artwork, Category, SearchParams } from "@/fetching/types";
+
+import ArtworkSearchFields from "./ArtworkSearchFields";
+
+import useAxios from "@/hooks/useAxios";
 
 type ArtworkSearchComponentProps = {
   admin?: boolean;

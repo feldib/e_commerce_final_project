@@ -1,12 +1,16 @@
 "use client";
 import React from "react";
-import useAxios from "@/hooks/useAxios";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
-import { Col, Row, Carousel } from "react-bootstrap";
 import { useMediaQuery } from "react-responsive";
-import RecommendationCard from "./RecommendationCard";
+
+import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Carousel,Col, Row } from "react-bootstrap";
+
 import { Artwork } from "@/fetching/types";
+
+import RecommendationCard from "./RecommendationCard";
+
+import useAxios from "@/hooks/useAxios";
 
 type RecommendationsProps = {
   title: string;

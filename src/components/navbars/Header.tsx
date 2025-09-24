@@ -1,15 +1,20 @@
 "use client";
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
-import { Navbar, Nav, Container } from "react-bootstrap";
+
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+
+import { faBars, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Container,Nav, Navbar } from "react-bootstrap";
+import { toast } from "react-toastify";
+
+import { UserDataContext } from "@/components/providers/UserDataProvider";
+
 import LoggedInNavbarItems from "./LoggedInNavbarItems";
 import NotLoggedInNavbarItems from "./NotLoggedInNavbarItems";
-import { toast } from "react-toastify";
+
 import { checkIfShoppingCartIsEmpty } from "@/helpers/helpers";
-import { UserDataContext } from "@/components/providers/UserDataProvider";
-import { useRouter } from "next/navigation";
 
 export const ExpandedNavContext = React.createContext({
   closeExpandedNav: () => {},

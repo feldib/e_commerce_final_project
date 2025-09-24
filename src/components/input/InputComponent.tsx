@@ -1,8 +1,9 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import { faAsterisk, IconDefinition } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Form, InputGroup } from "react-bootstrap";
-import { Field, ErrorMessage } from "formik";
+import { ErrorMessage,Field } from "formik";
 
 type InputComponentProps = {
   label: string;

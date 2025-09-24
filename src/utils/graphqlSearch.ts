@@ -1,5 +1,6 @@
+import { Artwork,SearchParams } from "@/fetching/types";
+
 import { server_url } from "./apiConstants";
-import { SearchParams, Artwork } from "@/fetching/types";
 
 export const searchArtworksGraphQL = async (
   searchParams: SearchParams,

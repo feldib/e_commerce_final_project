@@ -1,6 +1,8 @@
 "use client";
 import React from "react";
+
 import { Container } from "react-bootstrap";
+
 import PageTitle from "@/components/PageTitle";
 import ShoppingCartComponent from "@/components/ShoppingCartComponent";
 

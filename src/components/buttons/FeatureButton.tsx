@@ -1,11 +1,13 @@
 import React from "react";
+
 import {
   addToFeatured,
-  removeFromFeatured,
   isFeatured,
+  removeFromFeatured,
 } from "@/fetching/fetching";
-import AddOrRemoveFromButton from "./AddOrRemoveButton";
+
 import Trophy from "../svg_components/Trophy";
+import AddOrRemoveFromButton from "./AddOrRemoveButton";
 
 type FeatureButtonProps = {
   artwork_id: number;

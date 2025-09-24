@@ -1,10 +1,14 @@
 "use client";
 import React from "react";
-import { Col, Row, Button } from "react-bootstrap";
-import ShoppingCartTable from "@/components/tables/ShoppingCartTable";
-import useShoppingList from "@/hooks/useShoppingList";
+
 import Link from "next/link";
+
+import { Button,Col, Row } from "react-bootstrap";
+
 import { UserDataContext } from "@/components/providers/UserDataProvider";
+import ShoppingCartTable from "@/components/tables/ShoppingCartTable";
+
+import useShoppingList from "@/hooks/useShoppingList";
 
 function ShoppingCartComponent() {
   const { loggedIn } = React.useContext(UserDataContext);

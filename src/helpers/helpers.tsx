@@ -1,15 +1,17 @@
-import {
-  getDataOfArtworks,
-  replaceSavedShoppingCart,
-  getLoggedIn,
-  getIsAdmin,
-} from "@/fetching/fetching";
+import React from "react";
+
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
 import { server_url } from "@/utils/apiConstants";
-import React from "react";
-import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
-import { ShoppingCartItem, Artwork } from "@/fetching/types";
 import axiosConfigured from "@/utils/axiosConfigured";
+
+import {
+  getDataOfArtworks,
+  getIsAdmin,
+  getLoggedIn,
+  replaceSavedShoppingCart,
+} from "@/fetching/fetching";
+import { Artwork,ShoppingCartItem } from "@/fetching/types";
 
 const renderData = <T,>(
   dataLines: T[],
@@ -161,14 +163,14 @@ function getShoppingCartFromLocalStorage(): ShoppingCartItem[] {
 }
 
 export {
-  renderData,
-  increaseLocalStorageShoppingCartQuantity,
-  decreaseLocalStorageShoppingCartQuantity,
-  removeLocalStorageShoppingCartQuantity,
-  getLocalStorageShoppingCart,
-  replacePreviousShoppingCart,
-  redirectIfNotloggedIn,
-  redirectIfNotAdmin,
   checkIfShoppingCartIsEmpty,
+  decreaseLocalStorageShoppingCartQuantity,
+  getLocalStorageShoppingCart,
   getShoppingCartFromLocalStorage,
+  increaseLocalStorageShoppingCartQuantity,
+  redirectIfNotAdmin,
+  redirectIfNotloggedIn,
+  removeLocalStorageShoppingCartQuantity,
+  renderData,
+  replacePreviousShoppingCart,
 };

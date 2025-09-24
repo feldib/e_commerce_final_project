@@ -1,9 +1,13 @@
 import React from "react";
+
+import { Col,Row } from "react-bootstrap";
+
 import UserTableDataLines from "@/components/datalines/UserTableDataLines";
-import useLoading from "@/hooks/useLoading";
-import { Row, Col } from "react-bootstrap";
-import { renderData } from "@/helpers/helpers";
+
 import { User } from "@/fetching/types";
+
+import { renderData } from "@/helpers/helpers";
+import useLoading from "@/hooks/useLoading";
 
 type UserTableProps = {
   users: User[];

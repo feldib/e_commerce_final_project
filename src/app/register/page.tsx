@@ -1,15 +1,19 @@
 "use client";
 import React, { Suspense } from "react";
+
+import { useSearchParams } from "next/navigation";
+
+import { faKey, faQuestion,faUser } from "@fortawesome/free-solid-svg-icons";
+import { Button,Col, Container, Row } from "react-bootstrap";
+import { Form,Formik } from "formik";
+import * as Yup from "yup";
+import { toast,ToastContainer } from "react-toastify";
+
+import InputComponent from "@/components/input/InputComponent";
+import PageTitle from "@/components/PageTitle";
+
 import { registerNewUser } from "@/fetching/fetching";
 import { logIn } from "@/fetching/fetching";
-import InputComponent from "@/components/input/InputComponent";
-import { Container, Col, Row, Button } from "react-bootstrap";
-import { faUser, faKey, faQuestion } from "@fortawesome/free-solid-svg-icons";
-import { Formik, Form } from "formik";
-import * as Yup from "yup";
-import { ToastContainer, toast } from "react-toastify";
-import PageTitle from "@/components/PageTitle";
-import { useSearchParams } from "next/navigation";
 import { User } from "@/fetching/types";
 
 type RegistrationPageProps = {

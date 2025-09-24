@@ -1,11 +1,16 @@
 "use client";
 import React from "react";
+
 import { Col, Row } from "react-bootstrap";
+
+import { admin_url } from "@/utils/apiConstants";
+
+import UserTable from "@/components/tables/UserTable";
+
+import { User } from "@/fetching/types";
+
 import useAxios from "@/hooks/useAxios";
 import useLoading from "@/hooks/useLoading";
-import { admin_url } from "@/utils/apiConstants";
-import UserTable from "@/components/tables/UserTable";
-import { User } from "@/fetching/types";
 
 function Users() {
   const users = useAxios(`/${admin_url}/users`) as User[];

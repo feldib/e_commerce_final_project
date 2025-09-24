@@ -1,46 +1,52 @@
 "use client";
 import React from "react";
-import NewArtworkInputComponent from "@/components/input/NewArtworkInputComponent";
 import {
-  Container,
-  Col,
-  Row,
-  Button,
-  Form,
-  Dropdown,
-  InputGroup,
-} from "react-bootstrap";
+  Tag as ReactTagInputTag,
+  WithContext as ReactTags,
+} from "react-tag-input";
+
+import { useRouter } from "next/navigation";
+
 import {
-  faDollarSign,
-  faQuestion,
-  faImages,
   faAsterisk,
+  faDollarSign,
+  faImages,
+  faQuestion,
   faX,
 } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  Button,
+  Col,
+  Container,
+  Dropdown,
+  Form,
+  InputGroup,
+  Row,
+} from "react-bootstrap";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { ToastContainer, toast } from "react-toastify";
-import PageTitle from "@/components/PageTitle";
-import FloatingBackButton from "@/components/buttons/FloatingBackButton";
-import useAxios from "@/hooks/useAxios";
-import useLoading from "@/hooks/useLoading";
-import { useRouter } from "next/navigation";
-import {
-  WithContext as ReactTags,
-  Tag as ReactTagInputTag,
-} from "react-tag-input";
-import {
-  addNewThumbnail,
-  addNewOtherPictures,
-  addNewArtwork,
-} from "@/fetching/fetching";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Category } from "@/fetching/types";
+import { toast,ToastContainer } from "react-toastify";
+
 import {
   MAX_IMAGE_SIZE,
   TAG_DELIMITERS,
   VALID_IMAGE_EXTENSIONS,
 } from "@/utils/constants";
+
+import FloatingBackButton from "@/components/buttons/FloatingBackButton";
+import NewArtworkInputComponent from "@/components/input/NewArtworkInputComponent";
+import PageTitle from "@/components/PageTitle";
+
+import {
+  addNewArtwork,
+  addNewOtherPictures,
+  addNewThumbnail,
+} from "@/fetching/fetching";
+import { Category } from "@/fetching/types";
+
+import useAxios from "@/hooks/useAxios";
+import useLoading from "@/hooks/useLoading";
 
 interface AddNewArtworkFormValues extends Record<string, unknown> {
   title: string;

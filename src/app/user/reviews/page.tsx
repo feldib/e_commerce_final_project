@@ -1,12 +1,17 @@
 "use client";
 import React from "react";
+
 import { Col, Row } from "react-bootstrap";
-import useLoading from "@/hooks/useLoading";
-import useAxios from "@/hooks/useAxios";
+
 import { users_url } from "@/utils/apiConstants";
+
 import Review from "@/components/Review";
 import SubPageTitle from "@/components/SubPageTitle";
+
 import { Review as ReviewType } from "@/fetching/types";
+
+import useAxios from "@/hooks/useAxios";
+import useLoading from "@/hooks/useLoading";
 
 function Reviews() {
   const reviews = useAxios(`/${users_url}/get_reviews_of_user`) as ReviewType[];

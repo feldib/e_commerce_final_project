@@ -1,10 +1,13 @@
 "use client";
 import React from "react";
-import { Col, Row, Card } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faX, faCheck } from "@fortawesome/free-solid-svg-icons";
-import { approveReview, disapproveReview } from "@/fetching/fetching";
+
 import Link from "next/link";
+
+import { faCheck,faX } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Card,Col, Row } from "react-bootstrap";
+
+import { approveReview, disapproveReview } from "@/fetching/fetching";
 import { Review as ReviewType } from "@/fetching/types";
 
 type ReviewProps = {

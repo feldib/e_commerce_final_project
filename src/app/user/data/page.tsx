@@ -1,9 +1,11 @@
 "use client";
 import React from "react";
-import * as Yup from "yup";
+
 import { useFormik } from "formik";
-import { UserDataContext } from "@/components/providers/UserDataProvider";
+import * as Yup from "yup";
+
 import UserDataChangingComponent from "@/components/input/UserDataComponent";
+import { UserDataContext } from "@/components/providers/UserDataProvider";
 
 function UserData() {
   const { user } = React.useContext(UserDataContext);

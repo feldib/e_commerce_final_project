@@ -1,12 +1,16 @@
 "use client";
-import * as Yup from "yup";
-import { useFormik } from "formik";
-import { Button, Col, Row } from "react-bootstrap";
-import { order } from "@/fetching/fetching";
 import React from "react";
+
 import { useRouter } from "next/navigation";
-import { UserDataContext } from "@/components/providers/UserDataProvider";
+
+import { Button, Col, Row } from "react-bootstrap";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+
 import UserDataChangingComponent from "@/components/input/UserDataComponent";
+import { UserDataContext } from "@/components/providers/UserDataProvider";
+
+import { order } from "@/fetching/fetching";
 
 function CheckoutPage() {
   const router = useRouter();

@@ -1,11 +1,15 @@
 "use client";
 import React from "react";
-import { Row, Col, Container } from "react-bootstrap";
+
+import { Col, Container,Row } from "react-bootstrap";
+
+import SubPageTitle from "@/components/SubPageTitle";
 import BuyTable from "@/components/tables/BuyTable";
+
+import { Artwork } from "@/fetching/types";
+
 import useAxios from "@/hooks/useAxios";
 import useLoading from "@/hooks/useLoading";
-import SubPageTitle from "@/components/SubPageTitle";
-import { Artwork } from "@/fetching/types";
 
 function WishList() {
   const wishListed = useAxios("/users/wishlisted") as Artwork[];

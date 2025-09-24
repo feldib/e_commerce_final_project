@@ -1,14 +1,16 @@
 "use client";
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import {
   faAsterisk,
-  faGear,
   faCheck,
+  faGear,
   IconDefinition,
 } from "@fortawesome/free-solid-svg-icons";
-import { Form, InputGroup, Button } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Button,Form, InputGroup } from "react-bootstrap";
 import { toast } from "react-toastify";
+
 import { updateUserData } from "@/fetching/fetching";
 
 type UserDataInputComponentsProps = {

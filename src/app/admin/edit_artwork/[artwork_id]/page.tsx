@@ -1,44 +1,50 @@
 "use client";
 import React from "react";
-import ChangeArtworkDataInputComponent from "@/components/input/ChangeArtworkDataInputComponent";
-import {
-  Container,
-  Col,
-  Row,
-  Form,
-  Dropdown,
-  InputGroup,
-} from "react-bootstrap";
+import { Tag as ReactTag,WithContext as ReactTags } from "react-tag-input";
+
+import { useParams,useRouter } from "next/navigation";
+
 import {
   faAsterisk,
   faDollarSign,
-  faQuestion,
   faImages,
+  faQuestion,
   faX,
 } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  Col,
+  Container,
+  Dropdown,
+  Form,
+  InputGroup,
+  Row,
+} from "react-bootstrap";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { ToastContainer } from "react-toastify";
-import PageTitle from "@/components/PageTitle";
-import FloatingBackButton from "@/components/buttons/FloatingBackButton";
-import useAxios from "@/hooks/useAxios";
-import useLoading from "@/hooks/useLoading";
-import { useRouter, useParams } from "next/navigation";
-import { WithContext as ReactTags, Tag as ReactTag } from "react-tag-input";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import { server_url } from "@/utils/apiConstants";
-import {
-  addNewOtherPicture,
-  replaceThumbnail,
-  removePicture,
-  updateArtworkData,
-} from "@/fetching/fetching";
-import { Category, Artwork } from "@/fetching/types";
 import {
   MAX_IMAGE_SIZE,
   TAG_DELIMITERS,
   VALID_IMAGE_EXTENSIONS,
 } from "@/utils/constants";
+
+import FloatingBackButton from "@/components/buttons/FloatingBackButton";
+import ChangeArtworkDataInputComponent from "@/components/input/ChangeArtworkDataInputComponent";
+import PageTitle from "@/components/PageTitle";
+
+import {
+  addNewOtherPicture,
+  removePicture,
+  replaceThumbnail,
+  updateArtworkData,
+} from "@/fetching/fetching";
+import { Artwork,Category } from "@/fetching/types";
+
+import useAxios from "@/hooks/useAxios";
+import useLoading from "@/hooks/useLoading";
 
 interface EditArtworkFormValues extends Record<string, unknown> {
   title: string;

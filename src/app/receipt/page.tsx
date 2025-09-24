@@ -1,11 +1,14 @@
 "use client";
-import { Col, Row, Container, Button } from "react-bootstrap";
-import OrderSummaryComponent from "@/components/OrderSummaryComponent";
-import Link from "next/link";
-import PageTitle from "@/components/PageTitle";
-import { Artwork } from "@/fetching/types";
-
 import React, { useEffect, useState } from "react";
+
+import Link from "next/link";
+
+import { Button,Col, Container, Row } from "react-bootstrap";
+
+import OrderSummaryComponent from "@/components/OrderSummaryComponent";
+import PageTitle from "@/components/PageTitle";
+
+import { Artwork } from "@/fetching/types";
 
 function ReceiptPage() {
   const [currentOrderData, setCurrentOrderData] = useState<{

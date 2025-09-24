@@ -1,19 +1,23 @@
 "use client";
 import React from "react";
-import { Container, Row } from "react-bootstrap";
-import SubNavbar from "@/components/navbars/SubNavbar";
+
+import { useRouter } from "next/navigation";
+
 import {
-  faStar,
+  faClockRotateLeft,
   faHeart,
   faInfoCircle,
-  faClockRotateLeft,
   faShoppingCart,
+  faStar,
 } from "@fortawesome/free-solid-svg-icons";
+import { Container, Row } from "react-bootstrap";
+
+import SubNavbar from "@/components/navbars/SubNavbar";
 import PageTitle from "@/components/PageTitle";
+import { UserDataContext } from "@/components/providers/UserDataProvider";
+
 import { redirectIfNotloggedIn } from "@/helpers/helpers";
 import useLoading from "@/hooks/useLoading";
-import { UserDataContext } from "@/components/providers/UserDataProvider";
-import { useRouter } from "next/navigation";
 
 function ProfilePage({ children }: React.PropsWithChildren<React.ReactNode>) {
   const { user } = React.useContext(UserDataContext);

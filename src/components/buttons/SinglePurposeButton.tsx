@@ -1,10 +1,12 @@
 "use client";
 import React from "react";
+
+import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Row } from "react-bootstrap";
 import { toast } from "react-toastify";
+
 import { UserDataContext } from "@/components/providers/UserDataProvider";
-import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 
 type SinglePurposeButtonProps = {
   artwork_id: number;

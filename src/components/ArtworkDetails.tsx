@@ -1,18 +1,24 @@
 "use client";
-import { UserDataContext } from "@/components/providers/UserDataProvider";
-import { Artwork, Review, Tag } from "@/fetching/types";
 import React from "react";
+
 import { Card, Col, Row } from "react-bootstrap";
 import { ToastContainer } from "react-toastify";
-import useAxios from "@/hooks/useAxios";
-import useLoading from "@/hooks/useLoading";
-import useQuantity from "@/hooks/useQuantity";
+
 import { server_url } from "@/utils/apiConstants";
+
+import { UserDataContext } from "@/components/providers/UserDataProvider";
+
+import { Artwork, Review, Tag } from "@/fetching/types";
+
 import ArtworkPicturesCarousel from "./ArtworkPicturesCarousel";
 import FavouriteButton from "./buttons/FavouriteButton";
 import ShoppingCartButton from "./buttons/ShoppingCartButton";
 import LeaveReview from "./LeaveReview";
 import ReviewsOfArtworks from "./ReviewsOfArtwork";
+
+import useAxios from "@/hooks/useAxios";
+import useLoading from "@/hooks/useLoading";
+import useQuantity from "@/hooks/useQuantity";
 
 type ArtworkDetailsProps = {
   artwork_id: number;

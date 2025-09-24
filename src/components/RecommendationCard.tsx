@@ -1,13 +1,20 @@
 "use client";
 import React from "react";
+
+import Link from "next/link";
+
+import { Card,Col, Row } from "react-bootstrap";
+
 import { server_url } from "@/utils/apiConstants";
-import { Col, Row, Card } from "react-bootstrap";
+
+import { UserDataContext } from "@/components/providers/UserDataProvider";
+
+import { Artwork } from "@/fetching/types";
+
 import FavouriteButton from "./buttons/FavouriteButton";
 import ShoppingCartButton from "./buttons/ShoppingCartButton";
-import Link from "next/link";
-import { UserDataContext } from "@/components/providers/UserDataProvider";
+
 import useQuantity from "@/hooks/useQuantity";
-import { Artwork } from "@/fetching/types";
 
 type RecommendationCardProps = {
   artwork: Artwork;

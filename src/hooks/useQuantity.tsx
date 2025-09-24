@@ -1,7 +1,9 @@
 "use client";
 import React from "react";
-import { getShoppingCartFromLocalStorage } from "@/helpers/helpers";
+
 import { ShoppingCartItem } from "@/fetching/types";
+
+import { getShoppingCartFromLocalStorage } from "@/helpers/helpers";
 
 const useQuantity = (loggedIn: boolean, inStock: number, artworkId: number) => {
   const [quantity, setQuantity] = React.useState(inStock);

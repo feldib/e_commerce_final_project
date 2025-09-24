@@ -1,19 +1,24 @@
 "use client";
 import React, { Suspense } from "react";
-import { changePassword } from "@/fetching/fetching";
-import { Container, Row, Col, Button } from "react-bootstrap";
-import InputComponent from "@/components/input/InputComponent";
+
+import { useRouter,useSearchParams } from "next/navigation";
+
 import { faKey } from "@fortawesome/free-solid-svg-icons";
-import { useSearchParams, useRouter } from "next/navigation";
-import { Formik, Form } from "formik";
-import { resetPasswordSchema } from "@/utils/validationSchemas";
+import { Button,Col, Container, Row } from "react-bootstrap";
+import { Form,Formik } from "formik";
 import { ToastContainer } from "react-toastify";
+
 import {
-  showPasswordResetSuccessToast,
-  showPasswordChangeErrorToast,
   showIncorrectDataToast,
+  showPasswordChangeErrorToast,
+  showPasswordResetSuccessToast,
 } from "@/utils/toastUtils";
+import { resetPasswordSchema } from "@/utils/validationSchemas";
+
+import InputComponent from "@/components/input/InputComponent";
 import PageTitle from "@/components/PageTitle";
+
+import { changePassword } from "@/fetching/fetching";
 
 type ResetPasswordFormValues = {
   password: string;

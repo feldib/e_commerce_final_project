@@ -1,16 +1,19 @@
 "use client";
 import React from "react";
-import { Container, Col, Row, Form } from "react-bootstrap";
+
 import {
-  faUser,
-  faQuestion,
   faHouse,
   faPhone,
+  faQuestion,
+  faUser,
 } from "@fortawesome/free-solid-svg-icons";
-import { ToastContainer } from "react-toastify";
-import UserDataInputComponents from "./UserDataInputComponent";
-import SubPageTitle from "@/components/SubPageTitle";
+import { Col, Container, Form,Row } from "react-bootstrap";
 import { FormikProps } from "formik";
+import { ToastContainer } from "react-toastify";
+
+import SubPageTitle from "@/components/SubPageTitle";
+
+import UserDataInputComponents from "./UserDataInputComponent";
 
 type UserDataChangingComponentProps = {
   title: string;

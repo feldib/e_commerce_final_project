@@ -1,24 +1,30 @@
 "use client";
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faX, faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
-import { Row, Col } from "react-bootstrap";
-import { toast, ToastContainer } from "react-toastify";
+
 import Link from "next/link";
+
+import { faMinus,faPlus, faX } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Col,Row } from "react-bootstrap";
+import { toast, ToastContainer } from "react-toastify";
+
+import { server_url } from "@/utils/apiConstants";
+
 import FavouriteButton from "@/components/buttons/FavouriteButton";
+import { UserDataContext } from "@/components/providers/UserDataProvider";
+
 import {
-  increaseShoppingListItemQuantity,
   decreaseShoppingListItemQuantity,
+  increaseShoppingListItemQuantity,
   removeFromShoppingList,
 } from "@/fetching/fetching";
+import { Artwork } from "@/fetching/types";
+
 import {
-  increaseLocalStorageShoppingCartQuantity,
   decreaseLocalStorageShoppingCartQuantity,
+  increaseLocalStorageShoppingCartQuantity,
   removeLocalStorageShoppingCartQuantity,
 } from "@/helpers/helpers";
-import { UserDataContext } from "@/components/providers/UserDataProvider";
-import { server_url } from "@/utils/apiConstants";
-import { Artwork } from "@/fetching/types";
 
 type ShoppingCartDataLinesProps = {
   line: Artwork;

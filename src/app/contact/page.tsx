@@ -1,31 +1,35 @@
 "use client";
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import {
   faAsterisk,
-  faUser,
   faKeyboard,
+  faUser,
 } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  Col,
-  Row,
-  Container,
   Button,
+  Col,
+  Container,
   FloatingLabel,
   Form as RBForm,
+  Row,
 } from "react-bootstrap";
-import { Formik, Field, Form, ErrorMessage } from "formik";
-import { contactUsSchema } from "@/utils/validationSchemas";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import { ToastContainer } from "react-toastify";
+
 import {
-  showMessageSentToast,
-  showMessageErrorToast,
   showIncorrectDataToast,
+  showMessageErrorToast,
+  showMessageSentToast,
 } from "@/utils/toastUtils";
+import { contactUsSchema } from "@/utils/validationSchemas";
+
 import InputComponent from "@/components/input/InputComponent";
-import { sendMessageToAdministrator } from "@/fetching/fetching";
 import PageTitle from "@/components/PageTitle";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
+
+import { sendMessageToAdministrator } from "@/fetching/fetching";
 
 function ContactUs() {
   const { loggedIn, user } = React.useContext(UserDataContext);

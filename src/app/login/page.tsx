@@ -1,18 +1,23 @@
 "use client";
 import React, { Suspense } from "react";
+
+import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { logIn } from "@/fetching/fetching";
-import InputComponent from "@/components/input/InputComponent";
-import { Col, Container, Row, Button } from "react-bootstrap";
-import { faUser, faKey } from "@fortawesome/free-solid-svg-icons";
-import { Formik, Form } from "formik";
-import { loginSchema } from "@/utils/validationSchemas";
+
+import { faKey, faUser } from "@fortawesome/free-solid-svg-icons";
+import { Button, Col, Container, Row } from "react-bootstrap";
+import { Form, Formik } from "formik";
 import { ToastContainer } from "react-toastify";
-import { showLoginSuccessToast, showLoginErrorToast } from "@/utils/toastUtils";
+
+import { showLoginErrorToast, showLoginSuccessToast } from "@/utils/toastUtils";
+import { loginSchema } from "@/utils/validationSchemas";
+
+import InputComponent from "@/components/input/InputComponent";
 import PageTitle from "@/components/PageTitle";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
+
+import { logIn } from "@/fetching/fetching";
 import { User } from "@/fetching/types";
-import Link from "next/link";
 
 function SignInPageInner() {
   const searchParams = useSearchParams();

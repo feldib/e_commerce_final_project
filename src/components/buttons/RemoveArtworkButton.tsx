@@ -1,6 +1,9 @@
 import React from "react";
+
 import { faX } from "@fortawesome/free-solid-svg-icons";
+
 import { removeArtwork } from "@/fetching/fetching";
+
 import SinglePurposeButton from "./SinglePurposeButton";
 
 type RemoveArtworkButtonProps = {

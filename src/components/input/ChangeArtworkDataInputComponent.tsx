@@ -1,16 +1,18 @@
 "use client";
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import {
   faAsterisk,
   faCheck,
   faGear,
   IconDefinition,
 } from "@fortawesome/free-solid-svg-icons";
-import { Form, InputGroup, Button } from "react-bootstrap";
-import { toast } from "react-toastify";
-import { updateArtworkData } from "@/fetching/fetching";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Button,Form, InputGroup } from "react-bootstrap";
 import { FormikProps } from "formik";
+import { toast } from "react-toastify";
+
+import { updateArtworkData } from "@/fetching/fetching";
 
 type ChangeArtworkDataInputComponentProps<
   T extends Record<string, unknown> = Record<string, unknown>,

@@ -1,9 +1,13 @@
 import React from "react";
+
 import { Row } from "react-bootstrap";
-import useLoading from "@/hooks/useLoading";
+
 import AdminArtworkTableDatalines from "@/components/datalines/AdminArtworkTableDatalines";
-import { renderData } from "@/helpers/helpers";
+
 import { Artwork } from "@/fetching/types";
+
+import { renderData } from "@/helpers/helpers";
+import useLoading from "@/hooks/useLoading";
 
 type AdminArtworkTableProps = {
   dataLines: Artwork[];
