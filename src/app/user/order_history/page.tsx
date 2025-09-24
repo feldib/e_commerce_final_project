@@ -4,7 +4,7 @@ import { Row, Col } from "react-bootstrap";
 import useAxios from "@/hooks/useAxios";
 import useLoading from "@/hooks/useLoading";
 import OrderSummaryComponent from "@/components/OrderSummaryComponent";
-import { users_url } from "@/utils/api_constants";
+import { users_url } from "@/utils/apiConstants";
 import SubPageTitle from "@/components/SubPageTitle";
 import { Order } from "@/fetching/types";
 

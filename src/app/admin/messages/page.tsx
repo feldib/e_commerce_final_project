@@ -4,7 +4,7 @@ import { Col, Row } from "react-bootstrap";
 import SubPageTitle from "@/components/SubPageTitle";
 import useAxios from "@/hooks/useAxios";
 import useLoading from "@/hooks/useLoading";
-import { admin_url } from "@/utils/api_constants";
+import { admin_url } from "@/utils/apiConstants";
 import UnansweredMessage from "@/components/UnansweredMessage";
 import { Message } from "@/fetching/types";
 

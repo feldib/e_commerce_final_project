@@ -1,4 +1,4 @@
-import { server_url } from "./api_constants";
+import { server_url } from "./apiConstants";
 import { SearchParams, Artwork } from "@/fetching/types";
 
 export const searchArtworksGraphQL = async (

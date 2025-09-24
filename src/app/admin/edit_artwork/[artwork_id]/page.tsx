@@ -26,7 +26,7 @@ import useLoading from "@/hooks/useLoading";
 import { useRouter, useParams } from "next/navigation";
 import { WithContext as ReactTags, Tag as ReactTag } from "react-tag-input";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { server_url } from "@/utils/api_constants";
+import { server_url } from "@/utils/apiConstants";
 import {
   addNewOtherPicture,
   replaceThumbnail,

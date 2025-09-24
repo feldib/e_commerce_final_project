@@ -3,7 +3,7 @@ import React from "react";
 import { Col, Row } from "react-bootstrap";
 import useLoading from "@/hooks/useLoading";
 import useAxios from "@/hooks/useAxios";
-import { admin_url } from "@/utils/api_constants";
+import { admin_url } from "@/utils/apiConstants";
 import Review from "@/components/Review";
 import SubPageTitle from "@/components/SubPageTitle";
 import { Review as ReviewType } from "@/fetching/types";

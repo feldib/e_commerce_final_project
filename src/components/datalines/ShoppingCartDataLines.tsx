@@ -17,7 +17,7 @@ import {
   removeLocalStorageShoppingCartQuantity,
 } from "@/helpers/helpers";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
-import { server_url } from "@/utils/api_constants";
+import { server_url } from "@/utils/apiConstants";
 import { Artwork } from "@/fetching/types";
 
 type ShoppingCartDataLinesProps = {

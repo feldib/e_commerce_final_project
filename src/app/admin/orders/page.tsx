@@ -3,7 +3,7 @@ import React from "react";
 import { Row, Col } from "react-bootstrap";
 import useAxios from "@/hooks/useAxios";
 import useLoading from "@/hooks/useLoading";
-import { admin_url } from "@/utils/api_constants";
+import { admin_url } from "@/utils/apiConstants";
 import OrderSummaryComponent from "@/components/OrderSummaryComponent";
 import { Order } from "@/fetching/types";
 import SubPageTitle from "@/components/SubPageTitle";

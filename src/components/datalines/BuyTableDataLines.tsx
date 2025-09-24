@@ -5,7 +5,7 @@ import Link from "next/link";
 import FavouriteButton from "@/components/buttons/FavouriteButton";
 import ShoppingCartButton from "@/components/buttons/ShoppingCartButton";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
-import { server_url } from "@/utils/api_constants";
+import { server_url } from "@/utils/apiConstants";
 import useQuantity from "@/hooks/useQuantity";
 import { Artwork } from "@/fetching/types";
 

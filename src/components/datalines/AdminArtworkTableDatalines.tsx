@@ -4,7 +4,7 @@ import { ToastContainer } from "react-toastify";
 import Link from "next/link";
 import RemoveArtworkButton from "@/components/buttons/RemoveArtworkButton";
 import FeatureButton from "@/components/buttons/FeatureButton";
-import { server_url } from "@/utils/api_constants";
+import { server_url } from "@/utils/apiConstants";
 import { Artwork } from "@/fetching/types";
 
 type AdminArtworkTableDatalinesProps = {
