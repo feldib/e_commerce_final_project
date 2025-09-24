@@ -15,9 +15,8 @@ const useShoppingList = (loggedIn: boolean) => {
           .then((results) => {
             setData(results);
           })
-          .catch(function (error) {
+          .catch(function () {
             setData([]);
-            console.log(error);
           });
       } else {
         await getLocalStorageShoppingCart()

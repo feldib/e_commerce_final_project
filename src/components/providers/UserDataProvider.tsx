@@ -59,8 +59,8 @@ function UserDataProvider({
         setUser(data.user);
         setLoggedIn(true);
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
+        // User not logged in, continue as anonymous
       });
   };
 

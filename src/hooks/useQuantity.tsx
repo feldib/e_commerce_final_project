@@ -21,10 +21,6 @@ const useQuantity = (loggedIn: boolean, inStock: number, artworkId: number) => {
           setQuantity(inStock - signedOutShoppingCart[index].quantity);
         }
       }
-      console.log(
-        "signedOutShoppingCart",
-        JSON.stringify(signedOutShoppingCart)
-      );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

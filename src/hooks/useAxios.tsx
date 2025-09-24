@@ -13,9 +13,8 @@ const useAxios = (url: string) => {
         .then(function (results) {
           setData(results.data);
         })
-        .catch(function (error) {
+        .catch(function () {
           setData(false);
-          console.log(error);
         });
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps

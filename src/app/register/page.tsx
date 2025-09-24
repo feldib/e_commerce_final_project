@@ -59,7 +59,7 @@ function RegistrationPageInner({
         });
       })
       .catch(() => {
-        console.log("Registration failed");
+        showErrorToast("Registration failed");
       });
   };
 

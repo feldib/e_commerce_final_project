@@ -109,9 +109,8 @@ function ChangeArtworkDataInputComponent<
                   );
                   showSuccessToast(`${label} changed successfully`);
                   setEditing(false);
-                } catch (error) {
+                } catch {
                   showErrorToast("Error updating artwork data");
-                  console.error("Error updating artwork:", error);
                 }
               }
             }}

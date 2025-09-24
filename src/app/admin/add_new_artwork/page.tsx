@@ -117,9 +117,8 @@ function AddNewArtworkPage() {
         await addNewOtherPictures(artwork_id, values.other_pictures);
 
         actions.resetForm();
-      } catch (error) {
+      } catch {
         showErrorToast("Error: could not add artwork.");
-        console.log(error);
       }
     },
 

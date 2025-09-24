@@ -19,8 +19,6 @@ export const searchArtworksGraphQL = async (
       offset: pageNumber > 0 ? (pageNumber - 1) * searchParams.n : 0,
     };
 
-    console.log("GraphQL Search Input:", input);
-
     const query = `
       query SearchArtworks($input: SearchInput) {
         searchArtworks(input: $input) {
@@ -82,7 +80,6 @@ export const searchArtworksGraphQL = async (
       })
     );
   } catch (error) {
-    console.error("GraphQL Search Error:", error);
     throw error;
   }
 };
