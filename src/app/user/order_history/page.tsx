@@ -1,9 +1,9 @@
 "use client";
 import React from "react";
 
-import { Col,Row } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 
-import { users_url } from "@/utils/apiConstants";
+import { USERS_URL } from "@/utils/apiConstants";
 
 import OrderSummaryComponent from "@/components/OrderSummaryComponent";
 import SubPageTitle from "@/components/SubPageTitle";
@@ -31,7 +31,7 @@ function OrderHistory() {
   }
 
   const orderDataCollection = useAxios(
-    `/${users_url}/get_orders_of_user`
+    `/${USERS_URL}/get_orders_of_user`
   ) as Order[];
   const ordersRepresented = useLoading(orderDataCollection, (orders) => {
     if (orders.length === 0) {

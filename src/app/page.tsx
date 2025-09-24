@@ -1,9 +1,9 @@
 "use client";
 import React from "react";
 
-import { Container,Row } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 
-import { users_url } from "@/utils/apiConstants";
+import { USERS_URL } from "@/utils/apiConstants";
 
 import { UserDataContext } from "@/components/providers/UserDataProvider";
 import Recommendations from "@/components/Recommendations";
@@ -29,7 +29,7 @@ function HomePage() {
         {loggedIn && (
           <Recommendations
             title="Wishlisted"
-            path={`/${users_url}/wishlisted`}
+            path={`/${USERS_URL}/wishlisted`}
           />
         )}
       </Row>

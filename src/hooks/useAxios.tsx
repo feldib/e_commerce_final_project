@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 
-import { server_url } from "@/utils/apiConstants";
+import { SERVER_URL } from "@/utils/apiConstants";
 import axiosConfigured from "@/utils/axiosConfigured";
 
 const useAxios = (url: string) => {
@@ -9,7 +9,7 @@ const useAxios = (url: string) => {
   React.useEffect(() => {
     (async () => {
       await axiosConfigured
-        .get(`${server_url}${url}`)
+        .get(`${SERVER_URL}${url}`)
         .then(function (results) {
           setData(results.data);
         })

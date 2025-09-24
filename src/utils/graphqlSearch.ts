@@ -1,6 +1,6 @@
-import { Artwork,SearchParams } from "@/fetching/types";
+import { Artwork, SearchParams } from "@/fetching/types";
 
-import { server_url } from "./apiConstants";
+import { SERVER_URL } from "./apiConstants";
 
 export const searchArtworksGraphQL = async (
   searchParams: SearchParams,
@@ -43,7 +43,7 @@ export const searchArtworksGraphQL = async (
       }
     `;
 
-    const response = await fetch(`${server_url}/graphql-search`, {
+    const response = await fetch(`${SERVER_URL}/graphql-search`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

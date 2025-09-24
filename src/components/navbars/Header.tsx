@@ -8,6 +8,7 @@ import { faBars, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Container, Nav, Navbar } from "react-bootstrap";
 
+import { UI_DIMENSIONS } from "@/utils/constants";
 import { showWarningToast } from "@/utils/toastUtils";
 
 import { UserDataContext } from "@/components/providers/UserDataProvider";
@@ -48,7 +49,7 @@ function Header() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/logo.png"
-                width="100"
+                width={UI_DIMENSIONS.THUMBNAIL_SIZE}
                 className="d-inline-block align-top"
                 alt="Artwork market logo"
               />

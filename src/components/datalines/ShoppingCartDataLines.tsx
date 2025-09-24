@@ -8,7 +8,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Col, Row } from "react-bootstrap";
 import { ToastContainer } from "react-toastify";
 
-import { server_url } from "@/utils/apiConstants";
+import { SERVER_URL } from "@/utils/apiConstants";
+import { UI_DIMENSIONS } from "@/utils/constants";
 import { showErrorToast, showSuccessToast } from "@/utils/toastUtils";
 
 import FavouriteButton from "@/components/buttons/FavouriteButton";
@@ -54,9 +55,9 @@ function ShoppingCartDataLines({
       <td>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={`${server_url}/${line.thumbnail}`}
-          width="100"
-          height="100"
+          src={`${SERVER_URL}/${line.thumbnail}`}
+          width={UI_DIMENSIONS.THUMBNAIL_SIZE}
+          height={UI_DIMENSIONS.THUMBNAIL_SIZE}
           style={{ objectFit: "cover" }}
           alt="place of thumbnail"
         />

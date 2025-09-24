@@ -3,9 +3,10 @@ import React from "react";
 
 import Link from "next/link";
 
-import { Card,Col, Row } from "react-bootstrap";
+import { Card, Col, Row } from "react-bootstrap";
 
-import { server_url } from "@/utils/apiConstants";
+import { SERVER_URL } from "@/utils/apiConstants";
+import { UI_DIMENSIONS } from "@/utils/constants";
 
 import { UserDataContext } from "@/components/providers/UserDataProvider";
 
@@ -65,8 +66,8 @@ function RecommendationCard({ artwork }: RecommendationCardProps) {
       </Card.Body>
 
       <Card.Img
-        src={`${server_url}/${artwork.thumbnail}`}
-        width="500"
+        src={`${SERVER_URL}/${artwork.thumbnail}`}
+        width={UI_DIMENSIONS.CARD_IMAGE_WIDTH}
         height="300"
         style={{ objectFit: "cover" }}
         alt="place of thumbnail"

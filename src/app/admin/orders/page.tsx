@@ -1,9 +1,9 @@
 "use client";
 import React from "react";
 
-import { Col,Row } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 
-import { admin_url } from "@/utils/apiConstants";
+import { ADMIN_URL } from "@/utils/apiConstants";
 
 import OrderSummaryComponent from "@/components/OrderSummaryComponent";
 import SubPageTitle from "@/components/SubPageTitle";
@@ -29,7 +29,7 @@ function Orders() {
     });
   }
 
-  const orders = useAxios(`/${admin_url}/orders`) as Order[];
+  const orders = useAxios(`/${ADMIN_URL}/orders`) as Order[];
 
   const ordersRepresented = useLoading(orders, (orders) => {
     if (orders.length === 0) {

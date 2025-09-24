@@ -4,7 +4,9 @@ import { useMediaQuery } from "react-responsive";
 
 import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Carousel,Col, Row } from "react-bootstrap";
+import { Carousel, Col, Row } from "react-bootstrap";
+
+import { UI_DIMENSIONS } from "@/utils/constants";
 
 import { Artwork } from "@/fetching/types";
 
@@ -48,7 +50,7 @@ function Recommendations({ title, path }: RecommendationsProps) {
                 return (
                   <Carousel.Item
                     key={index}
-                    interval={3000}
+                    interval={UI_DIMENSIONS.CAROUSEL_INTERVAL}
                     className="mb-5 px-none"
                   >
                     <RecommendationCard artwork={artwork} />

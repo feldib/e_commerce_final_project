@@ -2,7 +2,7 @@ import React from "react";
 
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
-import { server_url } from "@/utils/apiConstants";
+import { SERVER_URL } from "@/utils/apiConstants";
 import axiosConfigured from "@/utils/axiosConfigured";
 
 import {
@@ -11,7 +11,7 @@ import {
   getLoggedIn,
   replaceSavedShoppingCart,
 } from "@/fetching/fetching";
-import { Artwork,ShoppingCartItem } from "@/fetching/types";
+import { Artwork, ShoppingCartItem } from "@/fetching/types";
 
 const renderData = <T,>(
   dataLines: T[],
@@ -126,7 +126,7 @@ const redirectIfNotAdmin = (router: AppRouterInstance) => {
 const checkIfShoppingCartIsEmpty = async (loggedIn: boolean) => {
   if (loggedIn) {
     return axiosConfigured
-      .get(`${server_url}/users/shopping_cart`)
+      .get(`${SERVER_URL}/users/shopping_cart`)
       .then(function (results) {
         if (Array.isArray(results.data) && results.data.length) {
           return true;

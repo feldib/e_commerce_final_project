@@ -4,7 +4,7 @@ import React from "react";
 import { Card, Col, Row } from "react-bootstrap";
 import { ToastContainer } from "react-toastify";
 
-import { server_url } from "@/utils/apiConstants";
+import { SERVER_URL } from "@/utils/apiConstants";
 
 import { UserDataContext } from "@/components/providers/UserDataProvider";
 
@@ -77,7 +77,7 @@ function ArtworkDetails({ artwork_id, artwork }: ArtworkDetailsProps) {
             </Card.Body>
 
             <Card.Img
-              src={`${server_url}/${artwork.thumbnail}`}
+              src={`${SERVER_URL}/${artwork.thumbnail}`}
               variant="bottom"
             />
           </Card>

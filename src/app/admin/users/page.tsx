@@ -3,7 +3,7 @@ import React from "react";
 
 import { Col, Row } from "react-bootstrap";
 
-import { admin_url } from "@/utils/apiConstants";
+import { ADMIN_URL } from "@/utils/apiConstants";
 
 import UserTable from "@/components/tables/UserTable";
 
@@ -13,7 +13,7 @@ import useAxios from "@/hooks/useAxios";
 import useLoading from "@/hooks/useLoading";
 
 function Users() {
-  const users = useAxios(`/${admin_url}/users`) as User[];
+  const users = useAxios(`/${ADMIN_URL}/users`) as User[];
   const usersRepresented = useLoading(users, (users) => {
     return <UserTable users={users} />;
   });

@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
-import { Tag as ReactTag,WithContext as ReactTags } from "react-tag-input";
+import { Tag as ReactTag, WithContext as ReactTags } from "react-tag-input";
 
-import { useParams,useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
 import {
   faAsterisk,
@@ -24,7 +24,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { ToastContainer } from "react-toastify";
 
-import { server_url } from "@/utils/apiConstants";
+import { SERVER_URL } from "@/utils/apiConstants";
 import {
   MAX_IMAGE_SIZE,
   TAG_DELIMITERS,
@@ -41,7 +41,7 @@ import {
   replaceThumbnail,
   updateArtworkData,
 } from "@/fetching/fetching";
-import { Artwork,Category } from "@/fetching/types";
+import { Artwork, Category } from "@/fetching/types";
 
 import useAxios from "@/hooks/useAxios";
 import useLoading from "@/hooks/useLoading";
@@ -159,10 +159,10 @@ function EditArtworkData() {
         tags: transformedTags,
         quantity: artworkData.quantity.toString(),
         category_id: artworkData.category_id.toString(),
-        thumbnail: `${server_url}/${artworkData.thumbnail}`,
+        thumbnail: `${SERVER_URL}/${artworkData.thumbnail}`,
         other_pictures:
           artworkData.other_pictures?.map((pic: string) => {
-            return `${server_url}/${pic}`;
+            return `${SERVER_URL}/${pic}`;
           }) || [],
         description: artworkData.description || "",
       });
