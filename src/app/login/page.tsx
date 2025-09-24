@@ -7,7 +7,8 @@ import { Col, Container, Row, Button } from "react-bootstrap";
 import { faUser, faKey } from "@fortawesome/free-solid-svg-icons";
 import { Formik, Form } from "formik";
 import { loginSchema } from "@/utils/validationSchemas";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
+import { showLoginSuccessToast, showLoginErrorToast } from "@/utils/toastUtils";
 import PageTitle from "@/components/PageTitle";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
 import { User } from "@/fetching/types";
@@ -30,13 +31,9 @@ function SignInPageInner() {
       await logIn(values.email, values.password, (userData: { user: User }) => {
         settleSuccessfulLogIn(to_checkout, userData, router);
       });
-      toast.success("Logged in", {
-        className: "toast-success",
-      });
+      showLoginSuccessToast();
     } catch {
-      toast.error("Incorrect email or password", {
-        className: "toast-error",
-      });
+      showLoginErrorToast();
     }
   }
 

@@ -16,7 +16,12 @@ import {
 } from "react-bootstrap";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import { contactUsSchema } from "@/utils/validationSchemas";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
+import {
+  showMessageSentToast,
+  showMessageErrorToast,
+  showIncorrectDataToast,
+} from "@/utils/toastUtils";
 import InputComponent from "@/components/input/InputComponent";
 import { sendMessageToAdministrator } from "@/fetching/fetching";
 import PageTitle from "@/components/PageTitle";
@@ -43,14 +48,10 @@ function ContactUs() {
         values.title,
         values.message
       );
-      toast.success("Message sent", {
-        className: "toast-success",
-      });
+      showMessageSentToast();
       form?.current?.reset();
     } catch {
-      toast.error("Error: couldn't send message", {
-        className: "toast-error",
-      });
+      showMessageErrorToast();
     }
   };
 
@@ -132,9 +133,7 @@ function ContactUs() {
                     type="submit"
                     onClick={() => {
                       if (Object.keys(errors).length) {
-                        toast.error("Incorrect data", {
-                          className: "toast-error",
-                        });
+                        showIncorrectDataToast();
                       }
                     }}
                   >

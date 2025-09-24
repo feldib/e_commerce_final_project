@@ -7,7 +7,12 @@ import { faKey } from "@fortawesome/free-solid-svg-icons";
 import { useSearchParams, useRouter } from "next/navigation";
 import { Formik, Form } from "formik";
 import { resetPasswordSchema } from "@/utils/validationSchemas";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
+import {
+  showPasswordResetSuccessToast,
+  showPasswordChangeErrorToast,
+  showIncorrectDataToast,
+} from "@/utils/toastUtils";
 import PageTitle from "@/components/PageTitle";
 
 type ResetPasswordFormValues = {
@@ -30,15 +35,11 @@ function ResetPasswordInner() {
     const email = searchParams.get("email");
     changePassword(token, email, values.password)
       .then(() => {
-        toast.success("Password changed successfully", {
-          className: "toast-success",
-        });
+        showPasswordResetSuccessToast();
         router.push("/login");
       })
       .catch(() => {
-        toast.error("Error: couldn't change password", {
-          className: "toast-error",
-        });
+        showPasswordChangeErrorToast();
       });
   };
 
@@ -79,9 +80,7 @@ function ResetPasswordInner() {
                   type="submit"
                   onClick={() => {
                     if (Object.keys(errors).length) {
-                      toast.error("Incorrect data", {
-                        className: "toast-error",
-                      });
+                      showIncorrectDataToast();
                     }
                   }}
                 >

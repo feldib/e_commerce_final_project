@@ -6,7 +6,11 @@ import { sendForgotPasswordEmail } from "@/fetching/fetching";
 import InputComponent from "@/components/input/InputComponent";
 import { Formik, Form } from "formik";
 import { forgotPasswordSchema } from "@/utils/validationSchemas";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
+import {
+  showEmailSubmittedToast,
+  showSubmissionErrorToast,
+} from "@/utils/toastUtils";
 import PageTitle from "@/components/PageTitle";
 
 function ForgotPassword() {
@@ -24,14 +28,10 @@ function ForgotPassword() {
     sendForgotPasswordEmail(values.email)
       .then(() => {
         setDisplayMessage(true);
-        toast.success("Email submitted", {
-          className: "toast-success",
-        });
+        showEmailSubmittedToast();
       })
       .catch(() => {
-        toast.error("Error: couldn't submit", {
-          className: "toast-error",
-        });
+        showSubmissionErrorToast();
       });
   };
 

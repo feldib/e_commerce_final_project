@@ -11,7 +11,11 @@ import {
 } from "react-bootstrap";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import { reviewSchema } from "@/utils/validationSchemas";
-import { toast } from "react-toastify";
+import {
+  showReviewSavedToast,
+  showReviewErrorToast,
+  showIncorrectDataToast,
+} from "@/utils/toastUtils";
 import InputComponent from "./input/InputComponent";
 import { leaveReview } from "@/fetching/fetching";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
@@ -38,17 +42,10 @@ function LeaveReview({ artwork_id }: LeaveReviewProps) {
   const onSubmit = async (values: ReviewFormValues) => {
     try {
       await leaveReview(artwork_id, values.title, values.review_text);
-      toast.success("Review saved", {
-        className: "toast-success",
-      });
-      toast.info("The review has to be approved by the administrator", {
-        className: "toast-info",
-      });
+      showReviewSavedToast();
       form?.current?.reset();
     } catch {
-      toast.error("Error: couldn't save review", {
-        className: "toast-error",
-      });
+      showReviewErrorToast();
     }
   };
 
@@ -107,9 +104,7 @@ function LeaveReview({ artwork_id }: LeaveReviewProps) {
                       type="submit"
                       onClick={() => {
                         if (Object.keys(errors).length) {
-                          toast.error("Incorrect data", {
-                            className: "toast-error",
-                          });
+                          showIncorrectDataToast();
                         }
                       }}
                     >
