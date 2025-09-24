@@ -9,11 +9,11 @@ import { UserDataContext } from "@/components/providers/UserDataProvider";
 import useQuantity from "@/hooks/useQuantity";
 import { Artwork } from "@/fetching/types";
 
-type ReccomendationCardProps = {
+type RecommendationCardProps = {
   artwork: Artwork;
 };
 
-function ReccomendationCard({ artwork }: ReccomendationCardProps) {
+function RecommendationCard({ artwork }: RecommendationCardProps) {
   const { loggedIn } = React.useContext(UserDataContext);
 
   const { quantity, setQuantity } = useQuantity(
@@ -40,7 +40,7 @@ function ReccomendationCard({ artwork }: ReccomendationCardProps) {
 
           <Col xs={1} className="text-center px-3">
             <span
-              className="reccommendation-button"
+              className="recommendation-button"
               onClick={() => {
                 if (quantity > 0) {
                   setQuantity(quantity - 1);
@@ -50,7 +50,7 @@ function ReccomendationCard({ artwork }: ReccomendationCardProps) {
               <ShoppingCartButton artwork_id={artwork.id} quantity={quantity} />
             </span>
 
-            <span className="reccommendation-button">
+            <span className="recommendation-button">
               <FavouriteButton artwork_id={artwork.id} />
             </span>
           </Col>
@@ -69,4 +69,4 @@ function ReccomendationCard({ artwork }: ReccomendationCardProps) {
   );
 }
 
-export default ReccomendationCard;
+export default RecommendationCard;

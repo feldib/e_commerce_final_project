@@ -7,14 +7,14 @@ import { Artwork } from "@/fetching/types";
 
 type ShoppingCartTableProps = {
   dataLines: Artwork[];
-  reccomendation?: boolean;
+  recommendation?: boolean;
   changeCosts: (index: number, cost: number) => void;
   theadNeeded: boolean;
 };
 
 function ShoppingCartTable({
   dataLines,
-  reccomendation = false,
+  recommendation = false,
   changeCosts,
   theadNeeded,
 }: ShoppingCartTableProps) {
@@ -23,7 +23,7 @@ function ShoppingCartTable({
       return (
         <ShoppingCartDataLines
           key={index}
-          reccomendation={reccomendation}
+          recommendation={recommendation}
           line={line}
           index={index}
           changeCosts={changeCosts}
@@ -46,12 +46,12 @@ function ShoppingCartTable({
               <th>Total cost</th>
               <th>Quantity</th>
               <th
-                className={`${reccomendation ? "d-none" : "d-none d-md-table-cell"}`}
+                className={`${recommendation ? "d-none" : "d-none d-md-table-cell"}`}
               >
                 Tags
               </th>
               <th
-                className={`${reccomendation ? "d-none" : "d-none d-md-table-cell"}`}
+                className={`${recommendation ? "d-none" : "d-none d-md-table-cell"}`}
               >
                 Categories
               </th>

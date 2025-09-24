@@ -24,14 +24,14 @@ type ShoppingCartDataLinesProps = {
   line: Artwork;
   index: number;
   changeCosts: (index: number, cost: number) => void;
-  reccomendation?: boolean;
+  recommendation?: boolean;
 };
 
 function ShoppingCartDataLines({
   line,
   index,
   changeCosts,
-  reccomendation = false,
+  recommendation = false,
 }: ShoppingCartDataLinesProps) {
   const { loggedIn } = React.useContext(UserDataContext);
 
@@ -147,10 +147,10 @@ function ShoppingCartDataLines({
           </Col>
         </Row>
       </td>
-      <td className={`${reccomendation ? "d-none" : "d-none d-md-table-cell"}`}>
+      <td className={`${recommendation ? "d-none" : "d-none d-md-table-cell"}`}>
         <p>{line.tags && line.tags.map((tag) => tag.tname).join(", ")}</p>
       </td>
-      <td className={`${reccomendation ? "d-none" : "d-none d-md-table-cell"}`}>
+      <td className={`${recommendation ? "d-none" : "d-none d-md-table-cell"}`}>
         <p>{line.cname}</p>
       </td>
       <td>

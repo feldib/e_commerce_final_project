@@ -2,7 +2,7 @@
 import React from "react";
 import { Row, Container } from "react-bootstrap";
 import { users_url } from "@/utils/api_constants";
-import Reccomendations from "@/components/Reccomendations";
+import Recommendations from "@/components/Recommendations";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
 
 function HomePage() {
@@ -17,14 +17,14 @@ function HomePage() {
       </Row>
 
       <Row className="mx-auto mb-3 d-flex justify-content-evenly">
-        <Reccomendations title="Featured" path="/featured" />
+        <Recommendations title="Featured" path="/featured" />
 
-        <Reccomendations title="Newest" path="/newest" />
+        <Recommendations title="Newest" path="/newest" />
 
-        <Reccomendations title="Most wishlisted" path="/most_wishlisted" />
+        <Recommendations title="Most wishlisted" path="/most_wishlisted" />
 
         {loggedIn && (
-          <Reccomendations
+          <Recommendations
             title="Wishlisted"
             path={`/${users_url}/wishlisted`}
           />

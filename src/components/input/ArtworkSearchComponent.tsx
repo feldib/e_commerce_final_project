@@ -92,7 +92,7 @@ function ArtworkSearchComponent({ admin }: ArtworkSearchComponentProps) {
             <AdminArtworkTable dataLines={searchResults} />
           ) : (
             <BuyTable
-              reccomendation={false}
+              recommendation={false}
               theadNeeded={true}
               dataLines={searchResults}
             />

@@ -10,14 +10,14 @@ import { Artwork, ShoppingCartItem } from "@/fetching/types";
 
 type BuyTableProps = {
   dataLines: Artwork[];
-  reccomendation?: boolean;
+  recommendation?: boolean;
   orderSummary?: boolean;
   theadNeeded: boolean;
 };
 
 function BuyTable({
   dataLines,
-  reccomendation = false,
+  recommendation = false,
   orderSummary = false,
   theadNeeded = true,
 }: BuyTableProps) {
@@ -25,7 +25,7 @@ function BuyTable({
     return dataLinesGenerated.map((line: Artwork, index: number) => {
       return (
         <BuyTableDataLines
-          reccomendation={reccomendation}
+          recommendation={recommendation}
           line={line}
           index={index}
           key={index}
@@ -77,17 +77,17 @@ function BuyTable({
               <th className="d-none d-md-table-cell">Artist</th>
               <th>Price</th>
               <th
-                className={`${reccomendation ? "d-none" : "d-none d-md-table-cell"}`}
+                className={`${recommendation ? "d-none" : "d-none d-md-table-cell"}`}
               >
                 Quantity
               </th>
               <th
-                className={`${reccomendation ? "d-none" : "d-none d-md-table-cell"}`}
+                className={`${recommendation ? "d-none" : "d-none d-md-table-cell"}`}
               >
                 Tags
               </th>
               <th
-                className={`${reccomendation ? "d-none" : "d-none d-md-table-cell"}`}
+                className={`${recommendation ? "d-none" : "d-none d-md-table-cell"}`}
               >
                 Categories
               </th>

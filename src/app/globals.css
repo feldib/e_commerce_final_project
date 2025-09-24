@@ -99,7 +99,7 @@ tbody > tr:hover {
 .toast-success,
 .toast-error,
 .toast-info,
-.reccomendation-title {
+.recommendation-title {
   background-color: var(--translucent-bg-color) !important;
   color: var(--bright-warm) !important;
   border-radius: 10px !important;
@@ -113,7 +113,7 @@ tbody > tr:hover {
 .subpage-title,
 .card,
 .subnavbar,
-.reccomendation-title {
+.recommendation-title {
   animation: fade-in 0.6s;
 }
 
