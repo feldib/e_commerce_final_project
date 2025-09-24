@@ -42,7 +42,7 @@ const initialValues: UserDataContextType = {
 export const UserDataContext =
   React.createContext<UserDataContextType>(initialValues);
 
-export default function UserDataProvider({
+function UserDataProvider({
   children,
 }: {
   children: React.ReactNode;
@@ -120,3 +120,5 @@ export default function UserDataProvider({
     children
   );
 }
+
+export default UserDataProvider;

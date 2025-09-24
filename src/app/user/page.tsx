@@ -1,5 +1,7 @@
 import { redirect } from "next/navigation";
 
-export default function UserPage() {
+function UserPage() {
   redirect("/user/data");
 }
+
+export default UserPage;

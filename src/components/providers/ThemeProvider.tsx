@@ -3,11 +3,7 @@ import React from "react";
 
 import { UserDataContext } from "./UserDataProvider";
 
-export default function ThemeProvider({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+function ThemeProvider({ children }: { children: React.ReactNode }) {
   const { user, loggedIn } = React.useContext(UserDataContext);
 
   React.useEffect(() => {
@@ -26,3 +22,5 @@ export default function ThemeProvider({
 
   return <>{children}</>;
 }
+
+export default ThemeProvider;

@@ -1,11 +1,11 @@
 "use client";
 import React, { Suspense } from "react";
 
-import { useRouter,useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 import { faKey } from "@fortawesome/free-solid-svg-icons";
-import { Button,Col, Container, Row } from "react-bootstrap";
-import { Form,Formik } from "formik";
+import { Button, Col, Container, Row } from "react-bootstrap";
+import { Form, Formik } from "formik";
 import { ToastContainer } from "react-toastify";
 
 import {
@@ -101,10 +101,12 @@ function ResetPasswordInner() {
   );
 }
 
-export default function ResetPassword() {
+function ResetPassword() {
   return (
     <Suspense>
       <ResetPasswordInner />
     </Suspense>
   );
 }
+
+export default ResetPassword;

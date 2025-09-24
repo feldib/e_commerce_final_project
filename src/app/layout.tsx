@@ -11,7 +11,7 @@ import "react-confirm-alert/src/react-confirm-alert.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./globals.css";
 
-export default function App({ children }: { children: React.ReactNode }) {
+function App({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
@@ -32,3 +32,5 @@ export default function App({ children }: { children: React.ReactNode }) {
     </html>
   );
 }
+
+export default App;

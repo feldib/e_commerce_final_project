@@ -96,10 +96,12 @@ function SignInPageInner() {
   );
 }
 
-export default function SignInPage() {
+function SignInPage() {
   return (
     <Suspense>
       <SignInPageInner />
     </Suspense>
   );
 }
+
+export default SignInPage;

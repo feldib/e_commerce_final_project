@@ -1,4 +1,4 @@
-export default function Trophy({
+function Trophy({
   height,
   filled = false,
 }: {
@@ -68,3 +68,5 @@ export default function Trophy({
     </svg>
   );
 }
+
+export default Trophy;
