@@ -15,7 +15,7 @@ import {
   Form as RBForm,
 } from "react-bootstrap";
 import { Formik, Field, Form, ErrorMessage } from "formik";
-import * as Yup from "yup";
+import { contactUsSchema } from "@/utils/validationSchemas";
 import { ToastContainer, toast } from "react-toastify";
 import InputComponent from "@/components/input/InputComponent";
 import { sendMessageToAdministrator } from "@/fetching/fetching";
@@ -31,12 +31,6 @@ function ContactUs() {
     title: "",
     message: "",
   };
-
-  const contactUsSchema = Yup.object().shape({
-    email: Yup.string().required("Email required").email("Invalid email"),
-    title: Yup.string().required("Title required"),
-    message: Yup.string().required("Message required"),
-  });
 
   const onSubmit = async (values: {
     email: string;

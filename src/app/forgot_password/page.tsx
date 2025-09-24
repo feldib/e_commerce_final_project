@@ -5,7 +5,7 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { sendForgotPasswordEmail } from "@/fetching/fetching";
 import InputComponent from "@/components/input/InputComponent";
 import { Formik, Form } from "formik";
-import * as Yup from "yup";
+import { forgotPasswordSchema } from "@/utils/validationSchemas";
 import { ToastContainer, toast } from "react-toastify";
 import PageTitle from "@/components/PageTitle";
 
@@ -34,10 +34,6 @@ function ForgotPassword() {
         });
       });
   };
-
-  const forgotPasswordSchema = Yup.object().shape({
-    email: Yup.string().required("Email required").email("Invalid email"),
-  });
 
   return (
     <Container className="pb-5">

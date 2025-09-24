@@ -10,7 +10,7 @@ import {
   Form as RBForm,
 } from "react-bootstrap";
 import { Formik, Field, Form, ErrorMessage } from "formik";
-import * as Yup from "yup";
+import { reviewSchema } from "@/utils/validationSchemas";
 import { toast } from "react-toastify";
 import InputComponent from "./input/InputComponent";
 import { leaveReview } from "@/fetching/fetching";
@@ -34,11 +34,6 @@ function LeaveReview({ artwork_id }: LeaveReviewProps) {
     title: "",
     review_text: "",
   };
-
-  const reviewSchema = Yup.object().shape({
-    title: Yup.string().required("Review required"),
-    review_text: Yup.string().required("Review text required"),
-  });
 
   const onSubmit = async (values: ReviewFormValues) => {
     try {

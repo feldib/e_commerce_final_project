@@ -6,7 +6,7 @@ import InputComponent from "@/components/input/InputComponent";
 import { faKey } from "@fortawesome/free-solid-svg-icons";
 import { useSearchParams, useRouter } from "next/navigation";
 import { Formik, Form } from "formik";
-import * as Yup from "yup";
+import { resetPasswordSchema } from "@/utils/validationSchemas";
 import { ToastContainer, toast } from "react-toastify";
 import PageTitle from "@/components/PageTitle";
 
@@ -41,13 +41,6 @@ function ResetPasswordInner() {
         });
       });
   };
-
-  const resetPasswordSchema = Yup.object().shape({
-    password: Yup.string().required("Password required"),
-    repeatPassword: Yup.string()
-      .required("Repeat password required")
-      .oneOf([Yup.ref("password")], "Must match password"),
-  });
 
   return (
     <Container className="pb-5">

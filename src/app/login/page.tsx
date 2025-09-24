@@ -6,7 +6,7 @@ import InputComponent from "@/components/input/InputComponent";
 import { Col, Container, Row, Button } from "react-bootstrap";
 import { faUser, faKey } from "@fortawesome/free-solid-svg-icons";
 import { Formik, Form } from "formik";
-import * as Yup from "yup";
+import { loginSchema } from "@/utils/validationSchemas";
 import { ToastContainer, toast } from "react-toastify";
 import PageTitle from "@/components/PageTitle";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
@@ -40,10 +40,7 @@ function SignInPageInner() {
     }
   }
 
-  const signInSchema = Yup.object().shape({
-    email: Yup.string().required("Email required").email("Invalid email"),
-    password: Yup.string().required("Password required"),
-  });
+  const signInSchema = loginSchema;
 
   return (
     <Container className="px-3 pb-5">
