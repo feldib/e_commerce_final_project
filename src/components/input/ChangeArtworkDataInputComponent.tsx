@@ -8,9 +8,14 @@ import {
   IconDefinition,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Button,Form, InputGroup } from "react-bootstrap";
+import { Button, Form, InputGroup } from "react-bootstrap";
 import { FormikProps } from "formik";
-import { toast } from "react-toastify";
+
+import {
+  showErrorToast,
+  showIncorrectDataToast,
+  showSuccessToast,
+} from "@/utils/toastUtils";
 
 import { updateArtworkData } from "@/fetching/fetching";
 
@@ -94,9 +99,7 @@ function ChangeArtworkDataInputComponent<
                 currentFieldError && formik.touched[name];
 
               if (hasCurrentFieldError) {
-                toast.error("Incorrect data", {
-                  className: "toast-error",
-                });
+                showIncorrectDataToast();
               } else {
                 try {
                   await updateArtworkData(
@@ -104,14 +107,10 @@ function ChangeArtworkDataInputComponent<
                     name,
                     String(formik.values[name] || "")
                   );
-                  toast.success(`${label} changed successfully`, {
-                    className: "toast-success",
-                  });
+                  showSuccessToast(`${label} changed successfully`);
                   setEditing(false);
                 } catch (error) {
-                  toast.error("Error updating artwork data", {
-                    className: "toast-error",
-                  });
+                  showErrorToast("Error updating artwork data");
                   console.error("Error updating artwork:", error);
                 }
               }

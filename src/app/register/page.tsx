@@ -7,7 +7,13 @@ import { faKey, faQuestion, faUser } from "@fortawesome/free-solid-svg-icons";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
+
+import {
+  showErrorToast,
+  showIncorrectDataToast,
+  showSuccessToast,
+} from "@/utils/toastUtils";
 
 import InputComponent from "@/components/input/InputComponent";
 import PageTitle from "@/components/PageTitle";
@@ -78,13 +84,9 @@ function RegistrationPageInner({
   }) {
     try {
       await attemptRegistration(values, settleSuccessfulRegistration);
-      toast.success("Registration successful", {
-        className: "toast-success",
-      });
+      showSuccessToast("Registration successful");
     } catch {
-      toast.error("A user is registered with email already", {
-        className: "toast-error",
-      });
+      showErrorToast("A user is registered with email already");
     }
   }
 
@@ -174,9 +176,7 @@ function RegistrationPageInner({
                   type="submit"
                   onClick={() => {
                     if (Object.keys(errors).length) {
-                      toast.error("Incorrect data", {
-                        className: "toast-error",
-                      });
+                      showIncorrectDataToast();
                     }
                   }}
                 >

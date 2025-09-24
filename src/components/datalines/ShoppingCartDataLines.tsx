@@ -3,12 +3,13 @@ import React from "react";
 
 import Link from "next/link";
 
-import { faMinus,faPlus, faX } from "@fortawesome/free-solid-svg-icons";
+import { faMinus, faPlus, faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Col,Row } from "react-bootstrap";
-import { toast, ToastContainer } from "react-toastify";
+import { Col, Row } from "react-bootstrap";
+import { ToastContainer } from "react-toastify";
 
 import { server_url } from "@/utils/apiConstants";
+import { showErrorToast, showSuccessToast } from "@/utils/toastUtils";
 
 import FavouriteButton from "@/components/buttons/FavouriteButton";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
@@ -118,32 +119,23 @@ function ShoppingCartDataLines({
               className="table-button"
               onClick={async () => {
                 if (loggedIn) {
-                  await increaseShoppingListItemQuantity(line.id)
-                    .then(() => {
-                      toast.success("Item added to shopping cart", {
-                        className: "toast-success",
-                      });
-                      setQuantity(quantity + 1);
-                    })
-                    .catch(() => {
-                      toast.error("Item out of stock", {
-                        className: "toast-error",
-                      });
-                    });
+                  try {
+                    await increaseShoppingListItemQuantity(line.id);
+                    showSuccessToast("Item added to shopping cart");
+                    setQuantity(quantity + 1);
+                  } catch {
+                    showErrorToast("Item out of stock");
+                  }
                 } else {
                   try {
                     increaseLocalStorageShoppingCartQuantity(
                       line.id,
                       line.stored_amount - quantity
                     );
-                    toast.success("Item added to shopping cart", {
-                      className: "toast-success",
-                    });
+                    showSuccessToast("Item added to shopping cart");
                     setQuantity(quantity + 1);
                   } catch {
-                    toast.error("Item out of stock", {
-                      className: "toast-error",
-                    });
+                    showErrorToast("Item out of stock");
                   }
                 }
               }}

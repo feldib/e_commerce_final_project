@@ -8,8 +8,13 @@ import {
   IconDefinition,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Button,Form, InputGroup } from "react-bootstrap";
-import { toast } from "react-toastify";
+import { Button, Form, InputGroup } from "react-bootstrap";
+
+import {
+  showErrorToast,
+  showSuccessToast,
+  showWarningToast,
+} from "@/utils/toastUtils";
 
 import { updateUserData } from "@/fetching/fetching";
 
@@ -73,22 +78,14 @@ function UserDataInputComponents({
             onClick={(e) => {
               e.preventDefault();
               if (error) {
-                toast.error("Incorrect data", {
-                  className: "toast-error",
-                });
+                showErrorToast("Incorrect data");
               } else {
                 if (changeUserData) {
                   updateUserData(name, value);
-                  toast.success(`${label} changed successfully`, {
-                    className: "toast-success",
-                  });
+                  showSuccessToast(`${label} changed successfully`);
                 } else {
-                  toast.success(`${label} changed successfully`, {
-                    className: "toast-success",
-                  });
-                  toast.warning(`This only effects the invoice!`, {
-                    className: "toast-warning",
-                  });
+                  showSuccessToast(`${label} changed successfully`);
+                  showWarningToast(`This only effects the invoice!`);
                 }
                 setEditing(false);
               }

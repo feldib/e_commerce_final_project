@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 
-import { faAsterisk,faKeyboard } from "@fortawesome/free-solid-svg-icons";
+import { faAsterisk, faKeyboard } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   Button,
@@ -10,9 +10,15 @@ import {
   Form as RBForm,
   Row,
 } from "react-bootstrap";
-import { ErrorMessage, Field,Form, Formik } from "formik";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
-import { toast,ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
+
+import {
+  showIncorrectDataToast,
+  showReplyErrorToast,
+  showReplySuccessToast,
+} from "@/utils/toastUtils";
 
 import { replyToMessage } from "@/fetching/fetching";
 
@@ -41,24 +47,19 @@ function UnansweredMessage({ message }: UnansweredMessageProps) {
     reply_text: "",
   };
 
-  const onSubmit = (values: ReplyToMessageProps) => {
-    replyToMessage(
-      message.id,
-      message.email,
-      values.reply_title,
-      values.reply_text
-    )
-      .then(() => {
-        toast.success("Reply sent successfully", {
-          className: "toast-success",
-        });
-        setReplied(true);
-      })
-      .catch(() => {
-        toast.error("Error: couldn't send reply", {
-          className: "toast-error",
-        });
-      });
+  const onSubmit = async (values: ReplyToMessageProps) => {
+    try {
+      await replyToMessage(
+        message.id,
+        message.email,
+        values.reply_title,
+        values.reply_text
+      );
+      showReplySuccessToast();
+      setReplied(true);
+    } catch {
+      showReplyErrorToast();
+    }
   };
 
   const resetPasswordSchema = Yup.object().shape({
@@ -148,9 +149,7 @@ function UnansweredMessage({ message }: UnansweredMessageProps) {
                         type="submit"
                         onClick={() => {
                           if (Object.keys(errors).length) {
-                            toast.error("Incorrect data", {
-                              className: "toast-error",
-                            });
+                            showIncorrectDataToast();
                           }
                         }}
                       >

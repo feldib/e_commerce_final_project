@@ -2,7 +2,8 @@
 import React from "react";
 
 import { Row } from "react-bootstrap";
-import { toast } from "react-toastify";
+
+import { showWarningToast } from "@/utils/toastUtils";
 
 import { UserDataContext } from "@/components/providers/UserDataProvider";
 
@@ -62,9 +63,7 @@ function AddOrRemoveFromButton({
               setNeedsToBeRefreshed(true);
             }
           } else {
-            toast.warning(toastWarningMessage, {
-              className: "toast-warning",
-            });
+            showWarningToast(toastWarningMessage);
           }
         }}
       >

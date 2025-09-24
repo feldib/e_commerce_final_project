@@ -6,8 +6,9 @@ import { useRouter } from "next/navigation";
 
 import { faBars, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Container,Nav, Navbar } from "react-bootstrap";
-import { toast } from "react-toastify";
+import { Container, Nav, Navbar } from "react-bootstrap";
+
+import { showWarningToast } from "@/utils/toastUtils";
 
 import { UserDataContext } from "@/components/providers/UserDataProvider";
 
@@ -66,9 +67,7 @@ function Header() {
                     await checkIfShoppingCartIsEmpty(loggedIn);
 
                   if (!isShoppingCartEmpty) {
-                    toast.warning("Shopping list is empty.", {
-                      className: "toast-warning",
-                    });
+                    showWarningToast("Shopping list is empty.");
                   } else {
                     router.push("/shopping_cart");
                   }
@@ -129,9 +128,7 @@ function Header() {
                     await checkIfShoppingCartIsEmpty(loggedIn);
 
                   if (!isShoppingCartEmpty) {
-                    toast.warning("Shopping list is empty.", {
-                      className: "toast-warning",
-                    });
+                    showWarningToast("Shopping list is empty.");
                   } else {
                     router.push("/shopping_cart");
                   }

@@ -26,13 +26,18 @@ import {
 } from "react-bootstrap";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { toast,ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 
 import {
   MAX_IMAGE_SIZE,
   TAG_DELIMITERS,
   VALID_IMAGE_EXTENSIONS,
 } from "@/utils/constants";
+import {
+  showErrorToast,
+  showIncorrectDataToast,
+  showSuccessToast,
+} from "@/utils/toastUtils";
 
 import FloatingBackButton from "@/components/buttons/FloatingBackButton";
 import NewArtworkInputComponent from "@/components/input/NewArtworkInputComponent";
@@ -96,31 +101,26 @@ function AddNewArtworkPage() {
       description: "",
     },
 
-    onSubmit: (values, actions) => {
+    onSubmit: async (values, actions) => {
       const tags = values.tags.map((obj) => obj.text);
 
-      addNewArtwork({ ...values, tags })
-        .then(async (response) => {
-          toast.success("Artwork added successfully to database", {
-            className: "toast-success",
-          });
+      try {
+        const response = await addNewArtwork({ ...values, tags });
+        showSuccessToast("Artwork added successfully to database");
 
-          const artwork_id = response.data;
+        const artwork_id = response.data;
 
-          if (values.thumbnail) {
-            await addNewThumbnail(artwork_id, values.thumbnail);
-          }
+        if (values.thumbnail) {
+          await addNewThumbnail(artwork_id, values.thumbnail);
+        }
 
-          await addNewOtherPictures(artwork_id, values.other_pictures);
+        await addNewOtherPictures(artwork_id, values.other_pictures);
 
-          actions.resetForm();
-        })
-        .catch((error) => {
-          toast.error("Error: could not add artwork.", {
-            className: "toast-error",
-          });
-          console.log(error);
-        });
+        actions.resetForm();
+      } catch (error) {
+        showErrorToast("Error: could not add artwork.");
+        console.log(error);
+      }
     },
 
     validationSchema: Yup.object().shape({
@@ -410,9 +410,7 @@ function AddNewArtworkPage() {
               type="submit"
               onClick={() => {
                 if (Object.keys(formik.errors).length) {
-                  toast.error("Incorrect data", {
-                    className: "toast-error",
-                  });
+                  showIncorrectDataToast();
                 }
               }}
             >

@@ -19,6 +19,12 @@ export const showInfoToast = (message: string) => {
   });
 };
 
+export const showWarningToast = (message: string) => {
+  toast.warning(message, {
+    className: "toast-warning",
+  });
+};
+
 // Common notification messages
 export const COMMON_MESSAGES = {
   // Auth related
@@ -48,6 +54,7 @@ export const COMMON_MESSAGES = {
   // Info
   REVIEW_APPROVAL_NOTICE: "The review has to be approved by the administrator",
   REPLY_SUCCESS: "Reply sent successfully!",
+  REPLY_ERROR: "Error: couldn't send reply",
 } as const;
 
 // Convenience functions for common toast patterns
@@ -75,3 +82,7 @@ export const showPasswordChangeErrorToast = () =>
   showErrorToast(COMMON_MESSAGES.PASSWORD_CHANGE_ERROR);
 export const showIncorrectDataToast = () =>
   showErrorToast(COMMON_MESSAGES.INCORRECT_DATA);
+export const showReplySuccessToast = () =>
+  showSuccessToast(COMMON_MESSAGES.REPLY_SUCCESS);
+export const showReplyErrorToast = () =>
+  showErrorToast(COMMON_MESSAGES.REPLY_ERROR);
