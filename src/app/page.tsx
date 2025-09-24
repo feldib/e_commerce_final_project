@@ -3,7 +3,7 @@ import React from "react";
 
 import { Container, Row } from "react-bootstrap";
 
-import { USERS_URL } from "@/utils/apiConstants";
+import { USERS_URL } from "@/utils/constants";
 
 import { UserDataContext } from "@/components/providers/UserDataProvider";
 import Recommendations from "@/components/Recommendations";

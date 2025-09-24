@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
 
-import { SERVER_URL } from "@/utils/apiConstants";
 import axiosConfigured from "@/utils/axiosConfigured";
+import { SERVER_URL } from "@/utils/constants";
 
 const useAxios = (url: string) => {
   const [data, setData] = React.useState<unknown>(undefined);

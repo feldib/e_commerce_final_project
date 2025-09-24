@@ -17,17 +17,6 @@ export const UI_DIMENSIONS = {
   CAROUSEL_INTERVAL: 3000,
 } as const;
 
-// HTTP Status Codes
-export const HTTP_STATUS = {
-  OK: 200,
-  CREATED: 201,
-  BAD_REQUEST: 400,
-  UNAUTHORIZED: 401,
-  FORBIDDEN: 403,
-  NOT_FOUND: 404,
-  INTERNAL_SERVER_ERROR: 500,
-} as const;
-
 // Tag related constants
 const KEY_CODES = {
   comma: 188,
@@ -40,3 +29,7 @@ export const TAG_DELIMITERS = [
   KEY_CODES.enter,
   KEY_CODES.space,
 ] as const;
+
+export const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL;
+export const USERS_URL = "users";
+export const ADMIN_URL = "admin";

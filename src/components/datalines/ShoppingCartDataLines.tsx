@@ -8,8 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Col, Row } from "react-bootstrap";
 import { ToastContainer } from "react-toastify";
 
-import { SERVER_URL } from "@/utils/apiConstants";
-import { UI_DIMENSIONS } from "@/utils/constants";
+import { SERVER_URL,UI_DIMENSIONS } from "@/utils/constants";
 import { showErrorToast, showSuccessToast } from "@/utils/toastUtils";
 
 import FavouriteButton from "@/components/buttons/FavouriteButton";

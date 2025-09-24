@@ -3,7 +3,7 @@ import React from "react";
 
 import { Col, Row } from "react-bootstrap";
 
-import { USERS_URL } from "@/utils/apiConstants";
+import { USERS_URL } from "@/utils/constants";
 
 import Review from "@/components/Review";
 import SubPageTitle from "@/components/SubPageTitle";

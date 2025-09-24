@@ -24,9 +24,9 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { ToastContainer } from "react-toastify";
 
-import { SERVER_URL } from "@/utils/apiConstants";
 import {
   MAX_IMAGE_SIZE,
+  SERVER_URL,
   TAG_DELIMITERS,
   VALID_IMAGE_EXTENSIONS,
 } from "@/utils/constants";

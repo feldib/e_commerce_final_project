@@ -2,7 +2,7 @@ import React from "react";
 
 import { Card, Carousel, Col, Row } from "react-bootstrap";
 
-import { SERVER_URL } from "@/utils/apiConstants";
+import { SERVER_URL } from "@/utils/constants";
 
 type ArtworkPicturesCarouselProps = {
   other_pictures: string[];

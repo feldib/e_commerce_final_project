@@ -2,8 +2,8 @@ import React from "react";
 
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
-import { SERVER_URL } from "@/utils/apiConstants";
 import axiosConfigured from "@/utils/axiosConfigured";
+import { SERVER_URL } from "@/utils/constants";
 
 import {
   getDataOfArtworks,

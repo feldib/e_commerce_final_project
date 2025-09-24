@@ -3,7 +3,7 @@ import React from "react";
 
 import { Col, Row } from "react-bootstrap";
 
-import { ADMIN_URL } from "@/utils/apiConstants";
+import { ADMIN_URL } from "@/utils/constants";
 
 import OrderSummaryComponent from "@/components/OrderSummaryComponent";
 import SubPageTitle from "@/components/SubPageTitle";

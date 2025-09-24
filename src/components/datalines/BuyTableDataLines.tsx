@@ -5,8 +5,7 @@ import Link from "next/link";
 
 import { ToastContainer } from "react-toastify";
 
-import { SERVER_URL } from "@/utils/apiConstants";
-import { UI_DIMENSIONS } from "@/utils/constants";
+import { SERVER_URL,UI_DIMENSIONS } from "@/utils/constants";
 
 import FavouriteButton from "@/components/buttons/FavouriteButton";
 import ShoppingCartButton from "@/components/buttons/ShoppingCartButton";

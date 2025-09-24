@@ -1,5 +1,5 @@
-import { ADMIN_URL, SERVER_URL, USERS_URL } from "@/utils/apiConstants";
 import axiosConfigured from "@/utils/axiosConfigured";
+import { ADMIN_URL, SERVER_URL, USERS_URL } from "@/utils/constants";
 import { searchArtworksGraphQL } from "@/utils/graphqlSearch";
 
 import {

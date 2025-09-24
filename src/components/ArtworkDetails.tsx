@@ -4,7 +4,7 @@ import React from "react";
 import { Card, Col, Row } from "react-bootstrap";
 import { ToastContainer } from "react-toastify";
 
-import { SERVER_URL } from "@/utils/apiConstants";
+import { SERVER_URL } from "@/utils/constants";
 
 import { UserDataContext } from "@/components/providers/UserDataProvider";
 
