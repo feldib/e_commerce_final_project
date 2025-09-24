@@ -82,6 +82,7 @@ function ChangeArtworkDataInputComponent<
         {editing ? (
           <Button
             variant="primary"
+            className="inline-submit-button"
             onClick={async (e) => {
               e.preventDefault();
 
@@ -119,6 +120,7 @@ function ChangeArtworkDataInputComponent<
         ) : (
           <Button
             variant="primary"
+            className="inline-submit-button"
             onClick={() => {
               setEditing(true);
             }}

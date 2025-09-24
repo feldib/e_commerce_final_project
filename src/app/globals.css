@@ -184,6 +184,7 @@ thead {
 button[type="submit"],
 input[type="submit"],
 .floating-back-button,
+.inline-submit-button,
 .submit {
   background-color: var(--light-bg-color) !important;
   font-weight: 700 !important;

@@ -67,6 +67,7 @@ function UserDataInputComponents({
         {editing ? (
           <Button
             variant="primary"
+            className="inline-submit-button"
             onClick={(e) => {
               e.preventDefault();
               if (error) {
@@ -96,6 +97,7 @@ function UserDataInputComponents({
         ) : (
           <Button
             variant="primary"
+            className="inline-submit-button"
             onClick={() => {
               setEditing(true);
             }}
