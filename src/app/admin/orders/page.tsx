@@ -9,9 +9,9 @@ import { Order } from "@/fetching/types";
 import SubPageTitle from "@/components/SubPageTitle";
 
 function Orders() {
-  function representOrderDataCollection(orderDataCollection: Order[]) {
-    const len = orderDataCollection.length;
-    return orderDataCollection.map((orderData: Order, index: number) => {
+  function renderOrderList(orders: Order[]) {
+    const len = orders.length;
+    return orders.map((orderData: Order, index: number) => {
       return (
         <OrderSummaryComponent
           key={index}
@@ -34,7 +34,7 @@ function Orders() {
         </Row>
       );
     }
-    return <>{representOrderDataCollection(orders)}</>;
+    return <>{renderOrderList(orders)}</>;
   });
 
   return (

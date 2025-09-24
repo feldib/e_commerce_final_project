@@ -22,7 +22,7 @@ function UserOrderHistory() {
     });
   }, [userId]);
 
-  function representOrderDataCollection(orders: Order[]) {
+  function renderOrderList(orders: Order[]) {
     const len = orders.length;
     return (
       <>
@@ -42,7 +42,7 @@ function UserOrderHistory() {
 
   const ordersRepresented = useLoading(
     orderDataCollection || [],
-    representOrderDataCollection
+    renderOrderList
   );
   return (
     <Col className="mb-5 pb-5">

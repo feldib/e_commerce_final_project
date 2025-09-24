@@ -2,7 +2,7 @@ import React from "react";
 import { Row } from "react-bootstrap";
 import useLoading from "@/hooks/useLoading";
 import AdminArtworkTableDatalines from "@/components/datalines/AdminArtworkTableDatalines";
-import { presentData } from "@/helpers/helpers";
+import { renderData } from "@/helpers/helpers";
 import { Artwork } from "@/fetching/types";
 
 type AdminArtworkTableProps = {
@@ -23,7 +23,7 @@ function AdminArtworkTable({ dataLines }: AdminArtworkTableProps) {
   }
 
   const dataLinesGenerated = useLoading(dataLines, (dataLines) => {
-    return presentData(dataLines as Artwork[], makeDataLines);
+    return renderData(dataLines, makeDataLines);
   });
 
   return (

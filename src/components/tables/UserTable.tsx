@@ -2,7 +2,7 @@ import React from "react";
 import UserTableDataLines from "@/components/datalines/UserTableDataLines";
 import useLoading from "@/hooks/useLoading";
 import { Row, Col } from "react-bootstrap";
-import { presentData } from "@/helpers/helpers";
+import { renderData } from "@/helpers/helpers";
 import { User } from "@/fetching/types";
 
 type UserTableProps = {
@@ -17,7 +17,7 @@ function UserTable({ users }: UserTableProps) {
   }
 
   const dataLines = useLoading(users, (dataLines) => {
-    return presentData(dataLines, makeDataLines);
+    return renderData(dataLines, makeDataLines);
   });
   return (
     <Row className="text-center">

@@ -11,9 +11,9 @@ import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.share
 import { ShoppingCartItem, Artwork } from "@/fetching/types";
 import axiosConfigured from "@/utils/axiosConfigured";
 
-const presentData = <T,>(
+const renderData = <T,>(
   dataLines: T[],
-  makeDataLines: (dataLines: T[]) => React.JSX.Element[]
+  makeDataLines: (dataLines: T[]) => React.JSX.Element
 ): React.JSX.Element => {
   if (dataLines.length > 0) {
     return <>{makeDataLines(dataLines)}</>;
@@ -161,7 +161,7 @@ function getShoppingCartFromLocalStorage(): ShoppingCartItem[] {
 }
 
 export {
-  presentData,
+  renderData,
   increaseLocalStorageShoppingCartQuantity,
   decreaseLocalStorageShoppingCartQuantity,
   removeLocalStorageShoppingCartQuantity,

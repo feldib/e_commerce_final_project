@@ -2,10 +2,7 @@ import React from "react";
 import { Row } from "react-bootstrap";
 import useLoading from "@/hooks/useLoading";
 import BuyTableDataLines from "@/components/datalines/BuyTableDataLines";
-import {
-  presentData,
-  getShoppingCartFromLocalStorage,
-} from "@/helpers/helpers";
+import { renderData, getShoppingCartFromLocalStorage } from "@/helpers/helpers";
 import { Artwork, ShoppingCartItem } from "@/fetching/types";
 
 type BuyTableProps = {
@@ -38,7 +35,7 @@ function BuyTable({
   const dataLinesGenerated = useLoading(
     dataLines,
     (dataLines): React.JSX.Element => {
-      return presentData(
+      return renderData(
         (dataLines as Artwork[]).filter((line: Artwork) => {
           const shoppingCart = getShoppingCartFromLocalStorage();
 

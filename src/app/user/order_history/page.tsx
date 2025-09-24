@@ -9,13 +9,11 @@ import SubPageTitle from "@/components/SubPageTitle";
 import { Order } from "@/fetching/types";
 
 function OrderHistory() {
-  function representOrderDataCollection(
-    orderDataCollection: Order[]
-  ): React.JSX.Element {
-    const len = orderDataCollection.length;
+  function renderOrderList(orders: Order[]): React.JSX.Element {
+    const len = orders.length;
     return (
       <>
-        {orderDataCollection.map((orderData, index) => (
+        {orders.map((orderData, index) => (
           <OrderSummaryComponent
             key={index}
             title={`Order ${len - index}`}
@@ -38,7 +36,7 @@ function OrderHistory() {
         </Row>
       );
     }
-    return representOrderDataCollection(orders);
+    return renderOrderList(orders);
   });
 
   return (

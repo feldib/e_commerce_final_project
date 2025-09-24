@@ -2,7 +2,7 @@ import React from "react";
 import { Row } from "react-bootstrap";
 import useLoading from "@/hooks/useLoading";
 import ShoppingCartDataLines from "@/components/datalines/ShoppingCartDataLines";
-import { presentData } from "@/helpers/helpers";
+import { renderData } from "@/helpers/helpers";
 import { Artwork } from "@/fetching/types";
 
 type ShoppingCartTableProps = {
@@ -32,7 +32,7 @@ function ShoppingCartTable({
     });
   }
   const dataLinesGenerated = useLoading(dataLines, (dataLines) => {
-    return presentData(dataLines, makeDataLines);
+    return renderData(dataLines, makeDataLines);
   });
   return (
     <Row className="text-center">
