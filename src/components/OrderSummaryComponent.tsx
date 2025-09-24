@@ -1,7 +1,6 @@
 import React from "react";
 import { Row, Col } from "react-bootstrap";
 import BuyTable from "./tables/BuyTable";
-import { UserDataContext } from "@/components/providers/UserDataProvider";
 import { Artwork } from "@/fetching/types";
 
 type OrderSummaryComponentProps = {
@@ -9,6 +8,7 @@ type OrderSummaryComponentProps = {
   items: Artwork[];
   totalCost: number;
   button?: React.ReactNode;
+  orderUser?: { user_name: string; user_id: number };
 };
 
 function OrderSummaryComponent({
@@ -16,9 +16,8 @@ function OrderSummaryComponent({
   items,
   totalCost,
   button,
+  orderUser,
 }: OrderSummaryComponentProps) {
-  const { user } = React.useContext(UserDataContext);
-
   return (
     <Row className="mb-3 floating-element">
       {items.length !== 0 ? (
@@ -30,9 +29,9 @@ function OrderSummaryComponent({
               </Row>
             )}
 
-            {user && (
+            {orderUser && (
               <Row className="mb-2 mt-5 mb-3">
-                <h3 className="text-start">User: {user.user_name}</h3>
+                <h3 className="text-start">User: {orderUser.user_name}</h3>
               </Row>
             )}
 

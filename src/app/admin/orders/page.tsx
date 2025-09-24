@@ -18,6 +18,7 @@ function Orders() {
           title={`Order ${len - index}`}
           items={orderData.items}
           totalCost={orderData.totalCost}
+          orderUser={orderData.user}
         />
       );
     });
