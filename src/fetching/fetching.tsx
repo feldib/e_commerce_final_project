@@ -5,7 +5,7 @@ import { searchArtworksGraphQL } from "@/utils/graphqlSearch";
 import {
   Artwork,
   ArtworkSent,
-  InvoiceData,
+  CheckoutFormData,
   Message,
   Order,
   SearchParams,
@@ -245,7 +245,7 @@ export const isWishlisted = async (artwork_id: number): Promise<boolean> => {
 // Orders
 // ===================
 
-export const order = async (invoice_data: InvoiceData): Promise<void> => {
+export const order = async (invoice_data: CheckoutFormData): Promise<void> => {
   await axiosConfigured.post(`${SERVER_URL}/${USERS_URL}/make_order`, {
     invoice_data,
   });

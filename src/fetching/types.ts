@@ -98,6 +98,14 @@ export interface InvoiceData {
   phone_number: string;
 }
 
+export interface CheckoutFormData {
+  email: string;
+  first_name: string;
+  last_name: string;
+  address: string;
+  phone_number: string;
+}
+
 // Formik Types - using FormikProps from formik
 import { FormikProps } from "formik";
 

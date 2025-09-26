@@ -13,12 +13,14 @@ import { ToastContainer } from "react-toastify";
 
 import SubPageTitle from "@/components/SubPageTitle";
 
+import { CheckoutFormData } from "@/fetching/types";
+
 import UserDataInputComponents from "./UserDataInputComponent";
 
 type UserDataChangingComponentProps = {
   title: string;
   checkout?: boolean;
-  formik: FormikProps<Record<string, string>>;
+  formik: FormikProps<CheckoutFormData>;
   button?: React.ReactNode;
 };
 

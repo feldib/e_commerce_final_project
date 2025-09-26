@@ -11,6 +11,7 @@ import UserDataChangingComponent from "@/components/input/UserDataComponent";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
 
 import { order } from "@/fetching/fetching";
+import { CheckoutFormData } from "@/fetching/types";
 
 function CheckoutPage() {
   const router = useRouter();
@@ -25,7 +26,7 @@ function CheckoutPage() {
     phone_number: Yup.string().required("Email required"),
   });
 
-  const formik = useFormik({
+  const formik = useFormik<CheckoutFormData>({
     enableReinitialize: true,
     initialValues: {
       email: user.email || "",
