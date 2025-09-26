@@ -1,5 +1,7 @@
+import { redirect } from "next/navigation";
+
 function AdminPage() {
-  return <div></div>;
+  redirect("/admin/artworks");
 }
 
 export default AdminPage;
