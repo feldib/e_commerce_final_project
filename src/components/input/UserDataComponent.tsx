@@ -7,7 +7,7 @@ import {
   faQuestion,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
-import { Col, Container, Form,Row } from "react-bootstrap";
+import { Col, Container, Form, Row } from "react-bootstrap";
 import { FormikProps } from "formik";
 import { ToastContainer } from "react-toastify";
 

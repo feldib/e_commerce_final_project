@@ -2,20 +2,14 @@
 import React from "react";
 
 import { useFormik } from "formik";
-import * as Yup from "yup";
+
+import { userDataSchema } from "@/utils/validationSchemas";
 
 import UserDataChangingComponent from "@/components/input/UserDataComponent";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
 
 function UserData() {
   const { user } = React.useContext(UserDataContext);
-  const validationSchema = Yup.object().shape({
-    email: Yup.string().email("Invalid email").required("Email required"),
-    first_name: Yup.string().required("Email required"),
-    last_name: Yup.string().required("Email required"),
-    address: Yup.string(),
-    phone_number: Yup.string(),
-  });
 
   const formik = useFormik({
     enableReinitialize: true,
@@ -27,7 +21,7 @@ function UserData() {
       phone_number: user.phone_number || "",
     },
 
-    validationSchema,
+    validationSchema: userDataSchema,
 
     onSubmit: async () => {
       return;

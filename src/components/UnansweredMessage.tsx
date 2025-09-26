@@ -11,7 +11,6 @@ import {
   Row,
 } from "react-bootstrap";
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import * as Yup from "yup";
 import { ToastContainer } from "react-toastify";
 
 import {
@@ -19,6 +18,7 @@ import {
   showReplyErrorToast,
   showReplySuccessToast,
 } from "@/utils/toastUtils";
+import { messageReplySchema } from "@/utils/validationSchemas";
 
 import { replyToMessage } from "@/fetching/fetching";
 
@@ -62,11 +62,6 @@ function UnansweredMessage({ message }: UnansweredMessageProps) {
     }
   };
 
-  const resetPasswordSchema = Yup.object().shape({
-    reply_title: Yup.string().required("Title required"),
-    reply_text: Yup.string().required("Reply required"),
-  });
-
   return (
     <Row className="mx-auto mb-5 floating-element p-3">
       {replied ? (
@@ -103,7 +98,7 @@ function UnansweredMessage({ message }: UnansweredMessageProps) {
                 <Formik
                   initialValues={initialValues}
                   onSubmit={onSubmit}
-                  validationSchema={resetPasswordSchema}
+                  validationSchema={messageReplySchema}
                 >
                   {({ errors, touched }) => (
                     <Form>

@@ -5,7 +5,8 @@ import { useRouter } from "next/navigation";
 
 import { Button, Col, Row } from "react-bootstrap";
 import { useFormik } from "formik";
-import * as Yup from "yup";
+
+import { checkoutSchema } from "@/utils/validationSchemas";
 
 import UserDataChangingComponent from "@/components/input/UserDataComponent";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
@@ -18,14 +19,6 @@ function CheckoutPage() {
 
   const { user } = React.useContext(UserDataContext);
 
-  const validationSchema = Yup.object().shape({
-    email: Yup.string().required("Email required").email("Invalid email"),
-    first_name: Yup.string().required("Email required"),
-    last_name: Yup.string().required("Email required"),
-    address: Yup.string().required("Email required"),
-    phone_number: Yup.string().required("Email required"),
-  });
-
   const formik = useFormik<CheckoutFormData>({
     enableReinitialize: true,
     initialValues: {
@@ -36,7 +29,7 @@ function CheckoutPage() {
       phone_number: user.phone_number || "",
     },
 
-    validationSchema,
+    validationSchema: checkoutSchema,
 
     onSubmit: (values) => {
       order(values).then(() => router.push("/receipt"));

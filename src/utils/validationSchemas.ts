@@ -66,8 +66,8 @@ export const registrationSchema = Yup.object().shape({
 
 export const userDataSchema = Yup.object().shape({
   email: commonValidationRules.email,
-  first_name: commonValidationRules.firstName,
-  last_name: commonValidationRules.lastName,
+  first_name: Yup.string().required("First name required"),
+  last_name: Yup.string().required("Last name required"),
   address: Yup.string().optional(),
   phone_number: Yup.string().optional(),
 });
@@ -78,4 +78,9 @@ export const checkoutSchema = Yup.object().shape({
   last_name: commonValidationRules.lastName,
   address: commonValidationRules.address,
   phone_number: commonValidationRules.phoneNumber,
+});
+
+export const messageReplySchema = Yup.object().shape({
+  reply_title: commonValidationRules.title,
+  reply_text: commonValidationRules.message,
 });
