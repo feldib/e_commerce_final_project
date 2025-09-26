@@ -1,15 +1,25 @@
 "use client";
 import React, { Suspense } from "react";
+
+import { useSearchParams } from "next/navigation";
+
+import { faKey, faQuestion, faUser } from "@fortawesome/free-solid-svg-icons";
+import { Button, Col, Container, Row } from "react-bootstrap";
+import { Form, Formik } from "formik";
+import * as Yup from "yup";
+import { ToastContainer } from "react-toastify";
+
+import {
+  showErrorToast,
+  showIncorrectDataToast,
+  showSuccessToast,
+} from "@/utils/toastUtils";
+
+import InputComponent from "@/components/input/InputComponent";
+import PageTitle from "@/components/PageTitle";
+
 import { registerNewUser } from "@/fetching/fetching";
 import { logIn } from "@/fetching/fetching";
-import InputComponent from "@/components/input/InputComponent";
-import { Container, Col, Row, Button } from "react-bootstrap";
-import { faUser, faKey, faQuestion } from "@fortawesome/free-solid-svg-icons";
-import { Formik, Form } from "formik";
-import * as Yup from "yup";
-import { ToastContainer, toast } from "react-toastify";
-import PageTitle from "@/components/PageTitle";
-import { useSearchParams } from "next/navigation";
 import { User } from "@/fetching/types";
 
 type RegistrationPageProps = {
@@ -49,7 +59,7 @@ function RegistrationPageInner({
         });
       })
       .catch(() => {
-        console.log("Registration failed");
+        showErrorToast("Registration failed");
       });
   };
 
@@ -74,13 +84,9 @@ function RegistrationPageInner({
   }) {
     try {
       await attemptRegistration(values, settleSuccessfulRegistration);
-      toast.success("Registration successful", {
-        className: "toast-success",
-      });
+      showSuccessToast("Registration successful");
     } catch {
-      toast.error("A user is registered with email already", {
-        className: "toast-error",
-      });
+      showErrorToast("A user is registered with email already");
     }
   }
 
@@ -170,9 +176,7 @@ function RegistrationPageInner({
                   type="submit"
                   onClick={() => {
                     if (Object.keys(errors).length) {
-                      toast.error("Incorrect data", {
-                        className: "toast-error",
-                      });
+                      showIncorrectDataToast();
                     }
                   }}
                 >
@@ -188,10 +192,12 @@ function RegistrationPageInner({
   );
 }
 
-export default function RegistrationPage(props: RegistrationPageProps) {
+function RegistrationPage(props: RegistrationPageProps) {
   return (
     <Suspense>
       <RegistrationPageInner {...props} />
     </Suspense>
   );
 }
+
+export default RegistrationPage;

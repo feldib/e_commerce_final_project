@@ -1,13 +1,21 @@
 "use client";
 import React from "react";
-import { Container, Row, Col, Button } from "react-bootstrap";
+
 import { faUser } from "@fortawesome/free-solid-svg-icons";
-import { sendForgotPasswordEmail } from "@/fetching/fetching";
+import { Button,Col, Container, Row } from "react-bootstrap";
+import { Form,Formik } from "formik";
+import { ToastContainer } from "react-toastify";
+
+import {
+  showEmailSubmittedToast,
+  showSubmissionErrorToast,
+} from "@/utils/toastUtils";
+import { forgotPasswordSchema } from "@/utils/validationSchemas";
+
 import InputComponent from "@/components/input/InputComponent";
-import { Formik, Form } from "formik";
-import * as Yup from "yup";
-import { ToastContainer, toast } from "react-toastify";
 import PageTitle from "@/components/PageTitle";
+
+import { sendForgotPasswordEmail } from "@/fetching/fetching";
 
 function ForgotPassword() {
   const [displayMessage, setDisplayMessage] = React.useState(false);
@@ -24,20 +32,12 @@ function ForgotPassword() {
     sendForgotPasswordEmail(values.email)
       .then(() => {
         setDisplayMessage(true);
-        toast.success("Email submitted", {
-          className: "toast-success",
-        });
+        showEmailSubmittedToast();
       })
       .catch(() => {
-        toast.error("Error: couldn't submit", {
-          className: "toast-error",
-        });
+        showSubmissionErrorToast();
       });
   };
-
-  const forgotPasswordSchema = Yup.object().shape({
-    email: Yup.string().required("Email required").email("Invalid email"),
-  });
 
   return (
     <Container className="pb-5">

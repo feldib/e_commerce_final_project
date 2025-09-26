@@ -1,20 +1,24 @@
 import React from "react";
+
 import { Row } from "react-bootstrap";
-import useLoading from "@/hooks/useLoading";
+
 import ShoppingCartDataLines from "@/components/datalines/ShoppingCartDataLines";
-import { presentData } from "@/helpers/helpers";
+
 import { Artwork } from "@/fetching/types";
+
+import { renderData } from "@/helpers/helpers";
+import useLoading from "@/hooks/useLoading";
 
 type ShoppingCartTableProps = {
   dataLines: Artwork[];
-  reccomendation?: boolean;
+  recommendation?: boolean;
   changeCosts: (index: number, cost: number) => void;
   theadNeeded: boolean;
 };
 
 function ShoppingCartTable({
   dataLines,
-  reccomendation = false,
+  recommendation = false,
   changeCosts,
   theadNeeded,
 }: ShoppingCartTableProps) {
@@ -23,7 +27,7 @@ function ShoppingCartTable({
       return (
         <ShoppingCartDataLines
           key={index}
-          reccomendation={reccomendation}
+          recommendation={recommendation}
           line={line}
           index={index}
           changeCosts={changeCosts}
@@ -32,7 +36,7 @@ function ShoppingCartTable({
     });
   }
   const dataLinesGenerated = useLoading(dataLines, (dataLines) => {
-    return presentData(dataLines, makeDataLines);
+    return renderData(dataLines, makeDataLines);
   });
   return (
     <Row className="text-center">
@@ -46,12 +50,12 @@ function ShoppingCartTable({
               <th>Total cost</th>
               <th>Quantity</th>
               <th
-                className={`${reccomendation ? "d-none" : "d-none d-md-table-cell"}`}
+                className={`${recommendation ? "d-none" : "d-none d-md-table-cell"}`}
               >
                 Tags
               </th>
               <th
-                className={`${reccomendation ? "d-none" : "d-none d-md-table-cell"}`}
+                className={`${recommendation ? "d-none" : "d-none d-md-table-cell"}`}
               >
                 Categories
               </th>

@@ -1,14 +1,21 @@
 "use client";
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import {
   faAsterisk,
-  faGear,
   faCheck,
+  faGear,
   IconDefinition,
 } from "@fortawesome/free-solid-svg-icons";
-import { Form, InputGroup, Button } from "react-bootstrap";
-import { toast } from "react-toastify";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Button, Form, InputGroup } from "react-bootstrap";
+
+import {
+  showErrorToast,
+  showSuccessToast,
+  showWarningToast,
+} from "@/utils/toastUtils";
+
 import { updateUserData } from "@/fetching/fetching";
 
 type UserDataInputComponentsProps = {
@@ -67,25 +74,18 @@ function UserDataInputComponents({
         {editing ? (
           <Button
             variant="primary"
+            className="inline-submit-button"
             onClick={(e) => {
               e.preventDefault();
               if (error) {
-                toast.error("Incorrect data", {
-                  className: "toast-error",
-                });
+                showErrorToast("Incorrect data");
               } else {
                 if (changeUserData) {
                   updateUserData(name, value);
-                  toast.success(`${label} changed successfully`, {
-                    className: "toast-success",
-                  });
+                  showSuccessToast(`${label} changed successfully`);
                 } else {
-                  toast.success(`${label} changed successfully`, {
-                    className: "toast-success",
-                  });
-                  toast.warning(`This only effects the invoice!`, {
-                    className: "toast-warning",
-                  });
+                  showSuccessToast(`${label} changed successfully`);
+                  showWarningToast(`This only effects the invoice!`);
                 }
                 setEditing(false);
               }
@@ -96,6 +96,7 @@ function UserDataInputComponents({
         ) : (
           <Button
             variant="primary"
+            className="inline-submit-button"
             onClick={() => {
               setEditing(true);
             }}

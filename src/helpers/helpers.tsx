@@ -1,19 +1,21 @@
+import React from "react";
+
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
+
+import axiosConfigured from "@/utils/axiosConfigured";
+import { SERVER_URL } from "@/utils/constants";
+
 import {
   getDataOfArtworks,
-  replaceSavedShoppingCart,
-  getLoggedIn,
   getIsAdmin,
+  getLoggedIn,
+  replaceSavedShoppingCart,
 } from "@/fetching/fetching";
+import { Artwork, ShoppingCartItem } from "@/fetching/types";
 
-import { server_url } from "@/utils/api_constants";
-import React from "react";
-import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
-import { ShoppingCartItem, Artwork } from "@/fetching/types";
-import axiosConfigured from "@/utils/axiosConfigured";
-
-const presentData = <T,>(
+const renderData = <T,>(
   dataLines: T[],
-  makeDataLines: (dataLines: T[]) => React.JSX.Element[]
+  makeDataLines: (dataLines: T[]) => React.JSX.Element
 ): React.JSX.Element => {
   if (dataLines.length > 0) {
     return <>{makeDataLines(dataLines)}</>;
@@ -124,7 +126,7 @@ const redirectIfNotAdmin = (router: AppRouterInstance) => {
 const checkIfShoppingCartIsEmpty = async (loggedIn: boolean) => {
   if (loggedIn) {
     return axiosConfigured
-      .get(`${server_url}/users/shopping_cart`)
+      .get(`${SERVER_URL}/users/shopping_cart`)
       .then(function (results) {
         if (Array.isArray(results.data) && results.data.length) {
           return true;
@@ -161,14 +163,14 @@ function getShoppingCartFromLocalStorage(): ShoppingCartItem[] {
 }
 
 export {
-  presentData,
-  increaseLocalStorageShoppingCartQuantity,
-  decreaseLocalStorageShoppingCartQuantity,
-  removeLocalStorageShoppingCartQuantity,
-  getLocalStorageShoppingCart,
-  replacePreviousShoppingCart,
-  redirectIfNotloggedIn,
-  redirectIfNotAdmin,
   checkIfShoppingCartIsEmpty,
+  decreaseLocalStorageShoppingCartQuantity,
+  getLocalStorageShoppingCart,
   getShoppingCartFromLocalStorage,
+  increaseLocalStorageShoppingCartQuantity,
+  redirectIfNotAdmin,
+  redirectIfNotloggedIn,
+  removeLocalStorageShoppingCartQuantity,
+  renderData,
+  replacePreviousShoppingCart,
 };

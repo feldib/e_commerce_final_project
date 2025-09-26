@@ -1,46 +1,57 @@
 "use client";
 import React from "react";
-import NewArtworkInputComponent from "@/components/input/NewArtworkInputComponent";
 import {
-  Container,
-  Col,
-  Row,
-  Button,
-  Form,
-  Dropdown,
-  InputGroup,
-} from "react-bootstrap";
+  Tag as ReactTagInputTag,
+  WithContext as ReactTags,
+} from "react-tag-input";
+
+import { useRouter } from "next/navigation";
+
 import {
-  faDollarSign,
-  faQuestion,
-  faImages,
   faAsterisk,
+  faDollarSign,
+  faImages,
+  faQuestion,
   faX,
 } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  Button,
+  Col,
+  Container,
+  Dropdown,
+  Form,
+  InputGroup,
+  Row,
+} from "react-bootstrap";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { ToastContainer, toast } from "react-toastify";
-import PageTitle from "@/components/PageTitle";
-import FloatingBackButton from "@/components/buttons/FloatingBackButton";
-import useAxios from "@/hooks/useAxios";
-import useLoading from "@/hooks/useLoading";
-import { useRouter } from "next/navigation";
-import {
-  WithContext as ReactTags,
-  Tag as ReactTagInputTag,
-} from "react-tag-input";
-import {
-  addNewThumbnail,
-  addNewOtherPictures,
-  addNewArtwork,
-} from "@/fetching/fetching";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Category } from "@/fetching/types";
+import { ToastContainer } from "react-toastify";
+
 import {
   MAX_IMAGE_SIZE,
   TAG_DELIMITERS,
   VALID_IMAGE_EXTENSIONS,
 } from "@/utils/constants";
+import {
+  showErrorToast,
+  showIncorrectDataToast,
+  showSuccessToast,
+} from "@/utils/toastUtils";
+
+import FloatingBackButton from "@/components/buttons/FloatingBackButton";
+import NewArtworkInputComponent from "@/components/input/NewArtworkInputComponent";
+import PageTitle from "@/components/PageTitle";
+
+import {
+  addNewArtwork,
+  addNewOtherPictures,
+  addNewThumbnail,
+} from "@/fetching/fetching";
+import { Category } from "@/fetching/types";
+
+import useAxios from "@/hooks/useAxios";
+import useLoading from "@/hooks/useLoading";
 
 interface AddNewArtworkFormValues extends Record<string, unknown> {
   title: string;
@@ -90,31 +101,25 @@ function AddNewArtworkPage() {
       description: "",
     },
 
-    onSubmit: (values, actions) => {
+    onSubmit: async (values, actions) => {
       const tags = values.tags.map((obj) => obj.text);
 
-      addNewArtwork({ ...values, tags })
-        .then(async (response) => {
-          toast.success("Artwork added successfully to database", {
-            className: "toast-success",
-          });
+      try {
+        const response = await addNewArtwork({ ...values, tags });
+        showSuccessToast("Artwork added successfully to database");
 
-          const artwork_id = response.data;
+        const artwork_id = response.data;
 
-          if (values.thumbnail) {
-            await addNewThumbnail(artwork_id, values.thumbnail);
-          }
+        if (values.thumbnail) {
+          await addNewThumbnail(artwork_id, values.thumbnail);
+        }
 
-          await addNewOtherPictures(artwork_id, values.other_pictures);
+        await addNewOtherPictures(artwork_id, values.other_pictures);
 
-          actions.resetForm();
-        })
-        .catch((error) => {
-          toast.error("Error: could not add artwork.", {
-            className: "toast-error",
-          });
-          console.log(error);
-        });
+        actions.resetForm();
+      } catch {
+        showErrorToast("Error: could not add artwork.");
+      }
     },
 
     validationSchema: Yup.object().shape({
@@ -404,9 +409,7 @@ function AddNewArtworkPage() {
               type="submit"
               onClick={() => {
                 if (Object.keys(formik.errors).length) {
-                  toast.error("Incorrect data", {
-                    className: "toast-error",
-                  });
+                  showIncorrectDataToast();
                 }
               }}
             >

@@ -1,19 +1,28 @@
 "use client";
 import React from "react";
+
+import { faAsterisk, faKeyboard } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   Button,
   Col,
-  Row,
-  Form as RBForm,
   FloatingLabel,
+  Form as RBForm,
+  Row,
 } from "react-bootstrap";
-import { Formik, Form, ErrorMessage, Field } from "formik";
-import InputComponent from "./input/InputComponent";
-import { ToastContainer, toast } from "react-toastify";
-import * as Yup from "yup";
+import { ErrorMessage, Field, Form, Formik } from "formik";
+import { ToastContainer } from "react-toastify";
+
+import {
+  showIncorrectDataToast,
+  showReplyErrorToast,
+  showReplySuccessToast,
+} from "@/utils/toastUtils";
+import { messageReplySchema } from "@/utils/validationSchemas";
+
 import { replyToMessage } from "@/fetching/fetching";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faKeyboard, faAsterisk } from "@fortawesome/free-solid-svg-icons";
+
+import InputComponent from "./input/InputComponent";
 
 type UnansweredMessageProps = {
   message: {
@@ -38,30 +47,20 @@ function UnansweredMessage({ message }: UnansweredMessageProps) {
     reply_text: "",
   };
 
-  const onSubmit = (values: ReplyToMessageProps) => {
-    replyToMessage(
-      message.id,
-      message.email,
-      values.reply_title,
-      values.reply_text
-    )
-      .then(() => {
-        toast.success("Reply sent successfully", {
-          className: "toast-success",
-        });
-        setReplied(true);
-      })
-      .catch(() => {
-        toast.error("Error: couldn't send reply", {
-          className: "toast-error",
-        });
-      });
+  const onSubmit = async (values: ReplyToMessageProps) => {
+    try {
+      await replyToMessage(
+        message.id,
+        message.email,
+        values.reply_title,
+        values.reply_text
+      );
+      showReplySuccessToast();
+      setReplied(true);
+    } catch {
+      showReplyErrorToast();
+    }
   };
-
-  const resetPasswordSchema = Yup.object().shape({
-    reply_title: Yup.string().required("Title required"),
-    reply_text: Yup.string().required("Reply required"),
-  });
 
   return (
     <Row className="mx-auto mb-5 floating-element p-3">
@@ -99,7 +98,7 @@ function UnansweredMessage({ message }: UnansweredMessageProps) {
                 <Formik
                   initialValues={initialValues}
                   onSubmit={onSubmit}
-                  validationSchema={resetPasswordSchema}
+                  validationSchema={messageReplySchema}
                 >
                   {({ errors, touched }) => (
                     <Form>
@@ -145,9 +144,7 @@ function UnansweredMessage({ message }: UnansweredMessageProps) {
                         type="submit"
                         onClick={() => {
                           if (Object.keys(errors).length) {
-                            toast.error("Incorrect data", {
-                              className: "toast-error",
-                            });
+                            showIncorrectDataToast();
                           }
                         }}
                       >

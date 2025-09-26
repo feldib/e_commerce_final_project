@@ -1,19 +1,25 @@
 "use client";
 import React from "react";
-import useAxios from "@/hooks/useAxios";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
-import { Col, Row, Carousel } from "react-bootstrap";
 import { useMediaQuery } from "react-responsive";
-import ReccomendationCard from "./ReccomendationCard";
+
+import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Carousel, Col, Row } from "react-bootstrap";
+
+import { UI_DIMENSIONS } from "@/utils/constants";
+
 import { Artwork } from "@/fetching/types";
 
-type ReccomendationsProps = {
+import RecommendationCard from "./RecommendationCard";
+
+import useAxios from "@/hooks/useAxios";
+
+type RecommendationsProps = {
   title: string;
   path: string;
 };
 
-function Reccomendations({ title, path }: ReccomendationsProps) {
+function Recommendations({ title, path }: RecommendationsProps) {
   const [tableHidden, setTableHidden] = React.useState(false);
   const recommendations = useAxios(`${path}?n=10`) as Artwork[];
 
@@ -25,7 +31,7 @@ function Reccomendations({ title, path }: ReccomendationsProps) {
         <Col xs={12} lg={5} className="mb-3 mx-auto">
           <Row>
             <Col xs={7} md={5} lg={7} className="mx-auto">
-              <h4 className="text-center reccomendation-title">
+              <h4 className="text-center recommendation-title">
                 {`${title}`}
                 <FontAwesomeIcon
                   className="toggle-reccommendation mx-2 d-md-none"
@@ -44,10 +50,10 @@ function Reccomendations({ title, path }: ReccomendationsProps) {
                 return (
                   <Carousel.Item
                     key={index}
-                    interval={3000}
+                    interval={UI_DIMENSIONS.CAROUSEL_INTERVAL}
                     className="mb-5 px-none"
                   >
-                    <ReccomendationCard artwork={artwork} />
+                    <RecommendationCard artwork={artwork} />
                   </Carousel.Item>
                 );
               })}
@@ -59,4 +65,4 @@ function Reccomendations({ title, path }: ReccomendationsProps) {
   );
 }
 
-export default Reccomendations;
+export default Recommendations;

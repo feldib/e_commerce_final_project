@@ -1,20 +1,20 @@
 "use client";
 import React from "react";
-import { server_url } from "@/utils/api_constants";
+
 import axiosConfigured from "@/utils/axiosConfigured";
+import { SERVER_URL } from "@/utils/constants";
 
 const useAxios = (url: string) => {
   const [data, setData] = React.useState<unknown>(undefined);
   React.useEffect(() => {
     (async () => {
       await axiosConfigured
-        .get(`${server_url}${url}`)
+        .get(`${SERVER_URL}${url}`)
         .then(function (results) {
           setData(results.data);
         })
-        .catch(function (error) {
+        .catch(function () {
           setData(false);
-          console.log(error);
         });
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps

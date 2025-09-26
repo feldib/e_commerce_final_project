@@ -1,10 +1,15 @@
 "use client";
 import React from "react";
-import { ToastContainer } from "react-toastify";
+
 import Link from "next/link";
-import RemoveArtworkButton from "@/components/buttons/RemoveArtworkButton";
+
+import { ToastContainer } from "react-toastify";
+
+import { SERVER_URL,UI_DIMENSIONS } from "@/utils/constants";
+
 import FeatureButton from "@/components/buttons/FeatureButton";
-import { server_url } from "@/utils/api_constants";
+import RemoveArtworkButton from "@/components/buttons/RemoveArtworkButton";
+
 import { Artwork } from "@/fetching/types";
 
 type AdminArtworkTableDatalinesProps = {
@@ -29,9 +34,9 @@ function AdminArtworkTableDatalines({
           <td>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={`${server_url}/${line.thumbnail}`}
-              width="100"
-              height="100"
+              src={`${SERVER_URL}/${line.thumbnail}`}
+              width={UI_DIMENSIONS.THUMBNAIL_SIZE}
+              height={UI_DIMENSIONS.THUMBNAIL_SIZE}
               style={{ objectFit: "contain" }}
               alt="place of thumbnail"
             />

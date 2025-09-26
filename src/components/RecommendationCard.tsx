@@ -1,19 +1,26 @@
 "use client";
 import React from "react";
-import { server_url } from "@/utils/api_constants";
-import { Col, Row, Card } from "react-bootstrap";
-import FavouriteButton from "./buttons/FavouriteButton";
-import ShoppingCartButton from "./buttons/ShoppingCartButton";
+
 import Link from "next/link";
+
+import { Card, Col, Row } from "react-bootstrap";
+
+import { SERVER_URL,UI_DIMENSIONS } from "@/utils/constants";
+
 import { UserDataContext } from "@/components/providers/UserDataProvider";
-import useQuantity from "@/hooks/useQuantity";
+
 import { Artwork } from "@/fetching/types";
 
-type ReccomendationCardProps = {
+import FavouriteButton from "./buttons/FavouriteButton";
+import ShoppingCartButton from "./buttons/ShoppingCartButton";
+
+import useQuantity from "@/hooks/useQuantity";
+
+type RecommendationCardProps = {
   artwork: Artwork;
 };
 
-function ReccomendationCard({ artwork }: ReccomendationCardProps) {
+function RecommendationCard({ artwork }: RecommendationCardProps) {
   const { loggedIn } = React.useContext(UserDataContext);
 
   const { quantity, setQuantity } = useQuantity(
@@ -40,7 +47,7 @@ function ReccomendationCard({ artwork }: ReccomendationCardProps) {
 
           <Col xs={1} className="text-center px-3">
             <span
-              className="reccommendation-button"
+              className="recommendation-button"
               onClick={() => {
                 if (quantity > 0) {
                   setQuantity(quantity - 1);
@@ -50,7 +57,7 @@ function ReccomendationCard({ artwork }: ReccomendationCardProps) {
               <ShoppingCartButton artwork_id={artwork.id} quantity={quantity} />
             </span>
 
-            <span className="reccommendation-button">
+            <span className="recommendation-button">
               <FavouriteButton artwork_id={artwork.id} />
             </span>
           </Col>
@@ -58,8 +65,8 @@ function ReccomendationCard({ artwork }: ReccomendationCardProps) {
       </Card.Body>
 
       <Card.Img
-        src={`${server_url}/${artwork.thumbnail}`}
-        width="500"
+        src={`${SERVER_URL}/${artwork.thumbnail}`}
+        width={UI_DIMENSIONS.CARD_IMAGE_WIDTH}
         height="300"
         style={{ objectFit: "cover" }}
         alt="place of thumbnail"
@@ -69,4 +76,4 @@ function ReccomendationCard({ artwork }: ReccomendationCardProps) {
   );
 }
 
-export default ReccomendationCard;
+export default RecommendationCard;

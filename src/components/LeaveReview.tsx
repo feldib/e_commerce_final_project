@@ -1,20 +1,29 @@
 "use client";
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import { faAsterisk, faKeyboard } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  Col,
-  Row,
   Button,
+  Col,
   FloatingLabel,
   Form as RBForm,
+  Row,
 } from "react-bootstrap";
-import { Formik, Field, Form, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import { toast } from "react-toastify";
-import InputComponent from "./input/InputComponent";
-import { leaveReview } from "@/fetching/fetching";
+import { ErrorMessage,Field, Form, Formik } from "formik";
+
+import {
+  showIncorrectDataToast,
+  showReviewErrorToast,
+  showReviewSavedToast,
+} from "@/utils/toastUtils";
+import { reviewSchema } from "@/utils/validationSchemas";
+
 import { UserDataContext } from "@/components/providers/UserDataProvider";
+
+import { leaveReview } from "@/fetching/fetching";
+
+import InputComponent from "./input/InputComponent";
 
 type LeaveReviewProps = {
   artwork_id: number;
@@ -35,25 +44,13 @@ function LeaveReview({ artwork_id }: LeaveReviewProps) {
     review_text: "",
   };
 
-  const reviewSchema = Yup.object().shape({
-    title: Yup.string().required("Review required"),
-    review_text: Yup.string().required("Review text required"),
-  });
-
   const onSubmit = async (values: ReviewFormValues) => {
     try {
       await leaveReview(artwork_id, values.title, values.review_text);
-      toast.success("Review saved", {
-        className: "toast-success",
-      });
-      toast.info("The review has to be approved by the administrator", {
-        className: "toast-info",
-      });
+      showReviewSavedToast();
       form?.current?.reset();
     } catch {
-      toast.error("Error: couldn't save review", {
-        className: "toast-error",
-      });
+      showReviewErrorToast();
     }
   };
 
@@ -112,9 +109,7 @@ function LeaveReview({ artwork_id }: LeaveReviewProps) {
                       type="submit"
                       onClick={() => {
                         if (Object.keys(errors).length) {
-                          toast.error("Incorrect data", {
-                            className: "toast-error",
-                          });
+                          showIncorrectDataToast();
                         }
                       }}
                     >

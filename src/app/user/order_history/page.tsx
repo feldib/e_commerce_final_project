@@ -1,21 +1,24 @@
 "use client";
 import React from "react";
-import { Col } from "react-bootstrap";
-import useAxios from "@/hooks/useAxios";
-import useLoading from "@/hooks/useLoading";
+
+import { Col, Row } from "react-bootstrap";
+
+import { USERS_URL } from "@/utils/constants";
+
 import OrderSummaryComponent from "@/components/OrderSummaryComponent";
-import { users_url } from "@/utils/api_constants";
 import SubPageTitle from "@/components/SubPageTitle";
+
 import { Order } from "@/fetching/types";
 
+import useAxios from "@/hooks/useAxios";
+import useLoading from "@/hooks/useLoading";
+
 function OrderHistory() {
-  function representOrderDataCollection(
-    orderDataCollection: Order[]
-  ): React.JSX.Element {
-    const len = orderDataCollection.length;
+  function renderOrderList(orders: Order[]): React.JSX.Element {
+    const len = orders.length;
     return (
       <>
-        {orderDataCollection.map((orderData, index) => (
+        {orders.map((orderData, index) => (
           <OrderSummaryComponent
             key={index}
             title={`Order ${len - index}`}
@@ -27,10 +30,20 @@ function OrderHistory() {
     );
   }
 
-  const orderDataCollection = useAxios(`/${users_url}/get_orders_of_user`);
-  const ordersRepresented = useLoading(orderDataCollection, (orders) =>
-    representOrderDataCollection(orders as Order[])
-  );
+  const orderDataCollection = useAxios(
+    `/${USERS_URL}/get_orders_of_user`
+  ) as Order[];
+  const ordersRepresented = useLoading(orderDataCollection, (orders) => {
+    if (orders.length === 0) {
+      return (
+        <Row className="mb-3 floating-element">
+          <Col className="text-center">--- No orders ---</Col>
+        </Row>
+      );
+    }
+    return renderOrderList(orders);
+  });
+
   return (
     <Col className="mb-5 pb-5">
       <SubPageTitle title="Order history" />

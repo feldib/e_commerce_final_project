@@ -1,8 +1,10 @@
 "use client";
 import React from "react";
-import { getLocalStorageShoppingCart } from "@/helpers/helpers";
+
 import { getShoppingCart } from "@/fetching/fetching";
 import { Artwork } from "@/fetching/types";
+
+import { getLocalStorageShoppingCart } from "@/helpers/helpers";
 
 const useShoppingList = (loggedIn: boolean) => {
   const [data, setData] = React.useState<Artwork[]>([]);
@@ -13,9 +15,8 @@ const useShoppingList = (loggedIn: boolean) => {
           .then((results) => {
             setData(results);
           })
-          .catch(function (error) {
+          .catch(function () {
             setData([]);
-            console.log(error);
           });
       } else {
         await getLocalStorageShoppingCart()

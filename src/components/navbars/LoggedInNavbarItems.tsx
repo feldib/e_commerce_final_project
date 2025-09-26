@@ -1,12 +1,17 @@
 "use client";
 import React from "react";
-import UserNavbarMenuItems from "./UserNavbarMenuItems";
-import { serverLogOut } from "@/fetching/fetching";
+
 import Link from "next/link";
-import { Nav } from "react-bootstrap";
-import { UserDataContext } from "@/components/providers/UserDataProvider";
-import { ExpandedNavContext } from "./Header";
 import { useRouter } from "next/navigation";
+
+import { Nav } from "react-bootstrap";
+
+import { UserDataContext } from "@/components/providers/UserDataProvider";
+
+import { serverLogOut } from "@/fetching/fetching";
+
+import { ExpandedNavContext } from "./Header";
+import UserNavbarMenuItems from "./UserNavbarMenuItems";
 
 function LoggedInNavbarItems() {
   const { user, logOut: contextLogOut } = React.useContext(UserDataContext);

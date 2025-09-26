@@ -1,14 +1,17 @@
-import Header from "@/components/navbars/Header";
-import Footer from "@/components/navbars/Footer";
 import React from "react";
-import "react-confirm-alert/src/react-confirm-alert.css";
+
 import { ToastContainer } from "react-toastify";
-import UserDataProvider from "@/components/providers/UserDataProvider";
+
+import Footer from "@/components/navbars/Footer";
+import Header from "@/components/navbars/Header";
 import ThemeProvider from "@/components/providers/ThemeProvider";
+import UserDataProvider from "@/components/providers/UserDataProvider";
+
+import "react-confirm-alert/src/react-confirm-alert.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./globals.css";
 
-export default function App({ children }: { children: React.ReactNode }) {
+function App({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
@@ -29,3 +32,5 @@ export default function App({ children }: { children: React.ReactNode }) {
     </html>
   );
 }
+
+export default App;

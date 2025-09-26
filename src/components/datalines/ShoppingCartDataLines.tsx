@@ -1,37 +1,44 @@
 "use client";
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faX, faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
-import { Row, Col } from "react-bootstrap";
-import { toast, ToastContainer } from "react-toastify";
+
 import Link from "next/link";
+
+import { faMinus, faPlus, faX } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Col, Row } from "react-bootstrap";
+import { ToastContainer } from "react-toastify";
+
+import { SERVER_URL,UI_DIMENSIONS } from "@/utils/constants";
+import { showErrorToast, showSuccessToast } from "@/utils/toastUtils";
+
 import FavouriteButton from "@/components/buttons/FavouriteButton";
+import { UserDataContext } from "@/components/providers/UserDataProvider";
+
 import {
-  increaseShoppingListItemQuantity,
   decreaseShoppingListItemQuantity,
+  increaseShoppingListItemQuantity,
   removeFromShoppingList,
 } from "@/fetching/fetching";
+import { Artwork } from "@/fetching/types";
+
 import {
-  increaseLocalStorageShoppingCartQuantity,
   decreaseLocalStorageShoppingCartQuantity,
+  increaseLocalStorageShoppingCartQuantity,
   removeLocalStorageShoppingCartQuantity,
 } from "@/helpers/helpers";
-import { UserDataContext } from "@/components/providers/UserDataProvider";
-import { server_url } from "@/utils/api_constants";
-import { Artwork } from "@/fetching/types";
 
 type ShoppingCartDataLinesProps = {
   line: Artwork;
   index: number;
   changeCosts: (index: number, cost: number) => void;
-  reccomendation?: boolean;
+  recommendation?: boolean;
 };
 
 function ShoppingCartDataLines({
   line,
   index,
   changeCosts,
-  reccomendation = false,
+  recommendation = false,
 }: ShoppingCartDataLinesProps) {
   const { loggedIn } = React.useContext(UserDataContext);
 
@@ -47,9 +54,9 @@ function ShoppingCartDataLines({
       <td>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={`${server_url}/${line.thumbnail}`}
-          width="100"
-          height="100"
+          src={`${SERVER_URL}/${line.thumbnail}`}
+          width={UI_DIMENSIONS.THUMBNAIL_SIZE}
+          height={UI_DIMENSIONS.THUMBNAIL_SIZE}
           style={{ objectFit: "cover" }}
           alt="place of thumbnail"
         />
@@ -112,32 +119,23 @@ function ShoppingCartDataLines({
               className="table-button"
               onClick={async () => {
                 if (loggedIn) {
-                  await increaseShoppingListItemQuantity(line.id)
-                    .then(() => {
-                      toast.success("Item added to shopping cart", {
-                        className: "toast-success",
-                      });
-                      setQuantity(quantity + 1);
-                    })
-                    .catch(() => {
-                      toast.error("Item out of stock", {
-                        className: "toast-error",
-                      });
-                    });
+                  try {
+                    await increaseShoppingListItemQuantity(line.id);
+                    showSuccessToast("Item added to shopping cart");
+                    setQuantity(quantity + 1);
+                  } catch {
+                    showErrorToast("Item out of stock");
+                  }
                 } else {
                   try {
                     increaseLocalStorageShoppingCartQuantity(
                       line.id,
                       line.stored_amount - quantity
                     );
-                    toast.success("Item added to shopping cart", {
-                      className: "toast-success",
-                    });
+                    showSuccessToast("Item added to shopping cart");
                     setQuantity(quantity + 1);
                   } catch {
-                    toast.error("Item out of stock", {
-                      className: "toast-error",
-                    });
+                    showErrorToast("Item out of stock");
                   }
                 }
               }}
@@ -147,10 +145,10 @@ function ShoppingCartDataLines({
           </Col>
         </Row>
       </td>
-      <td className={`${reccomendation ? "d-none" : "d-none d-md-table-cell"}`}>
+      <td className={`${recommendation ? "d-none" : "d-none d-md-table-cell"}`}>
         <p>{line.tags && line.tags.map((tag) => tag.tname).join(", ")}</p>
       </td>
-      <td className={`${reccomendation ? "d-none" : "d-none d-md-table-cell"}`}>
+      <td className={`${recommendation ? "d-none" : "d-none d-md-table-cell"}`}>
         <p>{line.cname}</p>
       </td>
       <td>

@@ -1,26 +1,35 @@
 "use client";
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import {
   faAsterisk,
-  faUser,
   faKeyboard,
+  faUser,
 } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  Col,
-  Row,
-  Container,
   Button,
+  Col,
+  Container,
   FloatingLabel,
   Form as RBForm,
+  Row,
 } from "react-bootstrap";
-import { Formik, Field, Form, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import { ToastContainer, toast } from "react-toastify";
+import { ErrorMessage, Field, Form, Formik } from "formik";
+import { ToastContainer } from "react-toastify";
+
+import {
+  showIncorrectDataToast,
+  showMessageErrorToast,
+  showMessageSentToast,
+} from "@/utils/toastUtils";
+import { contactUsSchema } from "@/utils/validationSchemas";
+
 import InputComponent from "@/components/input/InputComponent";
-import { sendMessageToAdministrator } from "@/fetching/fetching";
 import PageTitle from "@/components/PageTitle";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
+
+import { sendMessageToAdministrator } from "@/fetching/fetching";
 
 function ContactUs() {
   const { loggedIn, user } = React.useContext(UserDataContext);
@@ -31,12 +40,6 @@ function ContactUs() {
     title: "",
     message: "",
   };
-
-  const contactUsSchema = Yup.object().shape({
-    email: Yup.string().required("Email required").email("Invalid email"),
-    title: Yup.string().required("Title required"),
-    message: Yup.string().required("Message required"),
-  });
 
   const onSubmit = async (values: {
     email: string;
@@ -49,14 +52,10 @@ function ContactUs() {
         values.title,
         values.message
       );
-      toast.success("Message sent", {
-        className: "toast-success",
-      });
+      showMessageSentToast();
       form?.current?.reset();
     } catch {
-      toast.error("Error: couldn't send message", {
-        className: "toast-error",
-      });
+      showMessageErrorToast();
     }
   };
 
@@ -138,9 +137,7 @@ function ContactUs() {
                     type="submit"
                     onClick={() => {
                       if (Object.keys(errors).length) {
-                        toast.error("Incorrect data", {
-                          className: "toast-error",
-                        });
+                        showIncorrectDataToast();
                       }
                     }}
                   >

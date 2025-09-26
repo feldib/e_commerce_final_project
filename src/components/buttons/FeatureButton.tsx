@@ -1,12 +1,13 @@
 import React from "react";
+
 import {
   addToFeatured,
-  removeFromFeatured,
   isFeatured,
+  removeFromFeatured,
 } from "@/fetching/fetching";
+
+import Trophy from "../svg_components/Trophy";
 import AddOrRemoveFromButton from "./AddOrRemoveButton";
-import TrophyFilled from "../svg_components/trophy_filled";
-import TrophyRegular from "../svg_components/trophy_regular";
 
 type FeatureButtonProps = {
   artwork_id: number;
@@ -20,8 +21,8 @@ function FeatureButton({ artwork_id }: FeatureButtonProps) {
       removeFromAdded={removeFromFeatured}
       artwork_id={artwork_id}
       toastWarningMessage="Sign in as an admin to add to favourites "
-      filledButton={<TrophyFilled height="25px" />}
-      regularButton={<TrophyRegular height="25px" />}
+      filledButton={<Trophy height="25px" filled />}
+      regularButton={<Trophy height="25px" />}
     />
   );
 }

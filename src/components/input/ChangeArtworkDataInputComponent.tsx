@@ -1,16 +1,23 @@
 "use client";
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import {
   faAsterisk,
   faCheck,
   faGear,
   IconDefinition,
 } from "@fortawesome/free-solid-svg-icons";
-import { Form, InputGroup, Button } from "react-bootstrap";
-import { toast } from "react-toastify";
-import { updateArtworkData } from "@/fetching/fetching";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Button, Form, InputGroup } from "react-bootstrap";
 import { FormikProps } from "formik";
+
+import {
+  showErrorToast,
+  showIncorrectDataToast,
+  showSuccessToast,
+} from "@/utils/toastUtils";
+
+import { updateArtworkData } from "@/fetching/fetching";
 
 type ChangeArtworkDataInputComponentProps<
   T extends Record<string, unknown> = Record<string, unknown>,
@@ -82,6 +89,7 @@ function ChangeArtworkDataInputComponent<
         {editing ? (
           <Button
             variant="primary"
+            className="inline-submit-button"
             onClick={async (e) => {
               e.preventDefault();
 
@@ -91,9 +99,7 @@ function ChangeArtworkDataInputComponent<
                 currentFieldError && formik.touched[name];
 
               if (hasCurrentFieldError) {
-                toast.error("Incorrect data", {
-                  className: "toast-error",
-                });
+                showIncorrectDataToast();
               } else {
                 try {
                   await updateArtworkData(
@@ -101,15 +107,10 @@ function ChangeArtworkDataInputComponent<
                     name,
                     String(formik.values[name] || "")
                   );
-                  toast.success(`${label} changed successfully`, {
-                    className: "toast-success",
-                  });
+                  showSuccessToast(`${label} changed successfully`);
                   setEditing(false);
-                } catch (error) {
-                  toast.error("Error updating artwork data", {
-                    className: "toast-error",
-                  });
-                  console.error("Error updating artwork:", error);
+                } catch {
+                  showErrorToast("Error updating artwork data");
                 }
               }
             }}
@@ -119,6 +120,7 @@ function ChangeArtworkDataInputComponent<
         ) : (
           <Button
             variant="primary"
+            className="inline-submit-button"
             onClick={() => {
               setEditing(true);
             }}

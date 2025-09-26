@@ -1,14 +1,17 @@
 "use client";
 import React, { JSX } from "react";
+import { confirmAlert } from "react-confirm-alert";
+
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
+
 import { getLoggedIn } from "@/fetching/fetching";
 import { User } from "@/fetching/types";
+
 import "react-confirm-alert/src/react-confirm-alert.css";
 import {
   getShoppingCartFromLocalStorage,
   replacePreviousShoppingCart,
 } from "@/helpers/helpers";
-import { confirmAlert } from "react-confirm-alert";
-import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
 export type UserDataContextType = {
   user: User;
@@ -39,7 +42,7 @@ const initialValues: UserDataContextType = {
 export const UserDataContext =
   React.createContext<UserDataContextType>(initialValues);
 
-export default function UserDataProvider({
+function UserDataProvider({
   children,
 }: {
   children: React.ReactNode;
@@ -56,8 +59,8 @@ export default function UserDataProvider({
         setUser(data.user);
         setLoggedIn(true);
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
+        // User not logged in, continue as anonymous
       });
   };
 
@@ -117,3 +120,5 @@ export default function UserDataProvider({
     children
   );
 }
+
+export default UserDataProvider;

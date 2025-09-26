@@ -1,7 +1,10 @@
 import React from "react";
+
 import { Col, Dropdown } from "react-bootstrap";
-import useLoading from "@/hooks/useLoading";
+
 import { Category } from "@/fetching/types";
+
+import useLoading from "@/hooks/useLoading";
 
 type CategoriesDropdownProps = {
   categories: Category[];

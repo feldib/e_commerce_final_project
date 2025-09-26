@@ -1,23 +1,24 @@
 import React from "react";
+
 import { Row } from "react-bootstrap";
-import useLoading from "@/hooks/useLoading";
+
 import BuyTableDataLines from "@/components/datalines/BuyTableDataLines";
-import {
-  presentData,
-  getShoppingCartFromLocalStorage,
-} from "@/helpers/helpers";
+
 import { Artwork, ShoppingCartItem } from "@/fetching/types";
+
+import { getShoppingCartFromLocalStorage,renderData } from "@/helpers/helpers";
+import useLoading from "@/hooks/useLoading";
 
 type BuyTableProps = {
   dataLines: Artwork[];
-  reccomendation?: boolean;
+  recommendation?: boolean;
   orderSummary?: boolean;
   theadNeeded: boolean;
 };
 
 function BuyTable({
   dataLines,
-  reccomendation = false,
+  recommendation = false,
   orderSummary = false,
   theadNeeded = true,
 }: BuyTableProps) {
@@ -25,7 +26,7 @@ function BuyTable({
     return dataLinesGenerated.map((line: Artwork, index: number) => {
       return (
         <BuyTableDataLines
-          reccomendation={reccomendation}
+          recommendation={recommendation}
           line={line}
           index={index}
           key={index}
@@ -38,7 +39,7 @@ function BuyTable({
   const dataLinesGenerated = useLoading(
     dataLines,
     (dataLines): React.JSX.Element => {
-      return presentData(
+      return renderData(
         (dataLines as Artwork[]).filter((line: Artwork) => {
           const shoppingCart = getShoppingCartFromLocalStorage();
 
@@ -77,17 +78,17 @@ function BuyTable({
               <th className="d-none d-md-table-cell">Artist</th>
               <th>Price</th>
               <th
-                className={`${reccomendation ? "d-none" : "d-none d-md-table-cell"}`}
+                className={`${recommendation ? "d-none" : "d-none d-md-table-cell"}`}
               >
                 Quantity
               </th>
               <th
-                className={`${reccomendation ? "d-none" : "d-none d-md-table-cell"}`}
+                className={`${recommendation ? "d-none" : "d-none d-md-table-cell"}`}
               >
                 Tags
               </th>
               <th
-                className={`${reccomendation ? "d-none" : "d-none d-md-table-cell"}`}
+                className={`${recommendation ? "d-none" : "d-none d-md-table-cell"}`}
               >
                 Categories
               </th>

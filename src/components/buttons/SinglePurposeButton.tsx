@@ -1,10 +1,13 @@
 "use client";
 import React from "react";
+
+import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Row } from "react-bootstrap";
-import { toast } from "react-toastify";
+
+import { showErrorToast, showSuccessToast } from "@/utils/toastUtils";
+
 import { UserDataContext } from "@/components/providers/UserDataProvider";
-import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 
 type SinglePurposeButtonProps = {
   artwork_id: number;
@@ -32,28 +35,19 @@ function SinglePurposeButton({
         style={{ cursor: "pointer" }}
         onClick={async () => {
           if (loggedIn) {
-            actionOnLoggedIn(artwork_id)
-              .then(() => {
-                toast.success(toastSuccessMessage, {
-                  className: "toast-success",
-                });
-              })
-              .catch(() => {
-                toast.error(toastErrorMessage, {
-                  className: "toast-error",
-                });
-              });
+            try {
+              await actionOnLoggedIn(artwork_id);
+              showSuccessToast(toastSuccessMessage);
+            } catch {
+              showErrorToast(toastErrorMessage);
+            }
           } else {
             if (actionOnNotLoggedIn) {
               try {
                 actionOnNotLoggedIn();
-                toast.success(toastSuccessMessage, {
-                  className: "toast-success",
-                });
+                showSuccessToast(toastSuccessMessage);
               } catch {
-                toast.error(toastErrorMessage, {
-                  className: "toast-error",
-                });
+                showErrorToast(toastErrorMessage);
               }
             }
           }

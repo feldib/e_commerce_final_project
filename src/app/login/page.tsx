@@ -1,17 +1,23 @@
 "use client";
 import React, { Suspense } from "react";
+
+import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { logIn } from "@/fetching/fetching";
+
+import { faKey, faUser } from "@fortawesome/free-solid-svg-icons";
+import { Button, Col, Container, Row } from "react-bootstrap";
+import { Form, Formik } from "formik";
+import { ToastContainer } from "react-toastify";
+
+import { showLoginErrorToast, showLoginSuccessToast } from "@/utils/toastUtils";
+import { loginSchema } from "@/utils/validationSchemas";
+
 import InputComponent from "@/components/input/InputComponent";
-import { Col, Container, Row, Button } from "react-bootstrap";
-import { faUser, faKey } from "@fortawesome/free-solid-svg-icons";
-import { Formik, Form } from "formik";
-import * as Yup from "yup";
-import { ToastContainer, toast } from "react-toastify";
 import PageTitle from "@/components/PageTitle";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
+
+import { logIn } from "@/fetching/fetching";
 import { User } from "@/fetching/types";
-import Link from "next/link";
 
 function SignInPageInner() {
   const searchParams = useSearchParams();
@@ -27,23 +33,16 @@ function SignInPageInner() {
 
   async function onSubmit(values: { email: string; password: string }) {
     try {
-      await logIn(values.email, values.password, (userData: { user: User }) => {
+      await logIn(values.email, values.password, (userData: User) => {
         settleSuccessfulLogIn(to_checkout, userData, router);
       });
-      toast.success("Logged in", {
-        className: "toast-success",
-      });
+      showLoginSuccessToast();
     } catch {
-      toast.error("Incorrect email or password", {
-        className: "toast-error",
-      });
+      showLoginErrorToast();
     }
   }
 
-  const signInSchema = Yup.object().shape({
-    email: Yup.string().required("Email required").email("Invalid email"),
-    password: Yup.string().required("Password required"),
-  });
+  const signInSchema = loginSchema;
 
   return (
     <Container className="px-3 pb-5">
@@ -97,10 +96,12 @@ function SignInPageInner() {
   );
 }
 
-export default function SignInPage() {
+function SignInPage() {
   return (
     <Suspense>
       <SignInPageInner />
     </Suspense>
   );
 }
+
+export default SignInPage;

@@ -1,14 +1,24 @@
 "use client";
 import React, { Suspense } from "react";
-import { changePassword } from "@/fetching/fetching";
-import { Container, Row, Col, Button } from "react-bootstrap";
-import InputComponent from "@/components/input/InputComponent";
+
+import { useRouter, useSearchParams } from "next/navigation";
+
 import { faKey } from "@fortawesome/free-solid-svg-icons";
-import { useSearchParams, useRouter } from "next/navigation";
-import { Formik, Form } from "formik";
-import * as Yup from "yup";
-import { ToastContainer, toast } from "react-toastify";
+import { Button, Col, Container, Row } from "react-bootstrap";
+import { Form, Formik } from "formik";
+import { ToastContainer } from "react-toastify";
+
+import {
+  showIncorrectDataToast,
+  showPasswordChangeErrorToast,
+  showPasswordResetSuccessToast,
+} from "@/utils/toastUtils";
+import { resetPasswordSchema } from "@/utils/validationSchemas";
+
+import InputComponent from "@/components/input/InputComponent";
 import PageTitle from "@/components/PageTitle";
+
+import { changePassword } from "@/fetching/fetching";
 
 type ResetPasswordFormValues = {
   password: string;
@@ -30,24 +40,13 @@ function ResetPasswordInner() {
     const email = searchParams.get("email");
     changePassword(token, email, values.password)
       .then(() => {
-        toast.success("Password changed successfully", {
-          className: "toast-success",
-        });
+        showPasswordResetSuccessToast();
         router.push("/login");
       })
       .catch(() => {
-        toast.error("Error: couldn't change password", {
-          className: "toast-error",
-        });
+        showPasswordChangeErrorToast();
       });
   };
-
-  const resetPasswordSchema = Yup.object().shape({
-    password: Yup.string().required("Password required"),
-    repeatPassword: Yup.string()
-      .required("Repeat password required")
-      .oneOf([Yup.ref("password")], "Must match password"),
-  });
 
   return (
     <Container className="pb-5">
@@ -86,9 +85,7 @@ function ResetPasswordInner() {
                   type="submit"
                   onClick={() => {
                     if (Object.keys(errors).length) {
-                      toast.error("Incorrect data", {
-                        className: "toast-error",
-                      });
+                      showIncorrectDataToast();
                     }
                   }}
                 >
@@ -104,10 +101,12 @@ function ResetPasswordInner() {
   );
 }
 
-export default function ResetPassword() {
+function ResetPassword() {
   return (
     <Suspense>
       <ResetPasswordInner />
     </Suspense>
   );
 }
+
+export default ResetPassword;

@@ -1,21 +1,25 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Navbar, Nav, Container } from "react-bootstrap";
+
 import Link from "next/link";
 import {
-  EmailShareButton,
   EmailIcon,
-  TelegramShareButton,
-  TelegramIcon,
-  RedditShareButton,
+  EmailShareButton,
   RedditIcon,
+  RedditShareButton,
+  TelegramIcon,
+  TelegramShareButton,
 } from "next-share";
+
+import { Container,Nav, Navbar } from "react-bootstrap";
 
 function Footer() {
   const [hostname, setHostname] = useState("");
 
   useEffect(() => {
-    setHostname(window.location.hostname);
+    if (typeof window !== "undefined") {
+      setHostname(window.location.hostname);
+    }
   }, []);
   return (
     <Navbar id="footer" fixed="bottom">

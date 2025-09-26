@@ -1,13 +1,18 @@
 "use client";
 import React from "react";
+
+import { useParams,useRouter } from "next/navigation";
+
 import { Col } from "react-bootstrap";
-import useLoading from "@/hooks/useLoading";
-import OrderSummaryComponent from "@/components/OrderSummaryComponent";
-import { getOrderHistory } from "@/fetching/fetching";
-import SubPageTitle from "@/components/SubPageTitle";
+
 import FloatingBackButton from "@/components/buttons/FloatingBackButton";
-import { useRouter, useParams } from "next/navigation";
+import OrderSummaryComponent from "@/components/OrderSummaryComponent";
+import SubPageTitle from "@/components/SubPageTitle";
+
+import { getOrderHistory } from "@/fetching/fetching";
 import { Order } from "@/fetching/types";
+
+import useLoading from "@/hooks/useLoading";
 
 function UserOrderHistory() {
   const [orderDataCollection, setOrderDataCollection] =
@@ -22,7 +27,7 @@ function UserOrderHistory() {
     });
   }, [userId]);
 
-  function representOrderDataCollection(orders: Order[]) {
+  function renderOrderList(orders: Order[]) {
     const len = orders.length;
     return (
       <>
@@ -42,7 +47,7 @@ function UserOrderHistory() {
 
   const ordersRepresented = useLoading(
     orderDataCollection || [],
-    representOrderDataCollection
+    renderOrderList
   );
   return (
     <Col className="mb-5 pb-5">

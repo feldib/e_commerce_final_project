@@ -1,15 +1,22 @@
 "use client";
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
-import { Navbar, Nav, Container } from "react-bootstrap";
+
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+
+import { faBars, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Container, Nav, Navbar } from "react-bootstrap";
+
+import { UI_DIMENSIONS } from "@/utils/constants";
+import { showWarningToast } from "@/utils/toastUtils";
+
+import { UserDataContext } from "@/components/providers/UserDataProvider";
+
 import LoggedInNavbarItems from "./LoggedInNavbarItems";
 import NotLoggedInNavbarItems from "./NotLoggedInNavbarItems";
-import { toast } from "react-toastify";
+
 import { checkIfShoppingCartIsEmpty } from "@/helpers/helpers";
-import { UserDataContext } from "@/components/providers/UserDataProvider";
-import { useRouter } from "next/navigation";
 
 export const ExpandedNavContext = React.createContext({
   closeExpandedNav: () => {},
@@ -42,17 +49,37 @@ function Header() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/logo.png"
-                width="100"
+                width={UI_DIMENSIONS.THUMBNAIL_SIZE}
                 className="d-inline-block align-top"
                 alt="Artwork market logo"
               />
             </Link>
           </Navbar.Brand>
-          <Navbar.Toggle
-            onClick={() => toggleExpanded()}
-            aria-controls="menu-items"
-          >
-            <FontAwesomeIcon id="header-toggler" icon={faBars} />
+          <Navbar.Toggle aria-controls="menu-items">
+            {/*Shopping cart icon - mobile, non-admin users */}
+            {!user.is_admin && (
+              <FontAwesomeIcon
+                id="header-mobile-shopping-cart"
+                className="me-3"
+                aria-label="Shopping cart"
+                icon={faShoppingCart}
+                onClick={async () => {
+                  const isShoppingCartEmpty =
+                    await checkIfShoppingCartIsEmpty(loggedIn);
+
+                  if (!isShoppingCartEmpty) {
+                    showWarningToast("Shopping list is empty.");
+                  } else {
+                    router.push("/shopping_cart");
+                  }
+                }}
+              />
+            )}
+            <FontAwesomeIcon
+              id="header-toggler"
+              icon={faBars}
+              onClick={() => toggleExpanded()}
+            />
           </Navbar.Toggle>
           <Navbar.Collapse className="mx-3" id="menu-items">
             <Nav className="mx-auto">
@@ -81,37 +108,35 @@ function Header() {
                 Contact
               </Link>
 
-              {!user.is_admin && (
-                <a
-                  className="nav-link"
-                  style={{
-                    color: "inherit",
-                    textDecoration: "inherit",
-                    cursor: "pointer",
-                  }}
-                  href="#"
-                  onClick={async () => {
-                    closeExpandedNav();
-
-                    const isShoppingCartEmpty =
-                      await checkIfShoppingCartIsEmpty(loggedIn);
-
-                    if (!isShoppingCartEmpty) {
-                      toast.warning("Shopping list is empty.", {
-                        className: "toast-warning",
-                      });
-                    } else {
-                      router.push("/shopping_cart");
-                    }
-                  }}
-                >
-                  Shopping cart
-                </a>
-              )}
-
               {loggedIn ? <LoggedInNavbarItems /> : <NotLoggedInNavbarItems />}
             </Nav>
           </Navbar.Collapse>
+
+          {/* Shopping cart icon - desktop only, non-admin users */}
+          {!user.is_admin && (
+            <div className="d-none d-lg-block">
+              <FontAwesomeIcon
+                id="header-desktop-shopping-cart"
+                aria-label="Shopping cart"
+                size="xl"
+                icon={faShoppingCart}
+                style={{
+                  cursor: "pointer",
+                  color: "inherit",
+                }}
+                onClick={async () => {
+                  const isShoppingCartEmpty =
+                    await checkIfShoppingCartIsEmpty(loggedIn);
+
+                  if (!isShoppingCartEmpty) {
+                    showWarningToast("Shopping list is empty.");
+                  } else {
+                    router.push("/shopping_cart");
+                  }
+                }}
+              />
+            </div>
+          )}
         </Container>
       </Navbar>
     </ExpandedNavContext.Provider>

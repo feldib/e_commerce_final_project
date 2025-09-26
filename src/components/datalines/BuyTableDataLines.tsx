@@ -1,26 +1,32 @@
 "use client";
 import React from "react";
-import { ToastContainer } from "react-toastify";
+
 import Link from "next/link";
+
+import { ToastContainer } from "react-toastify";
+
+import { SERVER_URL,UI_DIMENSIONS } from "@/utils/constants";
+
 import FavouriteButton from "@/components/buttons/FavouriteButton";
 import ShoppingCartButton from "@/components/buttons/ShoppingCartButton";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
-import { server_url } from "@/utils/api_constants";
-import useQuantity from "@/hooks/useQuantity";
+
 import { Artwork } from "@/fetching/types";
+
+import useQuantity from "@/hooks/useQuantity";
 
 type BuyTableDataLinesProps = {
   line: Artwork;
   index: number;
   orderSummary?: boolean;
-  reccomendation?: boolean;
+  recommendation?: boolean;
 };
 
 function BuyTableDataLines({
   line,
   index,
   orderSummary = false,
-  reccomendation = false,
+  recommendation = false,
 }: BuyTableDataLinesProps) {
   const { loggedIn } = React.useContext(UserDataContext);
 
@@ -35,9 +41,9 @@ function BuyTableDataLines({
       <td>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={`${server_url}/${line.thumbnail}`}
-          width="100"
-          height="100"
+          src={`${SERVER_URL}/${line.thumbnail}`}
+          width={UI_DIMENSIONS.THUMBNAIL_SIZE}
+          height={UI_DIMENSIONS.THUMBNAIL_SIZE}
           style={{ objectFit: "cover" }}
           alt="place of thumbnail"
         />
@@ -47,7 +53,7 @@ function BuyTableDataLines({
           <p>{line.title}</p>
         </Link>
       </td>
-      <td className={`${reccomendation ? "d-none" : "d-none d-md-table-cell"}`}>
+      <td className={`${recommendation ? "d-none" : "d-none d-md-table-cell"}`}>
         <p>{line.artist_name}</p>
       </td>
       <td>
@@ -55,15 +61,15 @@ function BuyTableDataLines({
       </td>
       <td
         className={`text-center ${
-          reccomendation ? "d-none" : "d-none d-md-table-cell"
+          recommendation ? "d-none" : "d-none d-md-table-cell"
         }`}
       >
         <p>{quantity}</p>
       </td>
-      <td className={`${reccomendation ? "d-none" : "d-none d-md-table-cell"}`}>
+      <td className={`${recommendation ? "d-none" : "d-none d-md-table-cell"}`}>
         <p>{line.tags && line.tags.map((tag) => tag.tname).join(", ")}</p>
       </td>
-      <td className={`${reccomendation ? "d-none" : "d-none d-md-table-cell"}`}>
+      <td className={`${recommendation ? "d-none" : "d-none d-md-table-cell"}`}>
         <p>{line.cname}</p>
       </td>
       <td>

@@ -1,27 +1,28 @@
 import axiosConfigured from "@/utils/axiosConfigured";
-import { server_url, users_url, admin_url } from "@/utils/api_constants";
+import { ADMIN_URL, SERVER_URL, USERS_URL } from "@/utils/constants";
+import { searchArtworksGraphQL } from "@/utils/graphqlSearch";
+
 import {
   Artwork,
-  User,
-  ShoppingCartItem,
-  SearchParams,
-  Order,
   ArtworkSent,
+  CheckoutFormData,
   Message,
-  InvoiceData,
+  Order,
+  SearchParams,
+  ShoppingCartItem,
+  User,
 } from "./types";
-import { searchArtworksGraphQL } from "@/utils/graphqlSearch";
 
 // ===================
 // User-related
 // ===================
 
 export const serverLogOut = async (): Promise<void> => {
-  await axiosConfigured.get(`${server_url}/log_out`).catch(console.log);
+  await axiosConfigured.get(`${SERVER_URL}/log_out`).catch(console.log);
 };
 
 export const sendForgotPasswordEmail = async (email: string): Promise<void> => {
-  await axiosConfigured.post(`${server_url}/forgot_password`, { email });
+  await axiosConfigured.post(`${SERVER_URL}/forgot_password`, { email });
 };
 
 export const registerNewUser = async (
@@ -30,7 +31,7 @@ export const registerNewUser = async (
   firstName: string,
   lastName: string
 ): Promise<{ data: { user: User } }> => {
-  return await axiosConfigured.post(`${server_url}/${users_url}/new_user`, {
+  return await axiosConfigured.post(`${SERVER_URL}/${USERS_URL}/new_user`, {
     last_name: lastName,
     first_name: firstName,
     email,
@@ -41,12 +42,12 @@ export const registerNewUser = async (
 export const logIn = async (
   email: string,
   password: string,
-  settleSuccess: (userData: { user: User }) => void
+  settleSuccess: (userData: User) => void
 ): Promise<void> => {
   await axiosConfigured
-    .post(`${server_url}/login`, { email, password })
+    .post(`${SERVER_URL}/login`, { email, password })
     .then(function (response) {
-      const userData = response.data as { user: User };
+      const userData = response.data as User;
       settleSuccess(userData);
     });
 };
@@ -56,7 +57,7 @@ export const changePassword = async (
   email: string | null,
   newPassword: string
 ): Promise<void> => {
-  await axiosConfigured.post(`${server_url}/reset_password`, {
+  await axiosConfigured.post(`${SERVER_URL}/reset_password`, {
     token,
     email,
     new_password: newPassword,
@@ -64,20 +65,20 @@ export const changePassword = async (
 };
 
 export const getLoggedIn = async (): Promise<{ data: { user: User } }> => {
-  return axiosConfigured.get(`${server_url}/logged_in`);
+  return axiosConfigured.get(`${SERVER_URL}/logged_in`);
 };
 
 export const getIsAdmin = async (): Promise<{
   data: { is_admin: boolean };
 }> => {
-  return axiosConfigured.get(`${server_url}/${admin_url}/is_admin`);
+  return axiosConfigured.get(`${SERVER_URL}/${ADMIN_URL}/is_admin`);
 };
 
 export const updateUserData = async (
   field_name: string,
   value: string
 ): Promise<{ data: User }> => {
-  return axiosConfigured.post(`${server_url}/${users_url}/update_data`, {
+  return axiosConfigured.post(`${SERVER_URL}/${USERS_URL}/update_data`, {
     field_name,
     value,
   });
@@ -105,7 +106,7 @@ export const getDataOfArtworks = async (
   const results = await Promise.all(
     shoppingCart.map(async (item: ShoppingCartItem) => {
       const results = await axiosConfigured.get(
-        `${server_url}/find_artwork_by_id?artwork_id=${item.artwork_id}`
+        `${SERVER_URL}/find_artwork_by_id?artwork_id=${item.artwork_id}`
       );
       const data = results.data as Artwork & { quantity?: number };
       const resObj = {
@@ -122,7 +123,7 @@ export const addNewArtwork = async (
   artwork: ArtworkSent
 ): Promise<{ data: number }> => {
   return await axiosConfigured.post(
-    `${server_url}/${admin_url}/add_new_artwork`,
+    `${SERVER_URL}/${ADMIN_URL}/add_new_artwork`,
     {
       artwork,
     }
@@ -135,7 +136,7 @@ export const updateArtworkData = async (
   value: string | number | boolean | { tname: string }[]
 ): Promise<{ data: Artwork }> => {
   return axiosConfigured.post(
-    `${server_url}/${admin_url}/update_artwork_data`,
+    `${SERVER_URL}/${ADMIN_URL}/update_artwork_data`,
     {
       artwork_id,
       field_name,
@@ -145,7 +146,7 @@ export const updateArtworkData = async (
 };
 
 export const removeArtwork = async (artwork_id: number): Promise<void> => {
-  await axiosConfigured.post(`${server_url}/${admin_url}/remove_artwork`, {
+  await axiosConfigured.post(`${SERVER_URL}/${ADMIN_URL}/remove_artwork`, {
     artwork_id,
   });
   // returns void
@@ -157,13 +158,13 @@ export const removeArtwork = async (artwork_id: number): Promise<void> => {
 
 export const getShoppingCart = async (): Promise<Artwork[]> => {
   const res = await axiosConfigured.get(
-    `${server_url}/${users_url}/shopping_cart`
+    `${SERVER_URL}/${USERS_URL}/shopping_cart`
   );
   return res.data as Artwork[];
 };
 
 export const addToShoppingList = async (artwork_id: number): Promise<void> => {
-  await axiosConfigured.post(`${server_url}/${users_url}/shopping_cart`, {
+  await axiosConfigured.post(`${SERVER_URL}/${USERS_URL}/shopping_cart`, {
     artwork_id,
   });
   // returns void
@@ -173,7 +174,7 @@ export const removeFromShoppingList = async (
   artwork_id: number
 ): Promise<void> => {
   await axiosConfigured.post(
-    `${server_url}/${users_url}/remove_item_from_shopping_cart`,
+    `${SERVER_URL}/${USERS_URL}/remove_item_from_shopping_cart`,
     { artwork_id }
   );
   // returns void
@@ -183,7 +184,7 @@ export const increaseShoppingListItemQuantity = async (
   artwork_id: number
 ): Promise<void> => {
   await axiosConfigured.post(
-    `${server_url}/${users_url}/increase_shopping_cart_item_quantity`,
+    `${SERVER_URL}/${USERS_URL}/increase_shopping_cart_item_quantity`,
     { artwork_id }
   );
   // returns void
@@ -193,7 +194,7 @@ export const decreaseShoppingListItemQuantity = async (
   artwork_id: number
 ): Promise<void> => {
   await axiosConfigured.post(
-    `${server_url}/${users_url}/decrease_shopping_cart_item_quantity`,
+    `${SERVER_URL}/${USERS_URL}/decrease_shopping_cart_item_quantity`,
     { artwork_id }
   );
   // returns void
@@ -203,7 +204,7 @@ export const replaceSavedShoppingCart = async (
   shopping_cart: { artwork_id: number; quantity: number }[]
 ): Promise<void> => {
   await axiosConfigured.post(
-    `${server_url}/${users_url}/replace_saved_shopping_cart`,
+    `${SERVER_URL}/${USERS_URL}/replace_saved_shopping_cart`,
     {
       shopping_cart,
     }
@@ -212,7 +213,7 @@ export const replaceSavedShoppingCart = async (
 };
 
 export const addToWishlisted = async (artwork_id: number): Promise<void> => {
-  await axiosConfigured.post(`${server_url}/${users_url}/wishlisted`, {
+  await axiosConfigured.post(`${SERVER_URL}/${USERS_URL}/wishlisted`, {
     artwork_id,
   });
   // returns void
@@ -222,7 +223,7 @@ export const removeFromWishlisted = async (
   artwork_id: number
 ): Promise<void> => {
   await axiosConfigured.post(
-    `${server_url}/${users_url}/remove_from_wishlisted`,
+    `${SERVER_URL}/${USERS_URL}/remove_from_wishlisted`,
     {
       artwork_id,
     }
@@ -232,7 +233,7 @@ export const removeFromWishlisted = async (
 
 export const isWishlisted = async (artwork_id: number): Promise<boolean> => {
   const result = await axiosConfigured.post(
-    `${server_url}/${users_url}/is_wishlisted`,
+    `${SERVER_URL}/${USERS_URL}/is_wishlisted`,
     {
       artwork_id,
     }
@@ -244,8 +245,8 @@ export const isWishlisted = async (artwork_id: number): Promise<boolean> => {
 // Orders
 // ===================
 
-export const order = async (invoice_data: InvoiceData): Promise<void> => {
-  await axiosConfigured.post(`${server_url}/${users_url}/make_order`, {
+export const order = async (invoice_data: CheckoutFormData): Promise<void> => {
+  await axiosConfigured.post(`${SERVER_URL}/${USERS_URL}/make_order`, {
     invoice_data,
   });
   // returns void
@@ -253,7 +254,7 @@ export const order = async (invoice_data: InvoiceData): Promise<void> => {
 
 export const getOrderHistory = async (user_id: number): Promise<Order[]> => {
   const res = await axiosConfigured.post(
-    `${server_url}/${admin_url}/get_orders_of_user`,
+    `${SERVER_URL}/${ADMIN_URL}/get_orders_of_user`,
     {
       user_id,
     }
@@ -270,7 +271,7 @@ export const leaveReview = async (
   title: string,
   review_text: string
 ): Promise<void> => {
-  await axiosConfigured.post(`${server_url}/${users_url}/leave_review`, {
+  await axiosConfigured.post(`${SERVER_URL}/${USERS_URL}/leave_review`, {
     artwork_id,
     title,
     review_text,
@@ -278,14 +279,14 @@ export const leaveReview = async (
 };
 
 export const approveReview = async (review_id: number): Promise<void> => {
-  await axiosConfigured.post(`${server_url}/${admin_url}/approve_review`, {
+  await axiosConfigured.post(`${SERVER_URL}/${ADMIN_URL}/approve_review`, {
     review_id,
   });
   // returns void
 };
 
 export const disapproveReview = async (review_id: number): Promise<void> => {
-  await axiosConfigured.post(`${server_url}/${admin_url}/disapprove_review`, {
+  await axiosConfigured.post(`${SERVER_URL}/${ADMIN_URL}/disapprove_review`, {
     review_id,
   });
   // returns void
@@ -296,7 +297,7 @@ export const disapproveReview = async (review_id: number): Promise<void> => {
 // ===================
 
 export const addToFeatured = async (artwork_id: number): Promise<void> => {
-  await axiosConfigured.post(`${server_url}/${admin_url}/featured`, {
+  await axiosConfigured.post(`${SERVER_URL}/${ADMIN_URL}/featured`, {
     artwork_id,
   });
   // returns void
@@ -304,7 +305,7 @@ export const addToFeatured = async (artwork_id: number): Promise<void> => {
 
 export const removeFromFeatured = async (artwork_id: number): Promise<void> => {
   await axiosConfigured.post(
-    `${server_url}/${admin_url}/remove_from_featured`,
+    `${SERVER_URL}/${ADMIN_URL}/remove_from_featured`,
     {
       artwork_id,
     }
@@ -313,7 +314,7 @@ export const removeFromFeatured = async (artwork_id: number): Promise<void> => {
 
 export const isFeatured = async (artwork_id: number): Promise<boolean> => {
   const result = await axiosConfigured.post(
-    `${server_url}/${admin_url}/is_featured`,
+    `${SERVER_URL}/${ADMIN_URL}/is_featured`,
     {
       artwork_id,
     }
@@ -331,7 +332,7 @@ export const sendMessageToAdministrator = async (
   message: string
 ): Promise<void> => {
   await axiosConfigured.post(
-    `${server_url}/${users_url}/message_to_administrator`,
+    `${SERVER_URL}/${USERS_URL}/message_to_administrator`,
     {
       email,
       title,
@@ -346,7 +347,7 @@ export const replyToMessage = async (
   reply_title: string,
   reply_text: string
 ): Promise<void> => {
-  await axiosConfigured.post(`${server_url}/${admin_url}/reply_to_message`, {
+  await axiosConfigured.post(`${SERVER_URL}/${ADMIN_URL}/reply_to_message`, {
     message_id,
     email,
     reply_title,
@@ -356,7 +357,7 @@ export const replyToMessage = async (
 
 export const getUnansweredMessages = async (): Promise<Message[]> => {
   const res = await axiosConfigured.get(
-    `${server_url}/${admin_url}/unanswered_messages`
+    `${SERVER_URL}/${ADMIN_URL}/unanswered_messages`
   );
   return res.data as Message[];
 };
@@ -372,7 +373,7 @@ export const addNewThumbnail = async (
   const formData = new FormData();
   formData.append("thumbnail", thumbnail);
   await axiosConfigured.post(
-    `${server_url}/${admin_url}/thumbnail?artwork_id=${artwork_id}`,
+    `${SERVER_URL}/${ADMIN_URL}/thumbnail?artwork_id=${artwork_id}`,
     formData,
     {
       headers: { "Content-Type": "multipart/form-data" },
@@ -396,7 +397,7 @@ export const addNewOtherPicture = async (
   const formData = new FormData();
   formData.append("picture", picture);
   await axiosConfigured.post(
-    `${server_url}/${admin_url}/picture?artwork_id=${artwork_id}`,
+    `${SERVER_URL}/${ADMIN_URL}/picture?artwork_id=${artwork_id}`,
     formData,
     {
       headers: { "Content-Type": "multipart/form-data" },
@@ -408,7 +409,7 @@ export const removePicture = async (
   artwork_id: number,
   file_name: string
 ): Promise<void> => {
-  await axiosConfigured.post(`${server_url}/${admin_url}/remove_picture`, {
+  await axiosConfigured.post(`${SERVER_URL}/${ADMIN_URL}/remove_picture`, {
     artwork_id,
     file_name,
   });
@@ -421,7 +422,7 @@ export const replaceThumbnail = async (
   const formData = new FormData();
   formData.append("thumbnail", thumbnail);
   await axiosConfigured.post(
-    `${server_url}/${admin_url}/replace_thumbnail?artwork_id=${artwork_id}`,
+    `${SERVER_URL}/${ADMIN_URL}/replace_thumbnail?artwork_id=${artwork_id}`,
     formData,
     {
       headers: { "Content-Type": "multipart/form-data" },

@@ -1,12 +1,17 @@
 "use client";
 import React, { useEffect, useState } from "react";
+
+import { useParams,useRouter } from "next/navigation";
+
 import { Container } from "react-bootstrap";
-import { useRouter, useParams } from "next/navigation";
-import useLoading from "@/hooks/useLoading";
-import useAxios from "@/hooks/useAxios";
+
 import ArtworkDetails from "@/components/ArtworkDetails";
 import FloatingBackButton from "@/components/buttons/FloatingBackButton";
+
 import { Artwork } from "@/fetching/types";
+
+import useAxios from "@/hooks/useAxios";
+import useLoading from "@/hooks/useLoading";
 
 function ArtworkPage() {
   const [navigatedFromRouter, setNavigatedFromRouter] = useState(false);

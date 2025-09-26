@@ -1,21 +1,34 @@
 "use client";
 import React from "react";
+
 import { Col, Row } from "react-bootstrap";
+
+import { ADMIN_URL } from "@/utils/constants";
+
 import SubPageTitle from "@/components/SubPageTitle";
-import useAxios from "@/hooks/useAxios";
-import useLoading from "@/hooks/useLoading";
-import { admin_url } from "@/utils/api_constants";
 import UnansweredMessage from "@/components/UnansweredMessage";
+
 import { Message } from "@/fetching/types";
 
+import useAxios from "@/hooks/useAxios";
+import useLoading from "@/hooks/useLoading";
+
 function Messages() {
-  const messages = useAxios(`/${admin_url}/unanswered_messages`);
+  const messages = useAxios(`/${ADMIN_URL}/unanswered_messages`) as Message[];
   const messagesRepresented = useLoading(messages, (messages) => {
     return (
       <>
-        {(messages as Message[]).map((message: Message, index: number) => {
-          return <UnansweredMessage key={index} message={message} />;
-        })}
+        {messages.length !== 0 ? (
+          <>
+            {messages.map((message: Message, index: number) => {
+              return <UnansweredMessage key={index} message={message} />;
+            })}
+          </>
+        ) : (
+          <Row className="px-3 mx-auto floating-element mb-5">
+            <Col className="text-center">--- No messages ---</Col>
+          </Row>
+        )}
       </>
     );
   });

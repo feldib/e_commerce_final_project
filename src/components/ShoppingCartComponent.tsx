@@ -1,10 +1,14 @@
 "use client";
 import React from "react";
-import { Col, Row, Button } from "react-bootstrap";
-import ShoppingCartTable from "@/components/tables/ShoppingCartTable";
-import useShoppingList from "@/hooks/useShoppingList";
+
 import Link from "next/link";
+
+import { Button,Col, Row } from "react-bootstrap";
+
 import { UserDataContext } from "@/components/providers/UserDataProvider";
+import ShoppingCartTable from "@/components/tables/ShoppingCartTable";
+
+import useShoppingList from "@/hooks/useShoppingList";
 
 function ShoppingCartComponent() {
   const { loggedIn } = React.useContext(UserDataContext);
@@ -17,46 +21,52 @@ function ShoppingCartComponent() {
 
   return (
     <Row className="px-3 mx-auto floating-element mb-5">
-      <ShoppingCartTable
-        theadNeeded={true}
-        dataLines={shoppingListItems}
-        changeCosts={(key, newCost) => {
-          const temp = costs;
+      {shoppingListItems.length !== 0 ? (
+        <>
+          <ShoppingCartTable
+            theadNeeded={true}
+            dataLines={shoppingListItems}
+            changeCosts={(key, newCost) => {
+              const temp = costs;
 
-          temp[key] = newCost;
+              temp[key] = newCost;
 
-          setCosts(temp);
+              setCosts(temp);
 
-          setTotalCost(
-            Object.values(costs).reduce((acc, curr) => acc + curr, 0)
-          );
-        }}
-      />
+              setTotalCost(
+                Object.values(costs).reduce((acc, curr) => acc + curr, 0)
+              );
+            }}
+          />
 
-      <Row className="mt-4">
-        {shoppingListItems && <h2>Order Summary: € {totalCost}</h2>}
-      </Row>
+          <Row className="mt-4">
+            {shoppingListItems && <h2>Order Summary: € {totalCost}</h2>}
+          </Row>
 
-      <Row>
-        {shoppingListItems.length !== 0 && (
-          <Col className="text-center mb-5">
-            <Link href={loggedIn ? "/checkout" : "/login"}>
-              <Button
-                className="submit"
-                onClick={() => {
-                  localStorage.removeItem("currentOrder");
-                  localStorage.setItem(
-                    "currentOrder",
-                    JSON.stringify({ items: shoppingListItems, totalCost })
-                  );
-                }}
-              >
-                Go to Checkout
-              </Button>
-            </Link>
-          </Col>
-        )}
-      </Row>
+          <Row>
+            {shoppingListItems.length !== 0 && (
+              <Col className="text-center mb-5">
+                <Link href={loggedIn ? "/checkout" : "/login"}>
+                  <Button
+                    className="submit"
+                    onClick={() => {
+                      localStorage.removeItem("currentOrder");
+                      localStorage.setItem(
+                        "currentOrder",
+                        JSON.stringify({ items: shoppingListItems, totalCost })
+                      );
+                    }}
+                  >
+                    Go to Checkout
+                  </Button>
+                </Link>
+              </Col>
+            )}
+          </Row>
+        </>
+      ) : (
+        <Col className="text-center">--- Shopping cart is empty ---</Col>
+      )}
     </Row>
   );
 }

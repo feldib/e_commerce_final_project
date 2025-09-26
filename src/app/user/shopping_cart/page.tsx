@@ -1,8 +1,10 @@
 "use client";
 import React from "react";
+
 import { Col } from "react-bootstrap";
-import SubPageTitle from "@/components/SubPageTitle";
+
 import ShoppingCartComponent from "@/components/ShoppingCartComponent";
+import SubPageTitle from "@/components/SubPageTitle";
 
 function ShoppingCartSubPage() {
   return (
