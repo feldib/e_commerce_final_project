@@ -33,7 +33,7 @@ function SignInPageInner() {
 
   async function onSubmit(values: { email: string; password: string }) {
     try {
-      await logIn(values.email, values.password, (userData: { user: User }) => {
+      await logIn(values.email, values.password, (userData: User) => {
         settleSuccessfulLogIn(to_checkout, userData, router);
       });
       showLoginSuccessToast();

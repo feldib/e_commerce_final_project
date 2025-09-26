@@ -42,12 +42,12 @@ export const registerNewUser = async (
 export const logIn = async (
   email: string,
   password: string,
-  settleSuccess: (userData: { user: User }) => void
+  settleSuccess: (userData: User) => void
 ): Promise<void> => {
   await axiosConfigured
     .post(`${SERVER_URL}/login`, { email, password })
     .then(function (response) {
-      const userData = response.data as { user: User };
+      const userData = response.data as User;
       settleSuccess(userData);
     });
 };
