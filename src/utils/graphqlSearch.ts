@@ -4,7 +4,8 @@ import { SERVER_URL } from "./constants";
 
 export const searchArtworksGraphQL = async (
   searchParams: SearchParams,
-  pageNumber: number
+  pageNumber: number,
+  admin: boolean = false
 ): Promise<Artwork[]> => {
   try {
     const input = {
@@ -17,6 +18,7 @@ export const searchArtworksGraphQL = async (
           ? undefined
           : searchParams.max,
       offset: pageNumber > 0 ? (pageNumber - 1) * searchParams.n : 0,
+      admin, // Pass admin flag to backend
     };
 
     const query = `

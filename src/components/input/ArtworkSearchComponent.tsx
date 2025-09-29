@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 
-import { Button,Col, Form, Row } from "react-bootstrap";
+import { Button, Col, Form, Row } from "react-bootstrap";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
@@ -22,16 +22,23 @@ type ArtworkSearchComponentProps = {
 function ArtworkSearchComponent({ admin }: ArtworkSearchComponentProps) {
   const [searchResults, setSearchResults] = React.useState<Artwork[]>();
   const [searchedValues, setSearchedValues] = React.useState<SearchParams>();
+  const [hasMoreResults, setHasMoreResults] = React.useState(false);
 
   const [pageNumber, setPageNumber] = React.useState(0);
 
   const search = React.useCallback(
     async (values: SearchParams, page: number) => {
-      const results = await getArtworkSearchResults(values, page);
+      const results = await getArtworkSearchResults(
+        values,
+        page,
+        admin || false
+      );
       setSearchResults(results);
       setSearchedValues(values);
+      // If we got exactly the requested number of results, there might be more
+      setHasMoreResults(results.length === values.n);
     },
-    []
+    [admin]
   );
 
   const formik = useFormik({
@@ -119,7 +126,7 @@ function ArtworkSearchComponent({ admin }: ArtworkSearchComponentProps) {
               </Col>
             )}
 
-            {searchResults.length >= pageNumber * formik.values.n && (
+            {hasMoreResults && (
               <Col className="mx-auto">
                 <Button
                   className="submit"

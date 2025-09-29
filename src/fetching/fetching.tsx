@@ -89,10 +89,11 @@ export const updateUserData = async (
 
 export const getArtworkSearchResults = async (
   objects: SearchParams,
-  pageNumber: number
+  pageNumber: number,
+  admin: boolean = false
 ): Promise<Artwork[]> => {
   try {
-    return await searchArtworksGraphQL(objects, pageNumber);
+    return await searchArtworksGraphQL(objects, pageNumber, admin);
   } catch (error) {
     console.log(error);
     return [];
