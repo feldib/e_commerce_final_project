@@ -181,13 +181,13 @@ export const removeArtwork = async (artwork_id: number): Promise<void> => {
 
 export const getShoppingCart = async (): Promise<Artwork[]> => {
   const res = await axiosConfigured.get(
-    `${SERVER_URL}/${USERS_URL}/shopping-cart`
+    `${SERVER_URL}/${USERS_URL}/shopping_cart`
   );
   return res.data as Artwork[];
 };
 
 export const addToShoppingList = async (artwork_id: number): Promise<void> => {
-  await axiosConfigured.post(`${SERVER_URL}/${USERS_URL}/shopping-cart`, {
+  await axiosConfigured.post(`${SERVER_URL}/${USERS_URL}/shopping_cart`, {
     artwork_id,
   });
   // returns void
@@ -197,7 +197,7 @@ export const removeFromShoppingList = async (
   artwork_id: number
 ): Promise<void> => {
   await axiosConfigured.delete(
-    `${SERVER_URL}/${USERS_URL}/shopping-cart/${artwork_id}`
+    `${SERVER_URL}/${USERS_URL}/shopping_cart/${artwork_id}`
   );
   // returns void
 };
@@ -205,7 +205,7 @@ export const removeFromShoppingList = async (
 export const increaseShoppingListItemQuantity = async (
   artwork_id: number
 ): Promise<void> => {
-  await axiosConfigured.put(`${SERVER_URL}/${USERS_URL}/shopping-cart`, {
+  await axiosConfigured.put(`${SERVER_URL}/${USERS_URL}/shopping_cart`, {
     action: "increase",
     artwork_id,
   });
@@ -215,7 +215,7 @@ export const increaseShoppingListItemQuantity = async (
 export const decreaseShoppingListItemQuantity = async (
   artwork_id: number
 ): Promise<void> => {
-  await axiosConfigured.put(`${SERVER_URL}/${USERS_URL}/shopping-cart`, {
+  await axiosConfigured.put(`${SERVER_URL}/${USERS_URL}/shopping_cart`, {
     action: "decrease",
     artwork_id,
   });
@@ -225,7 +225,7 @@ export const decreaseShoppingListItemQuantity = async (
 export const replaceSavedShoppingCart = async (
   shopping_cart: { artwork_id: number; quantity: number }[]
 ): Promise<void> => {
-  await axiosConfigured.put(`${SERVER_URL}/${USERS_URL}/shopping-cart`, {
+  await axiosConfigured.put(`${SERVER_URL}/${USERS_URL}/shopping_cart`, {
     action: "replace",
     shopping_cart,
   });
