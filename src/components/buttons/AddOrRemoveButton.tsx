@@ -46,7 +46,7 @@ function AddOrRemoveFromButton({
       setNeedsToBeRefreshed(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [needsToBeRefreshed]);
+  }, [needsToBeRefreshed, artwork_id]);
 
   return (
     <Row className="py-2">
