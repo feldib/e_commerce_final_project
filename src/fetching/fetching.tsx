@@ -147,7 +147,7 @@ export const addNewArtwork = async (artworkData: {
   });
 
   return await axiosConfigured.post(
-    `${SERVER_URL}/${ADMIN_URL}/add_new_artwork`,
+    `${SERVER_URL}/${ADMIN_URL}/artwork`,
     formData,
     {
       headers: {
@@ -162,21 +162,17 @@ export const updateArtworkData = async (
   field_name: string,
   value: string | number | boolean | { tname: string }[]
 ): Promise<{ data: Artwork }> => {
-  return axiosConfigured.post(
-    `${SERVER_URL}/${ADMIN_URL}/update_artwork_data`,
-    {
-      artwork_id,
-      field_name,
-      value,
-    }
-  );
+  return axiosConfigured.put(`${SERVER_URL}/${ADMIN_URL}/artwork`, {
+    artwork_id,
+    field_name,
+    value,
+  });
 };
 
 export const removeArtwork = async (artwork_id: number): Promise<void> => {
-  await axiosConfigured.post(`${SERVER_URL}/${ADMIN_URL}/remove_artwork`, {
-    artwork_id,
-  });
-  // returns void
+  await axiosConfigured.delete(
+    `${SERVER_URL}/${ADMIN_URL}/artworks/${artwork_id}`
+  );
 };
 
 // ===================
@@ -298,7 +294,7 @@ export const leaveReview = async (
   title: string,
   review_text: string
 ): Promise<void> => {
-  await axiosConfigured.post(`${SERVER_URL}/${USERS_URL}/leave_review`, {
+  await axiosConfigured.post(`${SERVER_URL}/${USERS_URL}/review`, {
     artwork_id,
     title,
     review_text,
@@ -306,16 +302,16 @@ export const leaveReview = async (
 };
 
 export const approveReview = async (review_id: number): Promise<void> => {
-  await axiosConfigured.post(`${SERVER_URL}/${ADMIN_URL}/approve_review`, {
+  await axiosConfigured.put(`${SERVER_URL}/${ADMIN_URL}/review`, {
     review_id,
   });
   // returns void
 };
 
 export const disapproveReview = async (review_id: number): Promise<void> => {
-  await axiosConfigured.post(`${SERVER_URL}/${ADMIN_URL}/disapprove_review`, {
-    review_id,
-  });
+  await axiosConfigured.delete(
+    `${SERVER_URL}/${ADMIN_URL}/review?id=${review_id}`
+  );
   // returns void
 };
 
@@ -331,20 +327,14 @@ export const addToFeatured = async (artwork_id: number): Promise<void> => {
 };
 
 export const removeFromFeatured = async (artwork_id: number): Promise<void> => {
-  await axiosConfigured.post(
-    `${SERVER_URL}/${ADMIN_URL}/remove_from_featured`,
-    {
-      artwork_id,
-    }
+  await axiosConfigured.delete(
+    `${SERVER_URL}/${ADMIN_URL}/featured/${artwork_id}`
   );
 };
 
 export const isFeatured = async (artwork_id: number): Promise<boolean> => {
-  const result = await axiosConfigured.post(
-    `${SERVER_URL}/${ADMIN_URL}/is_featured`,
-    {
-      artwork_id,
-    }
+  const result = await axiosConfigured.get(
+    `${SERVER_URL}/${ADMIN_URL}/featured/${artwork_id}`
   );
   return result.data as boolean;
 };
