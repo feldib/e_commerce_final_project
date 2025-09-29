@@ -285,11 +285,15 @@ a:hover,
   font-size: 1.5rem;
 }
 
-.uploaded-image {
+.uploaded-image,
+.uploaded-thumbnail {
   object-fit: cover;
   height: 150px;
   width: 150px;
   border-radius: 10px;
+}
+
+.uploaded-image {
   transition: all 0.2s ease-in-out;
 }
 
@@ -307,10 +311,15 @@ a:hover,
   filter: brightness(50%);
 }
 
-.uploaded-thumbnail-container:hover,
+.uploaded-thumbnail-container:hover .uploaded-thumbnail,
 .uploaded-thumbnail:hover {
-  filter: brightness(100%);
-  cursor: disabled;
+  filter: brightness(100%) !important;
+  cursor: default !important;
+  transform: none !important;
+}
+
+.uploaded-thumbnail-container:hover .remove-uploaded-image {
+  opacity: 0 !important;
 }
 
 .uploaded-image-container:hover .remove-uploaded-image {

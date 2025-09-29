@@ -305,7 +305,7 @@ function AddNewArtworkPage() {
 
               {formik.values.thumbnail && (
                 <Col
-                  className="mb-3 uploaded-image-container"
+                  className="mb-3 uploaded-thumbnail-container"
                   style={{
                     position: "relative",
                     height: "150px",
@@ -315,7 +315,7 @@ function AddNewArtworkPage() {
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={URL.createObjectURL(formik.values.thumbnail)}
-                    className="mt-3 uploaded-image"
+                    className="mt-3 uploaded-thumbnail"
                     alt="Uploaded thumbnail"
                   />
 

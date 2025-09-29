@@ -341,7 +341,7 @@ function EditArtworkData() {
 
               {formik.values.thumbnail && (
                 <Col
-                  className="mb-3 uploaded-image-container"
+                  className="mb-3 uploaded-thumbnail-container"
                   style={{
                     position: "relative",
                     height: "150px",
@@ -351,7 +351,7 @@ function EditArtworkData() {
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={formik.values.thumbnail}
-                    className="mt-3 uploaded-image"
+                    className="mt-3 uploaded-thumbnail"
                     alt="Current thumbnail"
                   />
                 </Col>
