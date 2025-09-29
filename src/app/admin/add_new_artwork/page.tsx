@@ -43,11 +43,7 @@ import FloatingBackButton from "@/components/buttons/FloatingBackButton";
 import NewArtworkInputComponent from "@/components/input/NewArtworkInputComponent";
 import PageTitle from "@/components/PageTitle";
 
-import {
-  addNewArtwork,
-  addNewOtherPictures,
-  addNewThumbnail,
-} from "@/fetching/fetching";
+import { addNewArtwork } from "@/fetching/fetching";
 import { Category } from "@/fetching/types";
 
 import useAxios from "@/hooks/useAxios";
@@ -107,16 +103,22 @@ function AddNewArtworkPage() {
       const tags = values.tags.map((obj) => obj.text);
 
       try {
-        const response = await addNewArtwork({ ...values, tags });
+        // TypeScript check - thumbnail is required by validation but type allows undefined
+        if (!values.thumbnail) {
+          showErrorToast("Thumbnail is required");
+          return;
+        }
+
+        const response = await addNewArtwork({
+          ...values,
+          tags,
+          thumbnail: values.thumbnail,
+        });
         showSuccessToast("Artwork added successfully to database");
 
         const artwork_id = response.data;
 
-        if (values.thumbnail) {
-          await addNewThumbnail(artwork_id, values.thumbnail);
-        }
-
-        await addNewOtherPictures(artwork_id, values.other_pictures);
+        router.push(`/artwork_page/${artwork_id}`);
 
         actions.resetForm();
       } catch {

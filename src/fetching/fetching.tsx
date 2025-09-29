@@ -369,21 +369,6 @@ export const getUnansweredMessages = async (): Promise<Message[]> => {
 // Files/Images
 // ===================
 
-export const addNewThumbnail = async (
-  artwork_id: number,
-  thumbnail: Blob
-): Promise<void> => {
-  const formData = new FormData();
-  formData.append("thumbnail", thumbnail);
-  await axiosConfigured.post(
-    `${SERVER_URL}/${ADMIN_URL}/artworks/${artwork_id}/images?type=thumbnail`,
-    formData,
-    {
-      headers: { "Content-Type": "multipart/form-data" },
-    }
-  );
-};
-
 export const addNewOtherPictures = (
   artwork_id: number,
   other_pictures: Blob[]
