@@ -307,6 +307,12 @@ a:hover,
   filter: brightness(50%);
 }
 
+.uploaded-thumbnail-container:hover,
+.uploaded-thumbnail:hover {
+  filter: brightness(100%);
+  cursor: disabled;
+}
+
 .uploaded-image-container:hover .remove-uploaded-image {
   opacity: 1;
   transform: scale(1.1) !important;

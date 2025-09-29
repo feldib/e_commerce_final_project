@@ -4,7 +4,6 @@ import { searchArtworksGraphQL } from "@/utils/graphqlSearch";
 
 import {
   Artwork,
-  ArtworkSent,
   CheckoutFormData,
   Message,
   Order,
@@ -119,13 +118,41 @@ export const getDataOfArtworks = async (
   return results;
 };
 
-export const addNewArtwork = async (
-  artwork: ArtworkSent
-): Promise<{ data: number }> => {
+export const addNewArtwork = async (artworkData: {
+  title: string;
+  artist_name: string;
+  price: number;
+  quantity: number;
+  description: string;
+  category_id: number;
+  tags: string[];
+  thumbnail: Blob;
+  other_pictures?: Blob[];
+}): Promise<{ data: number }> => {
+  const formData = new FormData();
+
+  // Add text fields
+  formData.append("title", artworkData.title);
+  formData.append("artist_name", artworkData.artist_name);
+  formData.append("price", artworkData.price.toString());
+  formData.append("quantity", artworkData.quantity.toString());
+  formData.append("description", artworkData.description);
+  formData.append("category_id", artworkData.category_id.toString());
+  formData.append("tags", JSON.stringify(artworkData.tags));
+
+  formData.append("thumbnail", artworkData.thumbnail);
+
+  artworkData.other_pictures?.forEach((picture) => {
+    formData.append("other_pictures", picture);
+  });
+
   return await axiosConfigured.post(
     `${SERVER_URL}/${ADMIN_URL}/add_new_artwork`,
+    formData,
     {
-      artwork,
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
     }
   );
 };

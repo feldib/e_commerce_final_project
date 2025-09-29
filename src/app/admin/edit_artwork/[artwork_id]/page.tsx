@@ -27,9 +27,10 @@ import { ToastContainer } from "react-toastify";
 import {
   MAX_IMAGE_SIZE,
   SERVER_URL,
-  TAG_DELIMITERS,
+  TAG_SEPARATORS,
   VALID_IMAGE_EXTENSIONS,
 } from "@/utils/constants";
+import { showErrorToast, showSuccessToast } from "@/utils/toastUtils";
 
 import FloatingBackButton from "@/components/buttons/FloatingBackButton";
 import ChangeArtworkDataInputComponent from "@/components/input/ChangeArtworkDataInputComponent";
@@ -82,7 +83,19 @@ function EditArtworkData() {
   function isValidImage(fileName: string): boolean {
     if (!fileName) return false;
     const ext = fileName.split(".").pop()?.toLowerCase() || "";
-    return VALID_IMAGE_EXTENSIONS.includes(ext);
+    return VALID_IMAGE_EXTENSIONS.includes(
+      ext as (typeof VALID_IMAGE_EXTENSIONS)[number]
+    );
+  }
+
+  function validateNewFile(file: File): string | null {
+    if (!isValidImage(file.name)) {
+      return "Not a valid image type";
+    }
+    if (file.size > MAX_IMAGE_SIZE) {
+      return "Max allowed size is 100KB";
+    }
+    return null;
   }
 
   const formik = useFormik<EditArtworkFormValues>({
@@ -104,16 +117,7 @@ function EditArtworkData() {
       price: Yup.number().required("Price required").min(1),
       quantity: Yup.number().required("Quantity required").min(1),
       category_id: Yup.number().required("Category required"),
-      thumbnail: Yup.mixed()
-        .required("Thumbnail required")
-        .test("is-valid-type", "Not a valid image type", (value) =>
-          isValidImage(value instanceof File ? value.name : "")
-        )
-        .test(
-          "is-valid-size",
-          "Max allowed size is 100KB",
-          (value) => value instanceof File && value.size <= MAX_IMAGE_SIZE
-        ),
+      thumbnail: Yup.mixed().required("Thumbnail required"),
       tags: Yup.array()
         .min(3, "Add minimum 3 tags!")
         .of(
@@ -122,17 +126,7 @@ function EditArtworkData() {
             text: Yup.string(),
           })
         ),
-      other_pictures: Yup.array().of(
-        Yup.mixed()
-          .test("is-valid-type", "Not a valid image type", (value) =>
-            isValidImage(value instanceof File ? value.name : "")
-          )
-          .test(
-            "is-valid-size",
-            "Max allowed size is 100KB",
-            (value) => value instanceof File && value.size <= MAX_IMAGE_SIZE
-          )
-      ),
+      other_pictures: Yup.array(),
       description: Yup.string().required("Description required"),
     }),
     onSubmit: () => {
@@ -253,7 +247,7 @@ function EditArtworkData() {
               <ReactTags
                 tags={formik.values.tags}
                 // suggestions={suggestions}
-                delimiters={TAG_DELIMITERS}
+                separators={[...TAG_SEPARATORS]}
                 handleDelete={createHandleDelete(tags, setTags)}
                 handleAddition={createHandleAddition(tags, setTags)}
                 inputFieldPosition="bottom"
@@ -319,12 +313,27 @@ function EditArtworkData() {
                   placeholder="Upload thumbnail"
                   onChange={async (e: React.ChangeEvent<HTMLInputElement>) => {
                     const files = e.target.files;
-                    if (files) {
-                      await replaceThumbnail(artworkId, files[0]);
-                      formik.setFieldValue(
-                        "thumbnail",
-                        URL.createObjectURL(files[0])
-                      );
+                    if (files && files[0]) {
+                      const file = files[0];
+                      const validationError = validateNewFile(file);
+
+                      if (validationError) {
+                        alert(validationError);
+                        e.target.value = ""; // Reset the input
+                        return;
+                      }
+
+                      try {
+                        await replaceThumbnail(artworkId, file);
+                        formik.setFieldValue(
+                          "thumbnail",
+                          URL.createObjectURL(file)
+                        );
+                        showSuccessToast("Thumbnail uploaded successfully");
+                      } catch {
+                        showErrorToast("Failed to upload thumbnail");
+                        e.target.value = ""; // Reset the input
+                      }
                     }
                   }}
                 />
@@ -343,15 +352,7 @@ function EditArtworkData() {
                   <img
                     src={formik.values.thumbnail}
                     className="mt-3 uploaded-image"
-                    alt="Uploaded thumbnail"
-                  />
-
-                  <FontAwesomeIcon
-                    icon={faX}
-                    className="remove-uploaded-image"
-                    onClick={() => {
-                      formik.setFieldValue("thumbnail", "");
-                    }}
+                    alt="Current thumbnail"
                   />
                 </Col>
               )}
@@ -378,13 +379,28 @@ function EditArtworkData() {
                   placeholder="Upload other pictures"
                   onChange={async (e: React.ChangeEvent<HTMLInputElement>) => {
                     const files = e.target.files;
-                    if (files) {
-                      await addNewOtherPicture(artworkId, files[0]);
+                    if (files && files[0]) {
+                      const file = files[0];
+                      const validationError = validateNewFile(file);
 
-                      formik.setFieldValue("other_pictures", [
-                        ...formik.values.other_pictures,
-                        URL.createObjectURL(files[0]),
-                      ]);
+                      if (validationError) {
+                        alert(validationError);
+                        e.target.value = ""; // Reset the input
+                        return;
+                      }
+
+                      try {
+                        await addNewOtherPicture(artworkId, file);
+                        formik.setFieldValue("other_pictures", [
+                          ...formik.values.other_pictures,
+                          URL.createObjectURL(file),
+                        ]);
+                        e.target.value = ""; // Reset the input for next upload
+                        showSuccessToast("Image uploaded successfully");
+                      } catch {
+                        showErrorToast("Failed to upload image");
+                        e.target.value = ""; // Reset the input
+                      }
                     }
                   }}
                 />
@@ -413,24 +429,23 @@ function EditArtworkData() {
                         <FontAwesomeIcon
                           icon={faX}
                           className="remove-uploaded-image"
-                          id={pic}
-                          onClick={(e: React.MouseEvent<SVGSVGElement>) => {
-                            const id = (e.target as SVGSVGElement).id;
-                            const indexOfPicToRemove =
-                              formik.values.other_pictures.findIndex((pic) => {
-                                return pic === id;
-                              });
+                          onClick={async () => {
+                            try {
+                              if (SERVER_URL && pic.startsWith(SERVER_URL)) {
+                                // This is an existing image from server, remove it
+                                const fileName = pic.split("/").pop() || "";
+                                await removePicture(artworkId, fileName);
+                              }
 
-                            const newArray =
-                              formik.values.other_pictures.filter(
-                                (pic, index) => {
-                                  return index !== indexOfPicToRemove;
-                                }
-                              );
-
-                            removePicture(artworkId, id.split("/").pop() || "");
-
-                            formik.setFieldValue("other_pictures", newArray);
+                              // Remove from the form state
+                              const newArray =
+                                formik.values.other_pictures.filter(
+                                  (_, picIndex) => picIndex !== index
+                                );
+                              formik.setFieldValue("other_pictures", newArray);
+                            } catch {
+                              showErrorToast("Failed to remove image");
+                            }
                           }}
                         />
                       </Col>

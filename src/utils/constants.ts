@@ -30,6 +30,9 @@ export const TAG_DELIMITERS = [
   KEY_CODES.space,
 ] as const;
 
+// For new react-tags separators prop (v7+)
+export const TAG_SEPARATORS = [",", "Enter", " "] as const;
+
 export const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL;
 export const USERS_URL = "users";
 export const ADMIN_URL = "admin";

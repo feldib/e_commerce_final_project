@@ -30,7 +30,7 @@ import { ToastContainer } from "react-toastify";
 
 import {
   MAX_IMAGE_SIZE,
-  TAG_DELIMITERS,
+  TAG_SEPARATORS,
   VALID_IMAGE_EXTENSIONS,
 } from "@/utils/constants";
 import {
@@ -85,7 +85,9 @@ function AddNewArtworkPage() {
   function isValidImage(fileName: string): boolean {
     if (!fileName) return false;
     const ext = fileName.split(".").pop()?.toLowerCase() || "";
-    return VALID_IMAGE_EXTENSIONS.includes(ext);
+    return VALID_IMAGE_EXTENSIONS.includes(
+      ext as (typeof VALID_IMAGE_EXTENSIONS)[number]
+    );
   }
 
   const formik = useFormik<AddNewArtworkFormValues>({
@@ -225,7 +227,7 @@ function AddNewArtworkPage() {
               <ReactTags
                 tags={formik.values.tags}
                 // suggestions={suggestions}
-                delimiters={TAG_DELIMITERS}
+                separators={[...TAG_SEPARATORS]}
                 handleDelete={createHandleDelete(tags, setTags)}
                 handleAddition={createHandleAddition(tags, setTags)}
                 inputFieldPosition="bottom"
