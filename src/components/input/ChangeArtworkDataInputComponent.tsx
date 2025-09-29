@@ -19,6 +19,8 @@ import {
 
 import { updateArtworkData } from "@/fetching/fetching";
 
+import { preventNonNumericInput } from "@/helpers/helpers";
+
 type ChangeArtworkDataInputComponentProps<
   T extends Record<string, unknown> = Record<string, unknown>,
 > = {
@@ -83,6 +85,11 @@ function ChangeArtworkDataInputComponent<
             onChange={formik.handleChange}
             value={String(formik.values[name] || "")}
             disabled={!editing}
+            onKeyDown={(e) => {
+              if (type === "number") {
+                preventNonNumericInput(e);
+              }
+            }}
           />
         )}
 

@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Form, InputGroup } from "react-bootstrap";
 import { FormikProps } from "formik";
 
+import { preventNonNumericInput } from "@/helpers/helpers";
+
 type NewArtworkInputComponentProps<
   T extends Record<string, unknown> = Record<string, unknown>,
 > = {
@@ -63,6 +65,11 @@ function NewArtworkInputComponent<
             placeholder={placeholder}
             onChange={formik.handleChange}
             value={String(formik.values[name] || "")}
+            onKeyDown={(e) => {
+              if (type === "number") {
+                preventNonNumericInput(e);
+              }
+            }}
           />
         )}
       </InputGroup>
