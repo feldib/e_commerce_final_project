@@ -161,9 +161,16 @@ function EditArtworkData() {
         description: artworkData.description || "",
       });
       setTags(transformedTags);
+
+      const currentCategory = categories?.find(
+        (cat: Category) => cat.id === artworkData.category_id
+      );
+      if (currentCategory) {
+        setChoseCategory(currentCategory.cname);
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [artworkData]);
+  }, [artworkData, categories]);
 
   const [initialTagsLoaded, setInitialTagsLoaded] = React.useState(false);
 
@@ -274,11 +281,18 @@ function EditArtworkData() {
             <Form.Group className="pb-3">
               <Form.Label>Category</Form.Label>
               <Dropdown
-                onSelect={(cat) => {
+                onSelect={async (cat) => {
                   if (cat) {
                     const obj = JSON.parse(cat);
                     formik.setFieldValue("category_id", obj.id);
                     setChoseCategory(obj.cname);
+
+                    try {
+                      await updateArtworkData(artworkId, "category_id", obj.id);
+                      showSuccessToast("Category updated successfully");
+                    } catch {
+                      showErrorToast("Failed to update category");
+                    }
                   }
                 }}
               >
