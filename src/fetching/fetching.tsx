@@ -181,13 +181,13 @@ export const removeArtwork = async (artwork_id: number): Promise<void> => {
 
 export const getShoppingCart = async (): Promise<Artwork[]> => {
   const res = await axiosConfigured.get(
-    `${SERVER_URL}/${USERS_URL}/shopping_cart`
+    `${SERVER_URL}/${USERS_URL}/shopping-cart`
   );
   return res.data as Artwork[];
 };
 
 export const addToShoppingList = async (artwork_id: number): Promise<void> => {
-  await axiosConfigured.post(`${SERVER_URL}/${USERS_URL}/shopping_cart`, {
+  await axiosConfigured.post(`${SERVER_URL}/${USERS_URL}/shopping-cart`, {
     artwork_id,
   });
   // returns void
@@ -196,9 +196,8 @@ export const addToShoppingList = async (artwork_id: number): Promise<void> => {
 export const removeFromShoppingList = async (
   artwork_id: number
 ): Promise<void> => {
-  await axiosConfigured.post(
-    `${SERVER_URL}/${USERS_URL}/remove_item_from_shopping_cart`,
-    { artwork_id }
+  await axiosConfigured.delete(
+    `${SERVER_URL}/${USERS_URL}/shopping-cart/${artwork_id}`
   );
   // returns void
 };
@@ -206,37 +205,35 @@ export const removeFromShoppingList = async (
 export const increaseShoppingListItemQuantity = async (
   artwork_id: number
 ): Promise<void> => {
-  await axiosConfigured.post(
-    `${SERVER_URL}/${USERS_URL}/increase_shopping_cart_item_quantity`,
-    { artwork_id }
-  );
+  await axiosConfigured.put(`${SERVER_URL}/${USERS_URL}/shopping-cart`, {
+    action: "increase",
+    artwork_id,
+  });
   // returns void
 };
 
 export const decreaseShoppingListItemQuantity = async (
   artwork_id: number
 ): Promise<void> => {
-  await axiosConfigured.post(
-    `${SERVER_URL}/${USERS_URL}/decrease_shopping_cart_item_quantity`,
-    { artwork_id }
-  );
+  await axiosConfigured.put(`${SERVER_URL}/${USERS_URL}/shopping-cart`, {
+    action: "decrease",
+    artwork_id,
+  });
   // returns void
 };
 
 export const replaceSavedShoppingCart = async (
   shopping_cart: { artwork_id: number; quantity: number }[]
 ): Promise<void> => {
-  await axiosConfigured.post(
-    `${SERVER_URL}/${USERS_URL}/replace_saved_shopping_cart`,
-    {
-      shopping_cart,
-    }
-  );
+  await axiosConfigured.put(`${SERVER_URL}/${USERS_URL}/shopping-cart`, {
+    action: "replace",
+    shopping_cart,
+  });
   // returns void
 };
 
 export const addToWishlisted = async (artwork_id: number): Promise<void> => {
-  await axiosConfigured.post(`${SERVER_URL}/${USERS_URL}/wishlisted`, {
+  await axiosConfigured.post(`${SERVER_URL}/${USERS_URL}/wishlist`, {
     artwork_id,
   });
   // returns void
@@ -245,21 +242,15 @@ export const addToWishlisted = async (artwork_id: number): Promise<void> => {
 export const removeFromWishlisted = async (
   artwork_id: number
 ): Promise<void> => {
-  await axiosConfigured.post(
-    `${SERVER_URL}/${USERS_URL}/remove_from_wishlisted`,
-    {
-      artwork_id,
-    }
+  await axiosConfigured.delete(
+    `${SERVER_URL}/${USERS_URL}/wishlist/${artwork_id}`
   );
   // returns void
 };
 
 export const isWishlisted = async (artwork_id: number): Promise<boolean> => {
-  const result = await axiosConfigured.post(
-    `${SERVER_URL}/${USERS_URL}/is_wishlisted`,
-    {
-      artwork_id,
-    }
+  const result = await axiosConfigured.get(
+    `${SERVER_URL}/${USERS_URL}/wishlist/${artwork_id}`
   );
   return result.data as boolean;
 };
@@ -276,11 +267,8 @@ export const order = async (invoice_data: CheckoutFormData): Promise<void> => {
 };
 
 export const getOrderHistory = async (user_id: number): Promise<Order[]> => {
-  const res = await axiosConfigured.post(
-    `${SERVER_URL}/${ADMIN_URL}/get_orders_of_user`,
-    {
-      user_id,
-    }
+  const res = await axiosConfigured.get(
+    `${SERVER_URL}/${ADMIN_URL}/orders?user_id=${user_id}`
   );
   return res.data as Order[];
 };
@@ -302,15 +290,13 @@ export const leaveReview = async (
 };
 
 export const approveReview = async (review_id: number): Promise<void> => {
-  await axiosConfigured.put(`${SERVER_URL}/${ADMIN_URL}/review`, {
-    review_id,
-  });
+  await axiosConfigured.put(`${SERVER_URL}/${ADMIN_URL}/reviews/${review_id}`);
   // returns void
 };
 
 export const disapproveReview = async (review_id: number): Promise<void> => {
   await axiosConfigured.delete(
-    `${SERVER_URL}/${ADMIN_URL}/review?id=${review_id}`
+    `${SERVER_URL}/${ADMIN_URL}/reviews/${review_id}`
   );
   // returns void
 };
@@ -390,7 +376,7 @@ export const addNewThumbnail = async (
   const formData = new FormData();
   formData.append("thumbnail", thumbnail);
   await axiosConfigured.post(
-    `${SERVER_URL}/${ADMIN_URL}/thumbnail?artwork_id=${artwork_id}`,
+    `${SERVER_URL}/${ADMIN_URL}/artworks/${artwork_id}/images?type=thumbnail`,
     formData,
     {
       headers: { "Content-Type": "multipart/form-data" },
@@ -414,7 +400,7 @@ export const addNewOtherPicture = async (
   const formData = new FormData();
   formData.append("picture", picture);
   await axiosConfigured.post(
-    `${SERVER_URL}/${ADMIN_URL}/picture?artwork_id=${artwork_id}`,
+    `${SERVER_URL}/${ADMIN_URL}/artworks/${artwork_id}/images?type=picture`,
     formData,
     {
       headers: { "Content-Type": "multipart/form-data" },
@@ -426,10 +412,9 @@ export const removePicture = async (
   artwork_id: number,
   file_name: string
 ): Promise<void> => {
-  await axiosConfigured.post(`${SERVER_URL}/${ADMIN_URL}/remove_picture`, {
-    artwork_id,
-    file_name,
-  });
+  await axiosConfigured.delete(
+    `${SERVER_URL}/${ADMIN_URL}/artworks/${artwork_id}/images/${file_name}`
+  );
 };
 
 export const replaceThumbnail = async (
@@ -438,8 +423,8 @@ export const replaceThumbnail = async (
 ): Promise<void> => {
   const formData = new FormData();
   formData.append("thumbnail", thumbnail);
-  await axiosConfigured.post(
-    `${SERVER_URL}/${ADMIN_URL}/replace_thumbnail?artwork_id=${artwork_id}`,
+  await axiosConfigured.put(
+    `${SERVER_URL}/${ADMIN_URL}/artworks/${artwork_id}/images`,
     formData,
     {
       headers: { "Content-Type": "multipart/form-data" },
