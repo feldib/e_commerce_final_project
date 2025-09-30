@@ -1,3 +1,5 @@
+import { useCallback } from "react";
+
 import { Category } from "@/fetching/types";
 
 import useAxios from "./useAxios";
@@ -5,7 +7,7 @@ import useAxios from "./useAxios";
 export const useCategories = (locale: string) => {
   const categories = useAxios("/categories") as Category[];
 
-  const getCategoryName = (category: Category): string => {
+  const getCategoryName = useCallback((category: Category): string => {
     switch (locale) {
       case "he":
         return category.cname_he || category.cname_en;
@@ -15,12 +17,12 @@ export const useCategories = (locale: string) => {
       default:
         return category.cname_en;
     }
-  };
+  }, [locale]);
 
-  const getCategoryNameById = (categoryId: number): string => {
+  const getCategoryNameById = useCallback((categoryId: number): string => {
     const category = categories?.find((cat) => cat.id === categoryId);
     return category ? getCategoryName(category) : "";
-  };
+  }, [categories, getCategoryName]);
 
   return {
     categories,
