@@ -6,7 +6,9 @@ export const useValidationSchemas = () => {
   const { t } = useI18n();
 
   const commonValidationRules = {
-    email: Yup.string().required(t("validation.email_required")).email(t("validation.email_invalid")),
+    email: Yup.string()
+      .required(t("validation.email_required"))
+      .email(t("validation.email_invalid")),
     password: Yup.string().required(t("validation.password_required")),
     firstName: Yup.string().required(t("validation.first_name_required")),
     lastName: Yup.string().required(t("validation.last_name_required")),
@@ -31,7 +33,7 @@ export const useValidationSchemas = () => {
     commonValidationRules,
     createEmailMatchValidation,
     createPasswordMatchValidation,
-    
+
     loginSchema: Yup.object().shape({
       email: commonValidationRules.email,
       password: commonValidationRules.password,

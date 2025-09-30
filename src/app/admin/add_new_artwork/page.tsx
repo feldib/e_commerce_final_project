@@ -133,8 +133,12 @@ function AddNewArtworkPage() {
     validationSchema: Yup.object().shape({
       title: Yup.string().required(t("validation.title_required")),
       artist_name: Yup.string().required(t("validation.name_required")),
-      price: Yup.number().required(t("validation.price_required")).min(1, t("validation.price_min")),
-      quantity: Yup.number().required(t("validation.quantity_required")).min(1, t("validation.quantity_min")),
+      price: Yup.number()
+        .required(t("validation.price_required"))
+        .min(1, t("validation.price_min")),
+      quantity: Yup.number()
+        .required(t("validation.quantity_required"))
+        .min(1, t("validation.quantity_min")),
       category_id: Yup.number().required(t("validation.category_required")),
       thumbnail: Yup.mixed()
         .required(t("validation.thumbnail_required"))
