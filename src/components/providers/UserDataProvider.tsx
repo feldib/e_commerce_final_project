@@ -4,6 +4,8 @@ import { confirmAlert } from "react-confirm-alert";
 
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
+import { useI18n } from "@/components/providers/I18nProvider";
+
 import { getLoggedIn } from "@/fetching/fetching";
 import { User } from "@/fetching/types";
 
@@ -47,6 +49,7 @@ function UserDataProvider({
 }: {
   children: React.ReactNode;
 }): JSX.Element {
+  const { t } = useI18n();
   const [user, setUser] = React.useState<UserDataContextType["user"]>(
     initialValues.user
   );
@@ -80,19 +83,18 @@ function UserDataProvider({
 
     if (signed_out_shopping_cart.length > 0) {
       confirmAlert({
-        title: "Replace shopping cart",
-        message:
-          "Do you want to replace your current shopping cart with this one?",
+        title: t("common.shopping_cart_replacement_title"),
+        message: t("common.shopping_cart_replacement_message"),
         buttons: [
           {
-            label: "Yes",
+            label: t("common.yes"),
             onClick: () => {
               replacePreviousShoppingCart();
               router.push(path);
             },
           },
           {
-            label: "No",
+            label: t("common.no"),
             onClick: () => {
               localStorage.removeItem("shopping_cart");
               router.push(user_path);
