@@ -18,7 +18,7 @@ type AdminArtworkTableProps = {
 function AdminArtworkTable({ dataLines }: AdminArtworkTableProps) {
   const { t } = useI18n();
 
-  function makeDataLines(dataLinesGenerated: Artwork[]): React.JSX.Element {
+  function makeRows(dataLinesGenerated: Artwork[]): React.JSX.Element {
     return (
       <>
         {dataLinesGenerated.map((line: Artwork, index: number) => {
@@ -31,7 +31,7 @@ function AdminArtworkTable({ dataLines }: AdminArtworkTableProps) {
   }
 
   const dataLinesGenerated = useLoading(dataLines, (dataLines) => {
-    return renderData(dataLines, makeDataLines);
+    return renderData(dataLines, makeRows, t("common.no_results"));
   });
 
   return (

@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 
 import Link from "next/link";
@@ -128,7 +129,7 @@ function ShoppingCartDataLines({
                     showSuccessToast(t("toast.item_added_to_cart"));
                     setQuantity(quantity + 1);
                   } catch {
-                    showErrorToast("Item out of stock");
+                    showErrorToast(t("common.item_out_of_stock"));
                   }
                 } else {
                   try {
@@ -139,7 +140,7 @@ function ShoppingCartDataLines({
                     showSuccessToast(t("toast.item_added_to_cart"));
                     setQuantity(quantity + 1);
                   } catch {
-                    showErrorToast(t("toast.item_out_of_stock"));
+                    showErrorToast(t("common.item_out_of_stock"));
                   }
                 }
               }}

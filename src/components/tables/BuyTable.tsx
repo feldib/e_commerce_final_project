@@ -27,18 +27,22 @@ function BuyTable({
 }: BuyTableProps) {
   const { t } = useI18n();
 
-  function makeDataLines(dataLinesGenerated: Artwork[]): React.JSX.Element[] {
-    return dataLinesGenerated.map((line: Artwork, index: number) => {
-      return (
-        <BuyTableDataLines
-          recommendation={recommendation}
-          line={line}
-          index={index}
-          key={index}
-          orderSummary={orderSummary}
-        />
-      );
-    });
+  function makeRows(dataLinesGenerated: Artwork[]): React.JSX.Element {
+    return (
+      <>
+        {dataLinesGenerated.map((line: Artwork, index: number) => {
+          return (
+            <BuyTableDataLines
+              recommendation={recommendation}
+              line={line}
+              index={index}
+              key={index}
+              orderSummary={orderSummary}
+            />
+          );
+        })}
+      </>
+    );
   }
 
   const dataLinesGenerated = useLoading(
@@ -67,7 +71,8 @@ function BuyTable({
             return line.quantity;
           }
         }),
-        makeDataLines
+        makeRows,
+        t("common.no_results")
       );
     }
   );

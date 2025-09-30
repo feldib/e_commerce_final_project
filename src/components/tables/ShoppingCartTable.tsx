@@ -26,23 +26,27 @@ function ShoppingCartTable({
 }: ShoppingCartTableProps) {
   const { t } = useI18n();
 
-  function makeDataLines(dataLinesGenerated: Artwork[]): React.JSX.Element[] {
-    return dataLinesGenerated.map((line: Artwork, index: number) => {
-      return (
-        <ShoppingCartDataLines
-          key={index}
-          recommendation={recommendation}
-          line={line}
-          index={index}
-          changeCosts={changeCosts}
-        />
-      );
-    });
+  function makeRows(dataLinesGenerated: Artwork[]): React.JSX.Element {
+    return (
+      <>
+        {dataLinesGenerated.map((line: Artwork, index: number) => {
+          return (
+            <ShoppingCartDataLines
+              key={index}
+              recommendation={recommendation}
+              line={line}
+              index={index}
+              changeCosts={changeCosts}
+            />
+          );
+        })}
+      </>
+    );
   }
   const dataLinesGenerated = useLoading(
     dataLines,
     (dataLines): React.JSX.Element => {
-      return renderData(dataLines, makeDataLines);
+      return renderData(dataLines, makeRows, t("common.no_results"));
     }
   );
   return (

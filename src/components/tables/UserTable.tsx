@@ -18,14 +18,18 @@ type UserTableProps = {
 function UserTable({ users }: UserTableProps) {
   const { t } = useI18n();
 
-  function makeDataLines(dataLines: User[]): React.JSX.Element[] {
-    return dataLines.map((line: User, index: number) => {
-      return <UserTableDataLines key={index} line={line} index={index} />;
-    });
+  function makeRows(dataLines: User[]): React.JSX.Element {
+    return (
+      <>
+        {dataLines.map((line: User, index: number) => {
+          return <UserTableDataLines key={index} line={line} index={index} />;
+        })}
+      </>
+    );
   }
 
   const dataLines = useLoading(users, (dataLines): React.JSX.Element => {
-    return renderData(dataLines, makeDataLines);
+    return renderData(dataLines, makeRows, t("common.no_results"));
   });
 
   return (

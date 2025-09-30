@@ -15,15 +15,16 @@ import { Artwork, ShoppingCartItem } from "@/fetching/types";
 
 const renderData = <T,>(
   dataLines: T[],
-  makeDataLines: (dataLines: T[]) => React.JSX.Element
+  makeRows: (dataLines: T[]) => React.JSX.Element,
+  noResultsText: string
 ): React.JSX.Element => {
   if (dataLines.length > 0) {
-    return <>{makeDataLines(dataLines)}</>;
+    return <>{makeRows(dataLines)}</>;
   } else {
     return (
       <tr>
         <td colSpan={8}>
-          <h6 className="text-center">No results</h6>
+          <h6 className="text-center">{noResultsText}</h6>
         </td>
       </tr>
     );

@@ -95,7 +95,7 @@ function EditArtworkData() {
 
   function validateNewFile(file: File): string | null {
     if (!isValidImage(file.name)) {
-      return "Not a valid image type";
+      return t("validation.not_valid_image_type");
     }
     if (file.size > MAX_IMAGE_SIZE) {
       return "Max allowed size is 100KB";
@@ -233,7 +233,7 @@ function EditArtworkData() {
 
   return (
     <Container className="px-3">
-      <PageTitle title="Edit artwork data" />
+      <PageTitle title={t("app.admin.edit_artwork.title")} />
       <Row className="mx-auto pb-5 floating-element">
         <Col className="mx-5 pb-5 ">
           <Form>
@@ -307,9 +307,15 @@ function EditArtworkData() {
 
                     try {
                       await updateArtworkData(artworkId, "category_id", obj.id);
-                      showSuccessToast("Category updated successfully");
+                      showSuccessToast(
+                        t(
+                          "app.admin.edit_artwork.category_updated_successfully"
+                        )
+                      );
                     } catch {
-                      showErrorToast("Failed to update category");
+                      showErrorToast(
+                        t("app.admin.edit_artwork.failed_to_update_category")
+                      );
                     }
                   }
                 }}
@@ -361,9 +367,15 @@ function EditArtworkData() {
                           "thumbnail",
                           URL.createObjectURL(file)
                         );
-                        showSuccessToast("Thumbnail uploaded successfully");
+                        showSuccessToast(
+                          t(
+                            "app.admin.edit_artwork.thumbnail_uploaded_successfully"
+                          )
+                        );
                       } catch {
-                        showErrorToast("Failed to upload thumbnail");
+                        showErrorToast(
+                          t("app.admin.edit_artwork.failed_to_upload_thumbnail")
+                        );
                         e.target.value = ""; // Reset the input
                       }
                     }
@@ -430,9 +442,15 @@ function EditArtworkData() {
                           URL.createObjectURL(file),
                         ]);
                         e.target.value = ""; // Reset the input for next upload
-                        showSuccessToast("Image uploaded successfully");
+                        showSuccessToast(
+                          t(
+                            "app.admin.edit_artwork.image_uploaded_successfully"
+                          )
+                        );
                       } catch {
-                        showErrorToast("Failed to upload image");
+                        showErrorToast(
+                          t("app.admin.edit_artwork.failed_to_upload_image")
+                        );
                         e.target.value = ""; // Reset the input
                       }
                     }
@@ -480,7 +498,11 @@ function EditArtworkData() {
                                 );
                               formik.setFieldValue("other_pictures", newArray);
                             } catch {
-                              showErrorToast("Failed to remove image");
+                              showErrorToast(
+                                t(
+                                  "app.admin.edit_artwork.failed_to_remove_image"
+                                )
+                              );
                             }
                           }}
                         />

@@ -49,7 +49,6 @@ import { Category } from "@/fetching/types";
 
 import useAxios from "@/hooks/useAxios";
 import { useCategories } from "@/hooks/useCategories";
-import useLoading from "@/hooks/useLoading";
 
 interface AddNewArtworkFormValues extends Record<string, unknown> {
   title: string;
