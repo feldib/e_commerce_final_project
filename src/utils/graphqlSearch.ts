@@ -32,7 +32,6 @@ export const searchArtworksGraphQL = async (
           featured
           created_at
           thumbnail
-          cname
           quantity
           tags {
             id
@@ -72,7 +71,6 @@ export const searchArtworksGraphQL = async (
         featured: boolean;
         created_at: string;
         thumbnail?: string;
-        cname?: string;
         quantity?: number;
         tags?: Array<{ id: number; tname: string }>;
         other_pictures?: string[];

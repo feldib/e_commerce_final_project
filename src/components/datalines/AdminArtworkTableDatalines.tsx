@@ -13,6 +13,8 @@ import { useI18n } from "@/components/providers/I18nProvider";
 
 import { Artwork } from "@/fetching/types";
 
+import { useCategories } from "@/hooks/useCategories";
+
 type AdminArtworkTableDatalinesProps = {
   line: Artwork;
   index: number;
@@ -22,7 +24,8 @@ function AdminArtworkTableDatalines({
   line,
   index,
 }: AdminArtworkTableDatalinesProps) {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
+  const { getCategoryNameById } = useCategories(locale);
   const [lineVisible, setLineVisible] = React.useState(true);
 
   const removeLineFromView = () => {
@@ -61,7 +64,7 @@ function AdminArtworkTableDatalines({
             <p>{line.tags && line.tags.map((tag) => tag.tname).join(", ")}</p>
           </td>
           <td className={"d-none d-md-table-cell"}>
-            <p>{line.cname}</p>
+            <p>{getCategoryNameById(line.category_id)}</p>
           </td>
           <td>
             <div className="container">

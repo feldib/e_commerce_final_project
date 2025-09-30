@@ -27,6 +27,7 @@ import {
   increaseLocalStorageShoppingCartQuantity,
   removeLocalStorageShoppingCartQuantity,
 } from "@/helpers/helpers";
+import { useCategories } from "@/hooks/useCategories";
 
 type ShoppingCartDataLinesProps = {
   line: Artwork;
@@ -41,7 +42,8 @@ function ShoppingCartDataLines({
   changeCosts,
   recommendation = false,
 }: ShoppingCartDataLinesProps) {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
+  const { getCategoryNameById } = useCategories(locale);
   const { loggedIn } = React.useContext(UserDataContext);
 
   const [quantity, setQuantity] = React.useState(line.quantity);
@@ -151,7 +153,7 @@ function ShoppingCartDataLines({
         <p>{line.tags && line.tags.map((tag) => tag.tname).join(", ")}</p>
       </td>
       <td className={`${recommendation ? "d-none" : "d-none d-md-table-cell"}`}>
-        <p>{line.cname}</p>
+        <p>{getCategoryNameById(line.category_id)}</p>
       </td>
       <td>
         <div className="container text-center">

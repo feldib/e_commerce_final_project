@@ -48,6 +48,7 @@ import { addNewArtwork } from "@/fetching/fetching";
 import { Category } from "@/fetching/types";
 
 import useAxios from "@/hooks/useAxios";
+import { useCategories } from "@/hooks/useCategories";
 import useLoading from "@/hooks/useLoading";
 
 interface AddNewArtworkFormValues extends Record<string, unknown> {
@@ -63,15 +64,16 @@ interface AddNewArtworkFormValues extends Record<string, unknown> {
 }
 
 function AddNewArtworkPage() {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const categories = useAxios("/categories") as Category[];
+  const { getCategoryNameById } = useCategories(locale);
 
   const categoriesRepresented = useLoading(categories, (categories) => {
     return (
       <>
         {categories.map((cat: Category, index: number) => (
           <Dropdown.Item eventKey={JSON.stringify(cat)} key={index}>
-            {cat.cname}
+            {getCategoryNameById(cat.id)}
           </Dropdown.Item>
         ))}
       </>
@@ -263,7 +265,7 @@ function AddNewArtworkPage() {
                   if (cat) {
                     const obj = JSON.parse(cat);
                     formik.setFieldValue("category_id", obj.id);
-                    setChoseCategory(obj.cname);
+                    setChoseCategory(getCategoryNameById(obj.id));
                   }
                 }}
               >

@@ -15,6 +15,7 @@ import { Artwork } from "@/fetching/types";
 
 import { useI18n } from "../providers/I18nProvider";
 
+import { useCategories } from "@/hooks/useCategories";
 import useQuantity from "@/hooks/useQuantity";
 
 type BuyTableDataLinesProps = {
@@ -30,7 +31,8 @@ function BuyTableDataLines({
   recommendation = false,
   orderSummary = false,
 }: BuyTableDataLinesProps) {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
+  const { getCategoryNameById } = useCategories(locale);
   const { loggedIn } = React.useContext(UserDataContext);
   const { quantity, setQuantity } = useQuantity(
     loggedIn,
@@ -72,7 +74,7 @@ function BuyTableDataLines({
         <p>{line.tags && line.tags.map((tag) => tag.tname).join(", ")}</p>
       </td>
       <td className={`${recommendation ? "d-none" : "d-none d-md-table-cell"}`}>
-        <p>{line.cname}</p>
+        <p>{getCategoryNameById(line.category_id)}</p>
       </td>
       <td>
         {orderSummary ? (

@@ -19,6 +19,7 @@ import LeaveReview from "./LeaveReview";
 import ReviewsOfArtworks from "./ReviewsOfArtwork";
 
 import useAxios from "@/hooks/useAxios";
+import { useCategories } from "@/hooks/useCategories";
 import useLoading from "@/hooks/useLoading";
 import useQuantity from "@/hooks/useQuantity";
 
@@ -28,10 +29,10 @@ type ArtworkDetailsProps = {
 };
 
 function ArtworkDetails({ artwork_id, artwork }: ArtworkDetailsProps) {
-  const { t } = useI18n();
-  const reviewsData = useAxios(`/reviews?id=${artwork_id}`) as Review[];
-
+  const { t, locale } = useI18n();
+  const { getCategoryNameById } = useCategories(locale);
   const { loggedIn } = React.useContext(UserDataContext);
+  const reviewsData = useAxios(`/reviews?id=${artwork?.id}`) as Review[];
 
   const { quantity, setQuantity } = useQuantity(
     loggedIn,
@@ -123,7 +124,9 @@ function ArtworkDetails({ artwork_id, artwork }: ArtworkDetailsProps) {
                 <Col>
                   <Row>
                     <p>
-                      <strong>{artwork.cname}</strong>
+                      <strong>
+                        {getCategoryNameById(artwork.category_id)}
+                      </strong>
                     </p>
                   </Row>
                 </Col>

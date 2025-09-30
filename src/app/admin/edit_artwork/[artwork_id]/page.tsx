@@ -46,6 +46,7 @@ import {
 import { Artwork, Category } from "@/fetching/types";
 
 import useAxios from "@/hooks/useAxios";
+import { useCategories } from "@/hooks/useCategories";
 import useLoading from "@/hooks/useLoading";
 
 interface EditArtworkFormValues extends Record<string, unknown> {
@@ -61,19 +62,20 @@ interface EditArtworkFormValues extends Record<string, unknown> {
 }
 
 function EditArtworkData() {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const { artwork_id: artworkIdString } = useParams();
   const artworkId = Number(artworkIdString);
   const artworkData = useAxios(`/artwork?id=${artworkId}`) as Artwork;
 
   const categories = useAxios("/categories") as Category[];
+  const { getCategoryNameById } = useCategories(locale);
 
   const categoriesRepresented = useLoading(categories, (categories) => {
     return (
       <>
         {categories.map((cat: Category, index: number) => (
           <Dropdown.Item eventKey={JSON.stringify(cat)} key={index}>
-            {cat.cname}
+            {getCategoryNameById(cat.id)}
           </Dropdown.Item>
         ))}
       </>
@@ -168,7 +170,7 @@ function EditArtworkData() {
         (cat: Category) => cat.id === artworkData.category_id
       );
       if (currentCategory) {
-        setChoseCategory(currentCategory.cname);
+        setChoseCategory(getCategoryNameById(currentCategory.id));
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -287,7 +289,7 @@ function EditArtworkData() {
                   if (cat) {
                     const obj = JSON.parse(cat);
                     formik.setFieldValue("category_id", obj.id);
-                    setChoseCategory(obj.cname);
+                    setChoseCategory(getCategoryNameById(obj.id));
 
                     try {
                       await updateArtworkData(artworkId, "category_id", obj.id);

@@ -2,9 +2,13 @@ import React from "react";
 
 import { Row } from "react-bootstrap";
 
+import { useI18n } from "@/components/providers/I18nProvider";
+
 import { Category, SearchFormikInstance, SearchParams } from "@/fetching/types";
 
 import Query from "./Query";
+
+import { useCategories } from "@/hooks/useCategories";
 
 type QueriesProps = {
   formik: SearchFormikInstance;
@@ -21,6 +25,15 @@ function Queries({
   triggerSearchWithUpdatedValues,
   searchedValues,
 }: QueriesProps) {
+  const { locale } = useI18n();
+  const { getCategoryName } = useCategories(locale);
+
+  const getCurrentCategoryName = (categoryId: string) => {
+    const category = categories.find((cat) => {
+      return cat.id === parseInt(categoryId);
+    });
+    return category ? getCategoryName(category) : "Unknown Category";
+  };
   return (
     <Row>
       {searchedValues &&
@@ -82,11 +95,7 @@ function Queries({
 
       {searchedValues && searchedValues.category_id && (
         <Query
-          text={`${
-            categories.find((cat) => {
-              return cat.id === parseInt(searchedValues.category_id!);
-            })?.cname || "Unknown Category"
-          }`}
+          text={getCurrentCategoryName(searchedValues.category_id)}
           remove={() => {
             formik.setFieldValue("category_id", "");
             triggerSearchWithUpdatedValues({ category_id: "" });

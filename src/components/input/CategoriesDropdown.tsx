@@ -7,7 +7,9 @@ import { useI18n } from "@/components/providers/I18nProvider";
 
 import { Category } from "@/fetching/types";
 
-import useLoading from "@/hooks/useLoading";
+import LoadingSpinner from "../LoadingSpinner";
+
+import { useCategories } from "@/hooks/useCategories";
 
 type CategoriesDropdownProps = {
   categories: Category[];
@@ -15,24 +17,30 @@ type CategoriesDropdownProps = {
 };
 
 function CategoriesDropdown({ categories, setValue }: CategoriesDropdownProps) {
-  const { t } = useI18n();
-  function createCategoryButtons(cats: Category[]) {
-    return (
-      <>
-        {cats.map((category: Category, index: number) => (
-          <Dropdown.Item
-            eventKey={category.id}
-            key={index}
-            id={JSON.stringify(category.id)}
-            style={{ cursor: "pointer" }}
-          >
-            {category.cname}
-          </Dropdown.Item>
-        ))}
-      </>
-    );
-  }
-  const cats = useLoading(categories, createCategoryButtons);
+  const { t, locale } = useI18n();
+  const { getCategoryName } = useCategories(locale);
+
+  const [cats, setCats] = React.useState<React.JSX.Element>(<LoadingSpinner />);
+
+  React.useEffect(() => {
+    if (categories && categories.length > 0) {
+      const categoryButtons = (
+        <>
+          {categories.map((category: Category, index: number) => (
+            <Dropdown.Item
+              eventKey={category.id}
+              key={index}
+              id={JSON.stringify(category.id)}
+              style={{ cursor: "pointer" }}
+            >
+              {getCategoryName(category)}
+            </Dropdown.Item>
+          ))}
+        </>
+      );
+      setCats(categoryButtons);
+    }
+  }, [categories, getCategoryName]);
   return (
     <Col className="mx-auto mb-3">
       <Dropdown

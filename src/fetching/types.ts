@@ -19,7 +19,6 @@ export interface Artwork {
   date_added: string;
   description?: string;
   thumbnail?: string;
-  cname?: string;
   tags?: Tag[];
   other_pictures?: string[];
   stored_amount: number;
@@ -32,7 +31,9 @@ export interface Tag {
 
 export interface Category {
   id: number;
-  cname: string;
+  cname_en: string;
+  cname_he: string;
+  cname_hu: string;
 }
 
 export interface Review {
