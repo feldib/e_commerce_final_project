@@ -334,6 +334,11 @@
   },
   "toast": {
     "artwork_added_successfully": "Műalkotás sikeresen hozzáadva az adatbázishoz",
-    "error_add_artwork": "Hiba: nem sikerült hozzáadni a műalkotást"
+    "error_add_artwork": "Hiba: nem sikerült hozzáadni a műalkotást",
+    "registration_successful": "Regisztráció sikeres",
+    "registration_failed": "Regisztráció sikertelen",
+    "user_already_registered": "Már regisztrálva van felhasználó ezzel az email címmel",
+    "item_added_to_cart": "Tétel hozzáadva a kosárhoz",
+    "item_out_of_stock": "Tétel elfogyott"
   }
 }

@@ -339,14 +339,22 @@ a:hover,
 }
 
 /* RTL Support for Bootstrap Input Groups */
-[dir="rtl"] .input-group > :not(:last-child):not(.dropdown-toggle):not(.dropdown-menu):not(.form-floating) {
+[dir="rtl"]
+  .input-group
+  > :not(:last-child):not(.dropdown-toggle):not(.dropdown-menu):not(
+    .form-floating
+  ) {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   border-top-right-radius: var(--bs-border-radius);
   border-bottom-right-radius: var(--bs-border-radius);
 }
 
-[dir="rtl"] .input-group > :not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
+[dir="rtl"]
+  .input-group
+  > :not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(
+    .valid-feedback
+  ):not(.invalid-tooltip):not(.invalid-feedback) {
   margin-right: -1px;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;

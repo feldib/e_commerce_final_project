@@ -61,7 +61,7 @@ function RegistrationPageInner({
         });
       })
       .catch(() => {
-        showErrorToast("Registration failed");
+        showErrorToast(t("toast.registration_failed"));
       });
   };
 
@@ -86,9 +86,9 @@ function RegistrationPageInner({
   }) {
     try {
       await attemptRegistration(values, settleSuccessfulRegistration);
-      showSuccessToast("Registration successful");
+      showSuccessToast(t("toast.registration_successful"));
     } catch {
-      showErrorToast("A user is registered with email already");
+      showErrorToast(t("toast.user_already_registered"));
     }
   }
 

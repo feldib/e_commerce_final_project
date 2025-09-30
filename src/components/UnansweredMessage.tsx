@@ -95,7 +95,7 @@ function UnansweredMessage({ message }: UnansweredMessageProps) {
                     setReplying(true);
                   }}
                 >
-                  Reply
+                  {t("components.unanswered_message.reply")}
                 </Button>
               ) : (
                 <Formik
@@ -157,7 +157,7 @@ function UnansweredMessage({ message }: UnansweredMessageProps) {
                           }
                         }}
                       >
-                        Send
+                        {t("common.send")}
                       </Button>
                       <ToastContainer position="bottom-right" />
                     </Form>

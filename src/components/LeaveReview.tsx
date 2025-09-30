@@ -121,7 +121,7 @@ function LeaveReview({ artwork_id }: LeaveReviewProps) {
                         }
                       }}
                     >
-                      Submit
+                      {t("components.leave_review.submit")}
                     </Button>
                   </>
                 ) : (

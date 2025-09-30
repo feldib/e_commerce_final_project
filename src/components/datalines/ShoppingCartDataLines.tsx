@@ -123,7 +123,7 @@ function ShoppingCartDataLines({
                 if (loggedIn) {
                   try {
                     await increaseShoppingListItemQuantity(line.id);
-                    showSuccessToast("Item added to shopping cart");
+                    showSuccessToast(t("toast.item_added_to_cart"));
                     setQuantity(quantity + 1);
                   } catch {
                     showErrorToast("Item out of stock");
@@ -134,10 +134,10 @@ function ShoppingCartDataLines({
                       line.id,
                       line.stored_amount - quantity
                     );
-                    showSuccessToast("Item added to shopping cart");
+                    showSuccessToast(t("toast.item_added_to_cart"));
                     setQuantity(quantity + 1);
                   } catch {
-                    showErrorToast("Item out of stock");
+                    showErrorToast(t("toast.item_out_of_stock"));
                   }
                 }
               }}

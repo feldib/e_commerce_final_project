@@ -334,6 +334,11 @@
   },
   "toast": {
     "artwork_added_successfully": "Artwork added successfully to database",
-    "error_add_artwork": "Error: could not add artwork"
+    "error_add_artwork": "Error: could not add artwork",
+    "registration_successful": "Registration successful",
+    "registration_failed": "Registration failed",
+    "user_already_registered": "A user is registered with email already",
+    "item_added_to_cart": "Item added to shopping cart",
+    "item_out_of_stock": "Item out of stock"
   }
 }

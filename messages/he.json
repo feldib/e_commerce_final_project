@@ -334,6 +334,11 @@
   },
   "toast": {
     "artwork_added_successfully": "יצירת אמנות נוספה בהצלחה למאגר הנתונים",
-    "error_add_artwork": "שגיאה: לא ניתן להוסיף יצירת אמנות"
+    "error_add_artwork": "שגיאה: לא ניתן להוסיף יצירת אמנות",
+    "registration_successful": "הרשמה הושלמה בהצלחה",
+    "registration_failed": "ההרשמה נכשלה",
+    "user_already_registered": "משתמש כבר רשום עם כתובת האימייל הזו",
+    "item_added_to_cart": "פריט נוסף לעגלת הקניות",
+    "item_out_of_stock": "פריט אזל במלאי"
   }
 }
