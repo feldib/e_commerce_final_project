@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Button, Col, Dropdown, Form,InputGroup, Row } from "react-bootstrap";
+import { Button, Col, Dropdown, Form, InputGroup, Row } from "react-bootstrap";
 
 import Queries from "@/components/Queries";
 
@@ -44,7 +44,7 @@ function ArtworkSearchFields({
 
       <Row lg={6} sx={8} className="mx-auto mb-5 mt-5">
         <InputGroup>
-          <InputGroup.Text>Price range (min, max)</InputGroup.Text>
+          <InputGroup.Text>Price range</InputGroup.Text>
 
           <Form.Control
             type="number"
