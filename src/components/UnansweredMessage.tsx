@@ -25,7 +25,7 @@ import { replyToMessage } from "@/fetching/fetching";
 
 import InputComponent from "./input/InputComponent";
 
-import { useValidationSchemas } from "@/hooks/useValidationSchemas";
+import { useMessageReplySchema } from "@/hooks/useValidationSchemas";
 
 type UnansweredMessageProps = {
   message: {
@@ -43,7 +43,7 @@ type ReplyToMessageProps = {
 
 function UnansweredMessage({ message }: UnansweredMessageProps) {
   const { t } = useI18n();
-  const { messageReplySchema } = useValidationSchemas();
+  const messageReplySchema = useMessageReplySchema();
   const [replying, setReplying] = React.useState(false);
   const [replied, setReplied] = React.useState(false);
 

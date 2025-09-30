@@ -31,12 +31,12 @@ import { UserDataContext } from "@/components/providers/UserDataProvider";
 
 import { sendMessageToAdministrator } from "@/fetching/fetching";
 
-import { useValidationSchemas } from "@/hooks/useValidationSchemas";
+import { useContactSchema } from "@/hooks/useValidationSchemas";
 
 function ContactUs() {
   const { loggedIn, user } = React.useContext(UserDataContext);
   const { t } = useI18n();
-  const { contactUsSchema } = useValidationSchemas();
+  const contactUsSchema = useContactSchema();
   const form = React.useRef<HTMLFormElement | null>(null);
 
   const initialValues = {

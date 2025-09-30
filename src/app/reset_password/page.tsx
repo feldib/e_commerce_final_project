@@ -20,7 +20,7 @@ import { useI18n } from "@/components/providers/I18nProvider";
 
 import { changePassword } from "@/fetching/fetching";
 
-import { useValidationSchemas } from "@/hooks/useValidationSchemas";
+import { useResetPasswordSchema } from "@/hooks/useValidationSchemas";
 
 type ResetPasswordFormValues = {
   password: string;
@@ -35,7 +35,7 @@ function ResetPasswordInner() {
 
   const searchParams = useSearchParams();
   const { t } = useI18n();
-  const { resetPasswordSchema } = useValidationSchemas();
+  const resetPasswordSchema = useResetPasswordSchema();
 
   const router = useRouter();
 

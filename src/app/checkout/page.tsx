@@ -13,12 +13,12 @@ import { UserDataContext } from "@/components/providers/UserDataProvider";
 import { order } from "@/fetching/fetching";
 import { CheckoutFormData } from "@/fetching/types";
 
-import { useValidationSchemas } from "@/hooks/useValidationSchemas";
+import { useCheckoutSchema } from "@/hooks/useValidationSchemas";
 
 function CheckoutPage() {
   const router = useRouter();
   const { t } = useI18n();
-  const { checkoutSchema } = useValidationSchemas();
+  const checkoutSchema = useCheckoutSchema();
 
   const { user } = React.useContext(UserDataContext);
 

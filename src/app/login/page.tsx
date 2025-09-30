@@ -19,14 +19,14 @@ import { UserDataContext } from "@/components/providers/UserDataProvider";
 import { logIn } from "@/fetching/fetching";
 import { User } from "@/fetching/types";
 
-import { useValidationSchemas } from "@/hooks/useValidationSchemas";
+import { useLoginSchema } from "@/hooks/useValidationSchemas";
 
 function SignInPageInner() {
   const searchParams = useSearchParams();
   const to_checkout = searchParams.get("to_checkout") === "true";
   const router = useRouter();
   const { t } = useI18n();
-  const { loginSchema } = useValidationSchemas();
+  const loginSchema = useLoginSchema();
 
   const initialValues = {
     email: "",

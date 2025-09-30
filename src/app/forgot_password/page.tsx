@@ -17,12 +17,12 @@ import { useI18n } from "@/components/providers/I18nProvider";
 
 import { sendForgotPasswordEmail } from "@/fetching/fetching";
 
-import { useValidationSchemas } from "@/hooks/useValidationSchemas";
+import { useForgotPasswordSchema } from "@/hooks/useValidationSchemas";
 
 function ForgotPassword() {
   const [displayMessage, setDisplayMessage] = React.useState(false);
   const { t } = useI18n();
-  const { forgotPasswordSchema } = useValidationSchemas();
+  const forgotPasswordSchema = useForgotPasswordSchema();
 
   type ForgotPasswordFormValues = {
     email: string;

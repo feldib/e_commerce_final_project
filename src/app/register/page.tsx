@@ -6,7 +6,6 @@ import { useSearchParams } from "next/navigation";
 import { faKey, faQuestion, faUser } from "@fortawesome/free-solid-svg-icons";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { Form, Formik } from "formik";
-import * as Yup from "yup";
 import { ToastContainer } from "react-toastify";
 
 import {
@@ -23,6 +22,8 @@ import { registerNewUser } from "@/fetching/fetching";
 import { logIn } from "@/fetching/fetching";
 import { User } from "@/fetching/types";
 
+import { useRegistrationSchema } from "@/hooks/useValidationSchemas";
+
 type RegistrationPageProps = {
   settleSuccessfulRegistration: (
     to_checkout: boolean,
@@ -36,6 +37,7 @@ function RegistrationPageInner({
   const searchParams = useSearchParams();
   const to_checkout = searchParams.get("to_checkout") === "true";
   const { t } = useI18n();
+  const registrationSchema = useRegistrationSchema();
 
   const attemptRegistration = async (
     values: {
@@ -57,7 +59,7 @@ function RegistrationPageInner({
     )
       .then(function () {
         logIn(values.email, values.password, (userData) => {
-          settleSuccessfulRegistration(to_checkout, userData);
+          settleSuccessfulRegistration(to_checkout, { user: userData });
         });
       })
       .catch(() => {
@@ -91,19 +93,6 @@ function RegistrationPageInner({
       showErrorToast(t("toast.user_already_registered"));
     }
   }
-
-  const registrationSchema = Yup.object().shape({
-    email: Yup.string().required("Email required").email("Invalid email"),
-    repeatEmail: Yup.string()
-      .required("Repeat email required")
-      .oneOf([Yup.ref("email")], "Must match email"),
-    password: Yup.string().required("Password required"),
-    repeatPassword: Yup.string()
-      .required("Repeat password required")
-      .oneOf([Yup.ref("password")], "Must match password"),
-    firstName: Yup.string().required("First name required"),
-    lastName: Yup.string().required("Last name required"),
-  });
 
   return (
     <Container className="pb-5 px-3">
