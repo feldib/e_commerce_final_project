@@ -68,7 +68,8 @@ function AddNewArtworkPage() {
   const categories = useAxios("/categories") as Category[];
   const { getCategoryNameById } = useCategories(locale);
 
-  const categoriesRepresented = useLoading(categories, (categories) => {
+  const categoriesRepresented = React.useMemo(() => {
+    if (!categories) return null;
     return (
       <>
         {categories.map((cat: Category, index: number) => (
@@ -78,7 +79,8 @@ function AddNewArtworkPage() {
         ))}
       </>
     );
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [categories, locale, getCategoryNameById]);
 
   const router = useRouter();
 
@@ -200,6 +202,14 @@ function AddNewArtworkPage() {
   };
 
   const [chosenCategory, setChoseCategory] = React.useState("Choose");
+
+  React.useEffect(() => {
+    if (formik.values.category_id) {
+      setChoseCategory(getCategoryNameById(formik.values.category_id));
+    } else {
+      setChoseCategory(t("common.choose"));
+    }
+  }, [locale, formik.values.category_id, getCategoryNameById, t]);
 
   return (
     <Container className="px-3">

@@ -47,7 +47,6 @@ import { Artwork, Category } from "@/fetching/types";
 
 import useAxios from "@/hooks/useAxios";
 import { useCategories } from "@/hooks/useCategories";
-import useLoading from "@/hooks/useLoading";
 
 interface EditArtworkFormValues extends Record<string, unknown> {
   title: string;
@@ -70,7 +69,8 @@ function EditArtworkData() {
   const categories = useAxios("/categories") as Category[];
   const { getCategoryNameById } = useCategories(locale);
 
-  const categoriesRepresented = useLoading(categories, (categories) => {
+  const categoriesRepresentedMemo = React.useMemo(() => {
+    if (!categories) return null;
     return (
       <>
         {categories.map((cat: Category, index: number) => (
@@ -80,7 +80,8 @@ function EditArtworkData() {
         ))}
       </>
     );
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [categories, locale, getCategoryNameById]);
 
   const router = useRouter();
 
@@ -221,6 +222,15 @@ function EditArtworkData() {
 
   const [chosenCategory, setChoseCategory] = React.useState("Choose");
 
+  React.useEffect(() => {
+    const categoryIdNum = Number(formik.values.category_id);
+    if (formik.values.category_id && !isNaN(categoryIdNum)) {
+      setChoseCategory(getCategoryNameById(categoryIdNum));
+    } else {
+      setChoseCategory(t("common.choose"));
+    }
+  }, [locale, formik.values.category_id, getCategoryNameById, t]);
+
   return (
     <Container className="px-3">
       <PageTitle title="Edit artwork data" />
@@ -307,7 +317,7 @@ function EditArtworkData() {
                 <Dropdown.Toggle variant="outilne-dark">
                   {chosenCategory}
                 </Dropdown.Toggle>
-                <Dropdown.Menu>{categoriesRepresented}</Dropdown.Menu>
+                <Dropdown.Menu>{categoriesRepresentedMemo}</Dropdown.Menu>
               </Dropdown>
               {formik.errors.category_id && (
                 <div className="input-error-message">
