@@ -4,8 +4,9 @@ import React, { createContext, ReactNode, useContext, useState } from "react";
 
 import en from "../../../messages/en.json";
 import he from "../../../messages/he.json";
+import hu from "../../../messages/hu.json";
 
-type Locale = "en" | "he";
+type Locale = "en" | "he" | "hu";
 type Messages = typeof en;
 
 interface I18nContextType {
@@ -19,6 +20,7 @@ const I18nContext = createContext<I18nContextType | undefined>(undefined);
 const messages: Record<Locale, Messages> = {
   en,
   he,
+  hu,
 };
 
 export function I18nProvider({ children }: { children: ReactNode }) {

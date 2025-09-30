@@ -46,7 +46,7 @@ function Orders() {
 
   return (
     <Col className="mb-5 pb-5">
-      <SubPageTitle title={t("app.admin.orders.completed_orders")} />
+      <SubPageTitle title={t("app.admin.orders.title")} />
       {ordersRepresented}
     </Col>
   );

@@ -38,7 +38,7 @@ function Messages() {
   });
   return (
     <Col className="mx-3">
-      <SubPageTitle title={t("app.admin.messages.unanswered_messages")} />
+      <SubPageTitle title={t("app.admin.messages.title")} />
 
       <Row>{messagesRepresented}</Row>
     </Col>

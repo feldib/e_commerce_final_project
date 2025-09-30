@@ -119,16 +119,16 @@
         "failed_to_remove_image": "הסרת תמונה נכשלה"
       },
       "orders": {
-        "completed_orders": "הזמנות שהושלמו על ידי משתמשים",
+        "title": "הזמנות שהושלמו על ידי משתמשים",
         "order": "הזמנה",
         "no_orders": "--- אין הזמנות ---"
       },
       "reviews": {
-        "new_reviews": "ביקורות חדשות",
+        "title": "ביקורות חדשות",
         "no_reviews": "--- אין ביקורות ---"
       },
       "messages": {
-        "unanswered_messages": "הודעות ללא מענה",
+        "title": "הודעות ללא מענה",
         "no_messages": "--- אין הודעות ---"
       }
     },
