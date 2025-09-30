@@ -2,6 +2,10 @@
   "common": {
     "skip_to_content": "Skip to content",
     "shopping_cart": "Shopping cart",
+    "shopping_cart_replacement_title": "Replace shopping cart",
+    "shopping_cart_replacement_message": "Do you want to replace your current shopping cart with this one?",
+    "yes": "Yes",
+    "no": "No",
     "no_results": "No results",
     "no_orders": "No orders",
     "no_users": "No users",
@@ -46,7 +50,8 @@
     "oldest_to_newest": "Oldest to newest",
     "only_featured": "Only featured",
     "place_of_thumbnail": "Place of thumbnail",
-    "enter_email": "Enter email"
+    "enter_email": "Enter email",
+    "all": "All"
   },
   "navigation": {
     "search": "Search",
@@ -310,6 +315,9 @@
       "submit": "Submit",
       "login_required": "You have to be logged in to leave a review!"
     },
+    "reviews": {
+      "no_reviews": "No reviews yet"
+    },
     "buttons": {
       "item_added_to_cart": "Item added to shopping cart",
       "item_out_of_stock": "Item out of stock",
@@ -330,7 +338,22 @@
     "description_required": "Description required",
     "not_valid_image_type": "Not a valid image type",
     "max_allowed_size": "Max allowed size is 100KB",
-    "add_minimum_tags": "Add minimum 3 tags!"
+    "add_minimum_tags": "Add minimum 3 tags!",
+    "price_min": "Price must be greater than or equal to 1",
+    "quantity_min": "Quantity must be greater than or equal to 1",
+    "email_required": "Email required",
+    "email_invalid": "Invalid email",
+    "password_required": "Password required",
+    "first_name_required": "First name required",
+    "last_name_required": "Last name required",
+    "address_required": "Address required",
+    "phone_number_required": "Phone number required",
+    "message_required": "Message required",
+    "review_text_required": "Review text required",
+    "repeat_email_required": "Repeat email required",
+    "email_match": "Must match email",
+    "repeat_password_required": "Repeat password required",
+    "password_match": "Must match password"
   },
   "toast": {
     "artwork_added_successfully": "Artwork added successfully to database",

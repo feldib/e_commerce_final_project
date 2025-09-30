@@ -2,6 +2,10 @@
   "common": {
     "skip_to_content": "Ugrás a tartalomhoz",
     "shopping_cart": "Kosár",
+    "shopping_cart_replacement_title": "Kosár cseréje",
+    "shopping_cart_replacement_message": "Szeretnéd lecserélni a jelenlegi kosaradat erre?",
+    "yes": "Igen",
+    "no": "Nem",
     "no_results": "Nincs találat",
     "no_orders": "Nincsenek rendelések",
     "no_users": "Nincsenek felhasználók",
@@ -46,7 +50,8 @@
     "oldest_to_newest": "Legrégebbitől a legújabbig",
     "only_featured": "Csak kiemelt",
     "place_of_thumbnail": "Bélyegkép helye",
-    "enter_email": "Email megadása"
+    "enter_email": "Email megadása",
+    "all": "Minden"
   },
   "navigation": {
     "search": "Keresés",
@@ -310,6 +315,9 @@
       "submit": "Küldés",
       "login_required": "Be kell jelentkezned az értékelés írásához!"
     },
+    "reviews": {
+      "no_reviews": "Még nincsenek értékelések"
+    },
     "buttons": {
       "item_added_to_cart": "Tétel hozzáadva a kosárhoz",
       "item_out_of_stock": "Tétel elfogyott",
@@ -330,7 +338,22 @@
     "description_required": "Leírás szükséges",
     "not_valid_image_type": "Nem érvényes képtípus",
     "max_allowed_size": "Maximális megengedett méret 100KB",
-    "add_minimum_tags": "Adj hozzá legalább 3 címkét!"
+    "add_minimum_tags": "Adj hozzá legalább 3 címkét!",
+    "price_min": "Az árnak nagyobbnak vagy egyenlőnek kell lennie 1-gyel",
+    "quantity_min": "A mennyiségnek nagyobbnak vagy egyenlőnek kell lennie 1-gyel",
+    "email_required": "Email szükséges",
+    "email_invalid": "Érvénytelen email",
+    "password_required": "Jelszó szükséges",
+    "first_name_required": "Keresztnév szükséges",
+    "last_name_required": "Vezetéknév szükséges",
+    "address_required": "Cím szükséges",
+    "phone_number_required": "Telefonszám szükséges",
+    "message_required": "Üzenet szükséges",
+    "review_text_required": "Értékelés szövege szükséges",
+    "repeat_email_required": "Email ismétlése szükséges",
+    "email_match": "Meg kell egyeznie az email címmel",
+    "repeat_password_required": "Jelszó ismétlése szükséges",
+    "password_match": "Meg kell egyeznie a jelszóval"
   },
   "toast": {
     "artwork_added_successfully": "Műalkotás sikeresen hozzáadva az adatbázishoz",

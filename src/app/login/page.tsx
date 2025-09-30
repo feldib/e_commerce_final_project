@@ -10,7 +10,6 @@ import { Form, Formik } from "formik";
 import { ToastContainer } from "react-toastify";
 
 import { showLoginErrorToast, showLoginSuccessToast } from "@/utils/toastUtils";
-import { loginSchema } from "@/utils/validationSchemas";
 
 import InputComponent from "@/components/input/InputComponent";
 import PageTitle from "@/components/PageTitle";
@@ -20,11 +19,14 @@ import { UserDataContext } from "@/components/providers/UserDataProvider";
 import { logIn } from "@/fetching/fetching";
 import { User } from "@/fetching/types";
 
+import { useValidationSchemas } from "@/hooks/useValidationSchemas";
+
 function SignInPageInner() {
   const searchParams = useSearchParams();
   const to_checkout = searchParams.get("to_checkout") === "true";
   const router = useRouter();
   const { t } = useI18n();
+  const { loginSchema } = useValidationSchemas();
 
   const initialValues = {
     email: "",
@@ -44,15 +46,13 @@ function SignInPageInner() {
     }
   }
 
-  const signInSchema = loginSchema;
-
   return (
     <Container className="px-3 pb-5">
       <PageTitle title={t("app.login.title")} />
 
       <Formik
         initialValues={initialValues}
-        validationSchema={signInSchema}
+        validationSchema={loginSchema}
         onSubmit={onSubmit}
       >
         {({ errors, touched }) => (

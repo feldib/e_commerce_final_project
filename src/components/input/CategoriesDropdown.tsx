@@ -60,7 +60,7 @@ function CategoriesDropdown({ categories, setValue }: CategoriesDropdownProps) {
             id={"all"}
             style={{ cursor: "pointer" }}
           >
-            All
+            {t("common.all")}
           </Dropdown.Item>
           {cats}
         </Dropdown.Menu>

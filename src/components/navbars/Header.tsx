@@ -71,7 +71,7 @@ function Header() {
                     await checkIfShoppingCartIsEmpty(loggedIn);
 
                   if (!isShoppingCartEmpty) {
-                    showWarningToast("Shopping list is empty.");
+                    showWarningToast(t("common.shopping_list_empty"));
                   } else {
                     router.push("/shopping_cart");
                   }
@@ -140,7 +140,7 @@ function Header() {
                     await checkIfShoppingCartIsEmpty(loggedIn);
 
                   if (!isShoppingCartEmpty) {
-                    showWarningToast("Shopping list is empty.");
+                    showWarningToast(t("common.shopping_list_empty"));
                   } else {
                     router.push("/shopping_cart");
                   }

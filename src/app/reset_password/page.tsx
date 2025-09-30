@@ -13,13 +13,14 @@ import {
   showPasswordChangeErrorToast,
   showPasswordResetSuccessToast,
 } from "@/utils/toastUtils";
-import { resetPasswordSchema } from "@/utils/validationSchemas";
 
 import InputComponent from "@/components/input/InputComponent";
 import PageTitle from "@/components/PageTitle";
 import { useI18n } from "@/components/providers/I18nProvider";
 
 import { changePassword } from "@/fetching/fetching";
+
+import { useValidationSchemas } from "@/hooks/useValidationSchemas";
 
 type ResetPasswordFormValues = {
   password: string;
@@ -34,6 +35,7 @@ function ResetPasswordInner() {
 
   const searchParams = useSearchParams();
   const { t } = useI18n();
+  const { resetPasswordSchema } = useValidationSchemas();
 
   const router = useRouter();
 

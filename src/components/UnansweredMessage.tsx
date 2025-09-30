@@ -18,13 +18,14 @@ import {
   showReplyErrorToast,
   showReplySuccessToast,
 } from "@/utils/toastUtils";
-import { messageReplySchema } from "@/utils/validationSchemas";
 
 import { useI18n } from "@/components/providers/I18nProvider";
 
 import { replyToMessage } from "@/fetching/fetching";
 
 import InputComponent from "./input/InputComponent";
+
+import { useValidationSchemas } from "@/hooks/useValidationSchemas";
 
 type UnansweredMessageProps = {
   message: {
@@ -42,6 +43,7 @@ type ReplyToMessageProps = {
 
 function UnansweredMessage({ message }: UnansweredMessageProps) {
   const { t } = useI18n();
+  const { messageReplySchema } = useValidationSchemas();
   const [replying, setReplying] = React.useState(false);
   const [replied, setReplied] = React.useState(false);
 

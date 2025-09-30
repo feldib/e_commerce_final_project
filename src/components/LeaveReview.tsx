@@ -17,7 +17,6 @@ import {
   showReviewErrorToast,
   showReviewSavedToast,
 } from "@/utils/toastUtils";
-import { reviewSchema } from "@/utils/validationSchemas";
 
 import { useI18n } from "@/components/providers/I18nProvider";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
@@ -25,6 +24,8 @@ import { UserDataContext } from "@/components/providers/UserDataProvider";
 import { leaveReview } from "@/fetching/fetching";
 
 import InputComponent from "./input/InputComponent";
+
+import { useValidationSchemas } from "@/hooks/useValidationSchemas";
 
 type LeaveReviewProps = {
   artwork_id: number;
@@ -37,6 +38,7 @@ type ReviewFormValues = {
 
 function LeaveReview({ artwork_id }: LeaveReviewProps) {
   const { t } = useI18n();
+  const { reviewSchema } = useValidationSchemas();
   const { loggedIn } = React.useContext(UserDataContext);
 
   const form = React.useRef<HTMLFormElement | null>(null);

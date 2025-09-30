@@ -23,7 +23,6 @@ import {
   showMessageErrorToast,
   showMessageSentToast,
 } from "@/utils/toastUtils";
-import { contactUsSchema } from "@/utils/validationSchemas";
 
 import InputComponent from "@/components/input/InputComponent";
 import PageTitle from "@/components/PageTitle";
@@ -32,9 +31,12 @@ import { UserDataContext } from "@/components/providers/UserDataProvider";
 
 import { sendMessageToAdministrator } from "@/fetching/fetching";
 
+import { useValidationSchemas } from "@/hooks/useValidationSchemas";
+
 function ContactUs() {
   const { loggedIn, user } = React.useContext(UserDataContext);
   const { t } = useI18n();
+  const { contactUsSchema } = useValidationSchemas();
   const form = React.useRef<HTMLFormElement | null>(null);
 
   const initialValues = {

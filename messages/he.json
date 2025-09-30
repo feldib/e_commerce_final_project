@@ -2,6 +2,10 @@
   "common": {
     "skip_to_content": "דלג לתוכן",
     "shopping_cart": "עגלת קניות",
+    "shopping_cart_replacement_title": "החלף עגלת קניות",
+    "shopping_cart_replacement_message": "האם אתה רוצה להחליף את עגלת הקניות הנוכחית שלך בזו?",
+    "yes": "כן",
+    "no": "לא",
     "no_results": "אין תוצאות",
     "no_orders": "אין הזמנות",
     "no_users": "אין משתמשים",
@@ -46,7 +50,8 @@
     "oldest_to_newest": "מהישן לחדש",
     "only_featured": "רק מומלצות",
     "place_of_thumbnail": "מקום התמונה הממוזערת",
-    "enter_email": "הכנס אימייל"
+    "enter_email": "הכנס אימייל",
+    "all": "הכל"
   },
   "navigation": {
     "search": "חיפוש",
@@ -310,6 +315,9 @@
       "submit": "שלח",
       "login_required": "עליך להיות מחובר כדי להשאיר ביקורת!"
     },
+    "reviews": {
+      "no_reviews": "אין ביקורות עדיין"
+    },
     "buttons": {
       "item_added_to_cart": "פריט נוסף לעגלת הקניות",
       "item_out_of_stock": "פריט אזל במלאי",
@@ -330,7 +338,22 @@
     "description_required": "תיאור נדרש",
     "not_valid_image_type": "סוג תמונה לא תקין",
     "max_allowed_size": "גודל מקסימלי מותר הוא 100KB",
-    "add_minimum_tags": "הוסף לפחות 3 תגיות!"
+    "add_minimum_tags": "הוסף לפחות 3 תגיות!",
+    "price_min": "המחיר חייב להיות גדול או שווה ל-1",
+    "quantity_min": "הכמות חייבת להיות גדולה או שווה ל-1",
+    "email_required": "אימייל נדרש",
+    "email_invalid": "אימייל לא תקין",
+    "password_required": "סיסמה נדרשת",
+    "first_name_required": "שם פרטי נדרש",
+    "last_name_required": "שם משפחה נדרש",
+    "address_required": "כתובת נדרשת",
+    "phone_number_required": "מספר טלפון נדרש",
+    "message_required": "הודעה נדרשת",
+    "review_text_required": "טקסט ביקורת נדרש",
+    "repeat_email_required": "חזרה על אימייל נדרשת",
+    "email_match": "חייב להתאים לאימייל",
+    "repeat_password_required": "חזרה על סיסמה נדרשת",
+    "password_match": "חייב להתאים לסיסמה"
   },
   "toast": {
     "artwork_added_successfully": "יצירת אמנות נוספה בהצלחה למאגר הנתונים",

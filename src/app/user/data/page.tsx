@@ -3,15 +3,16 @@ import React from "react";
 
 import { useFormik } from "formik";
 
-import { userDataSchema } from "@/utils/validationSchemas";
-
 import UserDataChangingComponent from "@/components/input/UserDataComponent";
 import { useI18n } from "@/components/providers/I18nProvider";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
 
+import { useValidationSchemas } from "@/hooks/useValidationSchemas";
+
 function UserData() {
   const { user } = React.useContext(UserDataContext);
   const { t } = useI18n();
+  const { userDataSchema } = useValidationSchemas();
 
   const formik = useFormik({
     enableReinitialize: true,

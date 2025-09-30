@@ -6,8 +6,6 @@ import { useRouter } from "next/navigation";
 import { Button, Col, Row } from "react-bootstrap";
 import { useFormik } from "formik";
 
-import { checkoutSchema } from "@/utils/validationSchemas";
-
 import UserDataChangingComponent from "@/components/input/UserDataComponent";
 import { useI18n } from "@/components/providers/I18nProvider";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
@@ -15,9 +13,12 @@ import { UserDataContext } from "@/components/providers/UserDataProvider";
 import { order } from "@/fetching/fetching";
 import { CheckoutFormData } from "@/fetching/types";
 
+import { useValidationSchemas } from "@/hooks/useValidationSchemas";
+
 function CheckoutPage() {
   const router = useRouter();
   const { t } = useI18n();
+  const { checkoutSchema } = useValidationSchemas();
 
   const { user } = React.useContext(UserDataContext);
 
