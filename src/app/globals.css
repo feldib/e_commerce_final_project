@@ -388,3 +388,11 @@ a:hover,
   border-top-left-radius: 0.375rem !important;
   border-bottom-left-radius: 0.375rem !important;
 }
+
+/* RTL adjustments for Dropdowns */
+[dir="rtl"] .dropdown-toggle,
+[dir="rtl"] .dropdown-menu,
+[dir="rtl"] .dropdown-item {
+  direction: rtl;
+  text-align: right;
+}
