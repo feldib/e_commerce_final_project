@@ -14,6 +14,7 @@ import { Container, Row } from "react-bootstrap";
 
 import SubNavbar from "@/components/navbars/SubNavbar";
 import PageTitle from "@/components/PageTitle";
+import { useI18n } from "@/components/providers/I18nProvider";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
 
 import { redirectIfNotloggedIn } from "@/helpers/helpers";
@@ -21,6 +22,7 @@ import useLoading from "@/hooks/useLoading";
 
 function ProfilePage({ children }: React.PropsWithChildren<React.ReactNode>) {
   const { user } = React.useContext(UserDataContext);
+  const { t } = useI18n();
   const router = useRouter();
   redirectIfNotloggedIn(router);
 
@@ -34,16 +36,28 @@ function ProfilePage({ children }: React.PropsWithChildren<React.ReactNode>) {
 
       <SubNavbar
         linkObjects={[
-          { linkText: "User Data", linkTo: "data", icon: faInfoCircle },
           {
-            linkText: "Order History",
+            linkText: t("app.user.layout.user_data"),
+            linkTo: "data",
+            icon: faInfoCircle,
+          },
+          {
+            linkText: t("app.user.layout.order_history"),
             linkTo: "order_history",
             icon: faClockRotateLeft,
           },
-          { linkText: "Wishlist", linkTo: "wishlist", icon: faHeart },
-          { linkText: "Reviews", linkTo: "reviews", icon: faStar },
           {
-            linkText: "Shopping Cart",
+            linkText: t("app.user.layout.wishlist"),
+            linkTo: "wishlist",
+            icon: faHeart,
+          },
+          {
+            linkText: t("app.user.layout.reviews"),
+            linkTo: "reviews",
+            icon: faStar,
+          },
+          {
+            linkText: t("app.user.layout.shopping_cart"),
             linkTo: "shopping_cart",
             icon: faShoppingCart,
           },

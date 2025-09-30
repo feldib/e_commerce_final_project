@@ -1,6 +1,10 @@
+"use client";
+
 import React from "react";
 
-import { Col,Row } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
+
+import { useI18n } from "@/components/providers/I18nProvider";
 
 import { Artwork } from "@/fetching/types";
 
@@ -21,6 +25,8 @@ function OrderSummaryComponent({
   button,
   orderUser,
 }: OrderSummaryComponentProps) {
+  const { t } = useI18n();
+
   return (
     <Row className="mb-3 floating-element">
       {items.length !== 0 ? (
@@ -34,7 +40,9 @@ function OrderSummaryComponent({
 
             {orderUser && (
               <Row className="mb-2 mt-5 mb-3">
-                <h3 className="text-start">User: {orderUser.user_name}</h3>
+                <h3 className="text-start">
+                  {t("common.user")}: {orderUser.user_name}
+                </h3>
               </Row>
             )}
 
@@ -47,12 +55,16 @@ function OrderSummaryComponent({
           </Row>
 
           <Row className="mt-4 text-start">
-            {items && <h2>Order Summary: € {totalCost}</h2>}
+            {items && (
+              <h2>
+                {t("common.order_summary")}: € {totalCost}
+              </h2>
+            )}
           </Row>
           {button && <>{button}</>}
         </>
       ) : (
-        <Col className="text-center">--- No orders ---</Col>
+        <Col className="text-center">{t("common.no_orders")}</Col>
       )}
     </Row>
   );

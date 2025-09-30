@@ -11,6 +11,7 @@ import { Container, Nav, Navbar } from "react-bootstrap";
 import { UI_DIMENSIONS } from "@/utils/constants";
 import { showWarningToast } from "@/utils/toastUtils";
 
+import { useI18n } from "@/components/providers/I18nProvider";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
 
 import LanguageSelector from "./LanguageSelector";
@@ -25,6 +26,7 @@ export const ExpandedNavContext = React.createContext({
 
 function Header() {
   const router = useRouter();
+  const { t } = useI18n();
 
   const { user, loggedIn } = React.useContext(UserDataContext);
 
@@ -52,7 +54,7 @@ function Header() {
                 src="/logo.png"
                 width={UI_DIMENSIONS.THUMBNAIL_SIZE}
                 className="d-inline-block align-top"
-                alt="Artwork market logo"
+                alt={t("components.header.artwork_market_logo")}
               />
             </Link>
           </Navbar.Brand>
@@ -62,7 +64,7 @@ function Header() {
               <FontAwesomeIcon
                 id="header-mobile-shopping-cart"
                 className="me-3"
-                aria-label="Shopping cart"
+                aria-label={t("common.shopping_cart")}
                 icon={faShoppingCart}
                 onClick={async () => {
                   const isShoppingCartEmpty =
@@ -90,7 +92,7 @@ function Header() {
                 style={{ color: "inherit", textDecoration: "inherit" }}
                 href={user.is_admin ? "/admin/artworks" : "/search"}
               >
-                Search
+                {t("navigation.search")}
               </Link>
               <Link
                 onClick={() => closeExpandedNav()}
@@ -98,7 +100,7 @@ function Header() {
                 style={{ color: "inherit", textDecoration: "inherit" }}
                 href="/about"
               >
-                About
+                {t("navigation.about")}
               </Link>
               <Link
                 onClick={() => closeExpandedNav()}
@@ -106,7 +108,7 @@ function Header() {
                 style={{ color: "inherit", textDecoration: "inherit" }}
                 href="/contact"
               >
-                Contact
+                {t("navigation.contact")}
               </Link>
 
               {loggedIn ? <LoggedInNavbarItems /> : <NotLoggedInNavbarItems />}
@@ -126,7 +128,7 @@ function Header() {
             <div className="d-none d-lg-block">
               <FontAwesomeIcon
                 id="header-desktop-shopping-cart"
-                aria-label="Shopping cart"
+                aria-label={t("common.shopping_cart")}
                 size="xl"
                 icon={faShoppingCart}
                 style={{

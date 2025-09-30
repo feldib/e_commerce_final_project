@@ -5,13 +5,15 @@ import Link from "next/link";
 
 import { ToastContainer } from "react-toastify";
 
-import { SERVER_URL,UI_DIMENSIONS } from "@/utils/constants";
+import { SERVER_URL, UI_DIMENSIONS } from "@/utils/constants";
 
 import FavouriteButton from "@/components/buttons/FavouriteButton";
 import ShoppingCartButton from "@/components/buttons/ShoppingCartButton";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
 
 import { Artwork } from "@/fetching/types";
+
+import { useI18n } from "../providers/I18nProvider";
 
 import useQuantity from "@/hooks/useQuantity";
 
@@ -25,11 +27,11 @@ type BuyTableDataLinesProps = {
 function BuyTableDataLines({
   line,
   index,
-  orderSummary = false,
   recommendation = false,
+  orderSummary = false,
 }: BuyTableDataLinesProps) {
+  const { t } = useI18n();
   const { loggedIn } = React.useContext(UserDataContext);
-
   const { quantity, setQuantity } = useQuantity(
     loggedIn,
     line.quantity,
@@ -45,7 +47,7 @@ function BuyTableDataLines({
           width={UI_DIMENSIONS.THUMBNAIL_SIZE}
           height={UI_DIMENSIONS.THUMBNAIL_SIZE}
           style={{ objectFit: "cover" }}
-          alt="place of thumbnail"
+          alt={t("common.place_of_thumbnail")}
         />
       </td>
       <td>

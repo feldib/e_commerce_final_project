@@ -42,6 +42,7 @@ import {
 import FloatingBackButton from "@/components/buttons/FloatingBackButton";
 import NewArtworkInputComponent from "@/components/input/NewArtworkInputComponent";
 import PageTitle from "@/components/PageTitle";
+import { useI18n } from "@/components/providers/I18nProvider";
 
 import { addNewArtwork } from "@/fetching/fetching";
 import { Category } from "@/fetching/types";
@@ -62,6 +63,7 @@ interface AddNewArtworkFormValues extends Record<string, unknown> {
 }
 
 function AddNewArtworkPage() {
+  const { t } = useI18n();
   const categories = useAxios("/categories") as Category[];
 
   const categoriesRepresented = useLoading(categories, (categories) => {
@@ -105,7 +107,7 @@ function AddNewArtworkPage() {
       try {
         // TypeScript check - thumbnail is required by validation but type allows undefined
         if (!values.thumbnail) {
-          showErrorToast("Thumbnail is required");
+          showErrorToast(t("validation.thumbnail_required"));
           return;
         }
 
@@ -114,7 +116,7 @@ function AddNewArtworkPage() {
           tags,
           thumbnail: values.thumbnail,
         });
-        showSuccessToast("Artwork added successfully to database");
+        showSuccessToast(t("toast.artwork_added_successfully"));
 
         const artwork_id = response.data;
 
@@ -122,28 +124,28 @@ function AddNewArtworkPage() {
 
         actions.resetForm();
       } catch {
-        showErrorToast("Error: could not add artwork.");
+        showErrorToast(t("toast.error_add_artwork"));
       }
     },
 
     validationSchema: Yup.object().shape({
-      title: Yup.string().required("Title required"),
-      artist_name: Yup.string().required("Name required"),
-      price: Yup.number().required("Price required").min(1),
-      quantity: Yup.number().required("Quantity required").min(1),
-      category_id: Yup.number().required("Category required"),
+      title: Yup.string().required(t("validation.title_required")),
+      artist_name: Yup.string().required(t("validation.name_required")),
+      price: Yup.number().required(t("validation.price_required")).min(1),
+      quantity: Yup.number().required(t("validation.quantity_required")).min(1),
+      category_id: Yup.number().required(t("validation.category_required")),
       thumbnail: Yup.mixed()
-        .required("Thumbnail required")
-        .test("is-valid-type", "Not a valid image type", (value) =>
+        .required(t("validation.thumbnail_required"))
+        .test("is-valid-type", t("validation.not_valid_image_type"), (value) =>
           isValidImage(value instanceof File ? value.name : "")
         )
         .test(
           "is-valid-size",
-          "Max allowed size is 100KB",
+          t("validation.max_allowed_size"),
           (value) => value instanceof File && value.size <= MAX_IMAGE_SIZE
         ),
       tags: Yup.array()
-        .min(3, "Add minimum 3 tags!")
+        .min(3, t("validation.add_minimum_tags"))
         .of(
           Yup.object().shape({
             id: Yup.string(),
@@ -152,12 +154,14 @@ function AddNewArtworkPage() {
         ),
       other_pictures: Yup.array().of(
         Yup.mixed()
-          .test("is-valid-type", "Not a valid image type", (value) =>
-            isValidImage(value instanceof File ? value.name : "")
+          .test(
+            "is-valid-type",
+            t("validation.not_valid_image_type"),
+            (value) => isValidImage(value instanceof File ? value.name : "")
           )
           .test(
             "is-valid-size",
-            "Max allowed size is 100KB",
+            t("validation.max_allowed_size"),
             (value) => value instanceof File && value.size <= MAX_IMAGE_SIZE
           )
       ),
@@ -193,39 +197,39 @@ function AddNewArtworkPage() {
 
   return (
     <Container className="px-3">
-      <PageTitle title="Add new artwork" />
+      <PageTitle title={t("app.admin.add_new_artwork.page_title")} />
       <Row className="mx-auto pb-5 floating-element">
         <Col className="mx-5 pb-5 ">
           <Form onSubmit={formik.handleSubmit}>
             <NewArtworkInputComponent
-              label="Title"
+              label={t("common.title")}
               name="title"
               type="text"
-              placeholder="Enter title"
+              placeholder={t("app.admin.add_new_artwork.enter_title")}
               icon={faQuestion}
               formik={formik}
             />
 
             <NewArtworkInputComponent
-              label="Artist"
+              label={t("common.artist")}
               name="artist_name"
               type="text"
-              placeholder="Enter name of artist"
+              placeholder={t("app.admin.add_new_artwork.enter_artist_name")}
               icon={faQuestion}
               formik={formik}
             />
 
             <NewArtworkInputComponent
-              label="Price"
+              label={t("common.price")}
               name="price"
               type="number"
-              placeholder="Enter price of artwork"
+              placeholder={t("app.admin.add_new_artwork.enter_price")}
               icon={faDollarSign}
               formik={formik}
             />
 
             <Form.Group className="pb-3">
-              <Form.Label>Tags</Form.Label>
+              <Form.Label>{t("common.tags")}</Form.Label>
               <ReactTags
                 tags={formik.values.tags}
                 // suggestions={suggestions}
@@ -233,7 +237,7 @@ function AddNewArtworkPage() {
                 handleDelete={createHandleDelete(tags, setTags)}
                 handleAddition={createHandleAddition(tags, setTags)}
                 inputFieldPosition="bottom"
-                placeholder="Add new tag"
+                placeholder={t("app.admin.add_new_artwork.add_new_tag")}
                 // autocomplete
               />
               {formik.errors.tags && (
@@ -244,16 +248,16 @@ function AddNewArtworkPage() {
             </Form.Group>
 
             <NewArtworkInputComponent
-              label="Quantity"
+              label={t("common.quantity")}
               name="quantity"
               type="number"
-              placeholder="Enter quantity"
+              placeholder={t("app.admin.add_new_artwork.enter_quantity")}
               icon={faQuestion}
               formik={formik}
             />
 
             <Form.Group className="pb-3">
-              <Form.Label>Category</Form.Label>
+              <Form.Label>{t("common.category")}</Form.Label>
               <Dropdown
                 onSelect={(cat) => {
                   if (cat) {
@@ -264,7 +268,9 @@ function AddNewArtworkPage() {
                 }}
               >
                 <Dropdown.Toggle variant="outilne-dark">
-                  {chosenCategory}
+                  {chosenCategory === "Choose"
+                    ? t("common.choose")
+                    : chosenCategory}
                 </Dropdown.Toggle>
                 <Dropdown.Menu>{categoriesRepresented}</Dropdown.Menu>
               </Dropdown>
@@ -276,7 +282,7 @@ function AddNewArtworkPage() {
             </Form.Group>
 
             <Form.Group className="pb-3">
-              <Form.Label>Thumbnail</Form.Label>
+              <Form.Label>{t("common.thumbnail")}</Form.Label>
               {formik.errors.thumbnail && (
                 <FontAwesomeIcon
                   icon={faAsterisk}
@@ -291,7 +297,7 @@ function AddNewArtworkPage() {
 
                 <Form.Control
                   type="file"
-                  placeholder="Upload thumbnail"
+                  placeholder={t("app.admin.add_new_artwork.upload_thumbnail")}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     if (e.currentTarget.files) {
                       formik.setFieldValue(
@@ -316,7 +322,7 @@ function AddNewArtworkPage() {
                   <img
                     src={URL.createObjectURL(formik.values.thumbnail)}
                     className="mt-3 uploaded-thumbnail"
-                    alt="Uploaded thumbnail"
+                    alt={t("app.admin.add_new_artwork.uploaded_thumbnail")}
                   />
 
                   <FontAwesomeIcon
@@ -333,7 +339,7 @@ function AddNewArtworkPage() {
             </Form.Group>
 
             <Form.Group className="pb-3">
-              <Form.Label>Images</Form.Label>
+              <Form.Label>{t("common.images")}</Form.Label>
               {formik.errors.other_pictures && (
                 <FontAwesomeIcon
                   icon={faAsterisk}
@@ -348,7 +354,9 @@ function AddNewArtworkPage() {
 
                 <Form.Control
                   type="file"
-                  placeholder="Upload other pictures"
+                  placeholder={t(
+                    "app.admin.add_new_artwork.upload_other_pictures"
+                  )}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     if (e.currentTarget.files) {
                       formik.setFieldValue("other_pictures", [
@@ -377,7 +385,9 @@ function AddNewArtworkPage() {
                         <img
                           src={URL.createObjectURL(pic)}
                           className="mt-3 uploaded-image"
-                          alt="Uploaded other picture"
+                          alt={t(
+                            "app.admin.add_new_artwork.uploaded_other_picture"
+                          )}
                         />
 
                         <FontAwesomeIcon
@@ -400,10 +410,10 @@ function AddNewArtworkPage() {
             </Form.Group>
 
             <NewArtworkInputComponent
-              label="Description"
+              label={t("common.description")}
               name="description"
               type="textarea"
-              placeholder="Enter description"
+              placeholder={t("app.admin.add_new_artwork.enter_description")}
               icon={faQuestion}
               formik={formik}
             />
@@ -417,7 +427,7 @@ function AddNewArtworkPage() {
                 }
               }}
             >
-              Add new artwork
+              {t("app.admin.add_new_artwork.add_new_artwork")}
             </Button>
             <ToastContainer position="bottom-right" />
           </Form>

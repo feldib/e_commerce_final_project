@@ -6,10 +6,12 @@ import { useFormik } from "formik";
 import { userDataSchema } from "@/utils/validationSchemas";
 
 import UserDataChangingComponent from "@/components/input/UserDataComponent";
+import { useI18n } from "@/components/providers/I18nProvider";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
 
 function UserData() {
   const { user } = React.useContext(UserDataContext);
+  const { t } = useI18n();
 
   const formik = useFormik({
     enableReinitialize: true,
@@ -28,7 +30,12 @@ function UserData() {
     },
   });
 
-  return <UserDataChangingComponent title={"User Data"} formik={formik} />;
+  return (
+    <UserDataChangingComponent
+      title={t("app.user.data.title")}
+      formik={formik}
+    />
+  );
 }
 
 export default UserData;

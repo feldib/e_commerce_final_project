@@ -1,6 +1,10 @@
+"use client";
+
 import React from "react";
 
 import { Card, Carousel } from "react-bootstrap";
+
+import { useI18n } from "@/components/providers/I18nProvider";
 
 import { Review } from "@/fetching/types";
 
@@ -9,6 +13,8 @@ type ReviewsOfArtworksProps = {
 };
 
 function ReviewsOfArtworks({ reviews }: ReviewsOfArtworksProps) {
+  const { t } = useI18n();
+
   return (
     <>
       {reviews.length ? (
@@ -20,7 +26,7 @@ function ReviewsOfArtworks({ reviews }: ReviewsOfArtworksProps) {
                   <Card.Title className="mb-2">{review.title}</Card.Title>
 
                   <Card.Subtitle className="mb-2 custom-muted">
-                    by {review.name}
+                    {t("common.by")} {review.name}
                   </Card.Subtitle>
 
                   <Card.Text className="mb-2">{review.review_text}</Card.Text>
@@ -30,7 +36,9 @@ function ReviewsOfArtworks({ reviews }: ReviewsOfArtworksProps) {
           })}
         </Carousel>
       ) : (
-        <p className="text-center floating-element">---- No reviews ----</p>
+        <p className="text-center floating-element">
+          {t("components.reviews.no_reviews")}
+        </p>
       )}
     </>
   );

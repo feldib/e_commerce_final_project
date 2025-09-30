@@ -35,6 +35,7 @@ import { showErrorToast, showSuccessToast } from "@/utils/toastUtils";
 import FloatingBackButton from "@/components/buttons/FloatingBackButton";
 import ChangeArtworkDataInputComponent from "@/components/input/ChangeArtworkDataInputComponent";
 import PageTitle from "@/components/PageTitle";
+import { useI18n } from "@/components/providers/I18nProvider";
 
 import {
   addNewOtherPicture,
@@ -60,6 +61,7 @@ interface EditArtworkFormValues extends Record<string, unknown> {
 }
 
 function EditArtworkData() {
+  const { t } = useI18n();
   const { artwork_id: artworkIdString } = useParams();
   const artworkId = Number(artworkIdString);
   const artworkData = useAxios(`/artwork?id=${artworkId}`) as Artwork;
@@ -112,14 +114,14 @@ function EditArtworkData() {
     },
 
     validationSchema: Yup.object().shape({
-      title: Yup.string().required("Title required"),
-      artist_name: Yup.string().required("Name required"),
-      price: Yup.number().required("Price required").min(1),
-      quantity: Yup.number().required("Quantity required").min(1),
-      category_id: Yup.number().required("Category required"),
-      thumbnail: Yup.mixed().required("Thumbnail required"),
+      title: Yup.string().required(t("validation.title_required")),
+      artist_name: Yup.string().required(t("validation.name_required")),
+      price: Yup.number().required(t("validation.price_required")).min(1),
+      quantity: Yup.number().required(t("validation.quantity_required")).min(1),
+      category_id: Yup.number().required(t("validation.category_required")),
+      thumbnail: Yup.mixed().required(t("validation.thumbnail_required")),
       tags: Yup.array()
-        .min(3, "Add minimum 3 tags!")
+        .min(3, t("validation.add_minimum_tags"))
         .of(
           Yup.object().shape({
             id: Yup.string(),
@@ -127,7 +129,7 @@ function EditArtworkData() {
           })
         ),
       other_pictures: Yup.array(),
-      description: Yup.string().required("Description required"),
+      description: Yup.string().required(t("validation.description_required")),
     }),
     onSubmit: () => {
       // there is no single submission
@@ -223,7 +225,7 @@ function EditArtworkData() {
               label="Title"
               name="title"
               type="text"
-              placeholder="Enter title"
+              placeholder={t("app.admin.add_new_artwork.enter_title")}
               icon={faQuestion}
               formik={formik}
               artwork_id={artworkId}
@@ -233,7 +235,7 @@ function EditArtworkData() {
               label="Artist"
               name="artist_name"
               type="text"
-              placeholder="Enter name of artist"
+              placeholder={t("app.admin.add_new_artwork.enter_artist_name")}
               icon={faQuestion}
               formik={formik}
               artwork_id={artworkId}
@@ -243,14 +245,14 @@ function EditArtworkData() {
               label="Price"
               name="price"
               type="number"
-              placeholder="Enter price of artwork"
+              placeholder={t("app.admin.add_new_artwork.enter_price")}
               icon={faDollarSign}
               formik={formik}
               artwork_id={artworkId}
             />
 
             <Form.Group className="pb-3">
-              <Form.Label>Tags</Form.Label>
+              <Form.Label>{t("common.tags")}</Form.Label>
               <ReactTags
                 tags={formik.values.tags}
                 // suggestions={suggestions}
@@ -258,7 +260,7 @@ function EditArtworkData() {
                 handleDelete={createHandleDelete(tags, setTags)}
                 handleAddition={createHandleAddition(tags, setTags)}
                 inputFieldPosition="bottom"
-                placeholder="Add new tag"
+                placeholder={t("app.admin.add_new_artwork.add_new_tag")}
                 // autocomplete
               />
               {formik.errors.tags && (
@@ -272,14 +274,14 @@ function EditArtworkData() {
               label="Quantity"
               name="quantity"
               type="number"
-              placeholder="Enter quantity"
+              placeholder={t("app.admin.add_new_artwork.enter_quantity")}
               icon={faQuestion}
               formik={formik}
               artwork_id={artworkId}
             />
 
             <Form.Group className="pb-3">
-              <Form.Label>Category</Form.Label>
+              <Form.Label>{t("common.category")}</Form.Label>
               <Dropdown
                 onSelect={async (cat) => {
                   if (cat) {
@@ -309,7 +311,7 @@ function EditArtworkData() {
             </Form.Group>
 
             <Form.Group className="pb-3">
-              <Form.Label>Thumbnail</Form.Label>
+              <Form.Label>{t("common.thumbnail")}</Form.Label>
               {formik.errors.thumbnail && (
                 <FontAwesomeIcon
                   icon={faAsterisk}
@@ -324,7 +326,7 @@ function EditArtworkData() {
 
                 <Form.Control
                   type="file"
-                  placeholder="Upload thumbnail"
+                  placeholder={t("app.admin.add_new_artwork.upload_thumbnail")}
                   onChange={async (e: React.ChangeEvent<HTMLInputElement>) => {
                     const files = e.target.files;
                     if (files && files[0]) {
@@ -366,7 +368,7 @@ function EditArtworkData() {
                   <img
                     src={formik.values.thumbnail}
                     className="mt-3 uploaded-thumbnail"
-                    alt="Current thumbnail"
+                    alt={t("app.admin.edit_artwork.current_thumbnail")}
                   />
                 </Col>
               )}
@@ -375,7 +377,7 @@ function EditArtworkData() {
             </Form.Group>
 
             <Form.Group className="pb-3">
-              <Form.Label>Images</Form.Label>
+              <Form.Label>{t("common.images")}</Form.Label>
               {formik.errors.other_pictures && (
                 <FontAwesomeIcon
                   icon={faAsterisk}
@@ -390,7 +392,9 @@ function EditArtworkData() {
 
                 <Form.Control
                   type="file"
-                  placeholder="Upload other pictures"
+                  placeholder={t(
+                    "app.admin.add_new_artwork.upload_other_pictures"
+                  )}
                   onChange={async (e: React.ChangeEvent<HTMLInputElement>) => {
                     const files = e.target.files;
                     if (files && files[0]) {
@@ -436,7 +440,9 @@ function EditArtworkData() {
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
                           src={pic}
-                          alt="Uploaded other picture"
+                          alt={t(
+                            "app.admin.add_new_artwork.uploaded_other_picture"
+                          )}
                           className="mt-3 uploaded-image"
                         />
 
@@ -475,7 +481,7 @@ function EditArtworkData() {
               label="Description"
               name="description"
               type="textarea"
-              placeholder="Enter description"
+              placeholder={t("app.admin.add_new_artwork.enter_description")}
               icon={faQuestion}
               formik={formik}
               artwork_id={artworkId}

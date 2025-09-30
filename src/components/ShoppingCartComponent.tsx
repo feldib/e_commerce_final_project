@@ -3,14 +3,16 @@ import React from "react";
 
 import Link from "next/link";
 
-import { Button,Col, Row } from "react-bootstrap";
+import { Button, Col, Row } from "react-bootstrap";
 
+import { useI18n } from "@/components/providers/I18nProvider";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
 import ShoppingCartTable from "@/components/tables/ShoppingCartTable";
 
 import useShoppingList from "@/hooks/useShoppingList";
 
 function ShoppingCartComponent() {
+  const { t } = useI18n();
   const { loggedIn } = React.useContext(UserDataContext);
 
   const shoppingListItems = useShoppingList(loggedIn);
@@ -40,7 +42,11 @@ function ShoppingCartComponent() {
           />
 
           <Row className="mt-4">
-            {shoppingListItems && <h2>Order Summary: € {totalCost}</h2>}
+            {shoppingListItems && (
+              <h2>
+                {t("common.order_summary")}: € {totalCost}
+              </h2>
+            )}
           </Row>
 
           <Row>
@@ -57,7 +63,7 @@ function ShoppingCartComponent() {
                       );
                     }}
                   >
-                    Go to Checkout
+                    {t("common.checkout")}
                   </Button>
                 </Link>
               </Col>
@@ -65,7 +71,9 @@ function ShoppingCartComponent() {
           </Row>
         </>
       ) : (
-        <Col className="text-center">--- Shopping cart is empty ---</Col>
+        <Col className="text-center">
+          {t("components.shopping_cart.shopping_cart_empty")}
+        </Col>
       )}
     </Row>
   );

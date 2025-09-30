@@ -9,6 +9,7 @@ import { useFormik } from "formik";
 import { checkoutSchema } from "@/utils/validationSchemas";
 
 import UserDataChangingComponent from "@/components/input/UserDataComponent";
+import { useI18n } from "@/components/providers/I18nProvider";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
 
 import { order } from "@/fetching/fetching";
@@ -16,6 +17,7 @@ import { CheckoutFormData } from "@/fetching/types";
 
 function CheckoutPage() {
   const router = useRouter();
+  const { t } = useI18n();
 
   const { user } = React.useContext(UserDataContext);
 
@@ -40,13 +42,13 @@ function CheckoutPage() {
     <>
       <form className="pb-5" onSubmit={formik.handleSubmit}>
         <UserDataChangingComponent
-          title={"Invoice Data"}
+          title={t("app.checkout.invoice_data")}
           formik={formik}
           checkout={true}
           button={
             <Row>
               <Col className="text-center mb-5">
-                <Button type="submit">Order</Button>
+                <Button type="submit">{t("common.order")}</Button>
               </Col>
             </Row>
           }

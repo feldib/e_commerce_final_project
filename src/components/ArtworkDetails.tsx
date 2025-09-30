@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 
 import { Card, Col, Row } from "react-bootstrap";
@@ -6,6 +7,7 @@ import { ToastContainer } from "react-toastify";
 
 import { SERVER_URL } from "@/utils/constants";
 
+import { useI18n } from "@/components/providers/I18nProvider";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
 
 import { Artwork, Review, Tag } from "@/fetching/types";
@@ -26,6 +28,7 @@ type ArtworkDetailsProps = {
 };
 
 function ArtworkDetails({ artwork_id, artwork }: ArtworkDetailsProps) {
+  const { t } = useI18n();
   const reviewsData = useAxios(`/reviews?id=${artwork_id}`) as Review[];
 
   const { loggedIn } = React.useContext(UserDataContext);
@@ -53,7 +56,7 @@ function ArtworkDetails({ artwork_id, artwork }: ArtworkDetailsProps) {
                   </Card.Title>
 
                   <Card.Subtitle>
-                    <h6>{`by ${artwork.artist_name}`}</h6>
+                    <h6>{`${t("common.by")} ${artwork.artist_name}`}</h6>
                   </Card.Subtitle>
                 </Col>
 
@@ -89,7 +92,7 @@ function ArtworkDetails({ artwork_id, artwork }: ArtworkDetailsProps) {
               <Row>
                 <Col>
                   <Card.Title className="mb-4">
-                    <h3>Description</h3>
+                    <h3>{t("common.description")}</h3>
                   </Card.Title>
 
                   <Card.Subtitle>
@@ -142,7 +145,7 @@ function ArtworkDetails({ artwork_id, artwork }: ArtworkDetailsProps) {
                 <Col>
                   <Row>
                     <p>
-                      {"Available quantity: "}
+                      {t("common.available_quantity")}:{" "}
                       {artwork ? (
                         quantity
                       ) : (
@@ -155,7 +158,7 @@ function ArtworkDetails({ artwork_id, artwork }: ArtworkDetailsProps) {
 
                   <Row>
                     <p>
-                      {"Price: €"}
+                      {t("common.price")}: €
                       {artwork ? (
                         artwork.price
                       ) : (
@@ -177,7 +180,7 @@ function ArtworkDetails({ artwork_id, artwork }: ArtworkDetailsProps) {
       <Row className="mt-5">
         <Row className="text-center">
           <Col xs={5} md={4} className="mx-auto">
-            <h4 className="subpage-title">Reviews</h4>
+            <h4 className="subpage-title">{t("common.reviews")}</h4>
           </Col>
         </Row>
 

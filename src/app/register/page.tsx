@@ -17,6 +17,7 @@ import {
 
 import InputComponent from "@/components/input/InputComponent";
 import PageTitle from "@/components/PageTitle";
+import { useI18n } from "@/components/providers/I18nProvider";
 
 import { registerNewUser } from "@/fetching/fetching";
 import { logIn } from "@/fetching/fetching";
@@ -34,6 +35,7 @@ function RegistrationPageInner({
 }: RegistrationPageProps) {
   const searchParams = useSearchParams();
   const to_checkout = searchParams.get("to_checkout") === "true";
+  const { t } = useI18n();
 
   const attemptRegistration = async (
     values: {
@@ -105,7 +107,7 @@ function RegistrationPageInner({
 
   return (
     <Container className="pb-5 px-3">
-      <PageTitle title="Register" />
+      <PageTitle title={t("app.register.title")} />
       <Row className="mx-auto mb-5 pb-5 floating-element">
         <Col className="mx-5 pb-5 ">
           <Formik
@@ -116,37 +118,37 @@ function RegistrationPageInner({
             {({ errors, touched }) => (
               <Form>
                 <InputComponent
-                  label="Email address"
+                  label={t("app.register.email_address")}
                   name="email"
                   type="email"
-                  placeholder="Enter email"
+                  placeholder={t("common.enter_email")}
                   icon={faUser}
                   showAsterisk={!!errors.email && !!touched.email}
                 />
 
                 <InputComponent
-                  label="Email address again"
+                  label={t("app.register.email_address_again")}
                   name="repeatEmail"
                   type="email"
-                  placeholder="Enter email again"
+                  placeholder={t("app.register.enter_email_again")}
                   icon={faUser}
                   showAsterisk={!!errors.repeatEmail && !!touched.repeatEmail}
                 />
 
                 <InputComponent
-                  label="Password"
+                  label={t("app.register.password")}
                   name="password"
                   type="password"
-                  placeholder="Enter password"
+                  placeholder={t("app.register.enter_password")}
                   icon={faKey}
                   showAsterisk={!!errors.password && !!touched.password}
                 />
 
                 <InputComponent
-                  label="Password again"
+                  label={t("app.register.password_again")}
                   name="repeatPassword"
                   type="password"
-                  placeholder="Enter password again"
+                  placeholder={t("app.register.enter_password_again")}
                   icon={faKey}
                   showAsterisk={
                     !!errors.repeatPassword && !!touched.repeatPassword
@@ -154,19 +156,19 @@ function RegistrationPageInner({
                 />
 
                 <InputComponent
-                  label="First Name"
+                  label={t("app.register.first_name")}
                   name="firstName"
                   type="text"
-                  placeholder="Enter First Name"
+                  placeholder={t("app.register.enter_first_name")}
                   icon={faQuestion}
                   showAsterisk={!!errors.firstName && !!touched.firstName}
                 />
 
                 <InputComponent
-                  label="Last Name"
+                  label={t("app.register.last_name")}
                   name="lastName"
                   type="text"
-                  placeholder="Enter Last Name"
+                  placeholder={t("app.register.enter_last_name")}
                   icon={faQuestion}
                   showAsterisk={!!errors.lastName && !!touched.lastName}
                 />
@@ -180,7 +182,7 @@ function RegistrationPageInner({
                     }
                   }}
                 >
-                  Register
+                  {t("common.register")}
                 </Button>
                 <ToastContainer position="bottom-right" />
               </Form>

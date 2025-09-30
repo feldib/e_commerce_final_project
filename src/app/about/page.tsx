@@ -1,44 +1,27 @@
+"use client";
 import React from "react";
 
-import { Col, Container,Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 
 import PageTitle from "@/components/PageTitle";
+import { useI18n } from "@/components/providers/I18nProvider";
 
 const AboutUsPage: React.FC = () => {
+  const { t } = useI18n();
+
   return (
     <Container className="px-3 pb-5">
-      <PageTitle title="About us" />
+      <PageTitle title={t("app.about.title")} />
       <Row className="mx-auto mb-5">
         <Col className="pb-5 floating-element">
           <Row className="text-center">
-            <h2>Our story</h2>
+            <h2>{t("app.about.our_story")}</h2>
           </Row>
 
           <Row>
-            <p>
-              Welcome to our world of art! Our story began with a simple yet
-              profound passion: the love for creativity in all its forms. We
-              envisioned a platform that celebrates not just the beauty of art
-              but also the stories behind each masterpiece. Driven by our
-              admiration for diverse artistic expressions, we embarked on a
-              journey to create a space where artists and art enthusiasts
-              converge.
-            </p>
-            <p>
-              Our goal is to bridge the gap between creators and appreciators,
-              fostering a community that thrives on inspiration and imagination.
-              Art has the incredible power to evoke emotions, provoke thoughts,
-              and ignite conversations. Through our platform, we aim to showcase
-              the vibrant tapestry of artistic endeavors while honoring the
-              unique narratives woven into every brushstroke, sculpture, and
-              creation.
-            </p>
-            <p>
-              Join us on this enchanting voyage as we curate a collection of
-              exceptional artworks, each with its own tale to tell. Together,
-              let&#39;s celebrate the essence of creativity and the boundless
-              stories that reside within each artistic marvel.
-            </p>
+            <p>{t("app.about.story_paragraph_1")}</p>
+            <p>{t("app.about.story_paragraph_2")}</p>
+            <p>{t("app.about.story_paragraph_3")}</p>
           </Row>
         </Col>
       </Row>

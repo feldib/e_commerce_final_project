@@ -1,7 +1,9 @@
+"use client";
 import React from "react";
 
 import { Button, Col, Dropdown, Form, InputGroup, Row } from "react-bootstrap";
 
+import { useI18n } from "@/components/providers/I18nProvider";
 import Queries from "@/components/Queries";
 
 import { Category, SearchFormikInstance, SearchParams } from "@/fetching/types";
@@ -24,6 +26,7 @@ function ArtworkSearchFields({
   triggerSearchWithUpdatedValues,
   searchedValues,
 }: ArtworkSearchFieldsProps) {
+  const { t } = useI18n();
   return (
     <div className="floating-element mb-3 mx-5">
       <SearchField
@@ -44,11 +47,11 @@ function ArtworkSearchFields({
 
       <Row lg={6} sx={8} className="mx-auto mb-5 mt-5">
         <InputGroup>
-          <InputGroup.Text>Price range</InputGroup.Text>
+          <InputGroup.Text>{t("common.price_range")}</InputGroup.Text>
 
           <Form.Control
             type="number"
-            placeholder="Minimum"
+            placeholder={t("common.minimum")}
             name="min"
             value={formik.values.min === 0 ? "" : formik.values.min}
             onChange={(e) => {
@@ -70,7 +73,7 @@ function ArtworkSearchFields({
 
           <Form.Control
             type="number"
-            placeholder="Maximum"
+            placeholder={t("common.maximum")}
             name="max"
             value={formik.values.max === 0 ? "" : formik.values.max}
             onChange={(e) => {
@@ -137,7 +140,9 @@ function ArtworkSearchFields({
               triggerSearchWithUpdatedValues({ order: e as string });
             }}
           >
-            <Dropdown.Toggle variant="outilne-dark">Order by</Dropdown.Toggle>
+            <Dropdown.Toggle variant="outilne-dark">
+              {t("common.order_by")}
+            </Dropdown.Toggle>
             <Dropdown.Menu>
               <Dropdown.Item href="" eventKey="desc">
                 Newest to oldest

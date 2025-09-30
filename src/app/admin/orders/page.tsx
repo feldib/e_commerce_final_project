@@ -6,6 +6,7 @@ import { Col, Row } from "react-bootstrap";
 import { ADMIN_URL } from "@/utils/constants";
 
 import OrderSummaryComponent from "@/components/OrderSummaryComponent";
+import { useI18n } from "@/components/providers/I18nProvider";
 import SubPageTitle from "@/components/SubPageTitle";
 
 import { Order } from "@/fetching/types";
@@ -14,13 +15,14 @@ import useAxios from "@/hooks/useAxios";
 import useLoading from "@/hooks/useLoading";
 
 function Orders() {
+  const { t } = useI18n();
   function renderOrderList(orders: Order[]) {
     const len = orders.length;
     return orders.map((orderData: Order, index: number) => {
       return (
         <OrderSummaryComponent
           key={index}
-          title={`Order ${len - index}`}
+          title={`${t("app.admin.orders.order")} ${len - index}`}
           items={orderData.items}
           totalCost={orderData.totalCost}
           orderUser={orderData.user}
@@ -35,7 +37,7 @@ function Orders() {
     if (orders.length === 0) {
       return (
         <Row className="mb-3 floating-element">
-          <Col className="text-center">--- No orders ---</Col>
+          <Col className="text-center">{t("app.admin.orders.no_orders")}</Col>
         </Row>
       );
     }
@@ -44,7 +46,7 @@ function Orders() {
 
   return (
     <Col className="mb-5 pb-5">
-      <SubPageTitle title="Completed orders by users" />
+      <SubPageTitle title={t("app.admin.orders.completed_orders")} />
       {ordersRepresented}
     </Col>
   );

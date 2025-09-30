@@ -27,12 +27,14 @@ import { contactUsSchema } from "@/utils/validationSchemas";
 
 import InputComponent from "@/components/input/InputComponent";
 import PageTitle from "@/components/PageTitle";
+import { useI18n } from "@/components/providers/I18nProvider";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
 
 import { sendMessageToAdministrator } from "@/fetching/fetching";
 
 function ContactUs() {
   const { loggedIn, user } = React.useContext(UserDataContext);
+  const { t } = useI18n();
   const form = React.useRef<HTMLFormElement | null>(null);
 
   const initialValues = {
@@ -61,24 +63,24 @@ function ContactUs() {
 
   return (
     <Container className="mb-5 pb-3">
-      <PageTitle title="Contact us" />
+      <PageTitle title={t("app.contact.title")} />
 
       <Row className="mx-auto mb-5">
         <Col sm={12} md={5} className="mb-5 floating-element mx-auto my-2">
           <Row className="text-center">
-            <h2>Company details</h2>
+            <h2>{t("app.contact.company_details")}</h2>
           </Row>
 
           <Row>
-            <p>Name: Artwork Market</p>
-            <p>Address: Budapest, Hungary</p>
-            <p>Phone: +36 xx xxx xxxx</p>
+            <p>{t("app.contact.company_name")}</p>
+            <p>{t("app.contact.company_address")}</p>
+            <p>{t("app.contact.company_phone")}</p>
           </Row>
         </Col>
 
         <Col sm={12} md={5} className="mb-5 floating-element mx-auto my-2">
           <Row className="text-center">
-            <h2>Message administrator</h2>
+            <h2>{t("app.contact.message_administrator")}</h2>
           </Row>
 
           <Row>
@@ -90,25 +92,25 @@ function ContactUs() {
               {({ errors, touched }) => (
                 <Form ref={form}>
                   <InputComponent
-                    label="Email address"
+                    label={t("app.contact.email_address")}
                     name="email"
                     type="email"
-                    placeholder="Enter email"
+                    placeholder={t("app.contact.enter_email")}
                     icon={faUser}
                     showAsterisk={!!errors.email && !!touched.email}
                   />
 
                   <InputComponent
-                    label="Title"
+                    label={t("app.contact.title_field")}
                     name="title"
                     type="text"
-                    placeholder="Enter message title"
+                    placeholder={t("app.contact.enter_message_title")}
                     icon={faKeyboard}
                     showAsterisk={!!errors.title && !!touched.title}
                   />
 
                   <RBForm.Group className="mb-3">
-                    <RBForm.Label>Message</RBForm.Label>
+                    <RBForm.Label>{t("app.contact.message")}</RBForm.Label>
                     {errors.message && touched.message && (
                       <FontAwesomeIcon
                         icon={faAsterisk}
@@ -121,7 +123,7 @@ function ContactUs() {
                         className="form-control"
                         name="message"
                         as="textarea"
-                        placeholder="Enter message"
+                        placeholder={t("app.contact.enter_message")}
                         style={{ height: "100px" }}
                       />
                     </FloatingLabel>
@@ -141,7 +143,7 @@ function ContactUs() {
                       }
                     }}
                   >
-                    Send
+                    {t("common.send")}
                   </Button>
                   <ToastContainer position="bottom-right" />
                 </Form>

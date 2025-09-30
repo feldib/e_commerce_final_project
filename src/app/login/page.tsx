@@ -14,6 +14,7 @@ import { loginSchema } from "@/utils/validationSchemas";
 
 import InputComponent from "@/components/input/InputComponent";
 import PageTitle from "@/components/PageTitle";
+import { useI18n } from "@/components/providers/I18nProvider";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
 
 import { logIn } from "@/fetching/fetching";
@@ -23,6 +24,7 @@ function SignInPageInner() {
   const searchParams = useSearchParams();
   const to_checkout = searchParams.get("to_checkout") === "true";
   const router = useRouter();
+  const { t } = useI18n();
 
   const initialValues = {
     email: "",
@@ -46,7 +48,7 @@ function SignInPageInner() {
 
   return (
     <Container className="px-3 pb-5">
-      <PageTitle title="Log In" />
+      <PageTitle title={t("app.login.title")} />
 
       <Formik
         initialValues={initialValues}
@@ -59,25 +61,25 @@ function SignInPageInner() {
               <Col className="mx-3 pb-5">
                 <Form>
                   <InputComponent
-                    label="Email address"
+                    label={t("app.login.email_address")}
                     name="email"
                     type="email"
-                    placeholder="Enter email"
+                    placeholder={t("app.login.enter_email")}
                     icon={faUser}
                     showAsterisk={!!errors.email && !!touched.email}
                   />
 
                   <InputComponent
-                    label="Password"
+                    label={t("app.login.password")}
                     name="password"
                     type="password"
-                    placeholder="Enter password"
+                    placeholder={t("app.login.enter_password")}
                     icon={faKey}
                     showAsterisk={!!errors.password && !!touched.password}
                   />
 
                   <Button variant="primary" type="submit">
-                    Sign In
+                    {t("common.sign_in")}
                   </Button>
                   <ToastContainer position="bottom-right" />
                 </Form>
@@ -86,7 +88,9 @@ function SignInPageInner() {
 
             <Row className="mx-5 pt-3">
               <Col>
-                <Link href="/forgot_password">Forgot password</Link>
+                <Link href="/forgot_password">
+                  {t("app.login.forgot_password")}
+                </Link>
               </Col>
             </Row>
           </Row>

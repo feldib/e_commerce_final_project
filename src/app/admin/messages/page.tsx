@@ -5,6 +5,7 @@ import { Col, Row } from "react-bootstrap";
 
 import { ADMIN_URL } from "@/utils/constants";
 
+import { useI18n } from "@/components/providers/I18nProvider";
 import SubPageTitle from "@/components/SubPageTitle";
 import UnansweredMessage from "@/components/UnansweredMessage";
 
@@ -14,6 +15,7 @@ import useAxios from "@/hooks/useAxios";
 import useLoading from "@/hooks/useLoading";
 
 function Messages() {
+  const { t } = useI18n();
   const messages = useAxios(`/${ADMIN_URL}/unanswered_messages`) as Message[];
   const messagesRepresented = useLoading(messages, (messages) => {
     return (
@@ -26,7 +28,9 @@ function Messages() {
           </>
         ) : (
           <Row className="px-3 mx-auto floating-element mb-5">
-            <Col className="text-center">--- No messages ---</Col>
+            <Col className="text-center">
+              {t("app.admin.messages.no_messages")}
+            </Col>
           </Row>
         )}
       </>
@@ -34,7 +38,7 @@ function Messages() {
   });
   return (
     <Col className="mx-3">
-      <SubPageTitle title="Unanswered messages" />
+      <SubPageTitle title={t("app.admin.messages.unanswered_messages")} />
 
       <Row>{messagesRepresented}</Row>
     </Col>

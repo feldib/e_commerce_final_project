@@ -17,6 +17,7 @@ import { resetPasswordSchema } from "@/utils/validationSchemas";
 
 import InputComponent from "@/components/input/InputComponent";
 import PageTitle from "@/components/PageTitle";
+import { useI18n } from "@/components/providers/I18nProvider";
 
 import { changePassword } from "@/fetching/fetching";
 
@@ -32,6 +33,7 @@ function ResetPasswordInner() {
   };
 
   const searchParams = useSearchParams();
+  const { t } = useI18n();
 
   const router = useRouter();
 
@@ -50,7 +52,7 @@ function ResetPasswordInner() {
 
   return (
     <Container className="pb-5">
-      <PageTitle title="Reset Password" />
+      <PageTitle title={t("app.reset_password.title")} />
       <Row className="floating-element">
         <Col className="mx-5 pb-5">
           <Formik
@@ -61,19 +63,19 @@ function ResetPasswordInner() {
             {({ errors, touched }) => (
               <Form>
                 <InputComponent
-                  label="Password"
+                  label={t("app.reset_password.password")}
                   name="password"
                   type="password"
-                  placeholder="Enter password"
+                  placeholder={t("app.reset_password.enter_password")}
                   icon={faKey}
                   showAsterisk={!!errors.password && !!touched.password}
                 />
 
                 <InputComponent
-                  label="Password"
+                  label={t("app.reset_password.password")}
                   name="repeatPassword"
                   type="password"
-                  placeholder="Enter repeat password"
+                  placeholder={t("app.reset_password.enter_repeat_password")}
                   icon={faKey}
                   showAsterisk={
                     !!errors.repeatPassword && !!touched.repeatPassword
@@ -89,7 +91,7 @@ function ResetPasswordInner() {
                     }
                   }}
                 >
-                  Change password
+                  {t("app.reset_password.change_password")}
                 </Button>
                 <ToastContainer position="bottom-right" />
               </Form>

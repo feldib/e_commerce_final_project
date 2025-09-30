@@ -3,14 +3,16 @@ import React, { useEffect, useState } from "react";
 
 import Link from "next/link";
 
-import { Button,Col, Container, Row } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
 
 import OrderSummaryComponent from "@/components/OrderSummaryComponent";
 import PageTitle from "@/components/PageTitle";
+import { useI18n } from "@/components/providers/I18nProvider";
 
 import { Artwork } from "@/fetching/types";
 
 function ReceiptPage() {
+  const { t } = useI18n();
   const [currentOrderData, setCurrentOrderData] = useState<{
     items: Artwork[];
     totalCost: number;
@@ -27,7 +29,7 @@ function ReceiptPage() {
 
   return (
     <Container className="pb-5">
-      <PageTitle title="Receipt" />
+      <PageTitle title={t("app.receipt.title")} />
 
       <OrderSummaryComponent
         items={currentOrderData.items}
@@ -42,7 +44,7 @@ function ReceiptPage() {
                     localStorage.removeItem("currentOrder");
                   }}
                 >
-                  Back to Shop
+                  {t("app.receipt.back_to_shop")}
                 </Button>
               </Link>
             </Col>

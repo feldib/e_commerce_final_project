@@ -8,10 +8,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Col, Row } from "react-bootstrap";
 import { ToastContainer } from "react-toastify";
 
-import { SERVER_URL,UI_DIMENSIONS } from "@/utils/constants";
+import { SERVER_URL, UI_DIMENSIONS } from "@/utils/constants";
 import { showErrorToast, showSuccessToast } from "@/utils/toastUtils";
 
 import FavouriteButton from "@/components/buttons/FavouriteButton";
+import { useI18n } from "@/components/providers/I18nProvider";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
 
 import {
@@ -40,6 +41,7 @@ function ShoppingCartDataLines({
   changeCosts,
   recommendation = false,
 }: ShoppingCartDataLinesProps) {
+  const { t } = useI18n();
   const { loggedIn } = React.useContext(UserDataContext);
 
   const [quantity, setQuantity] = React.useState(line.quantity);
@@ -58,7 +60,7 @@ function ShoppingCartDataLines({
           width={UI_DIMENSIONS.THUMBNAIL_SIZE}
           height={UI_DIMENSIONS.THUMBNAIL_SIZE}
           style={{ objectFit: "cover" }}
-          alt="place of thumbnail"
+          alt={t("common.place_of_thumbnail")}
         />
       </td>
       <td>

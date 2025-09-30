@@ -5,6 +5,7 @@ import { Col, Row } from "react-bootstrap";
 
 import { USERS_URL } from "@/utils/constants";
 
+import { useI18n } from "@/components/providers/I18nProvider";
 import Review from "@/components/Review";
 import SubPageTitle from "@/components/SubPageTitle";
 
@@ -14,6 +15,7 @@ import useAxios from "@/hooks/useAxios";
 import useLoading from "@/hooks/useLoading";
 
 function Reviews() {
+  const { t } = useI18n();
   const reviews = useAxios(`/${USERS_URL}/get_reviews_of_user`) as ReviewType[];
   const representReviews = useLoading(reviews, (reviews) => {
     return (
@@ -31,7 +33,9 @@ function Reviews() {
           </>
         ) : (
           <Row className="px-3 mx-auto floating-element mb-5">
-            <Col className="text-center">--- No reviews ---</Col>
+            <Col className="text-center">
+              {t("app.user.reviews.no_reviews")}
+            </Col>
           </Row>
         )}
       </>
@@ -39,7 +43,7 @@ function Reviews() {
   });
   return (
     <Col className="mx-auto">
-      <SubPageTitle title="Past reviews" />
+      <SubPageTitle title={t("app.user.reviews.title")} />
 
       <Row>{representReviews}</Row>
     </Col>

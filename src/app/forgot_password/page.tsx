@@ -2,8 +2,8 @@
 import React from "react";
 
 import { faUser } from "@fortawesome/free-solid-svg-icons";
-import { Button,Col, Container, Row } from "react-bootstrap";
-import { Form,Formik } from "formik";
+import { Button, Col, Container, Row } from "react-bootstrap";
+import { Form, Formik } from "formik";
 import { ToastContainer } from "react-toastify";
 
 import {
@@ -14,11 +14,13 @@ import { forgotPasswordSchema } from "@/utils/validationSchemas";
 
 import InputComponent from "@/components/input/InputComponent";
 import PageTitle from "@/components/PageTitle";
+import { useI18n } from "@/components/providers/I18nProvider";
 
 import { sendForgotPasswordEmail } from "@/fetching/fetching";
 
 function ForgotPassword() {
   const [displayMessage, setDisplayMessage] = React.useState(false);
+  const { t } = useI18n();
 
   type ForgotPasswordFormValues = {
     email: string;
@@ -41,7 +43,7 @@ function ForgotPassword() {
 
   return (
     <Container className="pb-5">
-      <PageTitle title="Send email to reset password" />
+      <PageTitle title={t("app.forgot_password.title")} />
       <Formik
         initialValues={initialValues}
         validationSchema={forgotPasswordSchema}
@@ -52,21 +54,20 @@ function ForgotPassword() {
             <Col className="mx-5 pb-5">
               <Form>
                 <InputComponent
-                  label="Email address"
+                  label={t("app.forgot_password.email_address")}
                   name="email"
                   type="email"
-                  placeholder="Enter email"
+                  placeholder={t("app.forgot_password.enter_email")}
                   icon={faUser}
                   showAsterisk={!!errors.email && !!touched.email}
                 />
                 {displayMessage && (
                   <p className="text-muted">
-                    If a user is registered with this email, a password recovery
-                    link was sent to them
+                    {t("app.forgot_password.recovery_message")}
                   </p>
                 )}
                 <Button variant="primary" type="submit">
-                  Send link
+                  {t("app.forgot_password.send_link")}
                 </Button>
                 <ToastContainer position="bottom-right" />
               </Form>

@@ -1,6 +1,9 @@
+"use client";
 import React from "react";
 
 import { Col, Dropdown } from "react-bootstrap";
+
+import { useI18n } from "@/components/providers/I18nProvider";
 
 import { Category } from "@/fetching/types";
 
@@ -12,6 +15,7 @@ type CategoriesDropdownProps = {
 };
 
 function CategoriesDropdown({ categories, setValue }: CategoriesDropdownProps) {
+  const { t } = useI18n();
   function createCategoryButtons(cats: Category[]) {
     return (
       <>
@@ -38,7 +42,9 @@ function CategoriesDropdown({ categories, setValue }: CategoriesDropdownProps) {
           }
         }}
       >
-        <Dropdown.Toggle variant="outilne-dark">Categories</Dropdown.Toggle>
+        <Dropdown.Toggle variant="outilne-dark">
+          {t("common.categories")}
+        </Dropdown.Toggle>
         <Dropdown.Menu className="px-3">
           <Dropdown.Item
             eventKey={""}

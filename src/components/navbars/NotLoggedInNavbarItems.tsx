@@ -3,10 +3,13 @@ import React from "react";
 
 import Link from "next/link";
 
+import { useI18n } from "@/components/providers/I18nProvider";
+
 import { ExpandedNavContext } from "./Header";
 
 function NotLoggedInNavbarItems() {
   const { closeExpandedNav } = React.useContext(ExpandedNavContext);
+  const { t } = useI18n();
 
   return (
     <>
@@ -16,7 +19,7 @@ function NotLoggedInNavbarItems() {
         style={{ color: "inherit", textDecoration: "inherit" }}
         href="/login"
       >
-        Log in
+        {t("navigation.log_in")}
       </Link>
 
       <Link
@@ -25,7 +28,7 @@ function NotLoggedInNavbarItems() {
         style={{ color: "inherit", textDecoration: "inherit" }}
         href="/register"
       >
-        Register
+        {t("common.register")}
       </Link>
     </>
   );

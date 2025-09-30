@@ -5,10 +5,11 @@ import Link from "next/link";
 
 import { ToastContainer } from "react-toastify";
 
-import { SERVER_URL,UI_DIMENSIONS } from "@/utils/constants";
+import { SERVER_URL, UI_DIMENSIONS } from "@/utils/constants";
 
 import FeatureButton from "@/components/buttons/FeatureButton";
 import RemoveArtworkButton from "@/components/buttons/RemoveArtworkButton";
+import { useI18n } from "@/components/providers/I18nProvider";
 
 import { Artwork } from "@/fetching/types";
 
@@ -21,6 +22,7 @@ function AdminArtworkTableDatalines({
   line,
   index,
 }: AdminArtworkTableDatalinesProps) {
+  const { t } = useI18n();
   const [lineVisible, setLineVisible] = React.useState(true);
 
   const removeLineFromView = () => {
@@ -38,7 +40,7 @@ function AdminArtworkTableDatalines({
               width={UI_DIMENSIONS.THUMBNAIL_SIZE}
               height={UI_DIMENSIONS.THUMBNAIL_SIZE}
               style={{ objectFit: "contain" }}
-              alt="place of thumbnail"
+              alt={t("common.place_of_thumbnail")}
             />
           </td>
           <td>

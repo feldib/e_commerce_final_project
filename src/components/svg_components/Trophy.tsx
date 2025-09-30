@@ -1,3 +1,6 @@
+"use client";
+import { useI18n } from "@/components/providers/I18nProvider";
+
 function Trophy({
   height,
   filled = false,
@@ -5,11 +8,12 @@ function Trophy({
   height: string;
   filled?: boolean;
 }) {
+  const { t } = useI18n();
   const color = "#0c090d";
   return (
     <svg
       role="img"
-      aria-label="set artwork to featured"
+      aria-label={t("components.svg_components.set_artwork_featured")}
       xmlns="http://www.w3.org/2000/svg"
       width="auto"
       height={height}

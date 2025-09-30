@@ -1,12 +1,13 @@
 "use client";
 import React from "react";
 
-import { useParams,useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
 import { Col } from "react-bootstrap";
 
 import FloatingBackButton from "@/components/buttons/FloatingBackButton";
 import OrderSummaryComponent from "@/components/OrderSummaryComponent";
+import { useI18n } from "@/components/providers/I18nProvider";
 import SubPageTitle from "@/components/SubPageTitle";
 
 import { getOrderHistory } from "@/fetching/fetching";
@@ -20,6 +21,7 @@ function UserOrderHistory() {
   const router = useRouter();
   const { user_id: userIdString } = useParams();
   const userId = Number(userIdString);
+  const { t } = useI18n();
 
   React.useEffect(() => {
     getOrderHistory(userId).then((orders: Order[]) => {
@@ -35,7 +37,7 @@ function UserOrderHistory() {
           return (
             <OrderSummaryComponent
               key={index}
-              title={`Order ${len - index}`}
+              title={`${t("app.user.order_history.order")} ${len - index}`}
               items={orderData.items}
               totalCost={orderData.totalCost}
             />
@@ -51,7 +53,7 @@ function UserOrderHistory() {
   );
   return (
     <Col className="mb-5 pb-5">
-      <SubPageTitle title="Order history" />
+      <SubPageTitle title={t("app.user.order_history.title")} />
       {ordersRepresented}
       <FloatingBackButton router={router} />
     </Col>
