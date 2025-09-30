@@ -7,22 +7,28 @@ import useAxios from "./useAxios";
 export const useCategories = (locale: string) => {
   const categories = useAxios("/categories") as Category[];
 
-  const getCategoryName = useCallback((category: Category): string => {
-    switch (locale) {
-      case "he":
-        return category.cname_he || category.cname_en;
-      case "hu":
-        return category.cname_hu || category.cname_en;
-      case "en":
-      default:
-        return category.cname_en;
-    }
-  }, [locale]);
+  const getCategoryName = useCallback(
+    (category: Category): string => {
+      switch (locale) {
+        case "he":
+          return category.cname_he || category.cname_en;
+        case "hu":
+          return category.cname_hu || category.cname_en;
+        case "en":
+        default:
+          return category.cname_en;
+      }
+    },
+    [locale]
+  );
 
-  const getCategoryNameById = useCallback((categoryId: number): string => {
-    const category = categories?.find((cat) => cat.id === categoryId);
-    return category ? getCategoryName(category) : "";
-  }, [categories, getCategoryName]);
+  const getCategoryNameById = useCallback(
+    (categoryId: number): string => {
+      const category = categories?.find((cat) => cat.id === categoryId);
+      return category ? getCategoryName(category) : "";
+    },
+    [categories, getCategoryName]
+  );
 
   return {
     categories,
