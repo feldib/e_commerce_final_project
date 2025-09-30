@@ -332,3 +332,8 @@ a:hover,
   position: relative;
   z-index: 1000;
 }
+
+.flag-icon:hover {
+  transform: scale(1.1) !important;
+  cursor: pointer;
+}

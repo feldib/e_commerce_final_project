@@ -13,6 +13,7 @@ import { showWarningToast } from "@/utils/toastUtils";
 
 import { UserDataContext } from "@/components/providers/UserDataProvider";
 
+import LanguageSelector from "./LanguageSelector";
 import LoggedInNavbarItems from "./LoggedInNavbarItems";
 import NotLoggedInNavbarItems from "./NotLoggedInNavbarItems";
 
@@ -109,6 +110,14 @@ function Header() {
               </Link>
 
               {loggedIn ? <LoggedInNavbarItems /> : <NotLoggedInNavbarItems />}
+
+              <div
+                onClick={() => closeExpandedNav()}
+                className="nav-link"
+                style={{ color: "inherit", textDecoration: "inherit" }}
+              >
+                <LanguageSelector />
+              </div>
             </Nav>
           </Navbar.Collapse>
 
