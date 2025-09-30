@@ -43,8 +43,10 @@ export function I18nProvider({ children }: { children: ReactNode }) {
 
   // Update document direction when locale changes
   React.useEffect(() => {
-    document.documentElement.lang = locale;
-    document.documentElement.dir = locale === "he" ? "rtl" : "ltr";
+    if (typeof document !== "undefined") {
+      document.documentElement.lang = locale;
+      document.documentElement.dir = locale === "he" ? "rtl" : "ltr";
+    }
   }, [locale]);
 
   return (

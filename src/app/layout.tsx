@@ -15,7 +15,7 @@ import "./globals.css";
 
 function App({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html>
       <body>
         <I18nProvider>
           <UserDataProvider>
