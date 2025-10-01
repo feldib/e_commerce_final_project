@@ -12,11 +12,11 @@ import { UserDataContext } from "@/components/providers/UserDataProvider";
 
 import { Artwork, Review, Tag } from "@/fetching/types";
 
-import ArtworkPicturesCarousel from "./ArtworkPicturesCarousel";
 import FavouriteButton from "./buttons/FavouriteButton";
 import ShoppingCartButton from "./buttons/ShoppingCartButton";
+import ArtworkPictureCarousel from "./carousels/ArtworkPictureCarousel";
+import ArtworkReviewCarousel from "./carousels/ArtworkReviewCarousel";
 import LeaveReview from "./LeaveReview";
-import ReviewsOfArtworks from "./ReviewsOfArtwork";
 
 import useAxios from "@/hooks/useAxios";
 import { useCategories } from "@/hooks/useCategories";
@@ -41,7 +41,7 @@ function ArtworkDetails({ artwork_id, artwork }: ArtworkDetailsProps) {
   );
 
   const reviews = useLoading(reviewsData, (reviews) => {
-    return <ReviewsOfArtworks reviews={reviews} />;
+    return <ArtworkReviewCarousel reviews={reviews} />;
   });
 
   return (
@@ -178,7 +178,7 @@ function ArtworkDetails({ artwork_id, artwork }: ArtworkDetailsProps) {
         </Col>
       </Row>
 
-      <ArtworkPicturesCarousel other_pictures={artwork.other_pictures ?? []} />
+      <ArtworkPictureCarousel other_pictures={artwork.other_pictures ?? []} />
 
       <Row className="mt-5">
         <Row className="text-center">

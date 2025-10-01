@@ -12,13 +12,13 @@ import { useI18n } from "@/components/providers/I18nProvider";
 import { approveReview, disapproveReview } from "@/fetching/fetching";
 import { Review as ReviewType } from "@/fetching/types";
 
-type ReviewProps = {
+type UserReviewProps = {
   review: ReviewType;
   admin: boolean;
   index: number;
 };
 
-function Review({ review, admin, index }: ReviewProps) {
+function UserReview({ review, admin, index }: UserReviewProps) {
   const { t } = useI18n();
   const [showReview, setShowReview] = React.useState(true);
   return (
@@ -94,4 +94,4 @@ function Review({ review, admin, index }: ReviewProps) {
   );
 }
 
-export default Review;
+export default UserReview;

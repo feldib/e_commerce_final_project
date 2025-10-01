@@ -6,8 +6,8 @@ import { Col, Row } from "react-bootstrap";
 import { ADMIN_URL } from "@/utils/constants";
 
 import { useI18n } from "@/components/providers/I18nProvider";
-import Review from "@/components/Review";
 import SubPageTitle from "@/components/SubPageTitle";
+import UserReview from "@/components/UserReview";
 
 import { Review as ReviewType } from "@/fetching/types";
 
@@ -25,7 +25,7 @@ function Reviews() {
             {(reviews as ReviewType[]).map(
               (review: ReviewType, index: number) => {
                 return (
-                  <Review
+                  <UserReview
                     key={index}
                     review={review}
                     index={index + 1}
