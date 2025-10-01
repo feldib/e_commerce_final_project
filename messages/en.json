@@ -38,7 +38,7 @@
     "images": "Images",
     "category": "Category",
     "choose": "Choose",
-    "by": "By",
+    "by": "By ",
     "reviews": "Reviews",
     "available_quantity": "Available Quantity",
     "order_summary": "Order Summary",
@@ -264,7 +264,7 @@
       "approved": "Approved",
       "awaits_evaluation": "Awaits evaluation",
       "item_label": "Item:",
-      "by": "by"
+      "by": "by "
     },
     "unanswered_message": {
       "reply": "Reply",
@@ -325,7 +325,7 @@
       "sign_in_to_add_wishlist": "Sign in or register to add to wishlist! "
     },
     "recommendation_card": {
-      "by": "by",
+      "by": "by ",
       "place_of_thumbnail": "place of thumbnail"
     }
   },

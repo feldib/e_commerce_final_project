@@ -25,7 +25,8 @@ function ArtworkReview({ review, index }: ArtworkReviewProps) {
           </Card.Title>
 
           <Card.Subtitle className="mb-2 custom-muted">
-            {t("common.by")} {review.name}
+            {t("common.by")}
+            {review.name}
           </Card.Subtitle>
 
           <Card.Text className="mb-2">{review.review_text}</Card.Text>

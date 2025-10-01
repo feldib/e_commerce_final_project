@@ -38,7 +38,7 @@
     "images": "Képek",
     "category": "Kategória",
     "choose": "Válassz",
-    "by": "Készítette:",
+    "by": "",
     "reviews": "Értékelések",
     "available_quantity": "Elérhető mennyiség",
     "order_summary": "Rendelés összegzése",
@@ -264,7 +264,7 @@
       "approved": "Jóváhagyva",
       "awaits_evaluation": "Értékelésre vár",
       "item_label": "Tétel:",
-      "by": "készítette"
+      "by": ""
     },
     "unanswered_message": {
       "reply": "Válasz",
@@ -325,7 +325,7 @@
       "sign_in_to_add_wishlist": "Jelentkezz be vagy regisztrálj a kívánságlistához való hozzáadáshoz! "
     },
     "recommendation_card": {
-      "by": "készítette",
+      "by": "",
       "place_of_thumbnail": "bélyegkép helye"
     }
   },

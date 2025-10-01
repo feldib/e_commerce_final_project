@@ -38,7 +38,7 @@
     "images": "תמונות",
     "category": "קטגוריה",
     "choose": "בחר",
-    "by": "מאת",
+    "by": "",
     "reviews": "ביקורות",
     "available_quantity": "כמות זמינה",
     "order_summary": "סיכום הזמנה",
@@ -264,7 +264,7 @@
       "approved": "אושר",
       "awaits_evaluation": "ממתין להערכה",
       "item_label": "פריט:",
-      "by": "מאת"
+      "by": ""
     },
     "unanswered_message": {
       "reply": "הגב",
@@ -325,7 +325,7 @@
       "sign_in_to_add_wishlist": "התחבר או הרשם כדי להוסיף לרשימת המשאלות! "
     },
     "recommendation_card": {
-      "by": "מאת",
+      "by": "",
       "place_of_thumbnail": "מקום התמונה הממוזערת"
     }
   },

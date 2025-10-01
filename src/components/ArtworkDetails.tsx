@@ -71,7 +71,7 @@ function ArtworkDetails({ artwork_id, artwork }: ArtworkDetailsProps) {
                   </Card.Title>
 
                   <Card.Subtitle>
-                    <h6>{`${t("common.by")} ${artwork.artist_name}`}</h6>
+                    <h6>{`${t("common.by")}${artwork.artist_name}`}</h6>
                   </Card.Subtitle>
                 </Col>
 
