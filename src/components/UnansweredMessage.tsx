@@ -15,8 +15,8 @@ import { ToastContainer } from "react-toastify";
 
 import {
   showIncorrectDataToast,
-  showReplyErrorToast,
-  showReplySuccessToast,
+  showReplySendErrorToast,
+  showReplySentSuccessToast,
 } from "@/utils/toastUtils";
 
 import { useI18n } from "@/components/providers/I18nProvider";
@@ -58,12 +58,12 @@ function UnansweredMessage({ message }: UnansweredMessageProps) {
         message.id,
         message.email,
         values.reply_title,
-        values.reply_text
+        values.reply_text,
       );
-      showReplySuccessToast();
+      showReplySentSuccessToast(t);
       setReplied(true);
     } catch {
-      showReplyErrorToast();
+      showReplySendErrorToast(t);
     }
   };
 
@@ -112,7 +112,7 @@ function UnansweredMessage({ message }: UnansweredMessageProps) {
                         name="reply_title"
                         type="textarea"
                         placeholder={t(
-                          "components.unanswered_message.enter_title"
+                          "components.unanswered_message.enter_title",
                         )}
                         icon={faKeyboard}
                         showAsterisk={
@@ -138,7 +138,7 @@ function UnansweredMessage({ message }: UnansweredMessageProps) {
                             name="reply_text"
                             as="textarea"
                             placeholder={t(
-                              "components.unanswered_message.enter_reply"
+                              "components.unanswered_message.enter_reply",
                             )}
                             style={{ height: "100px" }}
                           />
@@ -151,15 +151,15 @@ function UnansweredMessage({ message }: UnansweredMessageProps) {
                       </RBForm.Group>
 
                       <Button
-                        variant="primary"
                         type="submit"
+                        variant="primary"
                         onClick={() => {
                           if (Object.keys(errors).length) {
-                            showIncorrectDataToast();
+                            showIncorrectDataToast(t);
                           }
                         }}
                       >
-                        {t("common.send")}
+                        {t("components.unanswered_message.send_reply")}
                       </Button>
                       <ToastContainer position="bottom-right" />
                     </Form>

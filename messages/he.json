@@ -363,6 +363,26 @@
     "registration_failed": "ההרשמה נכשלה",
     "user_already_registered": "משתמש כבר רשום עם כתובת האימייל הזו",
     "item_added_to_cart": "פריט נוסף לעגלת הקניות",
-    "item_out_of_stock": "פריט אזל במלאי"
+    "item_out_of_stock": "פריט אזל במלאי",
+    "data_saved_successfully": "נתונים נשמרו בהצלחה",
+    "changes_saved": "שינויים נשמרו",
+    "save_error": "שגיאה: לא ניתן לשמור",
+    "incorrect_data": "נתונים שגויים",
+    "only_effects_invoice": "זה משפיע רק על החשבונית!",
+    "login_success": "מחובר",
+    "logout_success": "מנותק",
+    "password_reset_success": "סיסמה שונתה בהצלחה",
+    "message_sent": "הודעה נשלחה",
+    "review_saved": "ביקורת נשמרה",
+    "email_submitted": "אימייל נשלח",
+    "data_saved": "נתונים נשמרו בהצלחה",
+    "incorrect_credentials": "אימייל או סיסמה שגויים",
+    "submission_error": "שגיאה: לא ניתן לשלוח",
+    "password_change_error": "שגיאה: לא ניתן לשנות סיסמה",
+    "message_error": "שגיאה: לא ניתן לשלוח הודעה",
+    "review_error": "שגיאה: לא ניתן לשמור ביקורת",
+    "review_approval_notice": "הביקורת צריכה לקבל אישור מהמנהל",
+    "reply_success": "תגובה נשלחה בהצלחה!",
+    "reply_error": "שגיאה: לא ניתן לשלוח תגובה"
   }
 }

@@ -28,7 +28,7 @@ export const registerNewUser = async (
   email: string,
   password: string,
   firstName: string,
-  lastName: string
+  lastName: string,
 ): Promise<{ data: { user: User } }> => {
   return await axiosConfigured.post(`${SERVER_URL}/${USERS_URL}/new_user`, {
     last_name: lastName,
@@ -41,7 +41,7 @@ export const registerNewUser = async (
 export const logIn = async (
   email: string,
   password: string,
-  settleSuccess: (userData: User) => void
+  settleSuccess: (userData: User) => void,
 ): Promise<void> => {
   await axiosConfigured
     .post(`${SERVER_URL}/login`, { email, password })
@@ -54,7 +54,7 @@ export const logIn = async (
 export const changePassword = async (
   token: string | null,
   email: string | null,
-  newPassword: string
+  newPassword: string,
 ): Promise<void> => {
   await axiosConfigured.post(`${SERVER_URL}/reset_password`, {
     token,
@@ -75,7 +75,7 @@ export const getIsAdmin = async (): Promise<{
 
 export const updateUserData = async (
   field_name: string,
-  value: string
+  value: string,
 ): Promise<{ data: User }> => {
   return axiosConfigured.post(`${SERVER_URL}/${USERS_URL}/update_data`, {
     field_name,
@@ -90,7 +90,7 @@ export const updateUserData = async (
 export const getArtworkSearchResults = async (
   objects: SearchParams,
   pageNumber: number,
-  admin: boolean = false
+  admin: boolean = false,
 ): Promise<Artwork[]> => {
   try {
     return await searchArtworksGraphQL(objects, pageNumber, admin);
@@ -101,12 +101,12 @@ export const getArtworkSearchResults = async (
 };
 
 export const getDataOfArtworks = async (
-  shoppingCart: ShoppingCartItem[]
+  shoppingCart: ShoppingCartItem[],
 ): Promise<Artwork[]> => {
   const results = await Promise.all(
     shoppingCart.map(async (item: ShoppingCartItem) => {
       const results = await axiosConfigured.get(
-        `${SERVER_URL}/find_artwork_by_id?artwork_id=${item.artwork_id}`
+        `${SERVER_URL}/find_artwork_by_id?artwork_id=${item.artwork_id}`,
       );
       const data = results.data as Artwork & { quantity?: number };
       const resObj = {
@@ -114,7 +114,7 @@ export const getDataOfArtworks = async (
         quantity: item.quantity,
       };
       return resObj as Artwork;
-    })
+    }),
   );
   return results;
 };
@@ -154,14 +154,14 @@ export const addNewArtwork = async (artworkData: {
       headers: {
         "Content-Type": "multipart/form-data",
       },
-    }
+    },
   );
 };
 
 export const updateArtworkData = async (
   artwork_id: number,
   field_name: string,
-  value: string | number | boolean | { tname: string }[]
+  value: string | number | boolean | { tname: string }[],
 ): Promise<{ data: Artwork }> => {
   return axiosConfigured.put(`${SERVER_URL}/${ADMIN_URL}/artwork`, {
     artwork_id,
@@ -172,7 +172,7 @@ export const updateArtworkData = async (
 
 export const removeArtwork = async (artwork_id: number): Promise<void> => {
   await axiosConfigured.delete(
-    `${SERVER_URL}/${ADMIN_URL}/artworks/${artwork_id}`
+    `${SERVER_URL}/${ADMIN_URL}/artworks/${artwork_id}`,
   );
 };
 
@@ -182,7 +182,7 @@ export const removeArtwork = async (artwork_id: number): Promise<void> => {
 
 export const getShoppingCart = async (): Promise<Artwork[]> => {
   const res = await axiosConfigured.get(
-    `${SERVER_URL}/${USERS_URL}/shopping_cart`
+    `${SERVER_URL}/${USERS_URL}/shopping_cart`,
   );
   return res.data as Artwork[];
 };
@@ -195,16 +195,16 @@ export const addToShoppingList = async (artwork_id: number): Promise<void> => {
 };
 
 export const removeFromShoppingList = async (
-  artwork_id: number
+  artwork_id: number,
 ): Promise<void> => {
   await axiosConfigured.delete(
-    `${SERVER_URL}/${USERS_URL}/shopping_cart/${artwork_id}`
+    `${SERVER_URL}/${USERS_URL}/shopping_cart/${artwork_id}`,
   );
   // returns void
 };
 
 export const increaseShoppingListItemQuantity = async (
-  artwork_id: number
+  artwork_id: number,
 ): Promise<void> => {
   await axiosConfigured.put(`${SERVER_URL}/${USERS_URL}/shopping_cart`, {
     action: "increase",
@@ -214,7 +214,7 @@ export const increaseShoppingListItemQuantity = async (
 };
 
 export const decreaseShoppingListItemQuantity = async (
-  artwork_id: number
+  artwork_id: number,
 ): Promise<void> => {
   await axiosConfigured.put(`${SERVER_URL}/${USERS_URL}/shopping_cart`, {
     action: "decrease",
@@ -224,7 +224,7 @@ export const decreaseShoppingListItemQuantity = async (
 };
 
 export const replaceSavedShoppingCart = async (
-  shopping_cart: { artwork_id: number; quantity: number }[]
+  shopping_cart: { artwork_id: number; quantity: number }[],
 ): Promise<void> => {
   await axiosConfigured.put(`${SERVER_URL}/${USERS_URL}/shopping_cart`, {
     action: "replace",
@@ -241,17 +241,17 @@ export const addToWishlisted = async (artwork_id: number): Promise<void> => {
 };
 
 export const removeFromWishlisted = async (
-  artwork_id: number
+  artwork_id: number,
 ): Promise<void> => {
   await axiosConfigured.delete(
-    `${SERVER_URL}/${USERS_URL}/wishlist/${artwork_id}`
+    `${SERVER_URL}/${USERS_URL}/wishlist/${artwork_id}`,
   );
   // returns void
 };
 
 export const isWishlisted = async (artwork_id: number): Promise<boolean> => {
   const result = await axiosConfigured.get(
-    `${SERVER_URL}/${USERS_URL}/wishlist/${artwork_id}`
+    `${SERVER_URL}/${USERS_URL}/wishlist/${artwork_id}`,
   );
   return result.data as boolean;
 };
@@ -269,7 +269,7 @@ export const order = async (invoice_data: CheckoutFormData): Promise<void> => {
 
 export const getOrderHistory = async (user_id: number): Promise<Order[]> => {
   const res = await axiosConfigured.get(
-    `${SERVER_URL}/${ADMIN_URL}/orders?user_id=${user_id}`
+    `${SERVER_URL}/${ADMIN_URL}/orders?user_id=${user_id}`,
   );
   return res.data as Order[];
 };
@@ -281,7 +281,7 @@ export const getOrderHistory = async (user_id: number): Promise<Order[]> => {
 export const leaveReview = async (
   artwork_id: number,
   title: string,
-  review_text: string
+  review_text: string,
 ): Promise<void> => {
   await axiosConfigured.post(`${SERVER_URL}/${USERS_URL}/review`, {
     artwork_id,
@@ -297,7 +297,7 @@ export const approveReview = async (review_id: number): Promise<void> => {
 
 export const disapproveReview = async (review_id: number): Promise<void> => {
   await axiosConfigured.delete(
-    `${SERVER_URL}/${ADMIN_URL}/reviews/${review_id}`
+    `${SERVER_URL}/${ADMIN_URL}/reviews/${review_id}`,
   );
   // returns void
 };
@@ -315,13 +315,13 @@ export const addToFeatured = async (artwork_id: number): Promise<void> => {
 
 export const removeFromFeatured = async (artwork_id: number): Promise<void> => {
   await axiosConfigured.delete(
-    `${SERVER_URL}/${ADMIN_URL}/featured/${artwork_id}`
+    `${SERVER_URL}/${ADMIN_URL}/featured/${artwork_id}`,
   );
 };
 
 export const isFeatured = async (artwork_id: number): Promise<boolean> => {
   const result = await axiosConfigured.get(
-    `${SERVER_URL}/${ADMIN_URL}/featured/${artwork_id}`
+    `${SERVER_URL}/${ADMIN_URL}/featured/${artwork_id}`,
   );
   return result.data as boolean;
 };
@@ -333,7 +333,7 @@ export const isFeatured = async (artwork_id: number): Promise<boolean> => {
 export const sendMessageToAdministrator = async (
   email: string,
   title: string,
-  message: string
+  message: string,
 ): Promise<void> => {
   await axiosConfigured.post(
     `${SERVER_URL}/${USERS_URL}/message_to_administrator`,
@@ -341,7 +341,7 @@ export const sendMessageToAdministrator = async (
       email,
       title,
       message,
-    }
+    },
   );
 };
 
@@ -349,7 +349,7 @@ export const replyToMessage = async (
   message_id: number,
   email: string,
   reply_title: string,
-  reply_text: string
+  reply_text: string,
 ): Promise<void> => {
   await axiosConfigured.post(`${SERVER_URL}/${ADMIN_URL}/reply_to_message`, {
     message_id,
@@ -361,7 +361,7 @@ export const replyToMessage = async (
 
 export const getUnansweredMessages = async (): Promise<Message[]> => {
   const res = await axiosConfigured.get(
-    `${SERVER_URL}/${ADMIN_URL}/unanswered_messages`
+    `${SERVER_URL}/${ADMIN_URL}/unanswered_messages`,
   );
   return res.data as Message[];
 };
@@ -372,16 +372,16 @@ export const getUnansweredMessages = async (): Promise<Message[]> => {
 
 export const addNewOtherPictures = (
   artwork_id: number,
-  other_pictures: Blob[]
+  other_pictures: Blob[],
 ): Promise<void[]> => {
   return Promise.all(
-    other_pictures.map((picture) => addNewOtherPicture(artwork_id, picture))
+    other_pictures.map((picture) => addNewOtherPicture(artwork_id, picture)),
   );
 };
 
 export const addNewOtherPicture = async (
   artwork_id: number,
-  picture: Blob
+  picture: Blob,
 ): Promise<void> => {
   const formData = new FormData();
   formData.append("picture", picture);
@@ -390,22 +390,22 @@ export const addNewOtherPicture = async (
     formData,
     {
       headers: { "Content-Type": "multipart/form-data" },
-    }
+    },
   );
 };
 
 export const removePicture = async (
   artwork_id: number,
-  file_name: string
+  file_name: string,
 ): Promise<void> => {
   await axiosConfigured.delete(
-    `${SERVER_URL}/${ADMIN_URL}/artworks/${artwork_id}/images/${file_name}`
+    `${SERVER_URL}/${ADMIN_URL}/artworks/${artwork_id}/images/${file_name}`,
   );
 };
 
 export const replaceThumbnail = async (
   artwork_id: number,
-  thumbnail: Blob
+  thumbnail: Blob,
 ): Promise<void> => {
   const formData = new FormData();
   formData.append("thumbnail", thumbnail);
@@ -414,6 +414,6 @@ export const replaceThumbnail = async (
     formData,
     {
       headers: { "Content-Type": "multipart/form-data" },
-    }
+    },
   );
 };

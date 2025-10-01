@@ -20,8 +20,8 @@ import { ToastContainer } from "react-toastify";
 
 import {
   showIncorrectDataToast,
-  showMessageErrorToast,
-  showMessageSentToast,
+  showMessageSendErrorToast,
+  showMessageSentSuccessToast,
 } from "@/utils/toastUtils";
 
 import InputComponent from "@/components/input/InputComponent";
@@ -54,12 +54,12 @@ function ContactUs() {
       await sendMessageToAdministrator(
         values.email,
         values.title,
-        values.message
+        values.message,
       );
-      showMessageSentToast();
+      showMessageSentSuccessToast(t);
       form?.current?.reset();
     } catch {
-      showMessageErrorToast();
+      showMessageSendErrorToast(t);
     }
   };
 
@@ -141,7 +141,7 @@ function ContactUs() {
                     type="submit"
                     onClick={() => {
                       if (Object.keys(errors).length) {
-                        showIncorrectDataToast();
+                        showIncorrectDataToast(t);
                       }
                     }}
                   >

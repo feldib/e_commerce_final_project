@@ -14,7 +14,7 @@ const useQuantity = (loggedIn: boolean, inStock: number, artworkId: number) => {
         const index = signedOutShoppingCart.findIndex(
           (item: ShoppingCartItem) => {
             return item.artwork_id === artworkId;
-          }
+          },
         );
 
         if (index !== -1) {

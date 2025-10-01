@@ -4,7 +4,7 @@ import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.share
 
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Button,Col } from "react-bootstrap";
+import { Button, Col } from "react-bootstrap";
 
 function FloatingBackButton({ router }: { router: AppRouterInstance }) {
   return (

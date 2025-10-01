@@ -363,6 +363,26 @@
     "registration_failed": "Registration failed",
     "user_already_registered": "A user is registered with email already",
     "item_added_to_cart": "Item added to shopping cart",
-    "item_out_of_stock": "Item out of stock"
+    "item_out_of_stock": "Item out of stock",
+    "data_saved_successfully": "Data saved successfully",
+    "changes_saved": "Changes saved",
+    "save_error": "Error: couldn't save",
+    "incorrect_data": "Incorrect data",
+    "only_effects_invoice": "This only affects the invoice!",
+    "login_success": "Logged in",
+    "logout_success": "Logged out",
+    "password_reset_success": "Password changed successfully",
+    "message_sent": "Message sent",
+    "review_saved": "Review saved",
+    "email_submitted": "Email submitted",
+    "data_saved": "Data saved successfully",
+    "incorrect_credentials": "Incorrect email or password",
+    "submission_error": "Error: couldn't submit",
+    "password_change_error": "Error: couldn't change password",
+    "message_error": "Error: couldn't send message",
+    "review_error": "Error: couldn't save review",
+    "review_approval_notice": "The review has to be approved by the administrator",
+    "reply_success": "Reply sent successfully!",
+    "reply_error": "Error: couldn't send reply"
   }
 }

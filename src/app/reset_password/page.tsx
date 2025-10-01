@@ -44,11 +44,11 @@ function ResetPasswordInner() {
     const email = searchParams.get("email");
     changePassword(token, email, values.password)
       .then(() => {
-        showPasswordResetSuccessToast();
+        showPasswordResetSuccessToast(t);
         router.push("/login");
       })
       .catch(() => {
-        showPasswordChangeErrorToast();
+        showPasswordChangeErrorToast(t);
       });
   };
 
@@ -89,7 +89,7 @@ function ResetPasswordInner() {
                   type="submit"
                   onClick={() => {
                     if (Object.keys(errors).length) {
-                      showIncorrectDataToast();
+                      showIncorrectDataToast(t);
                     }
                   }}
                 >

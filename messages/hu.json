@@ -363,6 +363,26 @@
     "registration_failed": "Regisztráció sikertelen",
     "user_already_registered": "Már regisztrálva van felhasználó ezzel az email címmel",
     "item_added_to_cart": "Tétel hozzáadva a kosárhoz",
-    "item_out_of_stock": "Tétel elfogyott"
+    "item_out_of_stock": "Tétel elfogyott",
+    "data_saved_successfully": "Adatok sikeresen mentve",
+    "changes_saved": "Változások mentve",
+    "save_error": "Hiba: nem sikerült menteni",
+    "incorrect_data": "Helytelen adatok",
+    "only_effects_invoice": "Ez csak a számlát érinti!",
+    "login_success": "Bejelentkezve",
+    "logout_success": "Kijelentkezve",
+    "password_reset_success": "Jelszó sikeresen megváltoztatva",
+    "message_sent": "Üzenet elküldve",
+    "review_saved": "Értékelés mentve",
+    "email_submitted": "Email elküldve",
+    "data_saved": "Adatok sikeresen mentve",
+    "incorrect_credentials": "Helytelen email vagy jelszó",
+    "submission_error": "Hiba: nem sikerült elküldeni",
+    "password_change_error": "Hiba: nem sikerült megváltoztatni a jelszót",
+    "message_error": "Hiba: nem sikerült elküldeni az üzenetet",
+    "review_error": "Hiba: nem sikerült menteni az értékelést",
+    "review_approval_notice": "Az értékelést jóvá kell hagynia az adminisztrátornak",
+    "reply_success": "Válasz sikeresen elküldve!",
+    "reply_error": "Hiba: nem sikerült elküldeni a választ"
   }
 }

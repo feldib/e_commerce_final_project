@@ -14,7 +14,7 @@ type QueriesProps = {
   formik: SearchFormikInstance;
   categories: Category[];
   triggerSearchWithUpdatedValues: (
-    updatedValues: Partial<SearchParams>
+    updatedValues: Partial<SearchParams>,
   ) => void;
   searchedValues?: SearchParams;
 };

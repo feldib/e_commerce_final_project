@@ -34,9 +34,10 @@ import {
   VALID_IMAGE_EXTENSIONS,
 } from "@/utils/constants";
 import {
-  showErrorToast,
+  showArtworkAddErrorToast,
+  showArtworkAddSuccessToast,
+  showArtworkThumbnailRequiredToast,
   showIncorrectDataToast,
-  showSuccessToast,
 } from "@/utils/toastUtils";
 
 import FloatingBackButton from "@/components/buttons/FloatingBackButton";
@@ -87,7 +88,7 @@ function AddNewArtworkPage() {
     if (!fileName) return false;
     const ext = fileName.split(".").pop()?.toLowerCase() || "";
     return VALID_IMAGE_EXTENSIONS.includes(
-      ext as (typeof VALID_IMAGE_EXTENSIONS)[number]
+      ext as (typeof VALID_IMAGE_EXTENSIONS)[number],
     );
   }
 
@@ -110,7 +111,7 @@ function AddNewArtworkPage() {
       try {
         // TypeScript check - thumbnail is required by validation but type allows undefined
         if (!values.thumbnail) {
-          showErrorToast(t("validation.thumbnail_required"));
+          showArtworkThumbnailRequiredToast(t);
           return;
         }
 
@@ -119,7 +120,7 @@ function AddNewArtworkPage() {
           tags,
           thumbnail: values.thumbnail,
         });
-        showSuccessToast(t("toast.artwork_added_successfully"));
+        showArtworkAddSuccessToast(t);
 
         const artwork_id = response.data;
 
@@ -127,7 +128,7 @@ function AddNewArtworkPage() {
 
         actions.resetForm();
       } catch {
-        showErrorToast(t("toast.error_add_artwork"));
+        showArtworkAddErrorToast(t);
       }
     },
 
@@ -144,12 +145,12 @@ function AddNewArtworkPage() {
       thumbnail: Yup.mixed()
         .required(t("validation.thumbnail_required"))
         .test("is-valid-type", t("validation.not_valid_image_type"), (value) =>
-          isValidImage(value instanceof File ? value.name : "")
+          isValidImage(value instanceof File ? value.name : ""),
         )
         .test(
           "is-valid-size",
           t("validation.max_allowed_size"),
-          (value) => value instanceof File && value.size <= MAX_IMAGE_SIZE
+          (value) => value instanceof File && value.size <= MAX_IMAGE_SIZE,
         ),
       tags: Yup.array()
         .min(3, t("validation.add_minimum_tags"))
@@ -157,20 +158,20 @@ function AddNewArtworkPage() {
           Yup.object().shape({
             id: Yup.string(),
             text: Yup.string(),
-          })
+          }),
         ),
       other_pictures: Yup.array().of(
         Yup.mixed()
           .test(
             "is-valid-type",
             t("validation.not_valid_image_type"),
-            (value) => isValidImage(value instanceof File ? value.name : "")
+            (value) => isValidImage(value instanceof File ? value.name : ""),
           )
           .test(
             "is-valid-size",
             t("validation.max_allowed_size"),
-            (value) => value instanceof File && value.size <= MAX_IMAGE_SIZE
-          )
+            (value) => value instanceof File && value.size <= MAX_IMAGE_SIZE,
+          ),
       ),
     }),
   });
@@ -184,7 +185,7 @@ function AddNewArtworkPage() {
 
   const createHandleDelete = (
     tgs: ReactTagInputTag[],
-    setTgs: React.Dispatch<React.SetStateAction<ReactTagInputTag[]>>
+    setTgs: React.Dispatch<React.SetStateAction<ReactTagInputTag[]>>,
   ) => {
     return (i: number) => {
       setTgs(tgs.filter((tag, index) => index !== i));
@@ -193,7 +194,7 @@ function AddNewArtworkPage() {
 
   const createHandleAddition = (
     tgs: ReactTagInputTag[],
-    setTgs: React.Dispatch<React.SetStateAction<ReactTagInputTag[]>>
+    setTgs: React.Dispatch<React.SetStateAction<ReactTagInputTag[]>>,
   ) => {
     return (tag: ReactTagInputTag) => {
       setTgs([...tgs, tag]);
@@ -317,7 +318,7 @@ function AddNewArtworkPage() {
                     if (e.currentTarget.files) {
                       formik.setFieldValue(
                         "thumbnail",
-                        e.currentTarget.files[0]
+                        e.currentTarget.files[0],
                       );
                     }
                   }}
@@ -370,7 +371,7 @@ function AddNewArtworkPage() {
                 <Form.Control
                   type="file"
                   placeholder={t(
-                    "app.admin.add_new_artwork.upload_other_pictures"
+                    "app.admin.add_new_artwork.upload_other_pictures",
                   )}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     if (e.currentTarget.files) {
@@ -401,7 +402,7 @@ function AddNewArtworkPage() {
                           src={URL.createObjectURL(pic)}
                           className="mt-3 uploaded-image"
                           alt={t(
-                            "app.admin.add_new_artwork.uploaded_other_picture"
+                            "app.admin.add_new_artwork.uploaded_other_picture",
                           )}
                         />
 
@@ -438,7 +439,7 @@ function AddNewArtworkPage() {
               type="submit"
               onClick={() => {
                 if (Object.keys(formik.errors).length) {
-                  showIncorrectDataToast();
+                  showIncorrectDataToast(t);
                 }
               }}
             >

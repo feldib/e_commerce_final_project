@@ -14,8 +14,8 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 
 import {
   showIncorrectDataToast,
-  showReviewErrorToast,
-  showReviewSavedToast,
+  showReviewSavedSuccessToast,
+  showReviewSaveErrorToast,
 } from "@/utils/toastUtils";
 
 import { useI18n } from "@/components/providers/I18nProvider";
@@ -51,10 +51,10 @@ function LeaveReview({ artwork_id }: LeaveReviewProps) {
   const onSubmit = async (values: ReviewFormValues) => {
     try {
       await leaveReview(artwork_id, values.title, values.review_text);
-      showReviewSavedToast();
+      showReviewSavedSuccessToast(t);
       form?.current?.reset();
     } catch {
-      showReviewErrorToast();
+      showReviewSaveErrorToast(t);
     }
   };
 
@@ -80,7 +80,7 @@ function LeaveReview({ artwork_id }: LeaveReviewProps) {
                       name="title"
                       type="text"
                       placeholder={t(
-                        "components.leave_review.enter_review_title"
+                        "components.leave_review.enter_review_title",
                       )}
                       icon={faKeyboard}
                       showAsterisk={!!errors.title && !!touched.title}
@@ -103,7 +103,7 @@ function LeaveReview({ artwork_id }: LeaveReviewProps) {
                           name="review_text"
                           as="textarea"
                           placeholder={t(
-                            "components.leave_review.enter_review_text"
+                            "components.leave_review.enter_review_text",
                           )}
                           style={{ height: "100px" }}
                         />
@@ -119,7 +119,7 @@ function LeaveReview({ artwork_id }: LeaveReviewProps) {
                       type="submit"
                       onClick={() => {
                         if (Object.keys(errors).length) {
-                          showIncorrectDataToast();
+                          showIncorrectDataToast(t);
                         }
                       }}
                     >

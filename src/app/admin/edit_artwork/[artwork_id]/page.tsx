@@ -89,7 +89,7 @@ function EditArtworkData() {
     if (!fileName) return false;
     const ext = fileName.split(".").pop()?.toLowerCase() || "";
     return VALID_IMAGE_EXTENSIONS.includes(
-      ext as (typeof VALID_IMAGE_EXTENSIONS)[number]
+      ext as (typeof VALID_IMAGE_EXTENSIONS)[number],
     );
   }
 
@@ -133,7 +133,7 @@ function EditArtworkData() {
           Yup.object().shape({
             id: Yup.string(),
             text: Yup.string(),
-          })
+          }),
         ),
       other_pictures: Yup.array(),
       description: Yup.string().required(t("validation.description_required")),
@@ -172,7 +172,7 @@ function EditArtworkData() {
       setTags(transformedTags);
 
       const currentCategory = categories?.find(
-        (cat: Category) => cat.id === artworkData.category_id
+        (cat: Category) => cat.id === artworkData.category_id,
       );
       if (currentCategory) {
         setChoseCategory(getCategoryNameById(currentCategory.id));
@@ -192,7 +192,7 @@ function EditArtworkData() {
         "tags",
         tags.map((tag: ReactTag) => {
           return { tname: tag.text };
-        })
+        }),
       );
     }
     // Mark that initial tags have been loaded after first render
@@ -204,7 +204,7 @@ function EditArtworkData() {
 
   const createHandleDelete = (
     tgs: ReactTag[],
-    setTgs: React.Dispatch<React.SetStateAction<ReactTag[]>>
+    setTgs: React.Dispatch<React.SetStateAction<ReactTag[]>>,
   ) => {
     return (i: number) => {
       setTgs(tgs.filter((_, index) => index !== i));
@@ -213,7 +213,7 @@ function EditArtworkData() {
 
   const createHandleAddition = (
     tgs: ReactTag[],
-    setTgs: React.Dispatch<React.SetStateAction<ReactTag[]>>
+    setTgs: React.Dispatch<React.SetStateAction<ReactTag[]>>,
   ) => {
     return (tag: ReactTag) => {
       setTgs([...tgs, tag]);
@@ -309,12 +309,12 @@ function EditArtworkData() {
                       await updateArtworkData(artworkId, "category_id", obj.id);
                       showSuccessToast(
                         t(
-                          "app.admin.edit_artwork.category_updated_successfully"
-                        )
+                          "app.admin.edit_artwork.category_updated_successfully",
+                        ),
                       );
                     } catch {
                       showErrorToast(
-                        t("app.admin.edit_artwork.failed_to_update_category")
+                        t("app.admin.edit_artwork.failed_to_update_category"),
                       );
                     }
                   }
@@ -365,16 +365,18 @@ function EditArtworkData() {
                         await replaceThumbnail(artworkId, file);
                         formik.setFieldValue(
                           "thumbnail",
-                          URL.createObjectURL(file)
+                          URL.createObjectURL(file),
                         );
                         showSuccessToast(
                           t(
-                            "app.admin.edit_artwork.thumbnail_uploaded_successfully"
-                          )
+                            "app.admin.edit_artwork.thumbnail_uploaded_successfully",
+                          ),
                         );
                       } catch {
                         showErrorToast(
-                          t("app.admin.edit_artwork.failed_to_upload_thumbnail")
+                          t(
+                            "app.admin.edit_artwork.failed_to_upload_thumbnail",
+                          ),
                         );
                         e.target.value = ""; // Reset the input
                       }
@@ -421,7 +423,7 @@ function EditArtworkData() {
                 <Form.Control
                   type="file"
                   placeholder={t(
-                    "app.admin.add_new_artwork.upload_other_pictures"
+                    "app.admin.add_new_artwork.upload_other_pictures",
                   )}
                   onChange={async (e: React.ChangeEvent<HTMLInputElement>) => {
                     const files = e.target.files;
@@ -444,12 +446,12 @@ function EditArtworkData() {
                         e.target.value = ""; // Reset the input for next upload
                         showSuccessToast(
                           t(
-                            "app.admin.edit_artwork.image_uploaded_successfully"
-                          )
+                            "app.admin.edit_artwork.image_uploaded_successfully",
+                          ),
                         );
                       } catch {
                         showErrorToast(
-                          t("app.admin.edit_artwork.failed_to_upload_image")
+                          t("app.admin.edit_artwork.failed_to_upload_image"),
                         );
                         e.target.value = ""; // Reset the input
                       }
@@ -475,7 +477,7 @@ function EditArtworkData() {
                         <img
                           src={pic}
                           alt={t(
-                            "app.admin.add_new_artwork.uploaded_other_picture"
+                            "app.admin.add_new_artwork.uploaded_other_picture",
                           )}
                           className="mt-3 uploaded-image"
                         />
@@ -494,14 +496,14 @@ function EditArtworkData() {
                               // Remove from the form state
                               const newArray =
                                 formik.values.other_pictures.filter(
-                                  (_, picIndex) => picIndex !== index
+                                  (_, picIndex) => picIndex !== index,
                                 );
                               formik.setFieldValue("other_pictures", newArray);
                             } catch {
                               showErrorToast(
                                 t(
-                                  "app.admin.edit_artwork.failed_to_remove_image"
-                                )
+                                  "app.admin.edit_artwork.failed_to_remove_image",
+                                ),
                               );
                             }
                           }}

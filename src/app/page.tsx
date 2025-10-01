@@ -12,7 +12,7 @@ import Recommendations from "@/components/Recommendations";
 function HomePage() {
   const { user, loggedIn } = React.useContext(UserDataContext);
   const { t } = useI18n();
-  
+
   return (
     <Container className="px-3 pb-5">
       <Row className="mx-auto mt-5 mb-5 jumbotron">
@@ -27,7 +27,10 @@ function HomePage() {
 
         <Recommendations title={t("app.home.newest")} path="/newest" />
 
-        <Recommendations title={t("app.home.most_wishlisted")} path="/most_wishlisted" />
+        <Recommendations
+          title={t("app.home.most_wishlisted")}
+          path="/most_wishlisted"
+        />
 
         {loggedIn && (
           <Recommendations

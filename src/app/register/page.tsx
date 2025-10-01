@@ -9,9 +9,10 @@ import { Form, Formik } from "formik";
 import { ToastContainer } from "react-toastify";
 
 import {
-  showErrorToast,
   showIncorrectDataToast,
-  showSuccessToast,
+  showRegistrationFailedToast,
+  showRegistrationSuccessToast,
+  showUserAlreadyExistsToast,
 } from "@/utils/toastUtils";
 
 import InputComponent from "@/components/input/InputComponent";
@@ -27,7 +28,7 @@ import { useRegistrationSchema } from "@/hooks/useValidationSchemas";
 type RegistrationPageProps = {
   settleSuccessfulRegistration: (
     to_checkout: boolean,
-    userData: { user: User }
+    userData: { user: User },
   ) => void;
 };
 
@@ -48,14 +49,14 @@ function RegistrationPageInner({
     },
     settleSuccessfulRegistration: (
       to_checkout: boolean,
-      userData: { user: User }
-    ) => void
+      userData: { user: User },
+    ) => void,
   ) => {
     await registerNewUser(
       values.email,
       values.password,
       values.firstName,
-      values.lastName
+      values.lastName,
     )
       .then(function () {
         logIn(values.email, values.password, (userData) => {
@@ -63,7 +64,7 @@ function RegistrationPageInner({
         });
       })
       .catch(() => {
-        showErrorToast(t("toast.registration_failed"));
+        showRegistrationFailedToast(t);
       });
   };
 
@@ -88,9 +89,9 @@ function RegistrationPageInner({
   }) {
     try {
       await attemptRegistration(values, settleSuccessfulRegistration);
-      showSuccessToast(t("toast.registration_successful"));
+      showRegistrationSuccessToast(t);
     } catch {
-      showErrorToast(t("toast.user_already_registered"));
+      showUserAlreadyExistsToast(t);
     }
   }
 
@@ -167,7 +168,7 @@ function RegistrationPageInner({
                   type="submit"
                   onClick={() => {
                     if (Object.keys(errors).length) {
-                      showIncorrectDataToast();
+                      showIncorrectDataToast(t);
                     }
                   }}
                 >

@@ -23,7 +23,7 @@ function ReceiptPage() {
     setCurrentOrderData(
       currentOrderString
         ? JSON.parse(currentOrderString)
-        : { items: [], totalCost: 0 }
+        : { items: [], totalCost: 0 },
     );
   }, []);
 

@@ -33,14 +33,14 @@ function ArtworkSearchComponent({ admin }: ArtworkSearchComponentProps) {
       const results = await getArtworkSearchResults(
         values,
         page,
-        admin || false
+        admin || false,
       );
       setSearchResults(results);
       setSearchedValues(values);
       // If we got exactly the requested number of results, there might be more
       setHasMoreResults(results.length === values.n);
     },
-    [admin]
+    [admin],
   );
 
   const formik = useFormik({
@@ -76,7 +76,7 @@ function ArtworkSearchComponent({ admin }: ArtworkSearchComponentProps) {
       setPageNumber(1);
       search(newValues, 1);
     },
-    [search, formik.values]
+    [search, formik.values],
   );
 
   const results = React.useRef<HTMLDivElement>(null);

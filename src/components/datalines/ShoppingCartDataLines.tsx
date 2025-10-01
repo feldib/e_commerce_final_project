@@ -10,7 +10,10 @@ import { Col, Row } from "react-bootstrap";
 import { ToastContainer } from "react-toastify";
 
 import { SERVER_URL, UI_DIMENSIONS } from "@/utils/constants";
-import { showErrorToast, showSuccessToast } from "@/utils/toastUtils";
+import {
+  showCartItemAddedToast,
+  showCartItemOutOfStockToast,
+} from "@/utils/toastUtils";
 
 import FavouriteButton from "@/components/buttons/FavouriteButton";
 import { useI18n } from "@/components/providers/I18nProvider";
@@ -126,10 +129,10 @@ function ShoppingCartDataLines({
                 if (loggedIn) {
                   try {
                     await increaseShoppingListItemQuantity(line.id);
-                    showSuccessToast(t("toast.item_added_to_cart"));
+                    showCartItemAddedToast(t);
                     setQuantity(quantity + 1);
                   } catch {
-                    showErrorToast(t("common.item_out_of_stock"));
+                    showCartItemOutOfStockToast(t);
                   }
                 } else {
                   try {
@@ -137,10 +140,10 @@ function ShoppingCartDataLines({
                       line.id,
                       line.stored_amount - quantity
                     );
-                    showSuccessToast(t("toast.item_added_to_cart"));
+                    showCartItemAddedToast(t);
                     setQuantity(quantity + 1);
                   } catch {
-                    showErrorToast(t("common.item_out_of_stock"));
+                    showCartItemOutOfStockToast(t);
                   }
                 }
               }}

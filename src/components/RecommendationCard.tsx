@@ -28,7 +28,7 @@ function RecommendationCard({ artwork }: RecommendationCardProps) {
   const { quantity, setQuantity } = useQuantity(
     loggedIn,
     artwork.quantity,
-    artwork.id
+    artwork.id,
   );
 
   return (

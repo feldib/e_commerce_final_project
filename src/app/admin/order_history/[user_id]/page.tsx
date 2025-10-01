@@ -49,7 +49,7 @@ function UserOrderHistory() {
 
   const ordersRepresented = useLoading(
     orderDataCollection || [],
-    renderOrderList
+    renderOrderList,
   );
   return (
     <Col className="mb-5 pb-5">

@@ -19,7 +19,7 @@ export const useCategories = (locale: string) => {
           return category.cname_en;
       }
     },
-    [locale]
+    [locale],
   );
 
   const getCategoryNameById = useCallback(
@@ -27,7 +27,7 @@ export const useCategories = (locale: string) => {
       const category = categories?.find((cat) => cat.id === categoryId);
       return category ? getCategoryName(category) : "";
     },
-    [categories, getCategoryName]
+    [categories, getCategoryName],
   );
 
   return {

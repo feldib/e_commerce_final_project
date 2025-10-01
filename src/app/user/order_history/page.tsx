@@ -33,7 +33,7 @@ function OrderHistory() {
   }
 
   const orderDataCollection = useAxios(
-    `/${USERS_URL}/get_orders_of_user`
+    `/${USERS_URL}/get_orders_of_user`,
   ) as Order[];
   const ordersRepresented = useLoading(orderDataCollection, (orders) => {
     if (orders.length === 0) {

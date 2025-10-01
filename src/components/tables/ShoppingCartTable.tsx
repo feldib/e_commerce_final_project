@@ -47,7 +47,7 @@ function ShoppingCartTable({
     dataLines,
     (dataLines): React.JSX.Element => {
       return renderData(dataLines, makeRows, t("common.no_results"));
-    }
+    },
   );
   return (
     <Row className="text-center">

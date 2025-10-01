@@ -37,7 +37,7 @@ function ArtworkDetails({ artwork_id, artwork }: ArtworkDetailsProps) {
   const { quantity, setQuantity } = useQuantity(
     loggedIn,
     artwork.quantity,
-    artwork_id
+    artwork_id,
   );
 
   const representReviews = useLoading(reviewsData, (reviews) => {

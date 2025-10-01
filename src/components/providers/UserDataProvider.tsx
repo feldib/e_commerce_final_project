@@ -21,7 +21,7 @@ export type UserDataContextType = {
   settleSuccessfulLogIn: (
     to_checkout: boolean,
     userData: User,
-    router: AppRouterInstance
+    router: AppRouterInstance,
   ) => void;
   logOut: () => void;
 };
@@ -51,7 +51,7 @@ function UserDataProvider({
 }): JSX.Element {
   const { t } = useI18n();
   const [user, setUser] = React.useState<UserDataContextType["user"]>(
-    initialValues.user
+    initialValues.user,
   );
   const [loggedIn, setLoggedIn] = React.useState(initialValues.loggedIn);
 
@@ -70,7 +70,7 @@ function UserDataProvider({
   const settleSuccessfulLogIn = (
     to_checkout: boolean,
     userData: User,
-    router: AppRouterInstance
+    router: AppRouterInstance,
   ) => {
     const checkout_path = "/checkout";
     const user_path = userData.is_admin ? "/admin" : "/user";
@@ -119,7 +119,7 @@ function UserDataProvider({
   return React.createElement(
     UserDataContext.Provider,
     { value: { user, loggedIn, settleSuccessfulLogIn, logOut } },
-    children
+    children,
   );
 }
 

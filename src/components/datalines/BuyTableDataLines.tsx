@@ -37,7 +37,7 @@ function BuyTableDataLines({
   const { quantity, setQuantity } = useQuantity(
     loggedIn,
     line.quantity,
-    line.id
+    line.id,
   );
 
   return (

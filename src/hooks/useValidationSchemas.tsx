@@ -36,7 +36,7 @@ const createReviewTextValidation = (t: (key: string) => string) =>
 
 const createRepeatEmailValidation = (
   t: (key: string) => string,
-  fieldName = "email"
+  fieldName = "email",
 ) =>
   Yup.string()
     .required(t("validation.repeat_email_required"))
@@ -44,7 +44,7 @@ const createRepeatEmailValidation = (
 
 const createRepeatPasswordValidation = (
   t: (key: string) => string,
-  fieldName = "password"
+  fieldName = "password",
 ) =>
   Yup.string()
     .required(t("validation.repeat_password_required"))

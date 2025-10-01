@@ -16,7 +16,7 @@ import { Artwork, ShoppingCartItem } from "@/fetching/types";
 const renderData = <T,>(
   dataLines: T[],
   makeRows: (dataLines: T[]) => React.JSX.Element,
-  noResultsText: string
+  noResultsText: string,
 ): React.JSX.Element => {
   if (dataLines.length > 0) {
     return <>{makeRows(dataLines)}</>;
@@ -33,12 +33,12 @@ const renderData = <T,>(
 
 const increaseLocalStorageShoppingCartQuantity = (
   artwork_id: number,
-  stored_amount: number
+  stored_amount: number,
 ) => {
   const shoppingCart = getShoppingCartFromLocalStorage();
 
   const existingRecordIndex = shoppingCart.findIndex(
-    (item: ShoppingCartItem) => item.artwork_id === artwork_id
+    (item: ShoppingCartItem) => item.artwork_id === artwork_id,
   );
 
   if (stored_amount > 0) {
@@ -62,7 +62,7 @@ const increaseLocalStorageShoppingCartQuantity = (
 const decreaseLocalStorageShoppingCartQuantity = (artwork_id: number) => {
   const shoppingCart = getShoppingCartFromLocalStorage();
   const existingRecordIndex = shoppingCart.findIndex(
-    (item: ShoppingCartItem) => item.artwork_id === artwork_id
+    (item: ShoppingCartItem) => item.artwork_id === artwork_id,
   );
 
   if (
@@ -83,7 +83,7 @@ const removeLocalStorageShoppingCartQuantity = (artwork_id: number) => {
   const shoppingCart = getShoppingCartFromLocalStorage();
 
   const existingRecordIndex = shoppingCart.findIndex(
-    (item: ShoppingCartItem) => item.artwork_id === artwork_id
+    (item: ShoppingCartItem) => item.artwork_id === artwork_id,
   );
 
   if (

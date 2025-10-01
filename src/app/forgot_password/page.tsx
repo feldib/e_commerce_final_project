@@ -7,8 +7,8 @@ import { Form, Formik } from "formik";
 import { ToastContainer } from "react-toastify";
 
 import {
-  showEmailSubmittedToast,
-  showSubmissionErrorToast,
+  showEmailSubmittedSuccessToast,
+  showFormSubmissionErrorToast,
 } from "@/utils/toastUtils";
 
 import InputComponent from "@/components/input/InputComponent";
@@ -36,10 +36,10 @@ function ForgotPassword() {
     sendForgotPasswordEmail(values.email)
       .then(() => {
         setDisplayMessage(true);
-        showEmailSubmittedToast();
+        showEmailSubmittedSuccessToast(t);
       })
       .catch(() => {
-        showSubmissionErrorToast();
+        showFormSubmissionErrorToast(t);
       });
   };
 

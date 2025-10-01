@@ -5,7 +5,7 @@ import { SERVER_URL } from "./constants";
 export const searchArtworksGraphQL = async (
   searchParams: SearchParams,
   pageNumber: number,
-  admin: boolean = false
+  admin: boolean = false,
 ): Promise<Artwork[]> => {
   try {
     const input = {
@@ -77,7 +77,7 @@ export const searchArtworksGraphQL = async (
       }) => ({
         ...artwork,
         date_added: artwork.created_at,
-      })
+      }),
     );
   } catch (error) {
     throw error;

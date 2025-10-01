@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Form, InputGroup,Row } from "react-bootstrap";
+import { Form, InputGroup, Row } from "react-bootstrap";
 
 type SearchFieldProps = {
   what: string;

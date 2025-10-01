@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Container, Nav, Navbar } from "react-bootstrap";
 
 import { UI_DIMENSIONS } from "@/utils/constants";
-import { showWarningToast } from "@/utils/toastUtils";
+import { showCartEmptyWarningToast } from "@/utils/toastUtils";
 
 import { useI18n } from "@/components/providers/I18nProvider";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
@@ -71,7 +71,7 @@ function Header() {
                     await checkIfShoppingCartIsEmpty(loggedIn);
 
                   if (!isShoppingCartEmpty) {
-                    showWarningToast(t("common.shopping_list_empty"));
+                    showCartEmptyWarningToast(t);
                   } else {
                     router.push("/shopping_cart");
                   }
@@ -140,7 +140,7 @@ function Header() {
                     await checkIfShoppingCartIsEmpty(loggedIn);
 
                   if (!isShoppingCartEmpty) {
-                    showWarningToast(t("common.shopping_list_empty"));
+                    showCartEmptyWarningToast(t);
                   } else {
                     router.push("/shopping_cart");
                   }
