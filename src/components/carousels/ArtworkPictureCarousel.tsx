@@ -1,6 +1,8 @@
 import React from "react";
 
-import { Carousel, Col, Row } from "react-bootstrap";
+import { Card, Carousel, Col, Row } from "react-bootstrap";
+
+import { SERVER_URL } from "@/utils/constants";
 
 import ArtworkPictureCarouselItem from "./ArtworkPictureCarouselItem";
 
@@ -19,10 +21,16 @@ function ArtworkPictureCarousel({
             <Carousel>
               {other_pictures.map((pic, index) => {
                 return (
-                  <ArtworkPictureCarouselItem
-                    imageUrl={pic}
-                    key={`${pic}_${index}`}
-                  />
+                  <Carousel.Item className="mb-5 px-3" key={`${pic}_${index}`}>
+                    <Card className="mx-5 p-2" border="secondary">
+                      <Card.Img
+                        src={`${SERVER_URL}/${pic}`}
+                        width="500px"
+                        height="300px"
+                        style={{ objectFit: "contain" }}
+                      />
+                    </Card>
+                  </Carousel.Item>
                 );
               })}
             </Carousel>
