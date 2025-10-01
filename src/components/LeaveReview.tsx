@@ -59,22 +59,22 @@ function LeaveReview({ artwork_id }: LeaveReviewProps) {
   };
 
   return (
-    <Row className="mx-5 mt-5 mb-5 floating-element">
-      <Col>
-        <Formik
-          initialValues={initialValues}
-          onSubmit={onSubmit}
-          validationSchema={reviewSchema}
-        >
-          {({ errors, touched }) => (
-            <Form ref={form}>
-              <RBForm.Group className="mb-3">
-                <RBForm.Label>
-                  <h4>{t("components.leave_review.add_review")}</h4>
-                </RBForm.Label>
+    <>
+      {loggedIn ? (
+        <Row className="mx-5 mt-5 mb-5 floating-element">
+          <Col>
+            <Formik
+              initialValues={initialValues}
+              onSubmit={onSubmit}
+              validationSchema={reviewSchema}
+            >
+              {({ errors, touched }) => (
+                <Form ref={form}>
+                  <RBForm.Group className="mb-3">
+                    <RBForm.Label>
+                      <h4>{t("components.leave_review.add_review")}</h4>
+                    </RBForm.Label>
 
-                {loggedIn ? (
-                  <>
                     <InputComponent
                       label="Title"
                       name="title"
@@ -125,16 +125,16 @@ function LeaveReview({ artwork_id }: LeaveReviewProps) {
                     >
                       {t("components.leave_review.submit")}
                     </Button>
-                  </>
-                ) : (
-                  <p>{t("components.leave_review.login_required")}</p>
-                )}
-              </RBForm.Group>
-            </Form>
-          )}
-        </Formik>
-      </Col>
-    </Row>
+                  </RBForm.Group>
+                </Form>
+              )}
+            </Formik>
+          </Col>
+        </Row>
+      ) : (
+        ""
+      )}
+    </>
   );
 }
 
