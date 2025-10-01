@@ -201,7 +201,7 @@ function ArtworkDetails({ artwork_id, artwork }: ArtworkDetailsProps) {
           </Col>
         </Row>
 
-        <Row>{representReviews}</Row>
+        <Row className="mt-5">{representReviews}</Row>
       </Row>
 
       <LeaveReview artwork_id={artwork_id} />
