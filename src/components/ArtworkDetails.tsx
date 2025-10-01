@@ -12,10 +12,10 @@ import { UserDataContext } from "@/components/providers/UserDataProvider";
 
 import { Artwork, Review, Tag } from "@/fetching/types";
 
+import ArtworkReview from "./ArtworkReview";
 import FavouriteButton from "./buttons/FavouriteButton";
 import ShoppingCartButton from "./buttons/ShoppingCartButton";
 import ArtworkPictureCarousel from "./carousels/ArtworkPictureCarousel";
-import ArtworkReviewCarousel from "./carousels/ArtworkReviewCarousel";
 import LeaveReview from "./LeaveReview";
 
 import useAxios from "@/hooks/useAxios";
@@ -40,8 +40,22 @@ function ArtworkDetails({ artwork_id, artwork }: ArtworkDetailsProps) {
     artwork_id
   );
 
-  const reviews = useLoading(reviewsData, (reviews) => {
-    return <ArtworkReviewCarousel reviews={reviews} />;
+  const representReviews = useLoading(reviewsData, (reviews) => {
+    return (
+      <>
+        {reviews.length !== 0 ? (
+          <>
+            {reviews.map((review, index) => (
+              <ArtworkReview key={index} review={review} index={index + 1} />
+            ))}
+          </>
+        ) : (
+          <Row className="px-3 mx-auto floating-element mb-5">
+            <Col className="text-center">{t("common.no_reviews")}</Col>
+          </Row>
+        )}
+      </>
+    );
   });
 
   return (
@@ -187,7 +201,7 @@ function ArtworkDetails({ artwork_id, artwork }: ArtworkDetailsProps) {
           </Col>
         </Row>
 
-        <Row>{reviews}</Row>
+        <Row>{representReviews}</Row>
       </Row>
 
       <LeaveReview artwork_id={artwork_id} />

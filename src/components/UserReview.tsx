@@ -10,10 +10,10 @@ import { Card, Col, Row } from "react-bootstrap";
 import { useI18n } from "@/components/providers/I18nProvider";
 
 import { approveReview, disapproveReview } from "@/fetching/fetching";
-import { Review as ReviewType } from "@/fetching/types";
+import { Review } from "@/fetching/types";
 
 type UserReviewProps = {
-  review: ReviewType;
+  review: Review;
   admin: boolean;
   index: number;
 };

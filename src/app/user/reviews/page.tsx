@@ -9,14 +9,14 @@ import { useI18n } from "@/components/providers/I18nProvider";
 import SubPageTitle from "@/components/SubPageTitle";
 import UserReview from "@/components/UserReview";
 
-import { Review as ReviewType } from "@/fetching/types";
+import { Review } from "@/fetching/types";
 
 import useAxios from "@/hooks/useAxios";
 import useLoading from "@/hooks/useLoading";
 
 function Reviews() {
   const { t } = useI18n();
-  const reviews = useAxios(`/${USERS_URL}/get_reviews_of_user`) as ReviewType[];
+  const reviews = useAxios(`/${USERS_URL}/get_reviews_of_user`) as Review[];
   const representReviews = useLoading(reviews, (reviews) => {
     return (
       <>
