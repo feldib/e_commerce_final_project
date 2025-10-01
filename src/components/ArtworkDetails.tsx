@@ -32,7 +32,7 @@ function ArtworkDetails({ artwork_id, artwork }: ArtworkDetailsProps) {
   const { t, locale } = useI18n();
   const { getCategoryNameById } = useCategories(locale);
   const { loggedIn } = React.useContext(UserDataContext);
-  const reviewsData = useAxios(`/reviews?id=${artwork?.id}`) as Review[];
+  const reviewsData = useAxios(`/reviews?id=${artwork_id}`) as Review[];
 
   const { quantity, setQuantity } = useQuantity(
     loggedIn,
