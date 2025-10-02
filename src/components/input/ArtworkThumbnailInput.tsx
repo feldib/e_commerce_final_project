@@ -66,8 +66,8 @@ function ArtworkThumbnailInput<T extends Record<string, unknown>>({
                     await replaceThumbnail(artworkId, file);
                     showSuccessToast(
                       t(
-                        "app.admin.edit_artwork.thumbnail_uploaded_successfully"
-                      )
+                        "app.admin.edit_artwork.thumbnail_uploaded_successfully",
+                      ),
                     );
                   }
                   // We create an object URL in both modes
@@ -104,7 +104,7 @@ function ArtworkThumbnailInput<T extends Record<string, unknown>>({
             alt={t(
               isEdit
                 ? "app.admin.edit_artwork.current_thumbnail"
-                : "app.admin.add_new_artwork.uploaded_thumbnail"
+                : "app.admin.add_new_artwork.uploaded_thumbnail",
             )}
           />
 

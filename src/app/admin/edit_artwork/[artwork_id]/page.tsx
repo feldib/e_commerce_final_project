@@ -110,14 +110,14 @@ function EditArtworkData() {
                     await updateArtworkData(
                       artworkId,
                       "category_id",
-                      category.id
+                      category.id,
                     );
                     showSuccessToast(
-                      t("app.admin.edit_artwork.category_updated_successfully")
+                      t("app.admin.edit_artwork.category_updated_successfully"),
                     );
                   } catch {
                     showErrorToast(
-                      t("app.admin.edit_artwork.failed_to_update_category")
+                      t("app.admin.edit_artwork.failed_to_update_category"),
                     );
                   }
                 }}
