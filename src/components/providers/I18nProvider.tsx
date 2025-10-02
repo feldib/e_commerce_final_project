@@ -1,10 +1,18 @@
 "use client";
 
-import React, { createContext, ReactNode, useContext, useState } from "react";
+import React, {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 import en from "../../../messages/en.json";
 import he from "../../../messages/he.json";
 import hu from "../../../messages/hu.json";
+
+import { getStoredLocale, setStoredLocale } from "@/helpers/helpers";
 
 type Locale = "en" | "he" | "hu";
 type Messages = typeof en;
@@ -25,6 +33,18 @@ const messages: Record<Locale, Messages> = {
 
 export function I18nProvider({ children }: { children: ReactNode }) {
   const [locale, setLocale] = useState<Locale>("en");
+
+  useEffect(() => {
+    const storedLocale = getStoredLocale<Locale>();
+    if (storedLocale) {
+      setLocale(storedLocale);
+    }
+  }, []);
+
+  const handleSetLocale = (newLocale: Locale) => {
+    setLocale(newLocale);
+    setStoredLocale(newLocale);
+  };
 
   const t = (key: string): string => {
     const keys = key.split(".");
@@ -50,7 +70,7 @@ export function I18nProvider({ children }: { children: ReactNode }) {
   }, [locale]);
 
   return (
-    <I18nContext.Provider value={{ locale, setLocale, t }}>
+    <I18nContext.Provider value={{ locale, setLocale: handleSetLocale, t }}>
       {children}
     </I18nContext.Provider>
   );

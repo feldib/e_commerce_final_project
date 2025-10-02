@@ -16,7 +16,7 @@ import { Artwork, ShoppingCartItem } from "@/fetching/types";
 const renderData = <T,>(
   dataLines: T[],
   makeRows: (dataLines: T[]) => React.JSX.Element,
-  noResultsText: string,
+  noResultsText: string
 ): React.JSX.Element => {
   if (dataLines.length > 0) {
     return <>{makeRows(dataLines)}</>;
@@ -33,12 +33,12 @@ const renderData = <T,>(
 
 const increaseLocalStorageShoppingCartQuantity = (
   artwork_id: number,
-  stored_amount: number,
+  stored_amount: number
 ) => {
   const shoppingCart = getShoppingCartFromLocalStorage();
 
   const existingRecordIndex = shoppingCart.findIndex(
-    (item: ShoppingCartItem) => item.artwork_id === artwork_id,
+    (item: ShoppingCartItem) => item.artwork_id === artwork_id
   );
 
   if (stored_amount > 0) {
@@ -62,7 +62,7 @@ const increaseLocalStorageShoppingCartQuantity = (
 const decreaseLocalStorageShoppingCartQuantity = (artwork_id: number) => {
   const shoppingCart = getShoppingCartFromLocalStorage();
   const existingRecordIndex = shoppingCart.findIndex(
-    (item: ShoppingCartItem) => item.artwork_id === artwork_id,
+    (item: ShoppingCartItem) => item.artwork_id === artwork_id
   );
 
   if (
@@ -83,7 +83,7 @@ const removeLocalStorageShoppingCartQuantity = (artwork_id: number) => {
   const shoppingCart = getShoppingCartFromLocalStorage();
 
   const existingRecordIndex = shoppingCart.findIndex(
-    (item: ShoppingCartItem) => item.artwork_id === artwork_id,
+    (item: ShoppingCartItem) => item.artwork_id === artwork_id
   );
 
   if (
@@ -190,11 +190,27 @@ function preventNonNumericInput(event: React.KeyboardEvent<HTMLInputElement>) {
   }
 }
 
+const getStoredLocale = <T extends string>(): T | null => {
+  if (typeof window === "undefined") return null;
+
+  const storedLocale = localStorage.getItem("userLocale");
+  return storedLocale && ["en", "he", "hu"].includes(storedLocale)
+    ? (storedLocale as T)
+    : null;
+};
+
+const setStoredLocale = <T extends string>(locale: T) => {
+  if (typeof window !== "undefined") {
+    localStorage.setItem("userLocale", locale);
+  }
+};
+
 export {
   checkIfShoppingCartIsEmpty,
   decreaseLocalStorageShoppingCartQuantity,
   getLocalStorageShoppingCart,
   getShoppingCartFromLocalStorage,
+  getStoredLocale,
   increaseLocalStorageShoppingCartQuantity,
   preventNonNumericInput,
   redirectIfNotAdmin,
@@ -202,4 +218,5 @@ export {
   removeLocalStorageShoppingCartQuantity,
   renderData,
   replacePreviousShoppingCart,
+  setStoredLocale,
 };
