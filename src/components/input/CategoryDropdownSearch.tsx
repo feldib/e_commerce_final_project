@@ -11,12 +11,15 @@ import LoadingSpinner from "../LoadingSpinner";
 
 import { useCategories } from "@/hooks/useCategories";
 
-type CategoriesDropdownProps = {
+type CategoryDropdownSearchProps = {
   categories: Category[];
   setValue: (value: string) => void;
 };
 
-function CategoriesDropdown({ categories, setValue }: CategoriesDropdownProps) {
+function CategoryDropdownSearch({
+  categories,
+  setValue,
+}: CategoryDropdownSearchProps) {
   const { t, locale } = useI18n();
   const { getCategoryName } = useCategories(locale);
 
@@ -28,7 +31,7 @@ function CategoriesDropdown({ categories, setValue }: CategoriesDropdownProps) {
         <>
           {categories.map((category: Category, index: number) => (
             <Dropdown.Item
-              eventKey={category.id}
+              eventKey={category.id.toString()}
               key={index}
               id={JSON.stringify(category.id)}
               style={{ cursor: "pointer" }}
@@ -41,6 +44,7 @@ function CategoriesDropdown({ categories, setValue }: CategoriesDropdownProps) {
       setCats(categoryButtons);
     }
   }, [categories, getCategoryName]);
+
   return (
     <Col className="mx-auto mb-3">
       <Dropdown
@@ -69,4 +73,4 @@ function CategoriesDropdown({ categories, setValue }: CategoriesDropdownProps) {
   );
 }
 
-export default CategoriesDropdown;
+export default CategoryDropdownSearch;

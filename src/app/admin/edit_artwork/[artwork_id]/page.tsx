@@ -1,235 +1,37 @@
 "use client";
 import React from "react";
-import { Tag as ReactTag, WithContext as ReactTags } from "react-tag-input";
+import { WithContext as ReactTags } from "react-tag-input";
 
-import { useParams, useRouter } from "next/navigation";
-
-import {
-  faAsterisk,
-  faDollarSign,
-  faImages,
-  faQuestion,
-  faX,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  Col,
-  Container,
-  Dropdown,
-  Form,
-  InputGroup,
-  Row,
-} from "react-bootstrap";
-import { useFormik } from "formik";
-import * as Yup from "yup";
+import { faDollarSign, faQuestion } from "@fortawesome/free-solid-svg-icons";
+import { Col, Container, Form, Row } from "react-bootstrap";
 import { ToastContainer } from "react-toastify";
 
-import {
-  MAX_IMAGE_SIZE,
-  SERVER_URL,
-  TAG_SEPARATORS,
-  VALID_IMAGE_EXTENSIONS,
-} from "@/utils/constants";
+import { TAG_SEPARATORS } from "@/utils/constants";
 import { showErrorToast, showSuccessToast } from "@/utils/toastUtils";
 
 import FloatingBackButton from "@/components/buttons/FloatingBackButton";
+import ArtworkImagesInput from "@/components/input/ArtworkImagesInput";
+import ArtworkThumbnailInput from "@/components/input/ArtworkThumbnailInput";
+import CategoryDropdownArtwork from "@/components/input/CategoryDropdownArtwork";
 import ChangeArtworkDataInputComponent from "@/components/input/ChangeArtworkDataInputComponent";
 import PageTitle from "@/components/PageTitle";
-import { useI18n } from "@/components/providers/I18nProvider";
 
-import {
-  addNewOtherPicture,
-  removePicture,
-  replaceThumbnail,
-  updateArtworkData,
-} from "@/fetching/fetching";
-import { Artwork, Category } from "@/fetching/types";
+import { updateArtworkData } from "@/fetching/fetching";
 
-import useAxios from "@/hooks/useAxios";
-import { useCategories } from "@/hooks/useCategories";
-
-interface EditArtworkFormValues extends Record<string, unknown> {
-  title: string;
-  artist_name: string;
-  price: string;
-  tags: ReactTag[];
-  quantity: string;
-  category_id: string;
-  thumbnail: string;
-  other_pictures: string[];
-  description: string;
-}
+import useEditArtworkData from "./useEditArtworkData";
 
 function EditArtworkData() {
-  const { t, locale } = useI18n();
-  const { artwork_id: artworkIdString } = useParams();
-  const artworkId = Number(artworkIdString);
-  const artworkData = useAxios(`/artwork?id=${artworkId}`) as Artwork;
-
-  const categories = useAxios("/categories") as Category[];
-  const { getCategoryNameById } = useCategories(locale);
-
-  const categoriesRepresentedMemo = React.useMemo(() => {
-    if (!categories) return null;
-    return (
-      <>
-        {categories.map((cat: Category, index: number) => (
-          <Dropdown.Item eventKey={JSON.stringify(cat)} key={index}>
-            {getCategoryNameById(cat.id)}
-          </Dropdown.Item>
-        ))}
-      </>
-    );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [categories, locale, getCategoryNameById]);
-
-  const router = useRouter();
-
-  function isValidImage(fileName: string): boolean {
-    if (!fileName) return false;
-    const ext = fileName.split(".").pop()?.toLowerCase() || "";
-    return VALID_IMAGE_EXTENSIONS.includes(
-      ext as (typeof VALID_IMAGE_EXTENSIONS)[number],
-    );
-  }
-
-  function validateNewFile(file: File): string | null {
-    if (!isValidImage(file.name)) {
-      return t("validation.not_valid_image_type");
-    }
-    if (file.size > MAX_IMAGE_SIZE) {
-      return "Max allowed size is 100KB";
-    }
-    return null;
-  }
-
-  const formik = useFormik<EditArtworkFormValues>({
-    initialValues: {
-      title: "",
-      artist_name: "",
-      price: "",
-      tags: [] as ReactTag[],
-      quantity: "",
-      category_id: "",
-      thumbnail: "",
-      other_pictures: [] as string[],
-      description: "",
-    },
-
-    validationSchema: Yup.object().shape({
-      title: Yup.string().required(t("validation.title_required")),
-      artist_name: Yup.string().required(t("validation.name_required")),
-      price: Yup.number()
-        .required(t("validation.price_required"))
-        .min(1, t("validation.price_min")),
-      quantity: Yup.number()
-        .required(t("validation.quantity_required"))
-        .min(1, t("validation.quantity_min")),
-      category_id: Yup.number().required(t("validation.category_required")),
-      thumbnail: Yup.mixed().required(t("validation.thumbnail_required")),
-      tags: Yup.array()
-        .min(3, t("validation.add_minimum_tags"))
-        .of(
-          Yup.object().shape({
-            id: Yup.string(),
-            text: Yup.string(),
-          }),
-        ),
-      other_pictures: Yup.array(),
-      description: Yup.string().required(t("validation.description_required")),
-    }),
-    onSubmit: () => {
-      // there is no single submission
-      return;
-    },
-  });
-
-  const [tags, setTags] = React.useState<ReactTag[]>([]);
-
-  React.useEffect(() => {
-    if (artworkData) {
-      const transformedTags =
-        artworkData.tags?.map((obj: { tname: string }) => ({
-          id: obj.tname,
-          text: obj.tname,
-          className: "",
-        })) || [];
-
-      formik.setValues({
-        title: artworkData.title,
-        artist_name: artworkData.artist_name,
-        price: artworkData.price.toString(),
-        tags: transformedTags,
-        quantity: artworkData.quantity.toString(),
-        category_id: artworkData.category_id.toString(),
-        thumbnail: `${SERVER_URL}/${artworkData.thumbnail}`,
-        other_pictures:
-          artworkData.other_pictures?.map((pic: string) => {
-            return `${SERVER_URL}/${pic}`;
-          }) || [],
-        description: artworkData.description || "",
-      });
-      setTags(transformedTags);
-
-      const currentCategory = categories?.find(
-        (cat: Category) => cat.id === artworkData.category_id,
-      );
-      if (currentCategory) {
-        setChoseCategory(getCategoryNameById(currentCategory.id));
-      }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [artworkData, categories]);
-
-  const [initialTagsLoaded, setInitialTagsLoaded] = React.useState(false);
-
-  React.useEffect(() => {
-    formik.setFieldValue("tags", tags);
-    // Only update server if this is not the initial load and tags have actually changed
-    if (initialTagsLoaded && tags.length >= 3) {
-      updateArtworkData(
-        artworkId,
-        "tags",
-        tags.map((tag: ReactTag) => {
-          return { tname: tag.text };
-        }),
-      );
-    }
-    // Mark that initial tags have been loaded after first render
-    if (!initialTagsLoaded && tags.length > 0) {
-      setInitialTagsLoaded(true);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [tags, artworkId]);
-
-  const createHandleDelete = (
-    tgs: ReactTag[],
-    setTgs: React.Dispatch<React.SetStateAction<ReactTag[]>>,
-  ) => {
-    return (i: number) => {
-      setTgs(tgs.filter((_, index) => index !== i));
-    };
-  };
-
-  const createHandleAddition = (
-    tgs: ReactTag[],
-    setTgs: React.Dispatch<React.SetStateAction<ReactTag[]>>,
-  ) => {
-    return (tag: ReactTag) => {
-      setTgs([...tgs, tag]);
-    };
-  };
-
-  const [chosenCategory, setChoseCategory] = React.useState("Choose");
-
-  React.useEffect(() => {
-    const categoryIdNum = Number(formik.values.category_id);
-    if (formik.values.category_id && !isNaN(categoryIdNum)) {
-      setChoseCategory(getCategoryNameById(categoryIdNum));
-    } else {
-      setChoseCategory(t("common.choose"));
-    }
-  }, [locale, formik.values.category_id, getCategoryNameById, t]);
+  const {
+    formik,
+    tags,
+    setTags,
+    createHandleDelete,
+    createHandleAddition,
+    categories,
+    artworkId,
+    t,
+    router,
+  } = useEditArtworkData();
 
   return (
     <Container className="px-3">
@@ -298,224 +100,41 @@ function EditArtworkData() {
 
             <Form.Group className="pb-3">
               <Form.Label>{t("common.category")}</Form.Label>
-              <Dropdown
-                onSelect={async (cat) => {
-                  if (cat) {
-                    const obj = JSON.parse(cat);
-                    formik.setFieldValue("category_id", obj.id);
-                    setChoseCategory(getCategoryNameById(obj.id));
-
-                    try {
-                      await updateArtworkData(artworkId, "category_id", obj.id);
-                      showSuccessToast(
-                        t(
-                          "app.admin.edit_artwork.category_updated_successfully",
-                        ),
-                      );
-                    } catch {
-                      showErrorToast(
-                        t("app.admin.edit_artwork.failed_to_update_category"),
-                      );
-                    }
+              <CategoryDropdownArtwork
+                categories={categories}
+                formik={formik}
+                fieldName="category_id"
+                required={true}
+                onCategoryChange={async (category) => {
+                  try {
+                    await updateArtworkData(
+                      artworkId,
+                      "category_id",
+                      category.id
+                    );
+                    showSuccessToast(
+                      t("app.admin.edit_artwork.category_updated_successfully")
+                    );
+                  } catch {
+                    showErrorToast(
+                      t("app.admin.edit_artwork.failed_to_update_category")
+                    );
                   }
                 }}
-              >
-                <Dropdown.Toggle variant="outilne-dark">
-                  {chosenCategory}
-                </Dropdown.Toggle>
-                <Dropdown.Menu>{categoriesRepresentedMemo}</Dropdown.Menu>
-              </Dropdown>
-              {formik.errors.category_id && (
-                <div className="input-error-message">
-                  {formik.errors.category_id}
-                </div>
-              )}
+              />
             </Form.Group>
 
-            <Form.Group className="pb-3">
-              <Form.Label>{t("common.thumbnail")}</Form.Label>
-              {formik.errors.thumbnail && (
-                <FontAwesomeIcon
-                  icon={faAsterisk}
-                  style={{ color: "red" }}
-                  className="mx-3"
-                />
-              )}
-              <InputGroup>
-                <InputGroup.Text>
-                  <FontAwesomeIcon icon={faImages} className="mx-3" />
-                </InputGroup.Text>
+            <ArtworkThumbnailInput
+              formik={formik}
+              isEdit={true}
+              artworkId={artworkId}
+            />
 
-                <Form.Control
-                  type="file"
-                  placeholder={t("app.admin.add_new_artwork.upload_thumbnail")}
-                  onChange={async (e: React.ChangeEvent<HTMLInputElement>) => {
-                    const files = e.target.files;
-                    if (files && files[0]) {
-                      const file = files[0];
-                      const validationError = validateNewFile(file);
-
-                      if (validationError) {
-                        alert(validationError);
-                        e.target.value = ""; // Reset the input
-                        return;
-                      }
-
-                      try {
-                        await replaceThumbnail(artworkId, file);
-                        formik.setFieldValue(
-                          "thumbnail",
-                          URL.createObjectURL(file),
-                        );
-                        showSuccessToast(
-                          t(
-                            "app.admin.edit_artwork.thumbnail_uploaded_successfully",
-                          ),
-                        );
-                      } catch {
-                        showErrorToast(
-                          t(
-                            "app.admin.edit_artwork.failed_to_upload_thumbnail",
-                          ),
-                        );
-                        e.target.value = ""; // Reset the input
-                      }
-                    }
-                  }}
-                />
-              </InputGroup>
-
-              {formik.values.thumbnail && (
-                <Col
-                  className="mb-3 uploaded-thumbnail-container"
-                  style={{
-                    position: "relative",
-                    height: "150px",
-                    width: "150px",
-                  }}
-                >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={formik.values.thumbnail}
-                    className="mt-3 uploaded-thumbnail"
-                    alt={t("app.admin.edit_artwork.current_thumbnail")}
-                  />
-                </Col>
-              )}
-
-              {formik.errors.thumbnail}
-            </Form.Group>
-
-            <Form.Group className="pb-3">
-              <Form.Label>{t("common.images")}</Form.Label>
-              {formik.errors.other_pictures && (
-                <FontAwesomeIcon
-                  icon={faAsterisk}
-                  style={{ color: "red" }}
-                  className="mx-3"
-                />
-              )}
-              <InputGroup>
-                <InputGroup.Text>
-                  <FontAwesomeIcon icon={faImages} className="mx-3" />
-                </InputGroup.Text>
-
-                <Form.Control
-                  type="file"
-                  placeholder={t(
-                    "app.admin.add_new_artwork.upload_other_pictures",
-                  )}
-                  onChange={async (e: React.ChangeEvent<HTMLInputElement>) => {
-                    const files = e.target.files;
-                    if (files && files[0]) {
-                      const file = files[0];
-                      const validationError = validateNewFile(file);
-
-                      if (validationError) {
-                        alert(validationError);
-                        e.target.value = ""; // Reset the input
-                        return;
-                      }
-
-                      try {
-                        await addNewOtherPicture(artworkId, file);
-                        formik.setFieldValue("other_pictures", [
-                          ...formik.values.other_pictures,
-                          URL.createObjectURL(file),
-                        ]);
-                        e.target.value = ""; // Reset the input for next upload
-                        showSuccessToast(
-                          t(
-                            "app.admin.edit_artwork.image_uploaded_successfully",
-                          ),
-                        );
-                      } catch {
-                        showErrorToast(
-                          t("app.admin.edit_artwork.failed_to_upload_image"),
-                        );
-                        e.target.value = ""; // Reset the input
-                      }
-                    }
-                  }}
-                />
-              </InputGroup>
-
-              {formik.values.other_pictures && (
-                <Row>
-                  {formik.values.other_pictures.map((pic, index) => {
-                    return (
-                      <Col
-                        key={index}
-                        className="mb-3 uploaded-image-container"
-                        style={{
-                          position: "relative",
-                          height: "150px",
-                          width: "150px",
-                        }}
-                      >
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          src={pic}
-                          alt={t(
-                            "app.admin.add_new_artwork.uploaded_other_picture",
-                          )}
-                          className="mt-3 uploaded-image"
-                        />
-
-                        <FontAwesomeIcon
-                          icon={faX}
-                          className="remove-uploaded-image"
-                          onClick={async () => {
-                            try {
-                              if (SERVER_URL && pic.startsWith(SERVER_URL)) {
-                                // This is an existing image from server, remove it
-                                const fileName = pic.split("/").pop() || "";
-                                await removePicture(artworkId, fileName);
-                              }
-
-                              // Remove from the form state
-                              const newArray =
-                                formik.values.other_pictures.filter(
-                                  (_, picIndex) => picIndex !== index,
-                                );
-                              formik.setFieldValue("other_pictures", newArray);
-                            } catch {
-                              showErrorToast(
-                                t(
-                                  "app.admin.edit_artwork.failed_to_remove_image",
-                                ),
-                              );
-                            }
-                          }}
-                        />
-                      </Col>
-                    );
-                  })}
-                </Row>
-              )}
-
-              {formik.errors.other_pictures}
-            </Form.Group>
+            <ArtworkImagesInput
+              formik={formik}
+              isEdit={true}
+              artworkId={artworkId}
+            />
 
             <ChangeArtworkDataInputComponent
               label="Description"

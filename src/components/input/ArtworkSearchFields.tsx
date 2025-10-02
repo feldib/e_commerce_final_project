@@ -8,7 +8,7 @@ import Queries from "@/components/Queries";
 
 import { Category, SearchFormikInstance, SearchParams } from "@/fetching/types";
 
-import CategoriesDropdown from "./CategoriesDropdown";
+import CategoryDropdownSearch from "./CategoryDropdownSearch";
 import SearchField from "./SearchField";
 
 type ArtworkSearchFieldsProps = {
@@ -94,7 +94,7 @@ function ArtworkSearchFields({
       </Row>
 
       <Row className="mx-auto">
-        <CategoriesDropdown
+        <CategoryDropdownSearch
           categories={categories}
           setValue={(value: string | number) => {
             formik.setFieldValue("category_id", value);

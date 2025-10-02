@@ -2,7 +2,11 @@ import { useMemo } from "react";
 
 import * as Yup from "yup";
 
+import { MAX_IMAGE_SIZE } from "@/utils/constants";
+
 import { useI18n } from "@/components/providers/I18nProvider";
+
+import { isValidImage } from "@/helpers/fileValidation";
 
 // Reusable validation functions
 const createEmailValidation = (t: (key: string) => string) =>
@@ -49,6 +53,46 @@ const createRepeatPasswordValidation = (
   Yup.string()
     .required(t("validation.repeat_password_required"))
     .oneOf([Yup.ref(fieldName)], t("validation.password_match"));
+
+const createDescriptionValidation = (t: (key: string) => string) =>
+  Yup.string().required(t("validation.description_required"));
+
+// Using imported isValidImage function from fileValidation
+
+const createThumbnailValidation = (t: (key: string) => string) =>
+  Yup.mixed()
+    .required(t("validation.thumbnail_required"))
+    .test("is-valid-type", t("validation.not_valid_image_type"), (value) =>
+      isValidImage(value instanceof File ? value.name : ""),
+    )
+    .test(
+      "is-valid-size",
+      t("validation.max_allowed_size"),
+      (value) => value instanceof File && value.size <= MAX_IMAGE_SIZE,
+    );
+
+const createOtherPicturesValidation = (t: (key: string) => string) =>
+  Yup.array().of(
+    Yup.mixed()
+      .test("is-valid-type", t("validation.not_valid_image_type"), (value) =>
+        isValidImage(value instanceof File ? value.name : ""),
+      )
+      .test(
+        "is-valid-size",
+        t("validation.max_allowed_size"),
+        (value) => value instanceof File && value.size <= MAX_IMAGE_SIZE,
+      ),
+  );
+
+const createTagsValidation = (t: (key: string) => string) =>
+  Yup.array()
+    .min(3, t("validation.add_minimum_tags"))
+    .of(
+      Yup.object().shape({
+        id: Yup.string(),
+        text: Yup.string(),
+      }),
+    );
 
 // Individual schema hooks for better performance - only create what you need
 export const useLoginSchema = () => {
@@ -156,6 +200,50 @@ export const useRegistrationSchema = () => {
       repeatPassword: createRepeatPasswordValidation(t),
       firstName: createFirstNameValidation(t),
       lastName: createLastNameValidation(t),
+    });
+  }, [t, locale]); // eslint-disable-line react-hooks/exhaustive-deps -- locale needed for language changes
+};
+
+export const useNewArtworkSchema = () => {
+  const { t, locale } = useI18n();
+
+  return useMemo(() => {
+    return Yup.object().shape({
+      title: createTitleValidation(t),
+      artist_name: Yup.string().required(t("validation.name_required")),
+      price: Yup.number()
+        .required(t("validation.price_required"))
+        .min(1, t("validation.price_min")),
+      quantity: Yup.number()
+        .required(t("validation.quantity_required"))
+        .min(1, t("validation.quantity_min")),
+      category_id: Yup.number().required(t("validation.category_required")),
+      thumbnail: createThumbnailValidation(t),
+      tags: createTagsValidation(t),
+      other_pictures: createOtherPicturesValidation(t),
+      description: createDescriptionValidation(t),
+    });
+  }, [t, locale]); // eslint-disable-line react-hooks/exhaustive-deps -- locale needed for language changes
+};
+
+export const useEditArtworkSchema = () => {
+  const { t, locale } = useI18n();
+
+  return useMemo(() => {
+    return Yup.object().shape({
+      title: createTitleValidation(t),
+      artist_name: Yup.string().required(t("validation.name_required")),
+      price: Yup.number()
+        .required(t("validation.price_required"))
+        .min(1, t("validation.price_min")),
+      quantity: Yup.number()
+        .required(t("validation.quantity_required"))
+        .min(1, t("validation.quantity_min")),
+      category_id: Yup.number().required(t("validation.category_required")),
+      thumbnail: Yup.mixed().required(t("validation.thumbnail_required")),
+      tags: createTagsValidation(t),
+      other_pictures: Yup.array(),
+      description: createDescriptionValidation(t),
     });
   }, [t, locale]); // eslint-disable-line react-hooks/exhaustive-deps -- locale needed for language changes
 };

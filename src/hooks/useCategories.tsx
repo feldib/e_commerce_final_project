@@ -24,7 +24,7 @@ export const useCategories = (locale: string) => {
       const availableTranslations = Object.values(category.translations);
       return availableTranslations.length > 0 ? availableTranslations[0] : "";
     },
-    [locale]
+    [locale],
   );
 
   const getCategoryNameById = useCallback(
@@ -32,7 +32,7 @@ export const useCategories = (locale: string) => {
       const category = categories?.find((cat) => cat.id === categoryId);
       return category ? getCategoryName(category) : "";
     },
-    [categories, getCategoryName]
+    [categories, getCategoryName],
   );
 
   return {
