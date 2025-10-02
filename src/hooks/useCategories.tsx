@@ -9,17 +9,22 @@ export const useCategories = (locale: string) => {
 
   const getCategoryName = useCallback(
     (category: Category): string => {
-      switch (locale) {
-        case "he":
-          return category.cname_he || category.cname_en;
-        case "hu":
-          return category.cname_hu || category.cname_en;
-        case "en":
-        default:
-          return category.cname_en;
+      if (!category?.translations) {
+        return "";
       }
+
+      if (category.translations[locale]) {
+        return category.translations[locale];
+      }
+
+      if (category.translations.en) {
+        return category.translations.en;
+      }
+
+      const availableTranslations = Object.values(category.translations);
+      return availableTranslations.length > 0 ? availableTranslations[0] : "";
     },
-    [locale],
+    [locale]
   );
 
   const getCategoryNameById = useCallback(
@@ -27,7 +32,7 @@ export const useCategories = (locale: string) => {
       const category = categories?.find((cat) => cat.id === categoryId);
       return category ? getCategoryName(category) : "";
     },
-    [categories, getCategoryName],
+    [categories, getCategoryName]
   );
 
   return {

@@ -138,7 +138,7 @@ function ShoppingCartDataLines({
                   try {
                     increaseLocalStorageShoppingCartQuantity(
                       line.id,
-                      line.stored_amount - quantity
+                      line.stored_amount - quantity,
                     );
                     showCartItemAddedToast(t);
                     setQuantity(quantity + 1);

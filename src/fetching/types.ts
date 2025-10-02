@@ -29,11 +29,16 @@ export interface Tag {
   tname: string;
 }
 
+// New category structure with MongoDB translations
+export interface CategoryTranslation {
+  languageCode: string;
+  name: string;
+}
+
 export interface Category {
   id: number;
-  cname_en: string;
-  cname_he: string;
-  cname_hu: string;
+  removed: boolean;
+  translations: { [languageCode: string]: string };
 }
 
 export interface Review {
