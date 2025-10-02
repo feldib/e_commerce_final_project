@@ -19,18 +19,20 @@ interface ArtworkImagesInputProps<T extends Record<string, unknown>> {
   formik: FormikProps<T>;
   isEdit?: boolean;
   artworkId?: number;
+  label: string;
 }
 
 function ArtworkImagesInput<T extends Record<string, unknown>>({
   formik,
   isEdit = false,
   artworkId,
+  label,
 }: ArtworkImagesInputProps<T>) {
   const { t } = useI18n();
 
   return (
     <Form.Group className="pb-3">
-      <Form.Label>{t("common.images")}</Form.Label>
+      <Form.Label>{label}</Form.Label>
       {formik.errors.other_pictures && (
         <FontAwesomeIcon
           icon={faAsterisk}
@@ -70,12 +72,12 @@ function ArtworkImagesInput<T extends Record<string, unknown>>({
                     ]);
                     e.target.value = ""; // Reset the input for next upload
                     showSuccessToast(
-                      t("app.admin.edit_artwork.image_uploaded_successfully")
+                      t("app.admin.edit_artwork.image_uploaded_successfully"),
                     );
                   }
                 } catch {
                   showErrorToast(
-                    t("app.admin.edit_artwork.failed_to_upload_image")
+                    t("app.admin.edit_artwork.failed_to_upload_image"),
                   );
                   e.target.value = ""; // Reset the input
                 }
@@ -115,7 +117,9 @@ function ArtworkImagesInput<T extends Record<string, unknown>>({
                           : URL.createObjectURL(pic as Blob)
                       }
                       alt={t(
-                        "app.admin.add_new_artwork.uploaded_other_picture"
+                        isEdit
+                          ? "app.admin.edit_artwork.current_image"
+                          : "app.admin.add_new_artwork.uploaded_other_picture",
                       )}
                       className="mt-3 uploaded-image"
                     />
@@ -145,7 +149,9 @@ function ArtworkImagesInput<T extends Record<string, unknown>>({
                             formik.setFieldValue("other_pictures", newArray);
                           } catch {
                             showErrorToast(
-                              t("app.admin.edit_artwork.failed_to_remove_image")
+                              t(
+                                "app.admin.edit_artwork.failed_to_remove_image",
+                              ),
                             );
                           }
                         } else {
@@ -160,7 +166,7 @@ function ArtworkImagesInput<T extends Record<string, unknown>>({
                     />
                   </Col>
                 );
-              }
+              },
             )}
           </Row>
         )}

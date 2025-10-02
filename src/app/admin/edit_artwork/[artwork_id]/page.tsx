@@ -40,7 +40,7 @@ function EditArtworkData() {
         <Col className="mx-5 pb-5 ">
           <Form>
             <ChangeArtworkDataInputComponent
-              label="Title"
+              label={t("common.title")}
               name="title"
               type="text"
               placeholder={t("app.admin.add_new_artwork.enter_title")}
@@ -50,7 +50,7 @@ function EditArtworkData() {
             />
 
             <ChangeArtworkDataInputComponent
-              label="Artist"
+              label={t("common.artist")}
               name="artist_name"
               type="text"
               placeholder={t("app.admin.add_new_artwork.enter_artist_name")}
@@ -60,7 +60,7 @@ function EditArtworkData() {
             />
 
             <ChangeArtworkDataInputComponent
-              label="Price"
+              label={t("common.price")}
               name="price"
               type="number"
               placeholder={t("app.admin.add_new_artwork.enter_price")}
@@ -89,7 +89,7 @@ function EditArtworkData() {
             </Form.Group>
 
             <ChangeArtworkDataInputComponent
-              label="Quantity"
+              label={t("common.quantity")}
               name="quantity"
               type="number"
               placeholder={t("app.admin.add_new_artwork.enter_quantity")}
@@ -110,14 +110,14 @@ function EditArtworkData() {
                     await updateArtworkData(
                       artworkId,
                       "category_id",
-                      category.id
+                      category.id,
                     );
                     showSuccessToast(
-                      t("app.admin.edit_artwork.category_updated_successfully")
+                      t("app.admin.edit_artwork.category_updated_successfully"),
                     );
                   } catch {
                     showErrorToast(
-                      t("app.admin.edit_artwork.failed_to_update_category")
+                      t("app.admin.edit_artwork.failed_to_update_category"),
                     );
                   }
                 }}
@@ -128,16 +128,18 @@ function EditArtworkData() {
               formik={formik}
               isEdit={true}
               artworkId={artworkId}
+              label={t("common.thumbnail")}
             />
 
             <ArtworkImagesInput
               formik={formik}
               isEdit={true}
               artworkId={artworkId}
+              label={t("common.images")}
             />
 
             <ChangeArtworkDataInputComponent
-              label="Description"
+              label={t("common.description")}
               name="description"
               type="textarea"
               placeholder={t("app.admin.add_new_artwork.enter_description")}

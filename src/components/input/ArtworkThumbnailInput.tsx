@@ -8,9 +8,9 @@ import { FormikProps } from "formik";
 
 import { showSuccessToast } from "@/utils/toastUtils";
 
-import { useI18n } from "@/components/providers/I18nProvider";
-
 import { replaceThumbnail } from "@/fetching/fetching";
+
+import { useI18n } from "../providers/I18nProvider";
 
 import { validateNewFile } from "@/helpers/fileValidation";
 
@@ -18,18 +18,19 @@ interface ArtworkThumbnailInputProps<T extends Record<string, unknown>> {
   formik: FormikProps<T>;
   isEdit?: boolean;
   artworkId?: number;
+  label: string;
 }
 
 function ArtworkThumbnailInput<T extends Record<string, unknown>>({
   formik,
   isEdit = false,
   artworkId,
+  label,
 }: ArtworkThumbnailInputProps<T>) {
   const { t } = useI18n();
-
   return (
     <Form.Group className="pb-3">
-      <Form.Label>{t("common.thumbnail")}</Form.Label>
+      <Form.Label>{label}</Form.Label>
       {formik.errors.thumbnail && (
         <FontAwesomeIcon
           icon={faAsterisk}
@@ -65,8 +66,8 @@ function ArtworkThumbnailInput<T extends Record<string, unknown>>({
                     await replaceThumbnail(artworkId, file);
                     showSuccessToast(
                       t(
-                        "app.admin.edit_artwork.thumbnail_uploaded_successfully"
-                      )
+                        "app.admin.edit_artwork.thumbnail_uploaded_successfully",
+                      ),
                     );
                   }
                   // We create an object URL in both modes
@@ -103,7 +104,7 @@ function ArtworkThumbnailInput<T extends Record<string, unknown>>({
             alt={t(
               isEdit
                 ? "app.admin.edit_artwork.current_thumbnail"
-                : "app.admin.add_new_artwork.uploaded_thumbnail"
+                : "app.admin.add_new_artwork.uploaded_thumbnail",
             )}
           />
 

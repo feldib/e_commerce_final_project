@@ -39,15 +39,15 @@ function CategoryDropdownArtwork<T extends Record<string, unknown>>({
   const [chosenCategory, setChosenCategory] = React.useState<Category | null>(
     formik && formik.values[fieldName]
       ? categories?.find(
-          (cat) => cat.id === Number(formik.values[fieldName])
+          (cat) => cat.id === Number(formik.values[fieldName]),
         ) || null
-      : null
+      : null,
   );
 
   React.useEffect(() => {
     if (formik && formik.values[fieldName] && categories) {
       const category = categories.find(
-        (cat) => cat.id === Number(formik.values[fieldName])
+        (cat) => cat.id === Number(formik.values[fieldName]),
       );
       if (category && (!chosenCategory || category.id !== chosenCategory.id)) {
         setChosenCategory(category);

@@ -100,9 +100,17 @@ function AddNewArtworkPage() {
               />
             </Form.Group>
 
-            <ArtworkThumbnailInput formik={formik} isEdit={false} />
+            <ArtworkThumbnailInput
+              formik={formik}
+              isEdit={false}
+              label={t("common.thumbnail")}
+            />
 
-            <ArtworkImagesInput formik={formik} isEdit={false} />
+            <ArtworkImagesInput
+              formik={formik}
+              isEdit={false}
+              label={t("common.images")}
+            />
 
             <NewArtworkInputComponent
               label={t("common.description")}

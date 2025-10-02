@@ -102,7 +102,7 @@ const useEditArtworkData = () => {
         "tags",
         tags.map((tag: ReactTag) => {
           return { tname: tag.text };
-        })
+        }),
       );
     }
     // Mark that initial tags have been loaded after first render
