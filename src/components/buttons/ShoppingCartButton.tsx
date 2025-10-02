@@ -8,7 +8,7 @@ import { addToShoppingList } from "@/fetching/fetching";
 import { useI18n } from "../providers/I18nProvider";
 import SinglePurposeButton from "./SinglePurposeButton";
 
-import { increaseLocalStorageShoppingCartQuantity } from "@/helpers/helpers";
+import { increaseLocalStorageShoppingCartQuantity } from "@/helpers/shoppingCartHelpers";
 
 type ShoppingCartButtonProps = {
   artwork_id: number;

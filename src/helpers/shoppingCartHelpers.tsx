@@ -1,44 +1,20 @@
-import React from "react";
-
-import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
-
 import axiosConfigured from "@/utils/axiosConfigured";
 import { SERVER_URL } from "@/utils/constants";
 
 import {
   getDataOfArtworks,
-  getIsAdmin,
-  getLoggedIn,
   replaceSavedShoppingCart,
 } from "@/fetching/fetching";
 import { Artwork, ShoppingCartItem } from "@/fetching/types";
 
-const renderData = <T,>(
-  dataLines: T[],
-  makeRows: (dataLines: T[]) => React.JSX.Element,
-  noResultsText: string
-): React.JSX.Element => {
-  if (dataLines.length > 0) {
-    return <>{makeRows(dataLines)}</>;
-  } else {
-    return (
-      <tr>
-        <td colSpan={8}>
-          <h6 className="text-center">{noResultsText}</h6>
-        </td>
-      </tr>
-    );
-  }
-};
-
 const increaseLocalStorageShoppingCartQuantity = (
   artwork_id: number,
-  stored_amount: number
+  stored_amount: number,
 ) => {
   const shoppingCart = getShoppingCartFromLocalStorage();
 
   const existingRecordIndex = shoppingCart.findIndex(
-    (item: ShoppingCartItem) => item.artwork_id === artwork_id
+    (item: ShoppingCartItem) => item.artwork_id === artwork_id,
   );
 
   if (stored_amount > 0) {
@@ -62,7 +38,7 @@ const increaseLocalStorageShoppingCartQuantity = (
 const decreaseLocalStorageShoppingCartQuantity = (artwork_id: number) => {
   const shoppingCart = getShoppingCartFromLocalStorage();
   const existingRecordIndex = shoppingCart.findIndex(
-    (item: ShoppingCartItem) => item.artwork_id === artwork_id
+    (item: ShoppingCartItem) => item.artwork_id === artwork_id,
   );
 
   if (
@@ -83,7 +59,7 @@ const removeLocalStorageShoppingCartQuantity = (artwork_id: number) => {
   const shoppingCart = getShoppingCartFromLocalStorage();
 
   const existingRecordIndex = shoppingCart.findIndex(
-    (item: ShoppingCartItem) => item.artwork_id === artwork_id
+    (item: ShoppingCartItem) => item.artwork_id === artwork_id,
   );
 
   if (
@@ -109,19 +85,6 @@ const replacePreviousShoppingCart = async () => {
   const shopping_cart = getShoppingCartFromLocalStorage();
   replaceSavedShoppingCart(shopping_cart);
   localStorage.removeItem("shopping_cart");
-};
-
-const redirectIfNotloggedIn = (router: AppRouterInstance) => {
-  getLoggedIn().catch(() => {
-    router.push("/login");
-  });
-};
-
-const redirectIfNotAdmin = (router: AppRouterInstance) => {
-  redirectIfNotloggedIn(router);
-  getIsAdmin().catch(() => {
-    router.push("/user");
-  });
 };
 
 const checkIfShoppingCartIsEmpty = async (loggedIn: boolean) => {
@@ -163,60 +126,12 @@ function getShoppingCartFromLocalStorage(): ShoppingCartItem[] {
   }
 }
 
-function preventNonNumericInput(event: React.KeyboardEvent<HTMLInputElement>) {
-  // Allow: backspace, delete, tab, escape, enter, home, end, arrow keys
-  if (
-    [
-      "Backspace",
-      "Delete",
-      "Tab",
-      "Escape",
-      "Enter",
-      "Home",
-      "End",
-      "ArrowLeft",
-      "ArrowRight",
-      "ArrowUp",
-      "ArrowDown",
-    ].includes(event.key) ||
-    // Allow Ctrl+A, Ctrl+C, Ctrl+V, Ctrl+X
-    (event.ctrlKey && ["a", "c", "v", "x"].includes(event.key))
-  ) {
-    return;
-  }
-  // Ensure that it is a number and stop the keypress
-  if (!/^[0-9]$/.test(event.key)) {
-    event.preventDefault();
-  }
-}
-
-const getStoredLocale = <T extends string>(): T | null => {
-  if (typeof window === "undefined") return null;
-
-  const storedLocale = localStorage.getItem("userLocale");
-  return storedLocale && ["en", "he", "hu"].includes(storedLocale)
-    ? (storedLocale as T)
-    : null;
-};
-
-const setStoredLocale = <T extends string>(locale: T) => {
-  if (typeof window !== "undefined") {
-    localStorage.setItem("userLocale", locale);
-  }
-};
-
 export {
   checkIfShoppingCartIsEmpty,
   decreaseLocalStorageShoppingCartQuantity,
   getLocalStorageShoppingCart,
   getShoppingCartFromLocalStorage,
-  getStoredLocale,
   increaseLocalStorageShoppingCartQuantity,
-  preventNonNumericInput,
-  redirectIfNotAdmin,
-  redirectIfNotloggedIn,
   removeLocalStorageShoppingCartQuantity,
-  renderData,
   replacePreviousShoppingCart,
-  setStoredLocale,
 };

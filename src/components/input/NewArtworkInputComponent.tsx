@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Form, InputGroup } from "react-bootstrap";
 import { FormikProps } from "formik";
 
-import { preventNonNumericInput } from "@/helpers/helpers";
+import { preventNonNumericInput } from "@/helpers/inputHelpers";
 
 type NewArtworkInputComponentProps<
   T extends Record<string, unknown> = Record<string, unknown>,

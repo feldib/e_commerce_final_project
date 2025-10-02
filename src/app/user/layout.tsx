@@ -17,7 +17,7 @@ import PageTitle from "@/components/PageTitle";
 import { useI18n } from "@/components/providers/I18nProvider";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
 
-import { redirectIfNotloggedIn } from "@/helpers/helpers";
+import { redirectIfNotloggedIn } from "@/helpers/authHelpers";
 import useLoading from "@/hooks/useLoading";
 
 function ProfilePage({ children }: React.PropsWithChildren<React.ReactNode>) {

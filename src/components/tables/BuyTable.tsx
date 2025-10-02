@@ -9,7 +9,8 @@ import { useI18n } from "@/components/providers/I18nProvider";
 
 import { Artwork, ShoppingCartItem } from "@/fetching/types";
 
-import { getShoppingCartFromLocalStorage, renderData } from "@/helpers/helpers";
+import { getShoppingCartFromLocalStorage } from "@/helpers/shoppingCartHelpers";
+import { renderData } from "@/helpers/tableHelpers";
 import useLoading from "@/hooks/useLoading";
 
 type BuyTableProps = {

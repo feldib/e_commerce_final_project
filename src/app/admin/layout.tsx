@@ -16,7 +16,10 @@ import SubNavbar from "@/components/navbars/SubNavbar";
 import PageTitle from "@/components/PageTitle";
 import { useI18n } from "@/components/providers/I18nProvider";
 
-import { redirectIfNotAdmin, redirectIfNotloggedIn } from "@/helpers/helpers";
+import {
+  redirectIfNotAdmin,
+  redirectIfNotloggedIn,
+} from "@/helpers/authHelpers";
 
 function AdminPage({ children }: { children: React.ReactNode }) {
   const router = useRouter();

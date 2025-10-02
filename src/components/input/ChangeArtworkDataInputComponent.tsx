@@ -21,7 +21,7 @@ import { useI18n } from "@/components/providers/I18nProvider";
 
 import { updateArtworkData } from "@/fetching/fetching";
 
-import { preventNonNumericInput } from "@/helpers/helpers";
+import { preventNonNumericInput } from "@/helpers/inputHelpers";
 
 type ChangeArtworkDataInputComponentProps<
   T extends Record<string, unknown> = Record<string, unknown>,

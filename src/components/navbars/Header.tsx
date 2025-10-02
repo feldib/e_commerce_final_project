@@ -18,7 +18,7 @@ import LanguageSelector from "./LanguageSelector";
 import LoggedInNavbarItems from "./LoggedInNavbarItems";
 import NotLoggedInNavbarItems from "./NotLoggedInNavbarItems";
 
-import { checkIfShoppingCartIsEmpty } from "@/helpers/helpers";
+import { checkIfShoppingCartIsEmpty } from "@/helpers/shoppingCartHelpers";
 
 export const ExpandedNavContext = React.createContext({
   closeExpandedNav: () => {},

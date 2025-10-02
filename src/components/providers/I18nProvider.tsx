@@ -12,7 +12,7 @@ import en from "../../../messages/en.json";
 import he from "../../../messages/he.json";
 import hu from "../../../messages/hu.json";
 
-import { getStoredLocale, setStoredLocale } from "@/helpers/helpers";
+import { getStoredLocale, setStoredLocale } from "@/helpers/localeHelpers";
 
 type Locale = "en" | "he" | "hu";
 type Messages = typeof en;

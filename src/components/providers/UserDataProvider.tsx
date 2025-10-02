@@ -13,7 +13,7 @@ import "react-confirm-alert/src/react-confirm-alert.css";
 import {
   getShoppingCartFromLocalStorage,
   replacePreviousShoppingCart,
-} from "@/helpers/helpers";
+} from "@/helpers/shoppingCartHelpers";
 
 export type UserDataContextType = {
   user: User;

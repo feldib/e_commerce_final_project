@@ -30,7 +30,7 @@ import {
   decreaseLocalStorageShoppingCartQuantity,
   increaseLocalStorageShoppingCartQuantity,
   removeLocalStorageShoppingCartQuantity,
-} from "@/helpers/helpers";
+} from "@/helpers/shoppingCartHelpers";
 import { useCategories } from "@/hooks/useCategories";
 
 type ShoppingCartDataLinesProps = {
