@@ -37,6 +37,11 @@ export const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL;
 export const USERS_URL = "users";
 export const ADMIN_URL = "admin";
 
+// Local Storage Keys
+export const STORAGE_KEYS = {
+  SHOPPING_CART: "shopping_cart",
+} as const;
+
 // Translation key constants for toast messages
 export const TOAST_KEYS = {
   // Authentication & User Management
