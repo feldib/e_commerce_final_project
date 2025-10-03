@@ -26,14 +26,14 @@ const clearCart = (): void => {
 
 const findCartItemIndex = (
   items: ShoppingCartItem[],
-  artworkId: number
+  artworkId: number,
 ): number => {
   return items.findIndex((item) => item.artwork_id === artworkId);
 };
 
 const increaseLocalStorageShoppingCartQuantity = (
   artwork_id: number,
-  stored_amount: number
+  stored_amount: number,
 ) => {
   if (stored_amount <= 0) {
     throw new Error("Item is out of stock");
@@ -113,13 +113,13 @@ const replacePreviousShoppingCart = async () => {
 };
 
 const checkIfShoppingCartIsEmpty = async (
-  loggedIn: boolean
+  loggedIn: boolean,
 ): Promise<boolean> => {
   try {
     if (loggedIn) {
       // Check server-side cart
       const results = await axiosConfigured.get(
-        `${SERVER_URL}/users/shopping_cart`
+        `${SERVER_URL}/users/shopping_cart`,
       );
       return Array.isArray(results.data) && results.data.length > 0;
     } else {
