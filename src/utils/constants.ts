@@ -40,7 +40,12 @@ export const ADMIN_URL = "admin";
 // Local Storage Keys
 export const STORAGE_KEYS = {
   SHOPPING_CART: "shopping_cart",
+  USER_LOCALE: "userLocale",
 } as const;
+
+// Locale settings
+export const SUPPORTED_LOCALES = ["en", "he", "hu"] as const;
+export type SupportedLocale = (typeof SUPPORTED_LOCALES)[number];
 
 // Translation key constants for toast messages
 export const TOAST_KEYS = {

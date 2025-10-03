@@ -1,7 +1,9 @@
 import { notFound } from "next/navigation";
 import { getRequestConfig } from "next-intl/server";
 
-export const locales = ["en", "he", "hu"] as const;
+import { SUPPORTED_LOCALES } from "@/utils/constants";
+
+export const locales = SUPPORTED_LOCALES;
 export type Locale = (typeof locales)[number];
 
 export default getRequestConfig(async ({ locale }) => {
@@ -10,5 +12,6 @@ export default getRequestConfig(async ({ locale }) => {
 
   return {
     messages: (await import(`../../messages/${locale}.json`)).default,
+    locale: locale as string, // Cast to non-nullable string
   };
 });
