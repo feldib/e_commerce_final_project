@@ -1,12 +1,16 @@
+"use client";
+
 import React from "react";
 
 import { Row } from "react-bootstrap";
 
 import BuyTableDataLines from "@/components/datalines/BuyTableDataLines";
+import { useI18n } from "@/components/providers/I18nProvider";
 
 import { Artwork, ShoppingCartItem } from "@/fetching/types";
 
-import { getShoppingCartFromLocalStorage,renderData } from "@/helpers/helpers";
+import { getShoppingCartFromLocalStorage } from "@/helpers/shoppingCartHelpers";
+import { renderData } from "@/helpers/tableHelpers";
 import useLoading from "@/hooks/useLoading";
 
 type BuyTableProps = {
@@ -22,18 +26,24 @@ function BuyTable({
   orderSummary = false,
   theadNeeded = true,
 }: BuyTableProps) {
-  function makeDataLines(dataLinesGenerated: Artwork[]): React.JSX.Element[] {
-    return dataLinesGenerated.map((line: Artwork, index: number) => {
-      return (
-        <BuyTableDataLines
-          recommendation={recommendation}
-          line={line}
-          index={index}
-          key={index}
-          orderSummary={orderSummary}
-        />
-      );
-    });
+  const { t } = useI18n();
+
+  function makeRows(dataLinesGenerated: Artwork[]): React.JSX.Element {
+    return (
+      <>
+        {dataLinesGenerated.map((line: Artwork, index: number) => {
+          return (
+            <BuyTableDataLines
+              recommendation={recommendation}
+              line={line}
+              index={index}
+              key={index}
+              orderSummary={orderSummary}
+            />
+          );
+        })}
+      </>
+    );
   }
 
   const dataLinesGenerated = useLoading(
@@ -45,7 +55,7 @@ function BuyTable({
 
           if (shoppingCart.length) {
             const existingRecordIndex = shoppingCart.findIndex(
-              (item: ShoppingCartItem) => item.artwork_id === line.id
+              (item: ShoppingCartItem) => item.artwork_id === line.id,
             );
 
             if (
@@ -62,9 +72,10 @@ function BuyTable({
             return line.quantity;
           }
         }),
-        makeDataLines
+        makeRows,
+        t("common.no_results"),
       );
-    }
+    },
   );
 
   return (
@@ -74,25 +85,25 @@ function BuyTable({
           <thead>
             <tr>
               <th></th>
-              <th>Title</th>
-              <th className="d-none d-md-table-cell">Artist</th>
-              <th>Price</th>
+              <th>{t("common.title")}</th>
+              <th className="d-none d-md-table-cell">{t("common.artist")}</th>
+              <th>{t("common.price")}</th>
               <th
                 className={`${recommendation ? "d-none" : "d-none d-md-table-cell"}`}
               >
-                Quantity
+                {t("common.quantity")}
               </th>
               <th
                 className={`${recommendation ? "d-none" : "d-none d-md-table-cell"}`}
               >
-                Tags
+                {t("common.tags")}
               </th>
               <th
                 className={`${recommendation ? "d-none" : "d-none d-md-table-cell"}`}
               >
-                Categories
+                {t("common.categories")}
               </th>
-              <th>{orderSummary && "Total Cost"}</th>
+              <th>{orderSummary && t("common.total_cost")}</th>
             </tr>
           </thead>
         )}

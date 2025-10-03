@@ -19,7 +19,6 @@ export interface Artwork {
   date_added: string;
   description?: string;
   thumbnail?: string;
-  cname?: string;
   tags?: Tag[];
   other_pictures?: string[];
   stored_amount: number;
@@ -30,9 +29,16 @@ export interface Tag {
   tname: string;
 }
 
+// New category structure with MongoDB translations
+export interface CategoryTranslation {
+  languageCode: string;
+  name: string;
+}
+
 export interface Category {
   id: number;
-  cname: string;
+  removed: boolean;
+  translations: { [languageCode: string]: string };
 }
 
 export interface Review {

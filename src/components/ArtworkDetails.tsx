@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 
 import { Card, Col, Row } from "react-bootstrap";
@@ -6,17 +7,19 @@ import { ToastContainer } from "react-toastify";
 
 import { SERVER_URL } from "@/utils/constants";
 
+import { useI18n } from "@/components/providers/I18nProvider";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
 
 import { Artwork, Review, Tag } from "@/fetching/types";
 
-import ArtworkPicturesCarousel from "./ArtworkPicturesCarousel";
+import ArtworkReview from "./ArtworkReview";
 import FavouriteButton from "./buttons/FavouriteButton";
 import ShoppingCartButton from "./buttons/ShoppingCartButton";
+import ArtworkPictureCarousel from "./carousels/ArtworkPictureCarousel";
 import LeaveReview from "./LeaveReview";
-import ReviewsOfArtworks from "./ReviewsOfArtwork";
 
 import useAxios from "@/hooks/useAxios";
+import { useCategories } from "@/hooks/useCategories";
 import useLoading from "@/hooks/useLoading";
 import useQuantity from "@/hooks/useQuantity";
 
@@ -26,18 +29,33 @@ type ArtworkDetailsProps = {
 };
 
 function ArtworkDetails({ artwork_id, artwork }: ArtworkDetailsProps) {
-  const reviewsData = useAxios(`/reviews?id=${artwork_id}`) as Review[];
-
+  const { t, locale } = useI18n();
+  const { getCategoryNameById } = useCategories(locale);
   const { loggedIn } = React.useContext(UserDataContext);
+  const reviewsData = useAxios(`/reviews?id=${artwork_id}`) as Review[];
 
   const { quantity, setQuantity } = useQuantity(
     loggedIn,
     artwork.quantity,
-    artwork_id
+    artwork_id,
   );
 
-  const reviews = useLoading(reviewsData, (reviews) => {
-    return <ReviewsOfArtworks reviews={reviews} />;
+  const representReviews = useLoading(reviewsData, (reviews) => {
+    return (
+      <>
+        {reviews.length !== 0 ? (
+          <>
+            {reviews.map((review, index) => (
+              <ArtworkReview key={index} review={review} index={index + 1} />
+            ))}
+          </>
+        ) : (
+          <Row className="px-3 mx-auto floating-element mb-5">
+            <Col className="text-center">{t("common.no_reviews")}</Col>
+          </Row>
+        )}
+      </>
+    );
   });
 
   return (
@@ -53,7 +71,7 @@ function ArtworkDetails({ artwork_id, artwork }: ArtworkDetailsProps) {
                   </Card.Title>
 
                   <Card.Subtitle>
-                    <h6>{`by ${artwork.artist_name}`}</h6>
+                    <h6>{`${t("common.by")}${artwork.artist_name}`}</h6>
                   </Card.Subtitle>
                 </Col>
 
@@ -89,7 +107,7 @@ function ArtworkDetails({ artwork_id, artwork }: ArtworkDetailsProps) {
               <Row>
                 <Col>
                   <Card.Title className="mb-4">
-                    <h3>Description</h3>
+                    <h3>{t("common.description")}</h3>
                   </Card.Title>
 
                   <Card.Subtitle>
@@ -120,7 +138,9 @@ function ArtworkDetails({ artwork_id, artwork }: ArtworkDetailsProps) {
                 <Col>
                   <Row>
                     <p>
-                      <strong>{artwork.cname}</strong>
+                      <strong>
+                        {getCategoryNameById(artwork.category_id)}
+                      </strong>
                     </p>
                   </Row>
                 </Col>
@@ -142,7 +162,7 @@ function ArtworkDetails({ artwork_id, artwork }: ArtworkDetailsProps) {
                 <Col>
                   <Row>
                     <p>
-                      {"Available quantity: "}
+                      {t("common.available_quantity")}:{" "}
                       {artwork ? (
                         quantity
                       ) : (
@@ -155,7 +175,7 @@ function ArtworkDetails({ artwork_id, artwork }: ArtworkDetailsProps) {
 
                   <Row>
                     <p>
-                      {"Price: €"}
+                      {t("common.price")}: €
                       {artwork ? (
                         artwork.price
                       ) : (
@@ -172,16 +192,16 @@ function ArtworkDetails({ artwork_id, artwork }: ArtworkDetailsProps) {
         </Col>
       </Row>
 
-      <ArtworkPicturesCarousel other_pictures={artwork.other_pictures ?? []} />
+      <ArtworkPictureCarousel other_pictures={artwork.other_pictures ?? []} />
 
       <Row className="mt-5">
         <Row className="text-center">
           <Col xs={5} md={4} className="mx-auto">
-            <h4 className="subpage-title">Reviews</h4>
+            <h4 className="subpage-title">{t("common.reviews")}</h4>
           </Col>
         </Row>
 
-        <Row>{reviews}</Row>
+        <Row className="mt-5">{representReviews}</Row>
       </Row>
 
       <LeaveReview artwork_id={artwork_id} />

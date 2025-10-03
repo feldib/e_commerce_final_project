@@ -1,12 +1,14 @@
+"use client";
 import React from "react";
 
 import { Row } from "react-bootstrap";
 
 import ShoppingCartDataLines from "@/components/datalines/ShoppingCartDataLines";
+import { useI18n } from "@/components/providers/I18nProvider";
 
 import { Artwork } from "@/fetching/types";
 
-import { renderData } from "@/helpers/helpers";
+import { renderData } from "@/helpers/tableHelpers";
 import useLoading from "@/hooks/useLoading";
 
 type ShoppingCartTableProps = {
@@ -22,22 +24,31 @@ function ShoppingCartTable({
   changeCosts,
   theadNeeded,
 }: ShoppingCartTableProps) {
-  function makeDataLines(dataLinesGenerated: Artwork[]) {
-    return dataLinesGenerated.map((line: Artwork, index: number) => {
-      return (
-        <ShoppingCartDataLines
-          key={index}
-          recommendation={recommendation}
-          line={line}
-          index={index}
-          changeCosts={changeCosts}
-        />
-      );
-    });
+  const { t } = useI18n();
+
+  function makeRows(dataLinesGenerated: Artwork[]): React.JSX.Element {
+    return (
+      <>
+        {dataLinesGenerated.map((line: Artwork, index: number) => {
+          return (
+            <ShoppingCartDataLines
+              key={index}
+              recommendation={recommendation}
+              line={line}
+              index={index}
+              changeCosts={changeCosts}
+            />
+          );
+        })}
+      </>
+    );
   }
-  const dataLinesGenerated = useLoading(dataLines, (dataLines) => {
-    return renderData(dataLines, makeDataLines);
-  });
+  const dataLinesGenerated = useLoading(
+    dataLines,
+    (dataLines): React.JSX.Element => {
+      return renderData(dataLines, makeRows, t("common.no_results"));
+    },
+  );
   return (
     <Row className="text-center">
       <table>
@@ -45,19 +56,19 @@ function ShoppingCartTable({
           <thead>
             <tr>
               <th></th>
-              <th>Title</th>
-              <th>Artist</th>
-              <th>Total cost</th>
-              <th>Quantity</th>
+              <th>{t("common.title")}</th>
+              <th>{t("common.artist")}</th>
+              <th>{t("common.total_cost")}</th>
+              <th>{t("common.quantity")}</th>
               <th
                 className={`${recommendation ? "d-none" : "d-none d-md-table-cell"}`}
               >
-                Tags
+                {t("common.tags")}
               </th>
               <th
                 className={`${recommendation ? "d-none" : "d-none d-md-table-cell"}`}
               >
-                Categories
+                {t("common.categories")}
               </th>
               <th></th>
             </tr>

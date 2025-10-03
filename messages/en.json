@@ -1,0 +1,388 @@
+{
+  "common": {
+    "skip_to_content": "Skip to content",
+    "shopping_cart": "Shopping cart",
+    "shopping_cart_replacement_title": "Replace shopping cart",
+    "shopping_cart_replacement_message": "Do you want to replace your current shopping cart with this one?",
+    "yes": "Yes",
+    "no": "No",
+    "no_results": "No results",
+    "no_orders": "No orders",
+    "no_users": "No users",
+    "no_artworks": "No artworks",
+    "no_reviews": "No reviews",
+    "item_out_of_stock": "Item is out of stock",
+    "shopping_list_empty": "Shopping list is empty",
+    "send": "Send",
+    "next": "Next",
+    "back": "Back",
+    "sign_in": "Sign In",
+    "register": "Register",
+    "checkout": "Checkout",
+    "user": "User",
+    "order": "Order",
+    "search": "Search",
+    "title": "Title",
+    "artist": "Artist",
+    "price": "Price",
+    "quantity": "Quantity",
+    "tags": "Tags",
+    "categories": "Categories",
+    "total_cost": "Total Cost",
+    "name": "Name",
+    "email": "Email",
+    "address": "Address",
+    "phone_number": "Phone Number",
+    "description": "Description",
+    "thumbnail": "Thumbnail",
+    "images": "Images",
+    "category": "Category",
+    "choose": "Choose",
+    "by": "By ",
+    "reviews": "Reviews",
+    "available_quantity": "Available Quantity",
+    "order_summary": "Order Summary",
+    "price_range": "Price range",
+    "minimum": "Minimum",
+    "maximum": "Maximum",
+    "number_of_artworks_shown": "Number of artworks shown",
+    "order_by": "Order by",
+    "newest_to_oldest": "Newest to oldest",
+    "oldest_to_newest": "Oldest to newest",
+    "only_featured": "Only featured",
+    "place_of_thumbnail": "Place of thumbnail",
+    "enter_email": "Enter email",
+    "all": "All"
+  },
+  "navigation": {
+    "search": "Search",
+    "about": "About",
+    "contact": "Contact",
+    "log_in": "Log in",
+    "log_out": "Log out",
+    "admin_page": "Admin Page"
+  },
+  "app": {
+    "home": {
+      "welcome_to_artwork_market": "Welcome to Artwork Market",
+      "featured": "Featured",
+      "newest": "Newest",
+      "most_wishlisted": "Most wishlisted",
+      "wishlisted": "Wishlisted"
+    },
+    "about": {
+      "title": "About us",
+      "our_story": "Our story",
+      "story_paragraph_1": "Welcome to our world of art! Our story began with a simple yet profound passion: the love for creativity in all its forms. We envisioned a platform that celebrates not just the beauty of art but also the stories behind each masterpiece. Driven by our admiration for diverse artistic expressions, we embarked on a journey to create a space where artists and art enthusiasts converge.",
+      "story_paragraph_2": "Our goal is to bridge the gap between creators and appreciators, fostering a community that thrives on inspiration and imagination. Art has the incredible power to evoke emotions, provoke thoughts, and ignite conversations. Through our platform, we aim to showcase the vibrant tapestry of artistic endeavors while honoring the unique narratives woven into every brushstroke, sculpture, and creation.",
+      "story_paragraph_3": "Join us on this enchanting voyage as we curate a collection of exceptional artworks, each with its own tale to tell. Together, let's celebrate the essence of creativity and the boundless stories that reside within each artistic marvel."
+    },
+    "admin": {
+      "layout": {
+        "title": "Admin page",
+        "artworks": "Artworks",
+        "users": "Users",
+        "orders": "Orders",
+        "reviews": "Reviews",
+        "messages": "Messages"
+      },
+      "artworks": {
+        "title": "Artworks",
+        "add_new_artwork": "Add new artwork"
+      },
+      "add_new_artwork": {
+        "title": "Add new artwork",
+        "title_field": "Title",
+        "artist": "Artist",
+        "price": "Price",
+        "tags": "Tags",
+        "quantity": "Quantity",
+        "category": "Category",
+        "thumbnail": "Thumbnail",
+        "images": "Images",
+        "description": "Description",
+        "enter_title": "Enter title",
+        "enter_artist_name": "Enter name of artist",
+        "enter_price": "Enter price of artwork",
+        "add_new_tag": "Add new tag",
+        "enter_quantity": "Enter quantity",
+        "choose": "Choose",
+        "upload_thumbnail": "Upload thumbnail",
+        "upload_other_pictures": "Upload other pictures",
+        "uploaded_thumbnail": "Uploaded thumbnail",
+        "uploaded_other_picture": "Uploaded other picture",
+        "enter_description": "Enter description"
+      },
+      "edit_artwork": {
+        "title": "Edit artwork data",
+        "current_thumbnail": "Current thumbnail",
+        "category_updated_successfully": "Category updated successfully",
+        "failed_to_update_category": "Failed to update category",
+        "thumbnail_uploaded_successfully": "Thumbnail uploaded successfully",
+        "failed_to_upload_thumbnail": "Failed to upload thumbnail",
+        "image_uploaded_successfully": "Image uploaded successfully",
+        "failed_to_upload_image": "Failed to upload image",
+        "failed_to_remove_image": "Failed to remove image"
+      },
+      "orders": {
+        "title": "Completed orders by users",
+        "order": "Order",
+        "no_orders": "--- No orders ---"
+      },
+      "reviews": {
+        "title": "New reviews",
+        "no_reviews": "--- No reviews ---"
+      },
+      "messages": {
+        "title": "Unanswered messages",
+        "no_messages": "--- No messages ---"
+      }
+    },
+    "search": {
+      "title": "Search",
+      "search_results": "Search results"
+    },
+    "login": {
+      "title": "Log In",
+      "email_address": "Email address",
+      "password": "Password",
+      "forgot_password": "Forgot password",
+      "enter_email": "Enter email",
+      "enter_password": "Enter password"
+    },
+    "register": {
+      "title": "Register",
+      "email_address": "Email address",
+      "email_address_again": "Email address again",
+      "password": "Password",
+      "password_again": "Password again",
+      "first_name": "First Name",
+      "last_name": "Last Name",
+      "enter_email": "Enter email",
+      "enter_email_again": "Enter email again",
+      "enter_password": "Enter password",
+      "enter_password_again": "Enter password again",
+      "enter_first_name": "Enter First Name",
+      "enter_last_name": "Enter Last Name",
+      "email_required": "Email required",
+      "invalid_email": "Invalid email",
+      "repeat_email_required": "Repeat email required",
+      "must_match_email": "Must match email",
+      "password_required": "Password required",
+      "repeat_password_required": "Repeat password required",
+      "must_match_password": "Must match password",
+      "first_name_required": "First name required",
+      "last_name_required": "Last name required"
+    },
+    "contact": {
+      "title": "Contact us",
+      "company_details": "Company details",
+      "company_name": "Name: Artwork Market",
+      "company_address": "Address: Budapest, Hungary",
+      "company_phone": "Phone: +36 xx xxx xxxx",
+      "message_administrator": "Message administrator",
+      "email_address": "Email address",
+      "title_field": "Title",
+      "message": "Message",
+      "enter_email": "Enter email",
+      "enter_message_title": "Enter message title",
+      "enter_message": "Enter message"
+    },
+    "shopping_cart": {
+      "title": "Shopping cart"
+    },
+    "user": {
+      "layout": {
+        "user_data": "User Data",
+        "order_history": "Order History",
+        "wishlist": "Wishlist",
+        "reviews": "Reviews",
+        "shopping_cart": "Shopping Cart"
+      },
+      "page_suffix": "'s page",
+      "data": {
+        "title": "User Data",
+        "email_address": "Email address",
+        "first_name": "First Name",
+        "last_name": "Last Name",
+        "phone_number": "Phone Number"
+      },
+      "order_history": {
+        "title": "Order history",
+        "order": "Order",
+        "no_orders": "--- No orders ---"
+      },
+      "wishlist": {
+        "title": "Wishlisted",
+        "no_wishlisted_items": "--- No wishlisted items ---"
+      },
+      "reviews": {
+        "title": "Past reviews",
+        "no_reviews": "--- No reviews ---"
+      }
+    },
+    "checkout": {
+      "invoice_data": "Invoice Data",
+      "save_data": "Save data"
+    },
+    "receipt": {
+      "title": "Receipt",
+      "back_to_shop": "Back to Shop"
+    },
+    "forgot_password": {
+      "title": "Send email to reset password",
+      "email_address": "Email address",
+      "enter_email": "Enter email",
+      "recovery_message": "If a user is registered with this email, a password recovery link was sent to them",
+      "send_link": "Send link"
+    },
+    "reset_password": {
+      "title": "Reset Password",
+      "password": "Password",
+      "enter_password": "Enter password",
+      "enter_repeat_password": "Enter repeat password",
+      "change_password": "Change password"
+    }
+  },
+  "components": {
+    "header": {
+      "artwork_market_logo": "Artwork market logo"
+    },
+    "shopping_cart": {
+      "shopping_cart_empty": "Shopping cart is empty"
+    },
+    "svg_components": {
+      "set_artwork_featured": "Set artwork to featured"
+    },
+    "user_data": {
+      "enter_address": "Enter Address",
+      "enter_phone_number": "Enter Phone Number"
+    },
+    "review": {
+      "title_label": "Title:",
+      "user_label": "User:",
+      "approved": "Approved",
+      "awaits_evaluation": "Awaits evaluation",
+      "item_label": "Item:",
+      "by": "by "
+    },
+    "unanswered_message": {
+      "reply": "Reply",
+      "reply_sent_successfully": "Reply sent successfully!",
+      "title_field": "Title",
+      "enter_title": "Enter title",
+      "message": "Message",
+      "enter_reply": "Enter reply"
+    },
+    "artwork_details": {
+      "description": "Description",
+      "available_quantity": "Available quantity: ",
+      "price": "Price: €",
+      "reviews": "Reviews"
+    },
+    "search_fields": {
+      "title": "Title",
+      "artist": "Artist",
+      "price_range": "Price range",
+      "minimum": "Minimum",
+      "maximum": "Maximum",
+      "number_of_artworks_shown": "Number of artworks shown",
+      "order_by": "Order by",
+      "newest_to_oldest": "Newest to oldest",
+      "oldest_to_newest": "Oldest to newest",
+      "only_featured": "Only featured",
+      "search": "Search"
+    },
+    "tables": {
+      "title": "Title",
+      "artist": "Artist",
+      "price": "Price",
+      "quantity": "Quantity",
+      "tags": "Tags",
+      "categories": "Categories",
+      "total_cost": "Total Cost",
+      "name": "Name",
+      "email": "Email",
+      "address": "Address",
+      "phone_number": "Phone number",
+      "no_users": "--- No users ---"
+    },
+    "leave_review": {
+      "add_review": "Add a review",
+      "title": "Title",
+      "message": "Message",
+      "enter_review_title": "Enter review title",
+      "enter_review_text": "Enter review text",
+      "submit": "Submit",
+      "login_required": "You have to be logged in to leave a review!"
+    },
+    "reviews": {
+      "no_reviews": "No reviews yet"
+    },
+    "buttons": {
+      "item_added_to_cart": "Item added to shopping cart",
+      "item_out_of_stock": "Item out of stock",
+      "sign_in_to_add_wishlist": "Sign in or register to add to wishlist! "
+    },
+    "recommendation_card": {
+      "by": "by ",
+      "place_of_thumbnail": "place of thumbnail"
+    }
+  },
+  "validation": {
+    "title_required": "Title required",
+    "name_required": "Name required",
+    "price_required": "Price required",
+    "quantity_required": "Quantity required",
+    "category_required": "Category required",
+    "thumbnail_required": "Thumbnail required",
+    "description_required": "Description required",
+    "not_valid_image_type": "Not a valid image type",
+    "max_allowed_size": "Max allowed size is 100KB",
+    "add_minimum_tags": "Add minimum 3 tags!",
+    "price_min": "Price must be greater than or equal to 1",
+    "quantity_min": "Quantity must be greater than or equal to 1",
+    "email_required": "Email required",
+    "email_invalid": "Invalid email",
+    "password_required": "Password required",
+    "first_name_required": "First name required",
+    "last_name_required": "Last name required",
+    "address_required": "Address required",
+    "phone_number_required": "Phone number required",
+    "message_required": "Message required",
+    "review_text_required": "Review text required",
+    "repeat_email_required": "Repeat email required",
+    "email_match": "Must match email",
+    "repeat_password_required": "Repeat password required",
+    "password_match": "Must match password"
+  },
+  "toast": {
+    "artwork_added_successfully": "Artwork added successfully to database",
+    "error_add_artwork": "Error: could not add artwork",
+    "registration_successful": "Registration successful",
+    "registration_failed": "Registration failed",
+    "user_already_registered": "A user is registered with email already",
+    "item_added_to_cart": "Item added to shopping cart",
+    "item_out_of_stock": "Item out of stock",
+    "data_saved_successfully": "Data saved successfully",
+    "changes_saved": "Changes saved",
+    "save_error": "Error: couldn't save",
+    "incorrect_data": "Incorrect data",
+    "only_effects_invoice": "This only affects the invoice!",
+    "login_success": "Logged in",
+    "logout_success": "Logged out",
+    "password_reset_success": "Password changed successfully",
+    "message_sent": "Message sent",
+    "review_saved": "Review saved",
+    "email_submitted": "Email submitted",
+    "data_saved": "Data saved successfully",
+    "incorrect_credentials": "Incorrect email or password",
+    "submission_error": "Error: couldn't submit",
+    "password_change_error": "Error: couldn't change password",
+    "message_error": "Error: couldn't send message",
+    "review_error": "Error: couldn't save review",
+    "review_approval_notice": "The review has to be approved by the administrator",
+    "reply_success": "Reply sent successfully!",
+    "reply_error": "Error: couldn't send reply"
+  }
+}

@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 
 import { Nav } from "react-bootstrap";
 
+import { useI18n } from "@/components/providers/I18nProvider";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
 
 import { serverLogOut } from "@/fetching/fetching";
@@ -16,6 +17,7 @@ import UserNavbarMenuItems from "./UserNavbarMenuItems";
 function LoggedInNavbarItems() {
   const { user, logOut: contextLogOut } = React.useContext(UserDataContext);
   const { closeExpandedNav } = React.useContext(ExpandedNavContext);
+  const { t } = useI18n();
   const router = useRouter();
 
   return (
@@ -29,7 +31,7 @@ function LoggedInNavbarItems() {
           style={{ color: "inherit", textDecoration: "inherit" }}
           href="/admin"
         >
-          Admin Page
+          {t("navigation.admin_page")}
         </Link>
       )}
 
@@ -41,7 +43,7 @@ function LoggedInNavbarItems() {
           router.push("/");
         }}
       >
-        Log out
+        {t("navigation.log_out")}
       </Nav.Link>
     </>
   );

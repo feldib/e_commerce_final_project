@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 
 import Link from "next/link";
@@ -8,10 +9,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Col, Row } from "react-bootstrap";
 import { ToastContainer } from "react-toastify";
 
-import { SERVER_URL,UI_DIMENSIONS } from "@/utils/constants";
-import { showErrorToast, showSuccessToast } from "@/utils/toastUtils";
+import { SERVER_URL, UI_DIMENSIONS } from "@/utils/constants";
+import {
+  showCartItemAddedToast,
+  showCartItemOutOfStockToast,
+} from "@/utils/toastUtils";
 
 import FavouriteButton from "@/components/buttons/FavouriteButton";
+import { useI18n } from "@/components/providers/I18nProvider";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
 
 import {
@@ -25,7 +30,8 @@ import {
   decreaseLocalStorageShoppingCartQuantity,
   increaseLocalStorageShoppingCartQuantity,
   removeLocalStorageShoppingCartQuantity,
-} from "@/helpers/helpers";
+} from "@/helpers/shoppingCartHelpers";
+import { useCategories } from "@/hooks/useCategories";
 
 type ShoppingCartDataLinesProps = {
   line: Artwork;
@@ -40,6 +46,8 @@ function ShoppingCartDataLines({
   changeCosts,
   recommendation = false,
 }: ShoppingCartDataLinesProps) {
+  const { t, locale } = useI18n();
+  const { getCategoryNameById } = useCategories(locale);
   const { loggedIn } = React.useContext(UserDataContext);
 
   const [quantity, setQuantity] = React.useState(line.quantity);
@@ -58,7 +66,7 @@ function ShoppingCartDataLines({
           width={UI_DIMENSIONS.THUMBNAIL_SIZE}
           height={UI_DIMENSIONS.THUMBNAIL_SIZE}
           style={{ objectFit: "cover" }}
-          alt="place of thumbnail"
+          alt={t("common.place_of_thumbnail")}
         />
       </td>
       <td>
@@ -121,21 +129,21 @@ function ShoppingCartDataLines({
                 if (loggedIn) {
                   try {
                     await increaseShoppingListItemQuantity(line.id);
-                    showSuccessToast("Item added to shopping cart");
+                    showCartItemAddedToast(t);
                     setQuantity(quantity + 1);
                   } catch {
-                    showErrorToast("Item out of stock");
+                    showCartItemOutOfStockToast(t);
                   }
                 } else {
                   try {
                     increaseLocalStorageShoppingCartQuantity(
                       line.id,
-                      line.stored_amount - quantity
+                      line.stored_amount - quantity,
                     );
-                    showSuccessToast("Item added to shopping cart");
+                    showCartItemAddedToast(t);
                     setQuantity(quantity + 1);
                   } catch {
-                    showErrorToast("Item out of stock");
+                    showCartItemOutOfStockToast(t);
                   }
                 }
               }}
@@ -149,7 +157,7 @@ function ShoppingCartDataLines({
         <p>{line.tags && line.tags.map((tag) => tag.tname).join(", ")}</p>
       </td>
       <td className={`${recommendation ? "d-none" : "d-none d-md-table-cell"}`}>
-        <p>{line.cname}</p>
+        <p>{getCategoryNameById(line.category_id)}</p>
       </td>
       <td>
         <div className="container text-center">

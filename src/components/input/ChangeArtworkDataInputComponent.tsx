@@ -12,12 +12,16 @@ import { Button, Form, InputGroup } from "react-bootstrap";
 import { FormikProps } from "formik";
 
 import {
-  showErrorToast,
+  showChangesSavedToast,
+  showDataSaveErrorToast,
   showIncorrectDataToast,
-  showSuccessToast,
 } from "@/utils/toastUtils";
 
+import { useI18n } from "@/components/providers/I18nProvider";
+
 import { updateArtworkData } from "@/fetching/fetching";
+
+import { preventNonNumericInput } from "@/helpers/inputHelpers";
 
 type ChangeArtworkDataInputComponentProps<
   T extends Record<string, unknown> = Record<string, unknown>,
@@ -42,6 +46,7 @@ function ChangeArtworkDataInputComponent<
   artwork_id,
   placeholder,
 }: ChangeArtworkDataInputComponentProps<T>) {
+  const { t } = useI18n();
   const showAsterisk = formik.errors[name] && formik.touched[name];
   const [editing, setEditing] = React.useState(false);
 
@@ -83,6 +88,11 @@ function ChangeArtworkDataInputComponent<
             onChange={formik.handleChange}
             value={String(formik.values[name] || "")}
             disabled={!editing}
+            onKeyDown={(e) => {
+              if (type === "number") {
+                preventNonNumericInput(e);
+              }
+            }}
           />
         )}
 
@@ -99,18 +109,18 @@ function ChangeArtworkDataInputComponent<
                 currentFieldError && formik.touched[name];
 
               if (hasCurrentFieldError) {
-                showIncorrectDataToast();
+                showIncorrectDataToast(t);
               } else {
                 try {
                   await updateArtworkData(
                     artwork_id,
                     name,
-                    String(formik.values[name] || "")
+                    String(formik.values[name] || ""),
                   );
-                  showSuccessToast(`${label} changed successfully`);
+                  showChangesSavedToast(t);
                   setEditing(false);
                 } catch {
-                  showErrorToast("Error updating artwork data");
+                  showDataSaveErrorToast(t);
                 }
               }
             }}

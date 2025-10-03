@@ -3,7 +3,7 @@ import React from "react";
 
 import { ShoppingCartItem } from "@/fetching/types";
 
-import { getShoppingCartFromLocalStorage } from "@/helpers/helpers";
+import { getShoppingCartFromLocalStorage } from "@/helpers/shoppingCartHelpers";
 
 const useQuantity = (loggedIn: boolean, inStock: number, artworkId: number) => {
   const [quantity, setQuantity] = React.useState(inStock);
@@ -14,7 +14,7 @@ const useQuantity = (loggedIn: boolean, inStock: number, artworkId: number) => {
         const index = signedOutShoppingCart.findIndex(
           (item: ShoppingCartItem) => {
             return item.artwork_id === artworkId;
-          }
+          },
         );
 
         if (index !== -1) {

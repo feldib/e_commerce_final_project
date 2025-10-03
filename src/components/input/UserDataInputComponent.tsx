@@ -11,10 +11,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, Form, InputGroup } from "react-bootstrap";
 
 import {
-  showErrorToast,
-  showSuccessToast,
-  showWarningToast,
+  showChangesSavedToast,
+  showIncorrectDataToast,
+  showInvoiceNoticeToast,
 } from "@/utils/toastUtils";
+
+import { useI18n } from "@/components/providers/I18nProvider";
 
 import { updateUserData } from "@/fetching/fetching";
 
@@ -45,6 +47,7 @@ function UserDataInputComponents({
   value,
   changeUserData = true,
 }: UserDataInputComponentsProps) {
+  const { t } = useI18n();
   const [editing, setEditing] = React.useState(false);
   return (
     <Form.Group className="pb-3">
@@ -78,14 +81,14 @@ function UserDataInputComponents({
             onClick={(e) => {
               e.preventDefault();
               if (error) {
-                showErrorToast("Incorrect data");
+                showIncorrectDataToast(t);
               } else {
                 if (changeUserData) {
                   updateUserData(name, value);
-                  showSuccessToast(`${label} changed successfully`);
+                  showChangesSavedToast(t);
                 } else {
-                  showSuccessToast(`${label} changed successfully`);
-                  showWarningToast(`This only effects the invoice!`);
+                  showChangesSavedToast(t);
+                  showInvoiceNoticeToast(t);
                 }
                 setEditing(false);
               }

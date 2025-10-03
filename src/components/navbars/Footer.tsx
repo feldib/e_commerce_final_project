@@ -11,10 +11,13 @@ import {
   TelegramShareButton,
 } from "next-share";
 
-import { Container,Nav, Navbar } from "react-bootstrap";
+import { Container, Nav, Navbar } from "react-bootstrap";
+
+import { useI18n } from "@/components/providers/I18nProvider";
 
 function Footer() {
   const [hostname, setHostname] = useState("");
+  const { t } = useI18n();
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -30,7 +33,7 @@ function Footer() {
             style={{ color: "inherit", textDecoration: "inherit" }}
             href="/about"
           >
-            About
+            {t("navigation.about")}
           </Link>
 
           <Link
@@ -38,7 +41,7 @@ function Footer() {
             style={{ color: "inherit", textDecoration: "inherit" }}
             href="/contact"
           >
-            Contact
+            {t("navigation.contact")}
           </Link>
 
           <Nav.Link>

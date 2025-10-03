@@ -1,10 +1,11 @@
 "use client";
 import React from "react";
 
-import { Button,Col, Form, Row } from "react-bootstrap";
+import { Button, Col, Form, Row } from "react-bootstrap";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
+import { useI18n } from "@/components/providers/I18nProvider";
 import AdminArtworkTable from "@/components/tables/AdminArtworkTable";
 import BuyTable from "@/components/tables/BuyTable";
 
@@ -22,16 +23,24 @@ type ArtworkSearchComponentProps = {
 function ArtworkSearchComponent({ admin }: ArtworkSearchComponentProps) {
   const [searchResults, setSearchResults] = React.useState<Artwork[]>();
   const [searchedValues, setSearchedValues] = React.useState<SearchParams>();
+  const [hasMoreResults, setHasMoreResults] = React.useState(false);
+  const { t } = useI18n();
 
   const [pageNumber, setPageNumber] = React.useState(0);
 
   const search = React.useCallback(
     async (values: SearchParams, page: number) => {
-      const results = await getArtworkSearchResults(values, page);
+      const results = await getArtworkSearchResults(
+        values,
+        page,
+        admin || false,
+      );
       setSearchResults(results);
       setSearchedValues(values);
+      // If we got exactly the requested number of results, there might be more
+      setHasMoreResults(results.length === values.n);
     },
-    []
+    [admin],
   );
 
   const formik = useFormik({
@@ -67,7 +76,7 @@ function ArtworkSearchComponent({ admin }: ArtworkSearchComponentProps) {
       setPageNumber(1);
       search(newValues, 1);
     },
-    [search, formik.values]
+    [search, formik.values],
   );
 
   const results = React.useRef<HTMLDivElement>(null);
@@ -91,7 +100,7 @@ function ArtworkSearchComponent({ admin }: ArtworkSearchComponentProps) {
             className="mb-3 mt-2"
             ref={results as React.RefObject<HTMLDivElement>}
           >
-            <h3 className="text-center">Search results</h3>
+            <h3 className="text-center">{t("app.search.search_results")}</h3>
           </Row>
           {admin ? (
             <AdminArtworkTable dataLines={searchResults} />
@@ -114,12 +123,12 @@ function ArtworkSearchComponent({ admin }: ArtworkSearchComponentProps) {
                     search(formik.values, newPageNumber);
                   }}
                 >
-                  Back {formik.values.n}
+                  {t("common.back")} {formik.values.n}
                 </Button>
               </Col>
             )}
 
-            {searchResults.length >= pageNumber * formik.values.n && (
+            {hasMoreResults && (
               <Col className="mx-auto">
                 <Button
                   className="submit"
@@ -129,7 +138,7 @@ function ArtworkSearchComponent({ admin }: ArtworkSearchComponentProps) {
                     search(formik.values, newPageNumber);
                   }}
                 >
-                  Next {formik.values.n}
+                  {t("common.next")} {formik.values.n}
                 </Button>
               </Col>
             )}

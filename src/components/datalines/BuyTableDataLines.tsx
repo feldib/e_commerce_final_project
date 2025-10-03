@@ -5,7 +5,7 @@ import Link from "next/link";
 
 import { ToastContainer } from "react-toastify";
 
-import { SERVER_URL,UI_DIMENSIONS } from "@/utils/constants";
+import { SERVER_URL, UI_DIMENSIONS } from "@/utils/constants";
 
 import FavouriteButton from "@/components/buttons/FavouriteButton";
 import ShoppingCartButton from "@/components/buttons/ShoppingCartButton";
@@ -13,6 +13,9 @@ import { UserDataContext } from "@/components/providers/UserDataProvider";
 
 import { Artwork } from "@/fetching/types";
 
+import { useI18n } from "../providers/I18nProvider";
+
+import { useCategories } from "@/hooks/useCategories";
 import useQuantity from "@/hooks/useQuantity";
 
 type BuyTableDataLinesProps = {
@@ -25,15 +28,16 @@ type BuyTableDataLinesProps = {
 function BuyTableDataLines({
   line,
   index,
-  orderSummary = false,
   recommendation = false,
+  orderSummary = false,
 }: BuyTableDataLinesProps) {
+  const { t, locale } = useI18n();
+  const { getCategoryNameById } = useCategories(locale);
   const { loggedIn } = React.useContext(UserDataContext);
-
   const { quantity, setQuantity } = useQuantity(
     loggedIn,
     line.quantity,
-    line.id
+    line.id,
   );
 
   return (
@@ -45,7 +49,7 @@ function BuyTableDataLines({
           width={UI_DIMENSIONS.THUMBNAIL_SIZE}
           height={UI_DIMENSIONS.THUMBNAIL_SIZE}
           style={{ objectFit: "cover" }}
-          alt="place of thumbnail"
+          alt={t("common.place_of_thumbnail")}
         />
       </td>
       <td>
@@ -70,7 +74,7 @@ function BuyTableDataLines({
         <p>{line.tags && line.tags.map((tag) => tag.tname).join(", ")}</p>
       </td>
       <td className={`${recommendation ? "d-none" : "d-none d-md-table-cell"}`}>
-        <p>{line.cname}</p>
+        <p>{getCategoryNameById(line.category_id)}</p>
       </td>
       <td>
         {orderSummary ? (

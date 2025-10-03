@@ -11,6 +11,7 @@ import { Col, Container, Form, Row } from "react-bootstrap";
 import { FormikProps } from "formik";
 import { ToastContainer } from "react-toastify";
 
+import { useI18n } from "@/components/providers/I18nProvider";
 import SubPageTitle from "@/components/SubPageTitle";
 
 import { CheckoutFormData } from "@/fetching/types";
@@ -30,6 +31,7 @@ function UserDataChangingComponent({
   formik,
   button,
 }: UserDataChangingComponentProps) {
+  const { t } = useI18n();
   const [changeUserData, setChangeUserData] = React.useState(!checkout);
 
   return (
@@ -40,10 +42,10 @@ function UserDataChangingComponent({
         <Row>
           <Col className="mx-5 mb-5">
             <UserDataInputComponents
-              label="Email address"
+              label={t("app.user.data.email_address")}
               name="email"
               type="email"
-              placeholder="Enter email"
+              placeholder={t("common.enter_email")}
               icon={faUser}
               showAsterisk={!!(formik.errors.email && formik.touched.email)}
               error={formik.errors.email}
@@ -54,10 +56,10 @@ function UserDataChangingComponent({
             />
 
             <UserDataInputComponents
-              label="First Name"
+              label={t("app.user.data.first_name")}
               name="first_name"
               type="text"
-              placeholder="Enter First Name"
+              placeholder={t("app.register.enter_first_name")}
               icon={faQuestion}
               showAsterisk={
                 !!formik.errors.first_name && !!formik.touched.first_name
@@ -70,10 +72,10 @@ function UserDataChangingComponent({
             />
 
             <UserDataInputComponents
-              label="Last Name"
+              label={t("app.user.data.last_name")}
               name="last_name"
               type="text"
-              placeholder="Enter Last Name"
+              placeholder={t("app.register.enter_last_name")}
               icon={faQuestion}
               showAsterisk={
                 !!formik.errors.last_name && !!formik.touched.last_name
@@ -86,10 +88,10 @@ function UserDataChangingComponent({
             />
 
             <UserDataInputComponents
-              label="Address"
+              label={t("common.address")}
               name="address"
               type="textarea"
-              placeholder="Enter Address"
+              placeholder={t("components.user_data.enter_address")}
               icon={faHouse}
               showAsterisk={!!formik.errors.address && !!formik.touched.address}
               error={formik.errors.address}
@@ -100,10 +102,10 @@ function UserDataChangingComponent({
             />
 
             <UserDataInputComponents
-              label="Phone Number"
+              label={t("app.user.data.phone_number")}
               name="phone_number"
               type="text"
-              placeholder="Enter Phone Number"
+              placeholder={t("components.user_data.enter_phone_number")}
               icon={faPhone}
               showAsterisk={
                 !!formik.errors.phone_number && !!formik.touched.phone_number
@@ -117,7 +119,7 @@ function UserDataChangingComponent({
 
             {checkout && (
               <Form.Check
-                label="Save data"
+                label={t("app.checkout.save_data")}
                 onChange={() => {
                   setChangeUserData(!changeUserData);
                 }}

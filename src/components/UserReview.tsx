@@ -3,20 +3,23 @@ import React from "react";
 
 import Link from "next/link";
 
-import { faCheck,faX } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Card,Col, Row } from "react-bootstrap";
+import { Card, Col, Row } from "react-bootstrap";
+
+import { useI18n } from "@/components/providers/I18nProvider";
 
 import { approveReview, disapproveReview } from "@/fetching/fetching";
-import { Review as ReviewType } from "@/fetching/types";
+import { Review } from "@/fetching/types";
 
-type ReviewProps = {
-  review: ReviewType;
+type UserReviewProps = {
+  review: Review;
   admin: boolean;
   index: number;
 };
 
-function Review({ review, admin, index }: ReviewProps) {
+function UserReview({ review, admin, index }: UserReviewProps) {
+  const { t } = useI18n();
   const [showReview, setShowReview] = React.useState(true);
   return (
     <>
@@ -24,26 +27,35 @@ function Review({ review, admin, index }: ReviewProps) {
         <Row className="mx-auto mb-5" key={index}>
           <Card className="p-3 floating-element">
             <Card.Title>
-              <p>Title: {review.title}</p>
+              <p>
+                {t("components.review.title_label")} {review.title}
+              </p>
             </Card.Title>
 
             {admin ? (
               <Card.Subtitle>
-                <p>User: {review.name}</p>
+                <p>
+                  {t("components.review.user_label")} {review.name}
+                </p>
               </Card.Subtitle>
             ) : (
               <Card.Subtitle>
-                <p>{review.approved ? "Approved" : "Awaits evaluation"}</p>
+                <p>
+                  {review.approved
+                    ? t("components.review.approved")
+                    : t("components.review.awaits_evaluation")}
+                </p>
               </Card.Subtitle>
             )}
 
             <Card.Subtitle>
               <p>
-                Item:{" "}
+                {t("components.review.item_label")}{" "}
                 <Link href={`/artwork_page/${review.artwork_id}`}>
                   {review.artwork_title}
                 </Link>{" "}
-                by {review.artist_name}
+                {t("components.review.by")}
+                {review.artist_name}
               </p>
             </Card.Subtitle>
 
@@ -83,4 +95,4 @@ function Review({ review, admin, index }: ReviewProps) {
   );
 }
 
-export default Review;
+export default UserReview;

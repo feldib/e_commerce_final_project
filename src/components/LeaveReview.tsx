@@ -10,20 +10,22 @@ import {
   Form as RBForm,
   Row,
 } from "react-bootstrap";
-import { ErrorMessage,Field, Form, Formik } from "formik";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 
 import {
   showIncorrectDataToast,
-  showReviewErrorToast,
-  showReviewSavedToast,
+  showReviewSavedSuccessToast,
+  showReviewSaveErrorToast,
 } from "@/utils/toastUtils";
-import { reviewSchema } from "@/utils/validationSchemas";
 
+import { useI18n } from "@/components/providers/I18nProvider";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
 
 import { leaveReview } from "@/fetching/fetching";
 
 import InputComponent from "./input/InputComponent";
+
+import { useReviewSchema } from "@/hooks/useValidationSchemas";
 
 type LeaveReviewProps = {
   artwork_id: number;
@@ -35,6 +37,8 @@ type ReviewFormValues = {
 };
 
 function LeaveReview({ artwork_id }: LeaveReviewProps) {
+  const { t } = useI18n();
+  const reviewSchema = useReviewSchema();
   const { loggedIn } = React.useContext(UserDataContext);
 
   const form = React.useRef<HTMLFormElement | null>(null);
@@ -47,41 +51,45 @@ function LeaveReview({ artwork_id }: LeaveReviewProps) {
   const onSubmit = async (values: ReviewFormValues) => {
     try {
       await leaveReview(artwork_id, values.title, values.review_text);
-      showReviewSavedToast();
+      showReviewSavedSuccessToast(t);
       form?.current?.reset();
     } catch {
-      showReviewErrorToast();
+      showReviewSaveErrorToast(t);
     }
   };
 
   return (
-    <Row className="mx-5 mt-5 mb-5 floating-element">
-      <Col>
-        <Formik
-          initialValues={initialValues}
-          onSubmit={onSubmit}
-          validationSchema={reviewSchema}
-        >
-          {({ errors, touched }) => (
-            <Form ref={form}>
-              <RBForm.Group className="mb-3">
-                <RBForm.Label>
-                  <h4>Add a review</h4>
-                </RBForm.Label>
+    <>
+      {loggedIn ? (
+        <Row className="mx-5 mt-5 mb-5 floating-element">
+          <Col>
+            <Formik
+              initialValues={initialValues}
+              onSubmit={onSubmit}
+              validationSchema={reviewSchema}
+            >
+              {({ errors, touched }) => (
+                <Form ref={form}>
+                  <RBForm.Group className="mb-3">
+                    <RBForm.Label>
+                      <h4>{t("components.leave_review.add_review")}</h4>
+                    </RBForm.Label>
 
-                {loggedIn ? (
-                  <>
                     <InputComponent
                       label="Title"
                       name="title"
                       type="text"
-                      placeholder="Enter review title"
+                      placeholder={t(
+                        "components.leave_review.enter_review_title",
+                      )}
                       icon={faKeyboard}
                       showAsterisk={!!errors.title && !!touched.title}
                     />
 
                     <RBForm.Group className="mb-3">
-                      <RBForm.Label>Message</RBForm.Label>
+                      <RBForm.Label>
+                        {t("components.leave_review.message")}
+                      </RBForm.Label>
                       {errors.review_text && touched.review_text && (
                         <FontAwesomeIcon
                           icon={faAsterisk}
@@ -94,7 +102,9 @@ function LeaveReview({ artwork_id }: LeaveReviewProps) {
                           className="form-control"
                           name="review_text"
                           as="textarea"
-                          placeholder="Enter review text"
+                          placeholder={t(
+                            "components.leave_review.enter_review_text",
+                          )}
                           style={{ height: "100px" }}
                         />
                       </FloatingLabel>
@@ -109,22 +119,22 @@ function LeaveReview({ artwork_id }: LeaveReviewProps) {
                       type="submit"
                       onClick={() => {
                         if (Object.keys(errors).length) {
-                          showIncorrectDataToast();
+                          showIncorrectDataToast(t);
                         }
                       }}
                     >
-                      Submit
+                      {t("components.leave_review.submit")}
                     </Button>
-                  </>
-                ) : (
-                  <p>You have to be logged in to leave a review!</p>
-                )}
-              </RBForm.Group>
-            </Form>
-          )}
-        </Formik>
-      </Col>
-    </Row>
+                  </RBForm.Group>
+                </Form>
+              )}
+            </Formik>
+          </Col>
+        </Row>
+      ) : (
+        ""
+      )}
+    </>
   );
 }
 

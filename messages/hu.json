@@ -1,0 +1,388 @@
+{
+  "common": {
+    "skip_to_content": "Ugrás a tartalomhoz",
+    "shopping_cart": "Kosár",
+    "shopping_cart_replacement_title": "Kosár cseréje",
+    "shopping_cart_replacement_message": "Szeretnéd lecserélni a jelenlegi kosaradat erre?",
+    "yes": "Igen",
+    "no": "Nem",
+    "no_results": "Nincs találat",
+    "no_orders": "Nincsenek rendelések",
+    "no_users": "Nincsenek felhasználók",
+    "no_artworks": "Nincsenek műalkotások",
+    "no_reviews": "Nincsenek értékelések",
+    "item_out_of_stock": "A termék elfogyott",
+    "shopping_list_empty": "A bevásárlólista üres",
+    "send": "Küldés",
+    "next": "Következő",
+    "back": "Vissza",
+    "sign_in": "Bejelentkezés",
+    "register": "Regisztráció",
+    "checkout": "Pénztár",
+    "user": "Felhasználó",
+    "order": "Rendelés",
+    "search": "Keresés",
+    "title": "Cím",
+    "artist": "Művész",
+    "price": "Ár",
+    "quantity": "Mennyiség",
+    "tags": "Címkék",
+    "categories": "Kategóriák",
+    "total_cost": "Végösszeg",
+    "name": "Név",
+    "email": "Email",
+    "address": "Cím",
+    "phone_number": "Telefonszám",
+    "description": "Leírás",
+    "thumbnail": "Bélyegkép",
+    "images": "Képek",
+    "category": "Kategória",
+    "choose": "Válassz",
+    "by": "",
+    "reviews": "Értékelések",
+    "available_quantity": "Elérhető mennyiség",
+    "order_summary": "Rendelés összegzése",
+    "price_range": "Ártartomány",
+    "minimum": "Minimum",
+    "maximum": "Maximum",
+    "number_of_artworks_shown": "Megjelenített műalkotások száma",
+    "order_by": "Rendezés",
+    "newest_to_oldest": "Legújabbtól a legrégebbiig",
+    "oldest_to_newest": "Legrégebbitől a legújabbig",
+    "only_featured": "Csak kiemelt",
+    "place_of_thumbnail": "Bélyegkép helye",
+    "enter_email": "Email megadása",
+    "all": "Minden"
+  },
+  "navigation": {
+    "search": "Keresés",
+    "about": "Rólunk",
+    "contact": "Kapcsolat",
+    "log_in": "Bejelentkezés",
+    "log_out": "Kijelentkezés",
+    "admin_page": "Admin oldal"
+  },
+  "app": {
+    "home": {
+      "welcome_to_artwork_market": "Üdvözöljük a Műalkotás Piactéren",
+      "featured": "Kiemelt",
+      "newest": "Legújabb",
+      "most_wishlisted": "Legtöbbet kívántott",
+      "wishlisted": "Kívánságlistán"
+    },
+    "about": {
+      "title": "Rólunk",
+      "our_story": "A mi történetünk",
+      "story_paragraph_1": "Üdvözöljük a művészet világában! Történetünk egy egyszerű, mégis mélységes elhatározással kezdődött: a kreativitás iránti szeretettel minden formájában. Olyan platformot képzeltünk el, amely nemcsak a művészet szépségét ünnepli, hanem az egyes remekművek mögött rejlő történeteket is. A változatos művészeti kifejezések iránti csodálatunk vezérelt bennünket, hogy létrehozzunk egy teret, ahol a művészek és a művészetkedvelők találkoznak.",
+      "story_paragraph_2": "Célunk az alkotók és értékelők közötti szakadék áthidalása, olyan közösség kialakítása, amely az inspirációból és képzeletből táplálkozik. A művészetnek hihetetlen ereje van érzelmek felkeltésére, gondolatok provokálására és beszélgetések elindítására. Platformunkon keresztül azt célozzuk, hogy bemutassuk a művészeti törekvések vibráló szövetét, miközben tiszteletben tartjuk az egyedi narratívákat, amelyek minden ecsetvonásba, szoborba és alkotásba szövődnek.",
+      "story_paragraph_3": "Csatlakozzon hozzánk ezen elbűvölő utazáson, miközben kivételes műalkotások gyűjteményét állítjuk össze, mindegyiknek megvan a maga meséje. Együtt ünnepeljük a kreativitás lényegét és a határtalan történeteket, amelyek minden művészeti csodában rejlenek."
+    },
+    "admin": {
+      "layout": {
+        "title": "Admin oldal",
+        "artworks": "Műalkotások",
+        "users": "Felhasználók",
+        "orders": "Rendelések",
+        "reviews": "Értékelések",
+        "messages": "Üzenetek"
+      },
+      "artworks": {
+        "title": "Műalkotások",
+        "add_new_artwork": "Új műalkotás hozzáadása"
+      },
+      "add_new_artwork": {
+        "title": "Új műalkotás hozzáadása",
+        "title_field": "Cím",
+        "artist": "Művész",
+        "price": "Ár",
+        "tags": "Címkék",
+        "quantity": "Mennyiség",
+        "category": "Kategória",
+        "thumbnail": "Bélyegkép",
+        "images": "Képek",
+        "description": "Leírás",
+        "enter_title": "Cím megadása",
+        "enter_artist_name": "Művész nevének megadása",
+        "enter_price": "Műalkotás árának megadása",
+        "add_new_tag": "Új címke hozzáadása",
+        "enter_quantity": "Mennyiség megadása",
+        "choose": "Válassz",
+        "upload_thumbnail": "Bélyegkép feltöltése",
+        "upload_other_pictures": "További képek feltöltése",
+        "uploaded_thumbnail": "Bélyegkép feltöltve",
+        "uploaded_other_picture": "További kép feltöltve",
+        "enter_description": "Leírás megadása"
+      },
+      "edit_artwork": {
+        "title": "Műalkotás adatainak szerkesztése",
+        "current_thumbnail": "Jelenlegi bélyegkép",
+        "category_updated_successfully": "Kategória sikeresen frissítve",
+        "failed_to_update_category": "Kategória frissítése sikertelen",
+        "thumbnail_uploaded_successfully": "Bélyegkép sikeresen feltöltve",
+        "failed_to_upload_thumbnail": "Bélyegkép feltöltése sikertelen",
+        "image_uploaded_successfully": "Kép sikeresen feltöltve",
+        "failed_to_upload_image": "Kép feltöltése sikertelen",
+        "failed_to_remove_image": "Kép eltávolítása sikertelen"
+      },
+      "orders": {
+        "title": "Felhasználók által teljesített rendelések",
+        "order": "Rendelés",
+        "no_orders": "--- Nincsenek rendelések ---"
+      },
+      "reviews": {
+        "title": "Új értékelések",
+        "no_reviews": "--- Nincsenek értékelések ---"
+      },
+      "messages": {
+        "title": "Megválaszolatlan üzenetek",
+        "no_messages": "--- Nincsenek üzenetek ---"
+      }
+    },
+    "search": {
+      "title": "Keresés",
+      "search_results": "Keresési eredmények"
+    },
+    "login": {
+      "title": "Bejelentkezés",
+      "email_address": "Email cím",
+      "password": "Jelszó",
+      "forgot_password": "Elfelejtett jelszó",
+      "enter_email": "Email megadása",
+      "enter_password": "Jelszó megadása"
+    },
+    "register": {
+      "title": "Regisztráció",
+      "email_address": "Email cím",
+      "email_address_again": "Email cím újra",
+      "password": "Jelszó",
+      "password_again": "Jelszó újra",
+      "first_name": "Keresztnév",
+      "last_name": "Vezetéknév",
+      "enter_email": "Email megadása",
+      "enter_email_again": "Email megadása újra",
+      "enter_password": "Jelszó megadása",
+      "enter_password_again": "Jelszó megadása újra",
+      "enter_first_name": "Keresztnév megadása",
+      "enter_last_name": "Vezetéknév megadása",
+      "email_required": "Email szükséges",
+      "invalid_email": "Érvénytelen email",
+      "repeat_email_required": "Email megerősítése szükséges",
+      "must_match_email": "Meg kell egyeznie az email címmel",
+      "password_required": "Jelszó szükséges",
+      "repeat_password_required": "Jelszó megerősítése szükséges",
+      "must_match_password": "Meg kell egyeznie a jelszóval",
+      "first_name_required": "Keresztnév szükséges",
+      "last_name_required": "Vezetéknév szükséges"
+    },
+    "contact": {
+      "title": "Kapcsolat",
+      "company_details": "Cég adatai",
+      "company_name": "Név: Műalkotás Piactér",
+      "company_address": "Cím: Budapest, Magyarország",
+      "company_phone": "Telefon: +36 xx xxx xxxx",
+      "message_administrator": "Üzenet az adminisztrátornak",
+      "email_address": "Email cím",
+      "title_field": "Cím",
+      "message": "Üzenet",
+      "enter_email": "Email megadása",
+      "enter_message_title": "Üzenet címének megadása",
+      "enter_message": "Üzenet megadása"
+    },
+    "shopping_cart": {
+      "title": "Kosár"
+    },
+    "user": {
+      "layout": {
+        "user_data": "Felhasználói adatok",
+        "order_history": "Rendelési előzmények",
+        "wishlist": "Kívánságlista",
+        "reviews": "Értékelések",
+        "shopping_cart": "Kosár"
+      },
+      "page_suffix": " oldala",
+      "data": {
+        "title": "Felhasználói adatok",
+        "email_address": "Email cím",
+        "first_name": "Keresztnév",
+        "last_name": "Vezetéknév",
+        "phone_number": "Telefonszám"
+      },
+      "order_history": {
+        "title": "Rendelési előzmények",
+        "order": "Rendelés",
+        "no_orders": "--- Nincsenek rendelések ---"
+      },
+      "wishlist": {
+        "title": "Kívánságlistán",
+        "no_wishlisted_items": "--- Nincsenek tételek a kívánságlistán ---"
+      },
+      "reviews": {
+        "title": "Korábbi értékelések",
+        "no_reviews": "--- Nincsenek értékelések ---"
+      }
+    },
+    "checkout": {
+      "invoice_data": "Számlázási adatok",
+      "save_data": "Adatok mentése"
+    },
+    "receipt": {
+      "title": "Számla",
+      "back_to_shop": "Vissza a boltba"
+    },
+    "forgot_password": {
+      "title": "Email küldése a jelszó visszaállításához",
+      "email_address": "Email cím",
+      "enter_email": "Email megadása",
+      "recovery_message": "Ha van regisztrált felhasználó ezzel az email címmel, jelszó-visszaállítási linket küldtünk neki",
+      "send_link": "Link küldése"
+    },
+    "reset_password": {
+      "title": "Jelszó visszaállítása",
+      "password": "Jelszó",
+      "enter_password": "Jelszó megadása",
+      "enter_repeat_password": "Jelszó megadása újra",
+      "change_password": "Jelszó módosítása"
+    }
+  },
+  "components": {
+    "header": {
+      "artwork_market_logo": "Műalkotás piactér logó"
+    },
+    "shopping_cart": {
+      "shopping_cart_empty": "A kosár üres"
+    },
+    "svg_components": {
+      "set_artwork_featured": "Műalkotás kiemeltként beállítása"
+    },
+    "user_data": {
+      "enter_address": "Cím megadása",
+      "enter_phone_number": "Telefonszám megadása"
+    },
+    "review": {
+      "title_label": "Cím:",
+      "user_label": "Felhasználó:",
+      "approved": "Jóváhagyva",
+      "awaits_evaluation": "Értékelésre vár",
+      "item_label": "Tétel:",
+      "by": ""
+    },
+    "unanswered_message": {
+      "reply": "Válasz",
+      "reply_sent_successfully": "Válasz sikeresen elküldve!",
+      "title_field": "Cím",
+      "enter_title": "Cím megadása",
+      "message": "Üzenet",
+      "enter_reply": "Válasz megadása"
+    },
+    "artwork_details": {
+      "description": "Leírás",
+      "available_quantity": "Elérhető mennyiség: ",
+      "price": "Ár: €",
+      "reviews": "Értékelések"
+    },
+    "search_fields": {
+      "title": "Cím",
+      "artist": "Művész",
+      "price_range": "Ártartomány",
+      "minimum": "Minimum",
+      "maximum": "Maximum",
+      "number_of_artworks_shown": "Megjelenített műalkotások száma",
+      "order_by": "Rendezés",
+      "newest_to_oldest": "Legújabbtól a legrégebbiig",
+      "oldest_to_newest": "Legrégebbitől a legújabbig",
+      "only_featured": "Csak kiemelt",
+      "search": "Keresés"
+    },
+    "tables": {
+      "title": "Cím",
+      "artist": "Művész",
+      "price": "Ár",
+      "quantity": "Mennyiség",
+      "tags": "Címkék",
+      "categories": "Kategóriák",
+      "total_cost": "Végösszeg",
+      "name": "Név",
+      "email": "Email",
+      "address": "Cím",
+      "phone_number": "Telefonszám",
+      "no_users": "--- Nincsenek felhasználók ---"
+    },
+    "leave_review": {
+      "add_review": "Értékelés hozzáadása",
+      "title": "Cím",
+      "message": "Üzenet",
+      "enter_review_title": "Értékelés címének megadása",
+      "enter_review_text": "Értékelés szövegének megadása",
+      "submit": "Küldés",
+      "login_required": "Be kell jelentkezned az értékelés írásához!"
+    },
+    "reviews": {
+      "no_reviews": "Még nincsenek értékelések"
+    },
+    "buttons": {
+      "item_added_to_cart": "Tétel hozzáadva a kosárhoz",
+      "item_out_of_stock": "Tétel elfogyott",
+      "sign_in_to_add_wishlist": "Jelentkezz be vagy regisztrálj a kívánságlistához való hozzáadáshoz! "
+    },
+    "recommendation_card": {
+      "by": "",
+      "place_of_thumbnail": "bélyegkép helye"
+    }
+  },
+  "validation": {
+    "title_required": "Cím szükséges",
+    "name_required": "Név szükséges",
+    "price_required": "Ár szükséges",
+    "quantity_required": "Mennyiség szükséges",
+    "category_required": "Kategória szükséges",
+    "thumbnail_required": "Bélyegkép szükséges",
+    "description_required": "Leírás szükséges",
+    "not_valid_image_type": "Nem érvényes képtípus",
+    "max_allowed_size": "Maximális megengedett méret 100KB",
+    "add_minimum_tags": "Adj hozzá legalább 3 címkét!",
+    "price_min": "Az árnak nagyobbnak vagy egyenlőnek kell lennie 1-gyel",
+    "quantity_min": "A mennyiségnek nagyobbnak vagy egyenlőnek kell lennie 1-gyel",
+    "email_required": "Email szükséges",
+    "email_invalid": "Érvénytelen email",
+    "password_required": "Jelszó szükséges",
+    "first_name_required": "Keresztnév szükséges",
+    "last_name_required": "Vezetéknév szükséges",
+    "address_required": "Cím szükséges",
+    "phone_number_required": "Telefonszám szükséges",
+    "message_required": "Üzenet szükséges",
+    "review_text_required": "Értékelés szövege szükséges",
+    "repeat_email_required": "Email ismétlése szükséges",
+    "email_match": "Meg kell egyeznie az email címmel",
+    "repeat_password_required": "Jelszó ismétlése szükséges",
+    "password_match": "Meg kell egyeznie a jelszóval"
+  },
+  "toast": {
+    "artwork_added_successfully": "Műalkotás sikeresen hozzáadva az adatbázishoz",
+    "error_add_artwork": "Hiba: nem sikerült hozzáadni a műalkotást",
+    "registration_successful": "Regisztráció sikeres",
+    "registration_failed": "Regisztráció sikertelen",
+    "user_already_registered": "Már regisztrálva van felhasználó ezzel az email címmel",
+    "item_added_to_cart": "Tétel hozzáadva a kosárhoz",
+    "item_out_of_stock": "Tétel elfogyott",
+    "data_saved_successfully": "Adatok sikeresen mentve",
+    "changes_saved": "Változások mentve",
+    "save_error": "Hiba: nem sikerült menteni",
+    "incorrect_data": "Helytelen adatok",
+    "only_effects_invoice": "Ez csak a számlát érinti!",
+    "login_success": "Bejelentkezve",
+    "logout_success": "Kijelentkezve",
+    "password_reset_success": "Jelszó sikeresen megváltoztatva",
+    "message_sent": "Üzenet elküldve",
+    "review_saved": "Értékelés mentve",
+    "email_submitted": "Email elküldve",
+    "data_saved": "Adatok sikeresen mentve",
+    "incorrect_credentials": "Helytelen email vagy jelszó",
+    "submission_error": "Hiba: nem sikerült elküldeni",
+    "password_change_error": "Hiba: nem sikerült megváltoztatni a jelszót",
+    "message_error": "Hiba: nem sikerült elküldeni az üzenetet",
+    "review_error": "Hiba: nem sikerült menteni az értékelést",
+    "review_approval_notice": "Az értékelést jóvá kell hagynia az adminisztrátornak",
+    "reply_success": "Válasz sikeresen elküldve!",
+    "reply_error": "Hiba: nem sikerült elküldeni a választ"
+  }
+}

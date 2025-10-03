@@ -1,12 +1,14 @@
+"use client";
 import React from "react";
 
 import { Row } from "react-bootstrap";
 
 import AdminArtworkTableDatalines from "@/components/datalines/AdminArtworkTableDatalines";
+import { useI18n } from "@/components/providers/I18nProvider";
 
 import { Artwork } from "@/fetching/types";
 
-import { renderData } from "@/helpers/helpers";
+import { renderData } from "@/helpers/tableHelpers";
 import useLoading from "@/hooks/useLoading";
 
 type AdminArtworkTableProps = {
@@ -14,7 +16,9 @@ type AdminArtworkTableProps = {
 };
 
 function AdminArtworkTable({ dataLines }: AdminArtworkTableProps) {
-  function makeDataLines(dataLinesGenerated: Artwork[]): React.JSX.Element {
+  const { t } = useI18n();
+
+  function makeRows(dataLinesGenerated: Artwork[]): React.JSX.Element {
     return (
       <>
         {dataLinesGenerated.map((line: Artwork, index: number) => {
@@ -27,7 +31,7 @@ function AdminArtworkTable({ dataLines }: AdminArtworkTableProps) {
   }
 
   const dataLinesGenerated = useLoading(dataLines, (dataLines) => {
-    return renderData(dataLines, makeDataLines);
+    return renderData(dataLines, makeRows, t("common.no_results"));
   });
 
   return (
@@ -36,12 +40,14 @@ function AdminArtworkTable({ dataLines }: AdminArtworkTableProps) {
         <thead>
           <tr>
             <th></th>
-            <th>Title</th>
-            <th>Artist</th>
-            <th className={"d-none d-md-table-cell"}>Price</th>
-            <th className={"d-none d-md-table-cell"}>Quantity</th>
-            <th className={"d-none d-md-table-cell"}>Tags</th>
-            <th className={"d-none d-md-table-cell"}>Categories</th>
+            <th>{t("common.title")}</th>
+            <th>{t("common.artist")}</th>
+            <th className={"d-none d-md-table-cell"}>{t("common.price")}</th>
+            <th className={"d-none d-md-table-cell"}>{t("common.quantity")}</th>
+            <th className={"d-none d-md-table-cell"}>{t("common.tags")}</th>
+            <th className={"d-none d-md-table-cell"}>
+              {t("common.categories")}
+            </th>
             <th></th>
           </tr>
         </thead>

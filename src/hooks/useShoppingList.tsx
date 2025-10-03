@@ -4,7 +4,7 @@ import React from "react";
 import { getShoppingCart } from "@/fetching/fetching";
 import { Artwork } from "@/fetching/types";
 
-import { getLocalStorageShoppingCart } from "@/helpers/helpers";
+import { getLocalStorageShoppingCart } from "@/helpers/shoppingCartHelpers";
 
 const useShoppingList = (loggedIn: boolean) => {
   const [data, setData] = React.useState<Artwork[]>([]);

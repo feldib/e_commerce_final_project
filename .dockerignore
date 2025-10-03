@@ -1,15 +1,44 @@
+# Dependencies
 node_modules
+
+# Build outputs
 build
 dist
+.next
+out
+.turbo
+
+# Docker files
 .dockerignore
 Dockerfile
+
+# Environment and secrets
 .env
 .env.*
+
+# Version control
 .git
 .gitignore
+
+# Logs
 npm-debug.log
 yarn-debug.log
 yarn-error.log
+*.log
+
+# Development tools
 .vscode
+.idea
+
+# Testing
 coverage
+
+# Documentation
 *.md
+README.md
+
+# Temporary files
+.DS_Store
+*.tmp
+*.temp
+.cache

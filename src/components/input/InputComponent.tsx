@@ -3,7 +3,7 @@ import React from "react";
 import { faAsterisk, IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Form, InputGroup } from "react-bootstrap";
-import { ErrorMessage,Field } from "formik";
+import { ErrorMessage, Field } from "formik";
 
 type InputComponentProps = {
   label: string;

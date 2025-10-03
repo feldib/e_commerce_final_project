@@ -6,26 +6,29 @@ import { useSearchParams } from "next/navigation";
 import { faKey, faQuestion, faUser } from "@fortawesome/free-solid-svg-icons";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { Form, Formik } from "formik";
-import * as Yup from "yup";
 import { ToastContainer } from "react-toastify";
 
 import {
-  showErrorToast,
   showIncorrectDataToast,
-  showSuccessToast,
+  showRegistrationFailedToast,
+  showRegistrationSuccessToast,
+  showUserAlreadyExistsToast,
 } from "@/utils/toastUtils";
 
 import InputComponent from "@/components/input/InputComponent";
 import PageTitle from "@/components/PageTitle";
+import { useI18n } from "@/components/providers/I18nProvider";
 
 import { registerNewUser } from "@/fetching/fetching";
 import { logIn } from "@/fetching/fetching";
 import { User } from "@/fetching/types";
 
+import { useRegistrationSchema } from "@/hooks/useValidationSchemas";
+
 type RegistrationPageProps = {
   settleSuccessfulRegistration: (
     to_checkout: boolean,
-    userData: { user: User }
+    userData: { user: User },
   ) => void;
 };
 
@@ -34,6 +37,8 @@ function RegistrationPageInner({
 }: RegistrationPageProps) {
   const searchParams = useSearchParams();
   const to_checkout = searchParams.get("to_checkout") === "true";
+  const { t } = useI18n();
+  const registrationSchema = useRegistrationSchema();
 
   const attemptRegistration = async (
     values: {
@@ -44,22 +49,22 @@ function RegistrationPageInner({
     },
     settleSuccessfulRegistration: (
       to_checkout: boolean,
-      userData: { user: User }
-    ) => void
+      userData: { user: User },
+    ) => void,
   ) => {
     await registerNewUser(
       values.email,
       values.password,
       values.firstName,
-      values.lastName
+      values.lastName,
     )
       .then(function () {
         logIn(values.email, values.password, (userData) => {
-          settleSuccessfulRegistration(to_checkout, userData);
+          settleSuccessfulRegistration(to_checkout, { user: userData });
         });
       })
       .catch(() => {
-        showErrorToast("Registration failed");
+        showRegistrationFailedToast(t);
       });
   };
 
@@ -84,28 +89,15 @@ function RegistrationPageInner({
   }) {
     try {
       await attemptRegistration(values, settleSuccessfulRegistration);
-      showSuccessToast("Registration successful");
+      showRegistrationSuccessToast(t);
     } catch {
-      showErrorToast("A user is registered with email already");
+      showUserAlreadyExistsToast(t);
     }
   }
 
-  const registrationSchema = Yup.object().shape({
-    email: Yup.string().required("Email required").email("Invalid email"),
-    repeatEmail: Yup.string()
-      .required("Repeat email required")
-      .oneOf([Yup.ref("email")], "Must match email"),
-    password: Yup.string().required("Password required"),
-    repeatPassword: Yup.string()
-      .required("Repeat password required")
-      .oneOf([Yup.ref("password")], "Must match password"),
-    firstName: Yup.string().required("First name required"),
-    lastName: Yup.string().required("Last name required"),
-  });
-
   return (
     <Container className="pb-5 px-3">
-      <PageTitle title="Register" />
+      <PageTitle title={t("app.register.title")} />
       <Row className="mx-auto mb-5 pb-5 floating-element">
         <Col className="mx-5 pb-5 ">
           <Formik
@@ -116,37 +108,37 @@ function RegistrationPageInner({
             {({ errors, touched }) => (
               <Form>
                 <InputComponent
-                  label="Email address"
+                  label={t("app.register.email_address")}
                   name="email"
                   type="email"
-                  placeholder="Enter email"
+                  placeholder={t("common.enter_email")}
                   icon={faUser}
                   showAsterisk={!!errors.email && !!touched.email}
                 />
 
                 <InputComponent
-                  label="Email address again"
+                  label={t("app.register.email_address_again")}
                   name="repeatEmail"
                   type="email"
-                  placeholder="Enter email again"
+                  placeholder={t("app.register.enter_email_again")}
                   icon={faUser}
                   showAsterisk={!!errors.repeatEmail && !!touched.repeatEmail}
                 />
 
                 <InputComponent
-                  label="Password"
+                  label={t("app.register.password")}
                   name="password"
                   type="password"
-                  placeholder="Enter password"
+                  placeholder={t("app.register.enter_password")}
                   icon={faKey}
                   showAsterisk={!!errors.password && !!touched.password}
                 />
 
                 <InputComponent
-                  label="Password again"
+                  label={t("app.register.password_again")}
                   name="repeatPassword"
                   type="password"
-                  placeholder="Enter password again"
+                  placeholder={t("app.register.enter_password_again")}
                   icon={faKey}
                   showAsterisk={
                     !!errors.repeatPassword && !!touched.repeatPassword
@@ -154,19 +146,19 @@ function RegistrationPageInner({
                 />
 
                 <InputComponent
-                  label="First Name"
+                  label={t("app.register.first_name")}
                   name="firstName"
                   type="text"
-                  placeholder="Enter First Name"
+                  placeholder={t("app.register.enter_first_name")}
                   icon={faQuestion}
                   showAsterisk={!!errors.firstName && !!touched.firstName}
                 />
 
                 <InputComponent
-                  label="Last Name"
+                  label={t("app.register.last_name")}
                   name="lastName"
                   type="text"
-                  placeholder="Enter Last Name"
+                  placeholder={t("app.register.enter_last_name")}
                   icon={faQuestion}
                   showAsterisk={!!errors.lastName && !!touched.lastName}
                 />
@@ -176,11 +168,11 @@ function RegistrationPageInner({
                   type="submit"
                   onClick={() => {
                     if (Object.keys(errors).length) {
-                      showIncorrectDataToast();
+                      showIncorrectDataToast(t);
                     }
                   }}
                 >
-                  Register
+                  {t("common.register")}
                 </Button>
                 <ToastContainer position="bottom-right" />
               </Form>

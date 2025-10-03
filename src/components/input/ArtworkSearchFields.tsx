@@ -1,19 +1,21 @@
+"use client";
 import React from "react";
 
-import { Button, Col, Dropdown, Form,InputGroup, Row } from "react-bootstrap";
+import { Button, Col, Dropdown, Form, InputGroup, Row } from "react-bootstrap";
 
+import { useI18n } from "@/components/providers/I18nProvider";
 import Queries from "@/components/Queries";
 
 import { Category, SearchFormikInstance, SearchParams } from "@/fetching/types";
 
-import CategoriesDropdown from "./CategoriesDropdown";
+import CategoryDropdownSearch from "./CategoryDropdownSearch";
 import SearchField from "./SearchField";
 
 type ArtworkSearchFieldsProps = {
   formik: SearchFormikInstance;
   categories: Category[];
   triggerSearchWithUpdatedValues: (
-    updatedValues: Partial<SearchParams>
+    updatedValues: Partial<SearchParams>,
   ) => void;
   searchedValues?: SearchParams;
 };
@@ -24,10 +26,11 @@ function ArtworkSearchFields({
   triggerSearchWithUpdatedValues,
   searchedValues,
 }: ArtworkSearchFieldsProps) {
+  const { t } = useI18n();
   return (
     <div className="floating-element mb-3 mx-5">
       <SearchField
-        what="Title"
+        what={t("components.search_fields.title")}
         name="title"
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
@@ -35,7 +38,7 @@ function ArtworkSearchFields({
       />
 
       <SearchField
-        what="Artist"
+        what={t("components.search_fields.artist")}
         name="artist_name"
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
@@ -44,11 +47,11 @@ function ArtworkSearchFields({
 
       <Row lg={6} sx={8} className="mx-auto mb-5 mt-5">
         <InputGroup>
-          <InputGroup.Text>Price range (min, max)</InputGroup.Text>
+          <InputGroup.Text>{t("common.price_range")}</InputGroup.Text>
 
           <Form.Control
             type="number"
-            placeholder="Minimum"
+            placeholder={t("common.minimum")}
             name="min"
             value={formik.values.min === 0 ? "" : formik.values.min}
             onChange={(e) => {
@@ -70,7 +73,7 @@ function ArtworkSearchFields({
 
           <Form.Control
             type="number"
-            placeholder="Maximum"
+            placeholder={t("common.maximum")}
             name="max"
             value={formik.values.max === 0 ? "" : formik.values.max}
             onChange={(e) => {
@@ -91,7 +94,7 @@ function ArtworkSearchFields({
       </Row>
 
       <Row className="mx-auto">
-        <CategoriesDropdown
+        <CategoryDropdownSearch
           categories={categories}
           setValue={(value: string | number) => {
             formik.setFieldValue("category_id", value);
@@ -108,7 +111,7 @@ function ArtworkSearchFields({
             }}
           >
             <Dropdown.Toggle variant="outilne-dark">
-              Number of artworks shown
+              {t("components.search_fields.number_of_artworks_shown")}
             </Dropdown.Toggle>
             <Dropdown.Menu>
               <Dropdown.Item href="" eventKey="5">
@@ -137,14 +140,16 @@ function ArtworkSearchFields({
               triggerSearchWithUpdatedValues({ order: e as string });
             }}
           >
-            <Dropdown.Toggle variant="outilne-dark">Order by</Dropdown.Toggle>
+            <Dropdown.Toggle variant="outilne-dark">
+              {t("common.order_by")}
+            </Dropdown.Toggle>
             <Dropdown.Menu>
               <Dropdown.Item href="" eventKey="desc">
-                Newest to oldest
+                {t("components.search_fields.newest_to_oldest")}
               </Dropdown.Item>
 
               <Dropdown.Item href="" eventKey="asc">
-                Oldest to newest
+                {t("components.search_fields.oldest_to_newest")}
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
@@ -153,7 +158,7 @@ function ArtworkSearchFields({
         <Col className="mb-3">
           <Form.Check
             type="switch"
-            label="Only featured"
+            label={t("components.search_fields.only_featured")}
             id="only_featured"
             onChange={() => {
               const newValue = !formik.values.only_featured;
@@ -173,7 +178,7 @@ function ArtworkSearchFields({
               triggerSearchWithUpdatedValues({});
             }}
           >
-            Search
+            {t("components.search_fields.search")}
           </Button>
         </Col>
       </Row>

@@ -4,13 +4,15 @@ import { Card, Carousel, Col, Row } from "react-bootstrap";
 
 import { SERVER_URL } from "@/utils/constants";
 
-type ArtworkPicturesCarouselProps = {
+import ArtworkPictureCarouselItem from "./ArtworkPictureCarouselItem";
+
+type ArtworkPictureCarouselProps = {
   other_pictures: string[];
 };
 
-function ArtworkPicturesCarousel({
+function ArtworkPictureCarousel({
   other_pictures,
-}: ArtworkPicturesCarouselProps) {
+}: ArtworkPictureCarouselProps) {
   return (
     <>
       {other_pictures.length > 0 && (
@@ -19,7 +21,7 @@ function ArtworkPicturesCarousel({
             <Carousel>
               {other_pictures.map((pic, index) => {
                 return (
-                  <Carousel.Item className="mb-5 px-3" key={index}>
+                  <Carousel.Item className="mb-5 px-3" key={`${pic}_${index}`}>
                     <Card className="mx-5 p-2" border="secondary">
                       <Card.Img
                         src={`${SERVER_URL}/${pic}`}
@@ -39,4 +41,4 @@ function ArtworkPicturesCarousel({
   );
 }
 
-export default ArtworkPicturesCarousel;
+export default ArtworkPictureCarousel;

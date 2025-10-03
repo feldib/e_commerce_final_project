@@ -4,7 +4,8 @@ import { SERVER_URL } from "./constants";
 
 export const searchArtworksGraphQL = async (
   searchParams: SearchParams,
-  pageNumber: number
+  pageNumber: number,
+  admin: boolean = false,
 ): Promise<Artwork[]> => {
   try {
     const input = {
@@ -17,6 +18,7 @@ export const searchArtworksGraphQL = async (
           ? undefined
           : searchParams.max,
       offset: pageNumber > 0 ? (pageNumber - 1) * searchParams.n : 0,
+      admin, // Pass admin flag to backend
     };
 
     const query = `
@@ -30,7 +32,6 @@ export const searchArtworksGraphQL = async (
           featured
           created_at
           thumbnail
-          cname
           quantity
           tags {
             id
@@ -70,14 +71,13 @@ export const searchArtworksGraphQL = async (
         featured: boolean;
         created_at: string;
         thumbnail?: string;
-        cname?: string;
         quantity?: number;
         tags?: Array<{ id: number; tname: string }>;
         other_pictures?: string[];
       }) => ({
         ...artwork,
         date_added: artwork.created_at,
-      })
+      }),
     );
   } catch (error) {
     throw error;

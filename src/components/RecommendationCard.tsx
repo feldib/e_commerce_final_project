@@ -5,8 +5,9 @@ import Link from "next/link";
 
 import { Card, Col, Row } from "react-bootstrap";
 
-import { SERVER_URL,UI_DIMENSIONS } from "@/utils/constants";
+import { SERVER_URL, UI_DIMENSIONS } from "@/utils/constants";
 
+import { useI18n } from "@/components/providers/I18nProvider";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
 
 import { Artwork } from "@/fetching/types";
@@ -21,12 +22,13 @@ type RecommendationCardProps = {
 };
 
 function RecommendationCard({ artwork }: RecommendationCardProps) {
+  const { t } = useI18n();
   const { loggedIn } = React.useContext(UserDataContext);
 
   const { quantity, setQuantity } = useQuantity(
     loggedIn,
     artwork.quantity,
-    artwork.id
+    artwork.id,
   );
 
   return (
@@ -41,7 +43,7 @@ function RecommendationCard({ artwork }: RecommendationCardProps) {
             </Card.Title>
 
             <Card.Subtitle>
-              <h6>{`by ${artwork.artist_name}`}</h6>
+              <h6>{`${t("common.by")}${artwork.artist_name}`}</h6>
             </Card.Subtitle>
           </Col>
 
@@ -69,7 +71,7 @@ function RecommendationCard({ artwork }: RecommendationCardProps) {
         width={UI_DIMENSIONS.CARD_IMAGE_WIDTH}
         height="300"
         style={{ objectFit: "cover" }}
-        alt="place of thumbnail"
+        alt={t("common.place_of_thumbnail")}
         variant="bottom"
       />
     </Card>
