@@ -34,6 +34,38 @@ function Queries({
     });
     return category ? getCategoryName(category) : "Unknown Category";
   };
+
+  const handleRemoveBetween = () => {
+    formik.setFieldValue("max", 0);
+    formik.setFieldValue("min", 0);
+    triggerSearchWithUpdatedValues({ max: 0, min: 0 });
+  };
+
+  const handleRemoveMin = () => {
+    formik.setFieldValue("min", 0);
+    triggerSearchWithUpdatedValues({ min: 0 });
+  };
+
+  const handleRemoveMax = () => {
+    formik.setFieldValue("max", 0);
+    triggerSearchWithUpdatedValues({ max: 0 });
+  };
+
+  const handleRemoveTitle = () => {
+    formik.setFieldValue("title", "");
+    triggerSearchWithUpdatedValues({ title: "" });
+  };
+
+  const handleRemoveArtist = () => {
+    formik.setFieldValue("artist_name", "");
+    triggerSearchWithUpdatedValues({ artist_name: "" });
+  };
+
+  const handleRemoveCategory = () => {
+    formik.setFieldValue("category_id", "");
+    triggerSearchWithUpdatedValues({ category_id: "" });
+  };
+
   return (
     <Row>
       {searchedValues &&
@@ -41,11 +73,7 @@ function Queries({
         searchedValues.max > 0 &&
         searchedValues.min < searchedValues.max && (
           <Query
-            remove={() => {
-              formik.setFieldValue("max", 0);
-              formik.setFieldValue("min", 0);
-              triggerSearchWithUpdatedValues({ max: 0, min: 0 });
-            }}
+            remove={handleRemoveBetween}
             text={`Between ${searchedValues.min} and ${searchedValues.max}`}
           />
         )}
@@ -55,50 +83,35 @@ function Queries({
         (searchedValues.max === 0 ||
           searchedValues.min >= searchedValues.max) && (
           <Query
-            remove={() => {
-              formik.setFieldValue("min", 0);
-              triggerSearchWithUpdatedValues({ min: 0 });
-            }}
+            remove={handleRemoveMin}
             text={`Minimum: ${searchedValues.min}`}
           />
         )}
 
       {searchedValues && searchedValues.max > 0 && searchedValues.min === 0 && (
         <Query
-          remove={() => {
-            formik.setFieldValue("max", 0);
-            triggerSearchWithUpdatedValues({ max: 0 });
-          }}
+          remove={handleRemoveMax}
           text={`Maximum: ${searchedValues.max}`}
         />
       )}
 
       {searchedValues && searchedValues.title && (
         <Query
-          remove={() => {
-            formik.setFieldValue("title", "");
-            triggerSearchWithUpdatedValues({ title: "" });
-          }}
+          remove={handleRemoveTitle}
           text={`Title: ${searchedValues.title}`}
         />
       )}
 
       {searchedValues && searchedValues.artist_name && (
         <Query
-          remove={() => {
-            formik.setFieldValue("artist_name", "");
-            triggerSearchWithUpdatedValues({ artist_name: "" });
-          }}
+          remove={handleRemoveArtist}
           text={`Artist: ${searchedValues.artist_name}`}
         />
       )}
 
       {searchedValues && searchedValues.category_id && (
         <Query
-          remove={() => {
-            formik.setFieldValue("category_id", "");
-            triggerSearchWithUpdatedValues({ category_id: "" });
-          }}
+          remove={handleRemoveCategory}
           text={getCurrentCategoryName(searchedValues.category_id)}
         />
       )}

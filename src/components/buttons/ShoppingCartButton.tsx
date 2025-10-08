@@ -17,12 +17,15 @@ type ShoppingCartButtonProps = {
 
 function ShoppingCartButton({ artwork_id, quantity }: ShoppingCartButtonProps) {
   const { t } = useI18n();
+
+  const handleNotLoggedInAction = () => {
+    increaseLocalStorageShoppingCartQuantity(artwork_id, quantity);
+  };
+
   return (
     <SinglePurposeButton
       actionOnLoggedIn={addToShoppingList}
-      actionOnNotLoggedIn={() => {
-        increaseLocalStorageShoppingCartQuantity(artwork_id, quantity);
-      }}
+      actionOnNotLoggedIn={handleNotLoggedInAction}
       artwork_id={artwork_id}
       icon={faBasketShopping}
       toastErrorMessage={t("components.buttons.out_of_stock")}

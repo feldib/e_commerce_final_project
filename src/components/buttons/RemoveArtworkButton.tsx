@@ -15,12 +15,14 @@ function RemoveArtworkButton({
   removeLineFromView,
   artwork_id,
 }: RemoveArtworkButtonProps) {
+  const handleRemoveArtwork = (artwork_id: number) => {
+    removeLineFromView();
+    return removeArtwork(artwork_id);
+  };
+
   return (
     <SinglePurposeButton
-      actionOnLoggedIn={(artwork_id) => {
-        removeLineFromView();
-        return removeArtwork(artwork_id);
-      }}
+      actionOnLoggedIn={handleRemoveArtwork}
       artwork_id={artwork_id}
       icon={faX}
       toastErrorMessage="Error: item could not be removed"

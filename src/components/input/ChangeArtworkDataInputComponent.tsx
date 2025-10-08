@@ -78,6 +78,12 @@ function ChangeArtworkDataInputComponent<
     setEditing(true);
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (type === "number") {
+      preventNonNumericInput(e);
+    }
+  };
+
   return (
     <Form.Group className="pb-3">
       <Form.Label>{label}</Form.Label>
@@ -113,11 +119,7 @@ function ChangeArtworkDataInputComponent<
             id={name}
             name={name}
             onChange={formik.handleChange}
-            onKeyDown={(e) => {
-              if (type === "number") {
-                preventNonNumericInput(e);
-              }
-            }}
+            onKeyDown={handleKeyDown}
             placeholder={placeholder}
             type={type}
             value={String(formik.values[name] || "")}

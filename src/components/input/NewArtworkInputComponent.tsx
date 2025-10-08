@@ -29,6 +29,13 @@ function NewArtworkInputComponent<
   formik,
 }: NewArtworkInputComponentProps<T>) {
   const showAsterisk = formik.errors[name] && formik.touched[name];
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (type === "number") {
+      preventNonNumericInput(e);
+    }
+  };
+
   return (
     <Form.Group className="pb-3">
       <Form.Label>{label}</Form.Label>
@@ -62,11 +69,7 @@ function NewArtworkInputComponent<
             id={name}
             name={name}
             onChange={formik.handleChange}
-            onKeyDown={(e) => {
-              if (type === "number") {
-                preventNonNumericInput(e);
-              }
-            }}
+            onKeyDown={handleKeyDown}
             placeholder={placeholder}
             type={type}
             value={String(formik.values[name] || "")}
