@@ -71,7 +71,7 @@ function ArtworkThumbnailInput<T extends Record<string, unknown>>({
   return (
     <Form.Group className="pb-3">
       <Form.Label>{label}</Form.Label>
-      {formik.errors.thumbnail && (
+      {formik.errors.thumbnail && formik.touched.thumbnail && (
         <FontAwesomeIcon
           icon={faAsterisk}
           style={{ color: "red" }}
@@ -124,7 +124,7 @@ function ArtworkThumbnailInput<T extends Record<string, unknown>>({
         </Col>
       )}
 
-      {formik.errors.thumbnail && (
+      {formik.errors.thumbnail && formik.touched.thumbnail && (
         <div className="text-danger small mt-1">
           {formik.errors.thumbnail as string}
         </div>
