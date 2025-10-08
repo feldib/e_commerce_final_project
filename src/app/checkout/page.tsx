@@ -22,6 +22,10 @@ function CheckoutPage() {
 
   const { user } = React.useContext(UserDataContext);
 
+  const handleSubmit = (values: CheckoutFormData) => {
+    order(values).then(() => router.push("/receipt"));
+  };
+
   const formik = useFormik<CheckoutFormData>({
     enableReinitialize: true,
     initialValues: {
@@ -34,9 +38,7 @@ function CheckoutPage() {
 
     validationSchema: checkoutSchema,
 
-    onSubmit: (values) => {
-      order(values).then(() => router.push("/receipt"));
-    },
+    onSubmit: handleSubmit,
   });
 
   return (

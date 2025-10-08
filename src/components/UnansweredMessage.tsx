@@ -71,6 +71,12 @@ function UnansweredMessage({ message }: UnansweredMessageProps) {
     }
   };
 
+  const handleSubmitClick = (errors: Record<string, unknown>) => {
+    if (Object.keys(errors).length) {
+      showIncorrectDataToast(t);
+    }
+  };
+
   return (
     <Row className="mx-auto mb-5 floating-element p-3">
       {replied ? (
@@ -153,11 +159,7 @@ function UnansweredMessage({ message }: UnansweredMessageProps) {
                       </RBForm.Group>
 
                       <Button
-                        onClick={() => {
-                          if (Object.keys(errors).length) {
-                            showIncorrectDataToast(t);
-                          }
-                        }}
+                        onClick={() => handleSubmitClick(errors)}
                         type="submit"
                         variant="primary"
                       >

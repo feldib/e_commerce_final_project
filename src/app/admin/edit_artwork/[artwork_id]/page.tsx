@@ -33,6 +33,17 @@ function EditArtworkData() {
     router,
   } = useEditArtworkData();
 
+  const handleCategoryChange = async (category: { id: number }) => {
+    try {
+      await updateArtworkData(artworkId, "category_id", category.id);
+      showSuccessToast(
+        t("app.admin.edit_artwork.category_updated_successfully")
+      );
+    } catch {
+      showErrorToast(t("app.admin.edit_artwork.failed_to_update_category"));
+    }
+  };
+
   return (
     <Container className="px-3">
       <PageTitle title={t("app.admin.edit_artwork.title")} />
@@ -103,22 +114,7 @@ function EditArtworkData() {
               fieldName="category_id"
               formik={formik}
               label={t("common.category")}
-              onCategoryChange={async (category) => {
-                try {
-                  await updateArtworkData(
-                    artworkId,
-                    "category_id",
-                    category.id
-                  );
-                  showSuccessToast(
-                    t("app.admin.edit_artwork.category_updated_successfully")
-                  );
-                } catch {
-                  showErrorToast(
-                    t("app.admin.edit_artwork.failed_to_update_category")
-                  );
-                }
-              }}
+              onCategoryChange={handleCategoryChange}
             />
 
             <ArtworkThumbnailInput

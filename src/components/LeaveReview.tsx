@@ -58,6 +58,12 @@ function LeaveReview({ artwork_id }: LeaveReviewProps) {
     }
   };
 
+  const handleSubmitClick = (errors: Record<string, unknown>) => {
+    if (Object.keys(errors).length) {
+      showIncorrectDataToast(t);
+    }
+  };
+
   return (
     <>
       {loggedIn ? (
@@ -115,11 +121,7 @@ function LeaveReview({ artwork_id }: LeaveReviewProps) {
                       />
                     </RBForm.Group>
                     <Button
-                      onClick={() => {
-                        if (Object.keys(errors).length) {
-                          showIncorrectDataToast(t);
-                        }
-                      }}
+                      onClick={() => handleSubmitClick(errors)}
                       type="submit"
                       variant="primary"
                     >

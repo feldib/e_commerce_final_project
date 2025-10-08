@@ -95,6 +95,12 @@ function RegistrationPageInner({
     }
   }
 
+  const handleSubmitClick = (errors: Record<string, unknown>) => {
+    if (Object.keys(errors).length) {
+      showIncorrectDataToast(t);
+    }
+  };
+
   return (
     <Container className="pb-5 px-3">
       <PageTitle title={t("app.register.title")} />
@@ -164,11 +170,7 @@ function RegistrationPageInner({
                 />
 
                 <Button
-                  onClick={() => {
-                    if (Object.keys(errors).length) {
-                      showIncorrectDataToast(t);
-                    }
-                  }}
+                  onClick={() => handleSubmitClick(errors)}
                   type="submit"
                   variant="primary"
                 >

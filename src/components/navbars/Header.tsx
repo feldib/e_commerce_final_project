@@ -50,6 +50,14 @@ function Header() {
     }
   };
 
+  const handleToggleClick = () => {
+    toggleExpanded();
+  };
+
+  const handleNavClose = () => {
+    closeExpandedNav();
+  };
+
   return (
     <ExpandedNavContext.Provider value={{ closeExpandedNav }}>
       <Navbar expand="lg" expanded={expanded} id="header">
@@ -82,7 +90,7 @@ function Header() {
             <FontAwesomeIcon
               icon={faBars}
               id="header-toggler"
-              onClick={() => toggleExpanded()}
+              onClick={handleToggleClick}
             />
           </Navbar.Toggle>
           <Navbar.Collapse className="mx-3" id="menu-items">
@@ -90,7 +98,7 @@ function Header() {
               <Link
                 className="nav-link"
                 href={user.is_admin ? "/admin/artworks" : "/search"}
-                onClick={() => closeExpandedNav()}
+                onClick={handleNavClose}
                 style={{ color: "inherit", textDecoration: "inherit" }}
               >
                 {t("navigation.search")}
@@ -98,7 +106,7 @@ function Header() {
               <Link
                 className="nav-link"
                 href="/about"
-                onClick={() => closeExpandedNav()}
+                onClick={handleNavClose}
                 style={{ color: "inherit", textDecoration: "inherit" }}
               >
                 {t("navigation.about")}
@@ -106,7 +114,7 @@ function Header() {
               <Link
                 className="nav-link"
                 href="/contact"
-                onClick={() => closeExpandedNav()}
+                onClick={handleNavClose}
                 style={{ color: "inherit", textDecoration: "inherit" }}
               >
                 {t("navigation.contact")}
@@ -116,7 +124,7 @@ function Header() {
 
               <div
                 className="nav-link"
-                onClick={() => closeExpandedNav()}
+                onClick={handleNavClose}
                 style={{ color: "inherit", textDecoration: "inherit" }}
               >
                 <LanguageSelector />

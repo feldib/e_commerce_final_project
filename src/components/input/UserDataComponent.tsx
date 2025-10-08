@@ -34,6 +34,10 @@ function UserDataChangingComponent({
   const { t } = useI18n();
   const [changeUserData, setChangeUserData] = React.useState(!checkout);
 
+  const handleSaveDataChange = () => {
+    setChangeUserData(!changeUserData);
+  };
+
   return (
     <Container className="px-3 mb-5">
       <SubPageTitle title={`${title}`} />
@@ -120,9 +124,7 @@ function UserDataChangingComponent({
             {checkout && (
               <Form.Check
                 label={t("app.checkout.save_data")}
-                onChange={() => {
-                  setChangeUserData(!changeUserData);
-                }}
+                onChange={handleSaveDataChange}
               />
             )}
 

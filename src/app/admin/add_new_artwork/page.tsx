@@ -29,6 +29,13 @@ function AddNewArtworkPage() {
     createHandleDelete,
     createHandleAddition,
   } = useAddNewArtworkPage();
+
+  const handleSubmitClick = () => {
+    if (Object.keys(formik.errors).length) {
+      showIncorrectDataToast(t);
+    }
+  };
+
   return (
     <Container className="px-3">
       <PageTitle title={t("app.admin.add_new_artwork.title")} />
@@ -118,15 +125,7 @@ function AddNewArtworkPage() {
               type="textarea"
             />
 
-            <Button
-              onClick={() => {
-                if (Object.keys(formik.errors).length) {
-                  showIncorrectDataToast(t);
-                }
-              }}
-              type="submit"
-              variant="primary"
-            >
+            <Button onClick={handleSubmitClick} type="submit" variant="primary">
               {t("app.admin.artworks.add_new_artwork")}
             </Button>
             <ToastContainer position="bottom-right" />

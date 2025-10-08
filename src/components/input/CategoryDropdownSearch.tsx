@@ -45,15 +45,15 @@ function CategoryDropdownSearch({
     }
   }, [categories, getCategoryName]);
 
+  const handleCategorySelect = (e: string | null) => {
+    if (e !== null) {
+      setValue(e);
+    }
+  };
+
   return (
     <Col className="mx-auto mb-3">
-      <Dropdown
-        onSelect={(e: string | null) => {
-          if (e !== null) {
-            setValue(e);
-          }
-        }}
-      >
+      <Dropdown onSelect={handleCategorySelect}>
         <Dropdown.Toggle variant="outilne-dark">
           {t("common.categories")}
         </Dropdown.Toggle>

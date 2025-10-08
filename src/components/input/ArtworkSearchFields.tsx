@@ -78,6 +78,11 @@ function ArtworkSearchFields({
     triggerSearchWithUpdatedValues({});
   };
 
+  const handleCategoryChange = (value: string | number) => {
+    formik.setFieldValue("category_id", value);
+    triggerSearchWithUpdatedValues({ category_id: value.toString() });
+  };
+
   return (
     <div className="floating-element mb-3 mx-5">
       <SearchField
@@ -123,10 +128,7 @@ function ArtworkSearchFields({
       <Row className="mx-auto">
         <CategoryDropdownSearch
           categories={categories}
-          setValue={(value: string | number) => {
-            formik.setFieldValue("category_id", value);
-            triggerSearchWithUpdatedValues({ category_id: value.toString() });
-          }}
+          setValue={handleCategoryChange}
         />
 
         <Col className="mb-3">

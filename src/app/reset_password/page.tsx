@@ -52,6 +52,12 @@ function ResetPasswordInner() {
       });
   };
 
+  const handleSubmitClick = (errors: Record<string, unknown>) => {
+    if (Object.keys(errors).length) {
+      showIncorrectDataToast(t);
+    }
+  };
+
   return (
     <Container className="pb-5">
       <PageTitle title={t("app.reset_password.title")} />
@@ -85,11 +91,7 @@ function ResetPasswordInner() {
                 />
 
                 <Button
-                  onClick={() => {
-                    if (Object.keys(errors).length) {
-                      showIncorrectDataToast(t);
-                    }
-                  }}
+                  onClick={() => handleSubmitClick(errors)}
                   type="submit"
                   variant="primary"
                 >
