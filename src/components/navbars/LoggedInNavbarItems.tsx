@@ -20,6 +20,13 @@ function LoggedInNavbarItems() {
   const { t } = useI18n();
   const router = useRouter();
 
+  const handleLogoutClick = async () => {
+    closeExpandedNav();
+    await serverLogOut();
+    contextLogOut();
+    router.push("/");
+  };
+
   return (
     <>
       {user && !user.is_admin ? (
@@ -35,16 +42,7 @@ function LoggedInNavbarItems() {
         </Link>
       )}
 
-      <Nav.Link
-        onClick={async () => {
-          closeExpandedNav();
-          await serverLogOut();
-          contextLogOut();
-          router.push("/");
-        }}
-      >
-        {t("navigation.log_out")}
-      </Nav.Link>
+      <Nav.Link onClick={handleLogoutClick}>{t("navigation.log_out")}</Nav.Link>
     </>
   );
 }

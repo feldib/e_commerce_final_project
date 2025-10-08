@@ -21,6 +21,17 @@ type UserReviewProps = {
 function UserReview({ review, admin, index }: UserReviewProps) {
   const { t } = useI18n();
   const [showReview, setShowReview] = React.useState(true);
+
+  const handleApproveClick = () => {
+    approveReview(review.id);
+    setShowReview(false);
+  };
+
+  const handleDisapproveClick = () => {
+    disapproveReview(review.id);
+    setShowReview(false);
+  };
+
   return (
     <>
       {showReview && (
@@ -68,10 +79,7 @@ function UserReview({ review, admin, index }: UserReviewProps) {
                 <Col>
                   <FontAwesomeIcon
                     icon={faCheck}
-                    onClick={() => {
-                      approveReview(review.id);
-                      setShowReview(false);
-                    }}
+                    onClick={handleApproveClick}
                     style={{ color: "blue", cursor: "pointer" }}
                   />
                 </Col>
@@ -79,10 +87,7 @@ function UserReview({ review, admin, index }: UserReviewProps) {
                 <Col>
                   <FontAwesomeIcon
                     icon={faX}
-                    onClick={() => {
-                      disapproveReview(review.id);
-                      setShowReview(false);
-                    }}
+                    onClick={handleDisapproveClick}
                     style={{ color: "red", cursor: "pointer" }}
                   />
                 </Col>

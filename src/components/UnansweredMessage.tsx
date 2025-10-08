@@ -52,6 +52,10 @@ function UnansweredMessage({ message }: UnansweredMessageProps) {
     reply_text: "",
   };
 
+  const handleReplyClick = () => {
+    setReplying(true);
+  };
+
   const onSubmit = async (values: ReplyToMessageProps) => {
     try {
       await replyToMessage(
@@ -91,9 +95,7 @@ function UnansweredMessage({ message }: UnansweredMessageProps) {
             <Col>
               {!replying ? (
                 <Button
-                  onClick={() => {
-                    setReplying(true);
-                  }}
+                  onClick={handleReplyClick}
                   type="submit"
                   variant="primary"
                 >

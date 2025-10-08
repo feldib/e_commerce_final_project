@@ -18,6 +18,10 @@ function ReceiptPage() {
     totalCost: number;
   }>({ items: [], totalCost: 0 });
 
+  const handleBackToShopClick = () => {
+    localStorage.removeItem("currentOrder");
+  };
+
   useEffect(() => {
     const currentOrderString = localStorage.getItem("currentOrder");
     setCurrentOrderData(
@@ -36,12 +40,7 @@ function ReceiptPage() {
           <Row>
             <Col className="text-center mb-5">
               <Link href="/">
-                <Button
-                  className="submit"
-                  onClick={() => {
-                    localStorage.removeItem("currentOrder");
-                  }}
-                >
+                <Button className="submit" onClick={handleBackToShopClick}>
                   {t("app.receipt.back_to_shop")}
                 </Button>
               </Link>

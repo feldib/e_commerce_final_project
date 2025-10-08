@@ -7,6 +7,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, Col } from "react-bootstrap";
 
 function FloatingBackButton({ router }: { router: AppRouterInstance }) {
+  const handleBackClick = () => {
+    router.back();
+  };
+
   return (
     <Col
       className="position-fixed fixed-bottom text-center mb-4 mx-auto"
@@ -14,9 +18,7 @@ function FloatingBackButton({ router }: { router: AppRouterInstance }) {
     >
       <Button
         className="mb-5 floating-back-button"
-        onClick={() => {
-          router.back();
-        }}
+        onClick={handleBackClick}
         variant="primary"
       >
         <FontAwesomeIcon icon={faArrowLeft} />

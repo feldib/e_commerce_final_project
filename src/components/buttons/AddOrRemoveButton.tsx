@@ -31,6 +31,20 @@ function AddOrRemoveFromButton({
   const [added, setAdded] = React.useState(false);
   const [needsToBeRefreshed, setNeedsToBeRefreshed] = React.useState(false);
 
+  const handleButtonClick = async () => {
+    if (loggedIn) {
+      if (added) {
+        await removeFromAdded(artwork_id);
+        setNeedsToBeRefreshed(true);
+      } else {
+        await addToAdded(artwork_id);
+        setNeedsToBeRefreshed(true);
+      }
+    } else {
+      showWarningToast(toastWarningMessage);
+    }
+  };
+
   React.useEffect(() => {
     (async () => {
       if (loggedIn) {
@@ -52,19 +66,7 @@ function AddOrRemoveFromButton({
     <Row className="py-2">
       <span
         className="table-button"
-        onClick={async () => {
-          if (loggedIn) {
-            if (added) {
-              await removeFromAdded(artwork_id);
-              setNeedsToBeRefreshed(true);
-            } else {
-              await addToAdded(artwork_id);
-              setNeedsToBeRefreshed(true);
-            }
-          } else {
-            showWarningToast(toastWarningMessage);
-          }
-        }}
+        onClick={handleButtonClick}
         style={{ cursor: "pointer" }}
       >
         {added ? <>{filledButton}</> : <>{regularButton}</>}

@@ -28,6 +28,12 @@ function CategoryDropdownSearch({
 
   const [cats, setCats] = React.useState<React.JSX.Element>(<LoadingSpinner />);
 
+  const handleDropdownSelect = (e: string | null) => {
+    if (e !== null) {
+      setValue(e);
+    }
+  };
+
   React.useEffect(() => {
     if (categories && categories.length > 0) {
       const categoryButtons = (
@@ -50,13 +56,7 @@ function CategoryDropdownSearch({
 
   return (
     <Col className="mx-auto mb-3">
-      <Dropdown
-        onSelect={(e: string | null) => {
-          if (e !== null) {
-            setValue(e);
-          }
-        }}
-      >
+      <Dropdown onSelect={handleDropdownSelect}>
         <Dropdown.Toggle variant="outilne-dark">
           {t("common.categories")}
         </Dropdown.Toggle>

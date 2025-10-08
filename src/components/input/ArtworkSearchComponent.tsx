@@ -28,6 +28,18 @@ function ArtworkSearchComponent({ admin }: ArtworkSearchComponentProps) {
 
   const [pageNumber, setPageNumber] = React.useState(0);
 
+  const handleBackClick = () => {
+    const newPageNumber = pageNumber - 1;
+    setPageNumber(newPageNumber);
+    search(formik.values, newPageNumber);
+  };
+
+  const handleNextClick = () => {
+    const newPageNumber = pageNumber + 1;
+    setPageNumber(newPageNumber);
+    search(formik.values, newPageNumber);
+  };
+
   const search = React.useCallback(
     async (values: SearchParams, page: number) => {
       const results = await getArtworkSearchResults(
@@ -115,14 +127,7 @@ function ArtworkSearchComponent({ admin }: ArtworkSearchComponentProps) {
           <Row className="pt-3 pb-3 text-center">
             {pageNumber > 1 && (
               <Col className="mx-auto">
-                <Button
-                  className="submit"
-                  onClick={() => {
-                    const newPageNumber = pageNumber - 1;
-                    setPageNumber(newPageNumber);
-                    search(formik.values, newPageNumber);
-                  }}
-                >
+                <Button className="submit" onClick={handleBackClick}>
                   {t("common.back")} {formik.values.n}
                 </Button>
               </Col>
@@ -130,14 +135,7 @@ function ArtworkSearchComponent({ admin }: ArtworkSearchComponentProps) {
 
             {hasMoreResults && (
               <Col className="mx-auto">
-                <Button
-                  className="submit"
-                  onClick={() => {
-                    const newPageNumber = pageNumber + 1;
-                    setPageNumber(newPageNumber);
-                    search(formik.values, newPageNumber);
-                  }}
-                >
+                <Button className="submit" onClick={handleNextClick}>
                   {t("common.next")} {formik.values.n}
                 </Button>
               </Col>

@@ -49,6 +49,27 @@ function UserDataInputComponents({
 }: UserDataInputComponentsProps) {
   const { t } = useI18n();
   const [editing, setEditing] = React.useState(false);
+
+  const handleSaveClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if (error) {
+      showIncorrectDataToast(t);
+    } else {
+      if (changeUserData) {
+        updateUserData(name, value);
+        showChangesSavedToast(t);
+      } else {
+        showChangesSavedToast(t);
+        showInvoiceNoticeToast(t);
+      }
+      setEditing(false);
+    }
+  };
+
+  const handleEditClick = () => {
+    setEditing(true);
+  };
+
   return (
     <Form.Group className="pb-3">
       <Form.Label>{label}</Form.Label>
@@ -77,21 +98,7 @@ function UserDataInputComponents({
         {editing ? (
           <Button
             className="inline-submit-button"
-            onClick={(e) => {
-              e.preventDefault();
-              if (error) {
-                showIncorrectDataToast(t);
-              } else {
-                if (changeUserData) {
-                  updateUserData(name, value);
-                  showChangesSavedToast(t);
-                } else {
-                  showChangesSavedToast(t);
-                  showInvoiceNoticeToast(t);
-                }
-                setEditing(false);
-              }
-            }}
+            onClick={handleSaveClick}
             variant="primary"
           >
             <FontAwesomeIcon className="mx-3" icon={faCheck} />
@@ -99,9 +106,7 @@ function UserDataInputComponents({
         ) : (
           <Button
             className="inline-submit-button"
-            onClick={() => {
-              setEditing(true);
-            }}
+            onClick={handleEditClick}
             variant="primary"
           >
             <FontAwesomeIcon className="mx-3" icon={faGear} />

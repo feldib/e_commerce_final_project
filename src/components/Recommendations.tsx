@@ -25,6 +25,10 @@ function Recommendations({ title, path }: RecommendationsProps) {
 
   const isMd = useMediaQuery({ minWidth: "768px" });
 
+  const handleToggleRecommendations = () => {
+    setTableHidden(!tableHidden);
+  };
+
   return (
     <>
       {recommendations && recommendations.length > 0 && (
@@ -36,9 +40,7 @@ function Recommendations({ title, path }: RecommendationsProps) {
                 <FontAwesomeIcon
                   className="toggle-reccommendation mx-2 d-md-none"
                   icon={!tableHidden ? faCaretDown : faCaretUp}
-                  onClick={() => {
-                    setTableHidden(!tableHidden);
-                  }}
+                  onClick={handleToggleRecommendations}
                 />
               </h4>
             </Col>

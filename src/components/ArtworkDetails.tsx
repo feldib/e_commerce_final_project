@@ -40,6 +40,12 @@ function ArtworkDetails({ artwork_id, artwork }: ArtworkDetailsProps) {
     artwork_id
   );
 
+  const handleQuantityDecrease = () => {
+    if (quantity > 0) {
+      setQuantity(quantity - 1);
+    }
+  };
+
   const representReviews = useLoading(reviewsData, (reviews) => {
     return (
       <>
@@ -76,13 +82,7 @@ function ArtworkDetails({ artwork_id, artwork }: ArtworkDetailsProps) {
                 </Col>
 
                 <Col className="text-center px-3" xs={1}>
-                  <span
-                    onClick={() => {
-                      if (quantity > 0) {
-                        setQuantity(quantity - 1);
-                      }
-                    }}
-                  >
+                  <span onClick={handleQuantityDecrease}>
                     <ShoppingCartButton
                       artwork_id={artwork_id}
                       quantity={quantity}
@@ -116,13 +116,7 @@ function ArtworkDetails({ artwork_id, artwork }: ArtworkDetailsProps) {
                 </Col>
 
                 <Col className="text-center px-3" xs={1}>
-                  <span
-                    onClick={() => {
-                      if (quantity > 0) {
-                        setQuantity(quantity - 1);
-                      }
-                    }}
-                  >
+                  <span onClick={handleQuantityDecrease}>
                     <ShoppingCartButton
                       artwork_id={artwork_id}
                       quantity={quantity}

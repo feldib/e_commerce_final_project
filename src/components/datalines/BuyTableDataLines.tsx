@@ -40,6 +40,12 @@ function BuyTableDataLines({
     line.id
   );
 
+  const handleQuantityDecrease = () => {
+    if (quantity > 0) {
+      setQuantity(quantity - 1);
+    }
+  };
+
   return (
     <tr key={index}>
       <td>
@@ -81,13 +87,7 @@ function BuyTableDataLines({
           <p>€{quantity * line.price}</p>
         ) : (
           <div className="container">
-            <span
-              onClick={() => {
-                if (quantity > 0) {
-                  setQuantity(quantity - 1);
-                }
-              }}
-            >
+            <span onClick={handleQuantityDecrease}>
               <ShoppingCartButton artwork_id={line.id} quantity={quantity} />
             </span>
             <FavouriteButton artwork_id={line.id} />
