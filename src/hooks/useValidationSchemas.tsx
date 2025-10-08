@@ -217,7 +217,9 @@ export const useNewArtworkSchema = () => {
       quantity: Yup.number()
         .required(t("validation.quantity_required"))
         .min(1, t("validation.quantity_min")),
-      category_id: Yup.number().required(t("validation.category_required")),
+      category_id: Yup.number()
+        .required(t("validation.category_required"))
+        .min(1, t("validation.category_required")),
       thumbnail: createThumbnailValidation(t),
       tags: createTagsValidation(t),
       other_pictures: createOtherPicturesValidation(t),
@@ -239,7 +241,9 @@ export const useEditArtworkSchema = () => {
       quantity: Yup.number()
         .required(t("validation.quantity_required"))
         .min(1, t("validation.quantity_min")),
-      category_id: Yup.number().required(t("validation.category_required")),
+      category_id: Yup.number()
+        .required(t("validation.category_required"))
+        .min(1, t("validation.category_required")),
       thumbnail: Yup.mixed().required(t("validation.thumbnail_required")),
       tags: createTagsValidation(t),
       other_pictures: Yup.array(),
