@@ -84,7 +84,7 @@ function BuyTable({
         {theadNeeded && (
           <thead>
             <tr>
-              <th></th>
+              <th aria-label={t("common.aria_label_thumbnail")}></th>
               <th>{t("common.title")}</th>
               <th className="d-none d-md-table-cell">{t("common.artist")}</th>
               <th>{t("common.price")}</th>

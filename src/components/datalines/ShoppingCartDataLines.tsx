@@ -115,7 +115,10 @@ function ShoppingCartDataLines({
         />
       </td>
       <td>
-        <Link href={`/artwork_page/${line.id}`}>
+        <Link
+          aria-label={`${t("components.datalines.aria_label_view_artwork")} ${line.title}`}
+          href={`/artwork_page/${line.id}`}
+        >
           <p>{line.title}</p>
         </Link>
       </td>
@@ -125,7 +128,10 @@ function ShoppingCartDataLines({
       <td>
         <p>€{line.price * quantity}</p>
       </td>
-      <td className="text-center">
+      <td
+        aria-label={t("components.shopping_cart.aria_label_quantity_controls")}
+        className="text-center"
+      >
         <Row>
           <Col className="d-xl-none" sm={12}>
             <Col>
@@ -134,13 +140,16 @@ function ShoppingCartDataLines({
           </Col>
 
           <Col>
-            <p
+            <button
+              aria-label={t(
+                "components.shopping_cart.aria_label_decrease_quantity"
+              )}
               className="table-button"
               onClick={handleDecrease}
               style={{ cursor: "pointer" }}
             >
               <FontAwesomeIcon icon={faMinus} style={{ color: "red" }} />
-            </p>
+            </button>
           </Col>
 
           <Col
@@ -156,13 +165,16 @@ function ShoppingCartDataLines({
           </Col>
 
           <Col>
-            <p
+            <button
+              aria-label={t(
+                "components.shopping_cart.aria_label_increase_quantity"
+              )}
               className="table-button"
               onClick={handleIncrease}
               style={{ cursor: "pointer" }}
             >
               <FontAwesomeIcon icon={faPlus} style={{ color: "red" }} />
-            </p>
+            </button>
           </Col>
         </Row>
       </td>
@@ -182,13 +194,16 @@ function ShoppingCartDataLines({
 
           <Row>
             <Col>
-              <p
+              <button
+                aria-label={t(
+                  "components.shopping_cart.aria_label_remove_item_from_cart"
+                )}
                 className="table-button"
                 onClick={handleRemove}
                 style={{ cursor: "pointer" }}
               >
                 <FontAwesomeIcon icon={faX} style={{ color: "red" }} />
-              </p>
+              </button>
             </Col>
           </Row>
           <ToastContainer position="bottom-right" />

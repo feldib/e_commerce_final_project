@@ -82,12 +82,12 @@ function ArtworkDetails({ artwork_id, artwork }: ArtworkDetailsProps) {
                 </Col>
 
                 <Col className="text-center px-3" xs={1}>
-                  <span onClick={handleQuantityDecrease}>
+                  <button onClick={handleQuantityDecrease}>
                     <ShoppingCartButton
                       artwork_id={artwork_id}
                       quantity={quantity}
                     />
-                  </span>
+                  </button>
 
                   <FavouriteButton artwork_id={artwork_id} />
                 </Col>
@@ -116,12 +116,12 @@ function ArtworkDetails({ artwork_id, artwork }: ArtworkDetailsProps) {
                 </Col>
 
                 <Col className="text-center px-3" xs={1}>
-                  <span onClick={handleQuantityDecrease}>
+                  <button onClick={handleQuantityDecrease}>
                     <ShoppingCartButton
                       artwork_id={artwork_id}
                       quantity={quantity}
                     />
-                  </span>
+                  </button>
 
                   <FavouriteButton artwork_id={artwork_id} />
                   <ToastContainer position="bottom-right" />

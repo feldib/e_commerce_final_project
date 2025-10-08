@@ -52,7 +52,9 @@
     "only_featured": "Csak kiemelt",
     "place_of_thumbnail": "Bélyegkép helye",
     "enter_email": "Email megadása",
-    "all": "Minden"
+    "all": "Minden",
+    "aria_label_thumbnail": "Bélyegkép",
+    "aria_label_actions": "Műveletek"
   },
   "navigation": {
     "search": "Keresés",
@@ -250,10 +252,22 @@
       "artwork_market_logo": "Műalkotás piactér logó"
     },
     "shopping_cart": {
-      "shopping_cart_empty": "A kosár üres"
+      "shopping_cart_empty": "A kosár üres",
+      "aria_label_decrease_quantity": "Mennyiség csökkentése",
+      "aria_label_increase_quantity": "Mennyiség növelése",
+      "aria_label_remove_item_from_cart": "Elem eltávolítása a kosárból",
+      "aria_label_quantity_controls": "Mennyiség vezérlők"
     },
     "svg_components": {
       "set_artwork_featured": "Műalkotás kiemeltként beállítása"
+    },
+    "query": {
+      "aria_label_remove_filter": "Szűrő eltávolítása"
+    },
+    "datalines": {
+      "aria_label_edit_artwork": "Műalkotás szerkesztése:",
+      "aria_label_view_artwork": "Műalkotás megtekintése:",
+      "aria_label_view_user": "Felhasználó megtekintése:"
     },
     "user_data": {
       "enter_address": "Cím megadása",

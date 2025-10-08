@@ -52,7 +52,9 @@
     "only_featured": "רק מומלצות",
     "place_of_thumbnail": "מקום התמונה הממוזערת",
     "enter_email": "הכנס אימייל",
-    "all": "הכל"
+    "all": "הכל",
+    "aria_label_thumbnail": "תמונה ממוזערת",
+    "aria_label_actions": "פעולות"
   },
   "navigation": {
     "search": "חיפוש",
@@ -250,10 +252,22 @@
       "artwork_market_logo": "לוגו שוק היצירות"
     },
     "shopping_cart": {
-      "shopping_cart_empty": "עגלת הקניות ריקה"
+      "shopping_cart_empty": "עגלת הקניות ריקה",
+      "aria_label_decrease_quantity": "הקטן כמות",
+      "aria_label_increase_quantity": "הגדל כמות",
+      "aria_label_remove_item_from_cart": "הסר פריט מהעגלה",
+      "aria_label_quantity_controls": "בקרות כמות"
     },
     "svg_components": {
       "set_artwork_featured": "קבע יצירה כמומלצת"
+    },
+    "query": {
+      "aria_label_remove_filter": "הסר מסנן"
+    },
+    "datalines": {
+      "aria_label_edit_artwork": "ערוך יצירה:",
+      "aria_label_view_artwork": "צפה ביצירה:",
+      "aria_label_view_user": "צפה במשתמש:"
     },
     "user_data": {
       "enter_address": "הכנס כתובת",

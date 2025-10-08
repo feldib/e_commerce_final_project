@@ -52,7 +52,9 @@
     "only_featured": "Only featured",
     "place_of_thumbnail": "Place of thumbnail",
     "enter_email": "Enter email",
-    "all": "All"
+    "all": "All",
+    "aria_label_thumbnail": "Thumbnail",
+    "aria_label_actions": "Actions"
   },
   "navigation": {
     "search": "Search",
@@ -250,10 +252,22 @@
       "artwork_market_logo": "Artwork market logo"
     },
     "shopping_cart": {
-      "shopping_cart_empty": "Shopping cart is empty"
+      "shopping_cart_empty": "Shopping cart is empty",
+      "aria_label_decrease_quantity": "Decrease quantity",
+      "aria_label_increase_quantity": "Increase quantity",
+      "aria_label_remove_item_from_cart": "Remove item from cart",
+      "aria_label_quantity_controls": "Quantity controls"
     },
     "svg_components": {
       "set_artwork_featured": "Set artwork to featured"
+    },
+    "query": {
+      "aria_label_remove_filter": "Remove filter"
+    },
+    "datalines": {
+      "aria_label_edit_artwork": "Edit artwork:",
+      "aria_label_view_artwork": "View artwork:",
+      "aria_label_view_user": "View user:"
     },
     "user_data": {
       "enter_address": "Enter Address",

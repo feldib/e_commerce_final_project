@@ -59,7 +59,10 @@ function BuyTableDataLines({
         />
       </td>
       <td>
-        <Link href={`/artwork_page/${line.id}`}>
+        <Link
+          aria-label={`${t("components.datalines.aria_label_view_artwork")} ${line.title}`}
+          href={`/artwork_page/${line.id}`}
+        >
           <p>{line.title}</p>
         </Link>
       </td>
@@ -87,9 +90,9 @@ function BuyTableDataLines({
           <p>€{quantity * line.price}</p>
         ) : (
           <div className="container">
-            <span onClick={handleQuantityDecrease}>
+            <button onClick={handleQuantityDecrease}>
               <ShoppingCartButton artwork_id={line.id} quantity={quantity} />
-            </span>
+            </button>
             <FavouriteButton artwork_id={line.id} />
             <ToastContainer position="bottom-right" />
           </div>

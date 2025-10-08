@@ -122,13 +122,13 @@ function Header() {
 
               {loggedIn ? <LoggedInNavbarItems /> : <NotLoggedInNavbarItems />}
 
-              <div
+              <button
                 className="nav-link"
                 onClick={handleNavClose}
                 style={{ color: "inherit", textDecoration: "inherit" }}
               >
                 <LanguageSelector />
-              </div>
+              </button>
             </Nav>
           </Navbar.Collapse>
 

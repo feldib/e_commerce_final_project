@@ -47,7 +47,10 @@ function AdminArtworkTableDatalines({
             />
           </td>
           <td>
-            <Link href={`/admin/edit_artwork/${line.id}`}>
+            <Link
+              aria-label={`${t("components.datalines.aria_label_edit_artwork")} ${line.title}`}
+              href={`/admin/edit_artwork/${line.id}`}
+            >
               <p>{line.title}</p>
             </Link>
           </td>

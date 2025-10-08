@@ -54,12 +54,12 @@ function RecommendationCard({ artwork }: RecommendationCardProps) {
           </Col>
 
           <Col className="text-center px-3" xs={1}>
-            <span
+            <button
               className="recommendation-button"
               onClick={handleQuantityDecrease}
             >
               <ShoppingCartButton artwork_id={artwork.id} quantity={quantity} />
-            </span>
+            </button>
 
             <span className="recommendation-button">
               <FavouriteButton artwork_id={artwork.id} />

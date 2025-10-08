@@ -64,13 +64,13 @@ function AddOrRemoveFromButton({
 
   return (
     <Row className="py-2">
-      <span
+      <button
         className="table-button"
         onClick={handleButtonClick}
         style={{ cursor: "pointer" }}
       >
         {added ? <>{filledButton}</> : <>{regularButton}</>}
-      </span>
+      </button>
     </Row>
   );
 }

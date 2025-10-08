@@ -55,7 +55,7 @@ function ShoppingCartTable({
         {theadNeeded && (
           <thead>
             <tr>
-              <th></th>
+              <th aria-label={t("common.aria_label_thumbnail")}></th>
               <th>{t("common.title")}</th>
               <th>{t("common.artist")}</th>
               <th>{t("common.total_cost")}</th>
@@ -70,7 +70,7 @@ function ShoppingCartTable({
               >
                 {t("common.categories")}
               </th>
-              <th></th>
+              <th aria-label={t("common.aria_label_actions")}></th>
             </tr>
           </thead>
         )}

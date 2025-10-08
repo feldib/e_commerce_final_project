@@ -39,7 +39,7 @@ function AdminArtworkTable({ dataLines }: AdminArtworkTableProps) {
       <table className="mb-3">
         <thead>
           <tr>
-            <th></th>
+            <th aria-label={t("common.aria_label_thumbnail")}></th>
             <th>{t("common.title")}</th>
             <th>{t("common.artist")}</th>
             <th className={"d-none d-md-table-cell"}>{t("common.price")}</th>
@@ -48,7 +48,7 @@ function AdminArtworkTable({ dataLines }: AdminArtworkTableProps) {
             <th className={"d-none d-md-table-cell"}>
               {t("common.categories")}
             </th>
-            <th></th>
+            <th aria-label={t("common.aria_label_actions")}></th>
           </tr>
         </thead>
 
