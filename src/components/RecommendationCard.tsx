@@ -38,7 +38,7 @@ function RecommendationCard({ artwork }: RecommendationCardProps) {
   };
 
   return (
-    <Card className="mx-auto" border="secondary">
+    <Card border="secondary" className="mx-auto">
       <Card.Body className="p-3">
         <Row>
           <Col>
@@ -53,7 +53,7 @@ function RecommendationCard({ artwork }: RecommendationCardProps) {
             </Card.Subtitle>
           </Col>
 
-          <Col xs={1} className="text-center px-3">
+          <Col className="text-center px-3" xs={1}>
             <span
               className="recommendation-button"
               onClick={handleQuantityDecrease}
@@ -69,12 +69,12 @@ function RecommendationCard({ artwork }: RecommendationCardProps) {
       </Card.Body>
 
       <Card.Img
-        src={`${SERVER_URL}/${artwork.thumbnail}`}
-        width={UI_DIMENSIONS.CARD_IMAGE_WIDTH}
-        height="300"
-        style={{ objectFit: "cover" }}
         alt={t("common.place_of_thumbnail")}
+        height="300"
+        src={`${SERVER_URL}/${artwork.thumbnail}`}
+        style={{ objectFit: "cover" }}
         variant="bottom"
+        width={UI_DIMENSIONS.CARD_IMAGE_WIDTH}
       />
     </Card>
   );

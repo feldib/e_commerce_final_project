@@ -68,7 +68,7 @@ function ContactUs() {
       <PageTitle title={t("app.contact.title")} />
 
       <Row className="mx-auto mb-5">
-        <Col sm={12} md={5} className="mb-5 floating-element mx-auto my-2">
+        <Col className="mb-5 floating-element mx-auto my-2" md={5} sm={12}>
           <Row className="text-center">
             <h2>{t("app.contact.company_details")}</h2>
           </Row>
@@ -80,7 +80,7 @@ function ContactUs() {
           </Row>
         </Col>
 
-        <Col sm={12} md={5} className="mb-5 floating-element mx-auto my-2">
+        <Col className="mb-5 floating-element mx-auto my-2" md={5} sm={12}>
           <Row className="text-center">
             <h2>{t("app.contact.message_administrator")}</h2>
           </Row>
@@ -94,56 +94,56 @@ function ContactUs() {
               {({ errors, touched }) => (
                 <Form ref={form}>
                   <InputComponent
+                    icon={faUser}
                     label={t("app.contact.email_address")}
                     name="email"
-                    type="email"
                     placeholder={t("app.contact.enter_email")}
-                    icon={faUser}
                     showAsterisk={!!errors.email && !!touched.email}
+                    type="email"
                   />
 
                   <InputComponent
+                    icon={faKeyboard}
                     label={t("app.contact.title_field")}
                     name="title"
-                    type="text"
                     placeholder={t("app.contact.enter_message_title")}
-                    icon={faKeyboard}
                     showAsterisk={!!errors.title && !!touched.title}
+                    type="text"
                   />
 
                   <RBForm.Group className="mb-3">
                     <RBForm.Label>{t("app.contact.message")}</RBForm.Label>
                     {errors.message && touched.message && (
                       <FontAwesomeIcon
+                        className="mx-3"
                         icon={faAsterisk}
                         style={{ color: "red" }}
-                        className="mx-3"
                       />
                     )}
                     <FloatingLabel label="">
                       <Field
+                        as="textarea"
                         className="form-control"
                         name="message"
-                        as="textarea"
                         placeholder={t("app.contact.enter_message")}
                         style={{ height: "100px" }}
                       />
                     </FloatingLabel>
                     <ErrorMessage
-                      component="div"
                       className="input-error-message"
+                      component="div"
                       name="message"
                     />
                   </RBForm.Group>
 
                   <Button
-                    variant="primary"
-                    type="submit"
                     onClick={() => {
                       if (Object.keys(errors).length) {
                         showIncorrectDataToast(t);
                       }
                     }}
+                    type="submit"
+                    variant="primary"
                   >
                     {t("common.send")}
                   </Button>

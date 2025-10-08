@@ -15,9 +15,9 @@ function UserNavbarMenuItems({ first_name }: UserNavbarMenuItemsProps) {
   return (
     <>
       <Link
+        className="nav-link"
         href="/user"
         onClick={closeExpandedNav}
-        className="nav-link"
         style={{ color: "inherit", textDecoration: "inherit" }}
       >
         {first_name}

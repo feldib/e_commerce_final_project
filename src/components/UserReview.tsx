@@ -68,22 +68,22 @@ function UserReview({ review, admin, index }: UserReviewProps) {
                 <Col>
                   <FontAwesomeIcon
                     icon={faCheck}
-                    style={{ color: "blue", cursor: "pointer" }}
                     onClick={() => {
                       approveReview(review.id);
                       setShowReview(false);
                     }}
+                    style={{ color: "blue", cursor: "pointer" }}
                   />
                 </Col>
 
                 <Col>
                   <FontAwesomeIcon
                     icon={faX}
-                    style={{ color: "red", cursor: "pointer" }}
                     onClick={() => {
                       disapproveReview(review.id);
                       setShowReview(false);
                     }}
+                    style={{ color: "red", cursor: "pointer" }}
                   />
                 </Col>
               </Row>

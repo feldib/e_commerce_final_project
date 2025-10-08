@@ -15,17 +15,17 @@ function ArtworkPictureCarousel({
     <>
       {other_pictures.length > 0 && (
         <Row>
-          <Col sm={9} md={8} className="mx-auto">
+          <Col className="mx-auto" md={8} sm={9}>
             <Carousel>
               {other_pictures.map((pic, index) => {
                 return (
                   <Carousel.Item className="mb-5 px-3" key={`${pic}_${index}`}>
-                    <Card className="mx-5 p-2" border="secondary">
+                    <Card border="secondary" className="mx-5 p-2">
                       <Card.Img
-                        src={`${SERVER_URL}/${pic}`}
-                        width="500px"
                         height="300px"
+                        src={`${SERVER_URL}/${pic}`}
                         style={{ objectFit: "contain" }}
+                        width="500px"
                       />
                     </Card>
                   </Carousel.Item>

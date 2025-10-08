@@ -52,7 +52,6 @@ function AddOrRemoveFromButton({
     <Row className="py-2">
       <span
         className="table-button"
-        style={{ cursor: "pointer" }}
         onClick={async () => {
           if (loggedIn) {
             if (added) {
@@ -66,6 +65,7 @@ function AddOrRemoveFromButton({
             showWarningToast(toastWarningMessage);
           }
         }}
+        style={{ cursor: "pointer" }}
       >
         {added ? <>{filledButton}</> : <>{regularButton}</>}
       </span>

@@ -16,13 +16,13 @@ type FeatureButtonProps = {
 function FeatureButton({ artwork_id }: FeatureButtonProps) {
   return (
     <AddOrRemoveFromButton
-      isAdded={isFeatured}
       addToAdded={addToFeatured}
-      removeFromAdded={removeFromFeatured}
       artwork_id={artwork_id}
-      toastWarningMessage="Sign in as an admin to add to favourites "
-      filledButton={<Trophy height="25px" filled />}
+      filledButton={<Trophy filled height="25px" />}
+      isAdded={isFeatured}
       regularButton={<Trophy height="25px" />}
+      removeFromAdded={removeFromFeatured}
+      toastWarningMessage="Sign in as an admin to add to favourites "
     />
   );
 }

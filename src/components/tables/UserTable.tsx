@@ -22,7 +22,7 @@ function UserTable({ users }: UserTableProps) {
     return (
       <>
         {dataLines.map((line: User, index: number) => {
-          return <UserTableDataLines key={index} line={line} index={index} />;
+          return <UserTableDataLines index={index} key={index} line={line} />;
         })}
       </>
     );

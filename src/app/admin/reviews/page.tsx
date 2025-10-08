@@ -25,10 +25,10 @@ function Reviews() {
             {(reviews as Review[]).map((review: Review, index: number) => {
               return (
                 <UserReview
+                  admin={true}
+                  index={index + 1}
                   key={index}
                   review={review}
-                  index={index + 1}
-                  admin={true}
                 />
               );
             })}

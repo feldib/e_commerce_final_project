@@ -26,10 +26,10 @@ function LoggedInNavbarItems() {
         <UserNavbarMenuItems first_name={user.first_name} />
       ) : (
         <Link
-          onClick={closeExpandedNav}
           className="nav-link"
-          style={{ color: "inherit", textDecoration: "inherit" }}
           href="/admin"
+          onClick={closeExpandedNav}
+          style={{ color: "inherit", textDecoration: "inherit" }}
         >
           {t("navigation.admin_page")}
         </Link>

@@ -52,8 +52,8 @@ function SignInPageInner() {
 
       <Formik
         initialValues={initialValues}
-        validationSchema={loginSchema}
         onSubmit={onSubmit}
+        validationSchema={loginSchema}
       >
         {({ errors, touched }) => (
           <Row className="mx-auto floating-element">
@@ -61,24 +61,24 @@ function SignInPageInner() {
               <Col className="mx-3 pb-5">
                 <Form>
                   <InputComponent
+                    icon={faUser}
                     label={t("app.login.email_address")}
                     name="email"
-                    type="email"
                     placeholder={t("app.login.enter_email")}
-                    icon={faUser}
                     showAsterisk={!!errors.email && !!touched.email}
+                    type="email"
                   />
 
                   <InputComponent
+                    icon={faKey}
                     label={t("app.login.password")}
                     name="password"
-                    type="password"
                     placeholder={t("app.login.enter_password")}
-                    icon={faKey}
                     showAsterisk={!!errors.password && !!touched.password}
+                    type="password"
                   />
 
-                  <Button variant="primary" type="submit">
+                  <Button type="submit" variant="primary">
                     {t("common.sign_in")}
                   </Button>
                   <ToastContainer position="bottom-right" />

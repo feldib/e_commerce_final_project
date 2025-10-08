@@ -22,9 +22,9 @@ function OrderHistory() {
       <>
         {orders.map((orderData, index) => (
           <OrderSummaryComponent
+            items={orderData.items}
             key={index}
             title={`${t("app.user.order_history.order")} ${len - index}`}
-            items={orderData.items}
             totalCost={orderData.totalCost}
           />
         ))}

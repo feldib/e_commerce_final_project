@@ -11,7 +11,7 @@ type QueryProps = {
 
 function Query({ text, remove }: QueryProps) {
   return (
-    <Col className="mb-3" xs={12} sm={6} md={6}>
+    <Col className="mb-3" md={6} sm={6} xs={12}>
       <p>
         <FontAwesomeIcon
           icon={faFilter}
@@ -30,7 +30,7 @@ function Query({ text, remove }: QueryProps) {
         >
           {text}
         </span>
-        <span className="mx-1" style={{ cursor: "pointer" }} onClick={remove}>
+        <span className="mx-1" onClick={remove} style={{ cursor: "pointer" }}>
           ❌
         </span>
       </p>

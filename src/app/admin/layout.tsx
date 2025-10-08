@@ -62,7 +62,7 @@ function AdminPage({ children }: { children: React.ReactNode }) {
         ]}
       />
 
-      <Row id="subpage" className="pb-5">
+      <Row className="pb-5" id="subpage">
         {children}
       </Row>
     </Container>

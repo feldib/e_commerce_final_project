@@ -34,11 +34,11 @@ function BuyTable({
         {dataLinesGenerated.map((line: Artwork, index: number) => {
           return (
             <BuyTableDataLines
-              recommendation={recommendation}
-              line={line}
               index={index}
               key={index}
+              line={line}
               orderSummary={orderSummary}
+              recommendation={recommendation}
             />
           );
         })}

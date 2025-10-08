@@ -107,11 +107,11 @@ function ShoppingCartDataLines({
       <td>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={`${SERVER_URL}/${line.thumbnail}`}
-          width={UI_DIMENSIONS.THUMBNAIL_SIZE}
-          height={UI_DIMENSIONS.THUMBNAIL_SIZE}
-          style={{ objectFit: "cover" }}
           alt={t("common.place_of_thumbnail")}
+          height={UI_DIMENSIONS.THUMBNAIL_SIZE}
+          src={`${SERVER_URL}/${line.thumbnail}`}
+          style={{ objectFit: "cover" }}
+          width={UI_DIMENSIONS.THUMBNAIL_SIZE}
         />
       </td>
       <td>
@@ -135,9 +135,9 @@ function ShoppingCartDataLines({
 
           <Col>
             <p
-              style={{ cursor: "pointer" }}
               className="table-button"
               onClick={handleDecrease}
+              style={{ cursor: "pointer" }}
             >
               <FontAwesomeIcon icon={faMinus} style={{ color: "red" }} />
             </p>
@@ -145,10 +145,10 @@ function ShoppingCartDataLines({
 
           <Col
             className="d-none d-xl-inline"
-            xl={1}
             style={{
               marginRight: "10px",
             }}
+            xl={1}
           >
             <Col>
               <p>{quantity}</p>
@@ -157,9 +157,9 @@ function ShoppingCartDataLines({
 
           <Col>
             <p
-              style={{ cursor: "pointer" }}
               className="table-button"
               onClick={handleIncrease}
+              style={{ cursor: "pointer" }}
             >
               <FontAwesomeIcon icon={faPlus} style={{ color: "red" }} />
             </p>
@@ -183,9 +183,9 @@ function ShoppingCartDataLines({
           <Row>
             <Col>
               <p
-                style={{ cursor: "pointer" }}
                 className="table-button"
                 onClick={handleRemove}
+                style={{ cursor: "pointer" }}
               >
                 <FontAwesomeIcon icon={faX} style={{ color: "red" }} />
               </p>

@@ -28,9 +28,9 @@ function Recommendations({ title, path }: RecommendationsProps) {
   return (
     <>
       {recommendations && recommendations.length > 0 && (
-        <Col xs={12} lg={5} className="mb-3 mx-auto">
+        <Col className="mb-3 mx-auto" lg={5} xs={12}>
           <Row>
-            <Col xs={7} md={5} lg={7} className="mx-auto">
+            <Col className="mx-auto" lg={7} md={5} xs={7}>
               <h4 className="text-center recommendation-title">
                 {`${title}`}
                 <FontAwesomeIcon
@@ -45,13 +45,13 @@ function Recommendations({ title, path }: RecommendationsProps) {
           </Row>
 
           {(!tableHidden || isMd) && recommendations && (
-            <Carousel pause="hover" className="recommendation-carousel">
+            <Carousel className="recommendation-carousel" pause="hover">
               {recommendations.map((artwork: Artwork, index: number) => {
                 return (
                   <Carousel.Item
-                    key={index}
-                    interval={UI_DIMENSIONS.CAROUSEL_INTERVAL}
                     className="mb-5 px-none"
+                    interval={UI_DIMENSIONS.CAROUSEL_INTERVAL}
+                    key={index}
                   >
                     <RecommendationCard artwork={artwork} />
                   </Carousel.Item>

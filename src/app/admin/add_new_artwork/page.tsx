@@ -36,42 +36,42 @@ function AddNewArtworkPage() {
         <Col className="mx-5 pb-5 ">
           <Form onSubmit={formik.handleSubmit}>
             <NewArtworkInputComponent
+              formik={formik}
+              icon={faQuestion}
               label={t("common.title")}
               name="title"
-              type="text"
               placeholder={t("app.admin.add_new_artwork.enter_title")}
-              icon={faQuestion}
-              formik={formik}
+              type="text"
             />
 
             <NewArtworkInputComponent
+              formik={formik}
+              icon={faQuestion}
               label={t("common.artist")}
               name="artist_name"
-              type="text"
               placeholder={t("app.admin.add_new_artwork.enter_artist_name")}
-              icon={faQuestion}
-              formik={formik}
+              type="text"
             />
 
             <NewArtworkInputComponent
+              formik={formik}
+              icon={faDollarSign}
               label={t("common.price")}
               name="price"
-              type="number"
               placeholder={t("app.admin.add_new_artwork.enter_price")}
-              icon={faDollarSign}
-              formik={formik}
+              type="number"
             />
 
             <Form.Group className="pb-3">
               <Form.Label>{t("common.tags")}</Form.Label>
               <ReactTags
-                tags={formik.values.tags}
-                // suggestions={suggestions}
-                separators={[...TAG_SEPARATORS]}
-                handleDelete={createHandleDelete(tags, setTags)}
                 handleAddition={createHandleAddition(tags, setTags)}
+                handleDelete={createHandleDelete(tags, setTags)}
                 inputFieldPosition="bottom"
                 placeholder={t("app.admin.add_new_artwork.add_new_tag")}
+                // suggestions={suggestions}
+                separators={[...TAG_SEPARATORS]}
+                tags={formik.values.tags}
                 // autocomplete
               />
               {formik.errors.tags && (
@@ -82,18 +82,18 @@ function AddNewArtworkPage() {
             </Form.Group>
 
             <NewArtworkInputComponent
+              formik={formik}
+              icon={faQuestion}
               label={t("common.quantity")}
               name="quantity"
-              type="number"
               placeholder={t("app.admin.add_new_artwork.enter_quantity")}
-              icon={faQuestion}
-              formik={formik}
+              type="number"
             />
 
             <CategoryDropdownArtwork
               categories={categories}
-              formik={formik}
               fieldName="category_id"
+              formik={formik}
               label={t("common.category")}
             />
 
@@ -110,22 +110,22 @@ function AddNewArtworkPage() {
             />
 
             <NewArtworkInputComponent
+              formik={formik}
+              icon={faQuestion}
               label={t("common.description")}
               name="description"
-              type="textarea"
               placeholder={t("app.admin.add_new_artwork.enter_description")}
-              icon={faQuestion}
-              formik={formik}
+              type="textarea"
             />
 
             <Button
-              variant="primary"
-              type="submit"
               onClick={() => {
                 if (Object.keys(formik.errors).length) {
                   showIncorrectDataToast(t);
                 }
               }}
+              type="submit"
+              variant="primary"
             >
               {t("app.admin.artworks.add_new_artwork")}
             </Button>

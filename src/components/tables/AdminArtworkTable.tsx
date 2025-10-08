@@ -23,7 +23,7 @@ function AdminArtworkTable({ dataLines }: AdminArtworkTableProps) {
       <>
         {dataLinesGenerated.map((line: Artwork, index: number) => {
           return (
-            <AdminArtworkTableDatalines key={index} line={line} index={index} />
+            <AdminArtworkTableDatalines index={index} key={index} line={line} />
           );
         })}
       </>

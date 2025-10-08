@@ -9,15 +9,15 @@ import { Button, Col } from "react-bootstrap";
 function FloatingBackButton({ router }: { router: AppRouterInstance }) {
   return (
     <Col
-      style={{ width: "20px" }}
       className="position-fixed fixed-bottom text-center mb-4 mx-auto"
+      style={{ width: "20px" }}
     >
       <Button
         className="mb-5 floating-back-button"
-        variant="primary"
         onClick={() => {
           router.back();
         }}
+        variant="primary"
       >
         <FontAwesomeIcon icon={faArrowLeft} />
       </Button>

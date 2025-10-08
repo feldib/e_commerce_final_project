@@ -32,11 +32,11 @@ function ShoppingCartTable({
         {dataLinesGenerated.map((line: Artwork, index: number) => {
           return (
             <ShoppingCartDataLines
-              key={index}
-              recommendation={recommendation}
-              line={line}
-              index={index}
               changeCosts={changeCosts}
+              index={index}
+              key={index}
+              line={line}
+              recommendation={recommendation}
             />
           );
         })}

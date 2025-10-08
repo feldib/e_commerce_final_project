@@ -52,19 +52,19 @@ function Header() {
 
   return (
     <ExpandedNavContext.Provider value={{ closeExpandedNav }}>
-      <Navbar id="header" expand="lg" expanded={expanded}>
+      <Navbar expand="lg" expanded={expanded} id="header">
         <Container>
           <Navbar.Brand>
             <Link
-              style={{ color: "inherit", textDecoration: "inherit" }}
               href="/"
+              style={{ color: "inherit", textDecoration: "inherit" }}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
+                alt={t("components.header.artwork_market_logo")}
+                className="d-inline-block align-top"
                 src="/logo.png"
                 width={UI_DIMENSIONS.THUMBNAIL_SIZE}
-                className="d-inline-block align-top"
-                alt={t("components.header.artwork_market_logo")}
               />
             </Link>
           </Navbar.Brand>
@@ -72,42 +72,42 @@ function Header() {
             {/*Shopping cart icon - mobile, non-admin users */}
             {!user.is_admin && (
               <FontAwesomeIcon
-                id="header-mobile-shopping-cart"
-                className="me-3"
                 aria-label={t("common.shopping_cart")}
+                className="me-3"
                 icon={faShoppingCart}
+                id="header-mobile-shopping-cart"
                 onClick={handleShoppingCartClick}
               />
             )}
             <FontAwesomeIcon
-              id="header-toggler"
               icon={faBars}
+              id="header-toggler"
               onClick={() => toggleExpanded()}
             />
           </Navbar.Toggle>
           <Navbar.Collapse className="mx-3" id="menu-items">
             <Nav className="mx-auto">
               <Link
-                onClick={() => closeExpandedNav()}
                 className="nav-link"
-                style={{ color: "inherit", textDecoration: "inherit" }}
                 href={user.is_admin ? "/admin/artworks" : "/search"}
+                onClick={() => closeExpandedNav()}
+                style={{ color: "inherit", textDecoration: "inherit" }}
               >
                 {t("navigation.search")}
               </Link>
               <Link
-                onClick={() => closeExpandedNav()}
                 className="nav-link"
-                style={{ color: "inherit", textDecoration: "inherit" }}
                 href="/about"
+                onClick={() => closeExpandedNav()}
+                style={{ color: "inherit", textDecoration: "inherit" }}
               >
                 {t("navigation.about")}
               </Link>
               <Link
-                onClick={() => closeExpandedNav()}
                 className="nav-link"
-                style={{ color: "inherit", textDecoration: "inherit" }}
                 href="/contact"
+                onClick={() => closeExpandedNav()}
+                style={{ color: "inherit", textDecoration: "inherit" }}
               >
                 {t("navigation.contact")}
               </Link>
@@ -115,8 +115,8 @@ function Header() {
               {loggedIn ? <LoggedInNavbarItems /> : <NotLoggedInNavbarItems />}
 
               <div
-                onClick={() => closeExpandedNav()}
                 className="nav-link"
+                onClick={() => closeExpandedNav()}
                 style={{ color: "inherit", textDecoration: "inherit" }}
               >
                 <LanguageSelector />
@@ -128,15 +128,15 @@ function Header() {
           {!user.is_admin && (
             <div className="d-none d-lg-block">
               <FontAwesomeIcon
-                id="header-desktop-shopping-cart"
                 aria-label={t("common.shopping_cart")}
-                size="xl"
                 icon={faShoppingCart}
+                id="header-desktop-shopping-cart"
+                onClick={handleShoppingCartClick}
+                size="xl"
                 style={{
                   cursor: "pointer",
                   color: "inherit",
                 }}
-                onClick={handleShoppingCartClick}
               />
             </div>
           )}

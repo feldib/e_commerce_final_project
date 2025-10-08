@@ -44,9 +44,9 @@ function ShoppingCartComponent() {
       {shoppingListItems.length !== 0 ? (
         <>
           <ShoppingCartTable
-            theadNeeded={true}
-            dataLines={shoppingListItems}
             changeCosts={handleCostsChange}
+            dataLines={shoppingListItems}
+            theadNeeded={true}
           />
 
           <Row className="mt-4">

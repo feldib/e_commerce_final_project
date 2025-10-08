@@ -88,10 +88,10 @@ function ArtworkSearchComponent({ admin }: ArtworkSearchComponentProps) {
   return (
     <Form onSubmit={formik.handleSubmit}>
       <ArtworkSearchFields
-        formik={formik}
         categories={categories}
-        triggerSearchWithUpdatedValues={triggerSearchWithUpdatedValues}
+        formik={formik}
         searchedValues={searchedValues}
+        triggerSearchWithUpdatedValues={triggerSearchWithUpdatedValues}
       />
 
       {searchResults && (
@@ -106,9 +106,9 @@ function ArtworkSearchComponent({ admin }: ArtworkSearchComponentProps) {
             <AdminArtworkTable dataLines={searchResults} />
           ) : (
             <BuyTable
+              dataLines={searchResults}
               recommendation={false}
               theadNeeded={true}
-              dataLines={searchResults}
             />
           )}
 

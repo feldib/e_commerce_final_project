@@ -83,62 +83,62 @@ function ChangeArtworkDataInputComponent<
       <Form.Label>{label}</Form.Label>
       {showAsterisk && (
         <FontAwesomeIcon
+          className="mx-3"
           icon={faAsterisk}
           style={{ color: "red" }}
-          className="mx-3"
         />
       )}
       <InputGroup>
         {type !== "textarea" && (
           <InputGroup.Text>
-            <FontAwesomeIcon icon={icon} className="mx-3" />
+            <FontAwesomeIcon className="mx-3" icon={icon} />
           </InputGroup.Text>
         )}
 
         {type === "textarea" ? (
           <textarea
             className="form-control"
+            disabled={!editing}
             id={name}
             name={name}
-            placeholder={placeholder}
             onChange={formik.handleChange}
-            value={String(formik.values[name] || "")}
+            placeholder={placeholder}
             rows={4}
-            disabled={!editing}
+            value={String(formik.values[name] || "")}
           />
         ) : (
           <input
             className="form-control"
+            disabled={!editing}
             id={name}
             name={name}
-            type={type}
-            placeholder={placeholder}
             onChange={formik.handleChange}
-            value={String(formik.values[name] || "")}
-            disabled={!editing}
             onKeyDown={(e) => {
               if (type === "number") {
                 preventNonNumericInput(e);
               }
             }}
+            placeholder={placeholder}
+            type={type}
+            value={String(formik.values[name] || "")}
           />
         )}
 
         {editing ? (
           <Button
-            variant="primary"
             className="inline-submit-button"
             onClick={handleSave}
+            variant="primary"
           >
-            <FontAwesomeIcon icon={faCheck} className="mx-3" />
+            <FontAwesomeIcon className="mx-3" icon={faCheck} />
           </Button>
         ) : (
           <Button
-            variant="primary"
             className="inline-submit-button"
             onClick={handleEdit}
+            variant="primary"
           >
-            <FontAwesomeIcon icon={faGear} className="mx-3" />
+            <FontAwesomeIcon className="mx-3" icon={faGear} />
           </Button>
         )}
       </InputGroup>

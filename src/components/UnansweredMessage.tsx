@@ -91,11 +91,11 @@ function UnansweredMessage({ message }: UnansweredMessageProps) {
             <Col>
               {!replying ? (
                 <Button
-                  type="submit"
-                  variant="primary"
                   onClick={() => {
                     setReplying(true);
                   }}
+                  type="submit"
+                  variant="primary"
                 >
                   {t("components.unanswered_message.reply")}
                 </Button>
@@ -108,16 +108,16 @@ function UnansweredMessage({ message }: UnansweredMessageProps) {
                   {({ errors, touched }) => (
                     <Form>
                       <InputComponent
+                        icon={faKeyboard}
                         label="Title"
                         name="reply_title"
-                        type="textarea"
                         placeholder={t(
                           "components.unanswered_message.enter_title",
                         )}
-                        icon={faKeyboard}
                         showAsterisk={
                           !!errors.reply_title && !!touched.reply_title
                         }
+                        type="textarea"
                       />
 
                       <RBForm.Group className="mb-3">
@@ -126,38 +126,38 @@ function UnansweredMessage({ message }: UnansweredMessageProps) {
                         </RBForm.Label>
                         {errors.reply_text && touched.reply_text && (
                           <FontAwesomeIcon
+                            className="mx-3"
                             icon={faAsterisk}
                             style={{ color: "red" }}
-                            className="mx-3"
                           />
                         )}
                         <FloatingLabel label="">
                           <Field
-                            className="form-control"
-                            type="text"
-                            name="reply_text"
                             as="textarea"
+                            className="form-control"
+                            name="reply_text"
                             placeholder={t(
                               "components.unanswered_message.enter_reply",
                             )}
                             style={{ height: "100px" }}
+                            type="text"
                           />
                         </FloatingLabel>
                         <ErrorMessage
-                          component="div"
                           className="input-error-message"
+                          component="div"
                           name="reply_text"
                         />
                       </RBForm.Group>
 
                       <Button
-                        type="submit"
-                        variant="primary"
                         onClick={() => {
                           if (Object.keys(errors).length) {
                             showIncorrectDataToast(t);
                           }
                         }}
+                        type="submit"
+                        variant="primary"
                       >
                         {t("components.unanswered_message.send_reply")}
                       </Button>

@@ -24,10 +24,10 @@ function Reviews() {
           <>
             {reviews.map((review, index) => (
               <UserReview
+                admin={false}
+                index={index + 1}
                 key={index}
                 review={review}
-                index={index + 1}
-                admin={false}
               />
             ))}
           </>

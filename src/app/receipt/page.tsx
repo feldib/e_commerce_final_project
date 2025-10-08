@@ -32,8 +32,6 @@ function ReceiptPage() {
       <PageTitle title={t("app.receipt.title")} />
 
       <OrderSummaryComponent
-        items={currentOrderData.items}
-        totalCost={currentOrderData.totalCost}
         button={
           <Row>
             <Col className="text-center mb-5">
@@ -50,6 +48,8 @@ function ReceiptPage() {
             </Col>
           </Row>
         }
+        items={currentOrderData.items}
+        totalCost={currentOrderData.totalCost}
       />
     </Container>
   );

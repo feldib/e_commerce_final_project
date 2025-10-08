@@ -43,9 +43,6 @@ function CheckoutPage() {
     <>
       <form className="pb-5" onSubmit={formik.handleSubmit}>
         <UserDataChangingComponent
-          title={t("app.checkout.invoice_data")}
-          formik={formik}
-          checkout={true}
           button={
             <Row>
               <Col className="text-center mb-5">
@@ -53,6 +50,9 @@ function CheckoutPage() {
               </Col>
             </Row>
           }
+          checkout={true}
+          formik={formik}
+          title={t("app.checkout.invoice_data")}
         />
       </form>
     </>

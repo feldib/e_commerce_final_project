@@ -25,40 +25,40 @@ function Footer() {
     }
   }, []);
   return (
-    <Navbar id="footer" fixed="bottom">
+    <Navbar fixed="bottom" id="footer">
       <Container>
         <Nav className="mx-auto w-full">
           <Link
             className="nav-link"
-            style={{ color: "inherit", textDecoration: "inherit" }}
             href="/about"
+            style={{ color: "inherit", textDecoration: "inherit" }}
           >
             {t("navigation.about")}
           </Link>
 
           <Link
             className="nav-link"
-            style={{ color: "inherit", textDecoration: "inherit" }}
             href="/contact"
+            style={{ color: "inherit", textDecoration: "inherit" }}
           >
             {t("navigation.contact")}
           </Link>
 
           <Nav.Link>
             <TelegramShareButton url={hostname}>
-              <TelegramIcon size={25} round />
+              <TelegramIcon round size={25} />
             </TelegramShareButton>
           </Nav.Link>
 
           <Nav.Link>
             <EmailShareButton url={hostname}>
-              <EmailIcon size={25} round />
+              <EmailIcon round size={25} />
             </EmailShareButton>
           </Nav.Link>
 
           <Nav.Link>
             <RedditShareButton url={hostname}>
-              <RedditIcon size={25} round />
+              <RedditIcon round size={25} />
             </RedditShareButton>
           </Nav.Link>
         </Nav>

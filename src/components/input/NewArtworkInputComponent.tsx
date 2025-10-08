@@ -34,15 +34,15 @@ function NewArtworkInputComponent<
       <Form.Label>{label}</Form.Label>
       {showAsterisk && (
         <FontAwesomeIcon
+          className="mx-3"
           icon={faAsterisk}
           style={{ color: "red" }}
-          className="mx-3"
         />
       )}
       <InputGroup>
         {type !== "textarea" && (
           <InputGroup.Text>
-            <FontAwesomeIcon icon={icon} className="mx-3" />
+            <FontAwesomeIcon className="mx-3" icon={icon} />
           </InputGroup.Text>
         )}
 
@@ -51,25 +51,25 @@ function NewArtworkInputComponent<
             className="form-control"
             id={name}
             name={name}
-            placeholder={placeholder}
             onChange={formik.handleChange}
-            value={String(formik.values[name] || "")}
+            placeholder={placeholder}
             rows={4}
+            value={String(formik.values[name] || "")}
           />
         ) : (
           <input
             className="form-control"
             id={name}
             name={name}
-            type={type}
-            placeholder={placeholder}
             onChange={formik.handleChange}
-            value={String(formik.values[name] || "")}
             onKeyDown={(e) => {
               if (type === "number") {
                 preventNonNumericInput(e);
               }
             }}
+            placeholder={placeholder}
+            type={type}
+            value={String(formik.values[name] || "")}
           />
         )}
       </InputGroup>

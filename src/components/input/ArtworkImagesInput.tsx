@@ -108,20 +108,20 @@ function ArtworkImagesInput<T extends Record<string, unknown>>({
       <Form.Label>{label}</Form.Label>
       {formik.errors.other_pictures && (
         <FontAwesomeIcon
+          className="mx-3"
           icon={faAsterisk}
           style={{ color: "red" }}
-          className="mx-3"
         />
       )}
       <InputGroup>
         <InputGroup.Text>
-          <FontAwesomeIcon icon={faImages} className="mx-3" />
+          <FontAwesomeIcon className="mx-3" icon={faImages} />
         </InputGroup.Text>
 
         <Form.Control
-          type="file"
-          placeholder={t("app.admin.add_new_artwork.upload_other_pictures")}
           onChange={handleFileChange}
+          placeholder={t("app.admin.add_new_artwork.upload_other_pictures")}
+          type="file"
         />
       </InputGroup>
 
@@ -133,8 +133,8 @@ function ArtworkImagesInput<T extends Record<string, unknown>>({
               (pic, index) => {
                 return (
                   <Col
-                    key={index}
                     className="mb-3 uploaded-image-container"
+                    key={index}
                     style={{
                       position: "relative",
                       height: "150px",
@@ -143,22 +143,22 @@ function ArtworkImagesInput<T extends Record<string, unknown>>({
                   >
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
-                      src={
-                        typeof pic === "string"
-                          ? pic
-                          : URL.createObjectURL(pic as Blob)
-                      }
                       alt={t(
                         isEdit
                           ? "app.admin.edit_artwork.current_image"
                           : "app.admin.add_new_artwork.uploaded_other_picture",
                       )}
                       className="mt-3 uploaded-image"
+                      src={
+                        typeof pic === "string"
+                          ? pic
+                          : URL.createObjectURL(pic as Blob)
+                      }
                     />
 
                     <FontAwesomeIcon
-                      icon={faX}
                       className="remove-uploaded-image"
+                      icon={faX}
                       onClick={() => handleRemoveImage(index, pic)}
                     />
                   </Col>

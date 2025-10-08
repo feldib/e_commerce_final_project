@@ -22,7 +22,7 @@ function App({ children }: { children: React.ReactNode }) {
             <ThemeProvider>
               <SkipToContentLink />
               <Header />
-              <main id="main" className="pb-5 vh-100">
+              <main className="pb-5 vh-100" id="main">
                 {children}
               </main>
               <Footer />

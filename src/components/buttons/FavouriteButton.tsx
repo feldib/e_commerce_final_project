@@ -24,13 +24,13 @@ function FavouriteButton({ artwork_id }: FavouriteButtonProps) {
 
   return (
     <AddOrRemoveFromButton
-      isAdded={isWishlisted}
       addToAdded={addToWishlisted}
-      removeFromAdded={removeFromWishlisted}
       artwork_id={artwork_id}
-      toastWarningMessage={t("components.buttons.sign_in_to_add_wishlist")}
       filledButton={<FontAwesomeIcon icon={faHeartSolid} />}
+      isAdded={isWishlisted}
       regularButton={<FontAwesomeIcon icon={faHeartRegular} />}
+      removeFromAdded={removeFromWishlisted}
+      toastWarningMessage={t("components.buttons.sign_in_to_add_wishlist")}
     />
   );
 }

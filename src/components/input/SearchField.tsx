@@ -18,16 +18,16 @@ function SearchField({
   onBlur,
 }: SearchFieldProps) {
   return (
-    <Row lg={6} sx={8} className="mx-auto mb-1 mt-5">
+    <Row className="mx-auto mb-1 mt-5" lg={6} sx={8}>
       <InputGroup>
         <InputGroup.Text>{what}</InputGroup.Text>
         <Form.Control
           className="form-control"
-          type="text"
           name={name}
-          value={value}
-          onChange={onChange}
           onBlur={onBlur}
+          onChange={onChange}
+          type="text"
+          value={value}
         />
       </InputGroup>
     </Row>

@@ -42,79 +42,79 @@ function UserDataChangingComponent({
         <Row>
           <Col className="mx-5 mb-5">
             <UserDataInputComponents
+              changeUserData={changeUserData}
+              error={formik.errors.email}
+              icon={faUser}
               label={t("app.user.data.email_address")}
               name="email"
-              type="email"
-              placeholder={t("common.enter_email")}
-              icon={faUser}
-              showAsterisk={!!(formik.errors.email && formik.touched.email)}
-              error={formik.errors.email}
-              onChange={formik.handleChange}
               onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              placeholder={t("common.enter_email")}
+              showAsterisk={!!(formik.errors.email && formik.touched.email)}
+              type="email"
               value={formik.values.email}
-              changeUserData={changeUserData}
             />
 
             <UserDataInputComponents
+              changeUserData={changeUserData}
+              error={formik.errors.first_name}
+              icon={faQuestion}
               label={t("app.user.data.first_name")}
               name="first_name"
-              type="text"
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
               placeholder={t("app.register.enter_first_name")}
-              icon={faQuestion}
               showAsterisk={
                 !!formik.errors.first_name && !!formik.touched.first_name
               }
-              error={formik.errors.first_name}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
+              type="text"
               value={formik.values.first_name}
-              changeUserData={changeUserData}
             />
 
             <UserDataInputComponents
+              changeUserData={changeUserData}
+              error={formik.errors.last_name}
+              icon={faQuestion}
               label={t("app.user.data.last_name")}
               name="last_name"
-              type="text"
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
               placeholder={t("app.register.enter_last_name")}
-              icon={faQuestion}
               showAsterisk={
                 !!formik.errors.last_name && !!formik.touched.last_name
               }
-              error={formik.errors.last_name}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
+              type="text"
               value={formik.values.last_name}
-              changeUserData={changeUserData}
             />
 
             <UserDataInputComponents
+              changeUserData={changeUserData}
+              error={formik.errors.address}
+              icon={faHouse}
               label={t("common.address")}
               name="address"
-              type="textarea"
-              placeholder={t("components.user_data.enter_address")}
-              icon={faHouse}
-              showAsterisk={!!formik.errors.address && !!formik.touched.address}
-              error={formik.errors.address}
-              onChange={formik.handleChange}
               onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              placeholder={t("components.user_data.enter_address")}
+              showAsterisk={!!formik.errors.address && !!formik.touched.address}
+              type="textarea"
               value={formik.values.address}
-              changeUserData={changeUserData}
             />
 
             <UserDataInputComponents
+              changeUserData={changeUserData}
+              error={formik.errors.phone_number}
+              icon={faPhone}
               label={t("app.user.data.phone_number")}
               name="phone_number"
-              type="text"
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
               placeholder={t("components.user_data.enter_phone_number")}
-              icon={faPhone}
               showAsterisk={
                 !!formik.errors.phone_number && !!formik.touched.phone_number
               }
-              error={formik.errors.phone_number}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
+              type="text"
               value={formik.values.phone_number}
-              changeUserData={changeUserData}
             />
 
             {checkout && (

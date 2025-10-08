@@ -48,27 +48,27 @@ function ForgotPassword() {
       <PageTitle title={t("app.forgot_password.title")} />
       <Formik
         initialValues={initialValues}
-        validationSchema={forgotPasswordSchema}
         onSubmit={onSubmit}
+        validationSchema={forgotPasswordSchema}
       >
         {({ errors, touched }) => (
           <Row className="floating-element">
             <Col className="mx-5 pb-5">
               <Form>
                 <InputComponent
+                  icon={faUser}
                   label={t("app.forgot_password.email_address")}
                   name="email"
-                  type="email"
                   placeholder={t("app.forgot_password.enter_email")}
-                  icon={faUser}
                   showAsterisk={!!errors.email && !!touched.email}
+                  type="email"
                 />
                 {displayMessage && (
                   <p className="text-muted">
                     {t("app.forgot_password.recovery_message")}
                   </p>
                 )}
-                <Button variant="primary" type="submit">
+                <Button type="submit" variant="primary">
                   {t("app.forgot_password.send_link")}
                 </Button>
                 <ToastContainer position="bottom-right" />

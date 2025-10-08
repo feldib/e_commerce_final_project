@@ -78,10 +78,10 @@ function CategoryDropdownArtwork<T extends Record<string, unknown>>({
           {categories.map((category: Category, index: number) => (
             <Dropdown.Item
               eventKey={category.id.toString()}
-              key={index}
               id={JSON.stringify(category.id)}
-              style={{ cursor: "pointer" }}
+              key={index}
               onClick={() => handleCategoryClick(category)}
+              style={{ cursor: "pointer" }}
             >
               {getCategoryName(category)}
             </Dropdown.Item>
@@ -98,15 +98,15 @@ function CategoryDropdownArtwork<T extends Record<string, unknown>>({
       <Form.Label>{label}</Form.Label>
       {showError && (
         <FontAwesomeIcon
+          className="mx-3"
           icon={faAsterisk}
           style={{ color: "red" }}
-          className="mx-3"
         />
       )}
       <Dropdown>
         <Dropdown.Toggle
-          variant={showError ? "danger" : "outline-dark"}
           className="w-100 text-start d-flex justify-content-between align-items-center"
+          variant={showError ? "danger" : "outline-dark"}
         >
           <span>
             {chosenCategory

@@ -21,11 +21,11 @@ function Orders() {
     return orders.map((orderData: Order, index: number) => {
       return (
         <OrderSummaryComponent
-          key={index}
-          title={`${t("app.admin.orders.order")} ${len - index}`}
           items={orderData.items}
-          totalCost={orderData.totalCost}
+          key={index}
           orderUser={orderData.user}
+          title={`${t("app.admin.orders.order")} ${len - index}`}
+          totalCost={orderData.totalCost}
         />
       );
     });

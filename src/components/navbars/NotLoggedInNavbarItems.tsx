@@ -14,19 +14,19 @@ function NotLoggedInNavbarItems() {
   return (
     <>
       <Link
-        onClick={closeExpandedNav}
         className="nav-link"
-        style={{ color: "inherit", textDecoration: "inherit" }}
         href="/login"
+        onClick={closeExpandedNav}
+        style={{ color: "inherit", textDecoration: "inherit" }}
       >
         {t("navigation.log_in")}
       </Link>
 
       <Link
-        onClick={closeExpandedNav}
         className="nav-link"
-        style={{ color: "inherit", textDecoration: "inherit" }}
         href="/register"
+        onClick={closeExpandedNav}
+        style={{ color: "inherit", textDecoration: "inherit" }}
       >
         {t("common.register")}
       </Link>

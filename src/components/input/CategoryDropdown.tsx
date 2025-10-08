@@ -35,8 +35,8 @@ function CategoryDropdownSearch({
           {categories.map((category: Category, index: number) => (
             <Dropdown.Item
               eventKey={category.id.toString()}
-              key={index}
               id={JSON.stringify(category.id)}
+              key={index}
               style={{ cursor: "pointer" }}
             >
               {getCategoryName(category)}
@@ -63,8 +63,8 @@ function CategoryDropdownSearch({
         <Dropdown.Menu className="px-3">
           <Dropdown.Item
             eventKey={""}
-            key={"all"}
             id={"all"}
+            key={"all"}
             style={{ cursor: "pointer" }}
           >
             {t("common.all")}

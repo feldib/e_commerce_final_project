@@ -47,10 +47,10 @@ function OrderSummaryComponent({
             )}
 
             <BuyTable
-              theadNeeded={true}
               dataLines={items}
               orderSummary={true}
               recommendation={false}
+              theadNeeded={true}
             />
           </Row>
 

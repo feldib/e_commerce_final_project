@@ -65,33 +65,33 @@ function ResetPasswordInner() {
             {({ errors, touched }) => (
               <Form>
                 <InputComponent
+                  icon={faKey}
                   label={t("app.reset_password.password")}
                   name="password"
-                  type="password"
                   placeholder={t("app.reset_password.enter_password")}
-                  icon={faKey}
                   showAsterisk={!!errors.password && !!touched.password}
+                  type="password"
                 />
 
                 <InputComponent
+                  icon={faKey}
                   label={t("app.reset_password.password")}
                   name="repeatPassword"
-                  type="password"
                   placeholder={t("app.reset_password.enter_repeat_password")}
-                  icon={faKey}
                   showAsterisk={
                     !!errors.repeatPassword && !!touched.repeatPassword
                   }
+                  type="password"
                 />
 
                 <Button
-                  variant="primary"
-                  type="submit"
                   onClick={() => {
                     if (Object.keys(errors).length) {
                       showIncorrectDataToast(t);
                     }
                   }}
+                  type="submit"
+                  variant="primary"
                 >
                   {t("app.reset_password.change_password")}
                 </Button>

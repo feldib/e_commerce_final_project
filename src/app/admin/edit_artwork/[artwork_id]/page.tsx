@@ -40,45 +40,45 @@ function EditArtworkData() {
         <Col className="mx-5 pb-5 ">
           <Form>
             <ChangeArtworkDataInputComponent
+              artwork_id={artworkId}
+              formik={formik}
+              icon={faQuestion}
               label={t("common.title")}
               name="title"
-              type="text"
               placeholder={t("app.admin.add_new_artwork.enter_title")}
-              icon={faQuestion}
-              formik={formik}
-              artwork_id={artworkId}
+              type="text"
             />
 
             <ChangeArtworkDataInputComponent
+              artwork_id={artworkId}
+              formik={formik}
+              icon={faQuestion}
               label={t("common.artist")}
               name="artist_name"
-              type="text"
               placeholder={t("app.admin.add_new_artwork.enter_artist_name")}
-              icon={faQuestion}
-              formik={formik}
-              artwork_id={artworkId}
+              type="text"
             />
 
             <ChangeArtworkDataInputComponent
+              artwork_id={artworkId}
+              formik={formik}
+              icon={faDollarSign}
               label={t("common.price")}
               name="price"
-              type="number"
               placeholder={t("app.admin.add_new_artwork.enter_price")}
-              icon={faDollarSign}
-              formik={formik}
-              artwork_id={artworkId}
+              type="number"
             />
 
             <Form.Group className="pb-3">
               <Form.Label>{t("common.tags")}</Form.Label>
               <ReactTags
-                tags={formik.values.tags}
-                // suggestions={suggestions}
-                separators={[...TAG_SEPARATORS]}
-                handleDelete={createHandleDelete(tags, setTags)}
                 handleAddition={createHandleAddition(tags, setTags)}
+                handleDelete={createHandleDelete(tags, setTags)}
                 inputFieldPosition="bottom"
                 placeholder={t("app.admin.add_new_artwork.add_new_tag")}
+                // suggestions={suggestions}
+                separators={[...TAG_SEPARATORS]}
+                tags={formik.values.tags}
                 // autocomplete
               />
               {formik.errors.tags && (
@@ -89,19 +89,20 @@ function EditArtworkData() {
             </Form.Group>
 
             <ChangeArtworkDataInputComponent
+              artwork_id={artworkId}
+              formik={formik}
+              icon={faQuestion}
               label={t("common.quantity")}
               name="quantity"
-              type="number"
               placeholder={t("app.admin.add_new_artwork.enter_quantity")}
-              icon={faQuestion}
-              formik={formik}
-              artwork_id={artworkId}
+              type="number"
             />
 
             <CategoryDropdownArtwork
               categories={categories}
-              formik={formik}
               fieldName="category_id"
+              formik={formik}
+              label={t("common.category")}
               onCategoryChange={async (category) => {
                 try {
                   await updateArtworkData(
@@ -118,31 +119,30 @@ function EditArtworkData() {
                   );
                 }
               }}
-              label={t("common.category")}
             />
 
             <ArtworkThumbnailInput
+              artworkId={artworkId}
               formik={formik}
               isEdit={true}
-              artworkId={artworkId}
               label={t("common.thumbnail")}
             />
 
             <ArtworkImagesInput
+              artworkId={artworkId}
               formik={formik}
               isEdit={true}
-              artworkId={artworkId}
               label={t("common.images")}
             />
 
             <ChangeArtworkDataInputComponent
+              artwork_id={artworkId}
+              formik={formik}
+              icon={faQuestion}
               label={t("common.description")}
               name="description"
-              type="textarea"
               placeholder={t("app.admin.add_new_artwork.enter_description")}
-              icon={faQuestion}
-              formik={formik}
-              artwork_id={artworkId}
+              type="textarea"
             />
             <ToastContainer position="bottom-right" />
           </Form>

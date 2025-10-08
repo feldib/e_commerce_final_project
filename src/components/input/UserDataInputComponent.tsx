@@ -54,29 +54,28 @@ function UserDataInputComponents({
       <Form.Label>{label}</Form.Label>
       {showAsterisk && (
         <FontAwesomeIcon
+          className="mx-3"
           icon={faAsterisk}
           style={{ color: "red" }}
-          className="mx-3"
         />
       )}
       <InputGroup>
         <InputGroup.Text>
-          <FontAwesomeIcon icon={icon} className="mx-3" />
+          <FontAwesomeIcon className="mx-3" icon={icon} />
         </InputGroup.Text>
 
         <Form.Control
-          name={name}
-          type={type}
-          placeholder={placeholder}
-          onChange={onChange}
-          onBlur={onBlur}
           defaultValue={value}
           disabled={!editing}
+          name={name}
+          onBlur={onBlur}
+          onChange={onChange}
+          placeholder={placeholder}
+          type={type}
         />
 
         {editing ? (
           <Button
-            variant="primary"
             className="inline-submit-button"
             onClick={(e) => {
               e.preventDefault();
@@ -93,18 +92,19 @@ function UserDataInputComponents({
                 setEditing(false);
               }
             }}
+            variant="primary"
           >
-            <FontAwesomeIcon icon={faCheck} className="mx-3" />
+            <FontAwesomeIcon className="mx-3" icon={faCheck} />
           </Button>
         ) : (
           <Button
-            variant="primary"
             className="inline-submit-button"
             onClick={() => {
               setEditing(true);
             }}
+            variant="primary"
           >
-            <FontAwesomeIcon icon={faGear} className="mx-3" />
+            <FontAwesomeIcon className="mx-3" icon={faGear} />
           </Button>
         )}
       </InputGroup>

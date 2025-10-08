@@ -41,12 +41,12 @@ function Queries({
         searchedValues.max > 0 &&
         searchedValues.min < searchedValues.max && (
           <Query
-            text={`Between ${searchedValues.min} and ${searchedValues.max}`}
             remove={() => {
               formik.setFieldValue("max", 0);
               formik.setFieldValue("min", 0);
               triggerSearchWithUpdatedValues({ max: 0, min: 0 });
             }}
+            text={`Between ${searchedValues.min} and ${searchedValues.max}`}
           />
         )}
 
@@ -55,51 +55,51 @@ function Queries({
         (searchedValues.max === 0 ||
           searchedValues.min >= searchedValues.max) && (
           <Query
-            text={`Minimum: ${searchedValues.min}`}
             remove={() => {
               formik.setFieldValue("min", 0);
               triggerSearchWithUpdatedValues({ min: 0 });
             }}
+            text={`Minimum: ${searchedValues.min}`}
           />
         )}
 
       {searchedValues && searchedValues.max > 0 && searchedValues.min === 0 && (
         <Query
-          text={`Maximum: ${searchedValues.max}`}
           remove={() => {
             formik.setFieldValue("max", 0);
             triggerSearchWithUpdatedValues({ max: 0 });
           }}
+          text={`Maximum: ${searchedValues.max}`}
         />
       )}
 
       {searchedValues && searchedValues.title && (
         <Query
-          text={`Title: ${searchedValues.title}`}
           remove={() => {
             formik.setFieldValue("title", "");
             triggerSearchWithUpdatedValues({ title: "" });
           }}
+          text={`Title: ${searchedValues.title}`}
         />
       )}
 
       {searchedValues && searchedValues.artist_name && (
         <Query
-          text={`Artist: ${searchedValues.artist_name}`}
           remove={() => {
             formik.setFieldValue("artist_name", "");
             triggerSearchWithUpdatedValues({ artist_name: "" });
           }}
+          text={`Artist: ${searchedValues.artist_name}`}
         />
       )}
 
       {searchedValues && searchedValues.category_id && (
         <Query
-          text={getCurrentCategoryName(searchedValues.category_id)}
           remove={() => {
             formik.setFieldValue("category_id", "");
             triggerSearchWithUpdatedValues({ category_id: "" });
           }}
+          text={getCurrentCategoryName(searchedValues.category_id)}
         />
       )}
     </Row>

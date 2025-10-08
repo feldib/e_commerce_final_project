@@ -22,9 +22,9 @@ function RemoveArtworkButton({
         return removeArtwork(artwork_id);
       }}
       artwork_id={artwork_id}
-      toastSuccessMessage="Artwork removed successfully"
-      toastErrorMessage="Error: item could not be removed"
       icon={faX}
+      toastErrorMessage="Error: item could not be removed"
+      toastSuccessMessage="Artwork removed successfully"
     />
   );
 }

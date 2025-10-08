@@ -46,7 +46,7 @@ function ArtworkDetails({ artwork_id, artwork }: ArtworkDetailsProps) {
         {reviews.length !== 0 ? (
           <>
             {reviews.map((review, index) => (
-              <ArtworkReview key={index} review={review} index={index + 1} />
+              <ArtworkReview index={index + 1} key={index} review={review} />
             ))}
           </>
         ) : (
@@ -61,8 +61,8 @@ function ArtworkDetails({ artwork_id, artwork }: ArtworkDetailsProps) {
   return (
     <>
       <Row className="mb-5 mt-5">
-        <Col sm={12} md={4} className="mb-3">
-          <Card className="mx-auto" border="secondary">
+        <Col className="mb-3" md={4} sm={12}>
+          <Card border="secondary" className="mx-auto">
             <Card.Body className="p-3">
               <Row>
                 <Col>
@@ -75,7 +75,7 @@ function ArtworkDetails({ artwork_id, artwork }: ArtworkDetailsProps) {
                   </Card.Subtitle>
                 </Col>
 
-                <Col xs={1} className="text-center px-3">
+                <Col className="text-center px-3" xs={1}>
                   <span
                     onClick={() => {
                       if (quantity > 0) {
@@ -101,8 +101,8 @@ function ArtworkDetails({ artwork_id, artwork }: ArtworkDetailsProps) {
           </Card>
         </Col>
 
-        <Col md={8} className="mb-3">
-          <Card className="mx-auto" border="secondary">
+        <Col className="mb-3" md={8}>
+          <Card border="secondary" className="mx-auto">
             <Card.Body className="p-3 px-3">
               <Row>
                 <Col>
@@ -115,7 +115,7 @@ function ArtworkDetails({ artwork_id, artwork }: ArtworkDetailsProps) {
                   </Card.Subtitle>
                 </Col>
 
-                <Col xs={1} className="text-center px-3">
+                <Col className="text-center px-3" xs={1}>
                   <span
                     onClick={() => {
                       if (quantity > 0) {
@@ -196,7 +196,7 @@ function ArtworkDetails({ artwork_id, artwork }: ArtworkDetailsProps) {
 
       <Row className="mt-5">
         <Row className="text-center">
-          <Col xs={5} md={4} className="mx-auto">
+          <Col className="mx-auto" md={4} xs={5}>
             <h4 className="subpage-title">{t("common.reviews")}</h4>
           </Col>
         </Row>

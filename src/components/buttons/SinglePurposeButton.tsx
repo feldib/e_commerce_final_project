@@ -52,8 +52,8 @@ function SinglePurposeButton({
     <Row>
       <p
         className="table-button"
-        style={{ cursor: "pointer" }}
         onClick={handleClick}
+        style={{ cursor: "pointer" }}
       >
         <FontAwesomeIcon icon={icon} />
       </p>

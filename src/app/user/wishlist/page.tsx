@@ -19,7 +19,7 @@ function WishList() {
   const wishlistContent = useLoading(wishListed, (data) => (
     <Row className="mx-auto floating-element">
       {data.length !== 0 ? (
-        <BuyTable theadNeeded={true} dataLines={data} />
+        <BuyTable dataLines={data} theadNeeded={true} />
       ) : (
         <Col className="text-center">
           {t("app.user.wishlist.no_wishlisted_items")}

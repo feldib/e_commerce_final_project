@@ -17,7 +17,7 @@ type SubNavbarProps = {
 function SubNavbar({ linkObjects }: SubNavbarProps) {
   return (
     <Row>
-      <a href="#subpage" className="skip-to-content">
+      <a className="skip-to-content" href="#subpage">
         Skip to subpage content
       </a>
       <Navbar>
@@ -26,15 +26,15 @@ function SubNavbar({ linkObjects }: SubNavbarProps) {
             {linkObjects.map((obj, index) => {
               return (
                 <Link
-                  key={index}
                   className="nav-link"
-                  style={{ color: "inherit", textDecoration: "inherit" }}
                   href={`${obj.linkTo}`}
+                  key={index}
+                  style={{ color: "inherit", textDecoration: "inherit" }}
                 >
                   <Col>
                     <Row className="text-center">
                       <Col>
-                        <FontAwesomeIcon size="2xl" icon={obj.icon} />
+                        <FontAwesomeIcon icon={obj.icon} size="2xl" />
                       </Col>
                     </Row>
                     <Row className="text-center">

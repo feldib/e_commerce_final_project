@@ -12,13 +12,13 @@ function Trophy({
   const color = "#0c090d";
   return (
     <svg
-      role="img"
       aria-label={t("components.svg_components.set_artwork_featured")}
-      xmlns="http://www.w3.org/2000/svg"
-      width="auto"
-      height={height}
-      viewBox="0 0 24 24"
       fill="none"
+      height={height}
+      role="img"
+      viewBox="0 0 24 24"
+      width="auto"
+      xmlns="http://www.w3.org/2000/svg"
     >
       <g id="SVGRepo_bgCarrier" stroke-width="0" />
 
@@ -44,9 +44,9 @@ function Trophy({
         {/* Main body U-shape */}
         <path
           d="M7.5 6V11.3308C7.5 13.1552 9.29713 15 12 15C14.7029 15 16.5 13.1552 16.5 11.3308V6"
+          fill="none"
           stroke={color}
           stroke-width="1.5"
-          fill="none"
         />
 
         {/* Main body U-shape FILL */}

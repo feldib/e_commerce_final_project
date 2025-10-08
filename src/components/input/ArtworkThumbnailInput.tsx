@@ -73,20 +73,20 @@ function ArtworkThumbnailInput<T extends Record<string, unknown>>({
       <Form.Label>{label}</Form.Label>
       {formik.errors.thumbnail && formik.touched.thumbnail && (
         <FontAwesomeIcon
+          className="mx-3"
           icon={faAsterisk}
           style={{ color: "red" }}
-          className="mx-3"
         />
       )}
       <InputGroup>
         <InputGroup.Text>
-          <FontAwesomeIcon icon={faImages} className="mx-3" />
+          <FontAwesomeIcon className="mx-3" icon={faImages} />
         </InputGroup.Text>
 
         <Form.Control
-          type="file"
-          placeholder={t("app.admin.add_new_artwork.upload_thumbnail")}
           onChange={handleFileChange}
+          placeholder={t("app.admin.add_new_artwork.upload_thumbnail")}
+          type="file"
         />
       </InputGroup>
 
@@ -101,23 +101,23 @@ function ArtworkThumbnailInput<T extends Record<string, unknown>>({
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={
-              typeof formik.values.thumbnail === "string"
-                ? formik.values.thumbnail
-                : URL.createObjectURL(formik.values.thumbnail as Blob)
-            }
-            className="mt-3 uploaded-thumbnail"
             alt={t(
               isEdit
                 ? "app.admin.edit_artwork.current_thumbnail"
                 : "app.admin.add_new_artwork.uploaded_thumbnail",
             )}
+            className="mt-3 uploaded-thumbnail"
+            src={
+              typeof formik.values.thumbnail === "string"
+                ? formik.values.thumbnail
+                : URL.createObjectURL(formik.values.thumbnail as Blob)
+            }
           />
 
           {!isEdit && (
             <FontAwesomeIcon
-              icon={faX}
               className="remove-uploaded-image"
+              icon={faX}
               onClick={handleRemoveThumbnail}
             />
           )}

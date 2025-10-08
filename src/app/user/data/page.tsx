@@ -33,8 +33,8 @@ function UserData() {
 
   return (
     <UserDataChangingComponent
-      title={t("app.user.data.title")}
       formik={formik}
+      title={t("app.user.data.title")}
     />
   );
 }

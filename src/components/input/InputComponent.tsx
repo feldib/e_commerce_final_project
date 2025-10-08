@@ -27,26 +27,26 @@ function InputComponent({
       <Form.Label>{label}</Form.Label>
       {showAsterisk && (
         <FontAwesomeIcon
+          className="mx-3"
           icon={faAsterisk}
           style={{ color: "red" }}
-          className="mx-3"
         />
       )}
       <InputGroup>
         <InputGroup.Text>
-          <FontAwesomeIcon icon={icon} className="mx-3" />
+          <FontAwesomeIcon className="mx-3" icon={icon} />
         </InputGroup.Text>
 
         <Field
           className="form-control"
           name={name}
-          type={type}
           placeholder={placeholder}
+          type={type}
         />
       </InputGroup>
       <ErrorMessage
-        component="div"
         className="input-error-message"
+        component="div"
         name={name}
       />
     </Form.Group>

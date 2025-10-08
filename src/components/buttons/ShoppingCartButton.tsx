@@ -24,9 +24,9 @@ function ShoppingCartButton({ artwork_id, quantity }: ShoppingCartButtonProps) {
         increaseLocalStorageShoppingCartQuantity(artwork_id, quantity);
       }}
       artwork_id={artwork_id}
-      toastSuccessMessage={t("components.buttons.item_added_to_cart")}
-      toastErrorMessage={t("components.buttons.out_of_stock")}
       icon={faBasketShopping}
+      toastErrorMessage={t("components.buttons.out_of_stock")}
+      toastSuccessMessage={t("components.buttons.item_added_to_cart")}
     />
   );
 }

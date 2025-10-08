@@ -76,14 +76,14 @@ function LeaveReview({ artwork_id }: LeaveReviewProps) {
                     </RBForm.Label>
 
                     <InputComponent
+                      icon={faKeyboard}
                       label="Title"
                       name="title"
-                      type="text"
                       placeholder={t(
                         "components.leave_review.enter_review_title",
                       )}
-                      icon={faKeyboard}
                       showAsterisk={!!errors.title && !!touched.title}
+                      type="text"
                     />
 
                     <RBForm.Group className="mb-3">
@@ -92,16 +92,16 @@ function LeaveReview({ artwork_id }: LeaveReviewProps) {
                       </RBForm.Label>
                       {errors.review_text && touched.review_text && (
                         <FontAwesomeIcon
+                          className="mx-3"
                           icon={faAsterisk}
                           style={{ color: "red" }}
-                          className="mx-3"
                         />
                       )}
                       <FloatingLabel label="">
                         <Field
+                          as="textarea"
                           className="form-control"
                           name="review_text"
-                          as="textarea"
                           placeholder={t(
                             "components.leave_review.enter_review_text",
                           )}
@@ -109,19 +109,19 @@ function LeaveReview({ artwork_id }: LeaveReviewProps) {
                         />
                       </FloatingLabel>
                       <ErrorMessage
-                        component="div"
                         className="input-error-message"
+                        component="div"
                         name="review_text"
                       />
                     </RBForm.Group>
                     <Button
-                      variant="primary"
-                      type="submit"
                       onClick={() => {
                         if (Object.keys(errors).length) {
                           showIncorrectDataToast(t);
                         }
                       }}
+                      type="submit"
+                      variant="primary"
                     >
                       {t("components.leave_review.submit")}
                     </Button>

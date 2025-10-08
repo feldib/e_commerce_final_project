@@ -81,41 +81,41 @@ function ArtworkSearchFields({
   return (
     <div className="floating-element mb-3 mx-5">
       <SearchField
-        what={t("components.search_fields.title")}
         name="title"
-        onChange={formik.handleChange}
         onBlur={formik.handleBlur}
+        onChange={formik.handleChange}
         value={formik.values.title}
+        what={t("components.search_fields.title")}
       />
 
       <SearchField
-        what={t("components.search_fields.artist")}
         name="artist_name"
-        onChange={formik.handleChange}
         onBlur={formik.handleBlur}
+        onChange={formik.handleChange}
         value={formik.values.artist_name}
+        what={t("components.search_fields.artist")}
       />
 
-      <Row lg={6} sx={8} className="mx-auto mb-5 mt-5">
+      <Row className="mx-auto mb-5 mt-5" lg={6} sx={8}>
         <InputGroup>
           <InputGroup.Text>{t("common.price_range")}</InputGroup.Text>
 
           <Form.Control
-            type="number"
-            placeholder={t("common.minimum")}
             name="min"
-            value={formik.values.min === 0 ? "" : formik.values.min}
-            onChange={handleMinChange}
             onBlur={handleMinBlur}
+            onChange={handleMinChange}
+            placeholder={t("common.minimum")}
+            type="number"
+            value={formik.values.min === 0 ? "" : formik.values.min}
           />
 
           <Form.Control
-            type="number"
-            placeholder={t("common.maximum")}
             name="max"
-            value={formik.values.max === 0 ? "" : formik.values.max}
-            onChange={handleMaxChange}
             onBlur={handleMaxBlur}
+            onChange={handleMaxChange}
+            placeholder={t("common.maximum")}
+            type="number"
+            value={formik.values.max === 0 ? "" : formik.values.max}
           />
         </InputGroup>
       </Row>
@@ -138,19 +138,19 @@ function ArtworkSearchFields({
               {t("components.search_fields.number_of_artworks_shown")}
             </Dropdown.Toggle>
             <Dropdown.Menu>
-              <Dropdown.Item href="" eventKey="5">
+              <Dropdown.Item eventKey="5" href="">
                 5
               </Dropdown.Item>
 
-              <Dropdown.Item href="" eventKey="10">
+              <Dropdown.Item eventKey="10" href="">
                 10
               </Dropdown.Item>
 
-              <Dropdown.Item href="" eventKey="20">
+              <Dropdown.Item eventKey="20" href="">
                 20
               </Dropdown.Item>
 
-              <Dropdown.Item href="" eventKey="30">
+              <Dropdown.Item eventKey="30" href="">
                 30
               </Dropdown.Item>
             </Dropdown.Menu>
@@ -163,11 +163,11 @@ function ArtworkSearchFields({
               {t("common.order_by")}
             </Dropdown.Toggle>
             <Dropdown.Menu>
-              <Dropdown.Item href="" eventKey="desc">
+              <Dropdown.Item eventKey="desc" href="">
                 {t("components.search_fields.newest_to_oldest")}
               </Dropdown.Item>
 
-              <Dropdown.Item href="" eventKey="asc">
+              <Dropdown.Item eventKey="asc" href="">
                 {t("components.search_fields.oldest_to_newest")}
               </Dropdown.Item>
             </Dropdown.Menu>
@@ -176,27 +176,27 @@ function ArtworkSearchFields({
 
         <Col className="mb-3">
           <Form.Check
-            type="switch"
-            label={t("components.search_fields.only_featured")}
             id="only_featured"
+            label={t("components.search_fields.only_featured")}
             onChange={handleOnlyFeaturedChange}
+            type="switch"
           />
         </Col>
       </Row>
 
       <Row className="mx-auto mb-3 text-end">
         <Col>
-          <Button className="submit" type="submit" onClick={handleSearchClick}>
+          <Button className="submit" onClick={handleSearchClick} type="submit">
             {t("components.search_fields.search")}
           </Button>
         </Col>
       </Row>
 
       <Queries
-        formik={formik}
         categories={categories}
-        triggerSearchWithUpdatedValues={triggerSearchWithUpdatedValues}
+        formik={formik}
         searchedValues={searchedValues}
+        triggerSearchWithUpdatedValues={triggerSearchWithUpdatedValues}
       />
     </div>
   );

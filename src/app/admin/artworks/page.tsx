@@ -19,7 +19,7 @@ function Search() {
       <PageTitle title={t("app.admin.artworks.title")} />
 
       <Row>
-        <Col className="floating-element mx-auto mb-4" xs={5} md={4} lg={3}>
+        <Col className="floating-element mx-auto mb-4" lg={3} md={4} xs={5}>
           <Link href="/admin/add_new_artwork">
             <p>
               <FontAwesomeIcon icon={faPlus} />
