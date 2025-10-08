@@ -39,10 +39,10 @@ function SignInPageInner() {
     try {
       await logIn(values.email, values.password, (userData: User) => {
         settleSuccessfulLogIn(to_checkout, userData, router);
+        showLoginSuccessToast(t);
       });
-      showLoginSuccessToast();
     } catch {
-      showLoginErrorToast();
+      showLoginErrorToast(t);
     }
   }
 
