@@ -31,7 +31,7 @@ function AddNewArtworkPage() {
   } = useAddNewArtworkPage();
   return (
     <Container className="px-3">
-      <PageTitle title={t("app.admin.add_new_artwork.page_title")} />
+      <PageTitle title={t("app.admin.add_new_artwork.title")} />
       <Row className="mx-auto pb-5 floating-element">
         <Col className="mx-5 pb-5 ">
           <Form onSubmit={formik.handleSubmit}>
