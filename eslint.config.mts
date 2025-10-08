@@ -27,6 +27,7 @@ const eslintConfig = [
       "simple-import-sort": (await import("eslint-plugin-simple-import-sort"))
         .default,
       perfectionist: (await import("eslint-plugin-perfectionist")).default,
+      "@eslint-react": (await import("@eslint-react/eslint-plugin")).default,
     },
     rules: {
       "simple-import-sort/imports": [
@@ -69,6 +70,8 @@ const eslintConfig = [
           ignoreCase: true,
         },
       ],
+      // Prefer destructuring assignment in React
+      "@eslint-react/prefer-destructuring-assignment": "error",
     },
   },
 ];
