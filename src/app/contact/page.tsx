@@ -19,7 +19,6 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import { ToastContainer } from "react-toastify";
 
 import {
-  showIncorrectDataToast,
   showMessageSendErrorToast,
   showMessageSentSuccessToast,
 } from "@/utils/toastUtils";
@@ -31,6 +30,7 @@ import { UserDataContext } from "@/components/providers/UserDataProvider";
 
 import { sendMessageToAdministrator } from "@/fetching/fetching";
 
+import { createHandleSubmitClick } from "@/helpers/formValidationHelpers";
 import { useContactSchema } from "@/hooks/useValidationSchemas";
 
 function ContactUs() {
@@ -63,11 +63,7 @@ function ContactUs() {
     }
   };
 
-  const handleSubmitClick = (errors: Record<string, unknown>) => {
-    if (Object.keys(errors).length) {
-      showIncorrectDataToast(t);
-    }
-  };
+  const handleSubmitClick = createHandleSubmitClick(t);
 
   return (
     <Container className="mb-5 pb-3">

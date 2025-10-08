@@ -7,7 +7,6 @@ import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { ToastContainer } from "react-toastify";
 
 import { TAG_SEPARATORS } from "@/utils/constants";
-import { showIncorrectDataToast } from "@/utils/toastUtils";
 
 import FloatingBackButton from "@/components/buttons/FloatingBackButton";
 import ArtworkImagesInput from "@/components/input/ArtworkImagesInput";
@@ -17,6 +16,8 @@ import NewArtworkInputComponent from "@/components/input/NewArtworkInputComponen
 import PageTitle from "@/components/PageTitle";
 
 import useAddNewArtworkPage from "./useAddNewArtworkPage";
+
+import { createHandleSubmitClick } from "@/helpers/formValidationHelpers";
 
 function AddNewArtworkPage() {
   const {
@@ -30,11 +31,7 @@ function AddNewArtworkPage() {
     createHandleAddition,
   } = useAddNewArtworkPage();
 
-  const handleSubmitClick = () => {
-    if (Object.keys(formik.errors).length) {
-      showIncorrectDataToast(t);
-    }
-  };
+  const handleSubmitClick = createHandleSubmitClick(t);
 
   return (
     <Container className="px-3">
@@ -125,7 +122,11 @@ function AddNewArtworkPage() {
               type="textarea"
             />
 
-            <Button onClick={handleSubmitClick} type="submit" variant="primary">
+            <Button
+              onClick={() => handleSubmitClick(formik.errors)}
+              type="submit"
+              variant="primary"
+            >
               {t("app.admin.artworks.add_new_artwork")}
             </Button>
             <ToastContainer position="bottom-right" />

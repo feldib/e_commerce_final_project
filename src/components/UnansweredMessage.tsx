@@ -14,7 +14,6 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import { ToastContainer } from "react-toastify";
 
 import {
-  showIncorrectDataToast,
   showReplySendErrorToast,
   showReplySentSuccessToast,
 } from "@/utils/toastUtils";
@@ -25,6 +24,7 @@ import { replyToMessage } from "@/fetching/fetching";
 
 import InputComponent from "./input/InputComponent";
 
+import { createHandleSubmitClick } from "@/helpers/formValidationHelpers";
 import { useMessageReplySchema } from "@/hooks/useValidationSchemas";
 
 type UnansweredMessageProps = {
@@ -71,11 +71,7 @@ function UnansweredMessage({ message }: UnansweredMessageProps) {
     }
   };
 
-  const handleSubmitClick = (errors: Record<string, unknown>) => {
-    if (Object.keys(errors).length) {
-      showIncorrectDataToast(t);
-    }
-  };
+  const handleSubmitClick = createHandleSubmitClick(t);
 
   return (
     <Row className="mx-auto mb-5 floating-element p-3">

@@ -9,7 +9,6 @@ import { Form, Formik } from "formik";
 import { ToastContainer } from "react-toastify";
 
 import {
-  showIncorrectDataToast,
   showRegistrationFailedToast,
   showRegistrationSuccessToast,
   showUserAlreadyExistsToast,
@@ -23,6 +22,7 @@ import { registerNewUser } from "@/fetching/fetching";
 import { logIn } from "@/fetching/fetching";
 import { User } from "@/fetching/types";
 
+import { createHandleSubmitClick } from "@/helpers/formValidationHelpers";
 import { useRegistrationSchema } from "@/hooks/useValidationSchemas";
 
 type RegistrationPageProps = {
@@ -95,11 +95,7 @@ function RegistrationPageInner({
     }
   }
 
-  const handleSubmitClick = (errors: Record<string, unknown>) => {
-    if (Object.keys(errors).length) {
-      showIncorrectDataToast(t);
-    }
-  };
+  const handleSubmitClick = createHandleSubmitClick(t);
 
   return (
     <Container className="pb-5 px-3">

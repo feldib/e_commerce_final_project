@@ -9,7 +9,6 @@ import { Form, Formik } from "formik";
 import { ToastContainer } from "react-toastify";
 
 import {
-  showIncorrectDataToast,
   showPasswordChangeErrorToast,
   showPasswordResetSuccessToast,
 } from "@/utils/toastUtils";
@@ -20,6 +19,7 @@ import { useI18n } from "@/components/providers/I18nProvider";
 
 import { changePassword } from "@/fetching/fetching";
 
+import { createHandleSubmitClick } from "@/helpers/formValidationHelpers";
 import { useResetPasswordSchema } from "@/hooks/useValidationSchemas";
 
 type ResetPasswordFormValues = {
@@ -52,11 +52,7 @@ function ResetPasswordInner() {
       });
   };
 
-  const handleSubmitClick = (errors: Record<string, unknown>) => {
-    if (Object.keys(errors).length) {
-      showIncorrectDataToast(t);
-    }
-  };
+  const handleSubmitClick = createHandleSubmitClick(t);
 
   return (
     <Container className="pb-5">

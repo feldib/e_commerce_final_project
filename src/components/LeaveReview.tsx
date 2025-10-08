@@ -13,7 +13,6 @@ import {
 import { ErrorMessage, Field, Form, Formik } from "formik";
 
 import {
-  showIncorrectDataToast,
   showReviewSavedSuccessToast,
   showReviewSaveErrorToast,
 } from "@/utils/toastUtils";
@@ -25,6 +24,7 @@ import { leaveReview } from "@/fetching/fetching";
 
 import InputComponent from "./input/InputComponent";
 
+import { createHandleSubmitClick } from "@/helpers/formValidationHelpers";
 import { useReviewSchema } from "@/hooks/useValidationSchemas";
 
 type LeaveReviewProps = {
@@ -58,11 +58,7 @@ function LeaveReview({ artwork_id }: LeaveReviewProps) {
     }
   };
 
-  const handleSubmitClick = (errors: Record<string, unknown>) => {
-    if (Object.keys(errors).length) {
-      showIncorrectDataToast(t);
-    }
-  };
+  const handleSubmitClick = createHandleSubmitClick(t);
 
   return (
     <>
