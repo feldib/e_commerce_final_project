@@ -307,6 +307,12 @@ a:hover,
   transition: all 0.2s ease-in-out;
 }
 
+/* RTL support for remove button positioning */
+[dir="rtl"] .remove-uploaded-image {
+  left: auto;
+  right: 60px;
+}
+
 .uploaded-image-container:hover .uploaded-image {
   filter: brightness(50%);
 }
