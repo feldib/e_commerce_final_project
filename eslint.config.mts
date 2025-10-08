@@ -15,6 +15,13 @@ const eslintConfig = [
   ...compat.extends("plugin:jsx-a11y/recommended"),
   // Prettier config should come last to override conflicting rules
   ...compat.extends("prettier"),
+  // Add nextjs-enforce-use-client plugin
+  ...compat.config({
+    plugins: ["nextjs-enforce-use-client"],
+    rules: {
+      "nextjs-enforce-use-client/enforce-use-client-react": "error",
+    },
+  }),
   {
     ignores: [
       "node_modules/**",
