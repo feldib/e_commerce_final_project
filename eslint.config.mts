@@ -24,6 +24,7 @@ const eslintConfig = [
     plugins: {
       "simple-import-sort": (await import("eslint-plugin-simple-import-sort"))
         .default,
+      perfectionist: (await import("eslint-plugin-perfectionist")).default,
     },
     rules: {
       "simple-import-sort/imports": [
@@ -57,6 +58,15 @@ const eslintConfig = [
         },
       ],
       "simple-import-sort/exports": "error",
+      // JSX props sorting
+      "perfectionist/sort-jsx-props": [
+        "error",
+        {
+          type: "alphabetical",
+          order: "asc",
+          ignoreCase: true,
+        },
+      ],
     },
   },
 ];
