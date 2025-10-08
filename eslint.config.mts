@@ -11,6 +11,8 @@ const compat = new FlatCompat({
 
 const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
+  // Prettier config should come last to override conflicting rules
+  ...compat.extends("prettier"),
   {
     ignores: [
       "node_modules/**",
