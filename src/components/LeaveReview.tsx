@@ -80,7 +80,7 @@ function LeaveReview({ artwork_id }: LeaveReviewProps) {
                       label="Title"
                       name="title"
                       placeholder={t(
-                        "components.leave_review.enter_review_title",
+                        "components.leave_review.enter_review_title"
                       )}
                       showAsterisk={!!errors.title && !!touched.title}
                       type="text"
@@ -103,7 +103,7 @@ function LeaveReview({ artwork_id }: LeaveReviewProps) {
                           className="form-control"
                           name="review_text"
                           placeholder={t(
-                            "components.leave_review.enter_review_text",
+                            "components.leave_review.enter_review_text"
                           )}
                           style={{ height: "100px" }}
                         />

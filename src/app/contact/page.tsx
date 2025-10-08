@@ -54,7 +54,7 @@ function ContactUs() {
       await sendMessageToAdministrator(
         values.email,
         values.title,
-        values.message,
+        values.message
       );
       showMessageSentSuccessToast(t);
       form?.current?.reset();

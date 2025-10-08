@@ -58,7 +58,7 @@ function UnansweredMessage({ message }: UnansweredMessageProps) {
         message.id,
         message.email,
         values.reply_title,
-        values.reply_text,
+        values.reply_text
       );
       showReplySentSuccessToast(t);
       setReplied(true);
@@ -112,7 +112,7 @@ function UnansweredMessage({ message }: UnansweredMessageProps) {
                         label="Title"
                         name="reply_title"
                         placeholder={t(
-                          "components.unanswered_message.enter_title",
+                          "components.unanswered_message.enter_title"
                         )}
                         showAsterisk={
                           !!errors.reply_title && !!touched.reply_title
@@ -137,7 +137,7 @@ function UnansweredMessage({ message }: UnansweredMessageProps) {
                             className="form-control"
                             name="reply_text"
                             placeholder={t(
-                              "components.unanswered_message.enter_reply",
+                              "components.unanswered_message.enter_reply"
                             )}
                             style={{ height: "100px" }}
                             type="text"

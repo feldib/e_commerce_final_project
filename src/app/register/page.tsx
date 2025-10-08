@@ -28,7 +28,7 @@ import { useRegistrationSchema } from "@/hooks/useValidationSchemas";
 type RegistrationPageProps = {
   settleSuccessfulRegistration: (
     to_checkout: boolean,
-    userData: { user: User },
+    userData: { user: User }
   ) => void;
 };
 
@@ -49,14 +49,14 @@ function RegistrationPageInner({
     },
     settleSuccessfulRegistration: (
       to_checkout: boolean,
-      userData: { user: User },
-    ) => void,
+      userData: { user: User }
+    ) => void
   ) => {
     await registerNewUser(
       values.email,
       values.password,
       values.firstName,
-      values.lastName,
+      values.lastName
     )
       .then(function () {
         logIn(values.email, values.password, (userData) => {

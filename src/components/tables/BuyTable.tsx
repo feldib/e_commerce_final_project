@@ -55,7 +55,7 @@ function BuyTable({
 
           if (shoppingCart.length) {
             const existingRecordIndex = shoppingCart.findIndex(
-              (item: ShoppingCartItem) => item.artwork_id === line.id,
+              (item: ShoppingCartItem) => item.artwork_id === line.id
             );
 
             if (
@@ -73,9 +73,9 @@ function BuyTable({
           }
         }),
         makeRows,
-        t("common.no_results"),
+        t("common.no_results")
       );
-    },
+    }
   );
 
   return (

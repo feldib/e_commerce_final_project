@@ -64,7 +64,7 @@ function ChangeArtworkDataInputComponent<
         await updateArtworkData(
           artwork_id,
           name,
-          String(formik.values[name] || ""),
+          String(formik.values[name] || "")
         );
         showChangesSavedToast(t);
         setEditing(false);

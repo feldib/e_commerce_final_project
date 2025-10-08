@@ -55,7 +55,7 @@ function ArtworkImagesInput<T extends Record<string, unknown>>({
             ]);
             e.target.value = ""; // Reset the input for next upload
             showSuccessToast(
-              t("app.admin.edit_artwork.image_uploaded_successfully"),
+              t("app.admin.edit_artwork.image_uploaded_successfully")
             );
           }
         } catch {
@@ -146,7 +146,7 @@ function ArtworkImagesInput<T extends Record<string, unknown>>({
                       alt={t(
                         isEdit
                           ? "app.admin.edit_artwork.current_image"
-                          : "app.admin.add_new_artwork.uploaded_other_picture",
+                          : "app.admin.add_new_artwork.uploaded_other_picture"
                       )}
                       className="mt-3 uploaded-image"
                       src={
@@ -163,7 +163,7 @@ function ArtworkImagesInput<T extends Record<string, unknown>>({
                     />
                   </Col>
                 );
-              },
+              }
             )}
           </Row>
         )}

@@ -35,7 +35,7 @@ function ShoppingCartComponent() {
     localStorage.removeItem("currentOrder");
     localStorage.setItem(
       "currentOrder",
-      JSON.stringify({ items: shoppingListItems, totalCost }),
+      JSON.stringify({ items: shoppingListItems, totalCost })
     );
   };
 

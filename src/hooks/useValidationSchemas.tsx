@@ -40,7 +40,7 @@ const createReviewTextValidation = (t: (key: string) => string) =>
 
 const createRepeatEmailValidation = (
   t: (key: string) => string,
-  fieldName = "email",
+  fieldName = "email"
 ) =>
   Yup.string()
     .required(t("validation.repeat_email_required"))
@@ -48,7 +48,7 @@ const createRepeatEmailValidation = (
 
 const createRepeatPasswordValidation = (
   t: (key: string) => string,
-  fieldName = "password",
+  fieldName = "password"
 ) =>
   Yup.string()
     .required(t("validation.repeat_password_required"))
@@ -63,25 +63,25 @@ const createThumbnailValidation = (t: (key: string) => string) =>
   Yup.mixed()
     .required(t("validation.thumbnail_required"))
     .test("is-valid-type", t("validation.not_valid_image_type"), (value) =>
-      isValidImage(value instanceof File ? value.name : ""),
+      isValidImage(value instanceof File ? value.name : "")
     )
     .test(
       "is-valid-size",
       t("validation.max_allowed_size"),
-      (value) => value instanceof File && value.size <= MAX_IMAGE_SIZE,
+      (value) => value instanceof File && value.size <= MAX_IMAGE_SIZE
     );
 
 const createOtherPicturesValidation = (t: (key: string) => string) =>
   Yup.array().of(
     Yup.mixed()
       .test("is-valid-type", t("validation.not_valid_image_type"), (value) =>
-        isValidImage(value instanceof File ? value.name : ""),
+        isValidImage(value instanceof File ? value.name : "")
       )
       .test(
         "is-valid-size",
         t("validation.max_allowed_size"),
-        (value) => value instanceof File && value.size <= MAX_IMAGE_SIZE,
-      ),
+        (value) => value instanceof File && value.size <= MAX_IMAGE_SIZE
+      )
   );
 
 const createTagsValidation = (t: (key: string) => string) =>
@@ -91,7 +91,7 @@ const createTagsValidation = (t: (key: string) => string) =>
       Yup.object().shape({
         id: Yup.string(),
         text: Yup.string(),
-      }),
+      })
     );
 
 // Individual schema hooks for better performance - only create what you need
