@@ -90,15 +90,12 @@ function AddNewArtworkPage() {
               formik={formik}
             />
 
-            <Form.Group className="pb-3">
-              <Form.Label>{t("common.category")}</Form.Label>
-              <CategoryDropdownArtwork
-                categories={categories}
-                formik={formik}
-                fieldName="category_id"
-                required={true}
-              />
-            </Form.Group>
+            <CategoryDropdownArtwork
+              categories={categories}
+              formik={formik}
+              fieldName="category_id"
+              label={t("common.category")}
+            />
 
             <ArtworkThumbnailInput
               formik={formik}

@@ -1,7 +1,9 @@
 "use client";
 import React from "react";
 
-import { Dropdown } from "react-bootstrap";
+import { faAsterisk } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Dropdown, Form } from "react-bootstrap";
 import { FormikProps } from "formik";
 
 import { useI18n } from "@/components/providers/I18nProvider";
@@ -16,11 +18,9 @@ interface CategoryDropdownArtworkProps<
   T extends Record<string, unknown> = Record<string, unknown>,
 > {
   categories: Category[];
-  formik?: FormikProps<T>;
+  formik: FormikProps<T>;
   fieldName?: string;
-  error?: string;
-  touched?: boolean;
-  required?: boolean;
+  label: string;
   onCategoryChange?: (category: Category) => Promise<void> | void;
 }
 
@@ -28,9 +28,7 @@ function CategoryDropdownArtwork<T extends Record<string, unknown>>({
   categories,
   formik,
   fieldName = "category_id",
-  error,
-  touched,
-  required = false,
+  label,
   onCategoryChange,
 }: CategoryDropdownArtworkProps<T>) {
   const { t, locale } = useI18n();
@@ -39,15 +37,15 @@ function CategoryDropdownArtwork<T extends Record<string, unknown>>({
   const [chosenCategory, setChosenCategory] = React.useState<Category | null>(
     formik && formik.values[fieldName]
       ? categories?.find(
-          (cat) => cat.id === Number(formik.values[fieldName]),
+          (cat) => cat.id === Number(formik.values[fieldName])
         ) || null
-      : null,
+      : null
   );
 
   React.useEffect(() => {
     if (formik && formik.values[fieldName] && categories) {
       const category = categories.find(
-        (cat) => cat.id === Number(formik.values[fieldName]),
+        (cat) => cat.id === Number(formik.values[fieldName])
       );
       if (category && (!chosenCategory || category.id !== chosenCategory.id)) {
         setChosenCategory(category);
@@ -56,10 +54,11 @@ function CategoryDropdownArtwork<T extends Record<string, unknown>>({
   }, [formik, fieldName, categories, chosenCategory]);
 
   const [cats, setCats] = React.useState<React.JSX.Element>(<LoadingSpinner />);
-  const formikError = formik?.errors[fieldName] as string;
-  const formikTouched = formik?.touched[fieldName];
+  const formikError = formik.errors[fieldName] as string;
+  const formikTouched = formik.touched[fieldName];
 
-  const showError = (error && touched) || (formikError && formikTouched);
+  // Only show error if field has been touched (for new artwork creation)
+  const showError = formikError && formikTouched;
 
   const handleCategoryClick = async (category: Category) => {
     setChosenCategory(category);
@@ -95,7 +94,15 @@ function CategoryDropdownArtwork<T extends Record<string, unknown>>({
   }, [categories, getCategoryName, formik, fieldName, onCategoryChange]);
 
   return (
-    <>
+    <Form.Group className="pb-3">
+      <Form.Label>{label}</Form.Label>
+      {showError && (
+        <FontAwesomeIcon
+          icon={faAsterisk}
+          style={{ color: "red" }}
+          className="mx-3"
+        />
+      )}
       <Dropdown>
         <Dropdown.Toggle
           variant={showError ? "danger" : "outline-dark"}
@@ -105,15 +112,12 @@ function CategoryDropdownArtwork<T extends Record<string, unknown>>({
             {chosenCategory
               ? getCategoryName(chosenCategory)
               : t("common.choose")}
-            {required && !chosenCategory && " *"}
           </span>
         </Dropdown.Toggle>
         <Dropdown.Menu className="w-100">{cats}</Dropdown.Menu>
       </Dropdown>
-      {showError && (
-        <div className="text-danger small mt-1">{error || formikError}</div>
-      )}
-    </>
+      {showError && <div className="text-danger small mt-1">{formikError}</div>}
+    </Form.Group>
   );
 }
 

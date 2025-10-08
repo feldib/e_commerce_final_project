@@ -98,31 +98,28 @@ function EditArtworkData() {
               artwork_id={artworkId}
             />
 
-            <Form.Group className="pb-3">
-              <Form.Label>{t("common.category")}</Form.Label>
-              <CategoryDropdownArtwork
-                categories={categories}
-                formik={formik}
-                fieldName="category_id"
-                required={true}
-                onCategoryChange={async (category) => {
-                  try {
-                    await updateArtworkData(
-                      artworkId,
-                      "category_id",
-                      category.id,
-                    );
-                    showSuccessToast(
-                      t("app.admin.edit_artwork.category_updated_successfully"),
-                    );
-                  } catch {
-                    showErrorToast(
-                      t("app.admin.edit_artwork.failed_to_update_category"),
-                    );
-                  }
-                }}
-              />
-            </Form.Group>
+            <CategoryDropdownArtwork
+              categories={categories}
+              formik={formik}
+              fieldName="category_id"
+              onCategoryChange={async (category) => {
+                try {
+                  await updateArtworkData(
+                    artworkId,
+                    "category_id",
+                    category.id
+                  );
+                  showSuccessToast(
+                    t("app.admin.edit_artwork.category_updated_successfully")
+                  );
+                } catch {
+                  showErrorToast(
+                    t("app.admin.edit_artwork.failed_to_update_category")
+                  );
+                }
+              }}
+              label={t("common.category")}
+            />
 
             <ArtworkThumbnailInput
               formik={formik}
