@@ -60,7 +60,8 @@
     "contact": "Kapcsolat",
     "log_in": "Bejelentkezés",
     "log_out": "Kijelentkezés",
-    "admin_page": "Admin oldal"
+    "admin_page": "Admin oldal",
+    "toggle_menu": "Menü kinyitása/bezárása"
   },
   "app": {
     "home": {

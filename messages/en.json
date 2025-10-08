@@ -60,7 +60,8 @@
     "contact": "Contact",
     "log_in": "Log in",
     "log_out": "Log out",
-    "admin_page": "Admin Page"
+    "admin_page": "Admin Page",
+    "toggle_menu": "Toggle menu"
   },
   "app": {
     "home": {

@@ -60,7 +60,8 @@
     "contact": "צור קשר",
     "log_in": "התחבר",
     "log_out": "התנתק",
-    "admin_page": "עמוד ניהול"
+    "admin_page": "עמוד ניהול",
+    "toggle_menu": "החלף תפריט"
   },
   "app": {
     "home": {

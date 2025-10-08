@@ -274,15 +274,23 @@ a:hover,
   width: 1px;
   height: 1px;
   overflow: hidden;
+  z-index: 9999;
 }
 
 .skip-to-content:focus {
-  position: static;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: auto;
   height: auto;
-  color: black;
-  background-color: blue;
-  font-size: 1.5rem;
+  padding: 8px 16px;
+  color: white;
+  background-color: #000;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: bold;
+  z-index: 10000;
+  border: 2px solid #fff;
 }
 
 .uploaded-image,
