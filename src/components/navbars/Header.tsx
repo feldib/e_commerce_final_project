@@ -40,6 +40,16 @@ function Header() {
     setExpanded(false);
   };
 
+  const handleShoppingCartClick = async () => {
+    const isShoppingCartEmpty = await checkIfShoppingCartIsEmpty(loggedIn);
+
+    if (!isShoppingCartEmpty) {
+      showCartEmptyWarningToast(t);
+    } else {
+      router.push("/shopping_cart");
+    }
+  };
+
   return (
     <ExpandedNavContext.Provider value={{ closeExpandedNav }}>
       <Navbar id="header" expand="lg" expanded={expanded}>
@@ -66,16 +76,7 @@ function Header() {
                 className="me-3"
                 aria-label={t("common.shopping_cart")}
                 icon={faShoppingCart}
-                onClick={async () => {
-                  const isShoppingCartEmpty =
-                    await checkIfShoppingCartIsEmpty(loggedIn);
-
-                  if (!isShoppingCartEmpty) {
-                    showCartEmptyWarningToast(t);
-                  } else {
-                    router.push("/shopping_cart");
-                  }
-                }}
+                onClick={handleShoppingCartClick}
               />
             )}
             <FontAwesomeIcon
@@ -135,16 +136,7 @@ function Header() {
                   cursor: "pointer",
                   color: "inherit",
                 }}
-                onClick={async () => {
-                  const isShoppingCartEmpty =
-                    await checkIfShoppingCartIsEmpty(loggedIn);
-
-                  if (!isShoppingCartEmpty) {
-                    showCartEmptyWarningToast(t);
-                  } else {
-                    router.push("/shopping_cart");
-                  }
-                }}
+                onClick={handleShoppingCartClick}
               />
             </div>
           )}

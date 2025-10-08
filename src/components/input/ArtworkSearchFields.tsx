@@ -27,6 +27,57 @@ function ArtworkSearchFields({
   searchedValues,
 }: ArtworkSearchFieldsProps) {
   const { t } = useI18n();
+
+  const handleMinChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value === "" ? 0 : parseInt(e.target.value);
+    formik.setFieldValue("min", value);
+  };
+
+  const handleMinBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    formik.handleBlur(e);
+    if (formik.values.min < 0) {
+      formik.setFieldValue("min", 0);
+    }
+    const max = formik.values.max;
+    if (max > 0 && max <= formik.values.min) {
+      formik.setFieldValue("max", 0);
+    }
+  };
+
+  const handleMaxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value === "" ? 0 : parseInt(e.target.value);
+    formik.setFieldValue("max", value);
+  };
+
+  const handleMaxBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    formik.handleBlur(e);
+    const min = formik.values.min;
+    const max = formik.values.max;
+    if (min > 0 && max > 0 && min > max) {
+      formik.setFieldValue("max", 0);
+    }
+  };
+
+  const handleNumberOfArtworksSelect = (e: string | null) => {
+    formik.setFieldValue("n", Number(e));
+    triggerSearchWithUpdatedValues({ n: Number(e) });
+  };
+
+  const handleOrderSelect = (e: string | null) => {
+    formik.setFieldValue("order", e);
+    triggerSearchWithUpdatedValues({ order: e as string });
+  };
+
+  const handleOnlyFeaturedChange = () => {
+    const newValue = !formik.values.only_featured;
+    formik.setFieldValue("only_featured", newValue);
+    triggerSearchWithUpdatedValues({ only_featured: newValue });
+  };
+
+  const handleSearchClick = () => {
+    triggerSearchWithUpdatedValues({});
+  };
+
   return (
     <div className="floating-element mb-3 mx-5">
       <SearchField
@@ -54,21 +105,8 @@ function ArtworkSearchFields({
             placeholder={t("common.minimum")}
             name="min"
             value={formik.values.min === 0 ? "" : formik.values.min}
-            onChange={(e) => {
-              const value =
-                e.target.value === "" ? 0 : parseInt(e.target.value);
-              formik.setFieldValue("min", value);
-            }}
-            onBlur={(e) => {
-              formik.handleBlur(e);
-              if (formik.values.min < 0) {
-                formik.setFieldValue("min", 0);
-              }
-              const max = formik.values.max;
-              if (max > 0 && max <= formik.values.min) {
-                formik.setFieldValue("max", 0);
-              }
-            }}
+            onChange={handleMinChange}
+            onBlur={handleMinBlur}
           />
 
           <Form.Control
@@ -76,19 +114,8 @@ function ArtworkSearchFields({
             placeholder={t("common.maximum")}
             name="max"
             value={formik.values.max === 0 ? "" : formik.values.max}
-            onChange={(e) => {
-              const value =
-                e.target.value === "" ? 0 : parseInt(e.target.value);
-              formik.setFieldValue("max", value);
-            }}
-            onBlur={(e) => {
-              formik.handleBlur(e);
-              const min = formik.values.min;
-              const max = formik.values.max;
-              if (min > 0 && max > 0 && min > max) {
-                formik.setFieldValue("max", 0);
-              }
-            }}
+            onChange={handleMaxChange}
+            onBlur={handleMaxBlur}
           />
         </InputGroup>
       </Row>
@@ -105,10 +132,7 @@ function ArtworkSearchFields({
         <Col className="mb-3">
           <Dropdown
             // value={formik.values.n}
-            onSelect={(e) => {
-              formik.setFieldValue("n", Number(e));
-              triggerSearchWithUpdatedValues({ n: Number(e) });
-            }}
+            onSelect={handleNumberOfArtworksSelect}
           >
             <Dropdown.Toggle variant="outilne-dark">
               {t("components.search_fields.number_of_artworks_shown")}
@@ -134,12 +158,7 @@ function ArtworkSearchFields({
         </Col>
 
         <Col className="mb-4">
-          <Dropdown
-            onSelect={(e) => {
-              formik.setFieldValue("order", e);
-              triggerSearchWithUpdatedValues({ order: e as string });
-            }}
-          >
+          <Dropdown onSelect={handleOrderSelect}>
             <Dropdown.Toggle variant="outilne-dark">
               {t("common.order_by")}
             </Dropdown.Toggle>
@@ -160,24 +179,14 @@ function ArtworkSearchFields({
             type="switch"
             label={t("components.search_fields.only_featured")}
             id="only_featured"
-            onChange={() => {
-              const newValue = !formik.values.only_featured;
-              formik.setFieldValue("only_featured", newValue);
-              triggerSearchWithUpdatedValues({ only_featured: newValue });
-            }}
+            onChange={handleOnlyFeaturedChange}
           />
         </Col>
       </Row>
 
       <Row className="mx-auto mb-3 text-end">
         <Col>
-          <Button
-            className="submit"
-            type="submit"
-            onClick={() => {
-              triggerSearchWithUpdatedValues({});
-            }}
-          >
+          <Button className="submit" type="submit" onClick={handleSearchClick}>
             {t("components.search_fields.search")}
           </Button>
         </Col>

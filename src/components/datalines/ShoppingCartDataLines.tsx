@@ -57,6 +57,51 @@ function ShoppingCartDataLines({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [quantity]);
 
+  const handleDecrease = async () => {
+    if (loggedIn) {
+      await decreaseShoppingListItemQuantity(line.id);
+    } else {
+      decreaseLocalStorageShoppingCartQuantity(line.id);
+    }
+
+    if (quantity > 0) {
+      setQuantity(quantity - 1);
+    }
+  };
+
+  const handleIncrease = async () => {
+    if (loggedIn) {
+      try {
+        await increaseShoppingListItemQuantity(line.id);
+        showCartItemAddedToast(t);
+        setQuantity(quantity + 1);
+      } catch {
+        showCartItemOutOfStockToast(t);
+      }
+    } else {
+      try {
+        increaseLocalStorageShoppingCartQuantity(
+          line.id,
+          line.stored_amount - quantity,
+        );
+        showCartItemAddedToast(t);
+        setQuantity(quantity + 1);
+      } catch {
+        showCartItemOutOfStockToast(t);
+      }
+    }
+  };
+
+  const handleRemove = async () => {
+    if (loggedIn) {
+      await removeFromShoppingList(line.id);
+      setQuantity(0);
+    } else {
+      removeLocalStorageShoppingCartQuantity(line.id);
+      setQuantity(0);
+    }
+  };
+
   return (
     <tr key={index}>
       <td>
@@ -92,18 +137,7 @@ function ShoppingCartDataLines({
             <p
               style={{ cursor: "pointer" }}
               className="table-button"
-              onClick={async () => {
-                //upon increase/decrease - go to the ancestor and update props quantity
-                if (loggedIn) {
-                  await decreaseShoppingListItemQuantity(line.id);
-                } else {
-                  decreaseLocalStorageShoppingCartQuantity(line.id);
-                }
-
-                if (quantity > 0) {
-                  setQuantity(quantity - 1);
-                }
-              }}
+              onClick={handleDecrease}
             >
               <FontAwesomeIcon icon={faMinus} style={{ color: "red" }} />
             </p>
@@ -125,28 +159,7 @@ function ShoppingCartDataLines({
             <p
               style={{ cursor: "pointer" }}
               className="table-button"
-              onClick={async () => {
-                if (loggedIn) {
-                  try {
-                    await increaseShoppingListItemQuantity(line.id);
-                    showCartItemAddedToast(t);
-                    setQuantity(quantity + 1);
-                  } catch {
-                    showCartItemOutOfStockToast(t);
-                  }
-                } else {
-                  try {
-                    increaseLocalStorageShoppingCartQuantity(
-                      line.id,
-                      line.stored_amount - quantity,
-                    );
-                    showCartItemAddedToast(t);
-                    setQuantity(quantity + 1);
-                  } catch {
-                    showCartItemOutOfStockToast(t);
-                  }
-                }
-              }}
+              onClick={handleIncrease}
             >
               <FontAwesomeIcon icon={faPlus} style={{ color: "red" }} />
             </p>
@@ -172,15 +185,7 @@ function ShoppingCartDataLines({
               <p
                 style={{ cursor: "pointer" }}
                 className="table-button"
-                onClick={async () => {
-                  if (loggedIn) {
-                    await removeFromShoppingList(line.id);
-                    setQuantity(0);
-                  } else {
-                    removeLocalStorageShoppingCartQuantity(line.id);
-                    setQuantity(0);
-                  }
-                }}
+                onClick={handleRemove}
               >
                 <FontAwesomeIcon icon={faX} style={{ color: "red" }} />
               </p>

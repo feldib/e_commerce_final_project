@@ -21,6 +21,24 @@ function ShoppingCartComponent() {
 
   const [totalCost, setTotalCost] = React.useState(0);
 
+  const handleCostsChange = (key: number, newCost: number) => {
+    const temp = costs;
+
+    temp[key] = newCost;
+
+    setCosts(temp);
+
+    setTotalCost(Object.values(costs).reduce((acc, curr) => acc + curr, 0));
+  };
+
+  const handleCheckoutClick = () => {
+    localStorage.removeItem("currentOrder");
+    localStorage.setItem(
+      "currentOrder",
+      JSON.stringify({ items: shoppingListItems, totalCost }),
+    );
+  };
+
   return (
     <Row className="px-3 mx-auto floating-element mb-5">
       {shoppingListItems.length !== 0 ? (
@@ -28,17 +46,7 @@ function ShoppingCartComponent() {
           <ShoppingCartTable
             theadNeeded={true}
             dataLines={shoppingListItems}
-            changeCosts={(key, newCost) => {
-              const temp = costs;
-
-              temp[key] = newCost;
-
-              setCosts(temp);
-
-              setTotalCost(
-                Object.values(costs).reduce((acc, curr) => acc + curr, 0),
-              );
-            }}
+            changeCosts={handleCostsChange}
           />
 
           <Row className="mt-4">
@@ -53,16 +61,7 @@ function ShoppingCartComponent() {
             {shoppingListItems.length !== 0 && (
               <Col className="text-center mb-5">
                 <Link href={loggedIn ? "/checkout" : "/login"}>
-                  <Button
-                    className="submit"
-                    onClick={() => {
-                      localStorage.removeItem("currentOrder");
-                      localStorage.setItem(
-                        "currentOrder",
-                        JSON.stringify({ items: shoppingListItems, totalCost }),
-                      );
-                    }}
-                  >
+                  <Button className="submit" onClick={handleCheckoutClick}>
                     {t("common.checkout")}
                   </Button>
                 </Link>

@@ -28,6 +28,45 @@ function ArtworkThumbnailInput<T extends Record<string, unknown>>({
   label,
 }: ArtworkThumbnailInputProps<T>) {
   const { t } = useI18n();
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (files && files[0]) {
+      const file = files[0];
+
+      // In edit mode, we need to validate and upload the file
+      if (isEdit) {
+        const validationError = validateNewFile(file, t);
+
+        if (validationError) {
+          alert(validationError);
+          e.target.value = ""; // Reset the input
+          return;
+        }
+
+        try {
+          if (artworkId) {
+            await replaceThumbnail(artworkId, file);
+            showSuccessToast(
+              t("app.admin.edit_artwork.thumbnail_uploaded_successfully"),
+            );
+          }
+          // We create an object URL in both modes
+          formik.setFieldValue("thumbnail", URL.createObjectURL(file));
+        } catch {
+          e.target.value = ""; // Reset the input
+        }
+      } else {
+        // In add mode, we just set the file directly
+        formik.setFieldValue("thumbnail", file);
+      }
+    }
+  };
+
+  const handleRemoveThumbnail = () => {
+    formik.setFieldValue("thumbnail", "");
+  };
+
   return (
     <Form.Group className="pb-3">
       <Form.Label>{label}</Form.Label>
@@ -46,41 +85,7 @@ function ArtworkThumbnailInput<T extends Record<string, unknown>>({
         <Form.Control
           type="file"
           placeholder={t("app.admin.add_new_artwork.upload_thumbnail")}
-          onChange={async (e: React.ChangeEvent<HTMLInputElement>) => {
-            const files = e.target.files;
-            if (files && files[0]) {
-              const file = files[0];
-
-              // In edit mode, we need to validate and upload the file
-              if (isEdit) {
-                const validationError = validateNewFile(file, t);
-
-                if (validationError) {
-                  alert(validationError);
-                  e.target.value = ""; // Reset the input
-                  return;
-                }
-
-                try {
-                  if (artworkId) {
-                    await replaceThumbnail(artworkId, file);
-                    showSuccessToast(
-                      t(
-                        "app.admin.edit_artwork.thumbnail_uploaded_successfully",
-                      ),
-                    );
-                  }
-                  // We create an object URL in both modes
-                  formik.setFieldValue("thumbnail", URL.createObjectURL(file));
-                } catch {
-                  e.target.value = ""; // Reset the input
-                }
-              } else {
-                // In add mode, we just set the file directly
-                formik.setFieldValue("thumbnail", file);
-              }
-            }
-          }}
+          onChange={handleFileChange}
         />
       </InputGroup>
 
@@ -112,9 +117,7 @@ function ArtworkThumbnailInput<T extends Record<string, unknown>>({
             <FontAwesomeIcon
               icon={faX}
               className="remove-uploaded-image"
-              onClick={() => {
-                formik.setFieldValue("thumbnail", "");
-              }}
+              onClick={handleRemoveThumbnail}
             />
           )}
         </Col>

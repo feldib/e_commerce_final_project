@@ -61,6 +61,17 @@ function CategoryDropdownArtwork<T extends Record<string, unknown>>({
 
   const showError = (error && touched) || (formikError && formikTouched);
 
+  const handleCategoryClick = async (category: Category) => {
+    setChosenCategory(category);
+    if (formik) {
+      formik.setFieldValue(fieldName, category.id);
+      formik.setFieldTouched(fieldName, true, false);
+    }
+    if (onCategoryChange) {
+      await onCategoryChange(category);
+    }
+  };
+
   React.useEffect(() => {
     if (categories && categories.length > 0) {
       const categoryDropdownItems = (
@@ -71,16 +82,7 @@ function CategoryDropdownArtwork<T extends Record<string, unknown>>({
               key={index}
               id={JSON.stringify(category.id)}
               style={{ cursor: "pointer" }}
-              onClick={async () => {
-                setChosenCategory(category);
-                if (formik) {
-                  formik.setFieldValue(fieldName, category.id);
-                  formik.setFieldTouched(fieldName, true, false);
-                }
-                if (onCategoryChange) {
-                  await onCategoryChange(category);
-                }
-              }}
+              onClick={() => handleCategoryClick(category)}
             >
               {getCategoryName(category)}
             </Dropdown.Item>
@@ -89,6 +91,7 @@ function CategoryDropdownArtwork<T extends Record<string, unknown>>({
       );
       setCats(categoryDropdownItems);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categories, getCategoryName, formik, fieldName, onCategoryChange]);
 
   return (

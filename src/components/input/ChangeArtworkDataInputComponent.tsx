@@ -50,6 +50,34 @@ function ChangeArtworkDataInputComponent<
   const showAsterisk = formik.errors[name] && formik.touched[name];
   const [editing, setEditing] = React.useState(false);
 
+  const handleSave = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    // Only check for errors in the current field being updated, not the entire form
+    const currentFieldError = formik.errors[name];
+    const hasCurrentFieldError = currentFieldError && formik.touched[name];
+
+    if (hasCurrentFieldError) {
+      showIncorrectDataToast(t);
+    } else {
+      try {
+        await updateArtworkData(
+          artwork_id,
+          name,
+          String(formik.values[name] || ""),
+        );
+        showChangesSavedToast(t);
+        setEditing(false);
+      } catch {
+        showDataSaveErrorToast(t);
+      }
+    }
+  };
+
+  const handleEdit = () => {
+    setEditing(true);
+  };
+
   return (
     <Form.Group className="pb-3">
       <Form.Label>{label}</Form.Label>
@@ -100,30 +128,7 @@ function ChangeArtworkDataInputComponent<
           <Button
             variant="primary"
             className="inline-submit-button"
-            onClick={async (e) => {
-              e.preventDefault();
-
-              // Only check for errors in the current field being updated, not the entire form
-              const currentFieldError = formik.errors[name];
-              const hasCurrentFieldError =
-                currentFieldError && formik.touched[name];
-
-              if (hasCurrentFieldError) {
-                showIncorrectDataToast(t);
-              } else {
-                try {
-                  await updateArtworkData(
-                    artwork_id,
-                    name,
-                    String(formik.values[name] || ""),
-                  );
-                  showChangesSavedToast(t);
-                  setEditing(false);
-                } catch {
-                  showDataSaveErrorToast(t);
-                }
-              }
-            }}
+            onClick={handleSave}
           >
             <FontAwesomeIcon icon={faCheck} className="mx-3" />
           </Button>
@@ -131,9 +136,7 @@ function ChangeArtworkDataInputComponent<
           <Button
             variant="primary"
             className="inline-submit-button"
-            onClick={() => {
-              setEditing(true);
-            }}
+            onClick={handleEdit}
           >
             <FontAwesomeIcon icon={faGear} className="mx-3" />
           </Button>

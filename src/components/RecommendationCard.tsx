@@ -31,6 +31,12 @@ function RecommendationCard({ artwork }: RecommendationCardProps) {
     artwork.id,
   );
 
+  const handleQuantityDecrease = () => {
+    if (quantity > 0) {
+      setQuantity(quantity - 1);
+    }
+  };
+
   return (
     <Card className="mx-auto" border="secondary">
       <Card.Body className="p-3">
@@ -50,11 +56,7 @@ function RecommendationCard({ artwork }: RecommendationCardProps) {
           <Col xs={1} className="text-center px-3">
             <span
               className="recommendation-button"
-              onClick={() => {
-                if (quantity > 0) {
-                  setQuantity(quantity - 1);
-                }
-              }}
+              onClick={handleQuantityDecrease}
             >
               <ShoppingCartButton artwork_id={artwork.id} quantity={quantity} />
             </span>

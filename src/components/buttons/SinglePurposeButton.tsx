@@ -28,30 +28,32 @@ function SinglePurposeButton({
 }: SinglePurposeButtonProps) {
   const { loggedIn } = React.useContext(UserDataContext);
 
+  const handleClick = async () => {
+    if (loggedIn) {
+      try {
+        await actionOnLoggedIn(artwork_id);
+        showSuccessToast(toastSuccessMessage);
+      } catch {
+        showErrorToast(toastErrorMessage);
+      }
+    } else {
+      if (actionOnNotLoggedIn) {
+        try {
+          actionOnNotLoggedIn();
+          showSuccessToast(toastSuccessMessage);
+        } catch {
+          showErrorToast(toastErrorMessage);
+        }
+      }
+    }
+  };
+
   return (
     <Row>
       <p
         className="table-button"
         style={{ cursor: "pointer" }}
-        onClick={async () => {
-          if (loggedIn) {
-            try {
-              await actionOnLoggedIn(artwork_id);
-              showSuccessToast(toastSuccessMessage);
-            } catch {
-              showErrorToast(toastErrorMessage);
-            }
-          } else {
-            if (actionOnNotLoggedIn) {
-              try {
-                actionOnNotLoggedIn();
-                showSuccessToast(toastSuccessMessage);
-              } catch {
-                showErrorToast(toastErrorMessage);
-              }
-            }
-          }
-        }}
+        onClick={handleClick}
       >
         <FontAwesomeIcon icon={icon} />
       </p>

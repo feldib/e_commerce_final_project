@@ -4,8 +4,6 @@ import { Card, Carousel, Col, Row } from "react-bootstrap";
 
 import { SERVER_URL } from "@/utils/constants";
 
-import ArtworkPictureCarouselItem from "./ArtworkPictureCarouselItem";
-
 type ArtworkPictureCarouselProps = {
   other_pictures: string[];
 };
