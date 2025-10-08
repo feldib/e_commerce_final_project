@@ -15,6 +15,7 @@ import { Artwork } from "@/fetching/types";
 
 import { useI18n } from "../providers/I18nProvider";
 
+import { createQuantityDecreaseHandler } from "@/helpers/shoppingCartHelpers";
 import { useCategories } from "@/hooks/useCategories";
 import useQuantity from "@/hooks/useQuantity";
 
@@ -40,11 +41,10 @@ function BuyTableDataLines({
     line.id
   );
 
-  const handleQuantityDecrease = () => {
-    if (quantity > 0) {
-      setQuantity(quantity - 1);
-    }
-  };
+  const handleQuantityDecrease = createQuantityDecreaseHandler(
+    quantity,
+    setQuantity
+  );
 
   return (
     <tr key={index}>

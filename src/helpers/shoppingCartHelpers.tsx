@@ -137,8 +137,20 @@ function getShoppingCartFromLocalStorage(): ShoppingCartItem[] {
   return getCartItems();
 }
 
+const createQuantityDecreaseHandler = (
+  quantity: number,
+  setQuantity: (quantity: number) => void
+): (() => void) => {
+  return () => {
+    if (quantity > 0) {
+      setQuantity(quantity - 1);
+    }
+  };
+};
+
 export {
   checkIfShoppingCartIsEmpty,
+  createQuantityDecreaseHandler,
   decreaseLocalStorageShoppingCartQuantity,
   getLocalStorageShoppingCart,
   getShoppingCartFromLocalStorage,

@@ -18,6 +18,7 @@ import ShoppingCartButton from "./buttons/ShoppingCartButton";
 import ArtworkPictureCarousel from "./carousels/ArtworkPictureCarousel";
 import LeaveReview from "./LeaveReview";
 
+import { createQuantityDecreaseHandler } from "@/helpers/shoppingCartHelpers";
 import useAxios from "@/hooks/useAxios";
 import { useCategories } from "@/hooks/useCategories";
 import useLoading from "@/hooks/useLoading";
@@ -40,11 +41,10 @@ function ArtworkDetails({ artwork_id, artwork }: ArtworkDetailsProps) {
     artwork_id
   );
 
-  const handleQuantityDecrease = () => {
-    if (quantity > 0) {
-      setQuantity(quantity - 1);
-    }
-  };
+  const handleQuantityDecrease = createQuantityDecreaseHandler(
+    quantity,
+    setQuantity
+  );
 
   const representReviews = useLoading(reviewsData, (reviews) => {
     return (

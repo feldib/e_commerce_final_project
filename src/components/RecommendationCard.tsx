@@ -15,6 +15,7 @@ import { Artwork } from "@/fetching/types";
 import FavouriteButton from "./buttons/FavouriteButton";
 import ShoppingCartButton from "./buttons/ShoppingCartButton";
 
+import { createQuantityDecreaseHandler } from "@/helpers/shoppingCartHelpers";
 import useQuantity from "@/hooks/useQuantity";
 
 type RecommendationCardProps = {
@@ -31,11 +32,10 @@ function RecommendationCard({ artwork }: RecommendationCardProps) {
     artwork.id
   );
 
-  const handleQuantityDecrease = () => {
-    if (quantity > 0) {
-      setQuantity(quantity - 1);
-    }
-  };
+  const handleQuantityDecrease = createQuantityDecreaseHandler(
+    quantity,
+    setQuantity
+  );
 
   return (
     <Card border="secondary" className="mx-auto">
