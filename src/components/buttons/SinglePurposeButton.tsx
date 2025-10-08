@@ -11,7 +11,7 @@ import { UserDataContext } from "@/components/providers/UserDataProvider";
 
 type SinglePurposeButtonProps = {
   artwork_id: number;
-  actionOnLoggedIn: (artwork_id: number) => Promise<Axios.AxiosXHR<unknown>>;
+  actionOnLoggedIn: (artwork_id: number) => Promise<unknown>;
   actionOnNotLoggedIn?: () => void;
   toastSuccessMessage: string;
   toastErrorMessage: string;
