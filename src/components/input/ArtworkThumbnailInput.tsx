@@ -34,16 +34,17 @@ function ArtworkThumbnailInput<T extends Record<string, unknown>>({
     if (files && files[0]) {
       const file = files[0];
 
+      // Validate file in both edit and add modes
+      const validationError = validateNewFile(file, t);
+
+      if (validationError) {
+        alert(validationError);
+        e.target.value = ""; // Reset the input
+        return;
+      }
+
       // In edit mode, we need to validate and upload the file
       if (isEdit) {
-        const validationError = validateNewFile(file, t);
-
-        if (validationError) {
-          alert(validationError);
-          e.target.value = ""; // Reset the input
-          return;
-        }
-
         try {
           if (artworkId) {
             await replaceThumbnail(artworkId, file);
