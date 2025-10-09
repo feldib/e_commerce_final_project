@@ -1,60 +1,87 @@
 {
   "common": {
-    "skip_to_content": "דלג לתוכן",
-    "shopping_cart": "עגלת קניות",
-    "shopping_cart_replacement_title": "החלף עגלת קניות",
-    "shopping_cart_replacement_message": "האם אתה רוצה להחליף את עגלת הקניות הנוכחית שלך בזו?",
-    "yes": "כן",
-    "no": "לא",
-    "no_results": "אין תוצאות",
-    "no_orders": "אין הזמנות",
-    "no_users": "אין משתמשים",
-    "no_artworks": "אין יצירות אמנות",
-    "no_reviews": "אין ביקורות",
-    "item_out_of_stock": "פריט אזל במלאי",
-    "shopping_list_empty": "רשימת הקניות ריקה",
-    "send": "שלח",
-    "next": "הבא",
-    "back": "חזור",
-    "sign_in": "התחבר",
-    "register": "הרשמה",
-    "checkout": "תשלום",
-    "user": "משתמש",
-    "order": "הזמנה",
-    "search": "חיפוש",
-    "title": "כותרת",
-    "artist": "אמן",
-    "price": "מחיר",
-    "quantity": "כמות",
-    "tags": "תגיות",
-    "categories": "קטגוריות",
-    "total_cost": "עלות כוללת",
-    "name": "שם",
-    "email": "אימייל",
+    "add_new_artwork": "הוסף יצירת אמנות חדשה",
+    "add_new_tag": "הוסף תגית חדשה",
     "address": "כתובת",
-    "phone_number": "מספר טלפון",
-    "description": "תיאור",
-    "thumbnail": "תמונה ממוזערת",
-    "images": "תמונות",
-    "category": "קטגוריה",
-    "choose": "בחר",
-    "by": "",
-    "reviews": "ביקורות",
+    "all": "הכל",
+    "aria_label_actions": "פעולות",
+    "aria_label_thumbnail": "תמונה ממוזערת",
+    "artist": "אמן",
     "available_quantity": "כמות זמינה",
-    "order_summary": "סיכום הזמנה",
-    "price_range": "טווח מחירים",
-    "minimum": "מינימום",
+    "back": "חזור",
+    "back_to_shop": "חזור לחנות",
+    "by": "",
+    "categories": "קטגוריות",
+    "category": "קטגוריה",
+    "change_password": "שנה סיסמה",
+    "checkout": "תשלום",
+    "choose": "בחר",
+    "data_saved_successfully": "נתונים נשמרו בהצלחה",
+    "description": "תיאור",
+    "email": "אימייל",
+    "email_address": "כתובת אימייל",
+    "enter_artist_name": "הכנס שם אמן",
+    "enter_description": "הכנס תיאור",
+    "enter_email": "הכנס אימייל",
+    "enter_first_name": "הכנס שם פרטי",
+    "enter_last_name": "הכנס שם משפחה",
+    "enter_message": "הכנס הודעה",
+    "enter_message_title": "הכנס כותרת הודעה",
+    "enter_password": "הכנס סיסמה",
+    "enter_price": "הכנס מחיר יצירת אמנות",
+    "enter_quantity": "הכנס כמות",
+    "enter_repeat_password": "הכנס חזרה על סיסמה",
+    "enter_title": "הכנס כותרת",
+    "first_name": "שם פרטי",
+    "images": "תמונות",
+    "item_added_to_cart": "פריט נוסף לעגלת הקניות",
+    "item_out_of_stock": "פריט אזל במלאי",
+    "last_name": "שם משפחה",
     "maximum": "מקסימום",
-    "number_of_artworks_shown": "מספר יצירות המוצגות",
-    "order_by": "סדר לפי",
+    "message": "הודעה",
+    "minimum": "מינימום",
+    "name": "שם",
     "newest_to_oldest": "מהחדש לישן",
+    "next": "הבא",
+    "no": "לא",
+    "no_artworks": "אין יצירות אמנות",
+    "no_orders": "--- אין הזמנות ---",
+    "no_results": "אין תוצאות",
+    "no_reviews": "--- אין ביקורות ---",
+    "no_users": "אין משתמשים",
+    "number_of_artworks_shown": "מספר יצירות המוצגות",
     "oldest_to_newest": "מהישן לחדש",
     "only_featured": "רק מומלצות",
+    "order": "הזמנה",
+    "order_by": "סדר לפי",
+    "order_summary": "סיכום הזמנה",
+    "password": "סיסמה",
+    "phone_number": "מספר טלפון",
     "place_of_thumbnail": "מקום התמונה הממוזערת",
-    "enter_email": "הכנס אימייל",
-    "all": "הכל",
-    "aria_label_thumbnail": "תמונה ממוזערת",
-    "aria_label_actions": "פעולות"
+    "price": "מחיר",
+    "price_range": "טווח מחירים",
+    "quantity": "כמות",
+    "register": "הרשמה",
+    "reply_sent_successfully": "תגובה נשלחה בהצלחה!",
+    "reviews": "ביקורות",
+    "save_data": "שמור נתונים",
+    "search": "חיפוש",
+    "search_results": "תוצאות חיפוש",
+    "send": "שלח",
+    "shopping_cart": "עגלת קניות",
+    "shopping_cart_replacement_message": "האם אתה רוצה להחליף את עגלת הקניות הנוכחית שלך בזו?",
+    "shopping_cart_replacement_title": "החלף עגלת קניות",
+    "shopping_list_empty": "רשימת הקניות ריקה",
+    "sign_in": "התחבר",
+    "skip_to_content": "דלג לתוכן",
+    "tags": "תגיות",
+    "thumbnail": "תמונה ממוזערת",
+    "title": "כותרת",
+    "total_cost": "עלות כוללת",
+    "upload_other_pictures": "העלה תמונות אחרות",
+    "upload_thumbnail": "העלה תמונה ממוזערת",
+    "user": "משתמש",
+    "yes": "כן"
   },
   "navigation": {
     "search": "חיפוש",
@@ -62,8 +89,7 @@
     "contact": "צור קשר",
     "log_in": "התחבר",
     "log_out": "התנתק",
-    "admin_page": "עמוד ניהול",
-    "toggle_menu": "החלף תפריט"
+    "admin_page": "עמוד ניהול"
   },
   "app": {
     "home": {
@@ -86,96 +112,31 @@
         "artworks": "יצירות אמנות",
         "users": "משתמשים",
         "orders": "הזמנות",
-        "reviews": "ביקורות",
         "messages": "הודעות"
       },
       "artworks": {
-        "title": "יצירות אמנות",
-        "add_new_artwork": "הוסף יצירת אמנות חדשה"
+        "title": "יצירות אמנות"
       },
       "add_new_artwork": {
-        "title": "הוסף יצירת אמנות חדשה",
-        "title_field": "כותרת",
-        "artist": "אמן",
-        "price": "מחיר",
-        "tags": "תגיות",
-        "quantity": "כמות",
-        "category": "קטגוריה",
-        "thumbnail": "תמונה ממוזערת",
-        "images": "תמונות",
-        "description": "תיאור",
-        "enter_title": "הכנס כותרת",
-        "enter_artist_name": "הכנס שם אמן",
-        "enter_price": "הכנס מחיר יצירה",
-        "add_new_tag": "הוסף תגית חדשה",
-        "enter_quantity": "הכנס כמות",
-        "choose": "בחר",
-        "upload_thumbnail": "העלה תמונה ממוזערת",
-        "upload_other_pictures": "העלה תמונות נוספות",
-        "uploaded_thumbnail": "תמונה ממוזערת הועלתה",
-        "uploaded_other_picture": "תמונה נוספת הועלתה",
-        "enter_description": "הכנס תיאור"
+        "title": "הוסף יצירת אמנות חדשה"
       },
       "edit_artwork": {
-        "title": "ערוך נתוני יצירת אמנות",
-        "current_thumbnail": "תמונה ממוזערת נוכחית",
-        "category_updated_successfully": "קטגוריה עודכנה בהצלחה",
-        "failed_to_update_category": "עדכון קטגוריה נכשל",
-        "thumbnail_uploaded_successfully": "תמונה ממוזערת הועלתה בהצלחה",
-        "failed_to_upload_thumbnail": "העלאת תמונה ממוזערת נכשלה",
-        "image_uploaded_successfully": "תמונה הועלתה בהצלחה",
-        "failed_to_upload_image": "העלאת תמונה נכשלה",
-        "failed_to_remove_image": "הסרת תמונה נכשלה"
+        "title": "ערוך נתוני יצירת אמנות"
       },
       "orders": {
-        "title": "הזמנות שהושלמו על ידי משתמשים",
-        "order": "הזמנה",
-        "no_orders": "--- אין הזמנות ---"
+        "title": "הזמנות שהושלמו על ידי משתמשים"
       },
       "reviews": {
-        "title": "ביקורות חדשות",
-        "no_reviews": "--- אין ביקורות ---"
+        "title": "ביקורות חדשות"
       },
       "messages": {
         "title": "הודעות ללא מענה",
         "no_messages": "--- אין הודעות ---"
       }
     },
-    "search": {
-      "title": "חיפוש",
-      "search_results": "תוצאות חיפוש"
-    },
     "login": {
       "title": "התחבר",
-      "email_address": "כתובת אימייל",
-      "password": "סיסמה",
-      "forgot_password": "שכחת סיסמה",
-      "enter_email": "הכנס אימייל",
-      "enter_password": "הכנס סיסמה"
-    },
-    "register": {
-      "title": "הרשמה",
-      "email_address": "כתובת אימייל",
-      "email_address_again": "כתובת אימייל שוב",
-      "password": "סיסמה",
-      "password_again": "סיסמה שוב",
-      "first_name": "שם פרטי",
-      "last_name": "שם משפחה",
-      "enter_email": "הכנס אימייל",
-      "enter_email_again": "הכנס אימייל שוב",
-      "enter_password": "הכנס סיסמה",
-      "enter_password_again": "הכנס סיסמה שוב",
-      "enter_first_name": "הכנס שם פרטי",
-      "enter_last_name": "הכנס שם משפחה",
-      "email_required": "אימייל נדרש",
-      "invalid_email": "אימייל לא תקין",
-      "repeat_email_required": "חזרה על אימייל נדרשת",
-      "must_match_email": "חייב להתאים לאימייל",
-      "password_required": "סיסמה נדרשת",
-      "repeat_password_required": "חזרה על סיסמה נדרשת",
-      "must_match_password": "חייב להתאים לסיסמה",
-      "first_name_required": "שם פרטי נדרש",
-      "last_name_required": "שם משפחה נדרש"
+      "forgot_password": "שכחת סיסמה"
     },
     "contact": {
       "title": "צור קשר",
@@ -183,13 +144,7 @@
       "company_name": "שם: שוק היצירות",
       "company_address": "כתובת: בודפשט, הונגריה",
       "company_phone": "טלפון: +36 xx xxx xxxx",
-      "message_administrator": "הודעה למנהל",
-      "email_address": "כתובת אימייל",
-      "title_field": "כותרת",
-      "message": "הודעה",
-      "enter_email": "הכנס אימייל",
-      "enter_message_title": "הכנס כותרת הודעה",
-      "enter_message": "הכנס הודעה"
+      "message_administrator": "הודעה למנהל"
     },
     "shopping_cart": {
       "title": "עגלת קניות"
@@ -199,52 +154,36 @@
         "user_data": "נתוני משתמש",
         "order_history": "היסטוריית הזמנות",
         "wishlist": "רשימת משאלות",
-        "reviews": "ביקורות",
         "shopping_cart": "עגלת קניות"
       },
-      "page_suffix": " - דף אישי",
       "data": {
-        "title": "נתוני משתמש",
-        "email_address": "כתובת אימייל",
-        "first_name": "שם פרטי",
-        "last_name": "שם משפחה",
-        "phone_number": "מספר טלפון"
+        "title": "נתוני משתמש"
       },
       "order_history": {
         "title": "היסטוריית הזמנות",
-        "order": "הזמנה",
-        "no_orders": "--- אין הזמנות ---"
+        "order": "הזמנה"
       },
       "wishlist": {
         "title": "ברשימת המשאלות",
         "no_wishlisted_items": "--- אין פריטים ברשימת המשאלות ---"
       },
       "reviews": {
-        "title": "ביקורות קודמות",
-        "no_reviews": "--- אין ביקורות ---"
+        "title": "ביקורות קודמות"
       }
     },
     "checkout": {
-      "invoice_data": "נתוני חשבונית",
-      "save_data": "שמור נתונים"
+      "invoice_data": "נתוני חשבונית"
     },
     "receipt": {
-      "title": "קבלה",
-      "back_to_shop": "חזור לחנות"
+      "title": "קבלה"
     },
     "forgot_password": {
       "title": "שלח אימייל לאיפוס סיסמה",
-      "email_address": "כתובת אימייל",
-      "enter_email": "הכנס אימייל",
       "recovery_message": "אם משתמש רשום עם האימייל הזה, קישור לשחזור סיסמה נשלח אליו",
       "send_link": "שלח קישור"
     },
     "reset_password": {
-      "title": "איפוס סיסמה",
-      "password": "סיסמה",
-      "enter_password": "הכנס סיסמה",
-      "enter_repeat_password": "הכנס סיסמה חוזרת",
-      "change_password": "שנה סיסמה"
+      "title": "איפוס סיסמה"
     }
   },
   "components": {
@@ -253,9 +192,6 @@
     },
     "shopping_cart": {
       "shopping_cart_empty": "עגלת הקניות ריקה",
-      "aria_label_decrease_quantity": "הקטן כמות",
-      "aria_label_increase_quantity": "הגדל כמות",
-      "aria_label_remove_item_from_cart": "הסר פריט מהעגלה",
       "aria_label_quantity_controls": "בקרות כמות"
     },
     "svg_components": {
@@ -278,70 +214,36 @@
       "user_label": "משתמש:",
       "approved": "אושר",
       "awaits_evaluation": "ממתין להערכה",
-      "item_label": "פריט:",
-      "by": ""
+      "item_label": "פריט:"
     },
     "unanswered_message": {
       "reply": "הגב",
-      "reply_sent_successfully": "תגובה נשלחה בהצלחה!",
-      "title_field": "כותרת",
-      "enter_title": "הכנס כותרת",
-      "message": "הודעה",
-      "enter_reply": "הכנס תגובה"
-    },
-    "artwork_details": {
-      "description": "תיאור",
-      "available_quantity": "כמות זמינה: ",
-      "price": "מחיר: €",
-      "reviews": "ביקורות"
+      "send_reply": "שלח תגובה"
     },
     "search_fields": {
-      "title": "כותרת",
-      "artist": "אמן",
-      "price_range": "טווח מחירים",
-      "minimum": "מינימום",
-      "maximum": "מקסימום",
-      "number_of_artworks_shown": "מספר יצירות המוצגות",
-      "order_by": "סדר לפי",
-      "newest_to_oldest": "מהחדש לישן",
-      "oldest_to_newest": "מהישן לחדש",
-      "only_featured": "רק מומלצות",
       "search": "חיפוש"
-    },
-    "tables": {
-      "title": "כותרת",
-      "artist": "אמן",
-      "price": "מחיר",
-      "quantity": "כמות",
-      "tags": "תגיות",
-      "categories": "קטגוריות",
-      "total_cost": "עלות כוללת",
-      "name": "שם",
-      "email": "אימייל",
-      "address": "כתובת",
-      "phone_number": "מספר טלפון",
-      "no_users": "--- אין משתמשים ---"
     },
     "leave_review": {
       "add_review": "הוסף ביקורת",
-      "title": "כותרת",
-      "message": "הודעה",
-      "enter_review_title": "הכנס כותרת ביקורת",
-      "enter_review_text": "הכנס טקסט ביקורת",
-      "submit": "שלח",
-      "login_required": "עליך להיות מחובר כדי להשאיר ביקורת!"
-    },
-    "reviews": {
-      "no_reviews": "אין ביקורות עדיין"
+      "submit": "שלח"
     },
     "buttons": {
-      "item_added_to_cart": "פריט נוסף לעגלת הקניות",
-      "item_out_of_stock": "פריט אזל במלאי",
       "sign_in_to_add_wishlist": "התחבר או הרשם כדי להוסיף לרשימת המשאלות! "
     },
-    "recommendation_card": {
-      "by": "",
-      "place_of_thumbnail": "מקום התמונה הממוזערת"
+    "forms": {
+      "registration": {
+        "email_address_again": "כתובת אימייל שוב",
+        "password_again": "סיסמה שוב",
+        "enter_email_again": "הכנס אימייל שוב"
+      },
+      "artwork": {
+        "category_updated_successfully": "קטגוריה עודכנה בהצלחה",
+        "failed_to_update_category": "נכשל בעדכון קטגוריה",
+        "thumbnail_uploaded_successfully": "תמונה ממוזערת הועלתה בהצלחה",
+        "image_uploaded_successfully": "תמונה הועלתה בהצלחה",
+        "failed_to_upload_image": "נכשל בהעלאת תמונה",
+        "failed_to_remove_image": "נכשל בהסרת תמונה"
+      }
     }
   },
   "validation": {
@@ -370,34 +272,5 @@
     "email_match": "חייב להתאים לאימייל",
     "repeat_password_required": "חזרה על סיסמה נדרשת",
     "password_match": "חייב להתאים לסיסמה"
-  },
-  "toast": {
-    "artwork_added_successfully": "יצירת אמנות נוספה בהצלחה למאגר הנתונים",
-    "error_add_artwork": "שגיאה: לא ניתן להוסיף יצירת אמנות",
-    "registration_successful": "הרשמה הושלמה בהצלחה",
-    "registration_failed": "ההרשמה נכשלה",
-    "user_already_registered": "משתמש כבר רשום עם כתובת האימייל הזו",
-    "item_added_to_cart": "פריט נוסף לעגלת הקניות",
-    "item_out_of_stock": "פריט אזל במלאי",
-    "data_saved_successfully": "נתונים נשמרו בהצלחה",
-    "changes_saved": "שינויים נשמרו",
-    "save_error": "שגיאה: לא ניתן לשמור",
-    "incorrect_data": "נתונים שגויים",
-    "only_effects_invoice": "זה משפיע רק על החשבונית!",
-    "login_success": "מחובר",
-    "logout_success": "מנותק",
-    "password_reset_success": "סיסמה שונתה בהצלחה",
-    "message_sent": "הודעה נשלחה",
-    "review_saved": "ביקורת נשמרה",
-    "email_submitted": "אימייל נשלח",
-    "data_saved": "נתונים נשמרו בהצלחה",
-    "incorrect_credentials": "אימייל או סיסמה שגויים",
-    "submission_error": "שגיאה: לא ניתן לשלוח",
-    "password_change_error": "שגיאה: לא ניתן לשנות סיסמה",
-    "message_error": "שגיאה: לא ניתן לשלוח הודעה",
-    "review_error": "שגיאה: לא ניתן לשמור ביקורת",
-    "review_approval_notice": "הביקורת צריכה לקבל אישור מהמנהל",
-    "reply_success": "תגובה נשלחה בהצלחה!",
-    "reply_error": "שגיאה: לא ניתן לשלוח תגובה"
   }
 }

@@ -34,11 +34,11 @@ function OrderByDropdown({
         </Dropdown.Toggle>
         <Dropdown.Menu>
           <Dropdown.Item eventKey="desc" href="">
-            {t("components.search_fields.newest_to_oldest")}
+            {t("common.newest_to_oldest")}
           </Dropdown.Item>
 
           <Dropdown.Item eventKey="asc" href="">
-            {t("components.search_fields.oldest_to_newest")}
+            {t("common.oldest_to_newest")}
           </Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>

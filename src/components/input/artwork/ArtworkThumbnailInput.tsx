@@ -58,7 +58,7 @@ function ArtworkThumbnailInput<T extends Record<string, unknown>>({
           // TypeScript assertion: artworkId is guaranteed to be defined when isEdit is true
           await replaceThumbnail(artworkId as number, file);
           showSuccessToast(
-            t("app.admin.edit_artwork.thumbnail_uploaded_successfully")
+            t("components.forms.artwork.thumbnail_uploaded_successfully")
           );
           // We create an object URL in both modes
           formik.setFieldValue("thumbnail", URL.createObjectURL(file));
@@ -89,7 +89,7 @@ function ArtworkThumbnailInput<T extends Record<string, unknown>>({
 
         <Form.Control
           onChange={handleFileChange}
-          placeholder={t("app.admin.add_new_artwork.upload_thumbnail")}
+          placeholder={t("common.upload_thumbnail")}
           type="file"
         />
       </InputGroup>

@@ -33,9 +33,7 @@ function Reviews() {
           </>
         ) : (
           <Row className="px-3 mx-auto floating-element mb-5">
-            <Col className="text-center">
-              {t("app.user.reviews.no_reviews")}
-            </Col>
+            <Col className="text-center">{t("common.no_reviews")}</Col>
           </Row>
         )}
       </>

@@ -76,7 +76,7 @@ function UnansweredMessage({ message }: UnansweredMessageProps) {
     <Row className="mx-auto mb-5 floating-element p-3">
       {replied ? (
         <Col>
-          <h4>{t("components.unanswered_message.reply_sent_successfully")}</h4>
+          <h4>{t("common.reply_sent_successfully")}</h4>
         </Col>
       ) : (
         <Col>
@@ -122,9 +122,7 @@ function UnansweredMessage({ message }: UnansweredMessageProps) {
                       />
 
                       <RBForm.Group className="mb-3">
-                        <RBForm.Label>
-                          {t("components.unanswered_message.message")}
-                        </RBForm.Label>
+                        <RBForm.Label>{t("common.message")}</RBForm.Label>
                         <ErrorAsterisk
                           show={!!(errors.reply_text && touched.reply_text)}
                         />

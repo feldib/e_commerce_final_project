@@ -63,18 +63,18 @@ function SignInPageInner() {
                   <InputComponent
                     hasError={!!errors.email && !!touched.email}
                     icon={faUser}
-                    label={t("app.login.email_address")}
+                    label={t("common.email_address")}
                     name="email"
-                    placeholder={t("app.login.enter_email")}
+                    placeholder={t("common.enter_email")}
                     type="email"
                   />
 
                   <InputComponent
                     hasError={!!errors.password && !!touched.password}
                     icon={faKey}
-                    label={t("app.login.password")}
+                    label={t("common.password")}
                     name="password"
-                    placeholder={t("app.login.enter_password")}
+                    placeholder={t("common.enter_password")}
                     type="password"
                   />
 

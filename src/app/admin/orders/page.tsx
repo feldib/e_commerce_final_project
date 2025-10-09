@@ -24,7 +24,7 @@ function Orders() {
           items={orderData.items}
           key={index}
           orderUser={orderData.user}
-          title={`${t("app.admin.orders.order")} ${len - index}`}
+          title={`${t("common.order")} ${len - index}`}
           totalCost={orderData.totalCost}
         />
       );
@@ -37,7 +37,7 @@ function Orders() {
     if (orders.length === 0) {
       return (
         <Row className="mb-3 floating-element">
-          <Col className="text-center">{t("app.admin.orders.no_orders")}</Col>
+          <Col className="text-center">{t("common.no_orders")}</Col>
         </Row>
       );
     }

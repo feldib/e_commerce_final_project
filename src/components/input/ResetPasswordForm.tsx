@@ -65,18 +65,20 @@ function ResetPasswordFormInner() {
             <InputComponent
               hasError={!!errors.password && !!touched.password}
               icon={faKey}
-              label={t("app.reset_password.password")}
+              label={t("common.password")}
               name="password"
-              placeholder={t("app.reset_password.enter_password")}
+              placeholder={t("common.enter_password")}
               type="password"
             />
 
             <InputComponent
               hasError={!!errors.repeatPassword && !!touched.repeatPassword}
               icon={faKey}
-              label={t("app.reset_password.password")}
+              label={t("common.password")}
               name="repeatPassword"
-              placeholder={t("app.reset_password.enter_repeat_password")}
+              placeholder={t(
+                "components.forms.reset_password.enter_repeat_password"
+              )}
               type="password"
             />
 
@@ -85,7 +87,7 @@ function ResetPasswordFormInner() {
               type="submit"
               variant="primary"
             >
-              {t("app.reset_password.change_password")}
+              {t("common.change_password")}
             </Button>
             <ToastContainer position="bottom-right" />
           </Form>

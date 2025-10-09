@@ -112,7 +112,7 @@ function RegistrationFormInner() {
             <InputComponent
               hasError={!!errors.email && !!touched.email}
               icon={faUser}
-              label={t("app.register.email_address")}
+              label={t("common.email_address")}
               name="email"
               placeholder={t("common.enter_email")}
               type="email"
@@ -121,45 +121,47 @@ function RegistrationFormInner() {
             <InputComponent
               hasError={!!errors.repeatEmail && !!touched.repeatEmail}
               icon={faUser}
-              label={t("app.register.email_address_again")}
+              label={t("components.forms.registration.email_address_again")}
               name="repeatEmail"
-              placeholder={t("app.register.enter_email_again")}
+              placeholder={t("components.forms.registration.enter_email_again")}
               type="email"
             />
 
             <InputComponent
               hasError={!!errors.password && !!touched.password}
               icon={faKey}
-              label={t("app.register.password")}
+              label={t("common.password")}
               name="password"
-              placeholder={t("app.register.enter_password")}
+              placeholder={t("common.enter_password")}
               type="password"
             />
 
             <InputComponent
               hasError={!!errors.repeatPassword && !!touched.repeatPassword}
               icon={faKey}
-              label={t("app.register.password_again")}
+              label={t("components.forms.registration.password_again")}
               name="repeatPassword"
-              placeholder={t("app.register.enter_password_again")}
+              placeholder={t(
+                "components.forms.registration.enter_password_again"
+              )}
               type="password"
             />
 
             <InputComponent
               hasError={!!errors.firstName && !!touched.firstName}
               icon={faQuestion}
-              label={t("app.register.first_name")}
+              label={t("common.first_name")}
               name="firstName"
-              placeholder={t("app.register.enter_first_name")}
+              placeholder={t("common.enter_first_name")}
               type="text"
             />
 
             <InputComponent
               hasError={!!errors.lastName && !!touched.lastName}
               icon={faQuestion}
-              label={t("app.register.last_name")}
+              label={t("common.last_name")}
               name="lastName"
-              placeholder={t("app.register.enter_last_name")}
+              placeholder={t("common.enter_last_name")}
               type="text"
             />
 

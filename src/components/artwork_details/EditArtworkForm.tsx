@@ -36,10 +36,10 @@ function EditArtworkForm() {
     try {
       await updateArtworkData(artworkId, "category_id", category.id);
       showSuccessToast(
-        t("app.admin.edit_artwork.category_updated_successfully")
+        t("components.forms.artwork.category_updated_successfully")
       );
     } catch {
-      showErrorToast(t("app.admin.edit_artwork.failed_to_update_category"));
+      showErrorToast(t("components.forms.artwork.failed_to_update_category"));
     }
   };
 
@@ -53,7 +53,7 @@ function EditArtworkForm() {
             icon={faQuestion}
             label={t("common.title")}
             name="title"
-            placeholder={t("app.admin.add_new_artwork.enter_title")}
+            placeholder={t("common.enter_title")}
             type="text"
           />
 
@@ -63,7 +63,7 @@ function EditArtworkForm() {
             icon={faQuestion}
             label={t("common.artist")}
             name="artist_name"
-            placeholder={t("app.admin.add_new_artwork.enter_artist_name")}
+            placeholder={t("common.enter_artist_name")}
             type="text"
           />
 
@@ -73,7 +73,7 @@ function EditArtworkForm() {
             icon={faDollarSign}
             label={t("common.price")}
             name="price"
-            placeholder={t("app.admin.add_new_artwork.enter_price")}
+            placeholder={t("common.enter_price")}
             type="number"
           />
 
@@ -83,7 +83,7 @@ function EditArtworkForm() {
               handleAddition={createHandleAddition(tags, setTags)}
               handleDelete={createHandleDelete(tags, setTags)}
               inputFieldPosition="bottom"
-              placeholder={t("app.admin.add_new_artwork.add_new_tag")}
+              placeholder={t("common.add_new_tag")}
               // suggestions={suggestions}
               separators={[...TAG_SEPARATORS]}
               tags={formik.values.tags}
@@ -102,7 +102,7 @@ function EditArtworkForm() {
             icon={faQuestion}
             label={t("common.quantity")}
             name="quantity"
-            placeholder={t("app.admin.add_new_artwork.enter_quantity")}
+            placeholder={t("common.enter_quantity")}
             type="number"
           />
 
@@ -134,7 +134,7 @@ function EditArtworkForm() {
             icon={faQuestion}
             label={t("common.description")}
             name="description"
-            placeholder={t("app.admin.add_new_artwork.enter_description")}
+            placeholder={t("common.enter_description")}
             type="textarea"
           />
           <ToastContainer position="bottom-right" />

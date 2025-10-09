@@ -49,7 +49,7 @@ function UserDataChangingComponent({
               changeUserData={changeUserData}
               error={formik.errors.email}
               icon={faUser}
-              label={t("app.user.data.email_address")}
+              label={t("common.email_address")}
               name="email"
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
@@ -63,11 +63,11 @@ function UserDataChangingComponent({
               changeUserData={changeUserData}
               error={formik.errors.first_name}
               icon={faQuestion}
-              label={t("app.user.data.first_name")}
+              label={t("common.first_name")}
               name="first_name"
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
-              placeholder={t("app.register.enter_first_name")}
+              placeholder={t("common.enter_first_name")}
               touched={!!formik.touched.first_name}
               type="text"
               value={formik.values.first_name}
@@ -77,11 +77,11 @@ function UserDataChangingComponent({
               changeUserData={changeUserData}
               error={formik.errors.last_name}
               icon={faQuestion}
-              label={t("app.user.data.last_name")}
+              label={t("common.last_name")}
               name="last_name"
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
-              placeholder={t("app.register.enter_last_name")}
+              placeholder={t("common.enter_last_name")}
               touched={!!formik.touched.last_name}
               type="text"
               value={formik.values.last_name}
@@ -105,7 +105,7 @@ function UserDataChangingComponent({
               changeUserData={changeUserData}
               error={formik.errors.phone_number}
               icon={faPhone}
-              label={t("app.user.data.phone_number")}
+              label={t("common.phone_number")}
               name="phone_number"
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
@@ -117,7 +117,7 @@ function UserDataChangingComponent({
 
             {checkout && (
               <Form.Check
-                label={t("app.checkout.save_data")}
+                label={t("common.save_data")}
                 onChange={handleSaveDataChange}
               />
             )}

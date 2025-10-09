@@ -12,7 +12,7 @@ function Search() {
 
   return (
     <Container className="pb-5 mb-5">
-      <PageTitle title={t("app.search.title")} />
+      <PageTitle title={t("common.search")} />
 
       <ArtworkSearchComponent admin={false} />
     </Container>

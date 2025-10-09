@@ -12,7 +12,7 @@ function RegistrationPage() {
 
   return (
     <Container className="pb-5 px-3">
-      <PageTitle title={t("app.register.title")} />
+      <PageTitle title={t("common.register")} />
       <Row className="mx-auto mb-5 pb-5 floating-element">
         <RegistrationForm />
       </Row>

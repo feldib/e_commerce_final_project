@@ -28,8 +28,8 @@ function ShoppingCartButton({ artwork_id, quantity }: ShoppingCartButtonProps) {
       actionOnNotLoggedIn={handleNotLoggedInAction}
       artwork_id={artwork_id}
       icon={faBasketShopping}
-      toastErrorMessage={t("components.buttons.out_of_stock")}
-      toastSuccessMessage={t("components.buttons.item_added_to_cart")}
+      toastErrorMessage={t("common.item_out_of_stock")}
+      toastSuccessMessage={t("common.item_added_to_cart")}
     />
   );
 }

@@ -41,7 +41,7 @@ function AddArtworkForm() {
             icon={faQuestion}
             label={t("common.title")}
             name="title"
-            placeholder={t("app.admin.add_new_artwork.enter_title")}
+            placeholder={t("common.enter_title")}
             type="text"
           />
 
@@ -50,7 +50,7 @@ function AddArtworkForm() {
             icon={faQuestion}
             label={t("common.artist")}
             name="artist_name"
-            placeholder={t("app.admin.add_new_artwork.enter_artist_name")}
+            placeholder={t("common.enter_artist_name")}
             type="text"
           />
 
@@ -59,7 +59,7 @@ function AddArtworkForm() {
             icon={faDollarSign}
             label={t("common.price")}
             name="price"
-            placeholder={t("app.admin.add_new_artwork.enter_price")}
+            placeholder={t("common.enter_price")}
             type="number"
           />
 
@@ -69,7 +69,7 @@ function AddArtworkForm() {
               handleAddition={createHandleAddition(tags, setTags)}
               handleDelete={createHandleDelete(tags, setTags)}
               inputFieldPosition="bottom"
-              placeholder={t("app.admin.add_new_artwork.add_new_tag")}
+              placeholder={t("common.add_new_tag")}
               // suggestions={suggestions}
               separators={[...TAG_SEPARATORS]}
               tags={formik.values.tags}
@@ -87,7 +87,7 @@ function AddArtworkForm() {
             icon={faQuestion}
             label={t("common.quantity")}
             name="quantity"
-            placeholder={t("app.admin.add_new_artwork.enter_quantity")}
+            placeholder={t("common.enter_quantity")}
             type="number"
           />
 
@@ -115,7 +115,7 @@ function AddArtworkForm() {
             icon={faQuestion}
             label={t("common.description")}
             name="description"
-            placeholder={t("app.admin.add_new_artwork.enter_description")}
+            placeholder={t("common.enter_description")}
             type="textarea"
           />
 
@@ -124,7 +124,7 @@ function AddArtworkForm() {
             type="submit"
             variant="primary"
           >
-            {t("app.admin.artworks.add_new_artwork")}
+            {t("common.add_new_artwork")}
           </Button>
           <ToastContainer position="bottom-right" />
         </Form>

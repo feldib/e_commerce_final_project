@@ -112,7 +112,7 @@ function ArtworkSearchComponent({ admin }: ArtworkSearchComponentProps) {
             className="mb-3 mt-2"
             ref={results as React.RefObject<HTMLDivElement>}
           >
-            <h3 className="text-center">{t("app.search.search_results")}</h3>
+            <h3 className="text-center">{t("common.search_results")}</h3>
           </Row>
           {admin ? (
             <AdminArtworkTable dataLines={searchResults} />

@@ -63,10 +63,10 @@ function ArtworkImagesInput<T extends Record<string, unknown>>({
           ]);
           e.target.value = ""; // Reset the input for next upload
           showSuccessToast(
-            t("app.admin.edit_artwork.image_uploaded_successfully")
+            t("components.forms.artwork.image_uploaded_successfully")
           );
         } catch {
-          showErrorToast(t("app.admin.edit_artwork.failed_to_upload_image"));
+          showErrorToast(t("components.forms.artwork.failed_to_upload_image"));
           e.target.value = ""; // Reset the input
         }
       } else {
@@ -99,7 +99,7 @@ function ArtworkImagesInput<T extends Record<string, unknown>>({
         ).filter((_, picIndex) => picIndex !== index);
         formik.setFieldValue("other_pictures", newArray);
       } catch {
-        showErrorToast(t("app.admin.edit_artwork.failed_to_remove_image"));
+        showErrorToast(t("components.forms.artwork.failed_to_remove_image"));
       }
     } else {
       // In add mode, we just remove the file from the array
@@ -120,7 +120,7 @@ function ArtworkImagesInput<T extends Record<string, unknown>>({
 
         <Form.Control
           onChange={handleFileChange}
-          placeholder={t("app.admin.add_new_artwork.upload_other_pictures")}
+          placeholder={t("common.upload_other_pictures")}
           type="file"
         />
       </InputGroup>

@@ -12,7 +12,7 @@ function ShoppingCartPage() {
 
   return (
     <Container className="pb-5 mb-5">
-      <PageTitle title={t("app.shopping_cart.title")} />
+      <PageTitle title={t("common.shopping_cart")} />
       <ShoppingCartComponent />
     </Container>
   );
