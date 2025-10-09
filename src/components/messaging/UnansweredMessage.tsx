@@ -1,8 +1,7 @@
 "use client";
 import React from "react";
 
-import { faAsterisk, faKeyboard } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faKeyboard } from "@fortawesome/free-solid-svg-icons";
 import {
   Button,
   Col,
@@ -18,6 +17,7 @@ import {
   showReplySentSuccessToast,
 } from "@/utils/toastUtils";
 
+import ErrorAsterisk from "@/components/input/ErrorAsterisk";
 import InputComponent from "@/components/input/InputComponent";
 import { useI18n } from "@/components/providers/I18nProvider";
 
@@ -125,13 +125,9 @@ function UnansweredMessage({ message }: UnansweredMessageProps) {
                         <RBForm.Label>
                           {t("components.unanswered_message.message")}
                         </RBForm.Label>
-                        {errors.reply_text && touched.reply_text && (
-                          <FontAwesomeIcon
-                            className="mx-3"
-                            icon={faAsterisk}
-                            style={{ color: "red" }}
-                          />
-                        )}
+                        <ErrorAsterisk
+                          show={!!(errors.reply_text && touched.reply_text)}
+                        />
                         <FloatingLabel label="">
                           <Field
                             as="textarea"

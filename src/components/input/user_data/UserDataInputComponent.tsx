@@ -2,7 +2,6 @@
 import React from "react";
 
 import {
-  faAsterisk,
   faCheck,
   faGear,
   IconDefinition,
@@ -16,6 +15,7 @@ import {
   showInvoiceNoticeToast,
 } from "@/utils/toastUtils";
 
+import ErrorAsterisk from "@/components/input/ErrorAsterisk";
 import { useI18n } from "@/components/providers/I18nProvider";
 
 import { updateUserData } from "@/fetching/fetching";
@@ -73,13 +73,7 @@ function UserDataInputComponent({
   return (
     <Form.Group className="pb-3">
       <Form.Label>{label}</Form.Label>
-      {error && touched && (
-        <FontAwesomeIcon
-          className="mx-3"
-          icon={faAsterisk}
-          style={{ color: "red" }}
-        />
-      )}
+      <ErrorAsterisk show={!!(error && touched)} />
       <InputGroup>
         <InputGroup.Text>
           <FontAwesomeIcon className="mx-3" icon={icon} />

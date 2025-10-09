@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 
-import { faAsterisk, faImages, faX } from "@fortawesome/free-solid-svg-icons";
+import { faImages, faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Col, Form, InputGroup, Row } from "react-bootstrap";
 import { FormikProps } from "formik";
@@ -9,6 +9,7 @@ import { FormikProps } from "formik";
 import { SERVER_URL } from "@/utils/constants";
 import { showErrorToast, showSuccessToast } from "@/utils/toastUtils";
 
+import ErrorAsterisk from "@/components/input/ErrorAsterisk";
 import { useI18n } from "@/components/providers/I18nProvider";
 
 import { addNewOtherPicture, removePicture } from "@/fetching/fetching";
@@ -106,13 +107,7 @@ function ArtworkImagesInput<T extends Record<string, unknown>>({
   return (
     <Form.Group className="pb-3">
       <Form.Label>{label}</Form.Label>
-      {formik.errors.other_pictures && (
-        <FontAwesomeIcon
-          className="mx-3"
-          icon={faAsterisk}
-          style={{ color: "red" }}
-        />
-      )}
+      <ErrorAsterisk show={!!formik.errors.other_pictures} />
       <InputGroup>
         <InputGroup.Text>
           <FontAwesomeIcon className="mx-3" icon={faImages} />

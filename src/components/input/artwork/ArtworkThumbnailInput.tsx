@@ -1,12 +1,14 @@
 "use client";
 import React from "react";
 
-import { faAsterisk, faImages, faX } from "@fortawesome/free-solid-svg-icons";
+import { faImages, faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Col, Form, InputGroup } from "react-bootstrap";
 import { FormikProps } from "formik";
 
 import { showSuccessToast } from "@/utils/toastUtils";
+
+import ErrorAsterisk from "@/components/input/ErrorAsterisk";
 
 import { replaceThumbnail } from "@/fetching/fetching";
 
@@ -71,13 +73,9 @@ function ArtworkThumbnailInput<T extends Record<string, unknown>>({
   return (
     <Form.Group className="pb-3">
       <Form.Label>{label}</Form.Label>
-      {formik.errors.thumbnail && formik.touched.thumbnail && (
-        <FontAwesomeIcon
-          className="mx-3"
-          icon={faAsterisk}
-          style={{ color: "red" }}
-        />
-      )}
+      <ErrorAsterisk
+        show={!!(formik.errors.thumbnail && formik.touched.thumbnail)}
+      />
       <InputGroup>
         <InputGroup.Text>
           <FontAwesomeIcon className="mx-3" icon={faImages} />

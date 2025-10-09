@@ -1,8 +1,7 @@
 "use client";
 import React from "react";
 
-import { faAsterisk, faKeyboard } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faKeyboard } from "@fortawesome/free-solid-svg-icons";
 import {
   Button,
   Col,
@@ -17,6 +16,7 @@ import {
   showReviewSaveErrorToast,
 } from "@/utils/toastUtils";
 
+import ErrorAsterisk from "@/components/input/ErrorAsterisk";
 import InputComponent from "@/components/input/InputComponent";
 import { useI18n } from "@/components/providers/I18nProvider";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
@@ -91,13 +91,9 @@ function LeaveReview({ artwork_id }: LeaveReviewProps) {
                       <RBForm.Label>
                         {t("components.leave_review.message")}
                       </RBForm.Label>
-                      {errors.review_text && touched.review_text && (
-                        <FontAwesomeIcon
-                          className="mx-3"
-                          icon={faAsterisk}
-                          style={{ color: "red" }}
-                        />
-                      )}
+                      <ErrorAsterisk
+                        show={!!(errors.review_text && touched.review_text)}
+                      />
                       <FloatingLabel label="">
                         <Field
                           as="textarea"

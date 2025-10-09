@@ -1,9 +1,11 @@
 import React from "react";
 
-import { faAsterisk, IconDefinition } from "@fortawesome/free-solid-svg-icons";
+import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Form, InputGroup } from "react-bootstrap";
 import { FormikProps } from "formik";
+
+import ErrorAsterisk from "@/components/input/ErrorAsterisk";
 
 import { preventNonNumericInput } from "@/helpers/inputHelpers";
 
@@ -39,13 +41,7 @@ function NewArtworkInputComponent<
   return (
     <Form.Group className="pb-3">
       <Form.Label>{label}</Form.Label>
-      {showAsterisk && (
-        <FontAwesomeIcon
-          className="mx-3"
-          icon={faAsterisk}
-          style={{ color: "red" }}
-        />
-      )}
+      <ErrorAsterisk show={!!showAsterisk} />
       <InputGroup>
         {type !== "textarea" && (
           <InputGroup.Text>

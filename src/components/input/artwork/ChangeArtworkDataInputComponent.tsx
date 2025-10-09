@@ -2,7 +2,6 @@
 import React from "react";
 
 import {
-  faAsterisk,
   faCheck,
   faGear,
   IconDefinition,
@@ -17,6 +16,7 @@ import {
   showIncorrectDataToast,
 } from "@/utils/toastUtils";
 
+import ErrorAsterisk from "@/components/input/ErrorAsterisk";
 import { useI18n } from "@/components/providers/I18nProvider";
 
 import { updateArtworkData } from "@/fetching/fetching";
@@ -87,13 +87,7 @@ function ChangeArtworkDataInputComponent<
   return (
     <Form.Group className="pb-3">
       <Form.Label>{label}</Form.Label>
-      {showAsterisk && (
-        <FontAwesomeIcon
-          className="mx-3"
-          icon={faAsterisk}
-          style={{ color: "red" }}
-        />
-      )}
+      <ErrorAsterisk show={!!showAsterisk} />
       <InputGroup>
         {type !== "textarea" && (
           <InputGroup.Text>

@@ -1,12 +1,7 @@
 "use client";
 import React from "react";
 
-import {
-  faAsterisk,
-  faKeyboard,
-  faUser,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faKeyboard, faUser } from "@fortawesome/free-solid-svg-icons";
 import {
   Button,
   Col,
@@ -23,6 +18,7 @@ import {
   showMessageSentSuccessToast,
 } from "@/utils/toastUtils";
 
+import ErrorAsterisk from "@/components/input/ErrorAsterisk";
 import InputComponent from "@/components/input/InputComponent";
 import PageTitle from "@/components/layout/PageTitle";
 import { useI18n } from "@/components/providers/I18nProvider";
@@ -115,13 +111,9 @@ function ContactUs() {
 
                   <RBForm.Group className="mb-3">
                     <RBForm.Label>{t("app.contact.message")}</RBForm.Label>
-                    {errors.message && touched.message && (
-                      <FontAwesomeIcon
-                        className="mx-3"
-                        icon={faAsterisk}
-                        style={{ color: "red" }}
-                      />
-                    )}
+                    <ErrorAsterisk
+                      show={!!(errors.message && touched.message)}
+                    />
                     <FloatingLabel label="">
                       <Field
                         as="textarea"
