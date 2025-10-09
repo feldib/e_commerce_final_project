@@ -156,8 +156,9 @@ html,
 #header-mobile-shopping-cart {
   font-family: "Rubik";
 
-  background-color: var(--nav-color);
-  color: var(--warm);
+  /* Fixed colors for header/footer - don't change with admin theme */
+  background-color: #0c090d;
+  color: #e1944e;
 }
 
 thead {
@@ -169,6 +170,9 @@ thead {
 #footer > div > div > div > a,
 .share-icon {
   font-size: 1rem;
+  /* Fixed colors for footer - don't change with admin theme */
+  background-color: #0c090d;
+  color: #e1944e;
 }
 
 .dropdown-menu {
