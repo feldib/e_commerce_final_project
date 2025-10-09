@@ -77,13 +77,13 @@ function LeaveReview({ artwork_id }: LeaveReviewProps) {
                     </RBForm.Label>
 
                     <InputComponent
+                      hasError={!!errors.title && !!touched.title}
                       icon={faKeyboard}
                       label="Title"
                       name="title"
                       placeholder={t(
                         "components.leave_review.enter_review_title"
                       )}
-                      hasError={!!errors.title && !!touched.title}
                       type="text"
                     />
 

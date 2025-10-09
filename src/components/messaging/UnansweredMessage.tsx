@@ -111,13 +111,13 @@ function UnansweredMessage({ message }: UnansweredMessageProps) {
                   {({ errors, touched }) => (
                     <Form>
                       <InputComponent
+                        hasError={!!errors.reply_title && !!touched.reply_title}
                         icon={faKeyboard}
                         label="Title"
                         name="reply_title"
                         placeholder={t(
                           "components.unanswered_message.enter_title"
                         )}
-                        hasError={!!errors.reply_title && !!touched.reply_title}
                         type="textarea"
                       />
 
