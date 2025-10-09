@@ -11,7 +11,7 @@ type InputComponentProps = {
   type: string;
   placeholder: string;
   icon: IconDefinition;
-  showAsterisk?: boolean;
+  hasError: boolean;
 };
 
 function InputComponent({
@@ -20,12 +20,12 @@ function InputComponent({
   type,
   placeholder,
   icon,
-  showAsterisk = false,
+  hasError,
 }: InputComponentProps) {
   return (
     <Form.Group className="pb-3">
       <Form.Label>{label}</Form.Label>
-      {showAsterisk && (
+      {hasError && (
         <FontAwesomeIcon
           className="mx-3"
           icon={faAsterisk}

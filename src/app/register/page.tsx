@@ -110,58 +110,56 @@ function RegistrationPageInner({
             {({ errors, touched }) => (
               <Form>
                 <InputComponent
+                  hasError={!!errors.email && !!touched.email}
                   icon={faUser}
                   label={t("app.register.email_address")}
                   name="email"
                   placeholder={t("common.enter_email")}
-                  showAsterisk={!!errors.email && !!touched.email}
                   type="email"
                 />
 
                 <InputComponent
+                  hasError={!!errors.repeatEmail && !!touched.repeatEmail}
                   icon={faUser}
                   label={t("app.register.email_address_again")}
                   name="repeatEmail"
                   placeholder={t("app.register.enter_email_again")}
-                  showAsterisk={!!errors.repeatEmail && !!touched.repeatEmail}
                   type="email"
                 />
 
                 <InputComponent
+                  hasError={!!errors.password && !!touched.password}
                   icon={faKey}
                   label={t("app.register.password")}
                   name="password"
                   placeholder={t("app.register.enter_password")}
-                  showAsterisk={!!errors.password && !!touched.password}
                   type="password"
                 />
 
                 <InputComponent
+                  hasError={!!errors.repeatPassword && !!touched.repeatPassword}
                   icon={faKey}
                   label={t("app.register.password_again")}
                   name="repeatPassword"
                   placeholder={t("app.register.enter_password_again")}
-                  showAsterisk={
-                    !!errors.repeatPassword && !!touched.repeatPassword
-                  }
                   type="password"
                 />
 
                 <InputComponent
+                  hasError={!!errors.firstName && !!touched.firstName}
                   icon={faQuestion}
                   label={t("app.register.first_name")}
                   name="firstName"
                   placeholder={t("app.register.enter_first_name")}
-                  showAsterisk={!!errors.firstName && !!touched.firstName}
                   type="text"
                 />
 
                 <InputComponent
+                  hasError={!!errors.lastName && !!touched.lastName}
                   icon={faQuestion}
                   label={t("app.register.last_name")}
                   name="lastName"
                   placeholder={t("app.register.enter_last_name")}
-                  showAsterisk={!!errors.lastName && !!touched.lastName}
                   type="text"
                 />
 

@@ -56,11 +56,11 @@ function ForgotPassword() {
             <Col className="mx-5 pb-5">
               <Form>
                 <InputComponent
+                  hasError={!!errors.email && !!touched.email}
                   icon={faUser}
                   label={t("app.forgot_password.email_address")}
                   name="email"
                   placeholder={t("app.forgot_password.enter_email")}
-                  showAsterisk={!!errors.email && !!touched.email}
                   type="email"
                 />
                 {displayMessage && (

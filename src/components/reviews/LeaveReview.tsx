@@ -83,7 +83,7 @@ function LeaveReview({ artwork_id }: LeaveReviewProps) {
                       placeholder={t(
                         "components.leave_review.enter_review_title"
                       )}
-                      showAsterisk={!!errors.title && !!touched.title}
+                      hasError={!!errors.title && !!touched.title}
                       type="text"
                     />
 

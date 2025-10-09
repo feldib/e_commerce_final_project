@@ -61,20 +61,20 @@ function SignInPageInner() {
               <Col className="mx-3 pb-5">
                 <Form>
                   <InputComponent
+                    hasError={!!errors.email && !!touched.email}
                     icon={faUser}
                     label={t("app.login.email_address")}
                     name="email"
                     placeholder={t("app.login.enter_email")}
-                    showAsterisk={!!errors.email && !!touched.email}
                     type="email"
                   />
 
                   <InputComponent
+                    hasError={!!errors.password && !!touched.password}
                     icon={faKey}
                     label={t("app.login.password")}
                     name="password"
                     placeholder={t("app.login.enter_password")}
-                    showAsterisk={!!errors.password && !!touched.password}
                     type="password"
                   />
 

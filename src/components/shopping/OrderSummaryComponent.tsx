@@ -49,7 +49,6 @@ function OrderSummaryComponent({
               dataLines={items}
               orderSummary={true}
               recommendation={false}
-              theadNeeded={true}
             />
           </Row>
 

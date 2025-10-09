@@ -117,11 +117,7 @@ function ArtworkSearchComponent({ admin }: ArtworkSearchComponentProps) {
           {admin ? (
             <AdminArtworkTable dataLines={searchResults} />
           ) : (
-            <BuyTable
-              dataLines={searchResults}
-              recommendation={false}
-              theadNeeded={true}
-            />
+            <BuyTable dataLines={searchResults} recommendation={false} />
           )}
 
           <Row className="pt-3 pb-3 text-center">

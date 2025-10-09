@@ -117,9 +117,7 @@ function UnansweredMessage({ message }: UnansweredMessageProps) {
                         placeholder={t(
                           "components.unanswered_message.enter_title"
                         )}
-                        showAsterisk={
-                          !!errors.reply_title && !!touched.reply_title
-                        }
+                        hasError={!!errors.reply_title && !!touched.reply_title}
                         type="textarea"
                       />
 

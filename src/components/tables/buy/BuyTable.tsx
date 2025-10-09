@@ -18,14 +18,12 @@ type BuyTableProps = {
   dataLines: Artwork[];
   recommendation?: boolean;
   orderSummary?: boolean;
-  theadNeeded: boolean;
 };
 
 function BuyTable({
   dataLines,
   recommendation = false,
   orderSummary = false,
-  theadNeeded = true,
 }: BuyTableProps) {
   const { t } = useI18n();
 
@@ -82,32 +80,30 @@ function BuyTable({
   return (
     <Row className="text-center mx-auto">
       <table className="mb-3">
-        {theadNeeded && (
-          <thead>
-            <tr>
-              <th aria-label={t("common.aria_label_thumbnail")}></th>
-              <th>{t("common.title")}</th>
-              <th className="d-none d-md-table-cell">{t("common.artist")}</th>
-              <th>{t("common.price")}</th>
-              <th
-                className={`${recommendation ? "d-none" : "d-none d-md-table-cell"}`}
-              >
-                {t("common.quantity")}
-              </th>
-              <th
-                className={`${recommendation ? "d-none" : "d-none d-md-table-cell"}`}
-              >
-                {t("common.tags")}
-              </th>
-              <th
-                className={`${recommendation ? "d-none" : "d-none d-md-table-cell"}`}
-              >
-                {t("common.categories")}
-              </th>
-              <th>{orderSummary && t("common.total_cost")}</th>
-            </tr>
-          </thead>
-        )}
+        <thead>
+          <tr>
+            <th aria-label={t("common.aria_label_thumbnail")}></th>
+            <th>{t("common.title")}</th>
+            <th className="d-none d-md-table-cell">{t("common.artist")}</th>
+            <th>{t("common.price")}</th>
+            <th
+              className={`${recommendation ? "d-none" : "d-none d-md-table-cell"}`}
+            >
+              {t("common.quantity")}
+            </th>
+            <th
+              className={`${recommendation ? "d-none" : "d-none d-md-table-cell"}`}
+            >
+              {t("common.tags")}
+            </th>
+            <th
+              className={`${recommendation ? "d-none" : "d-none d-md-table-cell"}`}
+            >
+              {t("common.categories")}
+            </th>
+            <th>{orderSummary && t("common.total_cost")}</th>
+          </tr>
+        </thead>
 
         <tbody>{dataLinesGenerated}</tbody>
       </table>
