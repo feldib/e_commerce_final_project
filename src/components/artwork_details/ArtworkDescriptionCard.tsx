@@ -41,7 +41,7 @@ function ArtworkDescriptionCard({
           <Row>
             <Col>
               <Card.Title className="mb-4">
-                <h3>{t("common.description")}</h3>
+                <h3>{t("common.fields.description")}</h3>
               </Card.Title>
 
               <Card.Subtitle>
@@ -88,7 +88,7 @@ function ArtworkDescriptionCard({
             <Col>
               <Row>
                 <p>
-                  {t("common.available_quantity")}:{" "}
+                  {t("common.shop.available_quantity")}:{" "}
                   {artwork ? (
                     quantity
                   ) : (
@@ -101,7 +101,7 @@ function ArtworkDescriptionCard({
 
               <Row>
                 <p>
-                  {t("common.price")}: €
+                  {t("common.fields.price")}: €
                   {artwork ? (
                     artwork.price
                   ) : (

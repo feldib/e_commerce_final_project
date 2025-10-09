@@ -54,7 +54,7 @@ function CategoryDropdownSearch({
     <Col className="mx-auto mb-3">
       <Dropdown onSelect={handleCategorySelect}>
         <Dropdown.Toggle variant="outilne-dark">
-          {t("common.categories")}
+          {t("common.fields.categories")}
         </Dropdown.Toggle>
         <Dropdown.Menu className="px-3">
           <Dropdown.Item
@@ -63,7 +63,7 @@ function CategoryDropdownSearch({
             key={"all"}
             style={{ cursor: "pointer" }}
           >
-            {t("common.all")}
+            {t("common.expressions.all")}
           </Dropdown.Item>
           {cats}
         </Dropdown.Menu>

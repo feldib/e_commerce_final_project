@@ -28,7 +28,7 @@ function NotLoggedInNavbarItems() {
         onClick={closeExpandedNav}
         style={{ color: "inherit", textDecoration: "inherit" }}
       >
-        {t("common.register")}
+        {t("common.actions.register")}
       </Link>
     </>
   );

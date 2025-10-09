@@ -30,7 +30,7 @@ function UserTable({ users }: UserTableProps) {
   }
 
   const dataLines = useLoading(users, (dataLines): React.JSX.Element => {
-    return renderData(dataLines, makeRows, t("common.no_results"));
+    return renderData(dataLines, makeRows, t("common.no_result.no_results"));
   });
 
   return (
@@ -39,11 +39,17 @@ function UserTable({ users }: UserTableProps) {
         <table className="mb-3">
           <thead>
             <tr>
-              <th className="d-none d-sm-table-cell">{t("common.name")}</th>
-              <th className="d-none d-md-table-cell">{t("common.email")}</th>
-              <th className="d-none d-md-table-cell">{t("common.address")}</th>
+              <th className="d-none d-sm-table-cell">
+                {t("common.fields.name")}
+              </th>
               <th className="d-none d-md-table-cell">
-                {t("common.phone_number")}
+                {t("common.fields.email")}
+              </th>
+              <th className="d-none d-md-table-cell">
+                {t("common.fields.address")}
+              </th>
+              <th className="d-none d-md-table-cell">
+                {t("common.fields.phone_number")}
               </th>
             </tr>
           </thead>
@@ -51,7 +57,7 @@ function UserTable({ users }: UserTableProps) {
           <tbody>{dataLines}</tbody>
         </table>
       ) : (
-        <Col className="text-center">{t("common.no_users")}</Col>
+        <Col className="text-center">{t("common.no_result.no_users")}</Col>
       )}
     </Row>
   );

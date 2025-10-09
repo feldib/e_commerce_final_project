@@ -39,7 +39,7 @@ function AdminArtworkTableDatalines({
           <td>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              alt={t("common.place_of_thumbnail")}
+              alt={t("common.shop.place_of_thumbnail")}
               height={UI_DIMENSIONS.THUMBNAIL_SIZE}
               src={`${SERVER_URL}/${line.thumbnail}`}
               style={{ objectFit: "contain" }}

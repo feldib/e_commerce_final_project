@@ -40,7 +40,7 @@ function OrderSummaryComponent({
             {orderUser && (
               <Row className="mb-2 mt-5 mb-3">
                 <h3 className="text-start">
-                  {t("common.user")}: {orderUser.user_name}
+                  {t("common.fields.user")}: {orderUser.user_name}
                 </h3>
               </Row>
             )}
@@ -55,14 +55,14 @@ function OrderSummaryComponent({
           <Row className="mt-4 text-start">
             {items && (
               <h2>
-                {t("common.order_summary")}: € {totalCost}
+                {t("common.shop.order_summary")}: € {totalCost}
               </h2>
             )}
           </Row>
           {button && <>{button}</>}
         </>
       ) : (
-        <Col className="text-center">{t("common.no_orders")}</Col>
+        <Col className="text-center">{t("common.no_result.no_orders")}</Col>
       )}
     </Row>
   );

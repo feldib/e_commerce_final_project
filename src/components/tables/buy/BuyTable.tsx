@@ -73,7 +73,7 @@ function BuyTable({
   );
 
   const dataLinesGenerated = useLoading(availableArtworks, (artworks) =>
-    renderData(artworks, makeRows, t("common.no_results"))
+    renderData(artworks, makeRows, t("common.no_result.no_results"))
   );
 
   return (
@@ -81,26 +81,28 @@ function BuyTable({
       <table className="mb-3">
         <thead>
           <tr>
-            <th aria-label={t("common.aria_label_thumbnail")}></th>
-            <th>{t("common.title")}</th>
-            <th className="d-none d-md-table-cell">{t("common.artist")}</th>
-            <th>{t("common.price")}</th>
+            <th aria-label={t("common.aria_labels.aria_label_thumbnail")}></th>
+            <th>{t("common.fields.title")}</th>
+            <th className="d-none d-md-table-cell">
+              {t("common.fields.artist")}
+            </th>
+            <th>{t("common.fields.price")}</th>
             <th
               className={`${recommendation ? "d-none" : "d-none d-md-table-cell"}`}
             >
-              {t("common.quantity")}
+              {t("common.fields.quantity")}
             </th>
             <th
               className={`${recommendation ? "d-none" : "d-none d-md-table-cell"}`}
             >
-              {t("common.tags")}
+              {t("common.fields.tags")}
             </th>
             <th
               className={`${recommendation ? "d-none" : "d-none d-md-table-cell"}`}
             >
-              {t("common.categories")}
+              {t("common.fields.categories")}
             </th>
-            <th>{orderSummary && t("common.total_cost")}</th>
+            <th>{orderSummary && t("common.shop.total_cost")}</th>
           </tr>
         </thead>
 

@@ -47,7 +47,7 @@ function ProfilePage({ children }: React.PropsWithChildren<React.ReactNode>) {
       icon: faHeart,
     },
     {
-      linkText: t("common.reviews"),
+      linkText: t("common.fields.reviews"),
       linkTo: "reviews",
       icon: faStar,
     },

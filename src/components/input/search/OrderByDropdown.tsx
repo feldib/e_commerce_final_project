@@ -30,15 +30,15 @@ function OrderByDropdown({
     <Col className="mb-4">
       <Dropdown onSelect={handleOrderSelect}>
         <Dropdown.Toggle variant="outilne-dark">
-          {t("common.order_by")}
+          {t("common.search.order_by")}
         </Dropdown.Toggle>
         <Dropdown.Menu>
           <Dropdown.Item eventKey="desc" href="">
-            {t("common.newest_to_oldest")}
+            {t("common.search.newest_to_oldest")}
           </Dropdown.Item>
 
           <Dropdown.Item eventKey="asc" href="">
-            {t("common.oldest_to_newest")}
+            {t("common.search.oldest_to_newest")}
           </Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>

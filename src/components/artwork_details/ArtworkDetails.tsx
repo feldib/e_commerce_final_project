@@ -46,7 +46,9 @@ function ArtworkDetails({ artwork_id, artwork }: ArtworkDetailsProps) {
           </>
         ) : (
           <Row className="px-3 mx-auto floating-element mb-5">
-            <Col className="text-center">{t("common.no_reviews")}</Col>
+            <Col className="text-center">
+              {t("common.no_result.no_reviews")}
+            </Col>
           </Row>
         )}
       </>
@@ -74,7 +76,7 @@ function ArtworkDetails({ artwork_id, artwork }: ArtworkDetailsProps) {
       <Row className="mt-5">
         <Row className="text-center">
           <Col className="mx-auto" md={4} xs={5}>
-            <h4 className="subpage-title">{t("common.reviews")}</h4>
+            <h4 className="subpage-title">{t("common.fields.reviews")}</h4>
           </Col>
         </Row>
 

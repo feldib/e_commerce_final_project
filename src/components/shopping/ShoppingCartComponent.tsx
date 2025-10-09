@@ -51,7 +51,7 @@ function ShoppingCartComponent() {
           <Row className="mt-4">
             {shoppingListItems && (
               <h2>
-                {t("common.order_summary")}: € {totalCost}
+                {t("common.shop.order_summary")}: € {totalCost}
               </h2>
             )}
           </Row>
@@ -61,7 +61,7 @@ function ShoppingCartComponent() {
               <Col className="text-center mb-5">
                 <Link href={loggedIn ? "/checkout" : "/login"}>
                   <Button className="submit" onClick={handleCheckoutClick}>
-                    {t("common.checkout")}
+                    {t("common.actions.checkout")}
                   </Button>
                 </Link>
               </Col>

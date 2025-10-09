@@ -65,7 +65,7 @@ function UserReview({ review, admin, index }: UserReviewProps) {
                 <Link href={`/artwork_page/${review.artwork_id}`}>
                   {review.artwork_title}
                 </Link>{" "}
-                {t("common.by")}
+                {t("common.fields.by")}
                 {review.artist_name}
               </p>
             </Card.Subtitle>

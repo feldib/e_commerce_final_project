@@ -30,7 +30,7 @@ function NumberOfArtworksDropdown({
     <Col className="mb-3">
       <Dropdown onSelect={handleNumberOfArtworksSelect}>
         <Dropdown.Toggle variant="outilne-dark">
-          {t("common.number_of_artworks_shown")}
+          {t("common.search.number_of_artworks_shown")}
         </Dropdown.Toggle>
         <Dropdown.Menu>
           <Dropdown.Item eventKey="5" href="">

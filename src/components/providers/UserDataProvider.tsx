@@ -83,18 +83,18 @@ function UserDataProvider({
 
     if (signed_out_shopping_cart.length > 0) {
       confirmAlert({
-        title: t("common.shopping_cart_replacement_title"),
-        message: t("common.shopping_cart_replacement_message"),
+        title: t("common.messages.shopping_cart_replacement_title"),
+        message: t("common.messages.shopping_cart_replacement_message"),
         buttons: [
           {
-            label: t("common.yes"),
+            label: t("common.expressions.yes"),
             onClick: () => {
               replacePreviousShoppingCart();
               router.push(path);
             },
           },
           {
-            label: t("common.no"),
+            label: t("common.expressions.no"),
             onClick: () => {
               localStorage.removeItem("shopping_cart");
               router.push(user_path);

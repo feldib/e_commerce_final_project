@@ -58,9 +58,9 @@ function ForgotPassword() {
                 <InputComponent
                   hasError={!!errors.email && !!touched.email}
                   icon={faUser}
-                  label={t("common.email_address")}
+                  label={t("common.fields.email_address")}
                   name="email"
-                  placeholder={t("common.enter_email")}
+                  placeholder={t("common.placeholders.enter_email")}
                   type="email"
                 />
                 {displayMessage && (

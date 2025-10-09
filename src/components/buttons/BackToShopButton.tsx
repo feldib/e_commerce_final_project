@@ -19,7 +19,7 @@ function BackToShopButton({ onClick }: BackToShopButtonProps) {
       <Col className="text-center mb-5">
         <Link href="/">
           <Button className="submit" onClick={onClick}>
-            {t("common.back_to_shop")}
+            {t("common.actions.back_to_shop")}
           </Button>
         </Link>
       </Col>

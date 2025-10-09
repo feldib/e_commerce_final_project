@@ -112,7 +112,9 @@ function ArtworkSearchComponent({ admin }: ArtworkSearchComponentProps) {
             className="mb-3 mt-2"
             ref={results as React.RefObject<HTMLDivElement>}
           >
-            <h3 className="text-center">{t("common.search_results")}</h3>
+            <h3 className="text-center">
+              {t("common.messages.search_results")}
+            </h3>
           </Row>
           {admin ? (
             <AdminArtworkTable dataLines={searchResults} />
@@ -124,7 +126,7 @@ function ArtworkSearchComponent({ admin }: ArtworkSearchComponentProps) {
             {pageNumber > 1 && (
               <Col className="mx-auto">
                 <Button className="submit" onClick={handleBackClick}>
-                  {t("common.back")} {formik.values.n}
+                  {t("common.actions.back")} {formik.values.n}
                 </Button>
               </Col>
             )}
@@ -132,7 +134,7 @@ function ArtworkSearchComponent({ admin }: ArtworkSearchComponentProps) {
             {hasMoreResults && (
               <Col className="mx-auto">
                 <Button className="submit" onClick={handleNextClick}>
-                  {t("common.next")} {formik.values.n}
+                  {t("common.expressions.next")} {formik.values.n}
                 </Button>
               </Col>
             )}

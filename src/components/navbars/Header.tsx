@@ -80,7 +80,7 @@ function Header() {
             {/*Shopping cart icon - mobile, non-admin users */}
             {!user.is_admin && (
               <FontAwesomeIcon
-                aria-label={t("common.shopping_cart")}
+                aria-label={t("common.shop.shopping_cart")}
                 className="me-3"
                 icon={faShoppingCart}
                 id="header-mobile-shopping-cart"
@@ -136,7 +136,7 @@ function Header() {
           {!user.is_admin && (
             <div className="d-none d-lg-block">
               <FontAwesomeIcon
-                aria-label={t("common.shopping_cart")}
+                aria-label={t("common.shop.shopping_cart")}
                 icon={faShoppingCart}
                 id="header-desktop-shopping-cart"
                 onClick={handleShoppingCartClick}

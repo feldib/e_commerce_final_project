@@ -45,7 +45,7 @@ function ShoppingCartTable({
   const dataLinesGenerated = useLoading(
     dataLines,
     (dataLines): React.JSX.Element => {
-      return renderData(dataLines, makeRows, t("common.no_results"));
+      return renderData(dataLines, makeRows, t("common.no_result.no_results"));
     }
   );
   return (
@@ -53,22 +53,22 @@ function ShoppingCartTable({
       <table>
         <thead>
           <tr>
-            <th aria-label={t("common.aria_label_thumbnail")}></th>
-            <th>{t("common.title")}</th>
-            <th>{t("common.artist")}</th>
-            <th>{t("common.total_cost")}</th>
-            <th>{t("common.quantity")}</th>
+            <th aria-label={t("common.aria_labels.aria_label_thumbnail")}></th>
+            <th>{t("common.fields.title")}</th>
+            <th>{t("common.fields.artist")}</th>
+            <th>{t("common.shop.total_cost")}</th>
+            <th>{t("common.fields.quantity")}</th>
             <th
               className={`${recommendation ? "d-none" : "d-none d-md-table-cell"}`}
             >
-              {t("common.tags")}
+              {t("common.fields.tags")}
             </th>
             <th
               className={`${recommendation ? "d-none" : "d-none d-md-table-cell"}`}
             >
-              {t("common.categories")}
+              {t("common.fields.categories")}
             </th>
-            <th aria-label={t("common.aria_label_actions")}></th>
+            <th aria-label={t("common.aria_labels.aria_label_actions")}></th>
           </tr>
         </thead>
 

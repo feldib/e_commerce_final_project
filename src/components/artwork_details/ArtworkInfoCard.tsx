@@ -44,7 +44,7 @@ function ArtworkInfoCard({
               </Card.Title>
 
               <Card.Subtitle>
-                <h6>{`${t("common.by")}${artwork.artist_name}`}</h6>
+                <h6>{`${t("common.fields.by")}${artwork.artist_name}`}</h6>
               </Card.Subtitle>
             </div>
 

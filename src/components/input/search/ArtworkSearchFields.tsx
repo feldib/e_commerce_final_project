@@ -53,7 +53,7 @@ function ArtworkSearchFields({
         onBlur={formik.handleBlur}
         onChange={formik.handleChange}
         value={formik.values.title}
-        what={t("common.title")}
+        what={t("common.fields.title")}
       />
 
       <SearchField
@@ -61,7 +61,7 @@ function ArtworkSearchFields({
         onBlur={formik.handleBlur}
         onChange={formik.handleChange}
         value={formik.values.artist_name}
-        what={t("common.artist")}
+        what={t("common.fields.artist")}
       />
 
       <PriceRangeInput formik={formik} />
@@ -85,7 +85,7 @@ function ArtworkSearchFields({
         <Col className="mb-3">
           <Form.Check
             id="only_featured"
-            label={t("common.only_featured")}
+            label={t("common.search.only_featured")}
             onChange={handleOnlyFeaturedChange}
             type="switch"
           />

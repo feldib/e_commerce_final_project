@@ -88,7 +88,7 @@ function LeaveReview({ artwork_id }: LeaveReviewProps) {
                     />
 
                     <RBForm.Group className="mb-3">
-                      <RBForm.Label>{t("common.message")}</RBForm.Label>
+                      <RBForm.Label>{t("common.fields.message")}</RBForm.Label>
                       <ErrorAsterisk
                         show={!!(errors.review_text && touched.review_text)}
                       />

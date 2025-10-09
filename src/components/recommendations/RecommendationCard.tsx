@@ -49,7 +49,7 @@ function RecommendationCard({ artwork }: RecommendationCardProps) {
             </Card.Title>
 
             <Card.Subtitle>
-              <h6>{`${t("common.by")}${artwork.artist_name}`}</h6>
+              <h6>{`${t("common.fields.by")}${artwork.artist_name}`}</h6>
             </Card.Subtitle>
           </Col>
 
@@ -69,7 +69,7 @@ function RecommendationCard({ artwork }: RecommendationCardProps) {
       </Card.Body>
 
       <Card.Img
-        alt={t("common.place_of_thumbnail")}
+        alt={t("common.shop.place_of_thumbnail")}
         height="300"
         src={`${SERVER_URL}/${artwork.thumbnail}`}
         style={{ objectFit: "cover" }}

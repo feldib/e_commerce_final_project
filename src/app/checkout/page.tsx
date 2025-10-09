@@ -48,7 +48,7 @@ function CheckoutPage() {
           button={
             <Row>
               <Col className="text-center mb-5">
-                <Button type="submit">{t("common.order")}</Button>
+                <Button type="submit">{t("common.shop.order")}</Button>
               </Col>
             </Row>
           }

@@ -23,7 +23,7 @@ function Search() {
           <Link href="/admin/add_new_artwork">
             <p>
               <FontAwesomeIcon icon={faPlus} />
-              <span> {t("common.add_new_artwork")}</span>
+              <span> {t("common.actions.add_new_artwork")}</span>
             </p>
           </Link>
         </Col>

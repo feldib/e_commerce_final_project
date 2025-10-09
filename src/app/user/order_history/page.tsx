@@ -39,7 +39,7 @@ function OrderHistory() {
     if (orders.length === 0) {
       return (
         <Row className="mb-3 floating-element">
-          <Col className="text-center">{t("common.no_orders")}</Col>
+          <Col className="text-center">{t("common.no_result.no_orders")}</Col>
         </Row>
       );
     }

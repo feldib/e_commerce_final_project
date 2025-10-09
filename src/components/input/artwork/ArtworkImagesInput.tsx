@@ -120,7 +120,7 @@ function ArtworkImagesInput<T extends Record<string, unknown>>({
 
         <Form.Control
           onChange={handleFileChange}
-          placeholder={t("common.upload_other_pictures")}
+          placeholder={t("common.actions.upload_other_pictures")}
           type="file"
         />
       </InputGroup>

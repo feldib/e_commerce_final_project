@@ -32,7 +32,7 @@ function AdminArtworkTable({ dataLines }: AdminArtworkTableProps) {
   }
 
   const dataLinesGenerated = useLoading(dataLines, (dataLines) => {
-    return renderData(dataLines, makeRows, t("common.no_results"));
+    return renderData(dataLines, makeRows, t("common.no_result.no_results"));
   });
 
   return (
@@ -40,16 +40,22 @@ function AdminArtworkTable({ dataLines }: AdminArtworkTableProps) {
       <table className="mb-3">
         <thead>
           <tr>
-            <th aria-label={t("common.aria_label_thumbnail")}></th>
-            <th>{t("common.title")}</th>
-            <th>{t("common.artist")}</th>
-            <th className={"d-none d-md-table-cell"}>{t("common.price")}</th>
-            <th className={"d-none d-md-table-cell"}>{t("common.quantity")}</th>
-            <th className={"d-none d-md-table-cell"}>{t("common.tags")}</th>
+            <th aria-label={t("common.aria_labels.aria_label_thumbnail")}></th>
+            <th>{t("common.fields.title")}</th>
+            <th>{t("common.fields.artist")}</th>
             <th className={"d-none d-md-table-cell"}>
-              {t("common.categories")}
+              {t("common.fields.price")}
             </th>
-            <th aria-label={t("common.aria_label_actions")}></th>
+            <th className={"d-none d-md-table-cell"}>
+              {t("common.fields.quantity")}
+            </th>
+            <th className={"d-none d-md-table-cell"}>
+              {t("common.fields.tags")}
+            </th>
+            <th className={"d-none d-md-table-cell"}>
+              {t("common.fields.categories")}
+            </th>
+            <th aria-label={t("common.aria_labels.aria_label_actions")}></th>
           </tr>
         </thead>
 

@@ -63,23 +63,23 @@ function SignInPageInner() {
                   <InputComponent
                     hasError={!!errors.email && !!touched.email}
                     icon={faUser}
-                    label={t("common.email_address")}
+                    label={t("common.fields.email_address")}
                     name="email"
-                    placeholder={t("common.enter_email")}
+                    placeholder={t("common.placeholders.enter_email")}
                     type="email"
                   />
 
                   <InputComponent
                     hasError={!!errors.password && !!touched.password}
                     icon={faKey}
-                    label={t("common.password")}
+                    label={t("common.fields.password")}
                     name="password"
-                    placeholder={t("common.enter_password")}
+                    placeholder={t("common.placeholders.enter_password")}
                     type="password"
                   />
 
                   <Button type="submit" variant="primary">
-                    {t("common.sign_in")}
+                    {t("common.actions.sign_in")}
                   </Button>
                   <ToastContainer position="bottom-right" />
                 </Form>

@@ -51,9 +51,9 @@ function EditArtworkForm() {
             artwork_id={artworkId}
             formik={formik}
             icon={faQuestion}
-            label={t("common.title")}
+            label={t("common.fields.title")}
             name="title"
-            placeholder={t("common.enter_title")}
+            placeholder={t("common.placeholders.enter_title")}
             type="text"
           />
 
@@ -61,9 +61,9 @@ function EditArtworkForm() {
             artwork_id={artworkId}
             formik={formik}
             icon={faQuestion}
-            label={t("common.artist")}
+            label={t("common.fields.artist")}
             name="artist_name"
-            placeholder={t("common.enter_artist_name")}
+            placeholder={t("common.placeholders.enter_artist_name")}
             type="text"
           />
 
@@ -71,19 +71,19 @@ function EditArtworkForm() {
             artwork_id={artworkId}
             formik={formik}
             icon={faDollarSign}
-            label={t("common.price")}
+            label={t("common.fields.price")}
             name="price"
-            placeholder={t("common.enter_price")}
+            placeholder={t("common.placeholders.enter_price")}
             type="number"
           />
 
           <Form.Group className="pb-3">
-            <Form.Label>{t("common.tags")}</Form.Label>
+            <Form.Label>{t("common.fields.tags")}</Form.Label>
             <ReactTags
               handleAddition={createHandleAddition(tags, setTags)}
               handleDelete={createHandleDelete(tags, setTags)}
               inputFieldPosition="bottom"
-              placeholder={t("common.add_new_tag")}
+              placeholder={t("common.actions.add_new_tag")}
               // suggestions={suggestions}
               separators={[...TAG_SEPARATORS]}
               tags={formik.values.tags}
@@ -100,9 +100,9 @@ function EditArtworkForm() {
             artwork_id={artworkId}
             formik={formik}
             icon={faQuestion}
-            label={t("common.quantity")}
+            label={t("common.fields.quantity")}
             name="quantity"
-            placeholder={t("common.enter_quantity")}
+            placeholder={t("common.placeholders.enter_quantity")}
             type="number"
           />
 
@@ -110,7 +110,7 @@ function EditArtworkForm() {
             categories={categories}
             fieldName="category_id"
             formik={formik}
-            label={t("common.category")}
+            label={t("common.fields.category")}
             onCategoryChange={handleCategoryChange}
           />
 
@@ -118,23 +118,23 @@ function EditArtworkForm() {
             artworkId={artworkId}
             formik={formik}
             isEdit={true}
-            label={t("common.thumbnail")}
+            label={t("common.fields.thumbnail")}
           />
 
           <ArtworkImagesInput
             artworkId={artworkId}
             formik={formik}
             isEdit={true}
-            label={t("common.images")}
+            label={t("common.fields.images")}
           />
 
           <ChangeArtworkDataInputComponent
             artwork_id={artworkId}
             formik={formik}
             icon={faQuestion}
-            label={t("common.description")}
+            label={t("common.fields.description")}
             name="description"
-            placeholder={t("common.enter_description")}
+            placeholder={t("common.placeholders.enter_description")}
             type="textarea"
           />
           <ToastContainer position="bottom-right" />

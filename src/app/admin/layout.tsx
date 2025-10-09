@@ -45,7 +45,7 @@ function AdminPage({ children }: { children: React.ReactNode }) {
       icon: faClockRotateLeft,
     },
     {
-      linkText: t("common.reviews"),
+      linkText: t("common.fields.reviews"),
       linkTo: "reviews",
       icon: faStar,
     },

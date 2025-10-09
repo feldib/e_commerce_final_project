@@ -39,37 +39,37 @@ function AddArtworkForm() {
           <NewArtworkInputComponent
             formik={formik}
             icon={faQuestion}
-            label={t("common.title")}
+            label={t("common.fields.title")}
             name="title"
-            placeholder={t("common.enter_title")}
+            placeholder={t("common.placeholders.enter_title")}
             type="text"
           />
 
           <NewArtworkInputComponent
             formik={formik}
             icon={faQuestion}
-            label={t("common.artist")}
+            label={t("common.fields.artist")}
             name="artist_name"
-            placeholder={t("common.enter_artist_name")}
+            placeholder={t("common.placeholders.enter_artist_name")}
             type="text"
           />
 
           <NewArtworkInputComponent
             formik={formik}
             icon={faDollarSign}
-            label={t("common.price")}
+            label={t("common.fields.price")}
             name="price"
-            placeholder={t("common.enter_price")}
+            placeholder={t("common.placeholders.enter_price")}
             type="number"
           />
 
           <Form.Group className="pb-3">
-            <Form.Label>{t("common.tags")}</Form.Label>
+            <Form.Label>{t("common.fields.tags")}</Form.Label>
             <ReactTags
               handleAddition={createHandleAddition(tags, setTags)}
               handleDelete={createHandleDelete(tags, setTags)}
               inputFieldPosition="bottom"
-              placeholder={t("common.add_new_tag")}
+              placeholder={t("common.actions.add_new_tag")}
               // suggestions={suggestions}
               separators={[...TAG_SEPARATORS]}
               tags={formik.values.tags}
@@ -85,9 +85,9 @@ function AddArtworkForm() {
           <NewArtworkInputComponent
             formik={formik}
             icon={faQuestion}
-            label={t("common.quantity")}
+            label={t("common.fields.quantity")}
             name="quantity"
-            placeholder={t("common.enter_quantity")}
+            placeholder={t("common.placeholders.enter_quantity")}
             type="number"
           />
 
@@ -95,27 +95,27 @@ function AddArtworkForm() {
             categories={categories}
             fieldName="category_id"
             formik={formik}
-            label={t("common.category")}
+            label={t("common.fields.category")}
           />
 
           <ArtworkThumbnailInput
             formik={formik}
             isEdit={false}
-            label={t("common.thumbnail")}
+            label={t("common.fields.thumbnail")}
           />
 
           <ArtworkImagesInput
             formik={formik}
             isEdit={false}
-            label={t("common.images")}
+            label={t("common.fields.images")}
           />
 
           <NewArtworkInputComponent
             formik={formik}
             icon={faQuestion}
-            label={t("common.description")}
+            label={t("common.fields.description")}
             name="description"
-            placeholder={t("common.enter_description")}
+            placeholder={t("common.placeholders.enter_description")}
             type="textarea"
           />
 
@@ -124,7 +124,7 @@ function AddArtworkForm() {
             type="submit"
             variant="primary"
           >
-            {t("common.add_new_artwork")}
+            {t("common.actions.add_new_artwork")}
           </Button>
           <ToastContainer position="bottom-right" />
         </Form>

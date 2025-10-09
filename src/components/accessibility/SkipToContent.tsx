@@ -8,7 +8,7 @@ const SkipToContent = () => {
 
   return (
     <a className="skip-to-content" href="#main" tabIndex={0}>
-      {t("common.skip_to_content")}
+      {t("common.actions.skip_to_content")}
     </a>
   );
 };

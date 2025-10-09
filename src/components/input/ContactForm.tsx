@@ -67,30 +67,30 @@ function ContactForm() {
             <InputComponent
               hasError={!!errors.email && !!touched.email}
               icon={faUser}
-              label={t("common.email_address")}
+              label={t("common.fields.email_address")}
               name="email"
-              placeholder={t("common.enter_email")}
+              placeholder={t("common.placeholders.enter_email")}
               type="email"
             />
 
             <InputComponent
               hasError={!!errors.title && !!touched.title}
               icon={faKeyboard}
-              label={t("common.title")}
+              label={t("common.fields.title")}
               name="title"
-              placeholder={t("common.enter_message_title")}
+              placeholder={t("common.placeholders.enter_message_title")}
               type="text"
             />
 
             <RBForm.Group className="mb-3">
-              <RBForm.Label>{t("common.message")}</RBForm.Label>
+              <RBForm.Label>{t("common.fields.message")}</RBForm.Label>
               <ErrorAsterisk show={!!(errors.message && touched.message)} />
               <FloatingLabel label="">
                 <Field
                   as="textarea"
                   className="form-control"
                   name="message"
-                  placeholder={t("common.enter_message")}
+                  placeholder={t("common.placeholders.enter_message")}
                   style={{ height: "100px" }}
                 />
               </FloatingLabel>
@@ -106,7 +106,7 @@ function ContactForm() {
               type="submit"
               variant="primary"
             >
-              {t("common.send")}
+              {t("common.actions.send")}
             </Button>
             <ToastContainer position="bottom-right" />
           </Form>

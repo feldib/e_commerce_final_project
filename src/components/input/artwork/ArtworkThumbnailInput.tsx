@@ -89,7 +89,7 @@ function ArtworkThumbnailInput<T extends Record<string, unknown>>({
 
         <Form.Control
           onChange={handleFileChange}
-          placeholder={t("common.upload_thumbnail")}
+          placeholder={t("common.actions.upload_thumbnail")}
           type="file"
         />
       </InputGroup>

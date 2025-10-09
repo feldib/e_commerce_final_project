@@ -49,11 +49,11 @@ function UserDataChangingComponent({
               changeUserData={changeUserData}
               error={formik.errors.email}
               icon={faUser}
-              label={t("common.email_address")}
+              label={t("common.fields.email_address")}
               name="email"
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
-              placeholder={t("common.enter_email")}
+              placeholder={t("common.placeholders.enter_email")}
               touched={!!formik.touched.email}
               type="email"
               value={formik.values.email}
@@ -63,11 +63,11 @@ function UserDataChangingComponent({
               changeUserData={changeUserData}
               error={formik.errors.first_name}
               icon={faQuestion}
-              label={t("common.first_name")}
+              label={t("common.fields.first_name")}
               name="first_name"
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
-              placeholder={t("common.enter_first_name")}
+              placeholder={t("common.placeholders.enter_first_name")}
               touched={!!formik.touched.first_name}
               type="text"
               value={formik.values.first_name}
@@ -77,11 +77,11 @@ function UserDataChangingComponent({
               changeUserData={changeUserData}
               error={formik.errors.last_name}
               icon={faQuestion}
-              label={t("common.last_name")}
+              label={t("common.fields.last_name")}
               name="last_name"
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
-              placeholder={t("common.enter_last_name")}
+              placeholder={t("common.placeholders.enter_last_name")}
               touched={!!formik.touched.last_name}
               type="text"
               value={formik.values.last_name}
@@ -91,7 +91,7 @@ function UserDataChangingComponent({
               changeUserData={changeUserData}
               error={formik.errors.address}
               icon={faHouse}
-              label={t("common.address")}
+              label={t("common.fields.address")}
               name="address"
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
@@ -105,7 +105,7 @@ function UserDataChangingComponent({
               changeUserData={changeUserData}
               error={formik.errors.phone_number}
               icon={faPhone}
-              label={t("common.phone_number")}
+              label={t("common.fields.phone_number")}
               name="phone_number"
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
@@ -117,7 +117,7 @@ function UserDataChangingComponent({
 
             {checkout && (
               <Form.Check
-                label={t("common.save_data")}
+                label={t("common.actions.save_data")}
                 onChange={handleSaveDataChange}
               />
             )}

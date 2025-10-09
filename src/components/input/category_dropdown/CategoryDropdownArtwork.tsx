@@ -110,7 +110,7 @@ function CategoryDropdownArtwork<T extends Record<string, unknown>>({
           <span>
             {chosenCategory
               ? getCategoryName(chosenCategory)
-              : t("common.choose")}
+              : t("common.actions.choose")}
           </span>
         </Dropdown.Toggle>
         <Dropdown.Menu className="w-100">{cats}</Dropdown.Menu>

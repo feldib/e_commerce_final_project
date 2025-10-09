@@ -112,9 +112,9 @@ function RegistrationFormInner() {
             <InputComponent
               hasError={!!errors.email && !!touched.email}
               icon={faUser}
-              label={t("common.email_address")}
+              label={t("common.fields.email_address")}
               name="email"
-              placeholder={t("common.enter_email")}
+              placeholder={t("common.placeholders.enter_email")}
               type="email"
             />
 
@@ -130,9 +130,9 @@ function RegistrationFormInner() {
             <InputComponent
               hasError={!!errors.password && !!touched.password}
               icon={faKey}
-              label={t("common.password")}
+              label={t("common.fields.password")}
               name="password"
-              placeholder={t("common.enter_password")}
+              placeholder={t("common.placeholders.enter_password")}
               type="password"
             />
 
@@ -150,18 +150,18 @@ function RegistrationFormInner() {
             <InputComponent
               hasError={!!errors.firstName && !!touched.firstName}
               icon={faQuestion}
-              label={t("common.first_name")}
+              label={t("common.fields.first_name")}
               name="firstName"
-              placeholder={t("common.enter_first_name")}
+              placeholder={t("common.placeholders.enter_first_name")}
               type="text"
             />
 
             <InputComponent
               hasError={!!errors.lastName && !!touched.lastName}
               icon={faQuestion}
-              label={t("common.last_name")}
+              label={t("common.fields.last_name")}
               name="lastName"
-              placeholder={t("common.enter_last_name")}
+              placeholder={t("common.placeholders.enter_last_name")}
               type="text"
             />
 
@@ -170,7 +170,7 @@ function RegistrationFormInner() {
               type="submit"
               variant="primary"
             >
-              {t("common.register")}
+              {t("common.actions.register")}
             </Button>
             <ToastContainer position="bottom-right" />
           </Form>
