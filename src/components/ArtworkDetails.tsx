@@ -2,25 +2,20 @@
 
 import React from "react";
 
-import { Card, Col, Row } from "react-bootstrap";
-import { ToastContainer } from "react-toastify";
-
-import { SERVER_URL } from "@/utils/constants";
+import { Col, Row } from "react-bootstrap";
 
 import { useI18n } from "@/components/providers/I18nProvider";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
 
-import { Artwork, Review, Tag } from "@/fetching/types";
+import { Artwork, Review } from "@/fetching/types";
 
+import ArtworkDetailsDescriptionCard from "./ArtworkDetailsDescriptionCard";
+import ArtworkDetailsInfoCard from "./ArtworkDetailsInfoCard";
 import ArtworkReview from "./ArtworkReview";
-import FavouriteButton from "./buttons/FavouriteButton";
-import ShoppingCartButton from "./buttons/ShoppingCartButton";
 import ArtworkPictureCarousel from "./carousels/ArtworkPictureCarousel";
 import LeaveReview from "./LeaveReview";
 
-import { createQuantityDecreaseHandler } from "@/helpers/shoppingCartHelpers";
 import useAxios from "@/hooks/useAxios";
-import { useCategories } from "@/hooks/useCategories";
 import useLoading from "@/hooks/useLoading";
 import useQuantity from "@/hooks/useQuantity";
 
@@ -30,8 +25,7 @@ type ArtworkDetailsProps = {
 };
 
 function ArtworkDetails({ artwork_id, artwork }: ArtworkDetailsProps) {
-  const { t, locale } = useI18n();
-  const { getCategoryNameById } = useCategories(locale);
+  const { t } = useI18n();
   const { loggedIn } = React.useContext(UserDataContext);
   const reviewsData = useAxios(`/reviews?id=${artwork_id}`) as Review[];
 
@@ -39,11 +33,6 @@ function ArtworkDetails({ artwork_id, artwork }: ArtworkDetailsProps) {
     loggedIn,
     artwork.quantity,
     artwork_id
-  );
-
-  const handleQuantityDecrease = createQuantityDecreaseHandler(
-    quantity,
-    setQuantity
   );
 
   const representReviews = useLoading(reviewsData, (reviews) => {
@@ -67,123 +56,19 @@ function ArtworkDetails({ artwork_id, artwork }: ArtworkDetailsProps) {
   return (
     <>
       <Row className="mb-5 mt-5">
-        <Col className="mb-3" md={4} sm={12}>
-          <Card border="secondary" className="mx-auto">
-            <Card.Body className="p-3">
-              <Row>
-                <Col>
-                  <Card.Title>
-                    <h3>{artwork.title}</h3>
-                  </Card.Title>
+        <ArtworkDetailsInfoCard
+          artwork={artwork}
+          artwork_id={artwork_id}
+          quantity={quantity}
+          setQuantity={setQuantity}
+        />
 
-                  <Card.Subtitle>
-                    <h6>{`${t("common.by")}${artwork.artist_name}`}</h6>
-                  </Card.Subtitle>
-                </Col>
-
-                <Col className="text-center px-3" xs={1}>
-                  <button onClick={handleQuantityDecrease}>
-                    <ShoppingCartButton
-                      artwork_id={artwork_id}
-                      quantity={quantity}
-                    />
-                  </button>
-
-                  <FavouriteButton artwork_id={artwork_id} />
-                </Col>
-              </Row>
-            </Card.Body>
-
-            <Card.Img
-              src={`${SERVER_URL}/${artwork.thumbnail}`}
-              variant="bottom"
-            />
-          </Card>
-        </Col>
-
-        <Col className="mb-3" md={8}>
-          <Card border="secondary" className="mx-auto">
-            <Card.Body className="p-3 px-3">
-              <Row>
-                <Col>
-                  <Card.Title className="mb-4">
-                    <h3>{t("common.description")}</h3>
-                  </Card.Title>
-
-                  <Card.Subtitle>
-                    <p>{artwork.description}</p>
-                  </Card.Subtitle>
-                </Col>
-
-                <Col className="text-center px-3" xs={1}>
-                  <button onClick={handleQuantityDecrease}>
-                    <ShoppingCartButton
-                      artwork_id={artwork_id}
-                      quantity={quantity}
-                    />
-                  </button>
-
-                  <FavouriteButton artwork_id={artwork_id} />
-                  <ToastContainer position="bottom-right" />
-                </Col>
-              </Row>
-
-              <Row>
-                <Col>
-                  <Row>
-                    <p>
-                      <strong>
-                        {getCategoryNameById(artwork.category_id)}
-                      </strong>
-                    </p>
-                  </Row>
-                </Col>
-
-                <Col>
-                  <Row>
-                    <p>
-                      {artwork.tags
-                        ?.map((tag: Tag) => {
-                          return tag.tname;
-                        })
-                        .join(", ")}
-                    </p>
-                  </Row>
-                </Col>
-              </Row>
-
-              <Row>
-                <Col>
-                  <Row>
-                    <p>
-                      {t("common.available_quantity")}:{" "}
-                      {artwork ? (
-                        quantity
-                      ) : (
-                        <div className="d-flex justify-content-center">
-                          <div className="spinner-border" role="status" />
-                        </div>
-                      )}
-                    </p>
-                  </Row>
-
-                  <Row>
-                    <p>
-                      {t("common.price")}: €
-                      {artwork ? (
-                        artwork.price
-                      ) : (
-                        <div className="d-flex justify-content-center">
-                          <div className="spinner-border" role="status" />
-                        </div>
-                      )}
-                    </p>
-                  </Row>
-                </Col>
-              </Row>
-            </Card.Body>
-          </Card>
-        </Col>
+        <ArtworkDetailsDescriptionCard
+          artwork={artwork}
+          artwork_id={artwork_id}
+          quantity={quantity}
+          setQuantity={setQuantity}
+        />
       </Row>
 
       <ArtworkPictureCarousel other_pictures={artwork.other_pictures ?? []} />
