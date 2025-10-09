@@ -14,7 +14,7 @@ import ArtworkThumbnailInput from "@/components/input/artwork/ArtworkThumbnailIn
 import NewArtworkInputComponent from "@/components/input/artwork/NewArtworkInputComponent";
 import CategoryDropdownArtwork from "@/components/input/category_dropdown/CategoryDropdownArtwork";
 
-import useAddNewArtworkPage from "../../app/admin/add_new_artwork/useAddNewArtworkPage";
+import useAddArtworkForm from "./hooks/useAddArtworkForm";
 
 import { createHandleSubmitClick } from "@/helpers/formValidationHelpers";
 
@@ -28,7 +28,7 @@ function AddArtworkForm() {
     router,
     createHandleDelete,
     createHandleAddition,
-  } = useAddNewArtworkPage();
+  } = useAddArtworkForm();
 
   const handleSubmitClick = createHandleSubmitClick(t);
 

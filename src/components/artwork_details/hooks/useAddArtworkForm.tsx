@@ -22,7 +22,7 @@ import useAxios from "@/hooks/useAxios";
 import { useCategories } from "@/hooks/useCategories";
 import { useNewArtworkSchema } from "@/hooks/useValidationSchemas";
 
-const useAddNewArtworkPage = () => {
+const useAddArtworkForm = () => {
   interface AddNewArtworkFormValues extends Record<string, unknown> {
     title: string;
     artist_name: string;
@@ -103,4 +103,4 @@ const useAddNewArtworkPage = () => {
   };
 };
 
-export default useAddNewArtworkPage;
+export default useAddArtworkForm;

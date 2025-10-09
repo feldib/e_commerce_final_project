@@ -18,7 +18,7 @@ import useAxios from "@/hooks/useAxios";
 import { useCategories } from "@/hooks/useCategories";
 import { useEditArtworkSchema } from "@/hooks/useValidationSchemas";
 
-const useEditArtworkData = () => {
+const useEditArtworkForm = () => {
   interface EditArtworkFormValues extends Record<string, unknown> {
     title: string;
     artist_name: string;
@@ -126,4 +126,4 @@ const useEditArtworkData = () => {
   };
 };
 
-export default useEditArtworkData;
+export default useEditArtworkForm;

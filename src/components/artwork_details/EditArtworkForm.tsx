@@ -17,7 +17,7 @@ import CategoryDropdownArtwork from "@/components/input/category_dropdown/Catego
 
 import { updateArtworkData } from "@/fetching/fetching";
 
-import useEditArtworkData from "../../app/admin/edit_artwork/[artwork_id]/useEditArtworkData";
+import useEditArtworkForm from "./hooks/useEditArtworkForm";
 
 function EditArtworkForm() {
   const {
@@ -30,7 +30,7 @@ function EditArtworkForm() {
     artworkId,
     t,
     router,
-  } = useEditArtworkData();
+  } = useEditArtworkForm();
 
   const handleCategoryChange = async (category: { id: number }) => {
     try {
