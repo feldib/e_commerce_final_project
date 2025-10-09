@@ -7,18 +7,23 @@ function ThemeProvider({ children }: { children: React.ReactNode }) {
   const { user, loggedIn } = React.useContext(UserDataContext);
 
   React.useEffect(() => {
-    // Apply admin theme class to body when user is admin
-    if (loggedIn && user.is_admin) {
+    const shouldHaveAdminTheme = loggedIn && user.is_admin;
+
+    if (shouldHaveAdminTheme) {
+      localStorage.setItem("admin-theme", "true");
       document.body.classList.add("admin-theme");
     } else {
+      localStorage.removeItem("admin-theme");
       document.body.classList.remove("admin-theme");
     }
-
-    // Cleanup function to remove theme class
-    return () => {
-      document.body.classList.remove("admin-theme");
-    };
   }, [loggedIn, user.is_admin]);
+
+  React.useEffect(() => {
+    const hasAdminTheme = localStorage.getItem("admin-theme") === "true";
+    if (hasAdminTheme) {
+      document.body.classList.add("admin-theme");
+    }
+  }, []);
 
   return <>{children}</>;
 }
