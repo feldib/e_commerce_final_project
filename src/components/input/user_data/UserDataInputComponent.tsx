@@ -20,7 +20,7 @@ import { useI18n } from "@/components/providers/I18nProvider";
 
 import { updateUserData } from "@/fetching/fetching";
 
-type UserDataInputComponentsProps = {
+type UserDataInputComponentProps = {
   label: string;
   name: string;
   type: string;
@@ -34,7 +34,7 @@ type UserDataInputComponentsProps = {
   changeUserData?: boolean;
 };
 
-function UserDataInputComponents({
+function UserDataInputComponent({
   label,
   name,
   type,
@@ -46,7 +46,7 @@ function UserDataInputComponents({
   onBlur,
   value,
   changeUserData = true,
-}: UserDataInputComponentsProps) {
+}: UserDataInputComponentProps) {
   const { t } = useI18n();
   const [editing, setEditing] = React.useState(false);
 
@@ -118,4 +118,4 @@ function UserDataInputComponents({
   );
 }
 
-export default UserDataInputComponents;
+export default UserDataInputComponent;

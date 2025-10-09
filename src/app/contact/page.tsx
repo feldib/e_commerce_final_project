@@ -96,20 +96,20 @@ function ContactUs() {
               {({ errors, touched }) => (
                 <Form ref={form}>
                   <InputComponent
+                    hasError={!!errors.email && !!touched.email}
                     icon={faUser}
                     label={t("app.contact.email_address")}
                     name="email"
                     placeholder={t("app.contact.enter_email")}
-                    showAsterisk={!!errors.email && !!touched.email}
                     type="email"
                   />
 
                   <InputComponent
+                    hasError={!!errors.title && !!touched.title}
                     icon={faKeyboard}
                     label={t("app.contact.title_field")}
                     name="title"
                     placeholder={t("app.contact.enter_message_title")}
-                    showAsterisk={!!errors.title && !!touched.title}
                     type="text"
                   />
 
