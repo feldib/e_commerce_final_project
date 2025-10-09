@@ -3,7 +3,7 @@ import React from "react";
 
 import { ToastContainer } from "react-toastify";
 
-import SkipToContentLink from "@/components/accessibility/SkipToContentLink";
+import SkipToContent from "@/components/accessibility/SkipToContent";
 import Footer from "@/components/navbars/Footer";
 import Header from "@/components/navbars/Header";
 import I18nProvider, { useI18n } from "@/components/providers/I18nProvider";
@@ -20,7 +20,7 @@ function AppContent({ children }: { children: React.ReactNode }) {
   return (
     <html lang={locale}>
       <body>
-        <SkipToContentLink />
+        <SkipToContent />
         <Header />
         <main className="pb-5 vh-100" id="main">
           {children}

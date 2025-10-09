@@ -5,9 +5,9 @@ import Link from "next/link";
 
 import { Button, Col, Container, Row } from "react-bootstrap";
 
-import OrderSummaryComponent from "@/components/OrderSummaryComponent";
-import PageTitle from "@/components/PageTitle";
+import PageTitle from "@/components/layout/PageTitle";
 import { useI18n } from "@/components/providers/I18nProvider";
+import OrderSummaryComponent from "@/components/shopping/OrderSummaryComponent";
 
 import { Artwork } from "@/fetching/types";
 

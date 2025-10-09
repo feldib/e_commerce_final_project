@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 
-import LoadingSpinner from "@/components/LoadingSpinner";
+import LoadingSpinner from "@/components/layout/LoadingSpinner";
 
 const useLoading = <T,>(data: T, makeJSX: (data: T) => React.JSX.Element) => {
   const [result, setResult] = React.useState(<LoadingSpinner />);

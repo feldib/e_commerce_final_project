@@ -6,19 +6,13 @@ import { Form, InputGroup, Row } from "react-bootstrap";
 
 import { useI18n } from "@/components/providers/I18nProvider";
 
-import { SearchFormikInstance, SearchParams } from "@/fetching/types";
+import { SearchFormikInstance } from "@/fetching/types";
 
 type PriceRangeInputProps = {
   formik: SearchFormikInstance;
-  triggerSearchWithUpdatedValues: (
-    updatedValues: Partial<SearchParams>
-  ) => void;
 };
 
-function PriceRangeInput({
-  formik,
-  triggerSearchWithUpdatedValues,
-}: PriceRangeInputProps) {
+function PriceRangeInput({ formik }: PriceRangeInputProps) {
   const { t } = useI18n();
 
   const handleMinChange = (e: React.ChangeEvent<HTMLInputElement>) => {

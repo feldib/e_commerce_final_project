@@ -9,25 +9,25 @@ import { useI18n } from "@/components/providers/I18nProvider";
 
 import { Artwork, Tag } from "@/fetching/types";
 
-import FavouriteButton from "./buttons/FavouriteButton";
-import ShoppingCartButton from "./buttons/ShoppingCartButton";
+import FavouriteButton from "../buttons/FavouriteButton";
+import ShoppingCartButton from "../buttons/ShoppingCartButton";
 
 import { createQuantityDecreaseHandler } from "@/helpers/shoppingCartHelpers";
 import { useCategories } from "@/hooks/useCategories";
 
-type ArtworkDetailsDescriptionCardProps = {
+type ArtworkDescriptionCardProps = {
   artwork_id: number;
   artwork: Artwork;
   quantity: number;
   setQuantity: React.Dispatch<React.SetStateAction<number>>;
 };
 
-function ArtworkDetailsDescriptionCard({
+function ArtworkDescriptionCard({
   artwork_id,
   artwork,
   quantity,
   setQuantity,
-}: ArtworkDetailsDescriptionCardProps) {
+}: ArtworkDescriptionCardProps) {
   const { t, locale } = useI18n();
   const { getCategoryNameById } = useCategories(locale);
 
@@ -121,4 +121,4 @@ function ArtworkDetailsDescriptionCard({
   );
 }
 
-export default ArtworkDetailsDescriptionCard;
+export default ArtworkDescriptionCard;

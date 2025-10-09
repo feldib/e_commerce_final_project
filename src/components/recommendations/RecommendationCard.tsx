@@ -12,8 +12,8 @@ import { UserDataContext } from "@/components/providers/UserDataProvider";
 
 import { Artwork } from "@/fetching/types";
 
-import FavouriteButton from "./buttons/FavouriteButton";
-import ShoppingCartButton from "./buttons/ShoppingCartButton";
+import FavouriteButton from "../buttons/FavouriteButton";
+import ShoppingCartButton from "../buttons/ShoppingCartButton";
 
 import { createQuantityDecreaseHandler } from "@/helpers/shoppingCartHelpers";
 import useQuantity from "@/hooks/useQuantity";

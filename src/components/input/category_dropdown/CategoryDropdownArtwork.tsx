@@ -6,11 +6,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Dropdown, Form } from "react-bootstrap";
 import { FormikProps } from "formik";
 
+import LoadingSpinner from "@/components/layout/LoadingSpinner";
 import { useI18n } from "@/components/providers/I18nProvider";
 
 import { Category } from "@/fetching/types";
-
-import LoadingSpinner from "../LoadingSpinner";
 
 import { useCategories } from "@/hooks/useCategories";
 

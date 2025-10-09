@@ -3,11 +3,10 @@ import React from "react";
 
 import { Col, Dropdown } from "react-bootstrap";
 
+import LoadingSpinner from "@/components/layout/LoadingSpinner";
 import { useI18n } from "@/components/providers/I18nProvider";
 
 import { Category } from "@/fetching/types";
-
-import LoadingSpinner from "../LoadingSpinner";
 
 import { useCategories } from "@/hooks/useCategories";
 

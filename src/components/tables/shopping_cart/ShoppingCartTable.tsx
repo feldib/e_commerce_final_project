@@ -3,10 +3,11 @@ import React from "react";
 
 import { Row } from "react-bootstrap";
 
-import ShoppingCartDataLines from "@/components/datalines/ShoppingCartDataLines";
 import { useI18n } from "@/components/providers/I18nProvider";
 
 import { Artwork } from "@/fetching/types";
+
+import ShoppingCartDataLines from "./ShoppingCartDataLines";
 
 import { renderData } from "@/helpers/tableHelpers";
 import useLoading from "@/hooks/useLoading";

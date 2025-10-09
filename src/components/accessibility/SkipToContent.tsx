@@ -3,7 +3,7 @@ import React from "react";
 
 import { useI18n } from "../providers/I18nProvider";
 
-const SkipToContentLink = () => {
+const SkipToContent = () => {
   const { t } = useI18n();
 
   return (
@@ -13,4 +13,4 @@ const SkipToContentLink = () => {
   );
 };
 
-export default SkipToContentLink;
+export default SkipToContent;

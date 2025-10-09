@@ -9,11 +9,11 @@ import { ToastContainer } from "react-toastify";
 import { TAG_SEPARATORS } from "@/utils/constants";
 
 import FloatingBackButton from "@/components/buttons/FloatingBackButton";
-import ArtworkImagesInput from "@/components/input/ArtworkImagesInput";
-import ArtworkThumbnailInput from "@/components/input/ArtworkThumbnailInput";
-import CategoryDropdownArtwork from "@/components/input/CategoryDropdownArtwork";
-import NewArtworkInputComponent from "@/components/input/NewArtworkInputComponent";
-import PageTitle from "@/components/PageTitle";
+import ArtworkImagesInput from "@/components/input/artwork/ArtworkImagesInput";
+import ArtworkThumbnailInput from "@/components/input/artwork/ArtworkThumbnailInput";
+import NewArtworkInputComponent from "@/components/input/artwork/NewArtworkInputComponent";
+import CategoryDropdownArtwork from "@/components/input/category_dropdown/CategoryDropdownArtwork";
+import PageTitle from "@/components/layout/PageTitle";
 
 import useAddNewArtworkPage from "./useAddNewArtworkPage";
 

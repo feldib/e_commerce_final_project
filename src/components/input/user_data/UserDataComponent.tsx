@@ -11,8 +11,8 @@ import { Col, Container, Form, Row } from "react-bootstrap";
 import { FormikProps } from "formik";
 import { ToastContainer } from "react-toastify";
 
+import SubPageTitle from "@/components/layout/SubPageTitle";
 import { useI18n } from "@/components/providers/I18nProvider";
-import SubPageTitle from "@/components/SubPageTitle";
 
 import { CheckoutFormData } from "@/fetching/types";
 

@@ -10,7 +10,7 @@ import { showSuccessToast } from "@/utils/toastUtils";
 
 import { replaceThumbnail } from "@/fetching/fetching";
 
-import { useI18n } from "../providers/I18nProvider";
+import { useI18n } from "../../providers/I18nProvider";
 
 import { validateNewFile } from "@/helpers/fileValidation";
 

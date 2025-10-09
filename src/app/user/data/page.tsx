@@ -3,7 +3,7 @@ import React from "react";
 
 import { useFormik } from "formik";
 
-import UserDataChangingComponent from "@/components/input/UserDataComponent";
+import UserDataChangingComponent from "@/components/input/user_data/UserDataComponent";
 import { useI18n } from "@/components/providers/I18nProvider";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
 

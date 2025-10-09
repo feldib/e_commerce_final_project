@@ -4,11 +4,11 @@ import React from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 
 import { useI18n } from "@/components/providers/I18nProvider";
-import Queries from "@/components/Queries";
+import Queries from "@/components/search/Queries";
 
 import { Category, SearchFormikInstance, SearchParams } from "@/fetching/types";
 
-import CategoryDropdownSearch from "./CategoryDropdownSearch";
+import CategoryDropdownSearch from "../category_dropdown/CategoryDropdownSearch";
 import NumberOfArtworksDropdown from "./NumberOfArtworksDropdown";
 import OrderByDropdown from "./OrderByDropdown";
 import PriceRangeInput from "./PriceRangeInput";
@@ -64,10 +64,7 @@ function ArtworkSearchFields({
         what={t("components.search_fields.artist")}
       />
 
-      <PriceRangeInput
-        formik={formik}
-        triggerSearchWithUpdatedValues={triggerSearchWithUpdatedValues}
-      />
+      <PriceRangeInput formik={formik} />
 
       <Row className="mx-auto">
         <CategoryDropdownSearch

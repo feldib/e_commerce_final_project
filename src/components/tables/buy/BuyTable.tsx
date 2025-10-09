@@ -4,10 +4,11 @@ import React from "react";
 
 import { Row } from "react-bootstrap";
 
-import BuyTableDataLines from "@/components/datalines/BuyTableDataLines";
 import { useI18n } from "@/components/providers/I18nProvider";
 
 import { Artwork, ShoppingCartItem } from "@/fetching/types";
+
+import BuyTableDataLines from "./BuyTableDataLines";
 
 import { getShoppingCartFromLocalStorage } from "@/helpers/shoppingCartHelpers";
 import { renderData } from "@/helpers/tableHelpers";

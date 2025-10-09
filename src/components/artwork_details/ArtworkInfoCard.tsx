@@ -10,24 +10,24 @@ import { useI18n } from "@/components/providers/I18nProvider";
 
 import { Artwork } from "@/fetching/types";
 
-import FavouriteButton from "./buttons/FavouriteButton";
-import ShoppingCartButton from "./buttons/ShoppingCartButton";
+import FavouriteButton from "../buttons/FavouriteButton";
+import ShoppingCartButton from "../buttons/ShoppingCartButton";
 
 import { createQuantityDecreaseHandler } from "@/helpers/shoppingCartHelpers";
 
-type ArtworkDetailsInfoCardProps = {
+type ArtworkInfoCardProps = {
   artwork_id: number;
   artwork: Artwork;
   quantity: number;
   setQuantity: React.Dispatch<React.SetStateAction<number>>;
 };
 
-function ArtworkDetailsInfoCard({
+function ArtworkInfoCard({
   artwork_id,
   artwork,
   quantity,
   setQuantity,
-}: ArtworkDetailsInfoCardProps) {
+}: ArtworkInfoCardProps) {
   const { t } = useI18n();
 
   const handleQuantityDecrease = createQuantityDecreaseHandler(
@@ -69,4 +69,4 @@ function ArtworkDetailsInfoCard({
   );
 }
 
-export default ArtworkDetailsInfoCard;
+export default ArtworkInfoCard;

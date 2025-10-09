@@ -17,12 +17,11 @@ import {
   showReviewSaveErrorToast,
 } from "@/utils/toastUtils";
 
+import InputComponent from "@/components/input/InputComponent";
 import { useI18n } from "@/components/providers/I18nProvider";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
 
 import { leaveReview } from "@/fetching/fetching";
-
-import InputComponent from "./input/InputComponent";
 
 import { createHandleSubmitClick } from "@/helpers/formValidationHelpers";
 import { useReviewSchema } from "@/hooks/useValidationSchemas";

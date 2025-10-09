@@ -7,7 +7,7 @@ import { USERS_URL } from "@/utils/constants";
 
 import { useI18n } from "@/components/providers/I18nProvider";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
-import Recommendations from "@/components/Recommendations";
+import Recommendations from "@/components/recommendations/Recommendations";
 
 function HomePage() {
   const { user, loggedIn } = React.useContext(UserDataContext);

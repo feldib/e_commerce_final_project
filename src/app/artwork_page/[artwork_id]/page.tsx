@@ -5,7 +5,7 @@ import { useParams, useRouter } from "next/navigation";
 
 import { Container } from "react-bootstrap";
 
-import ArtworkDetails from "@/components/ArtworkDetails";
+import ArtworkDetails from "@/components/artwork_details/ArtworkDetails";
 import FloatingBackButton from "@/components/buttons/FloatingBackButton";
 
 import { Artwork } from "@/fetching/types";

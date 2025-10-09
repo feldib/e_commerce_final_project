@@ -18,11 +18,10 @@ import {
   showReplySentSuccessToast,
 } from "@/utils/toastUtils";
 
+import InputComponent from "@/components/input/InputComponent";
 import { useI18n } from "@/components/providers/I18nProvider";
 
 import { replyToMessage } from "@/fetching/fetching";
-
-import InputComponent from "./input/InputComponent";
 
 import { createHandleSubmitClick } from "@/helpers/formValidationHelpers";
 import { useMessageReplySchema } from "@/hooks/useValidationSchemas";

@@ -12,7 +12,7 @@ import { ToastContainer } from "react-toastify";
 import { showLoginErrorToast, showLoginSuccessToast } from "@/utils/toastUtils";
 
 import InputComponent from "@/components/input/InputComponent";
-import PageTitle from "@/components/PageTitle";
+import PageTitle from "@/components/layout/PageTitle";
 import { useI18n } from "@/components/providers/I18nProvider";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
 

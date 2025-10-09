@@ -9,11 +9,11 @@ import { UserDataContext } from "@/components/providers/UserDataProvider";
 
 import { Artwork, Review } from "@/fetching/types";
 
-import ArtworkDetailsDescriptionCard from "./ArtworkDetailsDescriptionCard";
-import ArtworkDetailsInfoCard from "./ArtworkDetailsInfoCard";
-import ArtworkReview from "./ArtworkReview";
-import ArtworkPictureCarousel from "./carousels/ArtworkPictureCarousel";
-import LeaveReview from "./LeaveReview";
+import ArtworkPictureCarousel from "../carousels/ArtworkPictureCarousel";
+import ArtworkReview from "../reviews/ArtworkReview";
+import LeaveReview from "../reviews/LeaveReview";
+import ArtworkDescriptionCard from "./ArtworkDescriptionCard";
+import ArtworkInfoCard from "./ArtworkInfoCard";
 
 import useAxios from "@/hooks/useAxios";
 import useLoading from "@/hooks/useLoading";
@@ -56,14 +56,14 @@ function ArtworkDetails({ artwork_id, artwork }: ArtworkDetailsProps) {
   return (
     <>
       <Row className="mb-5 mt-5">
-        <ArtworkDetailsInfoCard
+        <ArtworkInfoCard
           artwork={artwork}
           artwork_id={artwork_id}
           quantity={quantity}
           setQuantity={setQuantity}
         />
 
-        <ArtworkDetailsDescriptionCard
+        <ArtworkDescriptionCard
           artwork={artwork}
           artwork_id={artwork_id}
           quantity={quantity}

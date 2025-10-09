@@ -3,10 +3,11 @@ import React from "react";
 
 import { Col, Row } from "react-bootstrap";
 
-import UserTableDataLines from "@/components/datalines/UserTableDataLines";
 import { useI18n } from "@/components/providers/I18nProvider";
 
 import { User } from "@/fetching/types";
+
+import UserTableDataLines from "./UserTableDataLines";
 
 import { renderData } from "@/helpers/tableHelpers";
 import useLoading from "@/hooks/useLoading";

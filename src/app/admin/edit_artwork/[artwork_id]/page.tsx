@@ -10,11 +10,11 @@ import { TAG_SEPARATORS } from "@/utils/constants";
 import { showErrorToast, showSuccessToast } from "@/utils/toastUtils";
 
 import FloatingBackButton from "@/components/buttons/FloatingBackButton";
-import ArtworkImagesInput from "@/components/input/ArtworkImagesInput";
-import ArtworkThumbnailInput from "@/components/input/ArtworkThumbnailInput";
-import CategoryDropdownArtwork from "@/components/input/CategoryDropdownArtwork";
-import ChangeArtworkDataInputComponent from "@/components/input/ChangeArtworkDataInputComponent";
-import PageTitle from "@/components/PageTitle";
+import ArtworkImagesInput from "@/components/input/artwork/ArtworkImagesInput";
+import ArtworkThumbnailInput from "@/components/input/artwork/ArtworkThumbnailInput";
+import ChangeArtworkDataInputComponent from "@/components/input/artwork/ChangeArtworkDataInputComponent";
+import CategoryDropdownArtwork from "@/components/input/category_dropdown/CategoryDropdownArtwork";
+import PageTitle from "@/components/layout/PageTitle";
 
 import { updateArtworkData } from "@/fetching/fetching";
 

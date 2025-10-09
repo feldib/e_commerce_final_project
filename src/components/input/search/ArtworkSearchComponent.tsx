@@ -6,8 +6,8 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 
 import { useI18n } from "@/components/providers/I18nProvider";
-import AdminArtworkTable from "@/components/tables/AdminArtworkTable";
-import BuyTable from "@/components/tables/BuyTable";
+import AdminArtworkTable from "@/components/tables/admin/AdminArtworkTable";
+import BuyTable from "@/components/tables/buy/BuyTable";
 
 import { getArtworkSearchResults } from "@/fetching/fetching";
 import { Artwork, Category, SearchParams } from "@/fetching/types";

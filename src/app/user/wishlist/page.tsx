@@ -3,9 +3,9 @@ import React from "react";
 
 import { Col, Container, Row } from "react-bootstrap";
 
+import SubPageTitle from "@/components/layout/SubPageTitle";
 import { useI18n } from "@/components/providers/I18nProvider";
-import SubPageTitle from "@/components/SubPageTitle";
-import BuyTable from "@/components/tables/BuyTable";
+import BuyTable from "@/components/tables/buy/BuyTable";
 
 import { Artwork } from "@/fetching/types";
 

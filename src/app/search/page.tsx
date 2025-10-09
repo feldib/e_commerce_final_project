@@ -3,8 +3,8 @@ import React from "react";
 
 import { Container } from "react-bootstrap";
 
-import ArtworkSearchComponent from "@/components/input/ArtworkSearchComponent";
-import PageTitle from "@/components/PageTitle";
+import ArtworkSearchComponent from "@/components/input/search/ArtworkSearchComponent";
+import PageTitle from "@/components/layout/PageTitle";
 import { useI18n } from "@/components/providers/I18nProvider";
 
 function Search() {

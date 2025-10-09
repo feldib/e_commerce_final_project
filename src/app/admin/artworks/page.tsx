@@ -7,8 +7,8 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Col, Container, Row } from "react-bootstrap";
 
-import ArtworkSearchComponent from "@/components/input/ArtworkSearchComponent";
-import PageTitle from "@/components/PageTitle";
+import ArtworkSearchComponent from "@/components/input/search/ArtworkSearchComponent";
+import PageTitle from "@/components/layout/PageTitle";
 import { useI18n } from "@/components/providers/I18nProvider";
 
 function Search() {

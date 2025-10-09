@@ -3,10 +3,11 @@ import React from "react";
 
 import { Row } from "react-bootstrap";
 
-import AdminArtworkTableDatalines from "@/components/datalines/AdminArtworkTableDatalines";
 import { useI18n } from "@/components/providers/I18nProvider";
 
 import { Artwork } from "@/fetching/types";
+
+import AdminArtworkTableDatalines from "./AdminArtworkTableDatalines";
 
 import { renderData } from "@/helpers/tableHelpers";
 import useLoading from "@/hooks/useLoading";

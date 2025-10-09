@@ -5,10 +5,9 @@ import React from "react";
 import { Col, Row } from "react-bootstrap";
 
 import { useI18n } from "@/components/providers/I18nProvider";
+import BuyTable from "@/components/tables/buy/BuyTable";
 
 import { Artwork } from "@/fetching/types";
-
-import BuyTable from "./tables/BuyTable";
 
 type OrderSummaryComponentProps = {
   title?: string;

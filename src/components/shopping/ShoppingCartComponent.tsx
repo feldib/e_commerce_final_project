@@ -7,7 +7,7 @@ import { Button, Col, Row } from "react-bootstrap";
 
 import { useI18n } from "@/components/providers/I18nProvider";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
-import ShoppingCartTable from "@/components/tables/ShoppingCartTable";
+import ShoppingCartTable from "@/components/tables/shopping_cart/ShoppingCartTable";
 
 import useShoppingList from "@/hooks/useShoppingList";
 

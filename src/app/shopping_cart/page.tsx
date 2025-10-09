@@ -3,9 +3,9 @@ import React from "react";
 
 import { Container } from "react-bootstrap";
 
-import PageTitle from "@/components/PageTitle";
+import PageTitle from "@/components/layout/PageTitle";
 import { useI18n } from "@/components/providers/I18nProvider";
-import ShoppingCartComponent from "@/components/ShoppingCartComponent";
+import ShoppingCartComponent from "@/components/shopping/ShoppingCartComponent";
 
 function ShoppingCartPage() {
   const { t } = useI18n();

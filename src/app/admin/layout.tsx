@@ -12,8 +12,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Container, Row } from "react-bootstrap";
 
+import PageTitle from "@/components/layout/PageTitle";
 import SubNavbar from "@/components/navbars/SubNavbar";
-import PageTitle from "@/components/PageTitle";
 import { useI18n } from "@/components/providers/I18nProvider";
 
 import {

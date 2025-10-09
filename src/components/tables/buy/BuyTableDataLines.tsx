@@ -9,11 +9,10 @@ import { SERVER_URL, UI_DIMENSIONS } from "@/utils/constants";
 
 import FavouriteButton from "@/components/buttons/FavouriteButton";
 import ShoppingCartButton from "@/components/buttons/ShoppingCartButton";
+import { useI18n } from "@/components/providers/I18nProvider";
 import { UserDataContext } from "@/components/providers/UserDataProvider";
 
 import { Artwork } from "@/fetching/types";
-
-import { useI18n } from "../providers/I18nProvider";
 
 import { createQuantityDecreaseHandler } from "@/helpers/shoppingCartHelpers";
 import { useCategories } from "@/hooks/useCategories";
