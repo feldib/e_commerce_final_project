@@ -28,39 +28,39 @@ function AdminPage({ children }: { children: React.ReactNode }) {
   redirectIfNotloggedIn(router);
   redirectIfNotAdmin(router);
 
+  const links = [
+    {
+      linkText: t("app.admin.layout.artworks"),
+      linkTo: "artworks",
+      icon: faPalette,
+    },
+    {
+      linkText: t("app.admin.layout.users"),
+      linkTo: "users",
+      icon: faPerson,
+    },
+    {
+      linkText: t("app.admin.layout.orders"),
+      linkTo: "orders",
+      icon: faClockRotateLeft,
+    },
+    {
+      linkText: t("app.admin.layout.reviews"),
+      linkTo: "reviews",
+      icon: faStar,
+    },
+    {
+      linkText: t("app.admin.layout.messages"),
+      linkTo: "messages",
+      icon: faMessage,
+    },
+  ];
+
   return (
     <Container className="pb-5">
       <PageTitle title={t("app.admin.layout.title")} />
 
-      <SubNavbar
-        linkObjects={[
-          {
-            linkText: t("app.admin.layout.artworks"),
-            linkTo: "artworks",
-            icon: faPalette,
-          },
-          {
-            linkText: t("app.admin.layout.users"),
-            linkTo: "users",
-            icon: faPerson,
-          },
-          {
-            linkText: t("app.admin.layout.orders"),
-            linkTo: "orders",
-            icon: faClockRotateLeft,
-          },
-          {
-            linkText: t("app.admin.layout.reviews"),
-            linkTo: "reviews",
-            icon: faStar,
-          },
-          {
-            linkText: t("app.admin.layout.messages"),
-            linkTo: "messages",
-            icon: faMessage,
-          },
-        ]}
-      />
+      <SubNavbar linkObjects={links} />
 
       <Row className="pb-5" id="subpage">
         {children}
