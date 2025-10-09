@@ -16,12 +16,19 @@ import { useI18n } from "../../providers/I18nProvider";
 
 import { validateNewFile } from "@/helpers/fileValidation";
 
-interface ArtworkThumbnailInputProps<T extends Record<string, unknown>> {
+type ArtworkThumbnailInputProps<T extends Record<string, unknown>> = {
   formik: FormikProps<T>;
-  isEdit?: boolean;
-  artworkId?: number;
   label: string;
-}
+} & (
+  | {
+      isEdit: true;
+      artworkId: number; // Required when editing
+    }
+  | {
+      isEdit?: false;
+      artworkId?: never; // Not allowed when adding
+    }
+);
 
 function ArtworkThumbnailInput<T extends Record<string, unknown>>({
   formik,
@@ -48,12 +55,11 @@ function ArtworkThumbnailInput<T extends Record<string, unknown>>({
       // In edit mode, we need to validate and upload the file
       if (isEdit) {
         try {
-          if (artworkId) {
-            await replaceThumbnail(artworkId, file);
-            showSuccessToast(
-              t("app.admin.edit_artwork.thumbnail_uploaded_successfully")
-            );
-          }
+          // TypeScript assertion: artworkId is guaranteed to be defined when isEdit is true
+          await replaceThumbnail(artworkId as number, file);
+          showSuccessToast(
+            t("app.admin.edit_artwork.thumbnail_uploaded_successfully")
+          );
           // We create an object URL in both modes
           formik.setFieldValue("thumbnail", URL.createObjectURL(file));
         } catch {

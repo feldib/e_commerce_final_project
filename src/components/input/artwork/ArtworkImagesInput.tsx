@@ -16,12 +16,19 @@ import { addNewOtherPicture, removePicture } from "@/fetching/fetching";
 
 import { validateNewFile } from "@/helpers/fileValidation";
 
-interface ArtworkImagesInputProps<T extends Record<string, unknown>> {
+type ArtworkImagesInputProps<T extends Record<string, unknown>> = {
   formik: FormikProps<T>;
-  isEdit?: boolean;
-  artworkId?: number;
   label: string;
-}
+} & (
+  | {
+      isEdit: true;
+      artworkId: number; // Required when editing
+    }
+  | {
+      isEdit?: false;
+      artworkId?: never; // Not allowed when adding
+    }
+);
 
 function ArtworkImagesInput<T extends Record<string, unknown>>({
   formik,
@@ -48,17 +55,16 @@ function ArtworkImagesInput<T extends Record<string, unknown>>({
       // In edit mode, we need to validate and upload the file
       if (isEdit) {
         try {
-          if (artworkId) {
-            await addNewOtherPicture(artworkId, file);
-            formik.setFieldValue("other_pictures", [
-              ...(formik.values.other_pictures as string[]),
-              URL.createObjectURL(file),
-            ]);
-            e.target.value = ""; // Reset the input for next upload
-            showSuccessToast(
-              t("app.admin.edit_artwork.image_uploaded_successfully")
-            );
-          }
+          // TypeScript assertion: artworkId is guaranteed to be defined when isEdit is true
+          await addNewOtherPicture(artworkId as number, file);
+          formik.setFieldValue("other_pictures", [
+            ...(formik.values.other_pictures as string[]),
+            URL.createObjectURL(file),
+          ]);
+          e.target.value = ""; // Reset the input for next upload
+          showSuccessToast(
+            t("app.admin.edit_artwork.image_uploaded_successfully")
+          );
         } catch {
           showErrorToast(t("app.admin.edit_artwork.failed_to_upload_image"));
           e.target.value = ""; // Reset the input
@@ -83,9 +89,8 @@ function ArtworkImagesInput<T extends Record<string, unknown>>({
         ) {
           // This is an existing image from server, remove it
           const fileName = pic.split("/").pop() || "";
-          if (artworkId) {
-            await removePicture(artworkId, fileName);
-          }
+          // TypeScript assertion: artworkId is guaranteed to be defined when isEdit is true
+          await removePicture(artworkId as number, fileName);
         }
 
         // Remove from the form state
