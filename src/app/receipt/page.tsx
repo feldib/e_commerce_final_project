@@ -1,10 +1,9 @@
 "use client";
 import React, { useEffect, useState } from "react";
 
-import Link from "next/link";
+import { Container } from "react-bootstrap";
 
-import { Button, Col, Container, Row } from "react-bootstrap";
-
+import BackToShopButton from "@/components/buttons/BackToShopButton";
 import PageTitle from "@/components/layout/PageTitle";
 import { useI18n } from "@/components/providers/I18nProvider";
 import OrderSummaryComponent from "@/components/shopping/OrderSummaryComponent";
@@ -36,17 +35,7 @@ function ReceiptPage() {
       <PageTitle title={t("app.receipt.title")} />
 
       <OrderSummaryComponent
-        button={
-          <Row>
-            <Col className="text-center mb-5">
-              <Link href="/">
-                <Button className="submit" onClick={handleBackToShopClick}>
-                  {t("app.receipt.back_to_shop")}
-                </Button>
-              </Link>
-            </Col>
-          </Row>
-        }
+        button={<BackToShopButton onClick={handleBackToShopClick} />}
         items={currentOrderData.items}
         totalCost={currentOrderData.totalCost}
       />

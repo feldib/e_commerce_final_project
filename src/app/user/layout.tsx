@@ -30,39 +30,39 @@ function ProfilePage({ children }: React.PropsWithChildren<React.ReactNode>) {
     return <PageTitle title={`${first_name}'s page`} />;
   });
 
+  const links = [
+    {
+      linkText: t("app.user.layout.user_data"),
+      linkTo: "data",
+      icon: faInfoCircle,
+    },
+    {
+      linkText: t("app.user.layout.order_history"),
+      linkTo: "order_history",
+      icon: faClockRotateLeft,
+    },
+    {
+      linkText: t("app.user.layout.wishlist"),
+      linkTo: "wishlist",
+      icon: faHeart,
+    },
+    {
+      linkText: t("app.user.layout.reviews"),
+      linkTo: "reviews",
+      icon: faStar,
+    },
+    {
+      linkText: t("app.user.layout.shopping_cart"),
+      linkTo: "shopping_cart",
+      icon: faShoppingCart,
+    },
+  ];
+
   return (
     <Container>
       {title}
 
-      <SubNavbar
-        linkObjects={[
-          {
-            linkText: t("app.user.layout.user_data"),
-            linkTo: "data",
-            icon: faInfoCircle,
-          },
-          {
-            linkText: t("app.user.layout.order_history"),
-            linkTo: "order_history",
-            icon: faClockRotateLeft,
-          },
-          {
-            linkText: t("app.user.layout.wishlist"),
-            linkTo: "wishlist",
-            icon: faHeart,
-          },
-          {
-            linkText: t("app.user.layout.reviews"),
-            linkTo: "reviews",
-            icon: faStar,
-          },
-          {
-            linkText: t("app.user.layout.shopping_cart"),
-            linkTo: "shopping_cart",
-            icon: faShoppingCart,
-          },
-        ]}
-      />
+      <SubNavbar linkObjects={links} />
 
       <Row className="pb-5" id="subpage">
         {children}
