@@ -16,14 +16,12 @@ import ShoppingCartButton from "../buttons/ShoppingCartButton";
 import { createQuantityDecreaseHandler } from "@/helpers/shoppingCartHelpers";
 
 type ArtworkInfoCardProps = {
-  artwork_id: number;
   artwork: Artwork;
   quantity: number;
   setQuantity: React.Dispatch<React.SetStateAction<number>>;
 };
 
 function ArtworkInfoCard({
-  artwork_id,
   artwork,
   quantity,
   setQuantity,
@@ -53,12 +51,12 @@ function ArtworkInfoCard({
             <div className="col text-center px-3" style={{ maxWidth: "auto" }}>
               <button onClick={handleQuantityDecrease}>
                 <ShoppingCartButton
-                  artwork_id={artwork_id}
+                  artwork_id={artwork.id}
                   quantity={quantity}
                 />
               </button>
 
-              <FavouriteButton artwork_id={artwork_id} />
+              <FavouriteButton artwork_id={artwork.id} />
             </div>
           </div>
         </Card.Body>

@@ -26,10 +26,10 @@ type UserDataInputComponentProps = {
   type: string;
   placeholder: string;
   icon: IconDefinition;
-  showAsterisk?: boolean;
+  touched: boolean;
   error?: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
   value: string;
   changeUserData?: boolean;
 };
@@ -40,7 +40,7 @@ function UserDataInputComponent({
   type,
   placeholder,
   icon,
-  showAsterisk = false,
+  touched,
   error,
   onChange,
   onBlur,
@@ -73,7 +73,7 @@ function UserDataInputComponent({
   return (
     <Form.Group className="pb-3">
       <Form.Label>{label}</Form.Label>
-      {showAsterisk && (
+      {error && touched && (
         <FontAwesomeIcon
           className="mx-3"
           icon={faAsterisk}

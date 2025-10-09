@@ -16,14 +16,12 @@ type ShoppingCartTableProps = {
   dataLines: Artwork[];
   recommendation?: boolean;
   changeCosts: (index: number, cost: number) => void;
-  theadNeeded: boolean;
 };
 
 function ShoppingCartTable({
   dataLines,
   recommendation = false,
   changeCosts,
-  theadNeeded,
 }: ShoppingCartTableProps) {
   const { t } = useI18n();
 
@@ -53,28 +51,26 @@ function ShoppingCartTable({
   return (
     <Row className="text-center">
       <table>
-        {theadNeeded && (
-          <thead>
-            <tr>
-              <th aria-label={t("common.aria_label_thumbnail")}></th>
-              <th>{t("common.title")}</th>
-              <th>{t("common.artist")}</th>
-              <th>{t("common.total_cost")}</th>
-              <th>{t("common.quantity")}</th>
-              <th
-                className={`${recommendation ? "d-none" : "d-none d-md-table-cell"}`}
-              >
-                {t("common.tags")}
-              </th>
-              <th
-                className={`${recommendation ? "d-none" : "d-none d-md-table-cell"}`}
-              >
-                {t("common.categories")}
-              </th>
-              <th aria-label={t("common.aria_label_actions")}></th>
-            </tr>
-          </thead>
-        )}
+        <thead>
+          <tr>
+            <th aria-label={t("common.aria_label_thumbnail")}></th>
+            <th>{t("common.title")}</th>
+            <th>{t("common.artist")}</th>
+            <th>{t("common.total_cost")}</th>
+            <th>{t("common.quantity")}</th>
+            <th
+              className={`${recommendation ? "d-none" : "d-none d-md-table-cell"}`}
+            >
+              {t("common.tags")}
+            </th>
+            <th
+              className={`${recommendation ? "d-none" : "d-none d-md-table-cell"}`}
+            >
+              {t("common.categories")}
+            </th>
+            <th aria-label={t("common.aria_label_actions")}></th>
+          </tr>
+        </thead>
 
         <tbody>{dataLinesGenerated}</tbody>
       </table>

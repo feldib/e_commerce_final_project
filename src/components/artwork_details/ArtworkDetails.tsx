@@ -58,14 +58,12 @@ function ArtworkDetails({ artwork_id, artwork }: ArtworkDetailsProps) {
       <Row className="mb-5 mt-5">
         <ArtworkInfoCard
           artwork={artwork}
-          artwork_id={artwork_id}
           quantity={quantity}
           setQuantity={setQuantity}
         />
 
         <ArtworkDescriptionCard
           artwork={artwork}
-          artwork_id={artwork_id}
           quantity={quantity}
           setQuantity={setQuantity}
         />

@@ -16,7 +16,7 @@ import { useI18n } from "@/components/providers/I18nProvider";
 
 import { CheckoutFormData } from "@/fetching/types";
 
-import UserDataInputComponents from "./UserDataInputComponent";
+import UserDataInputComponent from "./UserDataInputComponent";
 
 type UserDataChangingComponentProps = {
   title: string;
@@ -45,7 +45,7 @@ function UserDataChangingComponent({
       <Row className="mx-auto mb-5 floating-element">
         <Row>
           <Col className="mx-5 mb-5">
-            <UserDataInputComponents
+            <UserDataInputComponent
               changeUserData={changeUserData}
               error={formik.errors.email}
               icon={faUser}
@@ -54,12 +54,12 @@ function UserDataChangingComponent({
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
               placeholder={t("common.enter_email")}
-              showAsterisk={!!(formik.errors.email && formik.touched.email)}
+              touched={!!formik.touched.email}
               type="email"
               value={formik.values.email}
             />
 
-            <UserDataInputComponents
+            <UserDataInputComponent
               changeUserData={changeUserData}
               error={formik.errors.first_name}
               icon={faQuestion}
@@ -68,14 +68,12 @@ function UserDataChangingComponent({
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
               placeholder={t("app.register.enter_first_name")}
-              showAsterisk={
-                !!formik.errors.first_name && !!formik.touched.first_name
-              }
+              touched={!!formik.touched.first_name}
               type="text"
               value={formik.values.first_name}
             />
 
-            <UserDataInputComponents
+            <UserDataInputComponent
               changeUserData={changeUserData}
               error={formik.errors.last_name}
               icon={faQuestion}
@@ -84,14 +82,12 @@ function UserDataChangingComponent({
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
               placeholder={t("app.register.enter_last_name")}
-              showAsterisk={
-                !!formik.errors.last_name && !!formik.touched.last_name
-              }
+              touched={!!formik.touched.last_name}
               type="text"
               value={formik.values.last_name}
             />
 
-            <UserDataInputComponents
+            <UserDataInputComponent
               changeUserData={changeUserData}
               error={formik.errors.address}
               icon={faHouse}
@@ -100,12 +96,12 @@ function UserDataChangingComponent({
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
               placeholder={t("components.user_data.enter_address")}
-              showAsterisk={!!formik.errors.address && !!formik.touched.address}
+              touched={!!formik.touched.address}
               type="textarea"
               value={formik.values.address}
             />
 
-            <UserDataInputComponents
+            <UserDataInputComponent
               changeUserData={changeUserData}
               error={formik.errors.phone_number}
               icon={faPhone}
@@ -114,9 +110,7 @@ function UserDataChangingComponent({
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
               placeholder={t("components.user_data.enter_phone_number")}
-              showAsterisk={
-                !!formik.errors.phone_number && !!formik.touched.phone_number
-              }
+              touched={!!formik.touched.phone_number}
               type="text"
               value={formik.values.phone_number}
             />
