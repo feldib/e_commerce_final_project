@@ -1,28 +1,31 @@
 import React from "react";
 
-import {
-  addToFeatured,
-  isFeatured,
-  removeFromFeatured,
-} from "@/fetching/fetching";
-
-import Trophy from "../../svg_components/Trophy/Trophy";
 import AddOrRemoveFromButton from "../AddOrRemoveButton/AddOrRemoveButton";
+import useFeatureButton from "./useFeatureButton";
 
 type FeatureButtonProps = {
   artwork_id: number;
 };
 
 function FeatureButton({ artwork_id }: FeatureButtonProps) {
+  const {
+    addToAdded,
+    filledButton,
+    isAdded,
+    regularButton,
+    removeFromAdded,
+    toastWarningMessage,
+  } = useFeatureButton({ artwork_id });
+
   return (
     <AddOrRemoveFromButton
-      addToAdded={addToFeatured}
+      addToAdded={addToAdded}
       artwork_id={artwork_id}
-      filledButton={<Trophy filled height="25px" />}
-      isAdded={isFeatured}
-      regularButton={<Trophy height="25px" />}
-      removeFromAdded={removeFromFeatured}
-      toastWarningMessage="Sign in as an admin to add to favourites "
+      filledButton={filledButton}
+      isAdded={isAdded}
+      regularButton={regularButton}
+      removeFromAdded={removeFromAdded}
+      toastWarningMessage={toastWarningMessage}
     />
   );
 }

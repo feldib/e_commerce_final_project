@@ -5,15 +5,11 @@ import React from "react";
 import { Card, Col, Row } from "react-bootstrap";
 import { ToastContainer } from "react-toastify";
 
-import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
-
 import { Artwork, Tag } from "@/fetching/types";
 
 import FavouriteButton from "../../buttons/FavouriteButton/FavouriteButton";
 import ShoppingCartButton from "../../buttons/ShoppingCartButton/ShoppingCartButton";
-
-import { createQuantityDecreaseHandler } from "@/helpers/shoppingCartHelpers";
-import { useCategories } from "@/hooks/useCategories";
+import useArtworkDescriptionCard from "./useArtworkDescriptionCard";
 
 type ArtworkDescriptionCardProps = {
   artwork: Artwork;
@@ -26,13 +22,8 @@ function ArtworkDescriptionCard({
   quantity,
   setQuantity,
 }: ArtworkDescriptionCardProps) {
-  const { t, locale } = useI18n();
-  const { getCategoryNameById } = useCategories(locale);
-
-  const handleQuantityDecrease = createQuantityDecreaseHandler(
-    quantity,
-    setQuantity
-  );
+  const { getCategoryNameById, handleQuantityDecrease, t } =
+    useArtworkDescriptionCard({ quantity, setQuantity });
 
   return (
     <Col className="mb-3" md={8}>

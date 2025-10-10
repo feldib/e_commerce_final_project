@@ -6,14 +6,11 @@ import { Card, Col } from "react-bootstrap";
 
 import { SERVER_URL } from "@/utils/constants";
 
-import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
-
 import { Artwork } from "@/fetching/types";
 
 import FavouriteButton from "../../buttons/FavouriteButton/FavouriteButton";
 import ShoppingCartButton from "../../buttons/ShoppingCartButton/ShoppingCartButton";
-
-import { createQuantityDecreaseHandler } from "@/helpers/shoppingCartHelpers";
+import useArtworkInfoCard from "./useArtworkInfoCard";
 
 type ArtworkInfoCardProps = {
   artwork: Artwork;
@@ -26,12 +23,10 @@ function ArtworkInfoCard({
   quantity,
   setQuantity,
 }: ArtworkInfoCardProps) {
-  const { t } = useI18n();
-
-  const handleQuantityDecrease = createQuantityDecreaseHandler(
+  const { handleQuantityDecrease, t } = useArtworkInfoCard({
     quantity,
-    setQuantity
-  );
+    setQuantity,
+  });
 
   return (
     <Col className="mb-3" md={4} sm={12}>

@@ -4,9 +4,9 @@ import React from "react";
 
 import { Col, Dropdown } from "react-bootstrap";
 
-import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
-
 import { SearchFormikInstance, SearchParams } from "@/fetching/types";
+
+import useNumberOfArtworksDropdown from "./useNumberOfArtworksDropdown";
 
 type NumberOfArtworksDropdownProps = {
   formik: SearchFormikInstance;
@@ -19,12 +19,10 @@ function NumberOfArtworksDropdown({
   formik,
   triggerSearchWithUpdatedValues,
 }: NumberOfArtworksDropdownProps) {
-  const { t } = useI18n();
-
-  const handleNumberOfArtworksSelect = (e: string | null) => {
-    formik.setFieldValue("n", Number(e));
-    triggerSearchWithUpdatedValues({ n: Number(e) });
-  };
+  const { handleNumberOfArtworksSelect, t } = useNumberOfArtworksDropdown({
+    formik,
+    triggerSearchWithUpdatedValues,
+  });
 
   return (
     <Col className="mb-3">

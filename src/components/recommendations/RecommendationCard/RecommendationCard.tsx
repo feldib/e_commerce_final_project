@@ -7,35 +7,20 @@ import { Card, Col, Row } from "react-bootstrap";
 
 import { SERVER_URL, UI_DIMENSIONS } from "@/utils/constants";
 
-import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
-import { UserDataContext } from "@/components/providers/UserDataProvider/UserDataProvider";
-
 import { Artwork } from "@/fetching/types";
 
 import FavouriteButton from "../../buttons/FavouriteButton/FavouriteButton";
 import ShoppingCartButton from "../../buttons/ShoppingCartButton/ShoppingCartButton";
-
-import { createQuantityDecreaseHandler } from "@/helpers/shoppingCartHelpers";
-import useQuantity from "@/hooks/useQuantity";
+import useRecommendationCard from "./useRecommendationCard";
 
 type RecommendationCardProps = {
   artwork: Artwork;
 };
 
 function RecommendationCard({ artwork }: RecommendationCardProps) {
-  const { t } = useI18n();
-  const { loggedIn } = React.useContext(UserDataContext);
-
-  const { quantity, setQuantity } = useQuantity(
-    loggedIn,
-    artwork.quantity,
-    artwork.id
-  );
-
-  const handleQuantityDecrease = createQuantityDecreaseHandler(
-    quantity,
-    setQuantity
-  );
+  const { handleQuantityDecrease, quantity, t } = useRecommendationCard({
+    artwork,
+  });
 
   return (
     <Card border="secondary" className="mx-auto">

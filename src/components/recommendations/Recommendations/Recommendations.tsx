@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import { useMediaQuery } from "react-responsive";
 
 import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,8 +10,7 @@ import { UI_DIMENSIONS } from "@/utils/constants";
 import { Artwork } from "@/fetching/types";
 
 import RecommendationCard from "../RecommendationCard/RecommendationCard";
-
-import useAxios from "@/hooks/useAxios";
+import useRecommendations from "./useRecommendations";
 
 type RecommendationsProps = {
   title: string;
@@ -20,14 +18,8 @@ type RecommendationsProps = {
 };
 
 function Recommendations({ title, path }: RecommendationsProps) {
-  const [tableHidden, setTableHidden] = React.useState(false);
-  const recommendations = useAxios(`${path}?n=10`) as Artwork[];
-
-  const isMd = useMediaQuery({ minWidth: "768px" });
-
-  const handleToggleRecommendations = () => {
-    setTableHidden(!tableHidden);
-  };
+  const { handleToggleRecommendations, isMd, recommendations, tableHidden } =
+    useRecommendations({ path });
 
   return (
     <>

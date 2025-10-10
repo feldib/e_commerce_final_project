@@ -7,7 +7,6 @@ import { Col, Form, InputGroup, Row } from "react-bootstrap";
 import { FormikProps } from "formik";
 
 import ErrorAsterisk from "@/components/input/ErrorAsterisk/ErrorAsterisk";
-import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
 
 import useArtworkImagesInput from "./useArtworkImagesInput";
 

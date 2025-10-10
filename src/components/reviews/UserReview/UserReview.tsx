@@ -7,10 +7,9 @@ import { faCheck, faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Card, Col, Row } from "react-bootstrap";
 
-import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
-
-import { approveReview, disapproveReview } from "@/fetching/fetching";
 import { Review } from "@/fetching/types";
+
+import useUserReview from "./useUserReview";
 
 type UserReviewProps = {
   review: Review;
@@ -19,18 +18,8 @@ type UserReviewProps = {
 };
 
 function UserReview({ review, admin, index }: UserReviewProps) {
-  const { t } = useI18n();
-  const [showReview, setShowReview] = React.useState(true);
-
-  const handleApproveClick = () => {
-    approveReview(review.id);
-    setShowReview(false);
-  };
-
-  const handleDisapproveClick = () => {
-    disapproveReview(review.id);
-    setShowReview(false);
-  };
+  const { handleApproveClick, handleDisapproveClick, showReview, t } =
+    useUserReview({ review });
 
   return (
     <>

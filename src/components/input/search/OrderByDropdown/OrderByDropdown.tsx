@@ -4,9 +4,9 @@ import React from "react";
 
 import { Col, Dropdown } from "react-bootstrap";
 
-import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
-
 import { SearchFormikInstance, SearchParams } from "@/fetching/types";
+
+import useOrderByDropdown from "./useOrderByDropdown";
 
 type OrderByDropdownProps = {
   formik: SearchFormikInstance;
@@ -19,12 +19,10 @@ function OrderByDropdown({
   formik,
   triggerSearchWithUpdatedValues,
 }: OrderByDropdownProps) {
-  const { t } = useI18n();
-
-  const handleOrderSelect = (e: string | null) => {
-    formik.setFieldValue("order", e);
-    triggerSearchWithUpdatedValues({ order: e as string });
-  };
+  const { handleOrderSelect, t } = useOrderByDropdown({
+    formik,
+    triggerSearchWithUpdatedValues,
+  });
 
   return (
     <Col className="mb-4">
