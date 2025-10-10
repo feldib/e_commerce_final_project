@@ -3,14 +3,9 @@ import React from "react";
 
 import { Row } from "react-bootstrap";
 
-import { useI18n } from "@/components/providers/I18nProvider";
-
 import { Artwork } from "@/fetching/types";
 
-import ShoppingCartDataLines from "./ShoppingCartDataLines";
-
-import { renderData } from "@/helpers/tableHelpers";
-import useLoading from "@/hooks/useLoading";
+import useShoppingCartTable from "./hooks/useShoppingCartTable";
 
 type ShoppingCartTableProps = {
   dataLines: Artwork[];
@@ -23,31 +18,11 @@ function ShoppingCartTable({
   recommendation = false,
   changeCosts,
 }: ShoppingCartTableProps) {
-  const { t } = useI18n();
-
-  function makeRows(dataLinesGenerated: Artwork[]): React.JSX.Element {
-    return (
-      <>
-        {dataLinesGenerated.map((line: Artwork, index: number) => {
-          return (
-            <ShoppingCartDataLines
-              changeCosts={changeCosts}
-              index={index}
-              key={index}
-              line={line}
-              recommendation={recommendation}
-            />
-          );
-        })}
-      </>
-    );
-  }
-  const dataLinesGenerated = useLoading(
+  const { dataLinesGenerated, t } = useShoppingCartTable({
     dataLines,
-    (dataLines): React.JSX.Element => {
-      return renderData(dataLines, makeRows, t("common.no_result.no_results"));
-    }
-  );
+    changeCosts,
+    recommendation,
+  });
   return (
     <Row className="text-center">
       <table>

@@ -5,39 +5,19 @@ import Link from "next/link";
 
 import { Button, Col, Row } from "react-bootstrap";
 
-import { useI18n } from "@/components/providers/I18nProvider";
-import { UserDataContext } from "@/components/providers/UserDataProvider";
 import ShoppingCartTable from "@/components/tables/shopping_cart/ShoppingCartTable";
 
-import useShoppingList from "@/hooks/useShoppingList";
+import useShoppingCartComponent from "./hooks/useShoppingCartComponent";
 
 function ShoppingCartComponent() {
-  const { t } = useI18n();
-  const { loggedIn } = React.useContext(UserDataContext);
-
-  const shoppingListItems = useShoppingList(loggedIn);
-
-  const [costs, setCosts] = React.useState<{ [key: number]: number }>({});
-
-  const [totalCost, setTotalCost] = React.useState(0);
-
-  const handleCostsChange = (key: number, newCost: number) => {
-    const temp = costs;
-
-    temp[key] = newCost;
-
-    setCosts(temp);
-
-    setTotalCost(Object.values(costs).reduce((acc, curr) => acc + curr, 0));
-  };
-
-  const handleCheckoutClick = () => {
-    localStorage.removeItem("currentOrder");
-    localStorage.setItem(
-      "currentOrder",
-      JSON.stringify({ items: shoppingListItems, totalCost })
-    );
-  };
+  const {
+    loggedIn,
+    shoppingListItems,
+    totalCost,
+    handleCostsChange,
+    handleCheckoutClick,
+    t,
+  } = useShoppingCartComponent();
 
   return (
     <Row className="px-3 mx-auto floating-element mb-5">

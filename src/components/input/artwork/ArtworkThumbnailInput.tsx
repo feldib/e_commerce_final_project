@@ -6,15 +6,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Col, Form, InputGroup } from "react-bootstrap";
 import { FormikProps } from "formik";
 
-import { showSuccessToast } from "@/utils/toastUtils";
-
 import ErrorAsterisk from "@/components/input/ErrorAsterisk";
 
-import { replaceThumbnail } from "@/fetching/fetching";
-
 import { useI18n } from "../../providers/I18nProvider";
-
-import { validateNewFile } from "@/helpers/fileValidation";
+import useArtworkThumbnailInput from "./hooks/useArtworkThumbnailInput";
 
 type ArtworkThumbnailInputProps<T extends Record<string, unknown>> = {
   formik: FormikProps<T>;
@@ -36,45 +31,12 @@ function ArtworkThumbnailInput<T extends Record<string, unknown>>({
   artworkId,
   label,
 }: ArtworkThumbnailInputProps<T>) {
-  const { t } = useI18n();
-
-  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (files && files[0]) {
-      const file = files[0];
-
-      // Validate file in both edit and add modes
-      const validationError = validateNewFile(file, t);
-
-      if (validationError) {
-        alert(validationError);
-        e.target.value = ""; // Reset the input
-        return;
-      }
-
-      // In edit mode, we need to validate and upload the file
-      if (isEdit) {
-        try {
-          // TypeScript assertion: artworkId is guaranteed to be defined when isEdit is true
-          await replaceThumbnail(artworkId as number, file);
-          showSuccessToast(
-            t("components.forms.artwork.thumbnail_uploaded_successfully")
-          );
-          // We create an object URL in both modes
-          formik.setFieldValue("thumbnail", URL.createObjectURL(file));
-        } catch {
-          e.target.value = ""; // Reset the input
-        }
-      } else {
-        // In add mode, we just set the file directly
-        formik.setFieldValue("thumbnail", file);
-      }
-    }
-  };
-
-  const handleRemoveThumbnail = () => {
-    formik.setFieldValue("thumbnail", "");
-  };
+  const { handleFileChange, handleRemoveThumbnail, t } =
+    useArtworkThumbnailInput({
+      formik,
+      isEdit,
+      artworkId,
+    });
 
   return (
     <Form.Group className="pb-3">

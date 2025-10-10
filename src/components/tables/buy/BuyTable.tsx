@@ -6,13 +6,10 @@ import { Row } from "react-bootstrap";
 
 import { useI18n } from "@/components/providers/I18nProvider";
 
-import { Artwork, ShoppingCartItem } from "@/fetching/types";
+import { Artwork } from "@/fetching/types";
 
 import BuyTableDataLines from "./BuyTableDataLines";
-
-import { getShoppingCartFromLocalStorage } from "@/helpers/shoppingCartHelpers";
-import { renderData } from "@/helpers/tableHelpers";
-import useLoading from "@/hooks/useLoading";
+import useBuyTable from "./hooks/useBuyTable";
 
 type BuyTableProps = {
   dataLines: Artwork[];
@@ -25,8 +22,6 @@ function BuyTable({
   recommendation = false,
   orderSummary = false,
 }: BuyTableProps) {
-  const { t } = useI18n();
-
   function makeRows(dataLinesGenerated: Artwork[]): React.JSX.Element {
     return (
       <>
@@ -45,36 +40,10 @@ function BuyTable({
     );
   }
 
-  // Function to filter artworks based on availability and shopping cart contents
-  const getAvailableArtworks = React.useCallback((artworks: Artwork[]) => {
-    const shoppingCart = getShoppingCartFromLocalStorage();
-
-    return artworks.filter((artwork: Artwork) => {
-      if (!shoppingCart.length) {
-        return artwork.quantity > 0;
-      }
-
-      const cartItem = shoppingCart.find(
-        (item: ShoppingCartItem) => item.artwork_id === artwork.id
-      );
-
-      if (cartItem && cartItem.quantity > 0) {
-        return artwork.quantity - cartItem.quantity > 0;
-      }
-
-      return artwork.quantity > 0;
-    });
-  }, []);
-
-  // Memoize filtered artworks to avoid recalculating on every render
-  const availableArtworks = React.useMemo(
-    () => getAvailableArtworks(dataLines),
-    [dataLines, getAvailableArtworks]
-  );
-
-  const dataLinesGenerated = useLoading(availableArtworks, (artworks) =>
-    renderData(artworks, makeRows, t("common.no_result.no_results"))
-  );
+  const { dataLinesGenerated, t } = useBuyTable({
+    dataLines,
+    makeRows,
+  });
 
   return (
     <Row className="text-center mx-auto">

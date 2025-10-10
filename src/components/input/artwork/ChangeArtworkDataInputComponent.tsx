@@ -10,18 +10,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, Form, InputGroup } from "react-bootstrap";
 import { FormikProps } from "formik";
 
-import {
-  showChangesSavedToast,
-  showDataSaveErrorToast,
-  showIncorrectDataToast,
-} from "@/utils/toastUtils";
-
 import ErrorAsterisk from "@/components/input/ErrorAsterisk";
-import { useI18n } from "@/components/providers/I18nProvider";
 
-import { updateArtworkData } from "@/fetching/fetching";
-
-import { preventNonNumericInput } from "@/helpers/inputHelpers";
+import useChangeArtworkDataInput from "./hooks/useChangeArtworkDataInput";
 
 type ChangeArtworkDataInputComponentProps<
   T extends Record<string, unknown> = Record<string, unknown>,
@@ -46,43 +37,13 @@ function ChangeArtworkDataInputComponent<
   artwork_id,
   placeholder,
 }: ChangeArtworkDataInputComponentProps<T>) {
-  const { t } = useI18n();
-  const showAsterisk = formik.errors[name] && formik.touched[name];
-  const [editing, setEditing] = React.useState(false);
-
-  const handleSave = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-
-    // Only check for errors in the current field being updated, not the entire form
-    const currentFieldError = formik.errors[name];
-    const hasCurrentFieldError = currentFieldError && formik.touched[name];
-
-    if (hasCurrentFieldError) {
-      showIncorrectDataToast(t);
-    } else {
-      try {
-        await updateArtworkData(
-          artwork_id,
-          name,
-          String(formik.values[name] || "")
-        );
-        showChangesSavedToast(t);
-        setEditing(false);
-      } catch {
-        showDataSaveErrorToast(t);
-      }
-    }
-  };
-
-  const handleEdit = () => {
-    setEditing(true);
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (type === "number") {
-      preventNonNumericInput(e);
-    }
-  };
+  const { editing, showAsterisk, handleSave, handleEdit, handleKeyDown } =
+    useChangeArtworkDataInput({
+      formik,
+      name,
+      artwork_id,
+      type,
+    });
 
   return (
     <Form.Group className="pb-3">

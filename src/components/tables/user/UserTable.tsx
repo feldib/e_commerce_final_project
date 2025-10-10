@@ -3,22 +3,16 @@ import React from "react";
 
 import { Col, Row } from "react-bootstrap";
 
-import { useI18n } from "@/components/providers/I18nProvider";
-
 import { User } from "@/fetching/types";
 
+import useUserTable from "./hooks/useUserTable";
 import UserTableDataLines from "./UserTableDataLines";
-
-import { renderData } from "@/helpers/tableHelpers";
-import useLoading from "@/hooks/useLoading";
 
 type UserTableProps = {
   users: User[];
 };
 
 function UserTable({ users }: UserTableProps) {
-  const { t } = useI18n();
-
   function makeRows(dataLines: User[]): React.JSX.Element {
     return (
       <>
@@ -29,8 +23,9 @@ function UserTable({ users }: UserTableProps) {
     );
   }
 
-  const dataLines = useLoading(users, (dataLines): React.JSX.Element => {
-    return renderData(dataLines, makeRows, t("common.no_result.no_results"));
+  const { dataLines, t } = useUserTable({
+    users,
+    makeRows,
   });
 
   return (

@@ -7,15 +7,12 @@ import { Col, Form, Row } from "react-bootstrap";
 import { ToastContainer } from "react-toastify";
 
 import { TAG_SEPARATORS } from "@/utils/constants";
-import { showErrorToast, showSuccessToast } from "@/utils/toastUtils";
 
 import FloatingBackButton from "@/components/buttons/FloatingBackButton";
 import ArtworkImagesInput from "@/components/input/artwork/ArtworkImagesInput";
 import ArtworkThumbnailInput from "@/components/input/artwork/ArtworkThumbnailInput";
 import ChangeArtworkDataInputComponent from "@/components/input/artwork/ChangeArtworkDataInputComponent";
 import CategoryDropdownArtwork from "@/components/input/category_dropdown/CategoryDropdownArtwork";
-
-import { updateArtworkData } from "@/fetching/fetching";
 
 import useEditArtworkForm from "./hooks/useEditArtworkForm";
 
@@ -30,18 +27,8 @@ function EditArtworkForm() {
     artworkId,
     t,
     router,
+    handleCategoryChange,
   } = useEditArtworkForm();
-
-  const handleCategoryChange = async (category: { id: number }) => {
-    try {
-      await updateArtworkData(artworkId, "category_id", category.id);
-      showSuccessToast(
-        t("components.forms.artwork.category_updated_successfully")
-      );
-    } catch {
-      showErrorToast(t("components.forms.artwork.failed_to_update_category"));
-    }
-  };
 
   return (
     <Row className="mx-auto pb-5 floating-element">

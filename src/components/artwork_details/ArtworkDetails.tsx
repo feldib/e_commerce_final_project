@@ -4,20 +4,13 @@ import React from "react";
 
 import { Col, Row } from "react-bootstrap";
 
-import { useI18n } from "@/components/providers/I18nProvider";
-import { UserDataContext } from "@/components/providers/UserDataProvider";
-
-import { Artwork, Review } from "@/fetching/types";
+import { Artwork } from "@/fetching/types";
 
 import ArtworkPictureCarousel from "../carousels/ArtworkPictureCarousel";
-import ArtworkReview from "../reviews/ArtworkReview";
 import LeaveReview from "../reviews/LeaveReview";
 import ArtworkDescriptionCard from "./ArtworkDescriptionCard";
 import ArtworkInfoCard from "./ArtworkInfoCard";
-
-import useAxios from "@/hooks/useAxios";
-import useLoading from "@/hooks/useLoading";
-import useQuantity from "@/hooks/useQuantity";
+import useArtworkDetails from "./hooks/useArtworkDetails";
 
 type ArtworkDetailsProps = {
   artwork_id: number;
@@ -25,34 +18,9 @@ type ArtworkDetailsProps = {
 };
 
 function ArtworkDetails({ artwork_id, artwork }: ArtworkDetailsProps) {
-  const { t } = useI18n();
-  const { loggedIn } = React.useContext(UserDataContext);
-  const reviewsData = useAxios(`/reviews?id=${artwork_id}`) as Review[];
-
-  const { quantity, setQuantity } = useQuantity(
-    loggedIn,
-    artwork.quantity,
-    artwork_id
-  );
-
-  const representReviews = useLoading(reviewsData, (reviews) => {
-    return (
-      <>
-        {reviews.length !== 0 ? (
-          <>
-            {reviews.map((review, index) => (
-              <ArtworkReview index={index + 1} key={index} review={review} />
-            ))}
-          </>
-        ) : (
-          <Row className="px-3 mx-auto floating-element mb-5">
-            <Col className="text-center">
-              {t("common.no_result.no_reviews")}
-            </Col>
-          </Row>
-        )}
-      </>
-    );
+  const { t, quantity, setQuantity, representReviews } = useArtworkDetails({
+    artwork_id,
+    artwork,
   });
 
   return (

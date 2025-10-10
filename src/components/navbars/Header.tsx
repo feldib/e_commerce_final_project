@@ -2,61 +2,33 @@
 import React from "react";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 import { faBars, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Container, Nav, Navbar } from "react-bootstrap";
 
 import { UI_DIMENSIONS } from "@/utils/constants";
-import { showCartEmptyWarningToast } from "@/utils/toastUtils";
 
-import { useI18n } from "@/components/providers/I18nProvider";
-import { UserDataContext } from "@/components/providers/UserDataProvider";
-
+import useHeader from "./hooks/useHeader";
 import LanguageSelector from "./LanguageSelector";
 import LoggedInNavbarItems from "./LoggedInNavbarItems";
 import NotLoggedInNavbarItems from "./NotLoggedInNavbarItems";
-
-import { checkIfShoppingCartIsEmpty } from "@/helpers/shoppingCartHelpers";
 
 export const ExpandedNavContext = React.createContext({
   closeExpandedNav: () => {},
 });
 
 function Header() {
-  const router = useRouter();
-  const { t } = useI18n();
-
-  const { user, loggedIn } = React.useContext(UserDataContext);
-
-  const [expanded, setExpanded] = React.useState(false);
-
-  const toggleExpanded = () => {
-    setExpanded(!expanded);
-  };
-
-  const closeExpandedNav = () => {
-    setExpanded(false);
-  };
-
-  const handleShoppingCartClick = async () => {
-    const isShoppingCartEmpty = await checkIfShoppingCartIsEmpty(loggedIn);
-
-    if (!isShoppingCartEmpty) {
-      showCartEmptyWarningToast(t);
-    } else {
-      router.push("/shopping_cart");
-    }
-  };
-
-  const handleToggleClick = () => {
-    toggleExpanded();
-  };
-
-  const handleNavClose = () => {
-    closeExpandedNav();
-  };
+  const {
+    t,
+    user,
+    loggedIn,
+    expanded,
+    closeExpandedNav,
+    handleShoppingCartClick,
+    handleToggleClick,
+    handleNavClose,
+  } = useHeader();
 
   return (
     <ExpandedNavContext.Provider value={{ closeExpandedNav }}>

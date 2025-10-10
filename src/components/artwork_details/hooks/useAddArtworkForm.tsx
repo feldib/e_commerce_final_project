@@ -17,6 +17,7 @@ import { useI18n } from "@/components/providers/I18nProvider";
 import { addNewArtwork } from "@/fetching/fetching";
 import { Category } from "@/fetching/types";
 
+import { createHandleSubmitClick } from "@/helpers/formValidationHelpers";
 import { createHandleAddition, createHandleDelete } from "@/helpers/tagHelpers";
 import useAxios from "@/hooks/useAxios";
 import { useCategories } from "@/hooks/useCategories";
@@ -90,6 +91,8 @@ const useAddArtworkForm = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tags]);
 
+  const handleSubmitClick = createHandleSubmitClick(t);
+
   return {
     t,
     formik,
@@ -100,6 +103,7 @@ const useAddArtworkForm = () => {
     createHandleDelete,
     createHandleAddition,
     getCategoryNameById,
+    handleSubmitClick,
   };
 };
 

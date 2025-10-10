@@ -7,6 +7,7 @@ import { useParams, useRouter } from "next/navigation";
 import { useFormik } from "formik";
 
 import { SERVER_URL } from "@/utils/constants";
+import { showErrorToast, showSuccessToast } from "@/utils/toastUtils";
 
 import { useI18n } from "@/components/providers/I18nProvider";
 
@@ -112,6 +113,17 @@ const useEditArtworkForm = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tags, artworkId]);
 
+  const handleCategoryChange = async (category: { id: number }) => {
+    try {
+      await updateArtworkData(artworkId, "category_id", category.id);
+      showSuccessToast(
+        t("components.forms.artwork.category_updated_successfully")
+      );
+    } catch {
+      showErrorToast(t("components.forms.artwork.failed_to_update_category"));
+    }
+  };
+
   return {
     formik,
     tags,
@@ -123,6 +135,7 @@ const useEditArtworkForm = () => {
     t,
     router,
     getCategoryNameById,
+    handleCategoryChange,
   };
 };
 

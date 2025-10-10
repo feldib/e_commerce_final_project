@@ -16,8 +16,6 @@ import CategoryDropdownArtwork from "@/components/input/category_dropdown/Catego
 
 import useAddArtworkForm from "./hooks/useAddArtworkForm";
 
-import { createHandleSubmitClick } from "@/helpers/formValidationHelpers";
-
 function AddArtworkForm() {
   const {
     t,
@@ -28,9 +26,8 @@ function AddArtworkForm() {
     router,
     createHandleDelete,
     createHandleAddition,
+    handleSubmitClick,
   } = useAddArtworkForm();
-
-  const handleSubmitClick = createHandleSubmitClick(t);
 
   return (
     <Row className="mx-auto pb-5 floating-element">

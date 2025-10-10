@@ -4,13 +4,10 @@ import React from "react";
 
 import { Row } from "react-bootstrap";
 
-import { useI18n } from "@/components/providers/I18nProvider";
-
 import { Category, SearchFormikInstance, SearchParams } from "@/fetching/types";
 
+import useQueries from "./hooks/useQueries";
 import Query from "./Query";
-
-import { useCategories } from "@/hooks/useCategories";
 
 type QueriesProps = {
   formik: SearchFormikInstance;
@@ -27,46 +24,20 @@ function Queries({
   triggerSearchWithUpdatedValues,
   searchedValues,
 }: QueriesProps) {
-  const { locale } = useI18n();
-  const { getCategoryName } = useCategories(locale);
-
-  const getCurrentCategoryName = (categoryId: string) => {
-    const category = categories.find((cat) => {
-      return cat.id === parseInt(categoryId);
-    });
-    return category ? getCategoryName(category) : "Unknown Category";
-  };
-
-  const handleRemoveBetween = () => {
-    formik.setFieldValue("max", 0);
-    formik.setFieldValue("min", 0);
-    triggerSearchWithUpdatedValues({ max: 0, min: 0 });
-  };
-
-  const handleRemoveMin = () => {
-    formik.setFieldValue("min", 0);
-    triggerSearchWithUpdatedValues({ min: 0 });
-  };
-
-  const handleRemoveMax = () => {
-    formik.setFieldValue("max", 0);
-    triggerSearchWithUpdatedValues({ max: 0 });
-  };
-
-  const handleRemoveTitle = () => {
-    formik.setFieldValue("title", "");
-    triggerSearchWithUpdatedValues({ title: "" });
-  };
-
-  const handleRemoveArtist = () => {
-    formik.setFieldValue("artist_name", "");
-    triggerSearchWithUpdatedValues({ artist_name: "" });
-  };
-
-  const handleRemoveCategory = () => {
-    formik.setFieldValue("category_id", "");
-    triggerSearchWithUpdatedValues({ category_id: "" });
-  };
+  const {
+    getCurrentCategoryName,
+    handleRemoveBetween,
+    handleRemoveMin,
+    handleRemoveMax,
+    handleRemoveTitle,
+    handleRemoveArtist,
+    handleRemoveCategory,
+  } = useQueries({
+    formik,
+    categories,
+    triggerSearchWithUpdatedValues,
+    searchedValues,
+  });
 
   return (
     <Row>

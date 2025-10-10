@@ -3,9 +3,7 @@ import React from "react";
 
 import { Row } from "react-bootstrap";
 
-import { showWarningToast } from "@/utils/toastUtils";
-
-import { UserDataContext } from "@/components/providers/UserDataProvider";
+import useAddOrRemoveButton from "./hooks/useAddOrRemoveButton";
 
 type AddOrRemoveFromButtonProps = {
   artwork_id: number;
@@ -26,41 +24,13 @@ function AddOrRemoveFromButton({
   regularButton,
   toastWarningMessage,
 }: AddOrRemoveFromButtonProps) {
-  const { loggedIn } = React.useContext(UserDataContext);
-
-  const [added, setAdded] = React.useState(false);
-  const [needsToBeRefreshed, setNeedsToBeRefreshed] = React.useState(false);
-
-  const handleButtonClick = async () => {
-    if (loggedIn) {
-      if (added) {
-        await removeFromAdded(artwork_id);
-        setNeedsToBeRefreshed(true);
-      } else {
-        await addToAdded(artwork_id);
-        setNeedsToBeRefreshed(true);
-      }
-    } else {
-      showWarningToast(toastWarningMessage);
-    }
-  };
-
-  React.useEffect(() => {
-    (async () => {
-      if (loggedIn) {
-        try {
-          const isAddedOrNot = await isAdded(artwork_id);
-          setAdded(isAddedOrNot);
-        } catch {
-          console.log("Not authenticated");
-        }
-      }
-    })();
-    if (needsToBeRefreshed) {
-      setNeedsToBeRefreshed(false);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [needsToBeRefreshed, artwork_id]);
+  const { added, handleButtonClick } = useAddOrRemoveButton({
+    artwork_id,
+    isAdded,
+    addToAdded,
+    removeFromAdded,
+    toastWarningMessage,
+  });
 
   return (
     <Row className="py-2">

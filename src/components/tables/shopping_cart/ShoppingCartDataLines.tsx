@@ -10,28 +10,12 @@ import { Col, Row } from "react-bootstrap";
 import { ToastContainer } from "react-toastify";
 
 import { SERVER_URL, UI_DIMENSIONS } from "@/utils/constants";
-import {
-  showCartItemAddedToast,
-  showCartItemOutOfStockToast,
-} from "@/utils/toastUtils";
 
 import FavouriteButton from "@/components/buttons/FavouriteButton";
-import { useI18n } from "@/components/providers/I18nProvider";
-import { UserDataContext } from "@/components/providers/UserDataProvider";
 
-import {
-  decreaseShoppingListItemQuantity,
-  increaseShoppingListItemQuantity,
-  removeFromShoppingList,
-} from "@/fetching/fetching";
 import { Artwork } from "@/fetching/types";
 
-import {
-  decreaseLocalStorageShoppingCartQuantity,
-  increaseLocalStorageShoppingCartQuantity,
-  removeLocalStorageShoppingCartQuantity,
-} from "@/helpers/shoppingCartHelpers";
-import { useCategories } from "@/hooks/useCategories";
+import useShoppingCartDataLines from "./hooks/useShoppingCartDataLines";
 
 type ShoppingCartDataLinesProps = {
   line: Artwork;
@@ -46,61 +30,19 @@ function ShoppingCartDataLines({
   changeCosts,
   recommendation = false,
 }: ShoppingCartDataLinesProps) {
-  const { t, locale } = useI18n();
-  const { getCategoryNameById } = useCategories(locale);
-  const { loggedIn } = React.useContext(UserDataContext);
-
-  const [quantity, setQuantity] = React.useState(line.quantity);
-
-  React.useEffect(() => {
-    changeCosts(index, line.price * quantity);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [quantity]);
-
-  const handleDecrease = async () => {
-    if (loggedIn) {
-      await decreaseShoppingListItemQuantity(line.id);
-    } else {
-      decreaseLocalStorageShoppingCartQuantity(line.id);
-    }
-
-    if (quantity > 0) {
-      setQuantity(quantity - 1);
-    }
-  };
-
-  const handleIncrease = async () => {
-    if (loggedIn) {
-      try {
-        await increaseShoppingListItemQuantity(line.id);
-        showCartItemAddedToast(t);
-        setQuantity(quantity + 1);
-      } catch {
-        showCartItemOutOfStockToast(t);
-      }
-    } else {
-      try {
-        increaseLocalStorageShoppingCartQuantity(
-          line.id,
-          line.stored_amount - quantity
-        );
-        showCartItemAddedToast(t);
-        setQuantity(quantity + 1);
-      } catch {
-        showCartItemOutOfStockToast(t);
-      }
-    }
-  };
-
-  const handleRemove = async () => {
-    if (loggedIn) {
-      await removeFromShoppingList(line.id);
-      setQuantity(0);
-    } else {
-      removeLocalStorageShoppingCartQuantity(line.id);
-      setQuantity(0);
-    }
-  };
+  const {
+    loggedIn,
+    getCategoryNameById,
+    quantity,
+    handleDecrease,
+    handleIncrease,
+    handleRemove,
+    t,
+  } = useShoppingCartDataLines({
+    line,
+    index,
+    changeCosts,
+  });
 
   return (
     <tr key={index}>
