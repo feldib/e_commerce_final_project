@@ -9,7 +9,7 @@ import { Nav } from "react-bootstrap";
 import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
 import { UserDataContext } from "@/components/providers/UserDataProvider/UserDataProvider";
 
-import { serverLogOut } from "@/fetching/fetching";
+import { serverLogOut } from "@/fetching/auth";
 
 import { ExpandedNavContext } from "../Header/Header";
 import UserNavbarMenuItems from "../UserNavbarMenuItems/UserNavbarMenuItems";

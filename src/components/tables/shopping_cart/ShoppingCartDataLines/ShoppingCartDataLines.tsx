@@ -31,7 +31,6 @@ function ShoppingCartDataLines({
   recommendation = false,
 }: ShoppingCartDataLinesProps) {
   const {
-    loggedIn,
     getCategoryNameById,
     quantity,
     handleDecrease,

@@ -4,7 +4,7 @@ import React from "react";
 
 import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
 
-import { approveReview, disapproveReview } from "@/fetching/fetching";
+import { approveReview, disapproveReview } from "@/fetching/reviews";
 import { Review } from "@/fetching/types";
 
 type UseUserReviewProps = {

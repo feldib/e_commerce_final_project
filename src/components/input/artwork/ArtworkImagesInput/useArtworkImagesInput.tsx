@@ -9,7 +9,7 @@ import { showErrorToast } from "@/utils/toastUtils";
 
 import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
 
-import { addNewOtherPicture, removePicture } from "@/fetching/fetching";
+import { addNewOtherPicture, removePicture } from "@/fetching/images";
 
 import { validateNewFile } from "@/helpers/fileValidation";
 

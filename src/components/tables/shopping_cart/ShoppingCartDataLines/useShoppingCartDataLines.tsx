@@ -14,7 +14,7 @@ import {
   decreaseShoppingListItemQuantity,
   increaseShoppingListItemQuantity,
   removeFromShoppingList,
-} from "@/fetching/fetching";
+} from "@/fetching/shopping";
 import { Artwork } from "@/fetching/types";
 
 import {
@@ -31,7 +31,6 @@ type UseShoppingCartDataLinesProps = {
 };
 
 type UseShoppingCartDataLinesReturn = {
-  loggedIn: boolean;
   getCategoryNameById: (id: number) => string;
   quantity: number;
   handleDecrease: () => Promise<void>;
@@ -102,7 +101,6 @@ function useShoppingCartDataLines({
   };
 
   return {
-    loggedIn,
     getCategoryNameById,
     quantity,
     handleDecrease,

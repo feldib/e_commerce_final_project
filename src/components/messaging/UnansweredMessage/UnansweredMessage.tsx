@@ -21,7 +21,7 @@ import ErrorAsterisk from "@/components/input/ErrorAsterisk/ErrorAsterisk";
 import InputComponent from "@/components/input/InputComponent/InputComponent";
 import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
 
-import { replyToMessage } from "@/fetching/fetching";
+import { replyToMessage } from "@/fetching/messages";
 
 import { createHandleSubmitClick } from "@/helpers/formValidationHelpers";
 import { useMessageReplySchema } from "@/hooks/useValidationSchemas";

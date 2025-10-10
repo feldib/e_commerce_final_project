@@ -20,12 +20,12 @@ function Trophy({
       width="auto"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g id="SVGRepo_bgCarrier" stroke-width="0" />
+      <g id="SVGRepo_bgCarrier" strokeWidth="0" />
 
       <g
         id="SVGRepo_tracerCarrier"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
 
       <g id="SVGRepo_iconCarrier">
@@ -46,7 +46,7 @@ function Trophy({
           d="M7.5 6V11.3308C7.5 13.1552 9.29713 15 12 15C14.7029 15 16.5 13.1552 16.5 11.3308V6"
           fill="none"
           stroke={color}
-          stroke-width="1.5"
+          strokeWidth="1.5"
         />
 
         {/* Main body U-shape FILL */}

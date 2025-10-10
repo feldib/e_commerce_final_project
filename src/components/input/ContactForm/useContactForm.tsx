@@ -10,7 +10,7 @@ import {
 import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
 import { UserDataContext } from "@/components/providers/UserDataProvider/UserDataProvider";
 
-import { sendMessageToAdministrator } from "@/fetching/fetching";
+import { sendMessageToAdministrator } from "@/fetching/messages";
 import { User } from "@/fetching/types";
 
 import { createHandleSubmitClick } from "@/helpers/formValidationHelpers";

@@ -8,7 +8,7 @@ import { showSuccessToast } from "@/utils/toastUtils";
 
 import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
 
-import { replaceThumbnail } from "@/fetching/fetching";
+import { replaceThumbnail } from "@/fetching/images";
 
 import { validateNewFile } from "@/helpers/fileValidation";
 

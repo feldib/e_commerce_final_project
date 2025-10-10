@@ -16,7 +16,7 @@ import {
 import InputComponent from "@/components/input/InputComponent/InputComponent";
 import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
 
-import { changePassword } from "@/fetching/fetching";
+import { changePassword } from "@/fetching/auth";
 
 import { createHandleSubmitClick } from "@/helpers/formValidationHelpers";
 import { useResetPasswordSchema } from "@/hooks/useValidationSchemas";

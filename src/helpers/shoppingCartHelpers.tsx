@@ -1,10 +1,8 @@
 import axiosConfigured from "@/utils/axiosConfigured";
 import { SERVER_URL, STORAGE_KEYS } from "@/utils/constants";
 
-import {
-  getDataOfArtworks,
-  replaceSavedShoppingCart,
-} from "@/fetching/fetching";
+import { getDataOfArtworks } from "@/fetching/artwork";
+import { replaceSavedShoppingCart } from "@/fetching/shopping";
 import { Artwork, ShoppingCartItem } from "@/fetching/types";
 
 const getCartItems = (): ShoppingCartItem[] => {

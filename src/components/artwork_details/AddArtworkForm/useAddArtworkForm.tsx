@@ -14,7 +14,7 @@ import {
 
 import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
 
-import { addNewArtwork } from "@/fetching/fetching";
+import { addNewArtwork } from "@/fetching/artwork";
 import { Category } from "@/fetching/types";
 
 import { createHandleSubmitClick } from "@/helpers/formValidationHelpers";

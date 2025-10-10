@@ -21,7 +21,7 @@ import InputComponent from "@/components/input/InputComponent/InputComponent";
 import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
 import { UserDataContext } from "@/components/providers/UserDataProvider/UserDataProvider";
 
-import { leaveReview } from "@/fetching/fetching";
+import { leaveReview } from "@/fetching/reviews";
 
 import { createHandleSubmitClick } from "@/helpers/formValidationHelpers";
 import { useReviewSchema } from "@/hooks/useValidationSchemas";

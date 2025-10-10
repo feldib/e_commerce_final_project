@@ -4,7 +4,7 @@ import {
   addToFeatured,
   isFeatured,
   removeFromFeatured,
-} from "@/fetching/fetching";
+} from "@/fetching/featured";
 
 import Trophy from "../../svg_components/Trophy/Trophy";
 

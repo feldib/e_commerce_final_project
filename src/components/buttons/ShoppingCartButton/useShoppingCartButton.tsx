@@ -2,7 +2,7 @@
 
 import { faBasketShopping } from "@fortawesome/free-solid-svg-icons";
 
-import { addToShoppingList } from "@/fetching/fetching";
+import { addToShoppingList } from "@/fetching/shopping";
 
 import { useI18n } from "../../providers/I18nProvider/I18nProvider";
 

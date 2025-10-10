@@ -6,7 +6,7 @@ import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.share
 
 import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
 
-import { getLoggedIn } from "@/fetching/fetching";
+import { getLoggedIn } from "@/fetching/auth";
 import { User } from "@/fetching/types";
 
 import "react-confirm-alert/src/react-confirm-alert.css";

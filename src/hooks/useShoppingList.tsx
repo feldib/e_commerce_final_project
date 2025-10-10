@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 
-import { getShoppingCart } from "@/fetching/fetching";
+import { getShoppingCart } from "@/fetching/shopping";
 import { Artwork } from "@/fetching/types";
 
 import { getLocalStorageShoppingCart } from "@/helpers/shoppingCartHelpers";

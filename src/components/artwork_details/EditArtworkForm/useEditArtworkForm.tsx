@@ -11,7 +11,7 @@ import { showErrorToast, showSuccessToast } from "@/utils/toastUtils";
 
 import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
 
-import { updateArtworkData } from "@/fetching/fetching";
+import { updateArtworkData } from "@/fetching/artwork";
 import { Artwork, Category } from "@/fetching/types";
 
 import { createHandleAddition, createHandleDelete } from "@/helpers/tagHelpers";

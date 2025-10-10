@@ -8,7 +8,7 @@ import { useFormik } from "formik";
 import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
 import { UserDataContext } from "@/components/providers/UserDataProvider/UserDataProvider";
 
-import { order } from "@/fetching/fetching";
+import { order } from "@/fetching/orders";
 import { CheckoutFormData } from "@/fetching/types";
 
 import { useCheckoutSchema } from "@/hooks/useValidationSchemas";

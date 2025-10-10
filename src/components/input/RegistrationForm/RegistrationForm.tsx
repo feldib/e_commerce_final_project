@@ -17,8 +17,8 @@ import {
 import InputComponent from "@/components/input/InputComponent/InputComponent";
 import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
 
-import { registerNewUser } from "@/fetching/fetching";
-import { logIn } from "@/fetching/fetching";
+import { registerNewUser } from "@/fetching/auth";
+import { logIn } from "@/fetching/auth";
 import { User } from "@/fetching/types";
 
 import { createHandleSubmitClick } from "@/helpers/formValidationHelpers";

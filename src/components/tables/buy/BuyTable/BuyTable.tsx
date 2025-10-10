@@ -4,8 +4,6 @@ import React from "react";
 
 import { Row } from "react-bootstrap";
 
-import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
-
 import { Artwork } from "@/fetching/types";
 
 import BuyTableDataLines from "../BuyTableDataLines/BuyTableDataLines";

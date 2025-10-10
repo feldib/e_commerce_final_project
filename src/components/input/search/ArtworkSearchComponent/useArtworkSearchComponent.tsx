@@ -7,7 +7,7 @@ import * as Yup from "yup";
 
 import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
 
-import { getArtworkSearchResults } from "@/fetching/fetching";
+import { getArtworkSearchResults } from "@/fetching/artwork";
 import { Artwork, Category, SearchParams } from "@/fetching/types";
 
 import useAxios from "@/hooks/useAxios";

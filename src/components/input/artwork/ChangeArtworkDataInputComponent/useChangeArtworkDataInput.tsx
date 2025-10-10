@@ -12,7 +12,7 @@ import {
 
 import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
 
-import { updateArtworkData } from "@/fetching/fetching";
+import { updateArtworkData } from "@/fetching/artwork";
 
 import { preventNonNumericInput } from "@/helpers/inputHelpers";
 

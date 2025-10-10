@@ -3,7 +3,6 @@ import React from "react";
 
 import { Button, Col, Form, Row } from "react-bootstrap";
 
-import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
 import AdminArtworkTable from "@/components/tables/admin/AdminArtworkTable/AdminArtworkTable";
 import BuyTable from "@/components/tables/buy/BuyTable/BuyTable";
 

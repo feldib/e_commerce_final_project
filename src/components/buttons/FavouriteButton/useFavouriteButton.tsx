@@ -10,7 +10,7 @@ import {
   addToWishlisted,
   isWishlisted,
   removeFromWishlisted,
-} from "@/fetching/fetching";
+} from "@/fetching/shopping";
 
 type UseFavouriteButtonProps = {
   artwork_id: number;

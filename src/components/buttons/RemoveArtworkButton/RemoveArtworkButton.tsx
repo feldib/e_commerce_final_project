@@ -2,7 +2,7 @@ import React from "react";
 
 import { faX } from "@fortawesome/free-solid-svg-icons";
 
-import { removeArtwork } from "@/fetching/fetching";
+import { removeArtwork } from "@/fetching/artwork";
 
 import SinglePurposeButton from "../SinglePurposeButton/SinglePurposeButton";
 

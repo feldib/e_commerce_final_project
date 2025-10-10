@@ -8,7 +8,7 @@ import { showLoginErrorToast, showLoginSuccessToast } from "@/utils/toastUtils";
 import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
 import { UserDataContext } from "@/components/providers/UserDataProvider/UserDataProvider";
 
-import { logIn } from "@/fetching/fetching";
+import { logIn } from "@/fetching/auth";
 import { User } from "@/fetching/types";
 
 import { useLoginSchema } from "@/hooks/useValidationSchemas";
