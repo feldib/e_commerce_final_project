@@ -6,13 +6,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Dropdown, Form } from "react-bootstrap";
 import { FormikProps } from "formik";
 
-import { useI18n } from "@/components/providers/I18nProvider";
-
 import { Category } from "@/fetching/types";
 
 import useCategoryDropdownArtwork from "./hooks/useCategoryDropdownArtwork";
-
-import { useCategories } from "@/hooks/useCategories";
 
 interface CategoryDropdownArtworkProps<
   T extends Record<string, unknown> = Record<string, unknown>,

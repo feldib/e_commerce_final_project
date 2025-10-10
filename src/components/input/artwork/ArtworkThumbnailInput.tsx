@@ -8,7 +8,6 @@ import { FormikProps } from "formik";
 
 import ErrorAsterisk from "@/components/input/ErrorAsterisk";
 
-import { useI18n } from "../../providers/I18nProvider";
 import useArtworkThumbnailInput from "./hooks/useArtworkThumbnailInput";
 
 type ArtworkThumbnailInputProps<T extends Record<string, unknown>> = {
