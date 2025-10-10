@@ -14,11 +14,9 @@ jest.mock("../useArtworkThumbnailInput", () => ({
 }));
 
 // Mock ErrorAsterisk
-jest.mock("@/components/input/ErrorAsterisk/ErrorAsterisk", () => {
-  return function MockErrorAsterisk() {
-    return <div data-testid="error-asterisk">ErrorAsterisk</div>;
-  };
-});
+// Use reusable mocks
+jest.mock("@/components/providers/I18nProvider/I18nProvider");
+jest.mock("@/components/input/ErrorAsterisk/ErrorAsterisk");
 
 const mockFormik = {
   values: { thumbnail: null },
@@ -49,6 +47,9 @@ const mockFormik = {
   getFieldProps: jest.fn(),
   getFieldMeta: jest.fn(),
   getFieldHelpers: jest.fn(),
+  setFormikState: jest.fn(),
+  registerField: jest.fn(),
+  unregisterField: jest.fn(),
   status: undefined,
   validateOnChange: true,
   validateOnBlur: true,

@@ -3,7 +3,14 @@ import { render, screen } from "@testing-library/react";
 
 import LeaveReview from "../LeaveReview";
 
-// Mock Formik
+// Use reusable mocks
+jest.mock("@/fetching/reviews");
+jest.mock("@/components/providers/I18nProvider/I18nProvider");
+jest.mock("@/components/providers/UserDataProvider/UserDataProvider");
+jest.mock("@/components/input/ErrorAsterisk/ErrorAsterisk");
+jest.mock("@/components/input/InputComponent/InputComponent");
+
+// Mock Formik (specific to this component)
 jest.mock("formik", () => ({
   Formik: ({ children }: { children: (props: unknown) => React.ReactNode }) =>
     children({
@@ -32,53 +39,6 @@ jest.mock("formik", () => ({
   ErrorMessage: ({ name }: { name: string }) => (
     <div data-testid={`error-${name}`}>{`Error for ${name}`}</div>
   ),
-}));
-
-// Mock dependencies
-jest.mock("@/components/providers/I18nProvider/I18nProvider", () => ({
-  useI18n: () => ({
-    t: (key: string) => key,
-  }),
-}));
-
-// Mock UserDataProvider context
-const mockContextValue = {
-  loggedIn: true,
-  user: {},
-  setUser: jest.fn(),
-  setLoggedIn: jest.fn(),
-  setLoading: jest.fn(),
-  loading: false,
-};
-
-jest.mock("@/components/providers/UserDataProvider/UserDataProvider", () => ({
-  UserDataContext: {
-    Provider: ({ children }: { children: React.ReactNode }) => children,
-    Consumer: ({
-      children,
-    }: {
-      children: (value: unknown) => React.ReactNode;
-    }) => children(mockContextValue),
-  },
-}));
-
-// Mock React.useContext to return our mock value
-jest.spyOn(React, "useContext").mockReturnValue(mockContextValue);
-
-jest.mock("@/components/input/ErrorAsterisk/ErrorAsterisk", () => {
-  return function MockErrorAsterisk() {
-    return <div data-testid="error-asterisk">ErrorAsterisk</div>;
-  };
-});
-
-jest.mock("@/components/input/InputComponent/InputComponent", () => {
-  return function MockInputComponent({ name }: { name: string }) {
-    return <div data-testid={`input-component-${name}`}>InputComponent</div>;
-  };
-});
-
-jest.mock("@/fetching/reviews", () => ({
-  leaveReview: jest.fn(() => Promise.resolve()),
 }));
 
 jest.mock("@/utils/toastUtils", () => ({

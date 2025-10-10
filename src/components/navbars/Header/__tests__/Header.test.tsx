@@ -3,24 +3,9 @@ import { render } from "@testing-library/react";
 
 import Header from "../Header";
 
-// Mock the router
-jest.mock("next/navigation", () => ({
-  useRouter: () => ({
-    push: jest.fn(),
-    replace: jest.fn(),
-    prefetch: jest.fn(),
-  }),
-  usePathname: () => "/",
-}));
-
-// Mock the providers
-jest.mock("../../../providers/I18nProvider/I18nProvider", () => ({
-  useI18n: () => ({
-    t: (key: string) => key,
-    locale: "en",
-    setLocale: jest.fn(),
-  }),
-}));
+// Use reusable mocks
+jest.mock("next/navigation");
+jest.mock("@/components/providers/I18nProvider/I18nProvider");
 
 describe("Header", () => {
   it("should render without crashing", () => {

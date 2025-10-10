@@ -3,21 +3,9 @@ import { fireEvent, render, screen } from "@testing-library/react";
 
 import FavouriteButton from "../FavouriteButton";
 
-// Mock hooks
-jest.mock("../useFavouriteButton", () => ({
-  __esModule: true,
-  default: () => ({
-    handleAddOrRemoveFromWishList: jest.fn(),
-    isOnWishList: false,
-  }),
-}));
-
-// Mock providers
-jest.mock("../../../providers/I18nProvider/I18nProvider", () => ({
-  useI18n: () => ({
-    t: (key: string) => key,
-  }),
-}));
+// Use reusable mocks
+jest.mock("../useFavouriteButton");
+jest.mock("@/components/providers/I18nProvider/I18nProvider");
 
 describe("FavouriteButton", () => {
   const mockProps = {

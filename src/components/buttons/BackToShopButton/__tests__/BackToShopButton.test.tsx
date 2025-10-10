@@ -1,13 +1,10 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 
-import { I18nProvider } from "@/components/providers/I18nProvider/I18nProvider";
-
 import BackToShopButton from "../BackToShopButton";
 
-const TestWrapper = ({ children }: { children: React.ReactNode }) => (
-  <I18nProvider>{children}</I18nProvider>
-);
+// Use reusable mocks
+jest.mock("@/components/providers/I18nProvider/I18nProvider");
 
 describe("BackToShopButton", () => {
   const mockOnClick = jest.fn();
@@ -17,22 +14,14 @@ describe("BackToShopButton", () => {
   });
 
   it("should render button", () => {
-    render(
-      <TestWrapper>
-        <BackToShopButton onClick={mockOnClick} />
-      </TestWrapper>
-    );
+    render(<BackToShopButton onClick={mockOnClick} />);
 
     const button = screen.getByRole("button");
     expect(button).toBeTruthy();
   });
 
   it("should contain link to shop", () => {
-    render(
-      <TestWrapper>
-        <BackToShopButton onClick={mockOnClick} />
-      </TestWrapper>
-    );
+    render(<BackToShopButton onClick={mockOnClick} />);
 
     const linkElement = screen.getByRole("link");
     expect(linkElement).toBeTruthy();
@@ -40,11 +29,7 @@ describe("BackToShopButton", () => {
   });
 
   it("should have button text", () => {
-    render(
-      <TestWrapper>
-        <BackToShopButton onClick={mockOnClick} />
-      </TestWrapper>
-    );
+    render(<BackToShopButton onClick={mockOnClick} />);
 
     const button = screen.getByRole("button");
     expect(button.textContent).toBeTruthy();

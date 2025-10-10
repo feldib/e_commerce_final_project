@@ -3,33 +3,12 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 import UnansweredMessage from "../UnansweredMessage";
 
-// Mock dependencies
-jest.mock("@/components/providers/I18nProvider/I18nProvider", () => ({
-  useI18n: () => ({
-    t: (key: string) => key,
-  }),
-}));
-
-jest.mock("@/components/input/ErrorAsterisk/ErrorAsterisk", () => {
-  return function MockErrorAsterisk() {
-    return <div data-testid="error-asterisk">ErrorAsterisk</div>;
-  };
-});
-
-jest.mock("@/components/input/InputComponent/InputComponent", () => {
-  return function MockInputComponent({ name }: { name: string }) {
-    return <div data-testid={`input-component-${name}`}>InputComponent</div>;
-  };
-});
-
-jest.mock("@/fetching/messages", () => ({
-  replyToMessage: jest.fn(() => Promise.resolve()),
-}));
-
-jest.mock("@/utils/toastUtils", () => ({
-  showReplySendErrorToast: jest.fn(),
-  showReplySentSuccessToast: jest.fn(),
-}));
+// Use reusable mocks
+jest.mock("@/components/providers/I18nProvider/I18nProvider");
+jest.mock("@/components/input/ErrorAsterisk/ErrorAsterisk");
+jest.mock("@/components/input/InputComponent/InputComponent");
+jest.mock("@/fetching/messages");
+jest.mock("@/utils/toastUtils");
 
 jest.mock("@/helpers/formValidationHelpers", () => ({
   createHandleSubmitClick: () => jest.fn(),

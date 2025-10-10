@@ -5,14 +5,12 @@ import { I18nProvider } from "@/components/providers/I18nProvider/I18nProvider";
 
 import useContactForm from "../useContactForm";
 
-// Mock dependencies
-jest.mock("@/fetching/messages", () => ({
-  sendMessage: jest.fn(),
-}));
-
+// Use reusable mocks
+jest.mock("@/fetching/messages");
 jest.mock("@/hooks/useValidationSchemas", () => ({
   useContactSchema: jest.fn(() => ({})),
 }));
+jest.mock("@/components/providers/I18nProvider/I18nProvider");
 
 const TestWrapper = ({ children }: { children: React.ReactNode }) => (
   <I18nProvider>{children}</I18nProvider>

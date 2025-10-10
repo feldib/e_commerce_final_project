@@ -1,27 +1,34 @@
 import React from "react";
 import { act, renderHook } from "@testing-library/react";
 
-import * as toastUtils from "@/utils/toastUtils";
-
 import { I18nProvider } from "@/components/providers/I18nProvider/I18nProvider";
 import { UserDataContext } from "@/components/providers/UserDataProvider/UserDataProvider";
 
-import * as fetching from "@/fetching/auth";
-
 import useLogin from "../useLogin";
 
-// Mock dependencies
+// Use reusable mocks
 jest.mock("next/navigation");
-jest.mock("@/utils/toastUtils", () => ({
-  showLoginErrorToast: jest.fn(),
-  showLoginSuccessToast: jest.fn(),
-}));
-jest.mock("@/fetching/auth", () => ({
-  logIn: jest.fn(),
-}));
+jest.mock("@/utils/toastUtils");
+jest.mock("@/fetching/auth");
 jest.mock("@/hooks/useValidationSchemas", () => ({
   useLoginSchema: jest.fn(() => ({})),
 }));
+
+// Import mocked functions to configure them
+import * as toastUtils from "@/utils/toastUtils";
+
+import * as fetching from "@/fetching/auth";
+
+// Use mockUser from fixtures or define locally
+const mockUser = {
+  id: 1,
+  first_name: "Test",
+  last_name: "User",
+  email: "test@example.com",
+  address: "123 Test Street",
+  phone_number: "123-456-7890",
+  is_admin: false,
+};
 
 const mockLogIn = fetching.logIn as jest.MockedFunction<typeof fetching.logIn>;
 const mockShowLoginErrorToast =
@@ -31,15 +38,7 @@ const mockShowLoginErrorToast =
 
 const mockUserDataContext = {
   loggedIn: false,
-  user: {
-    id: 0,
-    first_name: "",
-    last_name: "",
-    email: "",
-    address: "",
-    phone_number: "",
-    is_admin: false,
-  },
+  user: mockUser,
   logOut: jest.fn(),
   settleSuccessfulLogIn: jest.fn(),
 };

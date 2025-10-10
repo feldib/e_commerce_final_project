@@ -3,25 +3,9 @@ import { render } from "@testing-library/react";
 
 import ResetPasswordForm from "../ResetPasswordForm";
 
-// Mock providers
-jest.mock("../../../providers/I18nProvider/I18nProvider", () => ({
-  useI18n: () => ({
-    t: (key: string) => key,
-  }),
-}));
-
-// Mock router
-jest.mock("next/navigation", () => ({
-  useRouter: () => ({
-    push: jest.fn(),
-  }),
-  usePathname: () => "/test-path",
-  useSearchParams: () => ({
-    get: jest.fn(() => null),
-  }),
-}));
-
-// Mock hooks;
+// Use reusable mocks
+jest.mock("@/components/providers/I18nProvider/I18nProvider");
+jest.mock("next/navigation");
 
 describe("ResetPasswordForm", () => {
   it("should render without crashing", () => {

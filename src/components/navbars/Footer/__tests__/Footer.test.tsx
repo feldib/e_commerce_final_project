@@ -3,12 +3,8 @@ import { render } from "@testing-library/react";
 
 import Footer from "../Footer";
 
-// Mock providers
-jest.mock("../../../providers/I18nProvider/I18nProvider", () => ({
-  useI18n: () => ({
-    t: (key: string) => key,
-  }),
-}));
+// Use reusable mocks
+jest.mock("@/components/providers/I18nProvider/I18nProvider");
 
 describe("Footer", () => {
   it("should render without crashing", () => {
