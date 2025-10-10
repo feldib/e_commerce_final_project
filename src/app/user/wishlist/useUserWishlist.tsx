@@ -3,8 +3,8 @@ import React from "react";
 
 import { Col, Row } from "react-bootstrap";
 
-import { useI18n } from "@/components/providers/I18nProvider";
-import BuyTable from "@/components/tables/buy/BuyTable";
+import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
+import BuyTable from "@/components/tables/buy/BuyTable/BuyTable";
 
 import { Artwork } from "@/fetching/types";
 

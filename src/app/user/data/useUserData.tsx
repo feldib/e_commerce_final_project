@@ -3,8 +3,8 @@ import React from "react";
 
 import { useFormik } from "formik";
 
-import { useI18n } from "@/components/providers/I18nProvider";
-import { UserDataContext } from "@/components/providers/UserDataProvider";
+import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
+import { UserDataContext } from "@/components/providers/UserDataProvider/UserDataProvider";
 
 import { useUserDataSchema } from "@/hooks/useValidationSchemas";
 

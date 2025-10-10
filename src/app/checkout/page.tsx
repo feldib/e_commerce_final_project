@@ -3,7 +3,7 @@ import React from "react";
 
 import { Button, Col, Row } from "react-bootstrap";
 
-import UserDataChangingComponent from "@/components/input/user_data/UserDataComponent";
+import UserDataChangingComponent from "@/components/input/user_data/UserDataComponent/UserDataComponent";
 
 import useCheckoutPage from "./useCheckoutPage";
 

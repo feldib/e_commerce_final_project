@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 
-import { useI18n } from "@/components/providers/I18nProvider";
+import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
 
 import { Artwork } from "@/fetching/types";
 

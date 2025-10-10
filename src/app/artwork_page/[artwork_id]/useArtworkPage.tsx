@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 
 import { useParams, useRouter } from "next/navigation";
 
-import ArtworkDetails from "@/components/artwork_details/ArtworkDetails";
+import ArtworkDetails from "@/components/artwork_details/ArtworkDetails/ArtworkDetails";
 
 import { Artwork } from "@/fetching/types";
 

@@ -6,7 +6,7 @@ import * as Yup from "yup";
 
 import { MAX_IMAGE_SIZE } from "@/utils/constants";
 
-import { useI18n } from "@/components/providers/I18nProvider";
+import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
 
 import { isValidImage } from "@/helpers/fileValidation";
 

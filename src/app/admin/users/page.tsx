@@ -5,7 +5,7 @@ import { Col, Row } from "react-bootstrap";
 
 import { ADMIN_URL } from "@/utils/constants";
 
-import UserTable from "@/components/tables/user/UserTable";
+import UserTable from "@/components/tables/user/UserTable/UserTable";
 
 import { User } from "@/fetching/types";
 

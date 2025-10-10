@@ -5,8 +5,8 @@ import { Col, Row } from "react-bootstrap";
 
 import { ADMIN_URL } from "@/utils/constants";
 
-import { useI18n } from "@/components/providers/I18nProvider";
-import OrderSummaryComponent from "@/components/shopping/OrderSummaryComponent";
+import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
+import OrderSummaryComponent from "@/components/shopping/OrderSummaryComponent/OrderSummaryComponent";
 
 import { Order } from "@/fetching/types";
 

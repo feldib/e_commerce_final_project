@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 
-import UserDataChangingComponent from "@/components/input/user_data/UserDataComponent";
+import UserDataChangingComponent from "@/components/input/user_data/UserDataComponent/UserDataComponent";
 
 import useUserData from "./useUserData";
 

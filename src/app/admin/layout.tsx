@@ -12,9 +12,9 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Container, Row } from "react-bootstrap";
 
-import PageTitle from "@/components/layout/PageTitle";
-import SubNavbar from "@/components/navbars/SubNavbar";
-import { useI18n } from "@/components/providers/I18nProvider";
+import PageTitle from "@/components/layout/PageTitle/PageTitle";
+import SubNavbar from "@/components/navbars/SubNavbar/SubNavbar";
+import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
 
 import {
   redirectIfNotAdmin,

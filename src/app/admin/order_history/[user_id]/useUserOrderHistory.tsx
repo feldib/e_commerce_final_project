@@ -3,8 +3,8 @@ import React from "react";
 
 import { useParams, useRouter } from "next/navigation";
 
-import { useI18n } from "@/components/providers/I18nProvider";
-import OrderSummaryComponent from "@/components/shopping/OrderSummaryComponent";
+import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
+import OrderSummaryComponent from "@/components/shopping/OrderSummaryComponent/OrderSummaryComponent";
 
 import { getOrderHistory } from "@/fetching/fetching";
 import { Order } from "@/fetching/types";

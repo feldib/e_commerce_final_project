@@ -3,7 +3,7 @@ import React from "react";
 
 import { Col, Row } from "react-bootstrap";
 
-import SubPageTitle from "@/components/layout/SubPageTitle";
+import SubPageTitle from "@/components/layout/SubPageTitle/SubPageTitle";
 
 import useUserReviews from "./useUserReviews";
 

@@ -5,8 +5,8 @@ import { Col, Row } from "react-bootstrap";
 
 import { ADMIN_URL } from "@/utils/constants";
 
-import { useI18n } from "@/components/providers/I18nProvider";
-import UserReview from "@/components/reviews/UserReview";
+import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
+import UserReview from "@/components/reviews/UserReview/UserReview";
 
 import { Review } from "@/fetching/types";
 

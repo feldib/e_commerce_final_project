@@ -3,9 +3,9 @@ import React from "react";
 
 import { Container, Row } from "react-bootstrap";
 
-import RegistrationForm from "@/components/input/RegistrationForm";
-import PageTitle from "@/components/layout/PageTitle";
-import { useI18n } from "@/components/providers/I18nProvider";
+import RegistrationForm from "@/components/input/RegistrationForm/RegistrationForm";
+import PageTitle from "@/components/layout/PageTitle/PageTitle";
+import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
 
 function RegistrationPage() {
   const { t } = useI18n();

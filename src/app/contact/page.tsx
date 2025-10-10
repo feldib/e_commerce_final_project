@@ -3,9 +3,9 @@ import React from "react";
 
 import { Col, Container, Row } from "react-bootstrap";
 
-import ContactForm from "@/components/input/ContactForm";
-import PageTitle from "@/components/layout/PageTitle";
-import { useI18n } from "@/components/providers/I18nProvider";
+import ContactForm from "@/components/input/ContactForm/ContactForm";
+import PageTitle from "@/components/layout/PageTitle/PageTitle";
+import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
 
 function ContactUs() {
   const { t } = useI18n();

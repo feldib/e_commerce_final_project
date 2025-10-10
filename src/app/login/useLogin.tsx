@@ -5,8 +5,8 @@ import { useRouter, useSearchParams } from "next/navigation";
 
 import { showLoginErrorToast, showLoginSuccessToast } from "@/utils/toastUtils";
 
-import { useI18n } from "@/components/providers/I18nProvider";
-import { UserDataContext } from "@/components/providers/UserDataProvider";
+import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
+import { UserDataContext } from "@/components/providers/UserDataProvider/UserDataProvider";
 
 import { logIn } from "@/fetching/fetching";
 import { User } from "@/fetching/types";

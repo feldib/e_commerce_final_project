@@ -3,9 +3,9 @@ import React from "react";
 
 import { Col } from "react-bootstrap";
 
-import SubPageTitle from "@/components/layout/SubPageTitle";
-import { useI18n } from "@/components/providers/I18nProvider";
-import ShoppingCartComponent from "@/components/shopping/ShoppingCartComponent";
+import SubPageTitle from "@/components/layout/SubPageTitle/SubPageTitle";
+import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
+import ShoppingCartComponent from "@/components/shopping/ShoppingCartComponent/ShoppingCartComponent";
 
 function ShoppingCartSubPage() {
   const { t } = useI18n();

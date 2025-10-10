@@ -3,9 +3,9 @@ import React from "react";
 
 import { Container, Row } from "react-bootstrap";
 
-import ResetPasswordForm from "@/components/input/ResetPasswordForm";
-import PageTitle from "@/components/layout/PageTitle";
-import { useI18n } from "@/components/providers/I18nProvider";
+import ResetPasswordForm from "@/components/input/ResetPasswordForm/ResetPasswordForm";
+import PageTitle from "@/components/layout/PageTitle/PageTitle";
+import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
 
 function ResetPassword() {
   const { t } = useI18n();

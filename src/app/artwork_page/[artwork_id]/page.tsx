@@ -3,7 +3,7 @@ import React from "react";
 
 import { Container } from "react-bootstrap";
 
-import FloatingBackButton from "@/components/buttons/FloatingBackButton";
+import FloatingBackButton from "@/components/buttons/FloatingBackButton/FloatingBackButton";
 
 import useArtworkPage from "./useArtworkPage";
 

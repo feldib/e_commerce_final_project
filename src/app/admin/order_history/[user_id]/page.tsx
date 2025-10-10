@@ -3,8 +3,8 @@ import React from "react";
 
 import { Col } from "react-bootstrap";
 
-import FloatingBackButton from "@/components/buttons/FloatingBackButton";
-import SubPageTitle from "@/components/layout/SubPageTitle";
+import FloatingBackButton from "@/components/buttons/FloatingBackButton/FloatingBackButton";
+import SubPageTitle from "@/components/layout/SubPageTitle/SubPageTitle";
 
 import useUserOrderHistory from "./useUserOrderHistory";
 

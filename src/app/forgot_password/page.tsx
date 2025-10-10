@@ -6,8 +6,8 @@ import { Button, Col, Container, Row } from "react-bootstrap";
 import { Form, Formik } from "formik";
 import { ToastContainer } from "react-toastify";
 
-import InputComponent from "@/components/input/InputComponent";
-import PageTitle from "@/components/layout/PageTitle";
+import InputComponent from "@/components/input/InputComponent/InputComponent";
+import PageTitle from "@/components/layout/PageTitle/PageTitle";
 
 import useForgotPassword from "./useForgotPassword";
 

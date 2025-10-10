@@ -3,9 +3,9 @@ import React from "react";
 
 import { Container } from "react-bootstrap";
 
-import BackToShopButton from "@/components/buttons/BackToShopButton";
-import PageTitle from "@/components/layout/PageTitle";
-import OrderSummaryComponent from "@/components/shopping/OrderSummaryComponent";
+import BackToShopButton from "@/components/buttons/BackToShopButton/BackToShopButton";
+import PageTitle from "@/components/layout/PageTitle/PageTitle";
+import OrderSummaryComponent from "@/components/shopping/OrderSummaryComponent/OrderSummaryComponent";
 
 import useReceipt from "./useReceipt";
 

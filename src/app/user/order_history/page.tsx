@@ -5,9 +5,9 @@ import { Col, Row } from "react-bootstrap";
 
 import { USERS_URL } from "@/utils/constants";
 
-import SubPageTitle from "@/components/layout/SubPageTitle";
-import { useI18n } from "@/components/providers/I18nProvider";
-import OrderSummaryComponent from "@/components/shopping/OrderSummaryComponent";
+import SubPageTitle from "@/components/layout/SubPageTitle/SubPageTitle";
+import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
+import OrderSummaryComponent from "@/components/shopping/OrderSummaryComponent/OrderSummaryComponent";
 
 import { Order } from "@/fetching/types";
 

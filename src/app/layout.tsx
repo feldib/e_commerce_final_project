@@ -3,12 +3,14 @@ import React from "react";
 
 import { ToastContainer } from "react-toastify";
 
-import SkipToContent from "@/components/accessibility/SkipToContent";
-import Footer from "@/components/navbars/Footer";
-import Header from "@/components/navbars/Header";
-import I18nProvider, { useI18n } from "@/components/providers/I18nProvider";
-import ThemeProvider from "@/components/providers/ThemeProvider";
-import UserDataProvider from "@/components/providers/UserDataProvider";
+import SkipToContent from "@/components/accessibility/SkipToContent/SkipToContent";
+import Footer from "@/components/navbars/Footer/Footer";
+import Header from "@/components/navbars/Header/Header";
+import I18nProvider, {
+  useI18n,
+} from "@/components/providers/I18nProvider/I18nProvider";
+import ThemeProvider from "@/components/providers/ThemeProvider/ThemeProvider";
+import UserDataProvider from "@/components/providers/UserDataProvider/UserDataProvider";
 
 import "react-confirm-alert/src/react-confirm-alert.css";
 import "bootstrap/dist/css/bootstrap.min.css";
