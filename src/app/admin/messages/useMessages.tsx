@@ -1,0 +1,42 @@
+"use client";
+import React from "react";
+
+import { Col, Row } from "react-bootstrap";
+
+import { ADMIN_URL } from "@/utils/constants";
+
+import SubPageTitle from "@/components/layout/SubPageTitle/SubPageTitle";
+import UnansweredMessage from "@/components/messaging/UnansweredMessage/UnansweredMessage";
+import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
+
+import { Message } from "@/fetching/types";
+
+import useAxios from "@/hooks/useAxios";
+import useLoading from "@/hooks/useLoading";
+
+const useMessages = () => {
+  const { t } = useI18n();
+  const messages = useAxios(`/${ADMIN_URL}/unanswered_messages`) as Message[];
+  const messagesRepresented = useLoading(messages, (messages) => {
+    return (
+      <>
+        {messages.length !== 0 ? (
+          <>
+            {messages.map((message: Message, index: number) => {
+              return <UnansweredMessage key={index} message={message} />;
+            })}
+          </>
+        ) : (
+          <Row className="px-3 mx-auto floating-element mb-5">
+            <Col className="text-center">
+              {t("app.admin.messages.no_messages")}
+            </Col>
+          </Row>
+        )}
+      </>
+    );
+  });
+  return { t, messagesRepresented };
+};
+
+export default useMessages;
