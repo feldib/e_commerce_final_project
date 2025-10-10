@@ -1,10 +1,12 @@
+"use client";
+
 import { useMemo } from "react";
 
 import * as Yup from "yup";
 
 import { MAX_IMAGE_SIZE } from "@/utils/constants";
 
-import { useI18n } from "@/components/providers/I18nProvider";
+import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
 
 import { isValidImage } from "@/helpers/fileValidation";
 
@@ -40,7 +42,7 @@ const createReviewTextValidation = (t: (key: string) => string) =>
 
 const createRepeatEmailValidation = (
   t: (key: string) => string,
-  fieldName = "email",
+  fieldName = "email"
 ) =>
   Yup.string()
     .required(t("validation.repeat_email_required"))
@@ -48,7 +50,7 @@ const createRepeatEmailValidation = (
 
 const createRepeatPasswordValidation = (
   t: (key: string) => string,
-  fieldName = "password",
+  fieldName = "password"
 ) =>
   Yup.string()
     .required(t("validation.repeat_password_required"))
@@ -63,25 +65,25 @@ const createThumbnailValidation = (t: (key: string) => string) =>
   Yup.mixed()
     .required(t("validation.thumbnail_required"))
     .test("is-valid-type", t("validation.not_valid_image_type"), (value) =>
-      isValidImage(value instanceof File ? value.name : ""),
+      isValidImage(value instanceof File ? value.name : "")
     )
     .test(
       "is-valid-size",
       t("validation.max_allowed_size"),
-      (value) => value instanceof File && value.size <= MAX_IMAGE_SIZE,
+      (value) => value instanceof File && value.size <= MAX_IMAGE_SIZE
     );
 
 const createOtherPicturesValidation = (t: (key: string) => string) =>
   Yup.array().of(
     Yup.mixed()
       .test("is-valid-type", t("validation.not_valid_image_type"), (value) =>
-        isValidImage(value instanceof File ? value.name : ""),
+        isValidImage(value instanceof File ? value.name : "")
       )
       .test(
         "is-valid-size",
         t("validation.max_allowed_size"),
-        (value) => value instanceof File && value.size <= MAX_IMAGE_SIZE,
-      ),
+        (value) => value instanceof File && value.size <= MAX_IMAGE_SIZE
+      )
   );
 
 const createTagsValidation = (t: (key: string) => string) =>
@@ -91,7 +93,7 @@ const createTagsValidation = (t: (key: string) => string) =>
       Yup.object().shape({
         id: Yup.string(),
         text: Yup.string(),
-      }),
+      })
     );
 
 // Individual schema hooks for better performance - only create what you need
@@ -217,7 +219,9 @@ export const useNewArtworkSchema = () => {
       quantity: Yup.number()
         .required(t("validation.quantity_required"))
         .min(1, t("validation.quantity_min")),
-      category_id: Yup.number().required(t("validation.category_required")),
+      category_id: Yup.number()
+        .required(t("validation.category_required"))
+        .min(1, t("validation.category_required")),
       thumbnail: createThumbnailValidation(t),
       tags: createTagsValidation(t),
       other_pictures: createOtherPicturesValidation(t),
@@ -239,7 +243,9 @@ export const useEditArtworkSchema = () => {
       quantity: Yup.number()
         .required(t("validation.quantity_required"))
         .min(1, t("validation.quantity_min")),
-      category_id: Yup.number().required(t("validation.category_required")),
+      category_id: Yup.number()
+        .required(t("validation.category_required"))
+        .min(1, t("validation.category_required")),
       thumbnail: Yup.mixed().required(t("validation.thumbnail_required")),
       tags: createTagsValidation(t),
       other_pictures: Yup.array(),

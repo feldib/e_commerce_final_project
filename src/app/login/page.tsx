@@ -2,49 +2,19 @@
 import React, { Suspense } from "react";
 
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
 
 import { faKey, faUser } from "@fortawesome/free-solid-svg-icons";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { Form, Formik } from "formik";
 import { ToastContainer } from "react-toastify";
 
-import { showLoginErrorToast, showLoginSuccessToast } from "@/utils/toastUtils";
+import InputComponent from "@/components/input/InputComponent/InputComponent";
+import PageTitle from "@/components/layout/PageTitle/PageTitle";
 
-import InputComponent from "@/components/input/InputComponent";
-import PageTitle from "@/components/PageTitle";
-import { useI18n } from "@/components/providers/I18nProvider";
-import { UserDataContext } from "@/components/providers/UserDataProvider";
-
-import { logIn } from "@/fetching/fetching";
-import { User } from "@/fetching/types";
-
-import { useLoginSchema } from "@/hooks/useValidationSchemas";
+import useLogin from "./useLogin";
 
 function SignInPageInner() {
-  const searchParams = useSearchParams();
-  const to_checkout = searchParams.get("to_checkout") === "true";
-  const router = useRouter();
-  const { t } = useI18n();
-  const loginSchema = useLoginSchema();
-
-  const initialValues = {
-    email: "",
-    password: "",
-  };
-
-  const { settleSuccessfulLogIn } = React.useContext(UserDataContext);
-
-  async function onSubmit(values: { email: string; password: string }) {
-    try {
-      await logIn(values.email, values.password, (userData: User) => {
-        settleSuccessfulLogIn(to_checkout, userData, router);
-      });
-      showLoginSuccessToast();
-    } catch {
-      showLoginErrorToast();
-    }
-  }
+  const { t, loginSchema, initialValues, onSubmit } = useLogin();
 
   return (
     <Container className="px-3 pb-5">
@@ -52,8 +22,8 @@ function SignInPageInner() {
 
       <Formik
         initialValues={initialValues}
-        validationSchema={loginSchema}
         onSubmit={onSubmit}
+        validationSchema={loginSchema}
       >
         {({ errors, touched }) => (
           <Row className="mx-auto floating-element">
@@ -61,25 +31,25 @@ function SignInPageInner() {
               <Col className="mx-3 pb-5">
                 <Form>
                   <InputComponent
-                    label={t("app.login.email_address")}
-                    name="email"
-                    type="email"
-                    placeholder={t("app.login.enter_email")}
+                    hasError={!!errors.email && !!touched.email}
                     icon={faUser}
-                    showAsterisk={!!errors.email && !!touched.email}
+                    label={t("common.fields.email_address")}
+                    name="email"
+                    placeholder={t("common.placeholders.enter_email")}
+                    type="email"
                   />
 
                   <InputComponent
-                    label={t("app.login.password")}
-                    name="password"
-                    type="password"
-                    placeholder={t("app.login.enter_password")}
+                    hasError={!!errors.password && !!touched.password}
                     icon={faKey}
-                    showAsterisk={!!errors.password && !!touched.password}
+                    label={t("common.fields.password")}
+                    name="password"
+                    placeholder={t("common.placeholders.enter_password")}
+                    type="password"
                   />
 
-                  <Button variant="primary" type="submit">
-                    {t("common.sign_in")}
+                  <Button type="submit" variant="primary">
+                    {t("common.actions.sign_in")}
                   </Button>
                   <ToastContainer position="bottom-right" />
                 </Form>

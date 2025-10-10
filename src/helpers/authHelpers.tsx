@@ -1,6 +1,6 @@
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
-import { getIsAdmin, getLoggedIn } from "@/fetching/fetching";
+import { getIsAdmin, getLoggedIn } from "@/fetching/auth";
 
 const redirectIfNotloggedIn = (router: AppRouterInstance) => {
   getLoggedIn().catch(() => {

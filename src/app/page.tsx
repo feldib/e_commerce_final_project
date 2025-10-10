@@ -5,9 +5,9 @@ import { Container, Row } from "react-bootstrap";
 
 import { USERS_URL } from "@/utils/constants";
 
-import { useI18n } from "@/components/providers/I18nProvider";
-import { UserDataContext } from "@/components/providers/UserDataProvider";
-import Recommendations from "@/components/Recommendations";
+import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
+import { UserDataContext } from "@/components/providers/UserDataProvider/UserDataProvider";
+import Recommendations from "@/components/recommendations/Recommendations/Recommendations";
 
 function HomePage() {
   const { user, loggedIn } = React.useContext(UserDataContext);
@@ -23,19 +23,19 @@ function HomePage() {
       </Row>
 
       <Row className="mx-auto mb-3 d-flex justify-content-evenly">
-        <Recommendations title={t("app.home.featured")} path="/featured" />
+        <Recommendations path="/featured" title={t("app.home.featured")} />
 
-        <Recommendations title={t("app.home.newest")} path="/newest" />
+        <Recommendations path="/newest" title={t("app.home.newest")} />
 
         <Recommendations
-          title={t("app.home.most_wishlisted")}
           path="/most_wishlisted"
+          title={t("app.home.most_wishlisted")}
         />
 
         {loggedIn && (
           <Recommendations
-            title={t("app.home.wishlisted")}
             path={`/${USERS_URL}/wishlisted`}
+            title={t("app.home.wishlisted")}
           />
         )}
       </Row>

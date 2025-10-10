@@ -1,10 +1,8 @@
 import axiosConfigured from "@/utils/axiosConfigured";
 import { SERVER_URL, STORAGE_KEYS } from "@/utils/constants";
 
-import {
-  getDataOfArtworks,
-  replaceSavedShoppingCart,
-} from "@/fetching/fetching";
+import { getDataOfArtworks } from "@/fetching/artwork";
+import { replaceSavedShoppingCart } from "@/fetching/shopping";
 import { Artwork, ShoppingCartItem } from "@/fetching/types";
 
 const getCartItems = (): ShoppingCartItem[] => {
@@ -26,14 +24,14 @@ const clearCart = (): void => {
 
 const findCartItemIndex = (
   items: ShoppingCartItem[],
-  artworkId: number,
+  artworkId: number
 ): number => {
   return items.findIndex((item) => item.artwork_id === artworkId);
 };
 
 const increaseLocalStorageShoppingCartQuantity = (
   artwork_id: number,
-  stored_amount: number,
+  stored_amount: number
 ) => {
   if (stored_amount <= 0) {
     throw new Error("Item is out of stock");
@@ -113,13 +111,13 @@ const replacePreviousShoppingCart = async () => {
 };
 
 const checkIfShoppingCartIsEmpty = async (
-  loggedIn: boolean,
+  loggedIn: boolean
 ): Promise<boolean> => {
   try {
     if (loggedIn) {
       // Check server-side cart
       const results = await axiosConfigured.get(
-        `${SERVER_URL}/users/shopping_cart`,
+        `${SERVER_URL}/users/shopping_cart`
       );
       return Array.isArray(results.data) && results.data.length > 0;
     } else {
@@ -137,8 +135,20 @@ function getShoppingCartFromLocalStorage(): ShoppingCartItem[] {
   return getCartItems();
 }
 
+const createQuantityDecreaseHandler = (
+  quantity: number,
+  setQuantity: (quantity: number) => void
+): (() => void) => {
+  return () => {
+    if (quantity > 0) {
+      setQuantity(quantity - 1);
+    }
+  };
+};
+
 export {
   checkIfShoppingCartIsEmpty,
+  createQuantityDecreaseHandler,
   decreaseLocalStorageShoppingCartQuantity,
   getLocalStorageShoppingCart,
   getShoppingCartFromLocalStorage,

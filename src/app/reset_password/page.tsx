@@ -1,115 +1,22 @@
 "use client";
-import React, { Suspense } from "react";
+import React from "react";
 
-import { useRouter, useSearchParams } from "next/navigation";
+import { Container, Row } from "react-bootstrap";
 
-import { faKey } from "@fortawesome/free-solid-svg-icons";
-import { Button, Col, Container, Row } from "react-bootstrap";
-import { Form, Formik } from "formik";
-import { ToastContainer } from "react-toastify";
+import ResetPasswordForm from "@/components/input/ResetPasswordForm/ResetPasswordForm";
+import PageTitle from "@/components/layout/PageTitle/PageTitle";
+import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
 
-import {
-  showIncorrectDataToast,
-  showPasswordChangeErrorToast,
-  showPasswordResetSuccessToast,
-} from "@/utils/toastUtils";
-
-import InputComponent from "@/components/input/InputComponent";
-import PageTitle from "@/components/PageTitle";
-import { useI18n } from "@/components/providers/I18nProvider";
-
-import { changePassword } from "@/fetching/fetching";
-
-import { useResetPasswordSchema } from "@/hooks/useValidationSchemas";
-
-type ResetPasswordFormValues = {
-  password: string;
-  repeatPassword: string;
-};
-
-function ResetPasswordInner() {
-  const initialValues: ResetPasswordFormValues = {
-    password: "",
-    repeatPassword: "",
-  };
-
-  const searchParams = useSearchParams();
+function ResetPassword() {
   const { t } = useI18n();
-  const resetPasswordSchema = useResetPasswordSchema();
-
-  const router = useRouter();
-
-  const onSubmit = (values: ResetPasswordFormValues) => {
-    const token = searchParams.get("token");
-    const email = searchParams.get("email");
-    changePassword(token, email, values.password)
-      .then(() => {
-        showPasswordResetSuccessToast(t);
-        router.push("/login");
-      })
-      .catch(() => {
-        showPasswordChangeErrorToast(t);
-      });
-  };
 
   return (
     <Container className="pb-5">
       <PageTitle title={t("app.reset_password.title")} />
       <Row className="floating-element">
-        <Col className="mx-5 pb-5">
-          <Formik
-            initialValues={initialValues}
-            onSubmit={onSubmit}
-            validationSchema={resetPasswordSchema}
-          >
-            {({ errors, touched }) => (
-              <Form>
-                <InputComponent
-                  label={t("app.reset_password.password")}
-                  name="password"
-                  type="password"
-                  placeholder={t("app.reset_password.enter_password")}
-                  icon={faKey}
-                  showAsterisk={!!errors.password && !!touched.password}
-                />
-
-                <InputComponent
-                  label={t("app.reset_password.password")}
-                  name="repeatPassword"
-                  type="password"
-                  placeholder={t("app.reset_password.enter_repeat_password")}
-                  icon={faKey}
-                  showAsterisk={
-                    !!errors.repeatPassword && !!touched.repeatPassword
-                  }
-                />
-
-                <Button
-                  variant="primary"
-                  type="submit"
-                  onClick={() => {
-                    if (Object.keys(errors).length) {
-                      showIncorrectDataToast(t);
-                    }
-                  }}
-                >
-                  {t("app.reset_password.change_password")}
-                </Button>
-                <ToastContainer position="bottom-right" />
-              </Form>
-            )}
-          </Formik>
-        </Col>
+        <ResetPasswordForm />
       </Row>
     </Container>
-  );
-}
-
-function ResetPassword() {
-  return (
-    <Suspense>
-      <ResetPasswordInner />
-    </Suspense>
   );
 }
 

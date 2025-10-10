@@ -3,8 +3,8 @@ import React from "react";
 
 import { Col, Container, Row } from "react-bootstrap";
 
-import PageTitle from "@/components/PageTitle";
-import { useI18n } from "@/components/providers/I18nProvider";
+import PageTitle from "@/components/layout/PageTitle/PageTitle";
+import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
 
 const AboutUsPage: React.FC = () => {
   const { t } = useI18n();

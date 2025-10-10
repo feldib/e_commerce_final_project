@@ -1,37 +1,48 @@
+"use client";
 import React from "react";
 
 import { ToastContainer } from "react-toastify";
 
-import SkipToContentLink from "@/components/accessibility/SkipToContentLink";
-import Footer from "@/components/navbars/Footer";
-import Header from "@/components/navbars/Header";
-import I18nProvider from "@/components/providers/I18nProvider";
-import ThemeProvider from "@/components/providers/ThemeProvider";
-import UserDataProvider from "@/components/providers/UserDataProvider";
+import SkipToContent from "@/components/accessibility/SkipToContent/SkipToContent";
+import Footer from "@/components/navbars/Footer/Footer";
+import Header from "@/components/navbars/Header/Header";
+import I18nProvider, {
+  useI18n,
+} from "@/components/providers/I18nProvider/I18nProvider";
+import ThemeProvider from "@/components/providers/ThemeProvider/ThemeProvider";
+import UserDataProvider from "@/components/providers/UserDataProvider/UserDataProvider";
 
 import "react-confirm-alert/src/react-confirm-alert.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./globals.css";
 
-function App({ children }: { children: React.ReactNode }) {
+function AppContent({ children }: { children: React.ReactNode }) {
+  const { locale } = useI18n();
+
   return (
-    <html>
+    <html lang={locale}>
       <body>
-        <I18nProvider>
-          <UserDataProvider>
-            <ThemeProvider>
-              <SkipToContentLink />
-              <Header />
-              <main id="main" className="pb-5 vh-100">
-                {children}
-              </main>
-              <Footer />
-              <ToastContainer position="bottom-right" />
-            </ThemeProvider>
-          </UserDataProvider>
-        </I18nProvider>
+        <SkipToContent />
+        <Header />
+        <main className="pb-5 vh-100" id="main">
+          {children}
+        </main>
+        <Footer />
+        <ToastContainer position="bottom-right" />
       </body>
     </html>
+  );
+}
+
+function App({ children }: { children: React.ReactNode }) {
+  return (
+    <I18nProvider>
+      <UserDataProvider>
+        <ThemeProvider>
+          <AppContent>{children}</AppContent>
+        </ThemeProvider>
+      </UserDataProvider>
+    </I18nProvider>
   );
 }
 

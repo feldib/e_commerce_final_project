@@ -7,9 +7,9 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Col, Container, Row } from "react-bootstrap";
 
-import ArtworkSearchComponent from "@/components/input/ArtworkSearchComponent";
-import PageTitle from "@/components/PageTitle";
-import { useI18n } from "@/components/providers/I18nProvider";
+import ArtworkSearchComponent from "@/components/input/search/ArtworkSearchComponent/ArtworkSearchComponent";
+import PageTitle from "@/components/layout/PageTitle/PageTitle";
+import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
 
 function Search() {
   const { t } = useI18n();
@@ -19,11 +19,11 @@ function Search() {
       <PageTitle title={t("app.admin.artworks.title")} />
 
       <Row>
-        <Col className="floating-element mx-auto mb-4" xs={5} md={4} lg={3}>
+        <Col className="floating-element mx-auto mb-4" lg={3} md={4} xs={5}>
           <Link href="/admin/add_new_artwork">
             <p>
               <FontAwesomeIcon icon={faPlus} />
-              <span> {t("app.admin.artworks.add_new_artwork")}</span>
+              <span> {t("common.actions.add_new_artwork")}</span>
             </p>
           </Link>
         </Col>

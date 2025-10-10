@@ -3,16 +3,16 @@ import React from "react";
 
 import { Container } from "react-bootstrap";
 
-import PageTitle from "@/components/PageTitle";
-import { useI18n } from "@/components/providers/I18nProvider";
-import ShoppingCartComponent from "@/components/ShoppingCartComponent";
+import PageTitle from "@/components/layout/PageTitle/PageTitle";
+import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
+import ShoppingCartComponent from "@/components/shopping/ShoppingCartComponent/ShoppingCartComponent";
 
 function ShoppingCartPage() {
   const { t } = useI18n();
 
   return (
     <Container className="pb-5 mb-5">
-      <PageTitle title={t("app.shopping_cart.title")} />
+      <PageTitle title={t("common.shop.shopping_cart")} />
       <ShoppingCartComponent />
     </Container>
   );

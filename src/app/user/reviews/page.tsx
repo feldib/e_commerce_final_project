@@ -3,44 +3,13 @@ import React from "react";
 
 import { Col, Row } from "react-bootstrap";
 
-import { USERS_URL } from "@/utils/constants";
+import SubPageTitle from "@/components/layout/SubPageTitle/SubPageTitle";
 
-import { useI18n } from "@/components/providers/I18nProvider";
-import SubPageTitle from "@/components/SubPageTitle";
-import UserReview from "@/components/UserReview";
-
-import { Review } from "@/fetching/types";
-
-import useAxios from "@/hooks/useAxios";
-import useLoading from "@/hooks/useLoading";
+import useUserReviews from "./useUserReviews";
 
 function Reviews() {
-  const { t } = useI18n();
-  const reviews = useAxios(`/${USERS_URL}/get_reviews_of_user`) as Review[];
-  const representReviews = useLoading(reviews, (reviews) => {
-    return (
-      <>
-        {reviews.length !== 0 ? (
-          <>
-            {reviews.map((review, index) => (
-              <UserReview
-                key={index}
-                review={review}
-                index={index + 1}
-                admin={false}
-              />
-            ))}
-          </>
-        ) : (
-          <Row className="px-3 mx-auto floating-element mb-5">
-            <Col className="text-center">
-              {t("app.user.reviews.no_reviews")}
-            </Col>
-          </Row>
-        )}
-      </>
-    );
-  });
+  const { t, representReviews } = useUserReviews();
+
   return (
     <Col className="mx-auto">
       <SubPageTitle title={t("app.user.reviews.title")} />

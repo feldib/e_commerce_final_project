@@ -1,55 +1,25 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 
-import Link from "next/link";
+import { Container } from "react-bootstrap";
 
-import { Button, Col, Container, Row } from "react-bootstrap";
+import BackToShopButton from "@/components/buttons/BackToShopButton/BackToShopButton";
+import PageTitle from "@/components/layout/PageTitle/PageTitle";
+import OrderSummaryComponent from "@/components/shopping/OrderSummaryComponent/OrderSummaryComponent";
 
-import OrderSummaryComponent from "@/components/OrderSummaryComponent";
-import PageTitle from "@/components/PageTitle";
-import { useI18n } from "@/components/providers/I18nProvider";
-
-import { Artwork } from "@/fetching/types";
+import useReceipt from "./useReceipt";
 
 function ReceiptPage() {
-  const { t } = useI18n();
-  const [currentOrderData, setCurrentOrderData] = useState<{
-    items: Artwork[];
-    totalCost: number;
-  }>({ items: [], totalCost: 0 });
-
-  useEffect(() => {
-    const currentOrderString = localStorage.getItem("currentOrder");
-    setCurrentOrderData(
-      currentOrderString
-        ? JSON.parse(currentOrderString)
-        : { items: [], totalCost: 0 },
-    );
-  }, []);
+  const { t, currentOrderData, handleBackToShopClick } = useReceipt();
 
   return (
     <Container className="pb-5">
       <PageTitle title={t("app.receipt.title")} />
 
       <OrderSummaryComponent
+        button={<BackToShopButton onClick={handleBackToShopClick} />}
         items={currentOrderData.items}
         totalCost={currentOrderData.totalCost}
-        button={
-          <Row>
-            <Col className="text-center mb-5">
-              <Link href="/">
-                <Button
-                  className="submit"
-                  onClick={() => {
-                    localStorage.removeItem("currentOrder");
-                  }}
-                >
-                  {t("app.receipt.back_to_shop")}
-                </Button>
-              </Link>
-            </Col>
-          </Row>
-        }
       />
     </Container>
   );

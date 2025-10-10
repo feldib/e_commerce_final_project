@@ -3,7 +3,7 @@ import React from "react";
 const renderData = <T,>(
   dataLines: T[],
   makeRows: (dataLines: T[]) => React.JSX.Element,
-  noResultsText: string,
+  noResultsText: string
 ): React.JSX.Element => {
   if (dataLines.length > 0) {
     return <>{makeRows(dataLines)}</>;

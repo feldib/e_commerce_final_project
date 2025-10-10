@@ -12,10 +12,10 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Container, Row } from "react-bootstrap";
 
-import SubNavbar from "@/components/navbars/SubNavbar";
-import PageTitle from "@/components/PageTitle";
-import { useI18n } from "@/components/providers/I18nProvider";
-import { UserDataContext } from "@/components/providers/UserDataProvider";
+import PageTitle from "@/components/layout/PageTitle/PageTitle";
+import SubNavbar from "@/components/navbars/SubNavbar/SubNavbar";
+import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
+import { UserDataContext } from "@/components/providers/UserDataProvider/UserDataProvider";
 
 import { redirectIfNotloggedIn } from "@/helpers/authHelpers";
 import useLoading from "@/hooks/useLoading";
@@ -30,41 +30,41 @@ function ProfilePage({ children }: React.PropsWithChildren<React.ReactNode>) {
     return <PageTitle title={`${first_name}'s page`} />;
   });
 
+  const links = [
+    {
+      linkText: t("app.user.layout.user_data"),
+      linkTo: "data",
+      icon: faInfoCircle,
+    },
+    {
+      linkText: t("app.user.layout.order_history"),
+      linkTo: "order_history",
+      icon: faClockRotateLeft,
+    },
+    {
+      linkText: t("app.user.layout.wishlist"),
+      linkTo: "wishlist",
+      icon: faHeart,
+    },
+    {
+      linkText: t("common.fields.reviews"),
+      linkTo: "reviews",
+      icon: faStar,
+    },
+    {
+      linkText: t("app.user.layout.shopping_cart"),
+      linkTo: "shopping_cart",
+      icon: faShoppingCart,
+    },
+  ];
+
   return (
     <Container>
       {title}
 
-      <SubNavbar
-        linkObjects={[
-          {
-            linkText: t("app.user.layout.user_data"),
-            linkTo: "data",
-            icon: faInfoCircle,
-          },
-          {
-            linkText: t("app.user.layout.order_history"),
-            linkTo: "order_history",
-            icon: faClockRotateLeft,
-          },
-          {
-            linkText: t("app.user.layout.wishlist"),
-            linkTo: "wishlist",
-            icon: faHeart,
-          },
-          {
-            linkText: t("app.user.layout.reviews"),
-            linkTo: "reviews",
-            icon: faStar,
-          },
-          {
-            linkText: t("app.user.layout.shopping_cart"),
-            linkTo: "shopping_cart",
-            icon: faShoppingCart,
-          },
-        ]}
-      />
+      <SubNavbar linkObjects={links} />
 
-      <Row id="subpage" className="pb-5">
+      <Row className="pb-5" id="subpage">
         {children}
       </Row>
     </Container>

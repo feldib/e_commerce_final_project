@@ -156,8 +156,9 @@ html,
 #header-mobile-shopping-cart {
   font-family: "Rubik";
 
-  background-color: var(--nav-color);
-  color: var(--warm);
+  /* Fixed colors for header/footer - don't change with admin theme */
+  background-color: #0c090d;
+  color: #e1944e;
 }
 
 thead {
@@ -169,6 +170,9 @@ thead {
 #footer > div > div > div > a,
 .share-icon {
   font-size: 1rem;
+  /* Fixed colors for footer - don't change with admin theme */
+  background-color: #0c090d;
+  color: #e1944e;
 }
 
 .dropdown-menu {
@@ -274,15 +278,23 @@ a:hover,
   width: 1px;
   height: 1px;
   overflow: hidden;
+  z-index: 9999;
 }
 
 .skip-to-content:focus {
-  position: static;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: auto;
   height: auto;
-  color: black;
-  background-color: blue;
-  font-size: 1.5rem;
+  padding: 8px 16px;
+  color: white;
+  background-color: #000;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: bold;
+  z-index: 10000;
+  border: 2px solid #fff;
 }
 
 .uploaded-image,
@@ -305,6 +317,12 @@ a:hover,
   font-size: 50px;
   opacity: 0;
   transition: all 0.2s ease-in-out;
+}
+
+/* RTL support for remove button positioning */
+[dir="rtl"] .remove-uploaded-image {
+  left: auto;
+  right: 60px;
 }
 
 .uploaded-image-container:hover .uploaded-image {
@@ -395,4 +413,16 @@ a:hover,
 [dir="rtl"] .dropdown-item {
   direction: rtl;
   text-align: right;
+}
+
+button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  display: inline;
 }

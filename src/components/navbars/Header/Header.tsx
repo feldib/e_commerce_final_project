@@ -1,0 +1,129 @@
+"use client";
+import React from "react";
+
+import Link from "next/link";
+
+import { faBars, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Container, Nav, Navbar } from "react-bootstrap";
+
+import { UI_DIMENSIONS } from "@/utils/constants";
+
+import LanguageSelector from "../LanguageSelector/LanguageSelector";
+import LoggedInNavbarItems from "../LoggedInNavbarItems/LoggedInNavbarItems";
+import NotLoggedInNavbarItems from "../NotLoggedInNavbarItems/NotLoggedInNavbarItems";
+import useHeader from "./useHeader";
+
+export const ExpandedNavContext = React.createContext({
+  closeExpandedNav: () => {},
+});
+
+function Header() {
+  const {
+    t,
+    user,
+    loggedIn,
+    expanded,
+    closeExpandedNav,
+    handleShoppingCartClick,
+    handleToggleClick,
+    handleNavClose,
+  } = useHeader();
+
+  return (
+    <ExpandedNavContext.Provider value={{ closeExpandedNav }}>
+      <Navbar expand="lg" expanded={expanded} id="header">
+        <Container>
+          <Navbar.Brand>
+            <Link
+              href="/"
+              style={{ color: "inherit", textDecoration: "inherit" }}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                alt={t("components.header.artwork_market_logo")}
+                className="d-inline-block align-top"
+                src="/logo.png"
+                width={UI_DIMENSIONS.THUMBNAIL_SIZE}
+              />
+            </Link>
+          </Navbar.Brand>
+          <Navbar.Toggle aria-controls="menu-items">
+            {/*Shopping cart icon - mobile, non-admin users */}
+            {!user.is_admin && (
+              <FontAwesomeIcon
+                aria-label={t("common.shop.shopping_cart")}
+                className="me-3"
+                icon={faShoppingCart}
+                id="header-mobile-shopping-cart"
+                onClick={handleShoppingCartClick}
+              />
+            )}
+            <FontAwesomeIcon
+              icon={faBars}
+              id="header-toggler"
+              onClick={handleToggleClick}
+            />
+          </Navbar.Toggle>
+          <Navbar.Collapse className="mx-3" id="menu-items">
+            <Nav className="mx-auto">
+              <Link
+                className="nav-link"
+                href={user.is_admin ? "/admin/artworks" : "/search"}
+                onClick={handleNavClose}
+                style={{ color: "inherit", textDecoration: "inherit" }}
+              >
+                {t("navigation.search")}
+              </Link>
+              <Link
+                className="nav-link"
+                href="/about"
+                onClick={handleNavClose}
+                style={{ color: "inherit", textDecoration: "inherit" }}
+              >
+                {t("navigation.about")}
+              </Link>
+              <Link
+                className="nav-link"
+                href="/contact"
+                onClick={handleNavClose}
+                style={{ color: "inherit", textDecoration: "inherit" }}
+              >
+                {t("navigation.contact")}
+              </Link>
+
+              {loggedIn ? <LoggedInNavbarItems /> : <NotLoggedInNavbarItems />}
+
+              <button
+                className="nav-link"
+                onClick={handleNavClose}
+                style={{ color: "inherit", textDecoration: "inherit" }}
+              >
+                <LanguageSelector />
+              </button>
+            </Nav>
+          </Navbar.Collapse>
+
+          {/* Shopping cart icon - desktop only, non-admin users */}
+          {!user.is_admin && (
+            <div className="d-none d-lg-block">
+              <FontAwesomeIcon
+                aria-label={t("common.shop.shopping_cart")}
+                icon={faShoppingCart}
+                id="header-desktop-shopping-cart"
+                onClick={handleShoppingCartClick}
+                size="xl"
+                style={{
+                  cursor: "pointer",
+                  color: "inherit",
+                }}
+              />
+            </div>
+          )}
+        </Container>
+      </Navbar>
+    </ExpandedNavContext.Provider>
+  );
+}
+
+export default Header;
