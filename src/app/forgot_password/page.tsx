@@ -6,42 +6,14 @@ import { Button, Col, Container, Row } from "react-bootstrap";
 import { Form, Formik } from "formik";
 import { ToastContainer } from "react-toastify";
 
-import {
-  showEmailSubmittedSuccessToast,
-  showFormSubmissionErrorToast,
-} from "@/utils/toastUtils";
-
 import InputComponent from "@/components/input/InputComponent";
 import PageTitle from "@/components/layout/PageTitle";
-import { useI18n } from "@/components/providers/I18nProvider";
 
-import { sendForgotPasswordEmail } from "@/fetching/fetching";
-
-import { useForgotPasswordSchema } from "@/hooks/useValidationSchemas";
+import useForgotPassword from "./useForgotPassword";
 
 function ForgotPassword() {
-  const [displayMessage, setDisplayMessage] = React.useState(false);
-  const { t } = useI18n();
-  const forgotPasswordSchema = useForgotPasswordSchema();
-
-  type ForgotPasswordFormValues = {
-    email: string;
-  };
-
-  const initialValues: ForgotPasswordFormValues = {
-    email: "",
-  };
-
-  const onSubmit = (values: ForgotPasswordFormValues) => {
-    sendForgotPasswordEmail(values.email)
-      .then(() => {
-        setDisplayMessage(true);
-        showEmailSubmittedSuccessToast(t);
-      })
-      .catch(() => {
-        showFormSubmissionErrorToast(t);
-      });
-  };
+  const { t, displayMessage, forgotPasswordSchema, initialValues, onSubmit } =
+    useForgotPassword();
 
   return (
     <Container className="pb-5">
