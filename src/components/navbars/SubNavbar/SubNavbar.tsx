@@ -6,6 +6,8 @@ import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Col, Container, Nav, Navbar, Row } from "react-bootstrap";
 
+import SkipToSubpageContent from "@/components/accessibility/SkipToSubpageContent/SkipToSubpageContent";
+
 type SubNavbarProps = {
   linkObjects: Array<{
     linkTo: string;
@@ -17,9 +19,7 @@ type SubNavbarProps = {
 function SubNavbar({ linkObjects }: SubNavbarProps) {
   return (
     <Row>
-      <a className="skip-to-content" href="#subpage">
-        Skip to subpage content
-      </a>
+      <SkipToSubpageContent />
       <Navbar>
         <Container>
           <Nav className="subnavbar d-flex flex-wrap mx-3 justify-content-around w-100 floating-element">
