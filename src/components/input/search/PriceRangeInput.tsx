@@ -4,46 +4,17 @@ import React from "react";
 
 import { Form, InputGroup, Row } from "react-bootstrap";
 
-import { useI18n } from "@/components/providers/I18nProvider";
-
 import { SearchFormikInstance } from "@/fetching/types";
+
+import usePriceRangeInput from "./hooks/usePriceRangeInput";
 
 type PriceRangeInputProps = {
   formik: SearchFormikInstance;
 };
 
 function PriceRangeInput({ formik }: PriceRangeInputProps) {
-  const { t } = useI18n();
-
-  const handleMinChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value === "" ? 0 : parseInt(e.target.value);
-    formik.setFieldValue("min", value);
-  };
-
-  const handleMinBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-    formik.handleBlur(e);
-    if (formik.values.min < 0) {
-      formik.setFieldValue("min", 0);
-    }
-    const max = formik.values.max;
-    if (max > 0 && max <= formik.values.min) {
-      formik.setFieldValue("max", 0);
-    }
-  };
-
-  const handleMaxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value === "" ? 0 : parseInt(e.target.value);
-    formik.setFieldValue("max", value);
-  };
-
-  const handleMaxBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-    formik.handleBlur(e);
-    const min = formik.values.min;
-    const max = formik.values.max;
-    if (min > 0 && max > 0 && min > max) {
-      formik.setFieldValue("max", 0);
-    }
-  };
+  const { t, handleMinChange, handleMinBlur, handleMaxChange, handleMaxBlur } =
+    usePriceRangeInput({ formik });
 
   return (
     <Row className="mx-auto mb-5 mt-5" lg={6} sx={8}>

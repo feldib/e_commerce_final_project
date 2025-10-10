@@ -6,54 +6,20 @@ import { Button, FloatingLabel, Form as RBForm, Row } from "react-bootstrap";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { ToastContainer } from "react-toastify";
 
-import {
-  showMessageSendErrorToast,
-  showMessageSentSuccessToast,
-} from "@/utils/toastUtils";
-
 import ErrorAsterisk from "@/components/input/ErrorAsterisk";
 import InputComponent from "@/components/input/InputComponent";
-import { useI18n } from "@/components/providers/I18nProvider";
-import { UserDataContext } from "@/components/providers/UserDataProvider";
 
-import { sendMessageToAdministrator } from "@/fetching/fetching";
-
-import { createHandleSubmitClick } from "@/helpers/formValidationHelpers";
-import { useContactSchema } from "@/hooks/useValidationSchemas";
-
-type ContactFormValues = {
-  email: string;
-  title: string;
-  message: string;
-};
+import useContactForm from "./hooks/useContactForm";
 
 function ContactForm() {
-  const { loggedIn, user } = React.useContext(UserDataContext);
-  const { t } = useI18n();
-  const contactUsSchema = useContactSchema();
-  const form = React.useRef<HTMLFormElement | null>(null);
-
-  const initialValues = {
-    email: loggedIn ? user.email : "",
-    title: "",
-    message: "",
-  };
-
-  const onSubmit = async (values: ContactFormValues) => {
-    try {
-      await sendMessageToAdministrator(
-        values.email,
-        values.title,
-        values.message
-      );
-      showMessageSentSuccessToast(t);
-      form?.current?.reset();
-    } catch {
-      showMessageSendErrorToast(t);
-    }
-  };
-
-  const handleSubmitClick = createHandleSubmitClick(t);
+  const {
+    t,
+    contactUsSchema,
+    form,
+    initialValues,
+    onSubmit,
+    handleSubmitClick,
+  } = useContactForm();
 
   return (
     <Row>

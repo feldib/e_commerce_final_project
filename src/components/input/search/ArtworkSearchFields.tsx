@@ -3,12 +3,12 @@ import React from "react";
 
 import { Button, Col, Form, Row } from "react-bootstrap";
 
-import { useI18n } from "@/components/providers/I18nProvider";
 import Queries from "@/components/search/Queries";
 
 import { Category, SearchFormikInstance, SearchParams } from "@/fetching/types";
 
 import CategoryDropdownSearch from "../category_dropdown/CategoryDropdownSearch";
+import useArtworkSearchFields from "./hooks/useArtworkSearchFields";
 import NumberOfArtworksDropdown from "./NumberOfArtworksDropdown";
 import OrderByDropdown from "./OrderByDropdown";
 import PriceRangeInput from "./PriceRangeInput";
@@ -29,22 +29,17 @@ function ArtworkSearchFields({
   triggerSearchWithUpdatedValues,
   searchedValues,
 }: ArtworkSearchFieldsProps) {
-  const { t } = useI18n();
-
-  const handleOnlyFeaturedChange = () => {
-    const newValue = !formik.values.only_featured;
-    formik.setFieldValue("only_featured", newValue);
-    triggerSearchWithUpdatedValues({ only_featured: newValue });
-  };
-
-  const handleSearchClick = () => {
-    triggerSearchWithUpdatedValues({});
-  };
-
-  const handleCategoryChange = (value: string | number) => {
-    formik.setFieldValue("category_id", value);
-    triggerSearchWithUpdatedValues({ category_id: value.toString() });
-  };
+  const {
+    t,
+    handleOnlyFeaturedChange,
+    handleSearchClick,
+    handleCategoryChange,
+  } = useArtworkSearchFields({
+    formik,
+    categories,
+    triggerSearchWithUpdatedValues,
+    searchedValues,
+  });
 
   return (
     <div className="floating-element mb-3 mx-5">
