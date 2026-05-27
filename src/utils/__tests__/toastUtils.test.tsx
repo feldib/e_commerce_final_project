@@ -1,14 +1,7 @@
 import { toast } from "react-toastify";
 
 import {
-  artworkToast,
-  authToast,
-  cartToast,
-  formToast,
-  messageToast,
-  reviewToast,
   showToast,
-  uiToast,
 } from "../toastUtils";
 
 // Mock react-toastify
