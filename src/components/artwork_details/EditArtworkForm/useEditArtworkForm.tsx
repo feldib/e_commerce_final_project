@@ -7,7 +7,7 @@ import { useParams, useRouter } from "next/navigation";
 import { useFormik } from "formik";
 
 import { SERVER_URL } from "@/utils/constants";
-import { showToast } from "@/utils/toastUtils";
+import { artworkToast } from "@/utils/toastUtils";
 
 import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
 
@@ -116,11 +116,9 @@ const useEditArtworkForm = () => {
   const handleCategoryChange = async (category: { id: number }) => {
     try {
       await updateArtworkData(artworkId, "category_id", category.id);
-      showToast.success(
-        t("components.forms.artwork.category_updated_successfully")
-      );
+      artworkToast.categoryUpdated(t);
     } catch {
-      showToast.error(t("components.forms.artwork.failed_to_update_category"));
+      artworkToast.failedToUpdateCategory(t);
     }
   };
 

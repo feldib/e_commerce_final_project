@@ -5,7 +5,7 @@ import React from "react";
 import { FormikProps } from "formik";
 
 import { SERVER_URL } from "@/utils/constants";
-import { showToast } from "@/utils/toastUtils";
+import { artworkToast } from "@/utils/toastUtils";
 
 import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
 
@@ -56,15 +56,9 @@ function useArtworkImagesInput<T extends Record<string, unknown>>({
             URL.createObjectURL(file),
           ]);
           e.target.value = ""; // Reset the input for next upload
-          showToast(
-            t("components.forms.artwork.image_uploaded_successfully"),
-            "error"
-          );
+          artworkToast.imageUploadFailed(t);
         } catch {
-          showToast(
-            t("components.forms.artwork.failed_to_upload_image"),
-            "error"
-          );
+          artworkToast.imageUploadFailed(t);
         }
       } else {
         // In add mode, we just set the file directly
@@ -94,10 +88,7 @@ function useArtworkImagesInput<T extends Record<string, unknown>>({
         ).filter((_, picIndex) => picIndex !== index);
         formik.setFieldValue("other_pictures", newArray);
       } catch {
-        showToast(
-          t("components.forms.artwork.failed_to_remove_image"),
-          "error"
-        );
+        artworkToast.imageRemoveFailed(t);
       }
     } else {
       // In add mode, we just remove the file from the array

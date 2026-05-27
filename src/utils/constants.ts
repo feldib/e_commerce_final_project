@@ -53,44 +53,68 @@ export type ToastType = (typeof TOAST_TYPES)[number];
 // Translation key constants for toast messages
 export const TOAST_KEYS = {
   // Authentication & User Management
-  AUTH_LOGIN_SUCCESS: "toast.login_success",
-  AUTH_LOGOUT_SUCCESS: "toast.logout_success",
-  AUTH_REGISTRATION_SUCCESS: "toast.registration_successful",
-  AUTH_REGISTRATION_FAILED: "toast.registration_failed",
-  AUTH_USER_ALREADY_EXISTS: "toast.user_already_registered",
-  AUTH_PASSWORD_RESET_SUCCESS: "toast.password_reset_success",
-  AUTH_PASSWORD_CHANGE_ERROR: "toast.password_change_error",
-  AUTH_INCORRECT_CREDENTIALS: "toast.incorrect_credentials",
+  AUTH: {
+    LOGIN_SUCCESS: "toast.login_success",
+    LOGOUT_SUCCESS: "toast.logout_success",
+    REGISTRATION_SUCCESS: "toast.registration_successful",
+    REGISTRATION_FAILED: "toast.registration_failed",
+    USER_ALREADY_EXISTS: "toast.user_already_registered",
+    PASSWORD_RESET_SUCCESS: "toast.password_reset_success",
+    PASSWORD_CHANGE_ERROR: "toast.password_change_error",
+    INCORRECT_CREDENTIALS: "toast.incorrect_credentials",
+  },
 
   // Form Validation & Data Operations
-  FORM_INCORRECT_DATA: "toast.incorrect_data",
-  FORM_SUBMISSION_ERROR: "toast.submission_error",
-  DATA_SAVE_SUCCESS: "toast.data_saved_successfully",
-  DATA_CHANGES_SAVED: "toast.changes_saved",
-  DATA_SAVE_ERROR: "toast.save_error",
+  FORM: {
+    INCORRECT_DATA: "toast.incorrect_data",
+    SUBMISSION_ERROR: "toast.submission_error",
+    DATA_SAVE_SUCCESS: "toast.data_saved_successfully",
+    DATA_CHANGES_SAVED: "toast.changes_saved",
+    DATA_SAVE_ERROR: "toast.save_error",
+  },
 
   // Communication & Messages
-  MESSAGE_SENT_SUCCESS: "toast.message_sent",
-  MESSAGE_SEND_ERROR: "toast.message_error",
-  EMAIL_SUBMITTED_SUCCESS: "toast.email_submitted",
-  REPLY_SENT_SUCCESS: "toast.reply_success",
-  REPLY_SEND_ERROR: "toast.reply_error",
+  MESSAGES: {
+    SENT_SUCCESS: "toast.message_sent",
+    SEND_ERROR: "toast.message_error",
+    EMAIL_SUBMITTED_SUCCESS: "toast.email_submitted",
+    REPLY_SENT_SUCCESS: "toast.reply_success",
+    REPLY_SEND_ERROR: "toast.reply_error",
+  },
 
   // Reviews & Ratings
-  REVIEW_SAVED_SUCCESS: "toast.review_saved",
-  REVIEW_SAVE_ERROR: "toast.review_error",
-  REVIEW_APPROVAL_NOTICE: "toast.review_approval_notice",
+  REVIEWS: {
+    SAVED_SUCCESS: "toast.review_saved",
+    SAVE_ERROR: "toast.review_error",
+    APPROVAL_NOTICE: "toast.review_approval_notice",
+  },
 
   // Artwork Management
-  ARTWORK_ADD_SUCCESS: "toast.artwork_added_successfully",
-  ARTWORK_ADD_ERROR: "toast.error_add_artwork",
-  ARTWORK_THUMBNAIL_REQUIRED: "validation.thumbnail_required",
+  ARTWORK: {
+    ADD_SUCCESS: "toast.artwork_added_successfully",
+    ADD_ERROR: "toast.error_add_artwork",
+    THUMBNAIL_REQUIRED: "validation.thumbnail_required",
+    THUMBNAIL_UPLOADED_SUCCESSFULLY:
+      "components.forms.artwork.thumbnail_uploaded_successfully",
+    CATEGORY_UPDATE_SUCCESS:
+      "components.forms.artwork.category_updated_successfully",
+    CATEGORY_UPDATE_FAILED:
+      "components.forms.artwork.failed_to_update_category",
+    IMAGE_UPLOADED_SUCCESSFULLY:
+      "components.forms.artwork.image_uploaded_successfully",
+    IMAGE_UPLOAD_FAILED: "components.forms.artwork.failed_to_upload_image",
+    IMAGE_REMOVE_FAILED: "components.forms.artwork.failed_to_remove_image",
+  },
 
   // Shopping Cart & Inventory
-  CART_ITEM_ADDED: "toast.item_added_to_cart",
-  CART_ITEM_OUT_OF_STOCK: "common.item_out_of_stock",
-  CART_EMPTY_WARNING: "common.shopping_list_empty",
+  CART: {
+    ITEM_ADDED: "toast.item_added_to_cart",
+    ITEM_OUT_OF_STOCK: "common.item_out_of_stock",
+    EMPTY_WARNING: "common.shopping_list_empty",
+  },
 
   // User Interface & Notifications
-  UI_INVOICE_NOTICE: "toast.ui_invoice_notice",
+  UI: {
+    INVOICE_NOTICE: "toast.ui_invoice_notice",
+  },
 } as const;
