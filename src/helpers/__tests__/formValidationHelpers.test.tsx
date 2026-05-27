@@ -12,10 +12,10 @@ jest.mock("@/utils/toastUtils", () => ({
 describe("formValidationHelpers", () => {
   describe("createHandleSubmitClick", () => {
     const mockT = jest.fn((key: string) => `translated_${key}`);
-    const mockShowIncorrectDataToast =
-      toastUtils.formToast.incorrectData as jest.MockedFunction<
-        typeof toastUtils.formToast.incorrectData
-      >;
+    const mockShowIncorrectDataToast = toastUtils.formToast
+      .incorrectData as jest.MockedFunction<
+      typeof toastUtils.formToast.incorrectData
+    >;
 
     beforeEach(() => {
       jest.clearAllMocks();

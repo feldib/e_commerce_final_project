@@ -12,9 +12,7 @@ import {
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { ToastContainer } from "react-toastify";
 
-import {
-  messageToast,
-} from "@/utils/toastUtils";
+import { messageToast } from "@/utils/toastUtils";
 
 import ErrorAsterisk from "@/components/input/ErrorAsterisk/ErrorAsterisk";
 import InputComponent from "@/components/input/InputComponent/InputComponent";

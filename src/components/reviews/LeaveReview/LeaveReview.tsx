@@ -11,9 +11,7 @@ import {
 } from "react-bootstrap";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 
-import {
-  reviewToast
-} from "@/utils/toastUtils";
+import { reviewToast } from "@/utils/toastUtils";
 
 import ErrorAsterisk from "@/components/input/ErrorAsterisk/ErrorAsterisk";
 import InputComponent from "@/components/input/InputComponent/InputComponent";

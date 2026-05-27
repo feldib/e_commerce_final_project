@@ -4,9 +4,7 @@ import React from "react";
 
 import { FormikProps } from "formik";
 
-import {
-  formToast,
-} from "@/utils/toastUtils";
+import { formToast } from "@/utils/toastUtils";
 
 import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
 

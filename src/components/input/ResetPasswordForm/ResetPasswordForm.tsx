@@ -8,9 +8,7 @@ import { Button, Col } from "react-bootstrap";
 import { Form, Formik } from "formik";
 import { ToastContainer } from "react-toastify";
 
-import {
-  authToast
-} from "@/utils/toastUtils";
+import { authToast } from "@/utils/toastUtils";
 
 import InputComponent from "@/components/input/InputComponent/InputComponent";
 import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";

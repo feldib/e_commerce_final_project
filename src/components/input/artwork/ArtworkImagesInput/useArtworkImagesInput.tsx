@@ -57,10 +57,14 @@ function useArtworkImagesInput<T extends Record<string, unknown>>({
           ]);
           e.target.value = ""; // Reset the input for next upload
           showToast(
-            t("components.forms.artwork.image_uploaded_successfully"), "error"
+            t("components.forms.artwork.image_uploaded_successfully"),
+            "error"
           );
         } catch {
-          showToast(t("components.forms.artwork.failed_to_upload_image"), "error");
+          showToast(
+            t("components.forms.artwork.failed_to_upload_image"),
+            "error"
+          );
         }
       } else {
         // In add mode, we just set the file directly
@@ -90,7 +94,10 @@ function useArtworkImagesInput<T extends Record<string, unknown>>({
         ).filter((_, picIndex) => picIndex !== index);
         formik.setFieldValue("other_pictures", newArray);
       } catch {
-        showToast(t("components.forms.artwork.failed_to_remove_image"), "error");
+        showToast(
+          t("components.forms.artwork.failed_to_remove_image"),
+          "error"
+        );
       }
     } else {
       // In add mode, we just remove the file from the array

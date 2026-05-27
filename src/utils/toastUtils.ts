@@ -3,30 +3,42 @@ import { toast } from "react-toastify";
 import { TOAST_KEYS, ToastType } from "./constants";
 
 export const showToast = {
-  success: (message: string) => toast.success(message, { className: "toast-success" }),
-  error: (message: string) => toast.error(message, { className: "toast-error" }),
+  success: (message: string) =>
+    toast.success(message, { className: "toast-success" }),
+  error: (message: string) =>
+    toast.error(message, { className: "toast-error" }),
   info: (message: string) => toast.info(message, { className: "toast-info" }),
-  warning: (message: string) => toast.warning(message, { className: "toast-warning" }),
-}
+  warning: (message: string) =>
+    toast.warning(message, { className: "toast-warning" }),
+};
 
 // Factory function to create toast functions
-const createToast = (messageKey: string, type: ToastType) =>
-  (t: (key: string) => string) => showToast[type](t(messageKey));
+const createToast =
+  (messageKey: string, type: ToastType) => (t: (key: string) => string) =>
+    showToast[type](t(messageKey));
 
 // Generic toast function for direct message strings
-export const showWarningToast = (message: string) =>
-  showToast.warning(message);
+export const showWarningToast = (message: string) => showToast.warning(message);
 
 // Authentication & User Management Toast Functions
 export const authToast = {
   loginSuccess: createToast(TOAST_KEYS.AUTH_LOGIN_SUCCESS, "success"),
   logoutSuccess: createToast(TOAST_KEYS.AUTH_LOGOUT_SUCCESS, "success"),
   loginError: createToast(TOAST_KEYS.AUTH_INCORRECT_CREDENTIALS, "error"),
-  registrationSuccess: createToast(TOAST_KEYS.AUTH_REGISTRATION_SUCCESS, "success"),
+  registrationSuccess: createToast(
+    TOAST_KEYS.AUTH_REGISTRATION_SUCCESS,
+    "success"
+  ),
   registrationFailed: createToast(TOAST_KEYS.AUTH_REGISTRATION_FAILED, "error"),
   userAlreadyExists: createToast(TOAST_KEYS.AUTH_USER_ALREADY_EXISTS, "error"),
-  passwordResetSuccess: createToast(TOAST_KEYS.AUTH_PASSWORD_RESET_SUCCESS, "success"),
-  passwordChangeError: createToast(TOAST_KEYS.AUTH_PASSWORD_CHANGE_ERROR, "error"),
+  passwordResetSuccess: createToast(
+    TOAST_KEYS.AUTH_PASSWORD_RESET_SUCCESS,
+    "success"
+  ),
+  passwordChangeError: createToast(
+    TOAST_KEYS.AUTH_PASSWORD_CHANGE_ERROR,
+    "error"
+  ),
 };
 
 // Form Validation & Data Operations Toast Functions
@@ -60,7 +72,10 @@ export const reviewToast = {
 export const artworkToast = {
   addSuccess: createToast(TOAST_KEYS.ARTWORK_ADD_SUCCESS, "success"),
   addError: createToast(TOAST_KEYS.ARTWORK_ADD_ERROR, "error"),
-  thumbnailRequired: createToast(TOAST_KEYS.ARTWORK_THUMBNAIL_REQUIRED, "error"),
+  thumbnailRequired: createToast(
+    TOAST_KEYS.ARTWORK_THUMBNAIL_REQUIRED,
+    "error"
+  ),
 };
 
 // Shopping Cart & Inventory Toast Functions

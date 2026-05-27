@@ -117,7 +117,7 @@ const useEditArtworkForm = () => {
     try {
       await updateArtworkData(artworkId, "category_id", category.id);
       showToast.success(
-        t("components.forms.artwork.category_updated_successfully"),
+        t("components.forms.artwork.category_updated_successfully")
       );
     } catch {
       showToast.error(t("components.forms.artwork.failed_to_update_category"));

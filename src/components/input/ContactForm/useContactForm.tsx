@@ -2,9 +2,7 @@
 
 import React from "react";
 
-import {
-  messageToast
-} from "@/utils/toastUtils";
+import { messageToast } from "@/utils/toastUtils";
 
 import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
 import { UserDataContext } from "@/components/providers/UserDataProvider/UserDataProvider";

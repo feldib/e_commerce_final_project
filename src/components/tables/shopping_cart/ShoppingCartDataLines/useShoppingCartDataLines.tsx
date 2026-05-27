@@ -2,9 +2,7 @@
 
 import React from "react";
 
-import {
-  cartToast,
-} from "@/utils/toastUtils";
+import { cartToast } from "@/utils/toastUtils";
 
 import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
 import { UserDataContext } from "@/components/providers/UserDataProvider/UserDataProvider";

@@ -9,10 +9,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, Form, InputGroup } from "react-bootstrap";
 
-import {
-    formToast,
-  uiToast
-} from "@/utils/toastUtils";
+import { formToast, uiToast } from "@/utils/toastUtils";
 
 import ErrorAsterisk from "@/components/input/ErrorAsterisk/ErrorAsterisk";
 import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";

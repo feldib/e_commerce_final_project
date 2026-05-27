@@ -6,9 +6,7 @@ import { useRouter } from "next/navigation";
 
 import { useFormik } from "formik";
 
-import {
-  artworkToast
-} from "@/utils/toastUtils";
+import { artworkToast } from "@/utils/toastUtils";
 
 import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
 
