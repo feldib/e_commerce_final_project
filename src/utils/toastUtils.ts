@@ -17,9 +17,6 @@ const createToast =
   (messageKey: string, type: ToastType) => (t: (key: string) => string) =>
     showToast[type](t(messageKey));
 
-// Generic toast function for direct message strings
-export const showWarningToast = (message: string) => showToast.warning(message);
-
 // Authentication & User Management Toast Functions
 export const authToast = {
   loginSuccess: createToast(TOAST_KEYS.AUTH_LOGIN_SUCCESS, "success"),

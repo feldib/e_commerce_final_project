@@ -7,7 +7,9 @@ import useAddOrRemoveButton from "../useAddOrRemoveButton";
 
 // Mock toast utils
 jest.mock("@/utils/toastUtils", () => ({
-  showWarningToast: jest.fn(),
+  showToast: {
+    warning: jest.fn(),
+  },
 }));
 
 // Mock functions
@@ -144,7 +146,7 @@ describe("useAddOrRemoveButton", () => {
       await result.current.handleButtonClick();
     });
 
-    expect(toastUtils.showWarningToast).toHaveBeenCalledWith("Please login");
+    expect(toastUtils.showToast.warning).toHaveBeenCalledWith("Please login");
     expect(mockAddToAdded).not.toHaveBeenCalled();
     expect(mockRemoveFromAdded).not.toHaveBeenCalled();
   });

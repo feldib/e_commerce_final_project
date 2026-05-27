@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import { showWarningToast } from "@/utils/toastUtils";
+import { showToast } from "@/utils/toastUtils";
 
 import { UserDataContext } from "@/components/providers/UserDataProvider/UserDataProvider";
 
@@ -41,7 +41,7 @@ function useAddOrRemoveButton({
         setNeedsToBeRefreshed(true);
       }
     } else {
-      showWarningToast(toastWarningMessage);
+      showToast.warning(toastWarningMessage);
     }
   };
 
