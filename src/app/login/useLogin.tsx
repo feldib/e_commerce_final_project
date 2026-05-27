@@ -3,7 +3,7 @@ import React from "react";
 
 import { useRouter, useSearchParams } from "next/navigation";
 
-import { showLoginErrorToast, showLoginSuccessToast } from "@/utils/toastUtils";
+import { authToast } from "@/utils/toastUtils";
 
 import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
 import { UserDataContext } from "@/components/providers/UserDataProvider/UserDataProvider";
@@ -43,10 +43,10 @@ function useLogin(): UseLoginReturn {
     try {
       await logIn(values.email, values.password, (userData: User) => {
         settleSuccessfulLogIn(to_checkout, userData, router);
-        showLoginSuccessToast(t);
+        authToast.loginSuccess(t);
       });
     } catch {
-      showLoginErrorToast(t);
+      authToast.loginError(t);
     }
   }
 

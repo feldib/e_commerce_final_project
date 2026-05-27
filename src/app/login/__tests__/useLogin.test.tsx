@@ -32,8 +32,8 @@ const mockUser = {
 
 const mockLogIn = fetching.logIn as jest.MockedFunction<typeof fetching.logIn>;
 const mockShowLoginErrorToast =
-  toastUtils.showLoginErrorToast as jest.MockedFunction<
-    typeof toastUtils.showLoginErrorToast
+  toastUtils.authToast.loginError as jest.MockedFunction<
+    typeof toastUtils.authToast.loginError
   >;
 
 const mockUserDataContext = {
