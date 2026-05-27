@@ -3,8 +3,7 @@
 import React from "react";
 
 import {
-  showMessageSendErrorToast,
-  showMessageSentSuccessToast,
+  messageToast
 } from "@/utils/toastUtils";
 
 import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
@@ -52,10 +51,10 @@ function useContactForm(): UseContactFormReturn {
         values.title,
         values.message
       );
-      showMessageSentSuccessToast(t);
+      messageToast.messageSuccess(t);
       form?.current?.reset();
     } catch {
-      showMessageSendErrorToast(t);
+      messageToast.messageSendError(t);
     }
   };
 

@@ -2,8 +2,8 @@
 import React from "react";
 
 import {
-  showEmailSubmittedSuccessToast,
-  showFormSubmissionErrorToast,
+  messageToast,
+  formToast
 } from "@/utils/toastUtils";
 
 import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
@@ -37,10 +37,10 @@ function useForgotPassword(): UseForgotPasswordReturn {
     sendForgotPasswordEmail(values.email)
       .then(() => {
         setDisplayMessage(true);
-        showEmailSubmittedSuccessToast(t);
+        messageToast.emailSubmitted(t);
       })
       .catch(() => {
-        showFormSubmissionErrorToast(t);
+        formToast.submissionError(t);
       });
   };
 

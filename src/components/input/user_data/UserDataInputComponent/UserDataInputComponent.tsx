@@ -10,9 +10,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, Form, InputGroup } from "react-bootstrap";
 
 import {
-  showChangesSavedToast,
-  showIncorrectDataToast,
-  showInvoiceNoticeToast,
+    formToast,
+  uiToast
 } from "@/utils/toastUtils";
 
 import ErrorAsterisk from "@/components/input/ErrorAsterisk/ErrorAsterisk";
@@ -53,14 +52,14 @@ function UserDataInputComponent({
   const handleSaveClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     if (error) {
-      showIncorrectDataToast(t);
+      formToast.incorrectData(t);
     } else {
       if (changeUserData) {
         updateUserData(name, value);
-        showChangesSavedToast(t);
+        formToast.changesSaved(t);
       } else {
-        showChangesSavedToast(t);
-        showInvoiceNoticeToast(t);
+        formToast.changesSaved(t);
+        uiToast.invoiceNotice(t);
       }
       setEditing(false);
     }

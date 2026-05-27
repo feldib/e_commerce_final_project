@@ -9,8 +9,7 @@ import { Form, Formik } from "formik";
 import { ToastContainer } from "react-toastify";
 
 import {
-  showPasswordChangeErrorToast,
-  showPasswordResetSuccessToast,
+  authToast
 } from "@/utils/toastUtils";
 
 import InputComponent from "@/components/input/InputComponent/InputComponent";
@@ -43,11 +42,11 @@ function ResetPasswordFormInner() {
     const email = searchParams.get("email");
     changePassword(token, email, values.password)
       .then(() => {
-        showPasswordResetSuccessToast(t);
+        authToast.passwordResetSuccess(t);
         router.push("/login");
       })
       .catch(() => {
-        showPasswordChangeErrorToast(t);
+        authToast.passwordChangeError(t);
       });
   };
 

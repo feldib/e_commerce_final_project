@@ -3,8 +3,7 @@
 import React from "react";
 
 import {
-  showCartItemAddedToast,
-  showCartItemOutOfStockToast,
+  cartToast,
 } from "@/utils/toastUtils";
 
 import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
@@ -71,10 +70,10 @@ function useShoppingCartDataLines({
     if (loggedIn) {
       try {
         await increaseShoppingListItemQuantity(line.id);
-        showCartItemAddedToast(t);
+        cartToast.itemAdded(t);
         setQuantity(quantity + 1);
       } catch {
-        showCartItemOutOfStockToast(t);
+        cartToast.itemOutOfStock(t);
       }
     } else {
       try {
@@ -82,10 +81,10 @@ function useShoppingCartDataLines({
           line.id,
           line.stored_amount - quantity
         );
-        showCartItemAddedToast(t);
+        cartToast.itemAdded(t);
         setQuantity(quantity + 1);
       } catch {
-        showCartItemOutOfStockToast(t);
+        cartToast.itemOutOfStock(t);
       }
     }
   };

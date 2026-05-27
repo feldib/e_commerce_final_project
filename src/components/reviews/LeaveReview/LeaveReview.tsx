@@ -12,8 +12,7 @@ import {
 import { ErrorMessage, Field, Form, Formik } from "formik";
 
 import {
-  showReviewSavedSuccessToast,
-  showReviewSaveErrorToast,
+  reviewToast
 } from "@/utils/toastUtils";
 
 import ErrorAsterisk from "@/components/input/ErrorAsterisk/ErrorAsterisk";
@@ -50,10 +49,10 @@ function LeaveReview({ artwork_id }: LeaveReviewProps) {
   const onSubmit = async (values: ReviewFormValues) => {
     try {
       await leaveReview(artwork_id, values.title, values.review_text);
-      showReviewSavedSuccessToast(t);
+      reviewToast.saveSuccess(t);
       form?.current?.reset();
     } catch {
-      showReviewSaveErrorToast(t);
+      reviewToast.saveError(t);
     }
   };
 

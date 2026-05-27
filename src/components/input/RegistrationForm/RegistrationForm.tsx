@@ -9,9 +9,7 @@ import { Form, Formik } from "formik";
 import { ToastContainer } from "react-toastify";
 
 import {
-  showRegistrationFailedToast,
-  showRegistrationSuccessToast,
-  showUserAlreadyExistsToast,
+    authToast,
 } from "@/utils/toastUtils";
 
 import InputComponent from "@/components/input/InputComponent/InputComponent";
@@ -71,11 +69,11 @@ function RegistrationFormInner() {
       .then(function () {
         logIn(values.email, values.password, (userData) => {
           settleSuccessfulRegistration(to_checkout, { user: userData });
-          showRegistrationSuccessToast(t);
+          authToast.registrationSuccess(t);
         });
       })
       .catch(() => {
-        showRegistrationFailedToast(t);
+        authToast.registrationFailed(t);
       });
   };
 
@@ -94,7 +92,7 @@ function RegistrationFormInner() {
     try {
       await attemptRegistration(values, settleSuccessfulRegistration);
     } catch {
-      showUserAlreadyExistsToast(t);
+      authToast.userAlreadyExists(t);
     }
   }
 

@@ -4,15 +4,17 @@ import { createHandleSubmitClick } from "../formValidationHelpers";
 
 // Mock toast utils
 jest.mock("@/utils/toastUtils", () => ({
-  showIncorrectDataToast: jest.fn(),
+  formToast: {
+    incorrectData: jest.fn(),
+  },
 }));
 
 describe("formValidationHelpers", () => {
   describe("createHandleSubmitClick", () => {
     const mockT = jest.fn((key: string) => `translated_${key}`);
     const mockShowIncorrectDataToast =
-      toastUtils.showIncorrectDataToast as jest.MockedFunction<
-        typeof toastUtils.showIncorrectDataToast
+      toastUtils.formToast.incorrectData as jest.MockedFunction<
+        typeof toastUtils.formToast.incorrectData
       >;
 
     beforeEach(() => {

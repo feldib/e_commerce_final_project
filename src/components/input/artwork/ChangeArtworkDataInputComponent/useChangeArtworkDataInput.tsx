@@ -5,9 +5,7 @@ import React from "react";
 import { FormikProps } from "formik";
 
 import {
-  showChangesSavedToast,
-  showDataSaveErrorToast,
-  showIncorrectDataToast,
+  formToast,
 } from "@/utils/toastUtils";
 
 import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
@@ -49,7 +47,7 @@ function useChangeArtworkDataInput<T extends Record<string, unknown>>({
     const hasCurrentFieldError = currentFieldError && formik.touched[name];
 
     if (hasCurrentFieldError) {
-      showIncorrectDataToast(t);
+      formToast.incorrectData(t);
     } else {
       try {
         await updateArtworkData(
@@ -57,10 +55,10 @@ function useChangeArtworkDataInput<T extends Record<string, unknown>>({
           name,
           String(formik.values[name] || "")
         );
-        showChangesSavedToast(t);
+        formToast.changesSaved(t);
         setEditing(false);
       } catch {
-        showDataSaveErrorToast(t);
+        formToast.dataSaveError(t);
       }
     }
   };

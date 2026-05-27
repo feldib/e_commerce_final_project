@@ -7,9 +7,7 @@ import { useRouter } from "next/navigation";
 import { useFormik } from "formik";
 
 import {
-  showArtworkAddErrorToast,
-  showArtworkAddSuccessToast,
-  showArtworkThumbnailRequiredToast,
+  artworkToast
 } from "@/utils/toastUtils";
 
 import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
@@ -60,7 +58,7 @@ const useAddArtworkForm = () => {
       try {
         // TypeScript check - thumbnail is required by validation but type allows undefined
         if (!values.thumbnail) {
-          showArtworkThumbnailRequiredToast(t);
+          artworkToast.thumbnailRequired(t);
           return;
         }
 
@@ -69,7 +67,7 @@ const useAddArtworkForm = () => {
           tags,
           thumbnail: values.thumbnail,
         });
-        showArtworkAddSuccessToast(t);
+        artworkToast.addSuccess(t);
 
         const artwork_id = response.data;
 
@@ -77,7 +75,7 @@ const useAddArtworkForm = () => {
 
         actions.resetForm();
       } catch {
-        showArtworkAddErrorToast(t);
+        artworkToast.addError(t);
       }
     },
 
