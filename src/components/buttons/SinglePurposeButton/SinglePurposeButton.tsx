@@ -32,17 +32,17 @@ function SinglePurposeButton({
     if (loggedIn) {
       try {
         await actionOnLoggedIn(artwork_id);
-        showToast(toastSuccessMessage, "success");
+        showToast.success(toastSuccessMessage);
       } catch {
-        showToast(toastErrorMessage, "error");
+        showToast.error(toastErrorMessage);
       }
     } else {
       if (actionOnNotLoggedIn) {
         try {
           actionOnNotLoggedIn();
-          showToast(toastSuccessMessage, "success");
+          showToast.success(toastSuccessMessage);
         } catch {
-          showToast(toastErrorMessage, "error");
+          showToast.error(toastErrorMessage);
         }
       }
     }

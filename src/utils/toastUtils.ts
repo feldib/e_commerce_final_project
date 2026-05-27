@@ -2,36 +2,20 @@ import { toast } from "react-toastify";
 
 import { TOAST_KEYS, ToastType } from "./constants";
 
-export const showToast = (message: string, type: ToastType) => {
-  const options = {
-    className: `toast-${type}`,
-  };
-
-  switch (type) {
-    case "success":
-      toast.success(message, options);
-      break;
-    case "error":
-      toast.error(message, options);
-      break;
-    case "info":
-      toast.info(message, options);
-      break;
-    case "warning":
-      toast.warning(message, options);
-      break;
-    default:
-      toast(message, options);
-  }
+export const showToast = {
+  success: (message: string) => toast.success(message, { className: "toast-success" }),
+  error: (message: string) => toast.error(message, { className: "toast-error" }),
+  info: (message: string) => toast.info(message, { className: "toast-info" }),
+  warning: (message: string) => toast.warning(message, { className: "toast-warning" }),
 }
 
 // Factory function to create toast functions
 const createToast = (messageKey: string, type: ToastType) =>
-  (t: (key: string) => string) => showToast(t(messageKey), type);
+  (t: (key: string) => string) => showToast[type](t(messageKey));
 
 // Generic toast function for direct message strings
 export const showWarningToast = (message: string) =>
-  showToast(message, "warning");
+  showToast.warning(message);
 
 // Authentication & User Management Toast Functions
 export const authToast = {
@@ -66,8 +50,8 @@ export const messageToast = {
 // Reviews & Ratings Toast Functions
 export const reviewToast = {
   saveSuccess: (t: (key: string) => string) => {
-    showToast(t(TOAST_KEYS.REVIEW_SAVED_SUCCESS), "success");
-    showToast(t(TOAST_KEYS.REVIEW_APPROVAL_NOTICE), "info");
+    showToast.success(t(TOAST_KEYS.REVIEW_SAVED_SUCCESS));
+    showToast.info(t(TOAST_KEYS.REVIEW_APPROVAL_NOTICE));
   },
   saveError: createToast(TOAST_KEYS.REVIEW_SAVE_ERROR, "error"),
 };

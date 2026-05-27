@@ -50,9 +50,8 @@ function useArtworkThumbnailInput<T extends Record<string, unknown>>({
         try {
           // TypeScript assertion: artworkId is guaranteed to be defined when isEdit is true
           await replaceThumbnail(artworkId as number, file);
-          showToast(
-            t("components.forms.artwork.thumbnail_uploaded_successfully"),
-            "success"
+          showToast.success(
+            t("components.forms.artwork.thumbnail_uploaded_successfully")
           );
           // We create an object URL in both modes
           formik.setFieldValue("thumbnail", URL.createObjectURL(file));

@@ -62,28 +62,28 @@ describe("toastUtils", () => {
 
   describe("Basic toast functions", () => {
     it("should show success toast", () => {
-      showToast("Test success message", "success");
+      showToast.success("Test success message");
       expect(toast.success).toHaveBeenCalledWith("Test success message", {
         className: "toast-success",
       });
     });
 
     it("should show error toast", () => {
-      showToast("Test error message", "error");
+      showToast.error("Test error message");
       expect(toast.error).toHaveBeenCalledWith("Test error message", {
         className: "toast-error",
       });
     });
 
     it("should show info toast", () => {
-      showToast("Test info message", "info");
+      showToast.info("Test info message");
       expect(toast.info).toHaveBeenCalledWith("Test info message", {
         className: "toast-info",
       });
     });
 
     it("should show warning toast", () => {
-      showToast("Test warning message", "warning");
+      showToast.warning("Test warning message");
       expect(toast.warning).toHaveBeenCalledWith("Test warning message", {
         className: "toast-warning",
       });

@@ -2,7 +2,12 @@
  * Mock for toast utilities
  */
 
-export const showToast = jest.fn();
+export const showToast = {
+  success: jest.fn(),
+  error: jest.fn(),
+  info: jest.fn(),
+  warning: jest.fn(),
+};
 export const authToast = {
   loginSuccess: jest.fn(),
   loginError: jest.fn(),

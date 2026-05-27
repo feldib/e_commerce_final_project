@@ -116,12 +116,11 @@ const useEditArtworkForm = () => {
   const handleCategoryChange = async (category: { id: number }) => {
     try {
       await updateArtworkData(artworkId, "category_id", category.id);
-      showToast(
+      showToast.success(
         t("components.forms.artwork.category_updated_successfully"),
-        "success"
       );
     } catch {
-      showToast(t("components.forms.artwork.failed_to_update_category"), "error");
+      showToast.error(t("components.forms.artwork.failed_to_update_category"));
     }
   };
 
