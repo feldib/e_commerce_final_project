@@ -47,6 +47,9 @@ export const STORAGE_KEYS = {
 export const SUPPORTED_LOCALES = ["en", "he", "hu"] as const;
 export type SupportedLocale = (typeof SUPPORTED_LOCALES)[number];
 
+export const TOAST_TYPES = ["success", "error", "info", "warning"] as const;
+export type ToastType = (typeof TOAST_TYPES)[number];
+
 // Translation key constants for toast messages
 export const TOAST_KEYS = {
   // Authentication & User Management
@@ -89,5 +92,5 @@ export const TOAST_KEYS = {
   CART_EMPTY_WARNING: "common.shopping_list_empty",
 
   // User Interface & Notifications
-  UI_INVOICE_NOTICE: "toast.only_effects_invoice",
+  UI_INVOICE_NOTICE: "toast.ui_invoice_notice",
 } as const;

@@ -11,10 +11,7 @@ import {
 } from "react-bootstrap";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 
-import {
-  showReviewSavedSuccessToast,
-  showReviewSaveErrorToast,
-} from "@/utils/toastUtils";
+import { reviewToast } from "@/utils/toastUtils";
 
 import ErrorAsterisk from "@/components/input/ErrorAsterisk/ErrorAsterisk";
 import InputComponent from "@/components/input/InputComponent/InputComponent";
@@ -50,10 +47,10 @@ function LeaveReview({ artwork_id }: LeaveReviewProps) {
   const onSubmit = async (values: ReviewFormValues) => {
     try {
       await leaveReview(artwork_id, values.title, values.review_text);
-      showReviewSavedSuccessToast(t);
+      reviewToast.saveSuccess(t);
       form?.current?.reset();
     } catch {
-      showReviewSaveErrorToast(t);
+      reviewToast.saveError(t);
     }
   };
 

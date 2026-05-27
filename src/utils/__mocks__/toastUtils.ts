@@ -2,16 +2,19 @@
  * Mock for toast utilities
  */
 
-export const showSuccessToast = jest.fn();
-export const showErrorToast = jest.fn();
-export const showInfoToast = jest.fn();
-export const showWarningToast = jest.fn();
-export const showLoginSuccessToast = jest.fn();
-export const showLoginErrorToast = jest.fn();
-export const showRegistrationSuccessToast = jest.fn();
-export const showRegistrationErrorToast = jest.fn();
-export const showLogoutToast = jest.fn();
-export const showUpdateSuccessToast = jest.fn();
-export const showUpdateErrorToast = jest.fn();
-export const showDeleteSuccessToast = jest.fn();
-export const showDeleteErrorToast = jest.fn();
+export const showToast = {
+  success: jest.fn(),
+  error: jest.fn(),
+  info: jest.fn(),
+  warning: jest.fn(),
+};
+export const authToast = {
+  loginSuccess: jest.fn(),
+  loginError: jest.fn(),
+  logoutSuccess: jest.fn(),
+  registrationSuccess: jest.fn(),
+  registrationFailed: jest.fn(),
+  userAlreadyExists: jest.fn(),
+  passwordResetSuccess: jest.fn(),
+  passwordChangeError: jest.fn(),
+};

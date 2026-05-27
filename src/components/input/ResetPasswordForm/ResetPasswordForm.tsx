@@ -8,10 +8,7 @@ import { Button, Col } from "react-bootstrap";
 import { Form, Formik } from "formik";
 import { ToastContainer } from "react-toastify";
 
-import {
-  showPasswordChangeErrorToast,
-  showPasswordResetSuccessToast,
-} from "@/utils/toastUtils";
+import { authToast } from "@/utils/toastUtils";
 
 import InputComponent from "@/components/input/InputComponent/InputComponent";
 import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
@@ -43,11 +40,11 @@ function ResetPasswordFormInner() {
     const email = searchParams.get("email");
     changePassword(token, email, values.password)
       .then(() => {
-        showPasswordResetSuccessToast(t);
+        authToast.passwordResetSuccess(t);
         router.push("/login");
       })
       .catch(() => {
-        showPasswordChangeErrorToast(t);
+        authToast.passwordChangeError(t);
       });
   };
 

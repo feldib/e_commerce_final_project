@@ -1,98 +1,91 @@
 import { toast } from "react-toastify";
 
-import { TOAST_KEYS } from "./constants";
+import { TOAST_KEYS, ToastType } from "./constants";
 
-// Standard toast notification utilities
-export const showSuccessToast = (message: string) => {
-  toast.success(message, {
-    className: "toast-success",
-  });
+export const showToast = {
+  success: (message: string) =>
+    toast.success(message, { className: "toast-success" }),
+  error: (message: string) =>
+    toast.error(message, { className: "toast-error" }),
+  info: (message: string) => toast.info(message, { className: "toast-info" }),
+  warning: (message: string) =>
+    toast.warning(message, { className: "toast-warning" }),
 };
 
-export const showErrorToast = (message: string) => {
-  toast.error(message, {
-    className: "toast-error",
-  });
-};
+// Factory function to create toast functions
+const createToast =
+  (messageKey: string, type: ToastType) => (t: (key: string) => string) =>
+    showToast[type](t(messageKey));
 
-export const showInfoToast = (message: string) => {
-  toast.info(message, {
-    className: "toast-info",
-  });
-};
-
-export const showWarningToast = (message: string) => {
-  toast.warning(message, {
-    className: "toast-warning",
-  });
-};
+// Generic toast function for direct message strings
+export const showWarningToast = (message: string) => showToast.warning(message);
 
 // Authentication & User Management Toast Functions
-export const showLoginSuccessToast = (t: (key: string) => string) =>
-  showSuccessToast(t(TOAST_KEYS.AUTH_LOGIN_SUCCESS));
-export const showLogoutSuccessToast = (t: (key: string) => string) =>
-  showSuccessToast(t(TOAST_KEYS.AUTH_LOGOUT_SUCCESS));
-export const showLoginErrorToast = (t: (key: string) => string) =>
-  showErrorToast(t(TOAST_KEYS.AUTH_INCORRECT_CREDENTIALS));
-export const showRegistrationSuccessToast = (t: (key: string) => string) =>
-  showSuccessToast(t(TOAST_KEYS.AUTH_REGISTRATION_SUCCESS));
-export const showRegistrationFailedToast = (t: (key: string) => string) =>
-  showErrorToast(t(TOAST_KEYS.AUTH_REGISTRATION_FAILED));
-export const showUserAlreadyExistsToast = (t: (key: string) => string) =>
-  showErrorToast(t(TOAST_KEYS.AUTH_USER_ALREADY_EXISTS));
-export const showPasswordResetSuccessToast = (t: (key: string) => string) =>
-  showSuccessToast(t(TOAST_KEYS.AUTH_PASSWORD_RESET_SUCCESS));
-export const showPasswordChangeErrorToast = (t: (key: string) => string) =>
-  showErrorToast(t(TOAST_KEYS.AUTH_PASSWORD_CHANGE_ERROR));
+export const authToast = {
+  loginSuccess: createToast(TOAST_KEYS.AUTH_LOGIN_SUCCESS, "success"),
+  logoutSuccess: createToast(TOAST_KEYS.AUTH_LOGOUT_SUCCESS, "success"),
+  loginError: createToast(TOAST_KEYS.AUTH_INCORRECT_CREDENTIALS, "error"),
+  registrationSuccess: createToast(
+    TOAST_KEYS.AUTH_REGISTRATION_SUCCESS,
+    "success"
+  ),
+  registrationFailed: createToast(TOAST_KEYS.AUTH_REGISTRATION_FAILED, "error"),
+  userAlreadyExists: createToast(TOAST_KEYS.AUTH_USER_ALREADY_EXISTS, "error"),
+  passwordResetSuccess: createToast(
+    TOAST_KEYS.AUTH_PASSWORD_RESET_SUCCESS,
+    "success"
+  ),
+  passwordChangeError: createToast(
+    TOAST_KEYS.AUTH_PASSWORD_CHANGE_ERROR,
+    "error"
+  ),
+};
 
 // Form Validation & Data Operations Toast Functions
-export const showIncorrectDataToast = (t: (key: string) => string) =>
-  showErrorToast(t(TOAST_KEYS.FORM_INCORRECT_DATA));
-export const showFormSubmissionErrorToast = (t: (key: string) => string) =>
-  showErrorToast(t(TOAST_KEYS.FORM_SUBMISSION_ERROR));
-export const showDataSaveSuccessToast = (t: (key: string) => string) =>
-  showSuccessToast(t(TOAST_KEYS.DATA_SAVE_SUCCESS));
-export const showChangesSavedToast = (t: (key: string) => string) =>
-  showSuccessToast(t(TOAST_KEYS.DATA_CHANGES_SAVED));
-export const showDataSaveErrorToast = (t: (key: string) => string) =>
-  showErrorToast(t(TOAST_KEYS.DATA_SAVE_ERROR));
+export const formToast = {
+  incorrectData: createToast(TOAST_KEYS.FORM_INCORRECT_DATA, "error"),
+  submissionError: createToast(TOAST_KEYS.FORM_SUBMISSION_ERROR, "error"),
+  dataSaveSuccess: createToast(TOAST_KEYS.DATA_SAVE_SUCCESS, "success"),
+  changesSaved: createToast(TOAST_KEYS.DATA_CHANGES_SAVED, "success"),
+  dataSaveError: createToast(TOAST_KEYS.DATA_SAVE_ERROR, "error"),
+};
 
 // Communication & Messages Toast Functions
-export const showMessageSentSuccessToast = (t: (key: string) => string) =>
-  showSuccessToast(t(TOAST_KEYS.MESSAGE_SENT_SUCCESS));
-export const showMessageSendErrorToast = (t: (key: string) => string) =>
-  showErrorToast(t(TOAST_KEYS.MESSAGE_SEND_ERROR));
-export const showEmailSubmittedSuccessToast = (t: (key: string) => string) =>
-  showSuccessToast(t(TOAST_KEYS.EMAIL_SUBMITTED_SUCCESS));
-export const showReplySentSuccessToast = (t: (key: string) => string) =>
-  showSuccessToast(t(TOAST_KEYS.REPLY_SENT_SUCCESS));
-export const showReplySendErrorToast = (t: (key: string) => string) =>
-  showErrorToast(t(TOAST_KEYS.REPLY_SEND_ERROR));
+export const messageToast = {
+  messageSuccess: createToast(TOAST_KEYS.MESSAGE_SENT_SUCCESS, "success"),
+  messageSendError: createToast(TOAST_KEYS.MESSAGE_SEND_ERROR, "error"),
+  emailSubmitted: createToast(TOAST_KEYS.EMAIL_SUBMITTED_SUCCESS, "success"),
+  replySentSuccess: createToast(TOAST_KEYS.REPLY_SENT_SUCCESS, "success"),
+  replySendError: createToast(TOAST_KEYS.REPLY_SEND_ERROR, "error"),
+};
 
 // Reviews & Ratings Toast Functions
-export const showReviewSavedSuccessToast = (t: (key: string) => string) => {
-  showSuccessToast(t(TOAST_KEYS.REVIEW_SAVED_SUCCESS));
-  showInfoToast(t(TOAST_KEYS.REVIEW_APPROVAL_NOTICE));
+export const reviewToast = {
+  saveSuccess: (t: (key: string) => string) => {
+    showToast.success(t(TOAST_KEYS.REVIEW_SAVED_SUCCESS));
+    showToast.info(t(TOAST_KEYS.REVIEW_APPROVAL_NOTICE));
+  },
+  saveError: createToast(TOAST_KEYS.REVIEW_SAVE_ERROR, "error"),
 };
-export const showReviewSaveErrorToast = (t: (key: string) => string) =>
-  showErrorToast(t(TOAST_KEYS.REVIEW_SAVE_ERROR));
 
 // Artwork Management Toast Functions
-export const showArtworkAddSuccessToast = (t: (key: string) => string) =>
-  showSuccessToast(t(TOAST_KEYS.ARTWORK_ADD_SUCCESS));
-export const showArtworkAddErrorToast = (t: (key: string) => string) =>
-  showErrorToast(t(TOAST_KEYS.ARTWORK_ADD_ERROR));
-export const showArtworkThumbnailRequiredToast = (t: (key: string) => string) =>
-  showErrorToast(t(TOAST_KEYS.ARTWORK_THUMBNAIL_REQUIRED));
+export const artworkToast = {
+  addSuccess: createToast(TOAST_KEYS.ARTWORK_ADD_SUCCESS, "success"),
+  addError: createToast(TOAST_KEYS.ARTWORK_ADD_ERROR, "error"),
+  thumbnailRequired: createToast(
+    TOAST_KEYS.ARTWORK_THUMBNAIL_REQUIRED,
+    "error"
+  ),
+};
 
 // Shopping Cart & Inventory Toast Functions
-export const showCartItemAddedToast = (t: (key: string) => string) =>
-  showSuccessToast(t(TOAST_KEYS.CART_ITEM_ADDED));
-export const showCartItemOutOfStockToast = (t: (key: string) => string) =>
-  showErrorToast(t(TOAST_KEYS.CART_ITEM_OUT_OF_STOCK));
-export const showCartEmptyWarningToast = (t: (key: string) => string) =>
-  showWarningToast(t(TOAST_KEYS.CART_EMPTY_WARNING));
+export const cartToast = {
+  itemAdded: createToast(TOAST_KEYS.CART_ITEM_ADDED, "success"),
+  itemOutOfStock: createToast(TOAST_KEYS.CART_ITEM_OUT_OF_STOCK, "error"),
+  cartEmptyWarning: createToast(TOAST_KEYS.CART_EMPTY_WARNING, "warning"),
+};
 
 // User Interface & Notifications Toast Functions
-export const showInvoiceNoticeToast = (t: (key: string) => string) =>
-  showWarningToast(t(TOAST_KEYS.UI_INVOICE_NOTICE));
+export const uiToast = {
+  invoiceNotice: createToast(TOAST_KEYS.UI_INVOICE_NOTICE, "warning"),
+};

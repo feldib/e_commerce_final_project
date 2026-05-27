@@ -291,5 +291,33 @@
     "email_match": "Meg kell egyeznie az email címmel",
     "repeat_password_required": "Jelszó ismétlése szükséges",
     "password_match": "Meg kell egyeznie a jelszóval"
+  },
+  "toast": {
+    "login_success": "Sikeresen bejelentkezve",
+    "logout_success": "Sikeresen kijelentkezve",
+    "registration_successful": "Regisztráció sikeres",
+    "registration_failed": "Regisztráció sikertelen",
+    "user_already_registered": "Felhasználó már regisztrált ezzel az email címmel",
+    "password_reset_success": "Jelszó sikeresen visszaállítva",
+    "password_change_error": "Jelszó megváltoztatása sikertelen",
+    "incorrect_credentials": "Helytelen email vagy jelszó",
+    "incorrect_data": "Helytelen adatok",
+    "submission_error": "Formabeküldési hiba",
+    "data_saved_successfully": "Adatok sikeresen mentve",
+    "changes_saved": "Módosítások mentve",
+    "save_error": "Hiba az adatok mentésekor",
+    "message_sent": "Üzenet sikeresen elküldve",
+    "message_error": "Hiba az üzenet elküldésekor",
+    "email_submitted": "Email sikeresen beküldve",
+    "reply_success": "Válasz sikeresen elküldve",
+    "reply_error": "Hiba a válasz elküldésekor",
+    "review_saved": "Értékelés sikeresen mentve",
+    "review_error": "Hiba az értékelés mentésekor",
+    "review_approval_notice": "Az értékelésed jóváhagyásra vár",
+    "artwork_added_successfully": "Műalkotás sikeresen hozzáadva",
+    "error_add_artwork": "Hiba a műalkotás hozzáadásakor",
+    "item_added_to_cart": "Tétel hozzáadva a kosárhoz",
+    "only_effects_invoice": "Ez csak a számlát érinti",
+    "ui_invoice_notice": "Ez csak a számlát érinti"
   }
 }

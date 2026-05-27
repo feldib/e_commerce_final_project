@@ -12,10 +12,7 @@ import {
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { ToastContainer } from "react-toastify";
 
-import {
-  showReplySendErrorToast,
-  showReplySentSuccessToast,
-} from "@/utils/toastUtils";
+import { messageToast } from "@/utils/toastUtils";
 
 import ErrorAsterisk from "@/components/input/ErrorAsterisk/ErrorAsterisk";
 import InputComponent from "@/components/input/InputComponent/InputComponent";
@@ -63,10 +60,10 @@ function UnansweredMessage({ message }: UnansweredMessageProps) {
         values.reply_title,
         values.reply_text
       );
-      showReplySentSuccessToast(t);
+      messageToast.replySentSuccess(t);
       setReplied(true);
     } catch {
-      showReplySendErrorToast(t);
+      messageToast.replySendError(t);
     }
   };
 

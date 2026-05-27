@@ -1,37 +1,14 @@
 import { toast } from "react-toastify";
 
 import {
-  showArtworkAddErrorToast,
-  showArtworkAddSuccessToast,
-  showArtworkThumbnailRequiredToast,
-  showCartEmptyWarningToast,
-  showCartItemAddedToast,
-  showCartItemOutOfStockToast,
-  showChangesSavedToast,
-  showDataSaveErrorToast,
-  showDataSaveSuccessToast,
-  showEmailSubmittedSuccessToast,
-  showErrorToast,
-  showFormSubmissionErrorToast,
-  showIncorrectDataToast,
-  showInfoToast,
-  showInvoiceNoticeToast,
-  showLoginErrorToast,
-  showLoginSuccessToast,
-  showLogoutSuccessToast,
-  showMessageSendErrorToast,
-  showMessageSentSuccessToast,
-  showPasswordChangeErrorToast,
-  showPasswordResetSuccessToast,
-  showRegistrationFailedToast,
-  showRegistrationSuccessToast,
-  showReplySendErrorToast,
-  showReplySentSuccessToast,
-  showReviewSavedSuccessToast,
-  showReviewSaveErrorToast,
-  showSuccessToast,
-  showUserAlreadyExistsToast,
-  showWarningToast,
+  artworkToast,
+  authToast,
+  cartToast,
+  formToast,
+  messageToast,
+  reviewToast,
+  showToast,
+  uiToast,
 } from "../toastUtils";
 
 // Mock react-toastify
@@ -85,28 +62,28 @@ describe("toastUtils", () => {
 
   describe("Basic toast functions", () => {
     it("should show success toast", () => {
-      showSuccessToast("Test success message");
+      showToast.success("Test success message");
       expect(toast.success).toHaveBeenCalledWith("Test success message", {
         className: "toast-success",
       });
     });
 
     it("should show error toast", () => {
-      showErrorToast("Test error message");
+      showToast.error("Test error message");
       expect(toast.error).toHaveBeenCalledWith("Test error message", {
         className: "toast-error",
       });
     });
 
     it("should show info toast", () => {
-      showInfoToast("Test info message");
+      showToast.info("Test info message");
       expect(toast.info).toHaveBeenCalledWith("Test info message", {
         className: "toast-info",
       });
     });
 
     it("should show warning toast", () => {
-      showWarningToast("Test warning message");
+      showToast.warning("Test warning message");
       expect(toast.warning).toHaveBeenCalledWith("Test warning message", {
         className: "toast-warning",
       });
@@ -117,7 +94,7 @@ describe("toastUtils", () => {
     const mockT = jest.fn((key: string) => `translated_${key}`);
 
     it("should show login success toast", () => {
-      showLoginSuccessToast(mockT);
+      authToast.loginSuccess(mockT);
       expect(mockT).toHaveBeenCalledWith("auth.login.success");
       expect(toast.success).toHaveBeenCalledWith(
         "translated_auth.login.success",
@@ -128,7 +105,7 @@ describe("toastUtils", () => {
     });
 
     it("should show logout success toast", () => {
-      showLogoutSuccessToast(mockT);
+      authToast.logoutSuccess(mockT);
       expect(mockT).toHaveBeenCalledWith("auth.logout.success");
       expect(toast.success).toHaveBeenCalledWith(
         "translated_auth.logout.success",
@@ -139,7 +116,7 @@ describe("toastUtils", () => {
     });
 
     it("should show login error toast", () => {
-      showLoginErrorToast(mockT);
+      authToast.loginError(mockT);
       expect(mockT).toHaveBeenCalledWith("auth.login.error");
       expect(toast.error).toHaveBeenCalledWith("translated_auth.login.error", {
         className: "toast-error",
@@ -147,7 +124,7 @@ describe("toastUtils", () => {
     });
 
     it("should show registration success toast", () => {
-      showRegistrationSuccessToast(mockT);
+      authToast.registrationSuccess(mockT);
       expect(mockT).toHaveBeenCalledWith("auth.registration.success");
       expect(toast.success).toHaveBeenCalledWith(
         "translated_auth.registration.success",
@@ -158,7 +135,7 @@ describe("toastUtils", () => {
     });
 
     it("should show registration failed toast", () => {
-      showRegistrationFailedToast(mockT);
+      authToast.registrationFailed(mockT);
       expect(mockT).toHaveBeenCalledWith("auth.registration.failed");
       expect(toast.error).toHaveBeenCalledWith(
         "translated_auth.registration.failed",
@@ -169,7 +146,7 @@ describe("toastUtils", () => {
     });
 
     it("should show user already exists toast", () => {
-      showUserAlreadyExistsToast(mockT);
+      authToast.userAlreadyExists(mockT);
       expect(mockT).toHaveBeenCalledWith("auth.user.exists");
       expect(toast.error).toHaveBeenCalledWith("translated_auth.user.exists", {
         className: "toast-error",
@@ -177,7 +154,7 @@ describe("toastUtils", () => {
     });
 
     it("should show password reset success toast", () => {
-      showPasswordResetSuccessToast(mockT);
+      authToast.passwordResetSuccess(mockT);
       expect(mockT).toHaveBeenCalledWith("auth.password.reset.success");
       expect(toast.success).toHaveBeenCalledWith(
         "translated_auth.password.reset.success",
@@ -188,7 +165,7 @@ describe("toastUtils", () => {
     });
 
     it("should show password change error toast", () => {
-      showPasswordChangeErrorToast(mockT);
+      authToast.passwordChangeError(mockT);
       expect(mockT).toHaveBeenCalledWith("auth.password.change.error");
       expect(toast.error).toHaveBeenCalledWith(
         "translated_auth.password.change.error",
@@ -203,7 +180,7 @@ describe("toastUtils", () => {
     const mockT = jest.fn((key: string) => `translated_${key}`);
 
     it("should show incorrect data toast", () => {
-      showIncorrectDataToast(mockT);
+      formToast.incorrectData(mockT);
       expect(mockT).toHaveBeenCalledWith("form.incorrect.data");
       expect(toast.error).toHaveBeenCalledWith(
         "translated_form.incorrect.data",
@@ -214,7 +191,7 @@ describe("toastUtils", () => {
     });
 
     it("should show form submission error toast", () => {
-      showFormSubmissionErrorToast(mockT);
+      formToast.submissionError(mockT);
       expect(mockT).toHaveBeenCalledWith("form.submission.error");
       expect(toast.error).toHaveBeenCalledWith(
         "translated_form.submission.error",
@@ -225,7 +202,7 @@ describe("toastUtils", () => {
     });
 
     it("should show data save success toast", () => {
-      showDataSaveSuccessToast(mockT);
+      formToast.dataSaveSuccess(mockT);
       expect(mockT).toHaveBeenCalledWith("data.save.success");
       expect(toast.success).toHaveBeenCalledWith(
         "translated_data.save.success",
@@ -236,7 +213,7 @@ describe("toastUtils", () => {
     });
 
     it("should show changes saved toast", () => {
-      showChangesSavedToast(mockT);
+      formToast.changesSaved(mockT);
       expect(mockT).toHaveBeenCalledWith("data.changes.saved");
       expect(toast.success).toHaveBeenCalledWith(
         "translated_data.changes.saved",
@@ -247,7 +224,7 @@ describe("toastUtils", () => {
     });
 
     it("should show data save error toast", () => {
-      showDataSaveErrorToast(mockT);
+      formToast.dataSaveError(mockT);
       expect(mockT).toHaveBeenCalledWith("data.save.error");
       expect(toast.error).toHaveBeenCalledWith("translated_data.save.error", {
         className: "toast-error",
@@ -259,7 +236,7 @@ describe("toastUtils", () => {
     const mockT = jest.fn((key: string) => `translated_${key}`);
 
     it("should show review saved success toast with approval notice", () => {
-      showReviewSavedSuccessToast(mockT);
+      reviewToast.saveSuccess(mockT);
       expect(mockT).toHaveBeenCalledWith("review.saved.success");
       expect(mockT).toHaveBeenCalledWith("review.approval.notice");
       expect(toast.success).toHaveBeenCalledWith(
@@ -277,7 +254,7 @@ describe("toastUtils", () => {
     });
 
     it("should show review save error toast", () => {
-      showReviewSaveErrorToast(mockT);
+      reviewToast.saveError(mockT);
       expect(mockT).toHaveBeenCalledWith("review.save.error");
       expect(toast.error).toHaveBeenCalledWith("translated_review.save.error", {
         className: "toast-error",
@@ -289,7 +266,7 @@ describe("toastUtils", () => {
     const mockT = jest.fn((key: string) => `translated_${key}`);
 
     it("should show cart item added toast", () => {
-      showCartItemAddedToast(mockT);
+      cartToast.itemAdded(mockT);
       expect(mockT).toHaveBeenCalledWith("cart.item.added");
       expect(toast.success).toHaveBeenCalledWith("translated_cart.item.added", {
         className: "toast-success",
@@ -297,7 +274,7 @@ describe("toastUtils", () => {
     });
 
     it("should show cart item out of stock toast", () => {
-      showCartItemOutOfStockToast(mockT);
+      cartToast.itemOutOfStock(mockT);
       expect(mockT).toHaveBeenCalledWith("cart.item.out.of.stock");
       expect(toast.error).toHaveBeenCalledWith(
         "translated_cart.item.out.of.stock",
@@ -308,7 +285,7 @@ describe("toastUtils", () => {
     });
 
     it("should show cart empty warning toast", () => {
-      showCartEmptyWarningToast(mockT);
+      cartToast.cartEmptyWarning(mockT);
       expect(mockT).toHaveBeenCalledWith("cart.empty.warning");
       expect(toast.warning).toHaveBeenCalledWith(
         "translated_cart.empty.warning",
@@ -323,7 +300,7 @@ describe("toastUtils", () => {
     const mockT = jest.fn((key: string) => `translated_${key}`);
 
     it("should show artwork add success toast", () => {
-      showArtworkAddSuccessToast(mockT);
+      artworkToast.addSuccess(mockT);
       expect(mockT).toHaveBeenCalledWith("artwork.add.success");
       expect(toast.success).toHaveBeenCalledWith(
         "translated_artwork.add.success",
@@ -334,7 +311,7 @@ describe("toastUtils", () => {
     });
 
     it("should show artwork add error toast", () => {
-      showArtworkAddErrorToast(mockT);
+      artworkToast.addError(mockT);
       expect(mockT).toHaveBeenCalledWith("artwork.add.error");
       expect(toast.error).toHaveBeenCalledWith("translated_artwork.add.error", {
         className: "toast-error",
@@ -342,7 +319,7 @@ describe("toastUtils", () => {
     });
 
     it("should show artwork thumbnail required toast", () => {
-      showArtworkThumbnailRequiredToast(mockT);
+      artworkToast.thumbnailRequired(mockT);
       expect(mockT).toHaveBeenCalledWith("artwork.thumbnail.required");
       expect(toast.error).toHaveBeenCalledWith(
         "translated_artwork.thumbnail.required",
@@ -357,7 +334,7 @@ describe("toastUtils", () => {
     const mockT = jest.fn((key: string) => `translated_${key}`);
 
     it("should show message sent success toast", () => {
-      showMessageSentSuccessToast(mockT);
+      messageToast.messageSuccess(mockT);
       expect(mockT).toHaveBeenCalledWith("message.sent.success");
       expect(toast.success).toHaveBeenCalledWith(
         "translated_message.sent.success",
@@ -368,7 +345,7 @@ describe("toastUtils", () => {
     });
 
     it("should show message send error toast", () => {
-      showMessageSendErrorToast(mockT);
+      messageToast.messageSendError(mockT);
       expect(mockT).toHaveBeenCalledWith("message.send.error");
       expect(toast.error).toHaveBeenCalledWith(
         "translated_message.send.error",
@@ -379,7 +356,7 @@ describe("toastUtils", () => {
     });
 
     it("should show email submitted success toast", () => {
-      showEmailSubmittedSuccessToast(mockT);
+      messageToast.emailSubmitted(mockT);
       expect(mockT).toHaveBeenCalledWith("email.submitted.success");
       expect(toast.success).toHaveBeenCalledWith(
         "translated_email.submitted.success",
@@ -390,7 +367,7 @@ describe("toastUtils", () => {
     });
 
     it("should show reply sent success toast", () => {
-      showReplySentSuccessToast(mockT);
+      messageToast.replySentSuccess(mockT);
       expect(mockT).toHaveBeenCalledWith("reply.sent.success");
       expect(toast.success).toHaveBeenCalledWith(
         "translated_reply.sent.success",
@@ -401,7 +378,7 @@ describe("toastUtils", () => {
     });
 
     it("should show reply send error toast", () => {
-      showReplySendErrorToast(mockT);
+      messageToast.replySendError(mockT);
       expect(mockT).toHaveBeenCalledWith("reply.send.error");
       expect(toast.error).toHaveBeenCalledWith("translated_reply.send.error", {
         className: "toast-error",
@@ -413,7 +390,7 @@ describe("toastUtils", () => {
     const mockT = jest.fn((key: string) => `translated_${key}`);
 
     it("should show invoice notice toast", () => {
-      showInvoiceNoticeToast(mockT);
+      uiToast.invoiceNotice(mockT);
       expect(mockT).toHaveBeenCalledWith("ui.invoice.notice");
       expect(toast.warning).toHaveBeenCalledWith(
         "translated_ui.invoice.notice",

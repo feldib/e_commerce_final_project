@@ -5,7 +5,7 @@ import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Row } from "react-bootstrap";
 
-import { showErrorToast, showSuccessToast } from "@/utils/toastUtils";
+import { showToast } from "@/utils/toastUtils";
 
 import { UserDataContext } from "@/components/providers/UserDataProvider/UserDataProvider";
 
@@ -32,17 +32,17 @@ function SinglePurposeButton({
     if (loggedIn) {
       try {
         await actionOnLoggedIn(artwork_id);
-        showSuccessToast(toastSuccessMessage);
+        showToast.success(toastSuccessMessage);
       } catch {
-        showErrorToast(toastErrorMessage);
+        showToast.error(toastErrorMessage);
       }
     } else {
       if (actionOnNotLoggedIn) {
         try {
           actionOnNotLoggedIn();
-          showSuccessToast(toastSuccessMessage);
+          showToast.success(toastSuccessMessage);
         } catch {
-          showErrorToast(toastErrorMessage);
+          showToast.error(toastErrorMessage);
         }
       }
     }

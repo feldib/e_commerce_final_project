@@ -8,11 +8,7 @@ import { Button, Col } from "react-bootstrap";
 import { Form, Formik } from "formik";
 import { ToastContainer } from "react-toastify";
 
-import {
-  showRegistrationFailedToast,
-  showRegistrationSuccessToast,
-  showUserAlreadyExistsToast,
-} from "@/utils/toastUtils";
+import { authToast } from "@/utils/toastUtils";
 
 import InputComponent from "@/components/input/InputComponent/InputComponent";
 import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
@@ -71,11 +67,11 @@ function RegistrationFormInner() {
       .then(function () {
         logIn(values.email, values.password, (userData) => {
           settleSuccessfulRegistration(to_checkout, { user: userData });
-          showRegistrationSuccessToast(t);
+          authToast.registrationSuccess(t);
         });
       })
       .catch(() => {
-        showRegistrationFailedToast(t);
+        authToast.registrationFailed(t);
       });
   };
 
@@ -94,7 +90,7 @@ function RegistrationFormInner() {
     try {
       await attemptRegistration(values, settleSuccessfulRegistration);
     } catch {
-      showUserAlreadyExistsToast(t);
+      authToast.userAlreadyExists(t);
     }
   }
 
