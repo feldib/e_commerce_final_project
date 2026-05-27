@@ -291,5 +291,33 @@
     "email_match": "חייב להתאים לאימייל",
     "repeat_password_required": "חזרה על סיסמה נדרשת",
     "password_match": "חייב להתאים לסיסמה"
+  },
+  "toast": {
+    "login_success": "התחברת בהצלחה",
+    "logout_success": "התנתקת בהצלחה",
+    "registration_successful": "הרשמה בהצלחה",
+    "registration_failed": "הרשמה נכשלה",
+    "user_already_registered": "משתמש כבר רשום עם האימייל הזה",
+    "password_reset_success": "איפוס סיסמה בהצלחה",
+    "password_change_error": "נכשל בשינוי סיסמה",
+    "incorrect_credentials": "אימייל או סיסמה שגויים",
+    "incorrect_data": "נתונים שגויים",
+    "submission_error": "שגיאה בהגשת טופס",
+    "data_saved_successfully": "נתונים נשמרו בהצלחה",
+    "changes_saved": "שינויים נשמרו",
+    "save_error": "שגיאה בשמירת נתונים",
+    "message_sent": "הודעה נשלחה בהצלחה",
+    "message_error": "שגיאה בשליחת הודעה",
+    "email_submitted": "אימייל הוגש בהצלחה",
+    "reply_success": "תגובה נשלחה בהצלחה",
+    "reply_error": "שגיאה בשליחת תגובה",
+    "review_saved": "ביקורת נשמרה בהצלחה",
+    "review_error": "שגיאה בשמירת ביקורת",
+    "review_approval_notice": "ביקורתך בהמתנה לאישור",
+    "artwork_added_successfully": "יצירת אמנות נוספה בהצלחה",
+    "error_add_artwork": "שגיאה בהוספת יצירת אמנות",
+    "item_added_to_cart": "פריט נוסף לעגלת הקניות",
+    "only_effects_invoice": "זה משפיע רק על החשבונית",
+    "ui_invoice_notice": "זה משפיע רק על החשבונית"
   }
 }

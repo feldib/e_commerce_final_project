@@ -4,7 +4,7 @@ import React from "react";
 
 import { FormikProps } from "formik";
 
-import { showSuccessToast } from "@/utils/toastUtils";
+import { showToast } from "@/utils/toastUtils";
 
 import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
 
@@ -50,8 +50,9 @@ function useArtworkThumbnailInput<T extends Record<string, unknown>>({
         try {
           // TypeScript assertion: artworkId is guaranteed to be defined when isEdit is true
           await replaceThumbnail(artworkId as number, file);
-          showSuccessToast(
-            t("components.forms.artwork.thumbnail_uploaded_successfully")
+          showToast(
+            t("components.forms.artwork.thumbnail_uploaded_successfully"),
+            "success"
           );
           // We create an object URL in both modes
           formik.setFieldValue("thumbnail", URL.createObjectURL(file));

@@ -291,5 +291,33 @@
     "email_match": "Must match email",
     "repeat_password_required": "Repeat password required",
     "password_match": "Must match password"
+  },
+  "toast": {
+    "login_success": "Successfully logged in",
+    "logout_success": "Successfully logged out",
+    "registration_successful": "Registration successful",
+    "registration_failed": "Registration failed",
+    "user_already_registered": "User already registered with this email",
+    "password_reset_success": "Password reset successful",
+    "password_change_error": "Failed to change password",
+    "incorrect_credentials": "Incorrect email or password",
+    "incorrect_data": "Incorrect data provided",
+    "submission_error": "Form submission error",
+    "data_saved_successfully": "Data saved successfully",
+    "changes_saved": "Changes saved",
+    "save_error": "Error saving data",
+    "message_sent": "Message sent successfully",
+    "message_error": "Error sending message",
+    "email_submitted": "Email submitted successfully",
+    "reply_success": "Reply sent successfully",
+    "reply_error": "Error sending reply",
+    "review_saved": "Review saved successfully",
+    "review_error": "Error saving review",
+    "review_approval_notice": "Your review is pending approval",
+    "artwork_added_successfully": "Artwork added successfully",
+    "error_add_artwork": "Error adding artwork",
+    "item_added_to_cart": "Item added to shopping cart",
+    "only_effects_invoice": "This only affects the invoice",
+    "ui_invoice_notice": "This only affects the invoice"
   }
 }

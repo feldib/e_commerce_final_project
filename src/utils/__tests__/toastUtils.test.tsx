@@ -11,10 +11,8 @@ import {
   showDataSaveErrorToast,
   showDataSaveSuccessToast,
   showEmailSubmittedSuccessToast,
-  showErrorToast,
   showFormSubmissionErrorToast,
   showIncorrectDataToast,
-  showInfoToast,
   showInvoiceNoticeToast,
   showLoginErrorToast,
   showLoginSuccessToast,
@@ -29,9 +27,8 @@ import {
   showReplySentSuccessToast,
   showReviewSavedSuccessToast,
   showReviewSaveErrorToast,
-  showSuccessToast,
   showUserAlreadyExistsToast,
-  showWarningToast,
+  showToast,
 } from "../toastUtils";
 
 // Mock react-toastify
@@ -85,28 +82,28 @@ describe("toastUtils", () => {
 
   describe("Basic toast functions", () => {
     it("should show success toast", () => {
-      showSuccessToast("Test success message");
+      showToast("Test success message", "success");
       expect(toast.success).toHaveBeenCalledWith("Test success message", {
         className: "toast-success",
       });
     });
 
     it("should show error toast", () => {
-      showErrorToast("Test error message");
+      showToast("Test error message", "error");
       expect(toast.error).toHaveBeenCalledWith("Test error message", {
         className: "toast-error",
       });
     });
 
     it("should show info toast", () => {
-      showInfoToast("Test info message");
+      showToast("Test info message", "info");
       expect(toast.info).toHaveBeenCalledWith("Test info message", {
         className: "toast-info",
       });
     });
 
     it("should show warning toast", () => {
-      showWarningToast("Test warning message");
+      showToast("Test warning message", "warning");
       expect(toast.warning).toHaveBeenCalledWith("Test warning message", {
         className: "toast-warning",
       });
