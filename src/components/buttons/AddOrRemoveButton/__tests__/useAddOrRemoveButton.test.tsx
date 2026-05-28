@@ -1,6 +1,7 @@
 import React from "react";
 import { act, renderHook } from "@testing-library/react";
 
+import I18nProvider from "@/components/providers/I18nProvider/__mocks__/I18nProvider";
 import { UserDataContext } from "@/components/providers/UserDataProvider/UserDataProvider";
 
 import useAddOrRemoveButton from "../useAddOrRemoveButton";
@@ -10,6 +11,11 @@ const mockIsAdded = jest.fn();
 const mockAddToAdded = jest.fn();
 const mockRemoveFromAdded = jest.fn();
 const warningToast = jest.fn();
+jest.mock("@/components/providers/I18nProvider/I18nProvider", () => ({
+  useI18n: () => ({
+    t: (key: string) => key,
+  }),
+}));
 
 const mockUserDataContext = {
   loggedIn: true,
