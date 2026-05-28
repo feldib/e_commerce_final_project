@@ -117,5 +117,7 @@ export const TOAST_KEYS = {
   UI: {
     INVOICE_NOTICE: "toast.ui_invoice_notice",
     SIGN_IN_TO_ADD_WISHLIST: "components.buttons.sign_in_to_add_wishlist",
+    ERROR_REMOVE_ARTWORK: "toast.error_remove_artwork",
+    ARTWORK_REMOVED_SUCCESSFULLY: "toast.artwork_removed_successfully",
   },
 } as const;

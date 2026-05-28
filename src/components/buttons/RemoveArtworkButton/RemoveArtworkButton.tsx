@@ -2,6 +2,8 @@ import React from "react";
 
 import { faX } from "@fortawesome/free-solid-svg-icons";
 
+import { uiToast } from "@/utils/toastUtils";
+
 import { removeArtwork } from "@/fetching/artwork";
 
 import SinglePurposeButton from "../SinglePurposeButton/SinglePurposeButton";
@@ -24,9 +26,9 @@ function RemoveArtworkButton({
     <SinglePurposeButton
       actionOnLoggedIn={handleRemoveArtwork}
       artwork_id={artwork_id}
+      errorToast={uiToast.errorRemoveArtwork}
       icon={faX}
-      toastErrorMessage="Error: item could not be removed"
-      toastSuccessMessage="Artwork removed successfully"
+      successToast={uiToast.artworkRemovedSuccessfully}
     />
   );
 }

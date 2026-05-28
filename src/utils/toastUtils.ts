@@ -119,4 +119,9 @@ export const uiToast = {
     TOAST_KEYS.UI.SIGN_IN_TO_ADD_WISHLIST,
     "warning"
   ),
+  errorRemoveArtwork: createToast(TOAST_KEYS.UI.ERROR_REMOVE_ARTWORK, "error"),
+  artworkRemovedSuccessfully: createToast(
+    TOAST_KEYS.UI.ARTWORK_REMOVED_SUCCESSFULLY,
+    "success"
+  ),
 };

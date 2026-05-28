@@ -315,6 +315,8 @@
     "review_error": "Hiba az értékelés mentésekor",
     "review_approval_notice": "Az értékelésed jóváhagyásra vár",
     "artwork_added_successfully": "Műalkotás sikeresen hozzáadva",
+    "error_remove_artwork": "Hiba: a műalkotást nem lehet eltávolítani",
+    "artwork_removed_successfully": "Műalkotás sikeresen eltávolítva",
     "error_add_artwork": "Hiba a műalkotás hozzáadásakor",
     "item_added_to_cart": "Tétel hozzáadva a kosárhoz",
     "only_effects_invoice": "Ez csak a számlát érinti",

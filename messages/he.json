@@ -316,6 +316,8 @@
     "review_approval_notice": "ביקורתך בהמתנה לאישור",
     "artwork_added_successfully": "יצירת אמנות נוספה בהצלחה",
     "error_add_artwork": "שגיאה בהוספת יצירת אמנות",
+    "error_remove_artwork": "שגיאה: פריט לא יכול להימחק",
+    "artwork_removed_successfully": "יצירת אמנות הוסרה בהצלחה",
     "item_added_to_cart": "פריט נוסף לעגלת הקניות",
     "only_effects_invoice": "זה משפיע רק על החשבונית",
     "ui_invoice_notice": "זה משפיע רק על החשבונית"
