@@ -2,6 +2,7 @@
 import React from "react";
 
 import { Row } from "react-bootstrap";
+import { Id } from "react-toastify/unstyled";
 
 import useAddOrRemoveButton from "./useAddOrRemoveButton";
 
@@ -12,7 +13,7 @@ type AddOrRemoveFromButtonProps = {
   removeFromAdded: (artwork_id: number) => Promise<void>;
   filledButton: React.ReactNode;
   regularButton: React.ReactNode;
-  toastWarningMessage: string;
+  warningToast: (t: (key: string) => string) => Id;
 };
 
 function AddOrRemoveFromButton({
@@ -22,14 +23,14 @@ function AddOrRemoveFromButton({
   removeFromAdded,
   filledButton,
   regularButton,
-  toastWarningMessage,
+  warningToast,
 }: AddOrRemoveFromButtonProps) {
   const { added, handleButtonClick } = useAddOrRemoveButton({
     artwork_id,
     isAdded,
     addToAdded,
     removeFromAdded,
-    toastWarningMessage,
+    warningToast,
   });
 
   return (

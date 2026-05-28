@@ -1,8 +1,6 @@
 import { toast } from "react-toastify";
 
-import {
-  showToast,
-} from "../toastUtils";
+import { showToast } from "../toastUtils";
 
 // Mock react-toastify
 jest.mock("react-toastify", () => ({

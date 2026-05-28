@@ -115,4 +115,8 @@ export const cartToast = {
 // User Interface & Notifications Toast Functions
 export const uiToast = {
   invoiceNotice: createToast(TOAST_KEYS.UI.INVOICE_NOTICE, "warning"),
+  signInToAddWishlist: createToast(
+    TOAST_KEYS.UI.SIGN_IN_TO_ADD_WISHLIST,
+    "warning"
+  ),
 };

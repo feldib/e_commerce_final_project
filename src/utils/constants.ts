@@ -116,5 +116,6 @@ export const TOAST_KEYS = {
   // User Interface & Notifications
   UI: {
     INVOICE_NOTICE: "toast.ui_invoice_notice",
+    SIGN_IN_TO_ADD_WISHLIST: "components.buttons.sign_in_to_add_wishlist",
   },
 } as const;
