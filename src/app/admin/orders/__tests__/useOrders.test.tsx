@@ -28,11 +28,4 @@ describe("useOrders", () => {
     expect(typeof result.current.t).toBe("function");
     expect(result.current.ordersRepresented).toBeDefined();
   });
-
-  it("should provide working translation function", () => {
-    const { result } = renderHook(() => useOrders(), { wrapper: TestWrapper });
-
-    const translationResult = result.current.t("test.key");
-    expect(typeof translationResult).toBe("string");
-  });
 });

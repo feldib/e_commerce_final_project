@@ -21,7 +21,7 @@ interface UseForgotPasswordReturn {
   onSubmit: (values: ForgotPasswordFormValues) => void;
 }
 
-function useForgotPassword(): UseForgotPasswordReturn {
+function useForgotPasswordForm(): UseForgotPasswordReturn {
   const [displayMessage, setDisplayMessage] = React.useState(false);
   const { t } = useI18n();
   const forgotPasswordSchema = useForgotPasswordSchema();
@@ -50,4 +50,4 @@ function useForgotPassword(): UseForgotPasswordReturn {
   };
 }
 
-export default useForgotPassword;
+export default useForgotPasswordForm;

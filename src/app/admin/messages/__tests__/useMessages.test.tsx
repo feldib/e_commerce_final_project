@@ -48,12 +48,4 @@ describe("useMessages", () => {
     expect(typeof result.current.t).toBe("function");
     expect(result.current.messagesRepresented).toBeDefined();
   });
-
-  it("should provide translation function", () => {
-    const { result } = renderHook(() => useMessages(), {
-      wrapper: TestWrapper,
-    });
-
-    expect(typeof result.current.t).toBe("function");
-  });
 });

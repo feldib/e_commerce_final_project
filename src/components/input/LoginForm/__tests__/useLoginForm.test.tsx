@@ -4,7 +4,7 @@ import { act, renderHook } from "@testing-library/react";
 import { I18nProvider } from "@/components/providers/I18nProvider/I18nProvider";
 import { UserDataContext } from "@/components/providers/UserDataProvider/UserDataProvider";
 
-import useLogin from "../useLogin";
+import useLoginForm from "../useLoginForm";
 
 // Use reusable mocks
 jest.mock("next/navigation");
@@ -49,13 +49,15 @@ const TestWrapper = ({ children }: { children: React.ReactNode }) => (
   </I18nProvider>
 );
 
-describe("useLogin", () => {
+describe("useLoginForm", () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
   it("should return login form properties", () => {
-    const { result } = renderHook(() => useLogin(), { wrapper: TestWrapper });
+    const { result } = renderHook(() => useLoginForm(), {
+      wrapper: TestWrapper,
+    });
 
     expect(result.current.t).toBeDefined();
     expect(result.current.loginSchema).toBeDefined();
@@ -81,7 +83,9 @@ describe("useLogin", () => {
       callback(mockUser);
     });
 
-    const { result } = renderHook(() => useLogin(), { wrapper: TestWrapper });
+    const { result } = renderHook(() => useLoginForm(), {
+      wrapper: TestWrapper,
+    });
 
     await act(async () => {
       await result.current.onSubmit({
@@ -105,7 +109,9 @@ describe("useLogin", () => {
   it("should handle login error", async () => {
     mockLogIn.mockRejectedValue(new Error("Login failed"));
 
-    const { result } = renderHook(() => useLogin(), { wrapper: TestWrapper });
+    const { result } = renderHook(() => useLoginForm(), {
+      wrapper: TestWrapper,
+    });
 
     await act(async () => {
       await result.current.onSubmit({
@@ -139,7 +145,9 @@ describe("useLogin", () => {
       callback(mockUser);
     });
 
-    const { result } = renderHook(() => useLogin(), { wrapper: TestWrapper });
+    const { result } = renderHook(() => useLoginForm(), {
+      wrapper: TestWrapper,
+    });
 
     await act(async () => {
       await result.current.onSubmit({

@@ -15,11 +15,4 @@ describe("LoadingSpinner", () => {
     expect(spinner).toBeTruthy();
     expect(spinner?.getAttribute("role")).toBe("status");
   });
-
-  it("should be accessible", () => {
-    const { getByRole } = render(<LoadingSpinner />);
-
-    const spinner = getByRole("status");
-    expect(spinner).toBeTruthy();
-  });
 });
