@@ -1,54 +1,19 @@
 "use client";
 import React from "react";
 
-import { faUser } from "@fortawesome/free-solid-svg-icons";
-import { Button, Col, Container, Row } from "react-bootstrap";
-import { Form, Formik } from "formik";
-import { ToastContainer } from "react-toastify";
+import { Container } from "react-bootstrap";
 
-import InputComponent from "@/components/input/InputComponent/InputComponent";
+import ForgotPasswordForm from "@/components/input/ForgotPasswordForm/ForgotPasswordForm";
 import PageTitle from "@/components/layout/PageTitle/PageTitle";
-
-import useForgotPassword from "./useForgotPassword";
+import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
 
 function ForgotPassword() {
-  const { t, displayMessage, forgotPasswordSchema, initialValues, onSubmit } =
-    useForgotPassword();
+  const { t } = useI18n();
 
   return (
     <Container className="pb-5">
       <PageTitle title={t("app.forgot_password.title")} />
-      <Formik
-        initialValues={initialValues}
-        onSubmit={onSubmit}
-        validationSchema={forgotPasswordSchema}
-      >
-        {({ errors, touched }) => (
-          <Row className="floating-element">
-            <Col className="mx-5 pb-5">
-              <Form>
-                <InputComponent
-                  hasError={!!errors.email && !!touched.email}
-                  icon={faUser}
-                  label={t("common.fields.email_address")}
-                  name="email"
-                  placeholder={t("common.placeholders.enter_email")}
-                  type="email"
-                />
-                {displayMessage && (
-                  <p className="text-muted">
-                    {t("app.forgot_password.recovery_message")}
-                  </p>
-                )}
-                <Button type="submit" variant="primary">
-                  {t("app.forgot_password.send_link")}
-                </Button>
-                <ToastContainer position="bottom-right" />
-              </Form>
-            </Col>
-          </Row>
-        )}
-      </Formik>
+      <ForgotPasswordForm />
     </Container>
   );
 }

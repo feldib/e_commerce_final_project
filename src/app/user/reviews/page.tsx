@@ -13,7 +13,6 @@ function Reviews() {
   return (
     <Col className="mx-auto">
       <SubPageTitle title={t("app.user.reviews.title")} />
-
       <Row>{representReviews}</Row>
     </Col>
   );

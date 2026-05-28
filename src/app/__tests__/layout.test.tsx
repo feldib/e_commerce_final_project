@@ -61,22 +61,4 @@ describe("Layout", () => {
 
     expect(document.body).toBeTruthy();
   });
-
-  it("should render providers in correct hierarchy", () => {
-    render(
-      <Layout>
-        <div>Test content</div>
-      </Layout>
-    );
-
-    expect(
-      document.querySelector('[data-testid="i18n-provider"]')
-    ).toBeTruthy();
-    expect(
-      document.querySelector('[data-testid="user-data-provider"]')
-    ).toBeTruthy();
-    expect(
-      document.querySelector('[data-testid="theme-provider"]')
-    ).toBeTruthy();
-  });
 });

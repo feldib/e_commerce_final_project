@@ -25,7 +25,7 @@ interface UseLoginReturn {
   onSubmit: (values: LoginFormValues) => Promise<void>;
 }
 
-function useLogin(): UseLoginReturn {
+function useLoginForm(): UseLoginReturn {
   const searchParams = useSearchParams();
   const to_checkout = searchParams.get("to_checkout") === "true";
   const router = useRouter();
@@ -58,4 +58,4 @@ function useLogin(): UseLoginReturn {
   };
 }
 
-export default useLogin;
+export default useLoginForm;
