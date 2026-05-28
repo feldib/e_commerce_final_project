@@ -43,10 +43,10 @@ function useLoginForm(): UseLoginReturn {
     try {
       await logIn(values.email, values.password, (userData: User) => {
         settleSuccessfulLogIn(to_checkout, userData, router);
-        authToast.loginSuccess(t);
+        authToast.login.success(t);
       });
     } catch {
-      authToast.loginError(t);
+      authToast.login.error(t);
     }
   }
 

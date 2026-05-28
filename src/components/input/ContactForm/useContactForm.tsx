@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import { messageToast } from "@/utils/toastUtils";
+import { communicationToast } from "@/utils/toastUtils";
 
 import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
 import { UserDataContext } from "@/components/providers/UserDataProvider/UserDataProvider";
@@ -49,10 +49,10 @@ function useContactForm(): UseContactFormReturn {
         values.title,
         values.message
       );
-      messageToast.messageSuccess(t);
+      communicationToast.message.sentSuccess(t);
       form?.current?.reset();
     } catch {
-      messageToast.messageSendError(t);
+      communicationToast.message.sendError(t);
     }
   };
 

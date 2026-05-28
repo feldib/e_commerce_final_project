@@ -56,9 +56,9 @@ function useArtworkImagesInput<T extends Record<string, unknown>>({
             URL.createObjectURL(file),
           ]);
           e.target.value = ""; // Reset the input for next upload
-          artworkToast.imageUploadFailed(t);
+          artworkToast.images.uploadedSuccessfully(t);
         } catch {
-          artworkToast.imageUploadFailed(t);
+          artworkToast.images.uploadFailed(t);
         }
       } else {
         // In add mode, we just set the file directly
@@ -88,7 +88,7 @@ function useArtworkImagesInput<T extends Record<string, unknown>>({
         ).filter((_, picIndex) => picIndex !== index);
         formik.setFieldValue("other_pictures", newArray);
       } catch {
-        artworkToast.imageRemoveFailed(t);
+        artworkToast.images.removeFailed(t);
       }
     } else {
       // In add mode, we just remove the file from the array

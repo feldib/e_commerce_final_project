@@ -56,7 +56,7 @@ const useAddArtworkForm = () => {
       try {
         // TypeScript check - thumbnail is required by validation but type allows undefined
         if (!values.thumbnail) {
-          artworkToast.thumbnailRequired(t);
+          artworkToast.thumbnail.required(t);
           return;
         }
 
@@ -65,7 +65,7 @@ const useAddArtworkForm = () => {
           tags,
           thumbnail: values.thumbnail,
         });
-        artworkToast.addSuccess(t);
+        artworkToast.add.success(t);
 
         const artwork_id = response.data;
 
@@ -73,7 +73,7 @@ const useAddArtworkForm = () => {
 
         actions.resetForm();
       } catch {
-        artworkToast.addError(t);
+        artworkToast.add.error(t);
       }
     },
 

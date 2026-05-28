@@ -19,23 +19,25 @@ const createToast =
 
 // Authentication & User Management Toast Functions
 export const authToast = {
-  loginSuccess: createToast(TOAST_KEYS.AUTH.LOGIN_SUCCESS, "success"),
-  logoutSuccess: createToast(TOAST_KEYS.AUTH.LOGOUT_SUCCESS, "success"),
-  loginError: createToast(TOAST_KEYS.AUTH.INCORRECT_CREDENTIALS, "error"),
-  registrationSuccess: createToast(
-    TOAST_KEYS.AUTH.REGISTRATION_SUCCESS,
-    "success"
-  ),
-  registrationFailed: createToast(TOAST_KEYS.AUTH.REGISTRATION_FAILED, "error"),
-  userAlreadyExists: createToast(TOAST_KEYS.AUTH.USER_ALREADY_EXISTS, "error"),
-  passwordResetSuccess: createToast(
-    TOAST_KEYS.AUTH.PASSWORD_RESET_SUCCESS,
-    "success"
-  ),
-  passwordChangeError: createToast(
-    TOAST_KEYS.AUTH.PASSWORD_CHANGE_ERROR,
-    "error"
-  ),
+  login: {
+    success: createToast(TOAST_KEYS.AUTH.LOGIN_SUCCESS, "success"),
+    error: createToast(TOAST_KEYS.AUTH.INCORRECT_CREDENTIALS, "error"),
+  },
+  logout: {
+    success: createToast(TOAST_KEYS.AUTH.LOGOUT_SUCCESS, "success"),
+  },
+  registration: {
+    success: createToast(TOAST_KEYS.AUTH.REGISTRATION_SUCCESS, "success"),
+    error: createToast(TOAST_KEYS.AUTH.REGISTRATION_FAILED, "error"),
+    userExists: createToast(TOAST_KEYS.AUTH.USER_ALREADY_EXISTS, "error"),
+  },
+  password: {
+    resetSuccess: createToast(
+      TOAST_KEYS.AUTH.PASSWORD_RESET_SUCCESS,
+      "success"
+    ),
+    changeError: createToast(TOAST_KEYS.AUTH.PASSWORD_CHANGE_ERROR, "error"),
+  },
 };
 
 // Form Validation & Data Operations Toast Functions
@@ -48,18 +50,21 @@ export const formToast = {
 };
 
 // Communication & Messages Toast Functions
-export const messageToast = {
-  messageSuccess: createToast(TOAST_KEYS.MESSAGES.SENT_SUCCESS, "success"),
-  messageSendError: createToast(TOAST_KEYS.MESSAGES.SEND_ERROR, "error"),
-  emailSubmitted: createToast(
-    TOAST_KEYS.MESSAGES.EMAIL_SUBMITTED_SUCCESS,
-    "success"
-  ),
-  replySentSuccess: createToast(
-    TOAST_KEYS.MESSAGES.REPLY_SENT_SUCCESS,
-    "success"
-  ),
-  replySendError: createToast(TOAST_KEYS.MESSAGES.REPLY_SEND_ERROR, "error"),
+export const communicationToast = {
+  message: {
+    sentSuccess: createToast(TOAST_KEYS.MESSAGES.SENT_SUCCESS, "success"),
+    sendError: createToast(TOAST_KEYS.MESSAGES.SEND_ERROR, "error"),
+  },
+  email: {
+    success: createToast(
+      TOAST_KEYS.MESSAGES.EMAIL_SUBMITTED_SUCCESS,
+      "success"
+    ),
+  },
+  reply: {
+    sentSuccess: createToast(TOAST_KEYS.MESSAGES.REPLY_SENT_SUCCESS, "success"),
+    sendError: createToast(TOAST_KEYS.MESSAGES.REPLY_SEND_ERROR, "error"),
+  },
 };
 
 // Reviews & Ratings Toast Functions
@@ -73,36 +78,29 @@ export const reviewToast = {
 
 // Artwork Management Toast Functions
 export const artworkToast = {
-  addSuccess: createToast(TOAST_KEYS.ARTWORK.ADD_SUCCESS, "success"),
-  addError: createToast(TOAST_KEYS.ARTWORK.ADD_ERROR, "error"),
-  thumbnailRequired: createToast(
-    TOAST_KEYS.ARTWORK.THUMBNAIL_REQUIRED,
-    "error"
-  ),
-  categoryUpdated: createToast(
-    TOAST_KEYS.ARTWORK.CATEGORY_UPDATE_SUCCESS,
-    "success"
-  ),
-  failedToUpdateCategory: createToast(
-    TOAST_KEYS.ARTWORK.CATEGORY_UPDATE_FAILED,
-    "error"
-  ),
-  thumbnailUploadedSuccessfully: createToast(
-    TOAST_KEYS.ARTWORK.THUMBNAIL_UPLOADED_SUCCESSFULLY,
-    "success"
-  ),
-  imageUploadedSuccessfully: createToast(
-    TOAST_KEYS.ARTWORK.IMAGE_UPLOADED_SUCCESSFULLY,
-    "success"
-  ),
-  imageUploadFailed: createToast(
-    TOAST_KEYS.ARTWORK.IMAGE_UPLOAD_FAILED,
-    "error"
-  ),
-  imageRemoveFailed: createToast(
-    TOAST_KEYS.ARTWORK.IMAGE_REMOVE_FAILED,
-    "error"
-  ),
+  add: {
+    success: createToast(TOAST_KEYS.ARTWORK.ADD_SUCCESS, "success"),
+    error: createToast(TOAST_KEYS.ARTWORK.ADD_ERROR, "error"),
+  },
+  category: {
+    updated: createToast(TOAST_KEYS.ARTWORK.CATEGORY_UPDATE_SUCCESS, "success"),
+    failed: createToast(TOAST_KEYS.ARTWORK.CATEGORY_UPDATE_FAILED, "error"),
+  },
+  thumbnail: {
+    required: createToast(TOAST_KEYS.ARTWORK.THUMBNAIL_REQUIRED, "error"),
+    uploadedSuccessfully: createToast(
+      TOAST_KEYS.ARTWORK.THUMBNAIL_UPLOADED_SUCCESSFULLY,
+      "success"
+    ),
+  },
+  images: {
+    uploadedSuccessfully: createToast(
+      TOAST_KEYS.ARTWORK.IMAGE_UPLOADED_SUCCESSFULLY,
+      "success"
+    ),
+    uploadFailed: createToast(TOAST_KEYS.ARTWORK.IMAGE_UPLOAD_FAILED, "error"),
+    removeFailed: createToast(TOAST_KEYS.ARTWORK.IMAGE_REMOVE_FAILED, "error"),
+  },
 };
 
 // Shopping Cart & Inventory Toast Functions

@@ -116,9 +116,9 @@ const useEditArtworkForm = () => {
   const handleCategoryChange = async (category: { id: number }) => {
     try {
       await updateArtworkData(artworkId, "category_id", category.id);
-      artworkToast.categoryUpdated(t);
+      artworkToast.category.updated(t);
     } catch {
-      artworkToast.failedToUpdateCategory(t);
+      artworkToast.category.failed(t);
     }
   };
 

@@ -67,11 +67,11 @@ function RegistrationFormInner() {
       .then(function () {
         logIn(values.email, values.password, (userData) => {
           settleSuccessfulRegistration(to_checkout, { user: userData });
-          authToast.registrationSuccess(t);
+          authToast.registration.success(t);
         });
       })
       .catch(() => {
-        authToast.registrationFailed(t);
+        authToast.registration.error(t);
       });
   };
 
@@ -90,7 +90,7 @@ function RegistrationFormInner() {
     try {
       await attemptRegistration(values, settleSuccessfulRegistration);
     } catch {
-      authToast.userAlreadyExists(t);
+      authToast.registration.userExists(t);
     }
   }
 
