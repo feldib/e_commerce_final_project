@@ -4,7 +4,7 @@ import React from "react";
 
 import { Id } from "react-toastify/unstyled";
 
-import { useI18n } from "@/components/providers/I18nProvider/__mocks__/I18nProvider";
+import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
 import { UserDataContext } from "@/components/providers/UserDataProvider/UserDataProvider";
 
 type UseAddOrRemoveButtonProps = {
