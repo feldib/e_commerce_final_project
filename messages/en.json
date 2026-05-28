@@ -315,6 +315,8 @@
     "review_error": "Error saving review",
     "review_approval_notice": "Your review is pending approval",
     "artwork_added_successfully": "Artwork added successfully",
+    "error_remove_artwork": "Error: item could not be removed",
+    "artwork_removed_successfully": "Artwork removed successfully",
     "error_add_artwork": "Error adding artwork",
     "item_added_to_cart": "Item added to shopping cart",
     "only_effects_invoice": "This only affects the invoice",

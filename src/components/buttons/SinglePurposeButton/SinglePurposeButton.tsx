@@ -4,17 +4,17 @@ import React from "react";
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Row } from "react-bootstrap";
+import { Id } from "react-toastify/unstyled";
 
-import { showToast } from "@/utils/toastUtils";
-
+import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
 import { UserDataContext } from "@/components/providers/UserDataProvider/UserDataProvider";
 
 type SinglePurposeButtonProps = {
   artwork_id: number;
   actionOnLoggedIn: (artwork_id: number) => Promise<unknown>;
   actionOnNotLoggedIn?: () => void;
-  toastSuccessMessage: string;
-  toastErrorMessage: string;
+  errorToast: (t: (key: string) => string) => Id;
+  successToast: (t: (key: string) => string) => Id;
   icon: IconDefinition;
 };
 
@@ -22,27 +22,28 @@ function SinglePurposeButton({
   artwork_id,
   actionOnLoggedIn,
   actionOnNotLoggedIn,
-  toastSuccessMessage,
-  toastErrorMessage,
+  errorToast,
+  successToast,
   icon,
 }: SinglePurposeButtonProps) {
   const { loggedIn } = React.useContext(UserDataContext);
+  const { t } = useI18n();
 
   const handleClick = async () => {
     if (loggedIn) {
       try {
         await actionOnLoggedIn(artwork_id);
-        showToast.success(toastSuccessMessage);
+        successToast(t);
       } catch {
-        showToast.error(toastErrorMessage);
+        errorToast(t);
       }
     } else {
       if (actionOnNotLoggedIn) {
         try {
           actionOnNotLoggedIn();
-          showToast.success(toastSuccessMessage);
+          successToast(t);
         } catch {
-          showToast.error(toastErrorMessage);
+          errorToast(t);
         }
       }
     }

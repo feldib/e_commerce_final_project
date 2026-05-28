@@ -15,7 +15,7 @@ function FavouriteButton({ artwork_id }: FavouriteButtonProps) {
     isAdded,
     regularButton,
     removeFromAdded,
-    toastWarningMessage,
+    warningToast,
   } = useFavouriteButton({ artwork_id });
 
   return (
@@ -26,7 +26,7 @@ function FavouriteButton({ artwork_id }: FavouriteButtonProps) {
       isAdded={isAdded}
       regularButton={regularButton}
       removeFromAdded={removeFromAdded}
-      toastWarningMessage={toastWarningMessage}
+      warningToast={warningToast}
     />
   );
 }

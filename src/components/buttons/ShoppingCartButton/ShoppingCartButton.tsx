@@ -14,8 +14,8 @@ function ShoppingCartButton({ artwork_id, quantity }: ShoppingCartButtonProps) {
     actionOnLoggedIn,
     actionOnNotLoggedIn,
     icon,
-    toastErrorMessage,
-    toastSuccessMessage,
+    errorToast,
+    successToast,
   } = useShoppingCartButton({ artwork_id, quantity });
 
   return (
@@ -23,9 +23,9 @@ function ShoppingCartButton({ artwork_id, quantity }: ShoppingCartButtonProps) {
       actionOnLoggedIn={actionOnLoggedIn}
       actionOnNotLoggedIn={actionOnNotLoggedIn}
       artwork_id={artwork_id}
+      errorToast={errorToast}
       icon={icon}
-      toastErrorMessage={toastErrorMessage}
-      toastSuccessMessage={toastSuccessMessage}
+      successToast={successToast}
     />
   );
 }

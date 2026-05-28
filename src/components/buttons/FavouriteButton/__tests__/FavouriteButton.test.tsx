@@ -2,6 +2,7 @@ import React from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
 
 import FavouriteButton from "../FavouriteButton";
+import useFavouriteButton from "../useFavouriteButton";
 
 // Use reusable mocks
 jest.mock("../useFavouriteButton");
@@ -14,6 +15,9 @@ describe("FavouriteButton", () => {
 
   beforeEach(() => {
     jest.clearAllMocks();
+    (useFavouriteButton as jest.Mock).mockReturnValue({
+      warningToast: jest.fn(),
+    });
   });
 
   it("should render without crashing", () => {

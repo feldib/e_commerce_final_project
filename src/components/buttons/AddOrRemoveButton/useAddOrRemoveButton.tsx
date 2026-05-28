@@ -2,8 +2,9 @@
 
 import React from "react";
 
-import { showToast } from "@/utils/toastUtils";
+import { Id } from "react-toastify/unstyled";
 
+import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
 import { UserDataContext } from "@/components/providers/UserDataProvider/UserDataProvider";
 
 type UseAddOrRemoveButtonProps = {
@@ -11,7 +12,7 @@ type UseAddOrRemoveButtonProps = {
   isAdded: (artwork_id: number) => Promise<boolean>;
   addToAdded: (artwork_id: number) => Promise<void>;
   removeFromAdded: (artwork_id: number) => Promise<void>;
-  toastWarningMessage: string;
+  warningToast: (t: (key: string) => string) => Id;
 };
 
 type UseAddOrRemoveButtonReturn = {
@@ -24,12 +25,13 @@ function useAddOrRemoveButton({
   isAdded,
   addToAdded,
   removeFromAdded,
-  toastWarningMessage,
+  warningToast,
 }: UseAddOrRemoveButtonProps): UseAddOrRemoveButtonReturn {
   const { loggedIn } = React.useContext(UserDataContext);
 
   const [added, setAdded] = React.useState(false);
   const [needsToBeRefreshed, setNeedsToBeRefreshed] = React.useState(false);
+  const { t } = useI18n();
 
   const handleButtonClick = async () => {
     if (loggedIn) {
@@ -41,7 +43,7 @@ function useAddOrRemoveButton({
         setNeedsToBeRefreshed(true);
       }
     } else {
-      showToast.warning(toastWarningMessage);
+      warningToast(t);
     }
   };
 

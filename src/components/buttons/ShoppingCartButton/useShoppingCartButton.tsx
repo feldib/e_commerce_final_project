@@ -1,6 +1,9 @@
 "use client";
 
 import { faBasketShopping } from "@fortawesome/free-solid-svg-icons";
+import { Id } from "react-toastify/unstyled";
+
+import { cartToast } from "@/utils/toastUtils";
 
 import { addToShoppingList } from "@/fetching/shopping";
 
@@ -18,8 +21,8 @@ type UseShoppingCartButtonReturn = {
   actionOnNotLoggedIn: () => void;
   artwork_id: number;
   icon: typeof faBasketShopping;
-  toastErrorMessage: string;
-  toastSuccessMessage: string;
+  errorToast: (t: (key: string) => string) => Id;
+  successToast: (t: (key: string) => string) => Id;
 };
 
 function useShoppingCartButton({
@@ -35,16 +38,16 @@ function useShoppingCartButton({
   const actionOnLoggedIn = addToShoppingList;
   const actionOnNotLoggedIn = handleNotLoggedInAction;
   const icon = faBasketShopping;
-  const toastErrorMessage = t("common.messages.item_out_of_stock");
-  const toastSuccessMessage = t("common.messages.item_added_to_cart");
+  const errorToast = cartToast.itemOutOfStock;
+  const successToast = cartToast.itemAdded;
 
   return {
     actionOnLoggedIn,
     actionOnNotLoggedIn,
     artwork_id,
     icon,
-    toastErrorMessage,
-    toastSuccessMessage,
+    errorToast,
+    successToast,
   };
 }
 
