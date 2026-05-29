@@ -20,23 +20,26 @@ const createToast =
 // Authentication & User Management Toast Functions
 export const authToast = {
   login: {
-    success: createToast(TOAST_KEYS.AUTH.LOGIN_SUCCESS, "success"),
-    error: createToast(TOAST_KEYS.AUTH.INCORRECT_CREDENTIALS, "error"),
+    success: createToast(TOAST_KEYS.AUTH.LOGIN.SUCCESS, "success"),
+    error: createToast(TOAST_KEYS.AUTH.LOGIN.INCORRECT_CREDENTIALS, "error"),
   },
   logout: {
-    success: createToast(TOAST_KEYS.AUTH.LOGOUT_SUCCESS, "success"),
+    success: createToast(TOAST_KEYS.AUTH.LOGOUT.SUCCESS, "success"),
   },
   registration: {
-    success: createToast(TOAST_KEYS.AUTH.REGISTRATION_SUCCESS, "success"),
-    error: createToast(TOAST_KEYS.AUTH.REGISTRATION_FAILED, "error"),
-    userExists: createToast(TOAST_KEYS.AUTH.USER_ALREADY_EXISTS, "error"),
+    success: createToast(TOAST_KEYS.AUTH.REGISTRATION.SUCCESS, "success"),
+    error: createToast(TOAST_KEYS.AUTH.REGISTRATION.FAILED, "error"),
+    userExists: createToast(
+      TOAST_KEYS.AUTH.REGISTRATION.USER_ALREADY_EXISTS,
+      "error"
+    ),
   },
   password: {
     resetSuccess: createToast(
-      TOAST_KEYS.AUTH.PASSWORD_RESET_SUCCESS,
+      TOAST_KEYS.AUTH.PASSWORD.RESET_SUCCESS,
       "success"
     ),
-    changeError: createToast(TOAST_KEYS.AUTH.PASSWORD_CHANGE_ERROR, "error"),
+    changeError: createToast(TOAST_KEYS.AUTH.PASSWORD.CHANGE_ERROR, "error"),
   },
 };
 
@@ -52,18 +55,27 @@ export const formToast = {
 // Communication & Messages Toast Functions
 export const communicationToast = {
   message: {
-    sentSuccess: createToast(TOAST_KEYS.MESSAGES.SENT_SUCCESS, "success"),
-    sendError: createToast(TOAST_KEYS.MESSAGES.SEND_ERROR, "error"),
+    sentSuccess: createToast(
+      TOAST_KEYS.COMMUNICATION.MESSAGE.SENT_SUCCESS,
+      "success"
+    ),
+    sendError: createToast(
+      TOAST_KEYS.COMMUNICATION.MESSAGE.SEND_ERROR,
+      "error"
+    ),
   },
   email: {
     success: createToast(
-      TOAST_KEYS.MESSAGES.EMAIL_SUBMITTED_SUCCESS,
+      TOAST_KEYS.COMMUNICATION.EMAIL.SUBMITTED_SUCCESS,
       "success"
     ),
   },
   reply: {
-    sentSuccess: createToast(TOAST_KEYS.MESSAGES.REPLY_SENT_SUCCESS, "success"),
-    sendError: createToast(TOAST_KEYS.MESSAGES.REPLY_SEND_ERROR, "error"),
+    sentSuccess: createToast(
+      TOAST_KEYS.COMMUNICATION.REPLY.SENT_SUCCESS,
+      "success"
+    ),
+    sendError: createToast(TOAST_KEYS.COMMUNICATION.REPLY.SEND_ERROR, "error"),
   },
 };
 
@@ -79,27 +91,27 @@ export const reviewToast = {
 // Artwork Management Toast Functions
 export const artworkToast = {
   add: {
-    success: createToast(TOAST_KEYS.ARTWORK.ADD_SUCCESS, "success"),
-    error: createToast(TOAST_KEYS.ARTWORK.ADD_ERROR, "error"),
+    success: createToast(TOAST_KEYS.ARTWORK.ADD.SUCCESS, "success"),
+    error: createToast(TOAST_KEYS.ARTWORK.ADD.ERROR, "error"),
   },
   category: {
-    updated: createToast(TOAST_KEYS.ARTWORK.CATEGORY_UPDATE_SUCCESS, "success"),
-    failed: createToast(TOAST_KEYS.ARTWORK.CATEGORY_UPDATE_FAILED, "error"),
+    updated: createToast(TOAST_KEYS.ARTWORK.CATEGORY.UPDATE_SUCCESS, "success"),
+    failed: createToast(TOAST_KEYS.ARTWORK.CATEGORY.UPDATE_FAILED, "error"),
   },
   thumbnail: {
-    required: createToast(TOAST_KEYS.ARTWORK.THUMBNAIL_REQUIRED, "error"),
+    required: createToast(TOAST_KEYS.ARTWORK.THUMBNAIL.REQUIRED, "error"),
     uploadedSuccessfully: createToast(
-      TOAST_KEYS.ARTWORK.THUMBNAIL_UPLOADED_SUCCESSFULLY,
+      TOAST_KEYS.ARTWORK.THUMBNAIL.UPLOADED_SUCCESSFULLY,
       "success"
     ),
   },
   images: {
     uploadedSuccessfully: createToast(
-      TOAST_KEYS.ARTWORK.IMAGE_UPLOADED_SUCCESSFULLY,
+      TOAST_KEYS.ARTWORK.IMAGES.UPLOADED_SUCCESSFULLY,
       "success"
     ),
-    uploadFailed: createToast(TOAST_KEYS.ARTWORK.IMAGE_UPLOAD_FAILED, "error"),
-    removeFailed: createToast(TOAST_KEYS.ARTWORK.IMAGE_REMOVE_FAILED, "error"),
+    uploadFailed: createToast(TOAST_KEYS.ARTWORK.IMAGES.UPLOAD_FAILED, "error"),
+    removeFailed: createToast(TOAST_KEYS.ARTWORK.IMAGES.REMOVE_FAILED, "error"),
   },
 };
 
