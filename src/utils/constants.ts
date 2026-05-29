@@ -54,14 +54,22 @@ export type ToastType = (typeof TOAST_TYPES)[number];
 export const TOAST_KEYS = {
   // Authentication & User Management
   AUTH: {
-    LOGIN_SUCCESS: "toast.login_success",
-    LOGOUT_SUCCESS: "toast.logout_success",
-    REGISTRATION_SUCCESS: "toast.registration_successful",
-    REGISTRATION_FAILED: "toast.registration_failed",
-    USER_ALREADY_EXISTS: "toast.user_already_registered",
-    PASSWORD_RESET_SUCCESS: "toast.password_reset_success",
-    PASSWORD_CHANGE_ERROR: "toast.password_change_error",
-    INCORRECT_CREDENTIALS: "toast.incorrect_credentials",
+    LOGIN: {
+      SUCCESS: "toast.login_success",
+      INCORRECT_CREDENTIALS: "toast.incorrect_credentials",
+    },
+    LOGOUT: {
+      SUCCESS: "toast.logout_success",
+    },
+    REGISTRATION: {
+      SUCCESS: "toast.registration_successful",
+      FAILED: "toast.registration_failed",
+      USER_ALREADY_EXISTS: "toast.user_already_registered",
+    },
+    PASSWORD: {
+      RESET_SUCCESS: "toast.password_reset_success",
+      CHANGE_ERROR: "toast.password_change_error",
+    },
   },
 
   // Form Validation & Data Operations
@@ -74,12 +82,18 @@ export const TOAST_KEYS = {
   },
 
   // Communication & Messages
-  MESSAGES: {
-    SENT_SUCCESS: "toast.message_sent",
-    SEND_ERROR: "toast.message_error",
-    EMAIL_SUBMITTED_SUCCESS: "toast.email_submitted",
-    REPLY_SENT_SUCCESS: "toast.reply_success",
-    REPLY_SEND_ERROR: "toast.reply_error",
+  COMMUNICATION: {
+    MESSAGE: {
+      SENT_SUCCESS: "toast.message_sent",
+      SEND_ERROR: "toast.message_error",
+    },
+    EMAIL: {
+      SUBMITTED_SUCCESS: "toast.email_submitted",
+    },
+    REPLY: {
+      SENT_SUCCESS: "toast.reply_success",
+      SEND_ERROR: "toast.reply_error",
+    },
   },
 
   // Reviews & Ratings
@@ -91,19 +105,25 @@ export const TOAST_KEYS = {
 
   // Artwork Management
   ARTWORK: {
-    ADD_SUCCESS: "toast.artwork_added_successfully",
-    ADD_ERROR: "toast.error_add_artwork",
-    THUMBNAIL_REQUIRED: "validation.thumbnail_required",
-    THUMBNAIL_UPLOADED_SUCCESSFULLY:
-      "components.forms.artwork.thumbnail_uploaded_successfully",
-    CATEGORY_UPDATE_SUCCESS:
-      "components.forms.artwork.category_updated_successfully",
-    CATEGORY_UPDATE_FAILED:
-      "components.forms.artwork.failed_to_update_category",
-    IMAGE_UPLOADED_SUCCESSFULLY:
-      "components.forms.artwork.image_uploaded_successfully",
-    IMAGE_UPLOAD_FAILED: "components.forms.artwork.failed_to_upload_image",
-    IMAGE_REMOVE_FAILED: "components.forms.artwork.failed_to_remove_image",
+    ADD: {
+      SUCCESS: "toast.artwork_added_successfully",
+      ERROR: "toast.error_add_artwork",
+    },
+    THUMBNAIL: {
+      REQUIRED: "validation.thumbnail_required",
+      UPLOADED_SUCCESSFULLY:
+        "components.forms.artwork.thumbnail_uploaded_successfully",
+    },
+    CATEGORY: {
+      UPDATE_SUCCESS: "components.forms.artwork.category_updated_successfully",
+      UPDATE_FAILED: "components.forms.artwork.failed_to_update_category",
+    },
+    IMAGES: {
+      UPLOADED_SUCCESSFULLY:
+        "components.forms.artwork.image_uploaded_successfully",
+      UPLOAD_FAILED: "components.forms.artwork.failed_to_upload_image",
+      REMOVE_FAILED: "components.forms.artwork.failed_to_remove_image",
+    },
   },
 
   // Shopping Cart & Inventory

@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 
-import { formToast, messageToast } from "@/utils/toastUtils";
+import { communicationToast, formToast } from "@/utils/toastUtils";
 
 import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
 
@@ -34,7 +34,7 @@ function useForgotPasswordForm(): UseForgotPasswordReturn {
     sendForgotPasswordEmail(values.email)
       .then(() => {
         setDisplayMessage(true);
-        messageToast.emailSubmitted(t);
+        communicationToast.email.success(t);
       })
       .catch(() => {
         formToast.submissionError(t);

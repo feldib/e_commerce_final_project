@@ -40,11 +40,11 @@ function ResetPasswordFormInner() {
     const email = searchParams.get("email");
     changePassword(token, email, values.password)
       .then(() => {
-        authToast.passwordResetSuccess(t);
+        authToast.password.resetSuccess(t);
         router.push("/login");
       })
       .catch(() => {
-        authToast.passwordChangeError(t);
+        authToast.password.changeError(t);
       });
   };
 

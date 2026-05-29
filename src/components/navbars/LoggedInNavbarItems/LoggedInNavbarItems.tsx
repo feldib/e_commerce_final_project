@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation";
 
 import { Nav } from "react-bootstrap";
 
+import { authToast } from "@/utils/toastUtils";
+
 import { useI18n } from "@/components/providers/I18nProvider/I18nProvider";
 import { UserDataContext } from "@/components/providers/UserDataProvider/UserDataProvider";
 
@@ -22,7 +24,9 @@ function LoggedInNavbarItems() {
 
   const handleLogoutClick = async () => {
     closeExpandedNav();
-    await serverLogOut();
+    await serverLogOut().then(() => {
+      authToast.logout.success(t);
+    });
     contextLogOut();
     router.push("/");
   };
