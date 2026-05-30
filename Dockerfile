@@ -6,6 +6,9 @@ WORKDIR /app
 ARG NEXT_PUBLIC_SERVER_URL
 ENV NEXT_PUBLIC_SERVER_URL=$NEXT_PUBLIC_SERVER_URL
 
+# Set Node.js heap size for Next.js build
+ENV NODE_OPTIONS="--max-old-space-size=2048"
+
 # Disable Next.js telemetry
 ENV NEXT_TELEMETRY_DISABLED=1
 
